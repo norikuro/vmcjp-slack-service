@@ -111,7 +111,7 @@ def write_db(event, config):
     db.upsert({"_id": event["user"]}, {"$set": config})    
 
 def lambda_handler(event, context):
-    logging.info(event)
+#    logging.info(event)
     
     url = event["response_url"]
     config = restore_sddc()
