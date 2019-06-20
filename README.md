@@ -1,1 +1,1 @@
-Vmcjp-ckeck-resources
+# vmcjp-create-sddc

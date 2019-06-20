@@ -5,10 +5,10 @@ import boto3
 
 from vmcjp.utils.cron import get_next_time
 
-def put_event(lambda_name, minutes, data):  
+def put_event(minutes, data):  
 #  event_name = "boto3_test"
 #  lambda_name = "event_test"
-  lambda_arn = "arn:aws:lambda:ap-northeast-1:{}:function:{}".format(data["aws_account"], lambda_name)
+  lambda_arn = "arn:aws:lambda:ap-northeast-1:{}:function:{}".format(data["aws_account"], data["lambda_name"])
   event_arn = "arn:aws:events:ap-northeast-1:{}:rule/{}".format(data["aws_account"], data["event_name"])
   
   boto3.client("events").put_rule(
@@ -20,7 +20,7 @@ def put_event(lambda_name, minutes, data):
     Rule=data["event_name"],
     Targets=[
       {
-        "Id": lambda_name,
+        "Id": data["lambda_name"],
         "Arn": lambda_arn,
         "Input": json.dumps(data)
 #        "Input": json.dumps({"key1": "test1", "key2": "test2"})
@@ -29,7 +29,7 @@ def put_event(lambda_name, minutes, data):
   )
   
   boto3.client("lambda").add_permission(
-    FunctionName=lambda_name,
+    FunctionName=data["lambda_name"],
     StatementId=data["event_name"],
     Action="lambda:InvokeFunction",
     Principal="events.amazonaws.com",
