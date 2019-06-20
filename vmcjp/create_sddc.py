@@ -97,9 +97,9 @@ def lambda_handler(event, context):
   event["task_id"] = "xxxxxxxx"
   event["lambda_name"] = "check_task"
 
-#  text = create_button(event["user_id"], event["sddc_name"], "xxxxxxxxxxx") #for test
-  text = create_button(event["user_id"], event["sddc_name"], event["task_id"])
-#  response = post_to_webhook(j["slack_webhook_url"], text)
+  text = create_button(event["user_id"], event["sddc_name"], "xxxxxxxxxxx") #for test
+#  text = create_button(event["user_id"], event["sddc_name"], event["task_id"])
+  response = post_to_webhook(j["slack_webhook_url"], text)
 #  logging.info(response.read())
     
   text = {
@@ -108,6 +108,6 @@ def lambda_handler(event, context):
       event
     )
   }
-#  response = post_to_webhook(j["slack_webhook_url"], text)
+  response = post_to_webhook(j["slack_webhook_url"], text)
 #  logging.info(response.read())
 #  logging.info(event)
