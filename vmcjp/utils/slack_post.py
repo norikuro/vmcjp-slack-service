@@ -2,14 +2,12 @@ import json
 import os
 import urllib2
 
-#from urlparse import parse_qs
+#BOT_OAUTH_TOKEN = os.environ["bot_token"]
 
-BOT_OAUTH_TOKEN = os.environ["bot_token"]
-
-def post(url, data):
+def post(url, data, bot_oauth_token):
     headers = {
         "Content-Type": "application/json; charset=UTF-8",
-        "Authorization": "Bearer {}".format(BOT_OAUTH_TOKEN)
+        "Authorization": "Bearer {}".format(bot_oauth_tokenN)
     }
     
     request = urllib2.Request(
