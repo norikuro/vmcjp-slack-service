@@ -1,1 +1,1 @@
-# vmcjp-slack-service
+Vmcjp-ckeck-resources
