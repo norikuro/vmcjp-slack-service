@@ -30,8 +30,8 @@ class DocmentDb(object):
     return self.collection.find(query, fields)[0]
   
   def find(self, query):
-    cur = self.collection.find(query)[0]
+    cur = self.collection.find(query)
     if cur.count() != 0:
-      return cur
+      return cur[0]
     else:
       return
