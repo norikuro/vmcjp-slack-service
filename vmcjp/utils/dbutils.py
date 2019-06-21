@@ -28,3 +28,10 @@ class DocmentDb(object):
 
   def find_with_fields(self, query, fields):
     return self.collection.find(query, fields)[0]
+  
+  def find(self, query):
+    cur = self.collection.find(query)[0]
+    if cur.count() != 0:
+      return cur
+    else:
+      return
