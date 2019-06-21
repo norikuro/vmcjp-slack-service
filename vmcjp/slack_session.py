@@ -20,10 +20,11 @@ def write_db(event):
         constant.USER_COLLECTION
     )
     event.update({"start_time": datetime.datetime.now()})
+    logging.info(event)
     db.upsert({"_id": event.pop("user")}, {"$set": event})
     
 def lambda_handler(event, context):
-    logging.info(event)
+#    logging.info(event)
     
     if event["event_type"] == "sddc_name":
         write_db(event)
