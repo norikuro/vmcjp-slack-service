@@ -10,8 +10,8 @@ class Test(object):
     db = dbutils.DocmentDb("vmcjp/s3config.json", "user_db", "user_collection")
     collection = db.get_collection()
 #    collection.remove()
-#    col = collection.find({"insertDate": {"$gt": "ISODate("2016-10-22T00:00:00+09:00")"}})
-    col = collection.find()
+    col = collection.find({"insertDate": {"$gt": "2019-06-21T12:21:30.316789Z"}})
+#    col = collection.find()
     for data in col:
       print(data)
   
