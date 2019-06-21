@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-
-#import pymongo
-#import sys
+import datetime
 
 from vmcjp.utils import dbutils
 
@@ -10,7 +7,9 @@ class Test(object):
     db = dbutils.DocmentDb("vmcjp/s3config.json", "user_db", "user_collection")
     collection = db.get_collection()
 #    collection.remove()
-    col = collection.find({"start_time": {"$gt": "2019-06-21T12:21:30.316789Z"}})
+    delta = datetime.datetime.now().timedelta(minutes=5).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+#    now = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+    col = collection.find({"start_time": {"$gt": delta}})
 #    col = collection.find()
     for data in col:
       print(data)
