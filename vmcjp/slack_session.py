@@ -46,3 +46,5 @@ def lambda_handler(event, context):
         config = read_db(event)
         if config is not None:
             aaaa
+        else:
+            cancel
