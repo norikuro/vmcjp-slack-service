@@ -29,3 +29,5 @@ def lambda_handler(event, context):
     
     if event["event_type"] == "create_sddc":
         write_db(event)
+    elif event["event_type"] == "sddc_name":
+        aaa
