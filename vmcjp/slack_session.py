@@ -27,5 +27,5 @@ def write_db(event):
 def lambda_handler(event, context):
 #    logging.info(event)
     
-    if event["event_type"] == "sddc_name":
+    if event["event_type"] == "create_sddc":
         write_db(event)
