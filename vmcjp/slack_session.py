@@ -19,7 +19,7 @@ def write_db(event):
         constant.USER_DB,
         constant.USER_COLLECTION
     )
-    event.update({"start_time": datetime.datetime.now()})
+    event.update({"start_time": datetime.datetime.now().strftime('%s')})
     logging.info(event)
     db.upsert({"_id": event.pop("user")}, {"$set": event})
     
