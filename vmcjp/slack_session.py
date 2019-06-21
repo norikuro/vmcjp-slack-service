@@ -1,7 +1,7 @@
 import json
 import os
 import logging
-import datetime
+import time
 
 from vmcjp.utils.slack_post import post
 from vmcjp.utils import dbutils
@@ -19,8 +19,8 @@ def write_db(event):
         constant.USER_DB,
         constant.USER_COLLECTION
     )
-    event.update({"start_time": datetime.datetime.now().strftime('%s')})
-    logging.info(event)
+    event.update({"start_time": time.time()})
+#    logging.info(event)
     db.upsert({"_id": event.pop("user")}, {"$set": event})
     
 def lambda_handler(event, context):
