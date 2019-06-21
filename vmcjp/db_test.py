@@ -10,6 +10,7 @@ class Test(object):
     delta = datetime.datetime.now() - datetime.timedelta(minutes=5)
     past = delta.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
 #    now = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+    print(past)
     col = collection.find({"start_time": {"$gt": past}})
 #    col = collection.find()
     for data in col:
