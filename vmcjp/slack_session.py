@@ -1,7 +1,7 @@
 import json
 import os
 import logging
-import time
+import datetime
 
 from vmcjp.utils.slack_post import post
 from vmcjp.utils import dbutils
@@ -19,7 +19,8 @@ def write_db(event):
         constant.USER_DB,
         constant.USER_COLLECTION
     )
-    event.update({"start_time": time.time()})
+    now = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+    event.update({"start_time": now})
 #    logging.info(event)
     db.upsert({"_id": event.pop("user")}, {"$set": event})
     
