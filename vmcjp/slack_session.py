@@ -10,8 +10,8 @@ from vmcjp.utils import constant
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-#EXPECTED_TOKEN = os.environ["token"]
-#BOT_OAUTH_TOKEN = os.environ["bot_token"]
+EXPECTED_TOKEN = os.environ["token"]
+BOT_OAUTH_TOKEN = os.environ["bot_token"]
 
 def read_db(event):
     db = dbutils.DocmentDb(
@@ -24,7 +24,7 @@ def read_db(event):
         datetime.datetime.now() - datetime.timedelta(minutes=5)
     ).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
     
-    return db.find({"start_time": {"$gt": past}})
+    return db.find({"start_time": {"$gt": past}, "user": event["user"]})
 
 def write_db(event):
     db = dbutils.DocmentDb(
