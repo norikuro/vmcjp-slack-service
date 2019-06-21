@@ -7,7 +7,7 @@ class Test(object):
     db = dbutils.DocmentDb("vmcjp/s3config.json", "user_db", "user_collection")
     collection = db.get_collection()
 #    collection.remove()
-    delta = datetime.datetime.now().timedelta(minutes=5).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+    delta = datetime.now().timedelta(minutes=5).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
 #    now = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
     col = collection.find({"start_time": {"$gt": delta}})
 #    col = collection.find()
