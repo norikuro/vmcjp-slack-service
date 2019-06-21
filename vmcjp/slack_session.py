@@ -13,17 +13,17 @@ logger.setLevel(logging.INFO)
 EXPECTED_TOKEN = os.environ["token"]
 BOT_OAUTH_TOKEN = os.environ["bot_token"]
 
-def write_db(user, data):
+def write_db(event):
     db = dbutils.DocmentDb(
         constant.S3_CONFIG,
         constant.USER_DB,
         constant.USER_COLLECTION
     )
-    data.update({"start_time": datetime.datetime.now()})
-    db.upsert({"_id": user}, {"$set": data})
+    event.update({"start_time": datetime.datetime.now()})
+    db.upsert({"_id": event.pop("user")}, {"$set": event})
     
 def lambda_handler(event, context):
 #    logging.info(event)
-        
-    write_db(event["event"]["user"], event)
-#    logging.info(response.read())
+    
+    if event["event_type"] == "sddc_name":
+        write_db(event)
