@@ -21,3 +21,9 @@ def write_db(user, data):
     )
     data.update({"start_time": datetime.datetime.now()})
     db.upsert({"_id": user}, {"$set": data})
+    
+def lambda_handler(event, context):
+#    logging.info(event)
+        
+    write_db(event["event"]["user"], event)
+#    logging.info(response.read())
