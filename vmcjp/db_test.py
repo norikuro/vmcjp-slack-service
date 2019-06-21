@@ -13,7 +13,7 @@ class Test(object):
     print(past)
     col = collection.find({"start_time": {"$gt": past}})
 #    col = collection.find()
-    print(len(col))
+    print(col.count())
     for data in col:
       print(data)
   
