@@ -45,13 +45,9 @@ def event_handler(event):
         response = post(url, data, bot_token)
         data["text"] = "Please enter SDDC name"
         response = post(url, data, bot_token)
-        le.update({"event_type": "create_sddc"})
-        call_lambda("slack_session", le)
     elif "cancel" in text:
         data["text"] = "OK, create SDDC has cenceled."
         response = post(url, data, bot_token)
-        le.update({"event_type": "cancel"})
-        call_lambda("slack_session", le)
     elif text.find(" ") != -1:
         data["text"] = event
         response = post(url, data, bot_token)
@@ -61,8 +57,6 @@ def event_handler(event):
     else:
         data["text"] = "Single host or Multi host?"
         response = post(url, data, BOT_OAUTH_TOKEN)
-        le.update({"event_type": "sddc_name"})
-        call_lambda("slack_session", le)
 #    logging.info(response.read())
 
 def lambda_handler(event, context):
