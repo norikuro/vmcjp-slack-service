@@ -62,10 +62,15 @@ def event_handler(event):
         else:
             return
     elif "cancel" in text:
-        data["text"] = "OK, create SDDC has cenceled."
-        response = post(url, data, bot_token)
-        delete_db(db, event["user"])
-        return
+        if result is None:
+            data["text"] = help_message
+            response = post(url, data, bot_token)
+            return
+        else:
+            data["text"] = "OK, create SDDC has cenceled."
+            response = post(url, data, bot_token)
+            delete_db(db, event["user"])
+            return
     elif text.find(" ") != -1:
         data["text"] = help_message
         response = post(url, data, bot_token)
