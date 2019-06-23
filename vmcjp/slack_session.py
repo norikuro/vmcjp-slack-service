@@ -5,7 +5,8 @@ import datetime
 import ipaddress
 
 from vmcjp.utils.slack_post import post
-from vmcjp.utils import dbutils
+#from vmcjp.utils import dbutils
+from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
 
 logger = logging.getLogger()
@@ -33,11 +34,12 @@ def delete_db(db, user):
     db.remove({"_id": user})
     
 def event_handler(event):
-    db = dbutils.DocmentDb(
-        constant.S3_CONFIG,
-        constant.USER_DB,
-        constant.USER_COLLECTION
-    )
+#    db = dbutils.DocmentDb(
+#        constant.S3_CONFIG,
+#        constant.USER_DB,
+#        constant.USER_COLLECTION
+#    )
+    db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     
     text = event["text"]
     url = event["response_url"]
@@ -99,4 +101,10 @@ def is_valid_network(address):
 
 def lambda_handler(event, context):
 #    logging.info(event)
+    f = json.load(open(s3config, 'r'))
+    event.update(
+        {
+            "db_url": read_json_from_s3(f["bucket"], f["config"])["db_url"]
+        }
+    )
     event_handler(event)
