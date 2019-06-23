@@ -30,7 +30,7 @@ def write_db(db, user, data):
     db.upsert({"_id": user}, {"$set": data})
 
 def delete_db(db, user):
-    write_db(db, user, null)
+    write_db(db, user, None)
     
 def event_handler(event):
     db = dbutils.DocmentDb(
