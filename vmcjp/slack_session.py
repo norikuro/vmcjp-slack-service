@@ -11,12 +11,14 @@ from vmcjp.utils import constant
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-def read_db(db, event):
+def read_db(db, query):
     past = (
         datetime.datetime.now() - datetime.timedelta(minutes=5)
     ).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+    query.update({"start_time": {"$gt": past}})
     
-    return db.find({"start_time": {"$gt": past}, "user": event["user"]})
+#    return db.find({"start_time": {"$gt": past}, "user": event["user"]})
+    return db.find(query)
 
 def write_db(db, event):
     now = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
