@@ -18,11 +18,6 @@ def read_db(db, event):
     return db.find({"start_time": {"$gt": past}, "user": event["user"]})
 
 def write_db(db, event):
-    db = dbutils.DocmentDb(
-        constant.S3_CONFIG,
-        constant.USER_DB,
-        constant.USER_COLLECTION
-    )
     now = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
     event.update({"start_time": now})
 #    logging.info(event)
@@ -35,23 +30,31 @@ def event_handler(event):
         constant.USER_COLLECTION
     )
     
+    url = event["response_url"]
+    bot_token = event["bot_token"]
+    
+    data = {
+        "token": event["token"],
+        "channel": event["event"]["channel"]
+    }
+    
     if "create sddc" in text:
         data["text"] = "OK, starting create sddc wizard."
-        response = post(url, data, BOT_OAUTH_TOKEN)
+        response = post(url, data, bot_token)
         data["text"] = "This conversation will end with typing `cancel` or doing nothing within 5 minutes"
-        response = post(url, data, BOT_OAUTH_TOKEN)
+        response = post(url, data, bot_token)
         data["text"] = "Please enter SDDC name"
-        response = post(url, data, BOT_OAUTH_TOKEN)
+        response = post(url, data, bot_token)
         le.update({"event_type": "create_sddc"})
         call_lambda("slack_session", le)
     elif "cancel" in text:
         data["text"] = "OK, create SDDC has cenceled."
-        response = post(url, data, BOT_OAUTH_TOKEN)
+        response = post(url, data, bot_token)
         le.update({"event_type": "cancel"})
         call_lambda("slack_session", le)
     elif text.find(" ") != -1:
         data["text"] = event
-        response = post(url, data, BOT_OAUTH_TOKEN)
+        response = post(url, data, bot_token)
     elif is_valid_network(text):
         data["text"] = text
         response = post(url, data, BOT_OAUTH_TOKEN)
