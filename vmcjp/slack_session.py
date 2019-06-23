@@ -49,8 +49,8 @@ def event_handler(event):
     }
     
     result = read_db(db, event["user"])
-    if "create sddc" in text:
-        if result is None:
+    if result is None:
+        if "create sddc" in text:
             data["text"] = "OK, starting create sddc wizard."
             response = post(url, data, bot_token)
             data["text"] = "This conversation will end with typing `cancel` or doing nothing within 5 minutes"
@@ -60,41 +60,26 @@ def event_handler(event):
             write_db(db, event["user"], {"command": "create_sddc"})
             return
         else:
-            return
-    elif "cancel" in text:
-        if result is None:
             data["text"] = help_message
             response = post(url, data, bot_token)
             return
-        else:
+    else:
+        if "create sddc" in text:
+            return
+        elif "cancel" in text:
             data["text"] = "OK, create SDDC has cenceled."
             response = post(url, data, bot_token)
             delete_db(db, event["user"])
             return
-    elif text.find(" ") != -1:
-        if result is None:
-            data["text"] = help_message
-            response = post(url, data, bot_token)
+        elif text.find(" ") != -1:
             return
-        else:
-            return
-    elif is_valid_network(text):
-        if result is None:
-            data["text"] = help_message
-            response = post(url, data, bot_token)
-            return
-        else:
+        elif is_valid_network(text):
             if result["command"] == "mgmt_cidr":
                 data["text"] = "creating sddc...."
                 response = post(url, data, bot_token)
                 return
             else:
                 return
-    else:
-        if result is None:
-            data["text"] = help_message
-            response = post(url, data, bot_token)
-            return
         else:
             if result["command"] == "create_sddc":
                 data["text"] = "Single host or Multi host?"
