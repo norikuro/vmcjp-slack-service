@@ -91,6 +91,9 @@ def event_handler(event):
                 data["text"] = "Single host or Multi host?"
                 response = post(url, data, bot_token)
                 ##write something!!!
+                return
+            else:
+                return
 #    logging.info(response.read())
 
 def is_valid_network(address):
