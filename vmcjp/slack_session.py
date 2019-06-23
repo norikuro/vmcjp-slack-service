@@ -58,7 +58,7 @@ def event_handler(event):
             response = post(url, data, bot_token)
             write_db(db, event["user"], {"command": "create_sddc"})
             return
-          else:
+        else:
             return
     elif "cancel" in text:
         data["text"] = "OK, create SDDC has cenceled."
