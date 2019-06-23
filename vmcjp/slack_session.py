@@ -82,8 +82,15 @@ def event_handler(event):
             else:
                 return
     else:
-        data["text"] = "Single host or Multi host?"
-        response = post(url, data, bot_token)
+        if result is None:
+            data["text"] = help_message
+            response = post(url, data, bot_token)
+            return
+        else:
+            if result["command"] == "create_sddc":
+                data["text"] = "Single host or Multi host?"
+                response = post(url, data, bot_token)
+                ##write something!!!
 #    logging.info(response.read())
 
 def is_valid_network(address):
