@@ -17,7 +17,6 @@ def read_db(db, user):
     past = (
         datetime.datetime.now() - datetime.timedelta(minutes=5)
     ).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
-    query.update({"start_time": {"$gt": past}})
     
     result = db.find({"start_time": {"$gt": past}, "_id": user})
     logging.info(result)
