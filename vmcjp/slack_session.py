@@ -57,6 +57,7 @@ def event_handler(event):
     elif "cancel" in text:
         data["text"] = "OK, create SDDC has cenceled."
         response = post(url, data, bot_token)
+        delete_db() #need to implement here!!!
     elif text.find(" ") != -1:
         data["text"] = event
         response = post(url, data, bot_token)
