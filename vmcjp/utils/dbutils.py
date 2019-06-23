@@ -35,3 +35,6 @@ class DocmentDb(object):
       return cur[0]
     else:
       return
+
+  def remove(self, data_to_remove):
+    self.collection.remove(data_to_remove)
