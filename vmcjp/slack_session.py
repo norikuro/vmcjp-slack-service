@@ -54,10 +54,10 @@ def event_handler(event):
         response = post(url, data, bot_token)
     elif is_valid_network(text):
         data["text"] = text
-        response = post(url, data, BOT_OAUTH_TOKEN)
+        response = post(url, data, bot_token)
     else:
         data["text"] = "Single host or Multi host?"
-        response = post(url, data, BOT_OAUTH_TOKEN)
+        response = post(url, data, bot_token)
 #    logging.info(response.read())
 
 def is_valid_network(address):
