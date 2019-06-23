@@ -18,11 +18,11 @@ def read_db(db, user):
         datetime.datetime.now() - datetime.timedelta(minutes=5)
     ).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
 #    query.update({"start_time": {"$gt": past}})
-    result = db.find({"start_time": {"$gt": past}, "_id": user})
-    logging.info(result)
+#    result = db.find({"start_time": {"$gt": past}, "_id": user})
+#    logging.info(result)
 #    return db.find({"start_time": {"$gt": past}, "user": event["user"]})
-#    return db.find({"start_time": {"$gt": past}, "user": user})
-    return result
+    return db.find({"start_time": {"$gt": past}, "_id": user})
+#    return result
 #    return db.find(query)
 
 def write_db(db, user, data):
