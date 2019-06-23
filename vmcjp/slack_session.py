@@ -44,7 +44,7 @@ def event_handler(event):
     
     data = {
         "token": event["token"],
-        "channel": event["event"]["channel"]
+        "channel": event["channel"]
     }
     
     result = read_db(db, event["user"])
