@@ -1,7 +1,7 @@
 import json
 import pymongo
 
-from vmcjp.utils.s3utils import read_json_from_s3, download_from_s3
+from vmcjp.utils.s3utils import read_json_from_s3
 
 class DocmentDb(object):
   def __init__(self, s3config, db_name, collection_name):
