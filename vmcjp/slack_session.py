@@ -67,12 +67,4 @@ def event_handler(event):
 
 def lambda_handler(event, context):
 #    logging.info(event)
-    
-    if event["event_type"] == "create_sddc":
-        write_db(event)
-    elif event["event_type"] == "sddc_name":
-        config = read_db(event)
-        if config is not None:
-            aaaa
-        else:
-            cancel
+    event_handler(event)
