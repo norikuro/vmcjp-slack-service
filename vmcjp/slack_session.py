@@ -102,7 +102,7 @@ def is_valid_network(address):
 
 def lambda_handler(event, context):
 #    logging.info(event)
-    f = json.load(open(s3config, 'r'))
+    f = json.load(open(constant.S3_CONFIG, 'r'))
     event.update(
         {
             "db_url": read_json_from_s3(f["bucket"], f["config"])["db_url"]
