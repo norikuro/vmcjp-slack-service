@@ -42,12 +42,18 @@ def event_handler(event):
     }
     
     if "create sddc" in text:
-        data["text"] = "OK, starting create sddc wizard."
-        response = post(url, data, bot_token)
-        data["text"] = "This conversation will end with typing `cancel` or doing nothing within 5 minutes"
-        response = post(url, data, bot_token)
-        data["text"] = "Please enter SDDC name"
-        response = post(url, data, bot_token)
+        result = read_db(db, {"user": event["user"], "command": "create_sddc"})
+        if result is None:
+            data["text"] = "OK, starting create sddc wizard."
+            response = post(url, data, bot_token)
+            data["text"] = "This conversation will end with typing `cancel` or doing nothing within 5 minutes"
+            response = post(url, data, bot_token)
+            data["text"] = "Please enter SDDC name"
+            response = post(url, data, bot_token)
+            write_db() #write db here!!!!
+            return
+          else:
+            return
     elif "cancel" in text:
         data["text"] = "OK, create SDDC has cenceled."
         response = post(url, data, bot_token)
