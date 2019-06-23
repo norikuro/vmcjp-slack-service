@@ -5,7 +5,7 @@ import urllib2
 def post(url, data, bot_oauth_token):
     headers = {
         "Content-Type": "application/json; charset=UTF-8",
-        "Authorization": "Bearer {}".format(bot_oauth_tokenN)
+        "Authorization": "Bearer {}".format(bot_oauth_token)
     }
     
     request = urllib2.Request(
