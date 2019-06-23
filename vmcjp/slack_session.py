@@ -20,11 +20,11 @@ def read_db(db, query):
 #    return db.find({"start_time": {"$gt": past}, "user": event["user"]})
     return db.find(query)
 
-def write_db(db, event):
+def write_db(db, user, data):
     now = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
-    event.update({"start_time": now})
+    data.update({"start_time": now})
 #    logging.info(event)
-    db.upsert({"_id": event.pop("user")}, {"$set": event})
+    db.upsert({"_id": user}, {"$set": data})
     
 def event_handler(event):
     db = dbutils.DocmentDb(
@@ -50,7 +50,7 @@ def event_handler(event):
             response = post(url, data, bot_token)
             data["text"] = "Please enter SDDC name"
             response = post(url, data, bot_token)
-            write_db() #write db here!!!!
+            write_db(db, event["user"], {"command": "create_sddc"}) #write db here!!!!
             return
           else:
             return
