@@ -84,7 +84,7 @@ def event_handler(event):
             if result["command"] == "create_sddc":
                 data["text"] = "Single host or Multi host?"
                 response = post(url, data, bot_token)
-                ##write something!!!
+                ##write sddc name to DB!!!
                 return
             else:
                 return
