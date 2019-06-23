@@ -50,7 +50,7 @@ def event_handler(event):
             response = post(url, data, bot_token)
             data["text"] = "Please enter SDDC name"
             response = post(url, data, bot_token)
-            write_db(db, event["user"], {"command": "create_sddc"}) #write db here!!!!
+            write_db(db, event["user"], {"command": "create_sddc"})
             return
           else:
             return
