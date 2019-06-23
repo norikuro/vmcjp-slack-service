@@ -11,6 +11,8 @@ from vmcjp.utils import constant
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+help_message = "May I help you? please type `help` command."
+
 def read_db(db, query):
     past = (
         datetime.datetime.now() - datetime.timedelta(minutes=5)
@@ -60,7 +62,7 @@ def event_handler(event):
         delete_db() #need to implement here!!!
         return
     elif text.find(" ") != -1:
-        data["text"] = event
+        data["text"] = help_message
         response = post(url, data, bot_token)
     elif is_valid_network(text):
         data["text"] = text
