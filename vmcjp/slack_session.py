@@ -10,20 +10,14 @@ from vmcjp.utils import constant
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-def read_db(event):
-    db = dbutils.DocmentDb(
-        constant.S3_CONFIG,
-        constant.USER_DB,
-        constant.USER_COLLECTION
-    )
-    
+def read_db(db, event):
     past = (
         datetime.datetime.now() - datetime.timedelta(minutes=5)
     ).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
     
     return db.find({"start_time": {"$gt": past}, "user": event["user"]})
 
-def write_db(event):
+def write_db(db, event):
     db = dbutils.DocmentDb(
         constant.S3_CONFIG,
         constant.USER_DB,
@@ -35,6 +29,12 @@ def write_db(event):
     db.upsert({"_id": event.pop("user")}, {"$set": event})
     
 def event_handler(event):
+    db = dbutils.DocmentDb(
+        constant.S3_CONFIG,
+        constant.USER_DB,
+        constant.USER_COLLECTION
+    )
+    
     if "create sddc" in text:
         data["text"] = "OK, starting create sddc wizard."
         response = post(url, data, BOT_OAUTH_TOKEN)
