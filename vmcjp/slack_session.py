@@ -64,6 +64,7 @@ def event_handler(event):
     elif text.find(" ") != -1:
         data["text"] = help_message
         response = post(url, data, bot_token)
+        return
     elif is_valid_network(text):
         data["text"] = text
         response = post(url, data, bot_token)
