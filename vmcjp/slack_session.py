@@ -59,6 +59,13 @@ def event_handler(event):
         response = post(url, data, BOT_OAUTH_TOKEN)
 #    logging.info(response.read())
 
+def is_valid_network(address):
+    try:
+        ipaddress.ip_network(address)
+        return True
+    except ValueError:
+        return False
+
 def lambda_handler(event, context):
 #    logging.info(event)
     event_handler(event)
