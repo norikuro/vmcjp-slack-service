@@ -39,6 +39,7 @@ def event_handler(event):
         constant.USER_COLLECTION
     )
     
+    text = event["text"]
     url = event["response_url"]
     bot_token = event["bot_token"]
     
