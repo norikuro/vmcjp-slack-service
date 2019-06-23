@@ -28,6 +28,9 @@ def write_db(db, user, data):
     data.update({"start_time": now})
 #    logging.info(event)
     db.upsert({"_id": user}, {"$set": data})
+
+def delete_db(db, user):
+    write_db(db, user, null)
     
 def event_handler(event):
     db = dbutils.DocmentDb(
@@ -60,7 +63,7 @@ def event_handler(event):
     elif "cancel" in text:
         data["text"] = "OK, create SDDC has cenceled."
         response = post(url, data, bot_token)
-        delete_db() #need to implement here!!!
+        delete_db(db, event["user"])
         return
     elif text.find(" ") != -1:
         data["text"] = help_message
