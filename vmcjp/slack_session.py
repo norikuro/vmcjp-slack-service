@@ -13,14 +13,15 @@ logger.setLevel(logging.INFO)
 
 help_message = "May I help you? please type `help` command."
 
-def read_db(db, query):
+def read_db(db, user):
     past = (
         datetime.datetime.now() - datetime.timedelta(minutes=5)
     ).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
-    query.update({"start_time": {"$gt": past}})
+#    query.update({"start_time": {"$gt": past}})
     
 #    return db.find({"start_time": {"$gt": past}, "user": event["user"]})
-    return db.find(query)
+    return db.find({"start_time": {"$gt": past}, "user": user})
+#    return db.find(query)
 
 def write_db(db, user, data):
     now = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
@@ -44,7 +45,7 @@ def event_handler(event):
     }
     
     if "create sddc" in text:
-        result = read_db(db, {"user": event["user"], "command": "create_sddc"})
+        result = read_db(db, event["user"])
         if result is None:
             data["text"] = "OK, starting create sddc wizard."
             response = post(url, data, bot_token)
