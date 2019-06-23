@@ -2,6 +2,7 @@ import json
 import os
 import logging
 import datetime
+import ipaddress
 
 from vmcjp.utils.slack_post import post
 from vmcjp.utils import dbutils
