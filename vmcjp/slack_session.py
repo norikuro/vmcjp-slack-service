@@ -47,8 +47,8 @@ def event_handler(event):
         "channel": event["event"]["channel"]
     }
     
+    result = read_db(db, event["user"])
     if "create sddc" in text:
-        result = read_db(db, event["user"])
         if result is None:
             data["text"] = "OK, starting create sddc wizard."
             response = post(url, data, bot_token)
@@ -70,8 +70,17 @@ def event_handler(event):
         response = post(url, data, bot_token)
         return
     elif is_valid_network(text):
-        data["text"] = text
-        response = post(url, data, bot_token)
+        if result is None:
+            data["text"] = help_message
+            response = post(url, data, bot_token)
+            return
+        else:
+            if result["command"] == "mgmt_cidr":
+                data["text"] = "creating sddc...."
+                response = post(url, data, bot_token)
+                return
+            else:
+                return
     else:
         data["text"] = "Single host or Multi host?"
         response = post(url, data, bot_token)
