@@ -72,9 +72,12 @@ def event_handler(event):
             delete_db(db, event["user"])
             return
     elif text.find(" ") != -1:
-        data["text"] = help_message
-        response = post(url, data, bot_token)
-        return
+        if result is None:
+            data["text"] = help_message
+            response = post(url, data, bot_token)
+            return
+        else:
+            return
     elif is_valid_network(text):
         if result is None:
             data["text"] = help_message
