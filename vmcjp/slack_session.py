@@ -6,7 +6,6 @@ import ipaddress
 
 from vmcjp.utils.slack_post import post
 from vmcjp.utils.s3utils import read_json_from_s3
-#from vmcjp.utils import dbutils
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
 
@@ -35,11 +34,6 @@ def delete_db(db, user):
     db.remove({"_id": user})
     
 def event_handler(event):
-#    db = dbutils.DocmentDb(
-#        constant.S3_CONFIG,
-#        constant.USER_DB,
-#        constant.USER_COLLECTION
-#    )
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     
     text = event["text"]
