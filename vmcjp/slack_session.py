@@ -11,6 +11,7 @@ from vmcjp.utils.slack_post import post
 from vmcjp.utils.s3utils import read_json_from_s3
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
+from vmcjp.slack_event import event_handler
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
