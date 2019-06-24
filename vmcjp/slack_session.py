@@ -84,7 +84,8 @@ def event_handler(event):
             response = post(url, data, bot_token)
             max_hosts = get_max_num_hosts(token, org_id)
             data["text"] = "You can deploy max xxxx hosts."
-            data.update(BUTTON)
+            button_set = json.load(open(BUTTON, 'r'))
+            data.update(button_set)
             response = post(url, data, bot_token)
             
             data["text"] = "OK, starting create sddc wizard."
