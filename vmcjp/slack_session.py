@@ -82,7 +82,7 @@ def event_handler(event):
             if result["command"] == "create_sddc":
                 data["text"] = "Single host or Multi host?"
                 response = post(url, data, bot_token)
-                write_db(db, user, {"command": "create_sddc", "sddc_name": text})
+                write_db(db, user, {"command": "sddc_name", "sddc_name": text})
                 return
             else:
                 return
