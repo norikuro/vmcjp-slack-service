@@ -67,6 +67,7 @@ def event_handler(event):
     text = event["text"]
     url = event["response_url"]
     bot_token = event["bot_token"]
+    token = event["token"]
     
     data = {
         "token": event["token"],
