@@ -125,7 +125,9 @@ def lambda_handler(event, context):
     f = json.load(open(constant.S3_CONFIG, 'r'))
     event.update(
         {
-            "db_url": read_json_from_s3(f["bucket"], f["config"])["db_url"]
+            "db_url": read_json_from_s3(f["bucket"], f["config"])["db_url"],
+            "token": f["token"],
+            "org_id": f["org_id"]
         }
     )
     event_handler(event)
