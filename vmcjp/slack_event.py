@@ -8,7 +8,7 @@ import requests
 
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.slack_post import post
-from vmcjp.utils.s3utils import read_json_from_s3
+#from vmcjp.utils.s3utils import read_json_from_s3
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
 
