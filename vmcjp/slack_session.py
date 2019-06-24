@@ -68,6 +68,7 @@ def event_handler(event):
     url = event["response_url"]
     bot_token = event["bot_token"]
     token = event["token"]
+    org_id = event["org_id"]
     
     data = {
         "token": event["token"],
