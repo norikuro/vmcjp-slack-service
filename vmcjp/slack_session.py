@@ -89,13 +89,13 @@ def event_handler(event):
             data.update(button_set)
             response = post(url, data, bot_token)
             
-            data["text"] = "OK, starting create sddc wizard."
-            response = post(url, data, bot_token)
-            data["text"] = "This conversation will end with typing `cancel` or doing nothing within 5 minutes"
-            response = post(url, data, bot_token)
-            data["text"] = "Please enter SDDC name"
-            response = post(url, data, bot_token)
-            write_db(db, user, {"command": "create_sddc"})
+#            data["text"] = "OK, starting create sddc wizard."
+#            response = post(url, data, bot_token)
+#            data["text"] = "This conversation will end with typing `cancel` or doing nothing within 5 minutes"
+#            response = post(url, data, bot_token)
+#            data["text"] = "Please enter SDDC name"
+#            response = post(url, data, bot_token)
+#            write_db(db, user, {"command": "create_sddc"})
             return
         else:
             data["text"] = help_message
