@@ -15,11 +15,6 @@ from vmcjp.utils import constant
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-help_message = "May I help you? please type `help` command."
-
-TEST_ORG_ID = os.environ["test_org"] #for test
-BUTTON = "vmcjp/precheck_button.json"
-
 def lambda_handler(event, context):
 #    logging.info(event)
     f = json.load(open(constant.S3_CONFIG, 'r'))
