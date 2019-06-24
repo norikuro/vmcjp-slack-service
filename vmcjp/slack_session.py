@@ -82,8 +82,9 @@ def event_handler(event):
         if "create sddc" in text:
             data["text"] = "Checking current resources..."
             response = post(url, data, bot_token)
-            max_hosts = get_max_num_hosts(token, org_id)
-            data["text"] = "You can deploy max xxxx hosts."
+            data["text"] = "You can deploy max {} hosts.".format(
+                get_max_num_hosts(token, org_id)
+            )
             button_set = json.load(open(BUTTON, 'r'))
             data.update(button_set)
             response = post(url, data, bot_token)
