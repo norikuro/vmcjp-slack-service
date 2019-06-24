@@ -19,10 +19,10 @@ def read_db(db, user):
         datetime.datetime.now() - datetime.timedelta(minutes=5)
     ).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
     
-#    result = db.find({"start_time": {"$gt": past}, "_id": user})
-#    logging.info(result)
-    return db.find({"start_time": {"$gt": past}, "_id": user})
-#    return result
+    result = db.find({"start_time": {"$gt": past}, "_id": user})
+    logging.info(result)
+    return result
+#    return db.find({"start_time": {"$gt": past}, "_id": user})
 
 def write_db(db, user, data):
     now = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
@@ -36,6 +36,7 @@ def delete_db(db, user):
 def event_handler(event):
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     
+    user = event["user"]
     text = event["text"]
     url = event["response_url"]
     bot_token = event["bot_token"]
@@ -54,7 +55,7 @@ def event_handler(event):
             response = post(url, data, bot_token)
             data["text"] = "Please enter SDDC name"
             response = post(url, data, bot_token)
-            write_db(db, event["user"], {"command": "create_sddc"})
+            write_db(db, user, {"command": "create_sddc"})
             return
         else:
             data["text"] = help_message
@@ -81,7 +82,7 @@ def event_handler(event):
             if result["command"] == "create_sddc":
                 data["text"] = "Single host or Multi host?"
                 response = post(url, data, bot_token)
-                ##write sddc name to DB!!!
+                write_db(db, user, {"command": "create_sddc", "sddc_name": text})
                 return
             else:
                 return
