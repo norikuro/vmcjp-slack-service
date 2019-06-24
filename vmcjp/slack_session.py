@@ -3,6 +3,8 @@ import os
 import logging
 import datetime
 import ipaddress
+import atexit
+import requests
 
 from vmcjp.utils.slack_post import post
 from vmcjp.utils.s3utils import read_json_from_s3
@@ -32,7 +34,30 @@ def write_db(db, user, data):
 
 def delete_db(db, user):
     db.remove({"_id": user})
+
+def get_max_num_hosts(token, org_id):
+# get deployable number of hosts
+# 1 host is for Storage EDRS
     
+    vmc_client = get_vmc_client(token)
+    
+#    sddcs = vmc_client.orgs.Sddcs.list(org_id)
+    sddcs = vmc_client.orgs.Sddcs.list(TEST_ORG_ID) #for test 
+    
+    i = 0
+    for sddc in sddcs:
+        i = i + len(sddc.resource_config.esx_hosts)
+#    max_host = int(vmc_client.Orgs.get(org_id).properties.values["sddcLimit"]) - 1
+    max_host = int(vmc_client.Orgs.get(TEST_ORG_ID).properties.values["sddcLimit"]) - 1
+    
+    return max_host - i
+
+def get_vmc_client(token):
+    session = requests.Session()
+    vmc_client = create_vmc_client(token, session=session)
+    atexit.register(session.close)
+    return vmc_client
+
 def event_handler(event):
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     
