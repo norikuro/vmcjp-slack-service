@@ -147,4 +147,8 @@ def lambda_handler(event, context):
             "org_id": j["org_id"]
         }
     )
-    event_handler(event)
+    
+    if event.has_key("callback_id"):
+        aaa
+    else:
+        event_handler(event)
