@@ -20,24 +20,24 @@ help_message = "May I help you? please type `help` command."
 TEST_ORG_ID = os.environ["test_org"] #for test
 BUTTON = "vmcjp/precheck_button.json"
 
-def read_db(db, user):
+def read_db(db, user_id):
     past = (
         datetime.datetime.now() - datetime.timedelta(minutes=5)
     ).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
     
-    result = db.find({"start_time": {"$gt": past}, "_id": user})
+    result = db.find({"start_time": {"$gt": past}, "_id": user_id})
     logging.info(result)
     return result
-#    return db.find({"start_time": {"$gt": past}, "_id": user})
+#    return db.find({"start_time": {"$gt": past}, "_id": user_id})
 
-def write_db(db, user, data):
+def write_db(db, user_id, data):
     now = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
     data.update({"start_time": now})
 #    logging.info(event)
-    db.upsert({"_id": user}, {"$set": data})
+    db.upsert({"_id": user_id}, {"$set": data})
 
-def delete_db(db, user):
-    db.remove({"_id": user})
+def delete_db(db, user_id):
+    db.remove({"_id": user_id})
 
 def get_max_num_hosts(token, org_id):
 # get deployable number of hosts
@@ -65,7 +65,7 @@ def get_vmc_client(token):
 def event_handler(event):
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     
-    user = event["user"]
+    user_id = event["user_id"]
     text = event["text"]
     url = event["response_url"]
     bot_token = event["bot_token"]
@@ -77,7 +77,7 @@ def event_handler(event):
         "channel": event["channel"]
     }
     
-    result = read_db(db, event["user"])
+    result = read_db(db, event["user_id"])
     if result is None:
         if "create sddc" in text:
             data["text"] = "Checking current resources..."
@@ -95,7 +95,7 @@ def event_handler(event):
 #            response = post(url, data, bot_token)
 #            data["text"] = "Please enter SDDC name"
 #            response = post(url, data, bot_token)
-#            write_db(db, user, {"command": "create_sddc"})
+#            write_db(db, user_id, {"command": "create_sddc"})
             return
         else:
             data["text"] = help_message
