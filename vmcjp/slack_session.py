@@ -74,6 +74,11 @@ def event_handler(event):
     result = read_db(db, event["user"])
     if result is None:
         if "create sddc" in text:
+            data["text"] = "Checking current resources..."
+            response = post(url, data, bot_token)
+            max_hosts = get_max_num_hosts(token, org_id)
+            ## respond interactive button here!!!
+            
             data["text"] = "OK, starting create sddc wizard."
             response = post(url, data, bot_token)
             data["text"] = "This conversation will end with typing `cancel` or doing nothing within 5 minutes"
