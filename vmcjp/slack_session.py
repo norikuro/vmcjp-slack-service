@@ -107,7 +107,7 @@ def event_handler(event):
         elif "cancel" in text:
             data["text"] = "OK, create SDDC has cenceled."
             response = post(url, data, bot_token)
-            delete_db(db, event["user"])
+            delete_db(db, event["user_id"])
             return
         elif text.find(" ") != -1:
             return
@@ -122,7 +122,7 @@ def event_handler(event):
             if result["command"] == "create_sddc":
                 data["text"] = "Single host or Multi host?"
                 response = post(url, data, bot_token)
-                write_db(db, user, {"command": "sddc_name", "sddc_name": text})
+                write_db(db, user_id, {"command": "sddc_name", "sddc_name": text})
                 return
             else:
                 return
