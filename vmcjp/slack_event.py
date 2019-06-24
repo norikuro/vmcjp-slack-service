@@ -1,3 +1,8 @@
+help_message = "May I help you? please type `help` command."
+
+TEST_ORG_ID = os.environ["test_org"] #for test
+BUTTON = "vmcjp/precheck_button.json"
+
 def read_db(db, user_id):
     past = (
         datetime.datetime.now() - datetime.timedelta(minutes=5)
