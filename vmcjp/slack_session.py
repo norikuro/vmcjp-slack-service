@@ -16,6 +16,8 @@ logger.setLevel(logging.INFO)
 
 help_message = "May I help you? please type `help` command."
 
+BUTTON = "vmcjp/precheck_button.json"
+
 def read_db(db, user):
     past = (
         datetime.datetime.now() - datetime.timedelta(minutes=5)
@@ -77,7 +79,9 @@ def event_handler(event):
             data["text"] = "Checking current resources..."
             response = post(url, data, bot_token)
             max_hosts = get_max_num_hosts(token, org_id)
-            ## respond interactive button here!!!
+            data["text"] = "You can deploy max xxxx hosts."
+            data.update(BUTTON)
+            response = post(url, data, bot_token)
             
             data["text"] = "OK, starting create sddc wizard."
             response = post(url, data, bot_token)
