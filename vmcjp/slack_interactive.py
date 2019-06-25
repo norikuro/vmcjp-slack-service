@@ -14,26 +14,20 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 def interactive_handler(event):
-#    db = dbutils2.DocmentDb(event["db_url"], constant.USER)
-    
-    user_id = event["user_id"]
-    url = event["response_url"]
-    token = event["token"]
-#    org_id = event["org_id"]
-    callback_id = event["callback_id"]
-    event_response = event["response"]
+    db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     
     data = {
         "token": event["token"],
         "channel": event["channel"]
     }
     
-    if callback_id == "create_sddc":
-        if event_response == "yes":
+    if event["callback_id"] == "create_sddc":
+        if event["response"] == "yes":
             data["text"] = "Please enter SDDC name"
-            response = post_to_response_url(url, data)
+            response = post_to_response_url(event["response_url"], data)
             return
         else:
             data["text"] = "OK, create SDDC has cenceled."
-            response = post_to_response_url(url, data)
+            response = post_to_response_url(event["response_url"], data)
+            db.delete_event_db(event["user_id"])
             return
