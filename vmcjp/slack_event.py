@@ -69,7 +69,7 @@ def event_handler(event):
         if "create sddc" in text:
             data["text"] = "OK, starting create sddc wizard."
             response = post(url, data, bot_token)
-            data["text"] = "This conversation will end with typing `cancel` or doing nothing for 5 minutes"
+            data["text"] = "This conversation will end by typing `cancel` or doing nothing for 5 minutes"
             response = post(url, data, bot_token)
             data["text"] = "Checking current resources..."
             response = post(url, data, bot_token)
