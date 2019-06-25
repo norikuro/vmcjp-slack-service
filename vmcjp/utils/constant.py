@@ -11,6 +11,7 @@ class _const:
   USER_COLLECTION = "user_collection"
   SDDC = "sddc"
   USER = "user"
+  BUTTON_DIR = "vmcjp/button/"
   
 
   class ConstError(TypeError):
