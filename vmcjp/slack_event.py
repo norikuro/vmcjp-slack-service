@@ -1,7 +1,6 @@
 import json
 import os
 import logging
-import datetime
 import ipaddress
 import atexit
 import requests
