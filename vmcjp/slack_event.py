@@ -13,7 +13,7 @@ from vmcjp.utils import constant
 help_message = "May I help you? please type `help` command."
 
 TEST_ORG_ID = os.environ["test_org"] #for test
-BUTTON = "vmcjp/precheck_button.json"
+PRECHECK_BUTTON = "vmcjp/precheck_button.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -76,7 +76,7 @@ def event_handler(event):
             data["text"] = "You can deploy max {} hosts.".format(
                 max_hosts
             )
-            button_set = json.load(open(BUTTON, 'r'))
+            button_set = json.load(open(PRECHECK_BUTTON, 'r'))
             data.update(button_set)
             response = post(url, data, bot_token)
             db.write_event_db(user_id, {"command": "create_sddc", "max_hosts": max_hosts})
