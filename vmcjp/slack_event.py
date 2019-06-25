@@ -20,25 +20,6 @@ BUTTON = "vmcjp/precheck_button.json"
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-def read_db(db, user_id):
-    past = (
-        datetime.datetime.now() - datetime.timedelta(minutes=5)
-    ).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
-    
-    result = db.find({"start_time": {"$gt": past}, "_id": user_id})
-    logging.info(result)
-    return result
-#    return db.find({"start_time": {"$gt": past}, "_id": user_id})
-
-def write_db(db, user_id, data):
-    now = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
-    data.update({"start_time": now})
-#    logging.info(event)
-    db.upsert({"_id": user_id}, {"$set": data})
-
-def delete_db(db, user_id):
-    db.remove({"_id": user_id})
-
 def get_max_num_hosts(token, org_id):
 # get deployable number of hosts
 # 1 host is for Storage EDRS
