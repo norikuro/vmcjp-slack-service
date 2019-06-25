@@ -3,7 +3,7 @@ import logging
 
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
-from vmcjp.utils.slack_post import post_to_response_url
+from vmcjp.utils.slack_post import post, post_to_response_url
 
 help_message = "May I help you? please type `help` command."
 
