@@ -47,5 +47,5 @@ class DocmentDb(object):
         
         self.upsert({"_id": user_id}, {"$set": data})
 
-    def delete_event_db(db, user_id):
+    def delete_event_db(self, user_id):
         self.remove({"_id": user_id})
