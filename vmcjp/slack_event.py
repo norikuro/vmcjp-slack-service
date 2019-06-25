@@ -104,7 +104,10 @@ def event_handler(event):
                 return
         else:
             if result["command"] == "create_sddc":
-                data["text"] = "Single host or Multi host?"
+                if result["max_hosts"] < 3:
+                    data["text"] = "Do you want to connect AWS?"
+                else:
+                    data["text"] = "Single host or Multi host?"
                 response = post(url, data, bot_token)
                 db.write_event_db(user_id, {"command": "sddc_name", "sddc_name": text})
                 return
