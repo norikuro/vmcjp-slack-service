@@ -17,7 +17,7 @@ def interactive_handler(event):
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     
     user_id = event["user_id"]
-    text = event["text"]
+#    text = event["text"]
     url = event["response_url"]
 #    bot_token = event["bot_token"]
     token = event["token"]
