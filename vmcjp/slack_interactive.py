@@ -21,6 +21,8 @@ def interactive_handler(event):
     bot_token = event["bot_token"]
     token = event["token"]
     org_id = event["org_id"]
+    callback_id = event["callback_id"]
+    response = event["response"]
     
     data = {
         "token": event["token"],
@@ -29,6 +31,11 @@ def interactive_handler(event):
     
     result = db.read_event_db(event["user_id"])
     if result is None:
-      aaa
+      if callback_id == "create_sddc":
+        if response == "yes":
+            data["text"] = "Please enter SDDC name"
+            response = post(url, data, bot_token)
+        else:
+            aaa
     else:
       aaa
