@@ -39,14 +39,14 @@ def interactive_handler(event):
       if callback_id == "create_sddc":
         if event_response == "yes":
             data["text"] = "Please enter SDDC name"
-            response = post(url, data, bot_token)
-#            response = post_to_response_url(url, data)
+#            response = post(url, data, bot_token)
+            response = post_to_response_url(url, data)
             logging.info(response.read())
             return
         else:
             data["text"] = "OK, create SDDC has cenceled."
-            response = post(url, data, bot_token)
-#            response = post_to_response_url(url, data)
+#            response = post(url, data, bot_token)
+            response = post_to_response_url(url, data)
             logging.info(response.read())
             return
     else:
