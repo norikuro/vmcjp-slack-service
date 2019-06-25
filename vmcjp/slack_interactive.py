@@ -31,3 +31,8 @@ def interactive_handler(event):
             response = post_to_response_url(event["response_url"], data)
             db.delete_event_db(event["user_id"])
             return
+      elif event["callback_id"] == "link_aws_sddc":
+        if event["response"] == "yes":
+            aaa
+        else:
+            aaa
