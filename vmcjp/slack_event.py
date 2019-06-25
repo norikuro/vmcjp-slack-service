@@ -13,7 +13,8 @@ from vmcjp.utils import constant
 help_message = "May I help you? please type `help` command."
 
 TEST_ORG_ID = os.environ["test_org"] #for test
-BUTTON = "vmcjp/precheck_button.json"
+PRECHECK_BUTTON = constant.BUTTON_DIR + "precheck_button.json"
+LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws_button.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -76,7 +77,7 @@ def event_handler(event):
             data["text"] = "You can deploy max {} hosts.".format(
                 max_hosts
             )
-            button_set = json.load(open(BUTTON, 'r'))
+            button_set = json.load(open(PRECHECK_BUTTON, 'r'))
             data.update(button_set)
             response = post(url, data, bot_token)
             db.write_event_db(user_id, {"command": "create_sddc", "max_hosts": max_hosts})
@@ -105,7 +106,8 @@ def event_handler(event):
         else:
             if result["command"] == "create_sddc":
                 if result["max_hosts"] < 3:
-                    data["text"] = "Do you want to connect AWS?"
+                    button_set = json.load(open(LINK_AWS_BUTTON, 'r'))
+                    data.update(button_set)
                 else:
                     data["text"] = "Single host or Multi host?"
                 response = post(url, data, bot_token)
