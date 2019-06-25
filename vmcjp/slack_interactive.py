@@ -24,7 +24,8 @@ def interactive_handler(event):
     org_id = event["org_id"]
     callback_id = event["callback_id"]
     event_response = event["response"]
-#    logging.info(event_response)
+    logging.info(callback_id)
+    logging.info(event_response)
     
     data = {
         "token": event["token"],
@@ -32,7 +33,6 @@ def interactive_handler(event):
     }
     
     result = db.read_event_db(event["user_id"])
-    logging.info("db_result:  " + result)
     if result is None:
       if callback_id == "create_sddc":
         if event_response == "yes":
