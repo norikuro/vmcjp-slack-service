@@ -38,14 +38,14 @@ class DocmentDb(object):
           datetime.datetime.now() - datetime.timedelta(minutes=5)
         ).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
 
-        result = find({"start_time": {"$gt": past}, "_id": user_id})
+        result = self.find({"start_time": {"$gt": past}, "_id": user_id})
         return result
 
     def write_event_db(self, user_id, data):
         now = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
         data.update({"start_time": now})
         
-        upsert({"_id": user_id}, {"$set": data})
+        self.upsert({"_id": user_id}, {"$set": data})
 
     def delete_event_db(db, user_id):
-        remove({"_id": user_id})
+        self.remove({"_id": user_id})
