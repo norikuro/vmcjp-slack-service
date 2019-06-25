@@ -63,7 +63,6 @@ def event_handler(event):
         "channel": event["channel"]
     }
     
-#    result = read_db(db, event["user_id"])
     result = db.read_event_db(event["user_id"])
     if result is None:
         if "create sddc" in text:
@@ -79,10 +78,6 @@ def event_handler(event):
             button_set = json.load(open(BUTTON, 'r'))
             data.update(button_set)
             response = post(url, data, bot_token)
-            
-#            data["text"] = "Please enter SDDC name"
-#            response = post(url, data, bot_token)
-#            write_db(db, user_id, {"command": "create_sddc"})
             db.write_event_db(user_id, {"command": "create_sddc"})
             return
         else:
@@ -95,7 +90,6 @@ def event_handler(event):
         elif "cancel" in text:
             data["text"] = "OK, create SDDC has cenceled."
             response = post(url, data, bot_token)
-#            delete_db(db, event["user_id"])
             db.delete_event_db(event["user_id"])
             return
         elif text.find(" ") != -1:
@@ -111,7 +105,6 @@ def event_handler(event):
             if result["command"] == "create_sddc":
                 data["text"] = "Single host or Multi host?"
                 response = post(url, data, bot_token)
-#                write_db(db, user_id, {"command": "sddc_name", "sddc_name": text})
                 db.write_event_db(user_id, {"command": "sddc_name", "sddc_name": text})
                 return
             else:
