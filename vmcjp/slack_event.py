@@ -72,13 +72,14 @@ def event_handler(event):
             response = post(url, data, bot_token)
             data["text"] = "Checking current resources..."
             response = post(url, data, bot_token)
+            max_hosts = get_max_num_hosts(token, org_id)
             data["text"] = "You can deploy max {} hosts.".format(
-                get_max_num_hosts(token, org_id)
+                max_hosts
             )
             button_set = json.load(open(BUTTON, 'r'))
             data.update(button_set)
             response = post(url, data, bot_token)
-            db.write_event_db(user_id, {"command": "create_sddc"})
+            db.write_event_db(user_id, {"command": "create_sddc", "max_hosts": max_hosts})
             return
         else:
             data["text"] = help_message
