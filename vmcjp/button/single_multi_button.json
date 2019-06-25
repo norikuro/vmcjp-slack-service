@@ -2,22 +2,22 @@
   "attachments": 
   [
     {
-      "text": "Do you want to connect AWS?",
+      "text": "Which type do you want to deploy, Single host or Multi host?",
       "color": "#3AA3E3",
       "attachment_type": "default",
-      "callback_id": "link_aws_sddc",
+      "callback_id": "single_multi",
       "actions": [
         {
-          "name": "yes",
-          "text": "Yes",
+          "name": "single",
+          "text": "Single Host",
           "type": "button",
-          "value": "yes"
+          "value": "signle"
         },
         {
-          "name": "no",
-          "text": "No",
+          "name": "multi",
+          "text": "Multi Host",
           "type": "button",
-          "value": "no"
+          "value": "multi"
         }
       ]
     }
