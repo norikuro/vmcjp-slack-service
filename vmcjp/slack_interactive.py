@@ -32,7 +32,6 @@ def interactive_handler(event):
         if event_response == "yes":
             data["text"] = "Please enter SDDC name"
             response = post_to_response_url(url, data)
-            db.write_event_db(user_id, {"command": "create_sddc"})
             return
         else:
             data["text"] = "OK, create SDDC has cenceled."
