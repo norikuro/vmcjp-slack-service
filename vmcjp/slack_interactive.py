@@ -43,7 +43,9 @@ def interactive_handler(event):
             return
         else:
             data["text"] = "OK, create SDDC has cenceled."
-            response = post_to_response_url(url, data)
+            response = post(url, data, bot_token)
+#            response = post_to_response_url(url, data)
+            logging.info(response.read())
             return
     else:
         logging.info("something wrong!!!")
