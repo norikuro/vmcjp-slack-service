@@ -62,6 +62,13 @@ def get_vmc_client(token):
     atexit.register(session.close)
     return vmc_client
 
+def is_valid_network(address):
+    try:
+        ipaddress.ip_network(address)
+        return True
+    except ValueError:
+        return False
+
 def event_handler(event):
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     
@@ -127,10 +134,3 @@ def event_handler(event):
             else:
                 return
 #    logging.info(response.read())
-
-def is_valid_network(address):
-    try:
-        ipaddress.ip_network(address)
-        return True
-    except ValueError:
-        return False
