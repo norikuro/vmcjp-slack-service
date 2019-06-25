@@ -19,7 +19,7 @@ def interactive_handler(event):
     user_id = event["user_id"]
     url = event["response_url"]
     token = event["token"]
-    org_id = event["org_id"]
+#    org_id = event["org_id"]
     callback_id = event["callback_id"]
     event_response = event["response"]
     
