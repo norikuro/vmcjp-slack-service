@@ -21,6 +21,6 @@ def lambda_handler(event, context):
     )
     
     if event.has_key("callback_id"):
-        aaa
+        print("aa")
     else:
         event_handler(event)
