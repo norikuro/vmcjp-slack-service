@@ -67,6 +67,10 @@ def event_handler(event):
     result = db.read_event_db(event["user_id"])
     if result is None:
         if "create sddc" in text:
+            data["text"] = "OK, starting create sddc wizard."
+            response = post(url, data, bot_token)
+            data["text"] = "This conversation will end with typing `cancel` or doing nothing within 5 minutes"
+            response = post(url, data, bot_token)
             data["text"] = "Checking current resources..."
             response = post(url, data, bot_token)
             data["text"] = "You can deploy max {} hosts.".format(
@@ -76,10 +80,6 @@ def event_handler(event):
             data.update(button_set)
             response = post(url, data, bot_token)
             
-#            data["text"] = "OK, starting create sddc wizard."
-#            response = post(url, data, bot_token)
-#            data["text"] = "This conversation will end with typing `cancel` or doing nothing within 5 minutes"
-#            response = post(url, data, bot_token)
 #            data["text"] = "Please enter SDDC name"
 #            response = post(url, data, bot_token)
 #            write_db(db, user_id, {"command": "create_sddc"})
