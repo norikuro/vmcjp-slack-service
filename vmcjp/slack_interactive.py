@@ -34,6 +34,7 @@ def interactive_handler(event):
     }
     
     result = db.read_event_db(event["user_id"])
+    logging.info(result)
     if result is None:
       if callback_id == "create_sddc":
         if event_response == "yes":
