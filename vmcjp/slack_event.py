@@ -13,8 +13,8 @@ from vmcjp.utils import constant
 help_message = "May I help you? please type `help` command."
 
 TEST_ORG_ID = os.environ["test_org"] #for test
-PRECHECK_BUTTON = "vmcjp/button/precheck_button.json"
-LINK_AWS_BUTTON = "vmcjp/button/link_aws_button.json"
+PRECHECK_BUTTON = constant.BUTTON_DIR + "precheck_button.json"
+LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws_button.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
