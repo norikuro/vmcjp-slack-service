@@ -16,6 +16,8 @@ logger.setLevel(logging.INFO)
 def interactive_handler(event):
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     
+    user_id = event["user_id"]
+    
     data = {
         "token": event["token"],
         "channel": event["channel"]
@@ -29,7 +31,7 @@ def interactive_handler(event):
         else:
             data["text"] = "OK, create SDDC has cenceled."
             response = post_to_response_url(event["response_url"], data)
-            db.delete_event_db(event["user_id"])
+            db.delete_event_db(user_id)
             return
       elif event["callback_id"] == "link_aws_sddc":
         if event["response"] == "yes":
