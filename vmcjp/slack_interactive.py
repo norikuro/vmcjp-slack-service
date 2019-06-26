@@ -33,6 +33,13 @@ def interactive_handler(event):
             return
       elif event["callback_id"] == "link_aws_sddc":
         if event["response"] == "yes":
-            aaa
+            data["text"] = "Please select aws account id which you want to link."
+            response = post_to_response_url(event["response_url"], data)
         else:
-            aaa
+            data["text"] = "Please enter CIDR block for management subnet."
+            response = post_to_response_url(event["response_url"], data)
+            data["text"] = "/23 is max 27 host, /20 is max 251, /16 is 4091."
+            response = post_to_response_url(event["response_url"], data)
+            data["text"] = "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved."
+            response = post_to_response_url(event["response_url"], data)
+        db.write_event_db(user_id, {"command": "link_aws", "num_hosts": 1})
