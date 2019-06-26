@@ -75,6 +75,7 @@ def event_handler(event):
             data["text"] = "Checking current resources..."
             response = post(url, data, bot_token)
             max_hosts = get_max_num_hosts(token, org_id)
+            max_hosts = 1 if max_hosts < 3 else max_hosts
 #            max_hosts = 10 #for test
             data["text"] = "You can deploy max {} hosts.".format(
                 max_hosts
