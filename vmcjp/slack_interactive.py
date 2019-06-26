@@ -16,6 +16,7 @@ TEST_ORG_ID = os.environ["test_org"] #for test
 AWS_ACCOUNT = os.environ["aws_account"] #for internal use
 AWS_ID = os.environ["aws_id"] #for internal use
 ACCOUNT_BUTTON = constant.BUTTON_DIR + "account_button.json"
+REGION_BUTTON = constant.BUTTON_DIR + "region_button.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
