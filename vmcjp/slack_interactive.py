@@ -136,17 +136,21 @@ def interactive_handler(event):
         post_to_response_url(event["response_url"], data)
         db.write_event_db(user_id, {"command": "region", "region": event["response"]})
     elif event["callback_id"] == "aws_account":
-        button_set = json.load(open(VPC_BUTTON, 'r'))
+        result = db.read_event_db(event["user_id"])
+        if result != None:
+            button_set = json.load(open(VPC_BUTTON, 'r'))
             button_set["attachments"][0]["actions"][0].update(
                 {
                     "options": list_vpc(
                         get_vmc_client(event["token"]),
                         event["org_id"],
-                        linked_account_id,
-                        region
+                        result["linked_account_id"],
+                        result["region"]
                     )
                 }
             )
             data.update(button_set)
+        else:
+            data["text"] = "Session has expired, please start wizard by typing `create sddc`"
         post_to_response_url(event["response_url"], data)
         db.write_event_db(user_id, {"command": "aws_account", "aws_id": event["response"]})
