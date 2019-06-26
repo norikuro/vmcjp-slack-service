@@ -1,5 +1,9 @@
 import os
 import logging
+import atexit
+import requests
+
+from vmware.vapi.vmc.client import create_vmc_client
 
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
@@ -8,10 +12,20 @@ from vmcjp.utils.slack_post import post, post_to_response_url
 help_message = "May I help you? please type `help` command."
 
 TEST_ORG_ID = os.environ["test_org"] #for test
-#BUTTON = "vmcjp/precheck_button.json"
+ACCOUNT_BUTTON = constant.BUTTON_DIR + "account_button.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
+
+def get_vmc_client(token):
+    session = requests.Session()
+    vmc_client = create_vmc_client(token, session=session)
+    atexit.register(session.close)
+    return vmc_client
+
+def list_aws_account(vmc_client, org_id):
+    accounts = vmc_client.orgs.account_link.ConnectedAccounts.get(org_id)
+    return [account.account_number for account in accounts]
 
 def interactive_handler(event):
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
@@ -36,6 +50,14 @@ def interactive_handler(event):
     elif event["callback_id"] == "link_aws_sddc":
         if event["response"] == "yes":
             data["text"] = "Please select aws account id which you want to link."
+            button_set = json.load(open(ACCOUNT_BUTTON, 'r'))
+            button_set["attachments"][0]["actions"][0].update(
+                "options" = list_aws_account(
+                    get_vmc_client(event["token"]), 
+                    event["org_id"]
+                )
+            )
+            data.update(button_set)
             response = post_to_response_url(event["response_url"], data)
         else:
             data["text"] = "Please enter CIDR block for management subnet."
