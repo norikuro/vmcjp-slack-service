@@ -13,6 +13,7 @@ from vmcjp.utils.slack_post import post, post_to_response_url
 help_message = "May I help you? please type `help` command."
 
 TEST_ORG_ID = os.environ["test_org"] #for test
+AWS_ACCOUNT = "aa" #for test
 ACCOUNT_BUTTON = constant.BUTTON_DIR + "account_button.json"
 
 logger = logging.getLogger()
@@ -30,7 +31,7 @@ def list_aws_account(vmc_client, org_id):
     return [
         {
             "text": account.account_number,
-            "value": account.account_number
+            "value": account.id
         } for account in accounts
     ]
 
@@ -67,6 +68,7 @@ def interactive_handler(event):
             )
             data.update(button_set)
             response = post_to_response_url(event["response_url"], data)
+            logging.info(button_set)
         else:
             data["text"] = "Please enter CIDR block for management subnet."
             response = post_to_response_url(event["response_url"], data)
