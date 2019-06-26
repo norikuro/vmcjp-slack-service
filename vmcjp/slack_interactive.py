@@ -75,7 +75,6 @@ def interactive_handler(event):
             )
             data.update(button_set)
             response = post_to_response_url(event["response_url"], data)
-            logging.info(button_set)
         else:
             data["text"] = "Please enter CIDR block for management subnet."
             response = post_to_response_url(event["response_url"], data)
