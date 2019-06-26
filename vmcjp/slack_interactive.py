@@ -30,7 +30,6 @@ def get_vmc_client(token):
     return vmc_client
 
 def list_aws_account(vmc_client, org_id):
-    a = []
     accounts = vmc_client.orgs.account_link.ConnectedAccounts.get(org_id)
     return [
         {
@@ -40,7 +39,6 @@ def list_aws_account(vmc_client, org_id):
     ]
 
 def list_region(vmc_client, org_id):
-    a = []
     regions = vmc_client.Orgs.get(org_id).properties.values.get("defaultAwsRegions").split(",")
     return [
         {
