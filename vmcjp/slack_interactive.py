@@ -13,7 +13,7 @@ from vmcjp.utils.slack_post import post, post_to_response_url
 help_message = "May I help you? please type `help` command."
 
 TEST_ORG_ID = os.environ["test_org"] #for test
-AWS_ACCOUNT = "aa" #for test
+AWS_ACCOUNT = os.environ["aws_account"] #for internal use
 ACCOUNT_BUTTON = constant.BUTTON_DIR + "account_button.json"
 
 logger = logging.getLogger()
@@ -60,10 +60,11 @@ def interactive_handler(event):
             button_set = json.load(open(ACCOUNT_BUTTON, 'r'))
             button_set["attachments"][0]["actions"][0].update(
                 {
-                    "options": list_aws_account(
-                    get_vmc_client(event["token"]), 
-                    event["org_id"]
-                    )
+#                    "options": list_aws_account(
+#                    get_vmc_client(event["token"]), 
+#                    event["org_id"]
+#                    )
+                    "options": [AWS_ACCOUNT] #for internal use
                 }
             )
             data.update(button_set)
