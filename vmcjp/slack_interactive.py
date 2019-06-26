@@ -50,9 +50,7 @@ def interactive_handler(event):
             return
     elif event["callback_id"] == "link_aws_sddc":
         if event["response"] == "yes":
-            data["text"] = "Please select aws account id which you want to link."
             button_set = json.load(open(ACCOUNT_BUTTON, 'r'))
-            logging.info(button_set["attachments"][0]["actions"][0])
 #            button_set["attachments"][0]["actions"][0].update(
 #                "options" = list_aws_account(
 #                    get_vmc_client(event["token"]), 
@@ -61,6 +59,8 @@ def interactive_handler(event):
 #            )
             data.update(button_set)
             response = post_to_response_url(event["response_url"], data)
+            button_set["attachments"][0]["actions"][0].update({"options": "aaa"})
+            logging.info(button_set["attachments"][0]["actions"][0])
         else:
             data["text"] = "Please enter CIDR block for management subnet."
             response = post_to_response_url(event["response_url"], data)
