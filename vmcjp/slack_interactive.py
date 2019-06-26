@@ -144,7 +144,7 @@ def interactive_handler(event):
                     "options": list_vpc(
                         get_vmc_client(event["token"]),
                         event["org_id"],
-                        result["linked_account_id"],
+                        event["response"],
                         result["region"]
                     )
                 }
