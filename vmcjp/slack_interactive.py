@@ -25,8 +25,13 @@ def get_vmc_client(token):
     return vmc_client
 
 def list_aws_account(vmc_client, org_id):
+    a = []
     accounts = vmc_client.orgs.account_link.ConnectedAccounts.get(org_id)
-    return [account.account_number for account in accounts]
+    for account in accounts:
+        a.append(account.account_number)
+        logging.info(account.account_number)
+#    return [account.account_number for account in accounts]
+    return a
 
 def interactive_handler(event):
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
