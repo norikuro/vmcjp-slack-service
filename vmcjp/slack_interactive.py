@@ -114,7 +114,7 @@ def interactive_handler(event):
         post_to_response_url(event["response_url"], data)
         db.write_event_db(user_id, {"command": "region", "region": event["response"]})
     elif event["callback_id"] == "aws_account":
-        data["text"] = "Please select Subnet."
+        data["text"] = "Please select AWS Subnet."
 #        button_set = json.load(open(VPC_BUTTON, 'r'))
         post_to_response_url(event["response_url"], data)
         db.write_event_db(user_id, {"command": "aws_account", "aws_id": event["response"]})
