@@ -84,4 +84,6 @@ def interactive_handler(event):
             response = post_to_response_url(event["response_url"], data)
         db.write_event_db(user_id, {"command": "link_aws", "num_hosts": 1})
     elif event["callback_id"] == "aws_account":
+        data["text"] = "Please select VPC."
+#        button_set = json.load(open(VPC_BUTTON, 'r'))
         db.write_event_db(user_id, {"command": "aws_account", "aws_id": event["response"]})
