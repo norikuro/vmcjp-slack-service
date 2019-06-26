@@ -179,7 +179,7 @@ def interactive_handler(event):
         data.update(button_set)
         post_to_response_url(event["response_url"], data)
         db.write_event_db(user_id, {"command": "aws_account", "connected_account_id": event["response"]})
-      elif event["callback_id"] == "vpc":
+    elif event["callback_id"] == "vpc":
         button_set = json.load(open(SUBNET_BUTTON, 'r'))
         button_set["attachments"][0]["actions"][0].update(
             {
