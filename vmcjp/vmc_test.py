@@ -22,10 +22,10 @@ def main():
   
   test = Test()
   vmc_client = test.get_vmc_client(j["token"])
-#  subnets = vmc_client.orgs.account_link.CompatibleSubnets.get(j["org_id"], linked_account_id="e462f412-be3a-3fa4-9d97-59f1217339a6", region=None, sddc=None, force_refresh=None)
-  print(get_members(vmc_client.Orgs.get(j["org_id"]).properties))
-#  print(get_members(subnets))
-  print(vmc_client.Orgs.get(j["org_id"]).properties.values.get("defaultAwsRegions").split(","))
+  subnets = vmc_client.orgs.account_link.CompatibleSubnets.get(j["org_id"], linked_account_id="e462f412-be3a-3fa4-9d97-59f1217339a6", region="AP_NORTHEAST_1", sddc=None, force_refresh=None)
+#  print(get_members(vmc_client.Orgs.get(j["org_id"]).properties))
+  print(subnets.vpc_map.keys())
+#  print(vmc_client.Orgs.get(j["org_id"]).properties.values.get("defaultAwsRegions").split(","))
 
 if __name__ == '__main__':
   main()
