@@ -9,7 +9,7 @@ from vmcjp.utils import constant
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-BUTTON = "vmcjp/restore_button.json"
+RESTORE_BUTTON = constant.BUTTON_DIR + "restore_button.json"
 
 def restore_sddc():
     db = dbutils.DocmentDb(
@@ -54,7 +54,7 @@ def restore_sddc():
     }
 
 def create_button(config):
-    button_set = json.load(open(BUTTON, 'r'))
+    button_set = json.load(open(RESTORE_BUTTON, 'r'))
     
     fields = [
         {
