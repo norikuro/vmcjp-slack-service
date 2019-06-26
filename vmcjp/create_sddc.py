@@ -13,7 +13,7 @@ from vmcjp.utils.s3utils import read_json_from_s3
 from vmcjp.utils import constant
 
 TEST_ORG_ID = os.environ["test_org"] #for test
-BUTTON = "vmcjp/task_button.json"
+TASK_BUTTON = constant.BUTTON_DIR + "task_button.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -55,7 +55,7 @@ def create_sddc(
 #  )
 
 def create_button(user_id, sddc_name, task_id):
-    button_set = json.load(open(BUTTON, 'r'))
+    button_set = json.load(open(TASK_BUTTON, 'r'))
     
     pretext = "Hi <@{}>, started to create sddc".format(user_id)
     fields = [
