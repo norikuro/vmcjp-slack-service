@@ -51,12 +51,14 @@ def interactive_handler(event):
     elif event["callback_id"] == "link_aws_sddc":
         if event["response"] == "yes":
             button_set = json.load(open(ACCOUNT_BUTTON, 'r'))
-#            button_set["attachments"][0]["actions"][0].update(
-#                "options" = list_aws_account(
-#                    get_vmc_client(event["token"]), 
-#                    event["org_id"]
-#                )
-#            )
+            button_set["attachments"][0]["actions"][0].update(
+                {
+                    "options": list_aws_account(
+                    get_vmc_client(event["token"]), 
+                    event["org_id"]
+                    )
+                }
+            )
             data.update(button_set)
             response = post_to_response_url(event["response_url"], data)
             button_set["attachments"][0]["actions"][0].update({"options": ["aaa"]})
