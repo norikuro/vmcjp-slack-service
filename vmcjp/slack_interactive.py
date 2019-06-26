@@ -83,3 +83,5 @@ def interactive_handler(event):
             data["text"] = "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved."
             response = post_to_response_url(event["response_url"], data)
         db.write_event_db(user_id, {"command": "link_aws", "num_hosts": 1})
+    elif event["callback_id"] == "aws_account":
+        db.write_event_db(user_id, {"command": "aws_account", "aws_account": aaa})
