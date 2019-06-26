@@ -63,10 +63,16 @@ def interactive_handler(event):
             button_set = json.load(open(REGION_BUTTON, 'r'))
             button_set["attachments"][0]["actions"][0].update(
                 {
-                    "options": list_region(
-                    get_vmc_client(event["token"]), 
-                    event["org_id"]
-                    )
+#                    "options": list_region(
+#                    get_vmc_client(event["token"]), 
+#                    event["org_id"]
+#                    )
+                    "options": [
+                        {
+                            "text": "AP_NORTHEAST_1", #for internal use
+                            "value": "AP_NORTHEAST_1" #for internal use
+                        }
+                    ]
                 }
             )
             data.update(button_set)
