@@ -36,6 +36,16 @@ def list_aws_account(vmc_client, org_id):
         } for account in accounts
     ]
 
+def list_region(vmc_client, org_id):
+    a = []
+    regions = vmc_client.Orgs.get(org_id).properties.values.get("defaultAwsRegions").split(",")
+    return [
+        {
+            "text": region,
+            "value": region
+        } for region in regions
+    ]
+
 def interactive_handler(event):
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     
@@ -48,7 +58,17 @@ def interactive_handler(event):
     
     if event["callback_id"] == "create_sddc":
         if event["response"] == "yes":
-            data["text"] = "Please enter SDDC name"
+#            data["text"] = "Please enter SDDC name"
+            button_set = json.load(open(REGION_BUTTON, 'r'))
+            button_set["attachments"][0]["actions"][0].update(
+                {
+                    "options": list_region(
+                    get_vmc_client(event["token"]), 
+                    event["org_id"]
+                    )
+                }
+            )
+            data.update(button_set)
             response = post_to_response_url(event["response_url"], data)
             return
         else:
