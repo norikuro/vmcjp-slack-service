@@ -10,7 +10,7 @@ from vmcjp.utils import constant
 #TEST_ORG_ID = os.environ["test_org"] #for test
 
 class Test(object):
-  def get_vmc_client(token):
+  def get_vmc_client(self, token):
     session = requests.Session()
     vmc_client = create_vmc_client(token, session=session)
     atexit.register(session.close)
