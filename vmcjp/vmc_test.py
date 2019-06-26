@@ -5,7 +5,7 @@ import requests
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.metadata import get_members
 
-TEST_ORG_ID = os.environ["test_org"] #for test
+#TEST_ORG_ID = os.environ["test_org"] #for test
 
 class Test(object):
   def get_vmc_client(token):
