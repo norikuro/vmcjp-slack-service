@@ -22,8 +22,8 @@ def main():
   
   test = Test()
   vmc_client = test.get_vmc_client(j["token"])
-  print(get_members(vmc_client.orgs.account_link))
-  print(vmc_client.orgs.account_link)
+  print(get_members(vmc_client.orgs.account_link.SddcConnections))
+  print(vmc_client.orgs.account_link.SddcConnections)
 
 if __name__ == '__main__':
   main()
