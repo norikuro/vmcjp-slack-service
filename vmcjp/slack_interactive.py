@@ -79,6 +79,12 @@ def interactive_handler(event):
         "channel": event["channel"]
     }
     
+    result = db.read_event_db(event["user_id"])
+    if result is None:
+        data["text"] = help_message
+        response = post_to_response_url(event["response_url"], data)
+        return
+    
     if event["callback_id"] == "create_sddc":
         if event["response"] == "yes":
             button_set = json.load(open(REGION_BUTTON, 'r'))
@@ -136,21 +142,17 @@ def interactive_handler(event):
         post_to_response_url(event["response_url"], data)
         db.write_event_db(user_id, {"command": "region", "region": event["response"]})
     elif event["callback_id"] == "aws_account":
-        result = db.read_event_db(event["user_id"])
-        if result != None:
-            button_set = json.load(open(VPC_BUTTON, 'r'))
-            button_set["attachments"][0]["actions"][0].update(
-                {
-                    "options": list_vpc(
-                        get_vmc_client(event["token"]),
-                        event["org_id"],
-                        event["response"],
-                        result["region"]
-                    )
-                }
-            )
-            data.update(button_set)
-        else:
-            data["text"] = "Session has expired, please start wizard by typing `create sddc`"
+        button_set = json.load(open(VPC_BUTTON, 'r'))
+        button_set["attachments"][0]["actions"][0].update(
+            {
+                "options": list_vpc(
+                    get_vmc_client(event["token"]),
+                    event["org_id"],
+                    event["response"],
+                    result["region"]
+                )
+            }
+        )
+        data.update(button_set)
         post_to_response_url(event["response_url"], data)
-        db.write_event_db(user_id, {"command": "aws_account", "aws_id": event["response"]})
+        db.write_event_db(user_id, {"command": "aws_account", "connected_account_id": event["response"]})
