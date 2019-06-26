@@ -33,7 +33,7 @@ def interactive_handler(event):
             response = post_to_response_url(event["response_url"], data)
             db.delete_event_db(user_id)
             return
-      elif event["callback_id"] == "link_aws_sddc":
+    elif event["callback_id"] == "link_aws_sddc":
         if event["response"] == "yes":
             data["text"] = "Please select aws account id which you want to link."
             response = post_to_response_url(event["response_url"], data)
