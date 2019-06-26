@@ -114,7 +114,7 @@ def event_handler(event):
                 return
         else:
             if result["command"] == "create_sddc":
-                if result["max_hosts"] < 3:
+                if result["max_hosts"] == 1:
                     button_set = json.load(open(LINK_AWS_BUTTON, 'r'))
                     data.update(button_set)
                 else:
