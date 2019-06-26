@@ -28,7 +28,7 @@ def list_aws_account(vmc_client, org_id):
     a = []
     accounts = vmc_client.orgs.account_link.ConnectedAccounts.get(org_id)
     for account in accounts:
-        a.append(account.account_number)
+        a.append(str(account.account_number))
         logging.info(account.account_number)
 #    return [account.account_number for account in accounts]
     return a
