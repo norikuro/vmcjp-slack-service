@@ -40,7 +40,7 @@ def interactive_handler(event):
         else:
             data["text"] = "Please enter CIDR block for management subnet."
             response = post_to_response_url(event["response_url"], data)
-            data["text"] = "/23 is max 27 host, /20 is max 251, /16 is 4091."
+            data["text"] = "/23 is max 27 hosts, /20 is max 251, /16 is 4091."
             response = post_to_response_url(event["response_url"], data)
             data["text"] = "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved."
             response = post_to_response_url(event["response_url"], data)
