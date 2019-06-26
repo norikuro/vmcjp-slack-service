@@ -14,6 +14,7 @@ help_message = "May I help you? please type `help` command."
 
 TEST_ORG_ID = os.environ["test_org"] #for test
 AWS_ACCOUNT = os.environ["aws_account"] #for internal use
+AWS_ID = os.environ["aws_id"] #for internal use
 ACCOUNT_BUTTON = constant.BUTTON_DIR + "account_button.json"
 
 logger = logging.getLogger()
@@ -64,7 +65,12 @@ def interactive_handler(event):
 #                    get_vmc_client(event["token"]), 
 #                    event["org_id"]
 #                    )
-                    "options": [AWS_ACCOUNT] #for internal use
+                    "options": [
+                        {
+                            "text": AWS_ACCOUNT, #for internal use
+                            "value": AWS_ID #for internal use
+                        }
+                    ]
                 }
             )
             data.update(button_set)
