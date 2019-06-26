@@ -194,3 +194,4 @@ def interactive_handler(event):
         )
         data.update(button_set)
         post_to_response_url(event["response_url"], data)
+        db.write_event_db(user_id, {"command": "vpc", "vpc_id": event["response"]})
