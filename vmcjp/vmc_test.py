@@ -4,6 +4,7 @@ import requests
 
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.metadata import get_members
+from vmcjp.utils.s3utils import read_json_from_s3
 from vmcjp.utils import constant
 
 #TEST_ORG_ID = os.environ["test_org"] #for test
