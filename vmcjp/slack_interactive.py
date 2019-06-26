@@ -18,6 +18,7 @@ AWS_ID = os.environ["aws_id"] #for internal use
 ACCOUNT_BUTTON = constant.BUTTON_DIR + "account_button.json"
 REGION_BUTTON = constant.BUTTON_DIR + "region_button.json"
 VPC_BUTTON = constant.BUTTON_DIR + "vpc_button.json"
+SUBNET_BUTTON = constant.BUTTON_DIR + "subnet_button.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -54,19 +55,41 @@ def list_vpc(
     linked_account_id, 
     region
 ):
-    subnets = vmc_client.orgs.account_link.CompatibleSubnets.get(
+    csbnts = vmc_client.orgs.account_link.CompatibleSubnets.get(
         org_id, 
         linked_account_id=linked_account_id, 
         region=region, 
         sddc=None, 
         force_refresh=None
     )
-    vpcs = subnets.vpc_map.keys()
+    vpcs = csbnts.vpc_map.keys()
     return [
         {
             "text": vpc,
             "value": vpc
         } for vpc in vpcs
+    ]
+
+def list_subnet(
+    vmc_client,
+    org_id,
+    linked_account_id, 
+    region,
+    vpc_id
+):
+    csbnts = vmc_client.orgs.account_link.CompatibleSubnets.get(
+        org_id, 
+        linked_account_id=linked_account_id, 
+        region=region, 
+        sddc=None, 
+        force_refresh=None
+    )
+    vpc_subnets = csbnts.get_field("vpc_map").get(vpc_id).subnets
+    return [
+        {
+            "text": "{}, {}".format(sub.get("subnet_id"), sub.get("name")),
+            "value": sub.get("subnet_id")
+        } for sub in vpc_subnets
     ]
 
 def interactive_handler(event):
@@ -156,3 +179,18 @@ def interactive_handler(event):
         data.update(button_set)
         post_to_response_url(event["response_url"], data)
         db.write_event_db(user_id, {"command": "aws_account", "connected_account_id": event["response"]})
+      elif event["callback_id"] == "vpc":
+        button_set = json.load(open(SUBNET_BUTTON, 'r'))
+        button_set["attachments"][0]["actions"][0].update(
+            {
+                "options": list_subnet(
+                    get_vmc_client(event["token"]),
+                    event["org_id"],
+                    result["connected_account_id"],
+                    result["region"],
+                    event["response"]
+                )
+            }
+        )
+        data.update(button_set)
+        post_to_response_url(event["response_url"], data)
