@@ -88,7 +88,7 @@ def list_subnet(
     return [
         {
             "text": "{}, {}".format(sub.subnet_id, sub.name),
-            "value": sub.get("subnet_id")
+            "value": sub.subnet_id
         } for sub in vpc_subnets
     ]
 
