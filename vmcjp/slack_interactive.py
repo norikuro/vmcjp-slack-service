@@ -152,6 +152,7 @@ def interactive_handler(event):
             )
             data.update(button_set)
             response = post_to_response_url(event["response_url"], data)
+            db.write_event_db(user_id, {"command": "link_aws", "num_hosts": 1, "link_aws": "True"})
         else:
             data["text"] = "Please enter CIDR block for management subnet."
             post_to_response_url(event["response_url"], data)
@@ -159,7 +160,7 @@ def interactive_handler(event):
             response = post(event["post_url"], data, event["bot_token"])
             data["text"] = "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved."
             response = post(event["post_url"], data, event["bot_token"])
-        db.write_event_db(user_id, {"command": "link_aws", "num_hosts": 1})
+            db.write_event_db(user_id, {"command": "link_aws", "num_hosts": 1, "link_aws": "True"})
     elif event["callback_id"] == "region":
         data["text"] = "Please enter SDDC name"
         post_to_response_url(event["response_url"], data)
@@ -195,3 +196,11 @@ def interactive_handler(event):
         data.update(button_set)
         post_to_response_url(event["response_url"], data)
         db.write_event_db(user_id, {"command": "vpc", "vpc_id": event["response"]})
+    elif event["callback_id"] == "subnet":
+        data["text"] = "Please enter CIDR block for management subnet."
+        post_to_response_url(event["response_url"], data)
+        data["text"] = "/23 is max 27 hosts, /20 is max 251, /16 is 4091."
+        response = post(event["post_url"], data, event["bot_token"])
+        data["text"] = "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved."
+        response = post(event["post_url"], data, event["bot_token"])
+        db.write_event_db(user_id, {"command": "subnet", "subnet_id": event["response"]})
