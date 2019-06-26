@@ -17,6 +17,7 @@ AWS_ACCOUNT = os.environ["aws_account"] #for internal use
 AWS_ID = os.environ["aws_id"] #for internal use
 ACCOUNT_BUTTON = constant.BUTTON_DIR + "account_button.json"
 REGION_BUTTON = constant.BUTTON_DIR + "region_button.json"
+VPC_BUTTON = constant.BUTTON_DIR + "vpc_button.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -45,6 +46,27 @@ def list_region(vmc_client, org_id):
             "text": region,
             "value": region
         } for region in regions
+    ]
+
+def list_vpc(
+    vmc_client, 
+    org_id, 
+    linked_account_id, 
+    region
+):
+    subnets = vmc_client.orgs.account_link.CompatibleSubnets.get(
+        org_id, 
+        linked_account_id=linked_account_id, 
+        region=region, 
+        sddc=None, 
+        force_refresh=None
+    )
+    vpcs = subnets.vpc_map.keys()
+    return [
+        {
+            "text": vpc,
+            "value": vpc
+        } for vpc in vpcs
     ]
 
 def interactive_handler(event):
@@ -114,7 +136,17 @@ def interactive_handler(event):
         post_to_response_url(event["response_url"], data)
         db.write_event_db(user_id, {"command": "region", "region": event["response"]})
     elif event["callback_id"] == "aws_account":
-        data["text"] = "Please select AWS Subnet."
-#        button_set = json.load(open(VPC_BUTTON, 'r'))
+        button_set = json.load(open(VPC_BUTTON, 'r'))
+            button_set["attachments"][0]["actions"][0].update(
+                {
+                    "options": list_vpc(
+                        get_vmc_client(event["token"]),
+                        event["org_id"],
+                        linked_account_id,
+                        region
+                    )
+                }
+            )
+            data.update(button_set)
         post_to_response_url(event["response_url"], data)
         db.write_event_db(user_id, {"command": "aws_account", "aws_id": event["response"]})
