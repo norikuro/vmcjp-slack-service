@@ -17,13 +17,15 @@ class Test(object):
     return vmc_client
 
 def main():
-  f = json.load(open(constant.S3_CONFIG, 'r'))
+  f = json.load(open("vmcjp/s3config.json", 'r'))
   j = read_json_from_s3(f["bucket"], f["config"])
   
   test = Test()
   vmc_client = test.get_vmc_client(j["token"])
-  print(get_members(vmc_client.orgs.account_link.SddcConnections))
-  print(vmc_client.orgs.account_link.SddcConnections.get())
+#  subnets = vmc_client.orgs.account_link.CompatibleSubnets.get(j["org_id"], linked_account_id="e462f412-be3a-3fa4-9d97-59f1217339a6", region=None, sddc=None, force_refresh=None)
+  print(get_members(vmc_client.Orgs.get(j["org_id"]).properties))
+#  print(get_members(subnets))
+  print(vmc_client.Orgs.get(j["org_id"]).properties.values.get("defaultAwsRegions").split(","))
 
 if __name__ == '__main__':
   main()
