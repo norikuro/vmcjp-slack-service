@@ -83,7 +83,13 @@ def event_handler(event):
             button_set = json.load(open(PRECHECK_BUTTON, 'r'))
             data.update(button_set)
             response = post(url, data, bot_token)
-            db.write_event_db(user_id, {"command": "create_sddc", "max_hosts": max_hosts})
+            db.write_event_db(
+                user_id, 
+                {
+                    "command": "create_sddc", 
+                    "max_hosts": max_hosts
+                }
+            )
             return
         else:
             data["text"] = help_message
@@ -115,7 +121,13 @@ def event_handler(event):
                     button_set = json.load(open(SINGLE_MULTI_BUTTON, 'r'))
                     data.update(button_set)
                 response = post(url, data, bot_token)
-                db.write_event_db(user_id, {"command": "sddc_name", "sddc_name": text})
+                db.write_event_db(
+                    user_id, 
+                    {
+                        "command": "sddc_name", 
+                        "sddc_name": text
+                    }
+                )
                 return
             else:
                 return
