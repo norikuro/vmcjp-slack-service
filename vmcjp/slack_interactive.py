@@ -87,7 +87,7 @@ def list_subnet(
     vpc_subnets = csbnts.get_field("vpc_map").get(vpc_id).subnets
     return [
         {
-            "text": "{}, {}".format(sub.get("subnet_id"), sub.get("name")),
+            "text": "{}, {}".format(sub.subnet_id, sub.name),
             "value": sub.get("subnet_id")
         } for sub in vpc_subnets
     ]
