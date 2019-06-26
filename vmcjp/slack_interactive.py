@@ -52,7 +52,7 @@ def interactive_handler(event):
         if event["response"] == "yes":
             data["text"] = "Please select aws account id which you want to link."
             button_set = json.load(open(ACCOUNT_BUTTON, 'r'))
-            logging.info(button_set)
+            logging.info(button_set["attachments"][0]["actions"][0])
 #            button_set["attachments"][0]["actions"][0].update(
 #                "options" = list_aws_account(
 #                    get_vmc_client(event["token"]), 
