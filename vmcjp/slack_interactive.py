@@ -102,6 +102,18 @@ def post_text(event, text, reply=True):
     else:
         response = post(event["post_url"], data, event["bot_token"])
 
+def post_button(event, button, option_list):
+    data = {
+        "token": event["token"],
+        "channel": event["channel"]
+    }
+    button_set = json.load(open(button, 'r'))
+    button_set["attachments"][0]["actions"][0].update(
+        {"options": option_list}
+    )
+    data.update(button_set)
+    response = post_to_response_url(event["response_url"], data)
+
 def interactive_handler(event):
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     
@@ -119,23 +131,37 @@ def interactive_handler(event):
     
     if event["callback_id"] == "create_sddc":
         if event["response"] == "yes":
-            button_set = json.load(open(REGION_BUTTON, 'r'))
-            button_set["attachments"][0]["actions"][0].update(
-                {
-#                    "options": list_region(
-#                        get_vmc_client(event["token"]),
-#                        event["org_id"]
-#                    )
-                    "options": [
-                        {
-                            "text": "AP_NORTHEAST_1", #for internal use
-                            "value": "AP_NORTHEAST_1" #for internal use
-                        }
-                    ]
-                }
+#            button_set = json.load(open(REGION_BUTTON, 'r'))
+#            button_set["attachments"][0]["actions"][0].update(
+#                {
+##                    "options": list_region(
+##                        get_vmc_client(event["token"]),
+##                        event["org_id"]
+##                    )
+#                    "options": [
+#                        {
+#                            "text": "AP_NORTHEAST_1", #for internal use
+#                            "value": "AP_NORTHEAST_1" #for internal use
+#                        }
+#                    ]
+#                }
+#            )
+#            data.update(button_set)
+#            response = post_to_response_url(event["response_url"], data)
+            post_button(
+                event,
+                REGION_BUTTON,
+#                list_region(
+#                    get_vmc_client(event["token"]),
+#                    event["org_id"]
+#                )
+                [
+                    {
+                        "text": "AP_NORTHEAST_1", #for internal use
+                        "value": "AP_NORTHEAST_1" #for internal use
+                    }
+                ]
             )
-            data.update(button_set)
-            response = post_to_response_url(event["response_url"], data)
             return
         else:
             post_text(
