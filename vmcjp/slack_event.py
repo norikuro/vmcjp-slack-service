@@ -95,8 +95,12 @@ def event_handler(event):
                 db.delete_event_db(event["user_id"])
                 return
 #            max_hosts = 10 #for test
-            data["text"] = "You can deploy max {} hosts.".format(
-                max_hosts
+            post_text(
+                event,
+                "You can deploy max {} hosts.".format(
+                    max_hosts
+                ),
+                False
             )
 #            button_set = json.load(open(PRECHECK_BUTTON, 'r'))
 #            data.update(button_set)
