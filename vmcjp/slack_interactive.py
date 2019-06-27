@@ -193,19 +193,6 @@ def interactive_handler(event):
         )
         db.write_event_db(user_id, {"command": "region", "region": event["response"]})
     elif event["callback_id"] == "aws_account":
-#        button_set = json.load(open(VPC_BUTTON, 'r'))
-#        button_set["attachments"][0]["actions"][0].update(
-#            {
-#                "options": list_vpc(
-#                    get_vmc_client(event["token"]),
-#                    event["org_id"],
-#                    event["response"],
-#                    result["region"]
-#                )
-#            }
-#        )
-#        data.update(button_set)
-#        post_to_response_url(event["response_url"], data)
         post_button(
             event,
             VPC_BUTTON,
@@ -218,20 +205,6 @@ def interactive_handler(event):
         )
         db.write_event_db(user_id, {"command": "aws_account", "connected_account_id": event["response"]})
     elif event["callback_id"] == "vpc":
-#        button_set = json.load(open(SUBNET_BUTTON, 'r'))
-#        button_set["attachments"][0]["actions"][0].update(
-#            {
-#                "options": list_subnet(
-#                    get_vmc_client(event["token"]),
-#                    event["org_id"],
-#                    result["connected_account_id"],
-#                    result["region"],
-#                    event["response"]
-#                )
-#            }
-#        )
-#        data.update(button_set)
-#        post_to_response_url(event["response_url"], data)
         post_button(
             event,
             SUBNET_BUTTON,
