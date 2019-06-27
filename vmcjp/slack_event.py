@@ -96,9 +96,10 @@ def event_handler(event):
             data["text"] = "You can deploy max {} hosts.".format(
                 max_hosts
             )
-            button_set = json.load(open(PRECHECK_BUTTON, 'r'))
-            data.update(button_set)
-            response = post(event["post_url"], data, event["bot_token"])
+#            button_set = json.load(open(PRECHECK_BUTTON, 'r'))
+#            data.update(button_set)
+#            response = post(event["post_url"], data, event["bot_token"])
+            post_button(event, PRECHECK_BUTTON)
             db.write_event_db(
                 event["user_id"], 
                 {
@@ -143,12 +144,14 @@ def event_handler(event):
         else:
             if result["command"] == "region":
                 if result["max_hosts"] == 1:
-                    button_set = json.load(open(LINK_AWS_BUTTON, 'r'))
-                    data.update(button_set)
+#                    button_set = json.load(open(LINK_AWS_BUTTON, 'r'))
+#                    data.update(button_set)
+                    post_button(event, LINK_AWS_BUTTON)
                 else:
-                    button_set = json.load(open(SINGLE_MULTI_BUTTON, 'r'))
-                    data.update(button_set)
-                response = post(event["post_url"], data, event["bot_token"])
+#                    button_set = json.load(open(SINGLE_MULTI_BUTTON, 'r'))
+#                    data.update(button_set)
+                    post_button(event, SINGLE_MULTI_BUTTON)
+#                response = post(event["post_url"], data, event["bot_token"])
                 db.write_event_db(
                     event["user_id"], 
                     {
