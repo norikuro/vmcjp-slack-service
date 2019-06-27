@@ -105,7 +105,7 @@ def event_handler(event):
 #            button_set = json.load(open(PRECHECK_BUTTON, 'r'))
 #            data.update(button_set)
 #            response = post(event["post_url"], data, event["bot_token"])
-            post_button(event, PRECHECK_BUTTON)
+            post_button(event, PRECHECK_BUTTON, False)
             db.write_event_db(
                 event["user_id"], 
                 {
