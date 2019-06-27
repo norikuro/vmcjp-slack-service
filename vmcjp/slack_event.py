@@ -51,15 +51,13 @@ def is_valid_network(address):
         return False
 
 def event_handler(event):
-    db = dbutils2.DocmentDb(event["db_url"], constant.USER)
-    
     text = event["text"].lower()
-    
     data = {
         "token": event["token"],
         "channel": event["channel"]
     }
     
+    db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     result = db.read_event_db(event["user_id"])
     if result is None:
         if "create sddc" in text:
