@@ -145,7 +145,14 @@ def interactive_handler(event):
                     }
                 ]
             )
-            db.write_event_db(user_id, {"command": "link_aws", "num_hosts": 1, "link_aws": True})
+            db.write_event_db(
+                user_id, 
+                {
+                    "command": "link_aws", 
+                    "num_hosts": 1, 
+                    "link_aws": True
+                }
+            )
         else:
             post_text(
                 event,
@@ -161,13 +168,26 @@ def interactive_handler(event):
                 "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved.",
                 False
             )
-            db.write_event_db(user_id, {"command": "link_aws", "num_hosts": 1, "link_aws": False})
+            db.write_event_db(
+                user_id, 
+                {
+                    "command": "link_aws", 
+                    "num_hosts": 1, 
+                    "link_aws": False
+                }
+            )
     elif event["callback_id"] == "region":
         post_text(
             event,
             "Please enter SDDC name"
         )
-        db.write_event_db(user_id, {"command": "region", "region": event["response"]})
+        db.write_event_db(
+            user_id, 
+            {
+                "command": "region", 
+                "region": event["response"]
+            }
+        )
     elif event["callback_id"] == "aws_account":
         post_button(
             event,
@@ -179,7 +199,13 @@ def interactive_handler(event):
                 result["region"]
             )
         )
-        db.write_event_db(user_id, {"command": "aws_account", "connected_account_id": event["response"]})
+        db.write_event_db(
+            user_id, 
+            {
+                "command": "aws_account", 
+                "connected_account_id": event["response"]
+            }
+        )
     elif event["callback_id"] == "vpc":
         post_button(
             event,
@@ -192,7 +218,13 @@ def interactive_handler(event):
                 event["response"]
             )
         )
-        db.write_event_db(user_id, {"command": "vpc", "vpc_id": event["response"]})
+        db.write_event_db(
+            user_id, 
+            {
+                "command": "vpc", 
+                "vpc_id": event["response"]
+            }
+        )
     elif event["callback_id"] == "subnet":
         post_text(
             event,
@@ -208,4 +240,10 @@ def interactive_handler(event):
             "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved.",
             False
         )
-        db.write_event_db(user_id, {"command": "subnet", "customer_subnet_id": event["response"]})
+        db.write_event_db(
+            user_id, 
+            {
+                "command": "subnet", 
+                "customer_subnet_id": event["response"]
+            }
+        )
