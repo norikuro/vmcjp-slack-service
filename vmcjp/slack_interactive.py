@@ -232,4 +232,4 @@ def interactive_handler(event):
             "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved.",
             False
         )
-        db.write_event_db(user_id, {"command": "subnet", "subnet_id": event["response"]})
+        db.write_event_db(user_id, {"command": "subnet", "customer_subnet_id": event["response"]})
