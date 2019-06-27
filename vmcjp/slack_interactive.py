@@ -92,6 +92,15 @@ def list_subnet(
         } for sub in vpc_subnets
     ]
 
+def list_num_hosts(num_hosts):
+    return [
+        {
+            "text": str(i),
+            "value": i
+        } for i in range(num_hosts)
+    ]
+    
+
 def interactive_handler(event):
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     
@@ -123,14 +132,13 @@ def interactive_handler(event):
                     }
                 ]
             )
-            return
         else:
             post_text(
                 event,
                 "OK, create SDDC has cenceled."
             )
             db.delete_event_db(user_id)
-            return
+        return
     elif event["callback_id"] == "link_aws_sddc":
         if event["response"] == "yes":
             post_option(
@@ -178,6 +186,7 @@ def interactive_handler(event):
                     "link_aws": False
                 }
             )
+        return
     elif event["callback_id"] == "region":
         post_text(
             event,
@@ -190,11 +199,23 @@ def interactive_handler(event):
                 "region": event["response"]
             }
         )
+        return
     elif event["callback_id"] == "single_multi":
         if event["response"] == "single":
             post_button(event, LINK_AWS_BUTTON)
         else:
-            post_button(event, NUM_HOSTS_BUTTON)
+            post_option(
+                event, 
+                NUM_HOSTS_BUTTON,
+                list_num_hosts(result["max_hosts"])
+            )
+        db.write_event_db(
+            user_id,
+            {
+                "command": "single_multi"
+            }
+        )
+        return
     elif event["callback_id"] == "aws_account":
         post_option(
             event,
@@ -213,6 +234,7 @@ def interactive_handler(event):
                 "connected_account_id": event["response"]
             }
         )
+        return
     elif event["callback_id"] == "vpc":
         post_option(
             event,
@@ -232,6 +254,7 @@ def interactive_handler(event):
                 "vpc_id": event["response"]
             }
         )
+        return
     elif event["callback_id"] == "subnet":
         post_text(
             event,
@@ -254,3 +277,6 @@ def interactive_handler(event):
                 "customer_subnet_id": event["response"]
             }
         )
+        return
+    else:
+        return
