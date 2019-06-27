@@ -110,8 +110,6 @@ def interactive_handler(event):
     
     result = db.read_event_db(event["user_id"])
     if result is None:
-#        data["text"] = help_message
-#        response = post_to_response_url(event["response_url"], data)
         post_text(event, help_message)
         return
     
