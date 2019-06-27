@@ -99,7 +99,6 @@ def list_num_hosts(num_hosts):
             "value": i + 1
         } for i in range(2, num_hosts)
     ]
-    
 
 def interactive_handler(event):
     user_id = event["user_id"]
