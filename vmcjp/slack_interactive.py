@@ -195,6 +195,7 @@ def interactive_handler(event):
         )
         return
     elif event["callback_id"] == "single_multi":
+        logging.info(event["response"])
         if event["response"] == "single":
             post_button(event, LINK_AWS_BUTTON)
         else:
@@ -229,11 +230,11 @@ def interactive_handler(event):
             user_id, 
             {
                 "command": "num_hosts",
-                "num_hosts": event["response"], 
+                "num_hosts": int(event["response"]), 
                 "link_aws": True
             }
         )
-        logging.info(type(event["response"]))
+        return
     elif event["callback_id"] == "aws_account":
         post_option(
             event,
