@@ -37,7 +37,7 @@ def list_aws_account(vmc_client, org_id):
     return [
         {
             "text": account.account_number,
-            "value": account.id
+            "value": "{}+{}".format(account.account_number, account.id)
         } for account in accounts
     ]
 
@@ -255,7 +255,8 @@ def interactive_handler(event):
             user_id, 
             {
                 "command": "aws_account", 
-                "connected_account_id": event["response"]
+                "connected_account_id": event["response"].split("+")[0],
+                "aws_account": event["response"].split("+")[1],
             }
         )
         return
