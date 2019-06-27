@@ -227,7 +227,7 @@ def interactive_handler(event):
             [
                 {
                     "text": AWS_ACCOUNT, #for internal use
-                    "value": AWS_ID #for internal use
+                    "value": "{}+{}".format(AWS_ACCOUNT, AWS_ID) #for internal use
                 }
             ]
         )
