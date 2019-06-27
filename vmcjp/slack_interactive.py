@@ -90,6 +90,14 @@ def list_subnet(
         } for sub in vpc_subnets
     ]
 
+def post_text(event, text):
+    data = {
+        "token": event["token"],
+        "channel": event["channel"],
+        "text": text
+    }
+    response = post_to_response_url(event["response_url"], data)
+
 def interactive_handler(event):
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     
@@ -102,8 +110,9 @@ def interactive_handler(event):
     
     result = db.read_event_db(event["user_id"])
     if result is None:
-        data["text"] = help_message
-        response = post_to_response_url(event["response_url"], data)
+#        data["text"] = help_message
+#        response = post_to_response_url(event["response_url"], data)
+        post_text(event, help_message)
         return
     
     if event["callback_id"] == "create_sddc":
@@ -127,8 +136,12 @@ def interactive_handler(event):
             response = post_to_response_url(event["response_url"], data)
             return
         else:
-            data["text"] = "OK, create SDDC has cenceled."
-            response = post_to_response_url(event["response_url"], data)
+#            data["text"] = "OK, create SDDC has cenceled."
+#            response = post_to_response_url(event["response_url"], data)
+            post_text(
+                event,
+                "OK, create SDDC has cenceled."
+            )
             db.delete_event_db(user_id)
             return
     elif event["callback_id"] == "link_aws_sddc":
@@ -152,16 +165,24 @@ def interactive_handler(event):
             response = post_to_response_url(event["response_url"], data)
             db.write_event_db(user_id, {"command": "link_aws", "num_hosts": 1, "link_aws": "True"})
         else:
-            data["text"] = "Please enter CIDR block for management subnet."
-            post_to_response_url(event["response_url"], data)
+#            data["text"] = "Please enter CIDR block for management subnet."
+#            post_to_response_url(event["response_url"], data)
+            post_text(
+                event,
+                "Please enter CIDR block for management subnet."
+            )
             data["text"] = "/23 is max 27 hosts, /20 is max 251, /16 is 4091."
             response = post(event["post_url"], data, event["bot_token"])
             data["text"] = "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved."
             response = post(event["post_url"], data, event["bot_token"])
             db.write_event_db(user_id, {"command": "link_aws", "num_hosts": 1, "link_aws": "True"})
     elif event["callback_id"] == "region":
-        data["text"] = "Please enter SDDC name"
-        post_to_response_url(event["response_url"], data)
+#        data["text"] = "Please enter SDDC name"
+#        post_to_response_url(event["response_url"], data)
+        post_text(
+            event,
+            "Please enter SDDC name"
+        )
         db.write_event_db(user_id, {"command": "region", "region": event["response"]})
     elif event["callback_id"] == "aws_account":
         button_set = json.load(open(VPC_BUTTON, 'r'))
@@ -195,8 +216,12 @@ def interactive_handler(event):
         post_to_response_url(event["response_url"], data)
         db.write_event_db(user_id, {"command": "vpc", "vpc_id": event["response"]})
     elif event["callback_id"] == "subnet":
-        data["text"] = "Please enter CIDR block for management subnet."
-        post_to_response_url(event["response_url"], data)
+#        data["text"] = "Please enter CIDR block for management subnet."
+#        post_to_response_url(event["response_url"], data)
+        post_text(
+            event,
+            "Please enter CIDR block for management subnet."
+        )
         data["text"] = "/23 is max 27 hosts, /20 is max 251, /16 is 4091."
         response = post(event["post_url"], data, event["bot_token"])
         data["text"] = "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved."
