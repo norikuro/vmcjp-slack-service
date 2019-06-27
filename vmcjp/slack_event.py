@@ -128,7 +128,7 @@ def event_handler(event):
                     user_id, 
                     {
                         "command": "vpc_cidr", 
-                        "vpc_cidr": text
+                        "vpc_cidr": event["text"]
                     }
                 )
                 return
@@ -147,7 +147,7 @@ def event_handler(event):
                     user_id, 
                     {
                         "command": "sddc_name", 
-                        "sddc_name": text
+                        "sddc_name": event["text"]
                     }
                 )
                 return
