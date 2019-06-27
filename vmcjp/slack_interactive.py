@@ -136,8 +136,6 @@ def interactive_handler(event):
             response = post_to_response_url(event["response_url"], data)
             return
         else:
-#            data["text"] = "OK, create SDDC has cenceled."
-#            response = post_to_response_url(event["response_url"], data)
             post_text(
                 event,
                 "OK, create SDDC has cenceled."
@@ -165,8 +163,6 @@ def interactive_handler(event):
             response = post_to_response_url(event["response_url"], data)
             db.write_event_db(user_id, {"command": "link_aws", "num_hosts": 1, "link_aws": "True"})
         else:
-#            data["text"] = "Please enter CIDR block for management subnet."
-#            post_to_response_url(event["response_url"], data)
             post_text(
                 event,
                 "Please enter CIDR block for management subnet."
@@ -177,8 +173,6 @@ def interactive_handler(event):
             response = post(event["post_url"], data, event["bot_token"])
             db.write_event_db(user_id, {"command": "link_aws", "num_hosts": 1, "link_aws": "True"})
     elif event["callback_id"] == "region":
-#        data["text"] = "Please enter SDDC name"
-#        post_to_response_url(event["response_url"], data)
         post_text(
             event,
             "Please enter SDDC name"
@@ -216,8 +210,6 @@ def interactive_handler(event):
         post_to_response_url(event["response_url"], data)
         db.write_event_db(user_id, {"command": "vpc", "vpc_id": event["response"]})
     elif event["callback_id"] == "subnet":
-#        data["text"] = "Please enter CIDR block for management subnet."
-#        post_to_response_url(event["response_url"], data)
         post_text(
             event,
             "Please enter CIDR block for management subnet."
