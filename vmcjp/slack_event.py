@@ -6,7 +6,7 @@ import atexit
 import requests
 
 from vmware.vapi.vmc.client import create_vmc_client
-from vmcjp.utils.slack_post import post, post_text
+from vmcjp.utils.slack_post import post_text
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
 
@@ -73,15 +73,11 @@ def event_handler(event):
                 "OK, starting create sddc wizard.",
                 False
             )
-#            data["text"] = "This conversation will end by typing `cancel` or doing nothing for 5 minutes"
-#            response = post(url, data, bot_token)
             post_text(
                 event,
                 "This conversation will end by typing `cancel` or doing nothing for 5 minutes",
                 False
             )
-#            data["text"] = "Checking current resources..."
-#            response = post(url, data, bot_token)
             post_text(
                 event,
                 "Checking current resources...",
@@ -105,16 +101,12 @@ def event_handler(event):
             )
             return
         else:
-#            data["text"] = help_message
-#            response = post(url, data, bot_token)
             post_text(event, help_message, False)
             return
     else:
         if "create sddc" in text:
             return
         elif "cancel" in text:
-#            data["text"] = "OK, create SDDC has cenceled."
-#            response = post(url, data, bot_token)
             post_text(
                 event,
                 "OK, create SDDC has cenceled.",
@@ -126,8 +118,6 @@ def event_handler(event):
             return
         elif is_valid_network(text):
             if result["command"] == "mgmt_cidr":
-#                data["text"] = "creating sddc...."
-#                response = post(url, data, bot_token)
                 post_text(
                     event,
                     "Creating sddc....",
