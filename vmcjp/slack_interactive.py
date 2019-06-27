@@ -195,7 +195,7 @@ def interactive_handler(event):
         )
         return
     elif event["callback_id"] == "single_multi":
-        if event["response"] == "single":
+        if "single" in event["response"]:
             logging.info("!!!singleeeeeeee!!!")
             post_button(event, LINK_AWS_BUTTON)
         else:
