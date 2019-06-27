@@ -112,7 +112,7 @@ def interactive_handler(event):
         "channel": event["channel"]
     }
     
-    result = db.read_event_db(event["user_id"])
+    result = db.read_event_db(user_id)
     if result is None:
         post_text(event, help_message)
         return
