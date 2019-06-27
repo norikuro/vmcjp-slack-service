@@ -19,6 +19,7 @@ ACCOUNT_BUTTON = constant.BUTTON_DIR + "account_button.json"
 REGION_BUTTON = constant.BUTTON_DIR + "region_button.json"
 VPC_BUTTON = constant.BUTTON_DIR + "vpc_button.json"
 SUBNET_BUTTON = constant.BUTTON_DIR + "subnet_button.json"
+LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws_button.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -188,6 +189,11 @@ def interactive_handler(event):
                 "region": event["response"]
             }
         )
+    elif event["callback_id"] == "single_multi":
+        if event["response"] == "single":
+            post_button(event, LINK_AWS_BUTTON)
+        else:
+            aaa
     elif event["callback_id"] == "aws_account":
         post_option(
             event,
