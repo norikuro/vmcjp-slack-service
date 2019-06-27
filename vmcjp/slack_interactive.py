@@ -216,6 +216,30 @@ def interactive_handler(event):
             }
         )
         return
+    elif event["callback_id"] == "num_hosts":
+        post_option(
+            event,
+            ACCOUNT_BUTTON,
+#            list_aws_account(
+#                get_vmc_client(event["token"]),
+#                event["org_id"]
+#            )
+            [
+                {
+                    "text": AWS_ACCOUNT, #for internal use
+                    "value": AWS_ID #for internal use
+                }
+            ]
+        )
+        db.write_event_db(
+            user_id, 
+            {
+                "command": "num_hosts",
+                "num_hosts": event["response"], 
+                "link_aws": True
+            }
+        )
+        logging.info(type(event["response"]))
     elif event["callback_id"] == "aws_account":
         post_option(
             event,
