@@ -54,7 +54,7 @@ def event_handler(event):
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     
     user_id = event["user_id"]
-    txt_low = event["text"].lower()
+    text = event["text"].lower()
     url = event["response_url"]
     bot_token = event["bot_token"]
     token = event["token"]
@@ -67,7 +67,7 @@ def event_handler(event):
     
     result = db.read_event_db(event["user_id"])
     if result is None:
-        if "create sddc" in txt_low:
+        if "create sddc" in text:
             post_text(
                 event,
                 "OK, starting create sddc wizard.",
@@ -104,9 +104,9 @@ def event_handler(event):
             post_text(event, help_message, False)
             return
     else:
-        if "create sddc" in txt_low:
+        if "create sddc" in text:
             return
-        elif "cancel" in txt_low:
+        elif "cancel" in text:
             post_text(
                 event,
                 "OK, create SDDC has cenceled.",
@@ -114,9 +114,9 @@ def event_handler(event):
             )
             db.delete_event_db(event["user_id"])
             return
-        elif txt_low.find(" ") != -1:
+        elif text.find(" ") != -1:
             return
-        elif is_valid_network(txt_low):
+        elif is_valid_network(text):
             if result["command"] == "link_aws" or "subnet":
                 post_text(
                     event,
