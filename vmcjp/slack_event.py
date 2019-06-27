@@ -108,10 +108,9 @@ def event_handler(event):
                     "max_hosts": max_hosts
                 }
             )
-            return
         else:
             post_text(event, help_message, False)
-            return
+        return
     else:
         if "create sddc" in text:
             return
@@ -139,9 +138,7 @@ def event_handler(event):
                         "vpc_cidr": event["text"]
                     }
                 )
-                return
-            else:
-                return
+            return
         else:
             if result["command"] == "region":
                 if result["max_hosts"] == 1:
@@ -155,7 +152,5 @@ def event_handler(event):
                         "sddc_name": event["text"]
                     }
                 )
-                return
-            else:
-                return
+            return
 #    logging.info(response.read())
