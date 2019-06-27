@@ -95,8 +95,8 @@ def list_subnet(
 def list_num_hosts(num_hosts):
     return [
         {
-            "text": str(i),
-            "value": i
+            "text": i + 1,
+            "value": i + 1
         } for i in range(num_hosts)
     ]
     
