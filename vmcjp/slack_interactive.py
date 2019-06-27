@@ -94,9 +94,11 @@ def post_text(event, text, bot_token=None):
     data = {
         "token": event["token"],
         "channel": event["channel"],
-        "text": text
     }
-    response = post_to_response_url(event["response_url"], data)
+    
+    if bot_token is None:
+        data.update({"text": text})
+        response = post_to_response_url(event["response_url"], data)
 
 def interactive_handler(event):
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
