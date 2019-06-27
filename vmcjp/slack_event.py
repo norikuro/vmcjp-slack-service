@@ -123,6 +123,13 @@ def event_handler(event):
                     "Creating sddc....",
                     False
                 )
+                db.write_event_db(
+                    user_id, 
+                    {
+                        "command": "vpc_cidr", 
+                        "vpc_cidr": text
+                    }
+                )
                 return
             else:
                 return
