@@ -163,22 +163,25 @@ def interactive_handler(event):
             )
             data.update(button_set)
             response = post_to_response_url(event["response_url"], data)
-            db.write_event_db(user_id, {"command": "link_aws", "num_hosts": 1, "link_aws": "True"})
+            db.write_event_db(user_id, {"command": "link_aws", "num_hosts": 1, "link_aws": True})
         else:
             post_text(
                 event,
                 "Please enter CIDR block for management subnet."
             )
-#            data["text"] = "/23 is max 27 hosts, /20 is max 251, /16 is 4091."
-#            response = post(event["post_url"], data, event["bot_token"])
             post_text(
                 event,
                 "/23 is max 27 hosts, /20 is max 251, /16 is 4091.",
                 False
             )
-            data["text"] = "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved."
-            response = post(event["post_url"], data, event["bot_token"])
-            db.write_event_db(user_id, {"command": "link_aws", "num_hosts": 1, "link_aws": "True"})
+#            data["text"] = "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved."
+#            response = post(event["post_url"], data, event["bot_token"])
+            post_text(
+                event,
+                "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved.",
+                False
+            )
+            db.write_event_db(user_id, {"command": "link_aws", "num_hosts": 1, "link_aws": False})
     elif event["callback_id"] == "region":
         post_text(
             event,
@@ -221,8 +224,18 @@ def interactive_handler(event):
             event,
             "Please enter CIDR block for management subnet."
         )
-        data["text"] = "/23 is max 27 hosts, /20 is max 251, /16 is 4091."
-        response = post(event["post_url"], data, event["bot_token"])
-        data["text"] = "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved."
-        response = post(event["post_url"], data, event["bot_token"])
+#        data["text"] = "/23 is max 27 hosts, /20 is max 251, /16 is 4091."
+#        response = post(event["post_url"], data, event["bot_token"])
+        post_text(
+            event,
+            "/23 is max 27 hosts, /20 is max 251, /16 is 4091.",
+            False
+        )
+#        data["text"] = "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved."
+#        response = post(event["post_url"], data, event["bot_token"])
+        post_text(
+            event,
+            "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved.",
+            False
+        )
         db.write_event_db(user_id, {"command": "subnet", "subnet_id": event["response"]})
