@@ -255,8 +255,8 @@ def interactive_handler(event):
             user_id, 
             {
                 "command": "aws_account", 
-                "connected_account_id": event["response"].split("+")[0],
-                "aws_account": event["response"].split("+")[1],
+                "aws_account": event["response"].split("+")[0],
+                "connected_account_id": event["response"].split("+")[1]
             }
         )
         return
