@@ -107,7 +107,7 @@ def interactive_handler(event):
     
     if event["callback_id"] == "create_sddc":
         if event["response"] == "yes":
-            post_button(
+            post_option(
                 event,
                 REGION_BUTTON,
 #                list_region(
@@ -131,7 +131,7 @@ def interactive_handler(event):
             return
     elif event["callback_id"] == "link_aws_sddc":
         if event["response"] == "yes":
-            post_button(
+            post_option(
                 event,
                 ACCOUNT_BUTTON,
 #                list_aws_account(
@@ -189,7 +189,7 @@ def interactive_handler(event):
             }
         )
     elif event["callback_id"] == "aws_account":
-        post_button(
+        post_option(
             event,
             VPC_BUTTON,
             list_vpc(
@@ -207,7 +207,7 @@ def interactive_handler(event):
             }
         )
     elif event["callback_id"] == "vpc":
-        post_button(
+        post_option(
             event,
             SUBNET_BUTTON,
             list_subnet(
