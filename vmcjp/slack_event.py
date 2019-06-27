@@ -6,7 +6,7 @@ import atexit
 import requests
 
 from vmware.vapi.vmc.client import create_vmc_client
-from vmcjp.utils.slack_post import post
+from vmcjp.utils.slack_post import post, post_text
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
 
@@ -68,8 +68,13 @@ def event_handler(event):
     result = db.read_event_db(event["user_id"])
     if result is None:
         if "create sddc" in text:
-            data["text"] = "OK, starting create sddc wizard."
-            response = post(url, data, bot_token)
+#            data["text"] = "OK, starting create sddc wizard."
+#            response = post(url, data, bot_token)
+            post_text(
+                event,
+                "OK, starting create sddc wizard.",
+                False
+            )
             data["text"] = "This conversation will end by typing `cancel` or doing nothing for 5 minutes"
             response = post(url, data, bot_token)
             data["text"] = "Checking current resources..."
