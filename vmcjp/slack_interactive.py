@@ -90,7 +90,7 @@ def list_subnet(
         } for sub in vpc_subnets
     ]
 
-def post_text(event, text):
+def post_text(event, text, bot_token=None):
     data = {
         "token": event["token"],
         "channel": event["channel"],
