@@ -8,7 +8,8 @@ from vmware.vapi.vmc.client import create_vmc_client
 
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
-from vmcjp.utils.slack_post import post, post_to_response_url
+#from vmcjp.utils.slack_post import post, post_to_response_url
+from vmcjp.utils.slack_post import post_text, post_button
 
 help_message = "May I help you? please type `help` command."
 
@@ -90,29 +91,29 @@ def list_subnet(
         } for sub in vpc_subnets
     ]
 
-def post_text(event, text, reply=True):
-    data = {
-        "token": event["token"],
-        "channel": event["channel"],
-        "text": text
-    }
+#def post_text(event, text, reply=True):
+#    data = {
+#        "token": event["token"],
+#        "channel": event["channel"],
+#        "text": text
+#    }
     
-    if reply:
-        response = post_to_response_url(event["response_url"], data)
-    else:
-        response = post(event["post_url"], data, event["bot_token"])
+#    if reply:
+#        response = post_to_response_url(event["response_url"], data)
+#    else:
+#        response = post(event["post_url"], data, event["bot_token"])
 
-def post_button(event, button, option_list):
-    data = {
-        "token": event["token"],
-        "channel": event["channel"]
-    }
-    button_set = json.load(open(button, 'r'))
-    button_set["attachments"][0]["actions"][0].update(
-        {"options": option_list}
-    )
-    data.update(button_set)
-    response = post_to_response_url(event["response_url"], data)
+#def post_button(event, button, option_list):
+#    data = {
+#        "token": event["token"],
+#        "channel": event["channel"]
+#    }
+#    button_set = json.load(open(button, 'r'))
+#    button_set["attachments"][0]["actions"][0].update(
+#        {"options": option_list}
+#    )
+#    data.update(button_set)
+#    response = post_to_response_url(event["response_url"], data)
 
 def interactive_handler(event):
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
