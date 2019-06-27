@@ -55,7 +55,7 @@ def post_text(event, text, reply=True):
         response = post(event["post_url"], data, event["bot_token"])
     return response
 
-def post_button(event, button, option_list):
+def post_option(event, button, option_list):
     data = {
         "token": event["token"],
         "channel": event["channel"]
