@@ -7,48 +7,38 @@
       "fallback": "You are able to choose Yes or No.",
       "attachment_type": "default",
       "callback_id": "restore_sddc",
-      "fields": fields = [
+      "fields": [
         {
-            "title": "Backed up date",
-            "value": config["updated"],
-            "short": "true"
+          "title": "Org Name",
+          "value": "org_name",
+          "short": "true"
         },
         {
-            "title": "Org Name",
-#            "value": config["org_name"],
-            "value": "APJ SME Zero Cloud Org", #for test
-            "short": "true"
+          "title": "SDDC name",
+          "value": "sddc_name",
+          "short": "true"
         },
         {
-            "title": "SDDC name",
-#            "value": config["sddc_name"],
-            "value": "nk_single_api_test", #for test
-            "short": "true"
+          "title": "Number of hosts",
+          "value": "num_hosts",
+          "short": "true"
         },
         {
-            "title": "Number of hosts",
-#            "value": config["num_hosts"],
-            "value": 3, #for test
-            "short": "true"
+          "title": "AWS account",
+          "value": "aws_account",
+          "short": "true"
         },
         {
-            "title": "AWS account",
-            "value": config["aws_account"],
-            "short": "true"
+          "title": "AWS linked subnet",
+          "value": "customer_subnet_id",
+          "short": "true"
         },
         {
-            "title": "AWS linked subnet",
-#            "value": config["customer_subnet_id"],
-            "value": "subnet-4c80da05", #for test,
-            "short": "true"
-        },
-        {
-            "title": "Region",
-            "value": config["region"],
-            "short": "true"
+          "title": "Region",
+          "value": "region",
+          "short": "true"
         }
-    ]
-
+      ]
     },
     {
       "text": "Do you want to proceed?",
