@@ -10,7 +10,7 @@ from vmcjp.utils.slack_post import post, post_text
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
 
-help_message = "May I help you? please type `help` command."
+help_message = "May I help you? please type `help`."
 
 TEST_ORG_ID = os.environ["test_org"] #for test
 PRECHECK_BUTTON = constant.BUTTON_DIR + "precheck_button.json"
@@ -55,6 +55,7 @@ def event_handler(event):
     
     user_id = event["user_id"]
     text = event["text"]
+    txt_low = event["text"].lower()
     url = event["response_url"]
     bot_token = event["bot_token"]
     token = event["token"]
@@ -67,7 +68,7 @@ def event_handler(event):
     
     result = db.read_event_db(event["user_id"])
     if result is None:
-        if "create sddc" in text:
+        if "create sddc" in txt_low:
             post_text(
                 event,
                 "OK, starting create sddc wizard.",
@@ -104,9 +105,9 @@ def event_handler(event):
             post_text(event, help_message, False)
             return
     else:
-        if "create sddc" in text:
+        if "create sddc" in txt_low:
             return
-        elif "cancel" in text:
+        elif "cancel" in txt_low:
             post_text(
                 event,
                 "OK, create SDDC has cenceled.",
@@ -114,9 +115,9 @@ def event_handler(event):
             )
             db.delete_event_db(event["user_id"])
             return
-        elif text.find(" ") != -1:
+        elif txt_low.find(" ") != -1:
             return
-        elif is_valid_network(text):
+        elif is_valid_network(txt_low):
             if result["command"] == "link_aws" or "subnet":
                 post_text(
                     event,
