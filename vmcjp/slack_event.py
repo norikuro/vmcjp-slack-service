@@ -68,17 +68,25 @@ def event_handler(event):
     result = db.read_event_db(event["user_id"])
     if result is None:
         if "create sddc" in text:
-#            data["text"] = "OK, starting create sddc wizard."
-#            response = post(url, data, bot_token)
             post_text(
                 event,
                 "OK, starting create sddc wizard.",
                 False
             )
-            data["text"] = "This conversation will end by typing `cancel` or doing nothing for 5 minutes"
-            response = post(url, data, bot_token)
-            data["text"] = "Checking current resources..."
-            response = post(url, data, bot_token)
+#            data["text"] = "This conversation will end by typing `cancel` or doing nothing for 5 minutes"
+#            response = post(url, data, bot_token)
+            post_text(
+                event,
+                "This conversation will end by typing `cancel` or doing nothing for 5 minutes",
+                False
+            )
+#            data["text"] = "Checking current resources..."
+#            response = post(url, data, bot_token)
+            post_text(
+                event,
+                "Checking current resources...",
+                False
+            )
             max_hosts = get_max_num_hosts(token, org_id)
             max_hosts = 1 if max_hosts < 3 else max_hosts
 #            max_hosts = 10 #for test
@@ -97,23 +105,34 @@ def event_handler(event):
             )
             return
         else:
-            data["text"] = help_message
-            response = post(url, data, bot_token)
+#            data["text"] = help_message
+#            response = post(url, data, bot_token)
+            post_text(event, help_message, False)
             return
     else:
         if "create sddc" in text:
             return
         elif "cancel" in text:
-            data["text"] = "OK, create SDDC has cenceled."
-            response = post(url, data, bot_token)
+#            data["text"] = "OK, create SDDC has cenceled."
+#            response = post(url, data, bot_token)
+            post_text(
+                event,
+                "OK, create SDDC has cenceled.",
+                False
+            )
             db.delete_event_db(event["user_id"])
             return
         elif text.find(" ") != -1:
             return
         elif is_valid_network(text):
             if result["command"] == "mgmt_cidr":
-                data["text"] = "creating sddc...."
-                response = post(url, data, bot_token)
+#                data["text"] = "creating sddc...."
+#                response = post(url, data, bot_token)
+                post_text(
+                    event,
+                    "Creating sddc....",
+                    False
+                )
                 return
             else:
                 return
