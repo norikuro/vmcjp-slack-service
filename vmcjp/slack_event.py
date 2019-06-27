@@ -117,7 +117,7 @@ def event_handler(event):
         elif text.find(" ") != -1:
             return
         elif is_valid_network(text):
-            if result["command"] == "mgmt_cidr":
+            if result["command"] == "link_aws" or "subnet":
                 post_text(
                     event,
                     "Creating sddc....",
