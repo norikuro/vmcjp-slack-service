@@ -54,7 +54,6 @@ def event_handler(event):
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     
     text = event["text"].lower()
-    bot_token = event["bot_token"]
     token = event["token"]
     org_id = event["org_id"]
     
@@ -89,7 +88,7 @@ def event_handler(event):
             )
             button_set = json.load(open(PRECHECK_BUTTON, 'r'))
             data.update(button_set)
-            response = post(event["response_url"], data, bot_token)
+            response = post(event["response_url"], data, event["bot_token"])
             db.write_event_db(
                 event["user_id"], 
                 {
@@ -139,7 +138,7 @@ def event_handler(event):
                 else:
                     button_set = json.load(open(SINGLE_MULTI_BUTTON, 'r'))
                     data.update(button_set)
-                response = post(event["response_url"], data, bot_token)
+                response = post(event["response_url"], data, event["bot_token"])
                 db.write_event_db(
                     event["user_id"], 
                     {
