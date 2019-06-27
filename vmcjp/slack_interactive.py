@@ -97,7 +97,7 @@ def list_num_hosts(num_hosts):
         {
             "text": i + 1,
             "value": i + 1
-        } for i in range(3, num_hosts)
+        } for i in range(2, num_hosts)
     ]
     
 
