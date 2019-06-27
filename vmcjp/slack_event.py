@@ -152,11 +152,11 @@ def event_handler(event):
                 if result["max_hosts"] == 1:
 #                    button_set = json.load(open(LINK_AWS_BUTTON, 'r'))
 #                    data.update(button_set)
-                    post_button(event, LINK_AWS_BUTTON)
+                    post_button(event, LINK_AWS_BUTTON, False)
                 else:
 #                    button_set = json.load(open(SINGLE_MULTI_BUTTON, 'r'))
 #                    data.update(button_set)
-                    post_button(event, SINGLE_MULTI_BUTTON)
+                    post_button(event, SINGLE_MULTI_BUTTON, False)
 #                response = post(event["post_url"], data, event["bot_token"])
                 db.write_event_db(
                     event["user_id"], 
