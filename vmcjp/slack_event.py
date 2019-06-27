@@ -34,6 +34,8 @@ def get_max_num_hosts(token, org_id):
         i += len(sddc.resource_config.esx_hosts)
 #    max_hosts = (int(vmc_client.Orgs.get(org_id).properties.values["sddcLimit"]) - 1) - i
     max_hosts = (int(vmc_client.Orgs.get(TEST_ORG_ID).properties.values["sddcLimit"]) - 1) - i
+    logging.info(i)
+    logging.info(int(vmc_client.Orgs.get(TEST_ORG_ID).properties.values["sddcLimit"]) - 1)
     if max_hosts < 1:
         return max_hosts
     else:
