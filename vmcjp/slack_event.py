@@ -100,9 +100,6 @@ def event_handler(event):
                 ),
                 False
             )
-#            button_set = json.load(open(PRECHECK_BUTTON, 'r'))
-#            data.update(button_set)
-#            response = post(event["post_url"], data, event["bot_token"])
             post_button(event, PRECHECK_BUTTON, False)
             db.write_event_db(
                 event["user_id"], 
@@ -148,14 +145,9 @@ def event_handler(event):
         else:
             if result["command"] == "region":
                 if result["max_hosts"] == 1:
-#                    button_set = json.load(open(LINK_AWS_BUTTON, 'r'))
-#                    data.update(button_set)
                     post_button(event, LINK_AWS_BUTTON, False)
                 else:
-#                    button_set = json.load(open(SINGLE_MULTI_BUTTON, 'r'))
-#                    data.update(button_set)
                     post_button(event, SINGLE_MULTI_BUTTON, False)
-#                response = post(event["post_url"], data, event["bot_token"])
                 db.write_event_db(
                     event["user_id"], 
                     {
