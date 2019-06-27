@@ -10,7 +10,7 @@ from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_button
 
-help_message = "May I help you? please type `help` command."
+help_message = "May I help you? please type `help`."
 
 TEST_ORG_ID = os.environ["test_org"] #for test
 AWS_ACCOUNT = os.environ["aws_account"] #for internal use
