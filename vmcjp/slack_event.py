@@ -93,7 +93,6 @@ def event_handler(event):
                 )
                 db.delete_event_db(event["user_id"])
                 return
-#            max_hosts = 10 #for test
             post_text(
                 event,
                 "You can deploy max {} hosts.".format(
