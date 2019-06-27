@@ -131,23 +131,6 @@ def interactive_handler(event):
     
     if event["callback_id"] == "create_sddc":
         if event["response"] == "yes":
-#            button_set = json.load(open(REGION_BUTTON, 'r'))
-#            button_set["attachments"][0]["actions"][0].update(
-#                {
-##                    "options": list_region(
-##                        get_vmc_client(event["token"]),
-##                        event["org_id"]
-##                    )
-#                    "options": [
-#                        {
-#                            "text": "AP_NORTHEAST_1", #for internal use
-#                            "value": "AP_NORTHEAST_1" #for internal use
-#                        }
-#                    ]
-#                }
-#            )
-#            data.update(button_set)
-#            response = post_to_response_url(event["response_url"], data)
             post_button(
                 event,
                 REGION_BUTTON,
@@ -172,23 +155,37 @@ def interactive_handler(event):
             return
     elif event["callback_id"] == "link_aws_sddc":
         if event["response"] == "yes":
-            button_set = json.load(open(ACCOUNT_BUTTON, 'r'))
-            button_set["attachments"][0]["actions"][0].update(
-                {
-#                    "options": list_aws_account(
-#                        get_vmc_client(event["token"]), 
-#                        event["org_id"]
-#                    )
-                    "options": [
-                        {
-                            "text": AWS_ACCOUNT, #for internal use
-                            "value": AWS_ID #for internal use
-                        }
-                    ]
-                }
+#            button_set = json.load(open(ACCOUNT_BUTTON, 'r'))
+#            button_set["attachments"][0]["actions"][0].update(
+#                {
+##                    "options": list_aws_account(
+##                        get_vmc_client(event["token"]), 
+##                        event["org_id"]
+##                    )
+#                    "options": [
+#                        {
+#                            "text": AWS_ACCOUNT, #for internal use
+#                            "value": AWS_ID #for internal use
+#                        }
+#                    ]
+#                }
+#            )
+#            data.update(button_set)
+#            response = post_to_response_url(event["response_url"], data)
+            post_button(
+                event,
+                ACCOUNT_BUTTON,
+#                list_aws_account(
+#                    get_vmc_client(event["token"]),
+#                    event["org_id"]
+#                )
+                [
+                    {
+                        "text": AWS_ACCOUNT, #for internal use
+                        "value": AWS_ID #for internal use
+                    }
+                ]
             )
-            data.update(button_set)
-            response = post_to_response_url(event["response_url"], data)
             db.write_event_db(user_id, {"command": "link_aws", "num_hosts": 1, "link_aws": True})
         else:
             post_text(
