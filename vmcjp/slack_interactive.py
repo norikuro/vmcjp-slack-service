@@ -102,15 +102,9 @@ def list_num_hosts(num_hosts):
     
 
 def interactive_handler(event):
-    db = dbutils2.DocmentDb(event["db_url"], constant.USER)
-    
     user_id = event["user_id"]
     
-    data = {
-        "token": event["token"],
-        "channel": event["channel"]
-    }
-    
+    db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     result = db.read_event_db(user_id)
     if result is None:
         post_text(event, help_message)
