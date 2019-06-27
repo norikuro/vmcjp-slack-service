@@ -90,15 +90,17 @@ def list_subnet(
         } for sub in vpc_subnets
     ]
 
-def post_text(event, text, bot_token=None):
+def post_text(event, text, reply=True):
     data = {
         "token": event["token"],
         "channel": event["channel"],
+        "text": text
     }
     
-    if bot_token is None:
-        data.update({"text": text})
+    if reply:
         response = post_to_response_url(event["response_url"], data)
+    else:
+        response = post(event["post_url"], data, event["bot_token"])
 
 def interactive_handler(event):
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
@@ -167,8 +169,13 @@ def interactive_handler(event):
                 event,
                 "Please enter CIDR block for management subnet."
             )
-            data["text"] = "/23 is max 27 hosts, /20 is max 251, /16 is 4091."
-            response = post(event["post_url"], data, event["bot_token"])
+#            data["text"] = "/23 is max 27 hosts, /20 is max 251, /16 is 4091."
+#            response = post(event["post_url"], data, event["bot_token"])
+            post_text(
+                event,
+                "/23 is max 27 hosts, /20 is max 251, /16 is 4091."
+                False
+            )
             data["text"] = "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved."
             response = post(event["post_url"], data, event["bot_token"])
             db.write_event_db(user_id, {"command": "link_aws", "num_hosts": 1, "link_aws": "True"})
