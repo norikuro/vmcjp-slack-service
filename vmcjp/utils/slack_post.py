@@ -67,11 +67,15 @@ def post_option(event, button, option_list):
     data.update(button_set)
     return post_to_response_url(event["response_url"], data)
 
-def post_button(event, button):
+def post_button(event, button, reply=True):
     data = {
         "token": event["token"],
         "channel": event["channel"]
     }
     button_set = json.load(open(button, 'r'))
     data.update(button_set)
-    return post(event["post_url"], data, event["bot_token"])
+    if reply:
+        response = post_to_response_url(event["response_url"], data)
+    else:
+        response = post(event["post_url"], data, event["bot_token"])
+    return response
