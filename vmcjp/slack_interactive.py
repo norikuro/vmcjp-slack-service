@@ -8,7 +8,7 @@ from vmware.vapi.vmc.client import create_vmc_client
 
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
-from vmcjp.utils.slack_post import post_text, post_button
+from vmcjp.utils.slack_post import post_text, post_option
 
 help_message = "May I help you? please type `help`."
 
