@@ -79,6 +79,7 @@ def event_handler(event):
                 False
             )
             max_hosts = get_max_num_hosts(event["token"], event["org_id"])
+            logging.info(max_hosts)
             if max_hosts < 1:
                 post_text(
                     event,
