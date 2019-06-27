@@ -93,7 +93,7 @@ def event_handler(event):
             data.update(button_set)
             response = post(url, data, bot_token)
             db.write_event_db(
-                user_id, 
+                event["user_id"], 
                 {
                     "command": "create_sddc", 
                     "max_hosts": max_hosts
@@ -124,7 +124,7 @@ def event_handler(event):
                     False
                 )
                 db.write_event_db(
-                    user_id, 
+                    event["user_id"], 
                     {
                         "command": "vpc_cidr", 
                         "vpc_cidr": event["text"]
@@ -143,7 +143,7 @@ def event_handler(event):
                     data.update(button_set)
                 response = post(url, data, bot_token)
                 db.write_event_db(
-                    user_id, 
+                    event["user_id"], 
                     {
                         "command": "sddc_name", 
                         "sddc_name": event["text"]
