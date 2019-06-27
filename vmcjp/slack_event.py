@@ -31,11 +31,13 @@ def get_max_num_hosts(token, org_id):
     
     i = 0
     for sddc in sddcs:
-        i = i + len(sddc.resource_config.esx_hosts)
-#    max_host = int(vmc_client.Orgs.get(org_id).properties.values["sddcLimit"]) - 1
-    max_host = int(vmc_client.Orgs.get(TEST_ORG_ID).properties.values["sddcLimit"]) - 1
-    
-    return max_host - i
+        i += len(sddc.resource_config.esx_hosts)
+#    max_hosts = (int(vmc_client.Orgs.get(org_id).properties.values["sddcLimit"]) - 1) - i
+    max_hosts = (int(vmc_client.Orgs.get(TEST_ORG_ID).properties.values["sddcLimit"]) - 1) - i
+    if max_hosts < 1:
+        return max_hosts
+    else:
+        return 1 if max_hosts < 3 else max_hosts
 
 def get_vmc_client(token):
     session = requests.Session()
@@ -77,7 +79,19 @@ def event_handler(event):
                 False
             )
             max_hosts = get_max_num_hosts(event["token"], event["org_id"])
-            max_hosts = 1 if max_hosts < 3 else max_hosts
+            if max_hosts < 1:
+                post_text(
+                    event,
+                    "Sorry, we don't have enough space to deploy hosts on this org.",
+                    False
+                )
+                post_text(
+                    event,
+                    "Canceled to create sddc.",
+                    False
+                )
+                db.delete_event_db(event["user_id"])
+                return
 #            max_hosts = 10 #for test
             data["text"] = "You can deploy max {} hosts.".format(
                 max_hosts
