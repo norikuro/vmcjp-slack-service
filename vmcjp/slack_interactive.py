@@ -119,8 +119,8 @@ def interactive_handler(event):
             button_set["attachments"][0]["actions"][0].update(
                 {
 #                    "options": list_region(
-#                    get_vmc_client(event["token"]), 
-#                    event["org_id"]
+#                        get_vmc_client(event["token"]),
+#                        event["org_id"]
 #                    )
                     "options": [
                         {
@@ -146,8 +146,8 @@ def interactive_handler(event):
             button_set["attachments"][0]["actions"][0].update(
                 {
 #                    "options": list_aws_account(
-#                    get_vmc_client(event["token"]), 
-#                    event["org_id"]
+#                        get_vmc_client(event["token"]), 
+#                        event["org_id"]
 #                    )
                     "options": [
                         {
