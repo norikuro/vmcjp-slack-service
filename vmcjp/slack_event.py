@@ -54,7 +54,6 @@ def event_handler(event):
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     
     text = event["text"].lower()
-    url = event["response_url"]
     bot_token = event["bot_token"]
     token = event["token"]
     org_id = event["org_id"]
