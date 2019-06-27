@@ -76,7 +76,7 @@ def event_handler(event):
                 "Checking current resources...",
                 False
             )
-            max_hosts = get_max_num_hosts(token, event["org_id"])
+            max_hosts = get_max_num_hosts(event["token"], event["org_id"])
             max_hosts = 1 if max_hosts < 3 else max_hosts
 #            max_hosts = 10 #for test
             data["text"] = "You can deploy max {} hosts.".format(
