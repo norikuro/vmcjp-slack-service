@@ -174,8 +174,6 @@ def interactive_handler(event):
                 "/23 is max 27 hosts, /20 is max 251, /16 is 4091.",
                 False
             )
-#            data["text"] = "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved."
-#            response = post(event["post_url"], data, event["bot_token"])
             post_text(
                 event,
                 "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved.",
@@ -224,15 +222,11 @@ def interactive_handler(event):
             event,
             "Please enter CIDR block for management subnet."
         )
-#        data["text"] = "/23 is max 27 hosts, /20 is max 251, /16 is 4091."
-#        response = post(event["post_url"], data, event["bot_token"])
         post_text(
             event,
             "/23 is max 27 hosts, /20 is max 251, /16 is 4091.",
             False
         )
-#        data["text"] = "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved."
-#        response = post(event["post_url"], data, event["bot_token"])
         post_text(
             event,
             "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved.",
