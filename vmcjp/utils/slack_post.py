@@ -80,7 +80,7 @@ def post_button(event, button, reply=True):
         response = post(event["post_url"], data, event["bot_token"])
     return response
 
-def create_configmation_button(result, button):
+def create_configmation_button(event, button):
     fields = button.get("attachments")[0].get("fields")
     for field in fields:
         field.update({"value": result.get(field.get("value"))})
