@@ -133,11 +133,13 @@ def event_handler(event):
             return
         elif is_valid_network(text):
             if result["command"] == "link_aws" or "subnet":
-                post_text(
-                    event,
-                    "Creating sddc....",
-                    False
-                )
+                button = create_configmation_button(result, CREATE_BUTTON)
+                post_button(event, xxxxxx, False)
+#                post_text(
+#                    event,
+#                    "Creating sddc....",
+#                    False
+#                )
                 db.write_event_db(
                     event["user_id"], 
                     {
