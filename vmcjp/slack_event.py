@@ -165,6 +165,7 @@ def event_handler(event):
                 if result["max_hosts"] == 1:
                     post_button(event, LINK_AWS_BUTTON, False)
                 else:
+                    logging.info(event)
                     post_button(event, SINGLE_MULTI_BUTTON, False)
                 db.write_event_db(
                     event["user_id"], 
