@@ -307,7 +307,8 @@ def interactive_handler(event):
                 event,
                 "OK, started to create sddc!"
             )
-            #create sddc here!!!!
+            event.update(result)
+#            call_lambda("create_sddc", event)
             db.write_event_db(
                 user_id, 
                 {
