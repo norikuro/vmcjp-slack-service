@@ -116,7 +116,7 @@ def event_handler(event):
                 ),
                 "bot"
             )
-            post_button(event, PRECHECK_BUTTON, False)
+            post_button(event, PRECHECK_BUTTON, "bot")
             db.write_event_db(
                 event["user_id"], 
                 {
