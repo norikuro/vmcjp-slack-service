@@ -104,7 +104,7 @@ def post_field_button(event, button, pretext=None, type="response"):
     
     data.update(button_set)
     
-    if if "response" in type:
+    if "response" in type:
         response = post_to_response_url(event["response_url"], data)
     else:
         response = post(event["post_url"], data, event["bot_token"])
