@@ -143,8 +143,7 @@ def event_handler(event):
         elif is_valid_network(text):
             if result["command"] == "link_aws" or "subnet":
                 post_confirm_button(
-                    event, 
-                    result, 
+                    event.update(result), 
                     CREATE_BUTTON, 
                     False
                 )
