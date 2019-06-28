@@ -64,7 +64,7 @@ def post_text(event, text, type="response"):
     return response
 
 def post_option(event, button, option_list):
-    logging.info("post_option: " + json.dumps(event) + ",  " + button + ",  " + option_list)
+    logging.info("post_option: " + json.dumps(event) + ",  " + button + ",  " + ",".join(option_list))
     data = {
         "token": event["token"],
         "channel": event["channel"]
