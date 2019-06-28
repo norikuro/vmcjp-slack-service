@@ -6,7 +6,7 @@ import atexit
 import requests
 
 from vmware.vapi.vmc.client import create_vmc_client
-from vmcjp.utils.slack_post import post, post_text, post_button
+from vmcjp.utils.slack_post import post, post_text, post_button, post_confirm_button
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
 
@@ -133,8 +133,12 @@ def event_handler(event):
             return
         elif is_valid_network(text):
             if result["command"] == "link_aws" or "subnet":
-                button = create_configmation_button(result, CREATE_BUTTON)
-                post_button(event, xxxxxx, False)
+                post_confirm_button(
+                    event, 
+                    result, 
+                    CREATE_BUTTON, 
+                    False
+                )
 #                post_text(
 #                    event,
 #                    "Creating sddc....",
