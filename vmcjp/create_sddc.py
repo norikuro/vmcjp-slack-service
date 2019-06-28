@@ -8,7 +8,6 @@ from com.vmware.vmc.model_client import AwsSddcConfig, AccountLinkSddcConfig, Sd
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.slack_post import post_to_webhook
 from vmcjp.utils.task_helper import task_handler
-from vmcjp.utils.s3utils import read_json_from_s3
 
 from vmcjp.utils import constant
 
@@ -79,29 +78,32 @@ def create_button(user_id, sddc_name, task_id):
 
 def lambda_handler(event, context):
 #  logging.info(event)
+  vmc_client = get_vmc_client(event.get("token"))
   
-  f = json.load(open(constant.S3_CONFIG, "r"))
-  j = read_json_from_s3(f["bucket"], f["config"])
-  
-  vmc_client = get_vmc_client(j["token"])
   task = create_sddc(
-    event["org_id"],
-    event["sddc_name"],
-    event.pop("customer_subnet_id"),
-    event.pop("connected_account_id"),
-    event.pop("num_hosts"),
+    event.get("org_id"),
+    event.get("sddc_name"),
+    event.get("customer_subnet_id"),
+    event.get("connected_account_id"),
+    event.get("num_hosts"),
     vmc_client
   )
-#  logging.info(task)
   
-  event.pop("sddc_id")
 #  event["task_id"] = task.id
   event["task_id"] = "xxxxxxxx"
   event["lambda_name"] = "check_task"
 
-  text = create_button(event["user_id"], event["sddc_name"], "xxxxxxxxxxx") #for test
-#  text = create_button(event["user_id"], event["sddc_name"], event["task_id"])
-  response = post_to_webhook(j["slack_webhook_url"], text)
+  text = create_button(
+    event["user_id"], 
+    event["sddc_name"], 
+#    event["task_id"]
+    "xxxxxxxxxxx" #for test
+  ) 
+  
+  response = post_to_webhook(
+    event.get("webhook_url"), 
+    text
+  )
 #  logging.info(response.read())
     
   text = {
@@ -110,6 +112,9 @@ def lambda_handler(event, context):
       event
     )
   }
-  response = post_to_webhook(j["slack_webhook_url"], text)
+  response = post_to_webhook(
+    event.get("slack_webhook_url"), 
+    text
+  )
 #  logging.info(response.read())
 #  logging.info(event)
