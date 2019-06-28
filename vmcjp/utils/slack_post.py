@@ -80,7 +80,7 @@ def post_button(event, button, reply=True):
         response = post(event["post_url"], data, event["bot_token"])
     return response
 
-def create_configmation_button(event, button):
+def create_button(event, button):
     fields = button.get("attachments")[0].get("fields")
     for field in fields:
         field.update({"value": result.get(field.get("value"))})
@@ -93,7 +93,7 @@ def post_field_button(event, button, pretext=None, reply=True):
     }
     
     button_set = json.load(open(button, 'r'))
-    button_set = create_configmation_button(event, button_set)
+    button_set = create_button(event, button_set)
     
     if pretext is not None:
         data.update(
