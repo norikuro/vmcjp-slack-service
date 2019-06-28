@@ -93,17 +93,25 @@ def lambda_handler(event, context):
   event["task_id"] = "xxxxxxxx"
   event["lambda_name"] = "check_task"
 
-  text = create_button(
-    event["user_id"], 
-    event["sddc_name"], 
-#    event["task_id"]
-    "xxxxxxxxxxx" #for test
-  ) 
+#  text = create_button(
+#    event["user_id"], 
+#    event["sddc_name"], 
+##    event["task_id"]
+#    "xxxxxxxxxxx" #for test
+#  ) 
   
-  response = post_to_webhook(
-    event.get("webhook_url"), 
-    text
+#  response = post_to_webhook(
+#    event.get("webhook_url"), 
+#    text
+#  )
+  
+  post_field_button(
+    event, 
+    TASK_BUTTON, 
+    "Hi <@{}>, started to create sddc".format(user_id), 
+    False
   )
+  
 #  logging.info(response.read())
     
   text = {
