@@ -21,7 +21,6 @@ VPC_BUTTON = constant.BUTTON_DIR + "vpc_button.json"
 SUBNET_BUTTON = constant.BUTTON_DIR + "subnet_button.json"
 LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws_button.json"
 NUM_HOSTS_BUTTON = constant.BUTTON_DIR + "num_hosts_button.json"
-CREATE_BUTTON = constant.BUTTON_DIR + "create_button.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -100,12 +99,6 @@ def list_num_hosts(num_hosts):
             "value": i + 1
         } for i in range(2, num_hosts)
     ]
-
-def create_configmation_button(result, button):
-    fields = button.get("attachments")[0].get("fields")
-    for field in fields:
-        field.update({"value": result.get(field.get("value"))})
-    return button
 
 def interactive_handler(event):
     user_id = event["user_id"]
