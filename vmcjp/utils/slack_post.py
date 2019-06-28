@@ -86,13 +86,13 @@ def create_configmation_button(result, button):
         field.update({"value": result.get(field.get("value"))})
     return button
 
-def post_confirm_button(event, result, button, reply=True):
+def post_confirm_button(event, button, reply=True):
     data = {
         "token": event["token"],
         "channel": event["channel"]
     }
     button_set = json.load(open(button, 'r'))
-    button_set = create_configmation_button(result, button_set)
+    button_set = create_configmation_button(event, button_set)
     data.update(button_set)
     if reply:
         response = post_to_response_url(event["response_url"], data)
