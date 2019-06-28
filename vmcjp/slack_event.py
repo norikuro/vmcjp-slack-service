@@ -16,6 +16,7 @@ TEST_ORG_ID = os.environ["test_org"] #for test
 PRECHECK_BUTTON = constant.BUTTON_DIR + "precheck_button.json"
 LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws_button.json"
 SINGLE_MULTI_BUTTON = constant.BUTTON_DIR + "single_multi_button.json"
+CREATE_BUTTON = constant.BUTTON_DIR + "create_button.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -52,6 +53,12 @@ def is_valid_network(address):
         return True
     except ValueError:
         return False
+    
+def create_configmation_button(result, button):
+    fields = button.get("attachments")[0].get("fields")
+    for field in fields:
+        field.update({"value": result.get(field.get("value"))})
+    return button
 
 def event_handler(event):
     text = event["text"].lower()
