@@ -72,7 +72,7 @@ def event_handler(event):
     if current is not None and current.get("command") == "create":
         post_text(
             event,
-            "Creating sddc now, please wait.",
+            "Creating sddc now, please wait until the task is finished.",
             False
         )
         return
