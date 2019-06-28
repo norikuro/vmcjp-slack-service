@@ -1,6 +1,10 @@
 import json
 import os
 import urllib2
+import logging
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def post(url, data, bot_oauth_token):
     headers = {
