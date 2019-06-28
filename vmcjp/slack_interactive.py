@@ -104,7 +104,7 @@ def interactive_handler(event):
     user_id = event["user_id"]
     
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
-    result = db.read_event_db(user_id)
+    result = db.read_event_db(user_id, 5)
     if result is None:
         post_text(event, help_message)
         return
