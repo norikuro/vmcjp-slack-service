@@ -182,10 +182,11 @@ def interactive_handler(event):
             )
         return
     elif event["callback_id"] == "region":
-        post_text(
+        response = post_text(
             event,
             "Please enter SDDC name"
         )
+        logging.info(response.read())
         db.write_event_db(
             user_id, 
             {
