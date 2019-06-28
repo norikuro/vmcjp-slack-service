@@ -27,13 +27,15 @@ def get_vmc_client(token):
 def create_sddc(
   org_id,
   sddc_name,
+  region,
+  vpc_cidr,
   customer_subnet_id,
   connected_account_id,
   num_hosts,
   vmc_client
 ):  
   sddc_config = AwsSddcConfig(
-    region="AP_NORTHEAST_1",
+    region=region,
     name="nk_single_api_test", #for test
 #    name=sddc_name,
     account_link_sddc_config=[
