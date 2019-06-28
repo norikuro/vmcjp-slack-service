@@ -68,6 +68,15 @@ def event_handler(event):
     }
     
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
+    current = db.read_event_db(event["user_id"], 120)
+    if current is not None and current.get("command") == "create":
+        post_text(
+            event,
+            "OK, Creating sddc now, please wait!",
+            False
+        )
+        return
+    
     result = db.read_event_db(event["user_id"], 5)
     if result is None:
         if "create sddc" in text:
@@ -122,20 +131,12 @@ def event_handler(event):
         if "create sddc" in text:
             return
         elif "cancel" in text:
-            current = db.read_event_db(event["user_id"], 120)
-            if current.get("command") == "create":
-                post_text(
-                    event,
-                    "SDDC creation has started, you can not cancel it.",
-                    False
-                )
-            else:
-                post_text(
-                    event,
-                    "OK, create SDDC has cenceled.",
-                    False
-                )
-                db.delete_event_db(event["user_id"])
+            post_text(
+                event,
+                "OK, create SDDC has cenceled.",
+                False
+            )
+            db.delete_event_db(event["user_id"])
             return
         elif text.find(" ") != -1:
             return
