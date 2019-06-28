@@ -88,7 +88,7 @@ def create_button(event, button):
         field.update({"value": result.get(field.get("value"))})
     return button
 
-def post_field_button(event, button, pretext=None, reply=True):
+def post_field_button(event, button, pretext=None, type="response"):
     data = {
         "token": event["token"],
         "channel": event["channel"]
@@ -104,7 +104,7 @@ def post_field_button(event, button, pretext=None, reply=True):
     
     data.update(button_set)
     
-    if reply:
+    if if "response" in type:
         response = post_to_response_url(event["response_url"], data)
     else:
         response = post(event["post_url"], data, event["bot_token"])
