@@ -300,5 +300,18 @@ def interactive_handler(event):
             }
         )
         return
+    elif event["callback_id"] == "confirmation":
+        if event["response"] == "yes":
+            post_text(
+                event,
+                "OK, started to create sddc!"
+            )
+        else:
+            post_text(
+                event,
+                "OK, create SDDC has cenceled."
+            )
+            db.delete_event_db(user_id)
+        return
     else:
         return
