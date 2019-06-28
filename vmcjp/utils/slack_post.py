@@ -64,6 +64,7 @@ def post_text(event, text, type="response"):
     return response
 
 def post_option(event, button, option_list):
+    logging.info("post_option: " + json.dumps(event) + ",  " + button + ",  " + option_list)
     data = {
         "token": event["token"],
         "channel": event["channel"]
@@ -73,6 +74,8 @@ def post_option(event, button, option_list):
         {"options": option_list}
     )
     data.update(button_set)
+    logging.info("post_option: " + json.dumps(data))
+
     return post_to_response_url(event["response_url"], data)
 
 def post_button(event, button, type="response"):
@@ -81,10 +84,11 @@ def post_button(event, button, type="response"):
         "token": event["token"],
         "channel": event["channel"]
     }
-    logging.info("post_text: " + json.dumps(data))
 
     button_set = json.load(open(button, 'r'))
     data.update(button_set)
+    logging.info("post_button: " + json.dumps(data))
+
     if "response" in type:
         response = post_to_response_url(event["response_url"], data)
     else:
@@ -98,12 +102,11 @@ def create_button(event, button):
     return button
 
 def post_field_button(event, button, pretext=None, type="response"):
-    logging.info("post_button: " + json.dumps(event) + ",  " + button + ",  " + type)
+    logging.info("post_field_button: " + json.dumps(event) + ",  " + button + ",  " + type)
     data = {
         "token": event["token"],
         "channel": event["channel"]
     }
-    logging.info("post_text: " + json.dumps(data))
     
     button_set = json.load(open(button, 'r'))
     button_set = create_button(event, button_set)
@@ -114,6 +117,7 @@ def post_field_button(event, button, pretext=None, type="response"):
         )
     
     data.update(button_set)
+    logging.info("post_field_button: " + json.dumps(data))
     
     if "response" in type:
         response = post_to_response_url(event["response_url"], data)
