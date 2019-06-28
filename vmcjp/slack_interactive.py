@@ -306,6 +306,12 @@ def interactive_handler(event):
                 event,
                 "OK, started to create sddc!"
             )
+            db.write_event_db(
+                user_id, 
+                {
+                    "command": "create"
+                }
+            )
         else:
             post_text(
                 event,
