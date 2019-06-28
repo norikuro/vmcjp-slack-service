@@ -86,14 +86,22 @@ def create_configmation_button(event, button):
         field.update({"value": result.get(field.get("value"))})
     return button
 
-def post_confirm_button(event, button, reply=True):
+def post_field_button(event, button, pretext=None, reply=True):
     data = {
         "token": event["token"],
         "channel": event["channel"]
     }
+    
     button_set = json.load(open(button, 'r'))
     button_set = create_configmation_button(event, button_set)
+    
+    if pretext is not None:
+        data.update(
+            {"pretext": pretext}
+        )
+    
     data.update(button_set)
+    
     if reply:
         response = post_to_response_url(event["response_url"], data)
     else:
