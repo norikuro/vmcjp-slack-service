@@ -73,7 +73,7 @@ def event_handler(event):
         post_text(
             event,
             "Creating sddc now, please wait until the task is finished.",
-            False
+            "bot"
         )
         return
     
@@ -83,29 +83,29 @@ def event_handler(event):
             post_text(
                 event,
                 "OK, starting create sddc wizard.",
-                False
+                "bot"
             )
             post_text(
                 event,
                 "This conversation will end by typing `cancel` or doing nothing for 5 minutes",
-                False
+                "bot"
             )
             post_text(
                 event,
                 "Checking current resources...",
-                False
+                "bot"
             )
             max_hosts = get_max_num_hosts(event["token"], event["org_id"])
             if max_hosts < 1:
                 post_text(
                     event,
                     "Sorry, we don't have enough space to deploy hosts on this org.",
-                    False
+                    "bot"
                 )
                 post_text(
                     event,
                     "Canceled to create sddc.",
-                    False
+                    "bot"
                 )
                 db.delete_event_db(event["user_id"])
                 return
@@ -114,7 +114,7 @@ def event_handler(event):
                 "You can deploy max {} hosts.".format(
                     max_hosts
                 ),
-                False
+                "bot"
             )
             post_button(event, PRECHECK_BUTTON, False)
             db.write_event_db(
@@ -125,7 +125,7 @@ def event_handler(event):
                 }
             )
         else:
-            post_text(event, help_message, False)
+            post_text(event, help_message, "bot")
         return
     else:
         if "create sddc" in text:
@@ -134,7 +134,7 @@ def event_handler(event):
             post_text(
                 event,
                 "OK, create SDDC has cenceled.",
-                False
+                "bot"
             )
             db.delete_event_db(event["user_id"])
             return
@@ -150,7 +150,7 @@ def event_handler(event):
 #                post_text(
 #                    event,
 #                    "Creating sddc....",
-#                    False
+#                    "bot"
 #                )
                 db.write_event_db(
                     event["user_id"], 
