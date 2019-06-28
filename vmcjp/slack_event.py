@@ -142,8 +142,10 @@ def event_handler(event):
             return
         elif is_valid_network(text):
             if result["command"] == "link_aws" or "subnet":
+                logging.info("pre event!!!" + event)
+                logging.info("result!!!" + result)
                 event = event.update(result)
-                logging.info(event)
+                logging.info("post event!!!" + event)
                 post_field_button(
                     event, 
                     CREATE_BUTTON, 
