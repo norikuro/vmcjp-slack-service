@@ -37,7 +37,7 @@
           "title": "Management Network",
           "value": "vpc_cidr",
           "short": "true"
-        },
+        }
       ]
     },
     {
