@@ -163,10 +163,10 @@ def event_handler(event):
         else:
             if result["command"] == "region":
                 if result["max_hosts"] == 1:
-                    post_button(event, LINK_AWS_BUTTON, False)
+                    post_button(event, LINK_AWS_BUTTON, "bot")
                 else:
                     logging.info(event)
-                    post_button(event, SINGLE_MULTI_BUTTON, False)
+                    post_button(event, SINGLE_MULTI_BUTTON, "bot")
                 db.write_event_db(
                     event["user_id"], 
                     {
