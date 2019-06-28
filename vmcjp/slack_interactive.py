@@ -312,6 +312,7 @@ def interactive_handler(event):
                     "command": "create"
                 }
             )
+            logging.info(event)
         else:
             post_text(
                 event,
