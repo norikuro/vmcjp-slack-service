@@ -33,9 +33,9 @@ class DocmentDb(object):
     def remove(self, data_to_remove):
         self.collection.remove(data_to_remove)
 
-    def read_event_db(self, user_id):
+    def read_event_db(self, user_id, minutes):
         past = (
-          datetime.datetime.now() - datetime.timedelta(minutes=5)
+          datetime.datetime.now() - datetime.timedelta(minutes=minutes)
         ).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
 
         result = self.find({"start_time": {"$gt": past}, "_id": user_id})
