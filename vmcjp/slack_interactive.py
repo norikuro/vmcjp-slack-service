@@ -9,6 +9,7 @@ from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_option, post_button
+from vmcjp.utils.lambdautils import call_lambda
 
 help_message = "May I help you? please type `help`."
 
@@ -306,6 +307,7 @@ def interactive_handler(event):
                 event,
                 "OK, started to create sddc!"
             )
+            #create sddc here!!!!
             db.write_event_db(
                 user_id, 
                 {
