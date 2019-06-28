@@ -47,14 +47,15 @@ def post_to_webhook(url, data):
     return urllib2.urlopen(request)
 
 def post_text(event, text, type="response"):
+    logging.info("post_text: " + json.dumps(event) + ",  " + text + ",  " + type)
     data = {
         "token": event["token"],
         "channel": event["channel"],
         "text": text
     }
+    logging.info("post_text: " + json.dumps(data))
     
     if "response" in type:
-        logging.info(event["response_url"])
         response = post_to_response_url(event["response_url"], data)
     elif "webhook" in type:
         response = post_to_webhook(event["webhook_url"], data)
@@ -75,10 +76,13 @@ def post_option(event, button, option_list):
     return post_to_response_url(event["response_url"], data)
 
 def post_button(event, button, type="response"):
+    logging.info("post_button: " + json.dumps(event) + ",  " + button + ",  " + type)
     data = {
         "token": event["token"],
         "channel": event["channel"]
     }
+    logging.info("post_text: " + json.dumps(data))
+
     button_set = json.load(open(button, 'r'))
     data.update(button_set)
     if "response" in type:
@@ -94,10 +98,12 @@ def create_button(event, button):
     return button
 
 def post_field_button(event, button, pretext=None, type="response"):
+    logging.info("post_button: " + json.dumps(event) + ",  " + button + ",  " + type)
     data = {
         "token": event["token"],
         "channel": event["channel"]
     }
+    logging.info("post_text: " + json.dumps(data))
     
     button_set = json.load(open(button, 'r'))
     button_set = create_button(event, button_set)
