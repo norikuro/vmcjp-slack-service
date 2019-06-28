@@ -42,15 +42,17 @@ def post_to_webhook(url, data):
     
     return urllib2.urlopen(request)
 
-def post_text(event, text, reply=True):
+def post_text(event, text, type="response"):
     data = {
         "token": event["token"],
         "channel": event["channel"],
         "text": text
     }
     
-    if reply:
+    if "response" in type:
         response = post_to_response_url(event["response_url"], data)
+    elif "webhook" in type:
+        response = post_to_webhook(event["webhook_url"], data)
     else:
         response = post(event["post_url"], data, event["bot_token"])
     return response
