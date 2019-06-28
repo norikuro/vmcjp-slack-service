@@ -122,7 +122,8 @@ def event_handler(event):
         if "create sddc" in text:
             return
         elif "cancel" in text:
-            if result.get("command") == "create":
+            current = db.read_event_db(event["user_id"], 120)
+            if current.get("command") == "create":
                 post_text(
                     event,
                     "SDDC creation has started, you can not cancel it.",
