@@ -241,22 +241,26 @@ def interactive_handler(event):
         )
         return
     elif event["callback_id"] == "aws_account":
+        aws_account = event["response"].split("+")[0]
+        aws_id = event["response"].split("+")[1]
+        
         post_option(
             event,
             VPC_BUTTON,
             list_vpc(
                 get_vmc_client(event["token"]),
                 event["org_id"],
-                event["response"],
+                aws_id,
                 result["region"]
             )
         )
+        
         db.write_event_db(
             user_id, 
             {
                 "command": "aws_account", 
-                "aws_account": event["response"].split("+")[0],
-                "connected_account_id": event["response"].split("+")[1]
+                "aws_account": aws_account,
+                "connected_account_id": aws_id
             }
         )
         return
