@@ -68,7 +68,7 @@ def event_handler(event):
     }
     
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
-    result = db.read_event_db(event["user_id"])
+    result = db.read_event_db(event["user_id"], 5)
     if result is None:
         if "create sddc" in text:
             post_text(
