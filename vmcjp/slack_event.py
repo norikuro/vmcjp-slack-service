@@ -145,7 +145,7 @@ def event_handler(event):
                 post_field_button(
                     event.update(result), 
                     CREATE_BUTTON, 
-                    False
+                    "bot"
                 )
 #                post_text(
 #                    event,
