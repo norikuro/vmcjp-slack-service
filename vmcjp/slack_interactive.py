@@ -137,7 +137,7 @@ def interactive_handler(event):
             db.delete_event_db(user_id)
         return
     elif event["callback_id"] == "link_aws_sddc":
-        if event["response"] == "yes":
+        if event["response"] == "True":
             response = post_option(
                 event,
                 ACCOUNT_BUTTON,
@@ -153,14 +153,6 @@ def interactive_handler(event):
                 ]
             )
 #            logging.info(response.read())
-            db.write_event_db(
-                user_id, 
-                {
-                    "command": "link_aws", 
-                    "num_hosts": 1, 
-                    "link_aws": "True"
-                }
-            )
         else:
             response = post_text(
                 event,
@@ -179,14 +171,14 @@ def interactive_handler(event):
                 "bot"
             )
 #            logging.info(response.read())
-            db.write_event_db(
-                user_id, 
-                {
-                    "command": "link_aws", 
-                    "num_hosts": 1, 
-                    "link_aws": "False"
-                }
-            )
+        db.write_event_db(
+            user_id, 
+            {
+                "command": "link_aws", 
+                "num_hosts": 1, 
+                "link_aws": event["response"]
+            }
+        )
         return
     elif event["callback_id"] == "region":
         response = post_text(
