@@ -184,7 +184,7 @@ def interactive_handler(event):
                 {
                     "command": "link_aws", 
                     "num_hosts": 1, 
-                    "link_aws": False
+                    "link_aws": "False"
                 }
             )
         return
