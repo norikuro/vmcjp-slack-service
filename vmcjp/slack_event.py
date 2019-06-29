@@ -80,16 +80,19 @@ def event_handler(event):
     result = db.read_event_db(event["user_id"], 5)
     if result is None:
         if "create sddc" in text:
+            logging.info("!!text, ceate sddc, bot")
             post_text(
                 event,
                 "OK, starting create sddc wizard.",
                 "bot"
             )
+            logging.info("!!text, this conversaion..., bot")
             post_text(
                 event,
                 "This conversation will end by typing `cancel` or doing nothing for 5 minutes",
                 "bot"
             )
+            logging.info("!!text, checking current.., bot")
             post_text(
                 event,
                 "Checking current resources...",
@@ -109,6 +112,7 @@ def event_handler(event):
                 )
                 db.delete_event_db(event["user_id"])
                 return
+            logging.info("!!text, you can deploy..., bot")
             post_text(
                 event,
                 "You can deploy max {} hosts.".format(
@@ -116,6 +120,7 @@ def event_handler(event):
                 ),
                 "bot"
             )
+            logging.info("!!button, precheck, bot")
             post_button(event, PRECHECK_BUTTON, "bot")
             db.write_event_db(
                 event["user_id"], 
@@ -144,6 +149,7 @@ def event_handler(event):
             if result["command"] == "link_aws" or "subnet":
                 logging.info("pre event!!! " + json.dumps(event))
                 logging.info("result!!! " + json.dumps(result))
+                logging.info("!!field button, create, bot")
                 post_field_button(
                     event.update(result), 
                     CREATE_BUTTON, 
@@ -165,9 +171,10 @@ def event_handler(event):
         else:
             if result["command"] == "region":
                 if result["max_hosts"] == 1:
+                    logging.info("!!button, link aws , bot")
                     post_button(event, LINK_AWS_BUTTON, "bot")
                 else:
-                    logging.info(event)
+                    logging.info("!!button, single multi , bot")
                     post_button(event, SINGLE_MULTI_BUTTON, "bot")
                 db.write_event_db(
                     event["user_id"], 
