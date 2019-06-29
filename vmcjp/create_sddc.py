@@ -110,7 +110,7 @@ def lambda_handler(event, context):
   post_field_button(
     event, 
     TASK_BUTTON, 
-    "Hi <@{}>, started to create sddc".format(user_id), 
+    "Hi <@{}>, started to create sddc".format(event["user_id"]), 
     type="bot"
   )
   
