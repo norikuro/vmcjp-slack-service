@@ -112,6 +112,7 @@ def interactive_handler(event):
     
     if event["callback_id"] == "create_sddc":
         if event["response"] == "yes":
+            logging.info("!!option, region , response")
             post_option(
                 event,
                 REGION_BUTTON,
@@ -135,6 +136,7 @@ def interactive_handler(event):
         return
     elif event["callback_id"] == "link_aws_sddc":
         if event["response"] == "yes":
+            logging.info("!!option, aws account , response")
             post_option(
                 event,
                 ACCOUNT_BUTTON,
@@ -182,11 +184,11 @@ def interactive_handler(event):
             )
         return
     elif event["callback_id"] == "region":
+        logging.info("!!text, sddc name , response")
         response = post_text(
             event,
             "Please enter SDDC name"
         )
-        logging.info(response.read())
         db.write_event_db(
             user_id, 
             {
@@ -199,11 +201,13 @@ def interactive_handler(event):
         if "single" in event["response"]:
             post_button(event, LINK_AWS_BUTTON)
         else:
-            post_option(
+            logging.info("!!option, num hosts , response")
+            response = post_option(
                 event, 
                 NUM_HOSTS_BUTTON,
                 list_num_hosts(result["max_hosts"])
             )
+            logging.info(response.read())
         db.write_event_db(
             user_id,
             {
@@ -212,7 +216,8 @@ def interactive_handler(event):
         )
         return
     elif event["callback_id"] == "num_hosts":
-        post_option(
+        logging.info("!!option, acount , response")
+        response = post_option(
             event,
             ACCOUNT_BUTTON,
 #            list_aws_account(
@@ -226,6 +231,7 @@ def interactive_handler(event):
                 }
             ]
         )
+        logging.info(response.read())
         db.write_event_db(
             user_id, 
             {
@@ -238,8 +244,8 @@ def interactive_handler(event):
     elif event["callback_id"] == "aws_account":
         aws_account = event["response"].split("+")[0]
         aws_id = event["response"].split("+")[1]
-        
-        post_option(
+        logging.info("!!option, vpc , response")
+        response = post_option(
             event,
             VPC_BUTTON,
             list_vpc(
@@ -249,7 +255,7 @@ def interactive_handler(event):
                 result["region"]
             )
         )
-        
+        logging.info(response.read())
         db.write_event_db(
             user_id, 
             {
@@ -260,7 +266,8 @@ def interactive_handler(event):
         )
         return
     elif event["callback_id"] == "vpc":
-        post_option(
+        logging.info("!!option, subnet , response")
+        response = post_option(
             event,
             SUBNET_BUTTON,
             list_subnet(
@@ -271,6 +278,7 @@ def interactive_handler(event):
                 event["response"]
             )
         )
+        logging.info(response.read())
         db.write_event_db(
             user_id, 
             {
@@ -280,15 +288,18 @@ def interactive_handler(event):
         )
         return
     elif event["callback_id"] == "subnet":
+        logging.info("!!text, cidr , response")
         post_text(
             event,
             "Please enter CIDR block for management subnet."
         )
+        logging.info("!!text, cidr , bot")
         post_text(
             event,
             "/23 is max 27 hosts, /20 is max 251, /16 is 4091.",
             "bot"
         )
+        logging.info("!!option, cidr , bot")
         post_text(
             event,
             "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved.",
