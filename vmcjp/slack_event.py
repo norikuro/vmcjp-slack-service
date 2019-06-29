@@ -150,7 +150,7 @@ def event_handler(event):
             if result["command"] == "link_aws" or "subnet":
                 logging.info("pre event!!! " + json.dumps(event))
                 logging.info("result!!! " + json.dumps(result))
-                logging.info("!!field button, create, bot")
+                logging.info("result!!! type" + type(result))
                 post_field_button(
                     event.update(result), 
                     CREATE_BUTTON, 
