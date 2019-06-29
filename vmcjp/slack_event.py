@@ -151,8 +151,11 @@ def event_handler(event):
                 logging.info("pre event!!! " + json.dumps(event))
                 logging.info("result!!! " + json.dumps(result))
                 logging.info("result!!! type" + str(type(result)))
+                e = event.update(result)
+                logging.info("event.update!!! " + json.dumps(e))
+                logging.info("event.update!!! type" + str(type(e)))
                 post_field_button(
-                    event.update(result), 
+                    e, 
                     CREATE_BUTTON, 
                     "bot"
                 )
