@@ -111,7 +111,7 @@ def lambda_handler(event, context):
     event, 
     TASK_BUTTON, 
     "Hi <@{}>, started to create sddc".format(user_id), 
-    "bot"
+    type="bot"
   )
   
 #  logging.info(response.read())
