@@ -241,7 +241,7 @@ def interactive_handler(event):
             {
                 "command": "num_hosts",
                 "num_hosts": int(event["response"]), 
-                "link_aws": True
+                "link_aws": "True"
             }
         )
         return
