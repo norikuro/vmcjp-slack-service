@@ -83,6 +83,8 @@ def lambda_handler(event, context):
   task = create_sddc(
     event.get("org_id"),
     event.get("sddc_name"),
+    event.get("region"),
+    event.get("vpc_cidr"),
     event.get("customer_subnet_id"),
     event.get("connected_account_id"),
     event.get("num_hosts"),
