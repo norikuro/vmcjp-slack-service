@@ -88,7 +88,7 @@ def post_button(event, button, type="response"):
 def create_button(event, button):
     fields = button.get("attachments")[0].get("fields")
     for field in fields:
-        field.update({"value": result.get(field.get("value"))})
+        field.update({"value": event.get(field.get("value"))})
     return button
 
 def post_field_button(event, button, pretext=None, type="response"):
