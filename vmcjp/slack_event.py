@@ -88,7 +88,7 @@ def event_handler(event):
                 "This conversation will end by typing `cancel` or doing nothing for 5 minutes",
                 "bot"
             )
-            logging.info(response.read())
+#            logging.info(response.read())
             response = post_text(
                 event,
                 "Checking current resources...",
