@@ -1,10 +1,6 @@
 import json
 import os
 import urllib2
-import logging
-
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
 
 def post(url, data, bot_oauth_token):
     headers = {
@@ -47,13 +43,11 @@ def post_to_webhook(url, data):
     return urllib2.urlopen(request)
 
 def post_text(event, text, type="response"):
-    logging.info("post_text: " + json.dumps(event) + ",  " + text + ",  " + type)
     data = {
         "token": event["token"],
         "channel": event["channel"],
         "text": text
     }
-    logging.info("post_text, data: " + json.dumps(data))
     
     if "response" in type:
         response = post_to_response_url(event["response_url"], data)
@@ -64,7 +58,6 @@ def post_text(event, text, type="response"):
     return response
 
 def post_option(event, button, option_list):
-    logging.info("post_option: " + json.dumps(event) + ",  " + button)
     data = {
         "token": event["token"],
         "channel": event["channel"]
@@ -74,12 +67,10 @@ def post_option(event, button, option_list):
         {"options": option_list}
     )
     data.update(button_set)
-    logging.info("post_option, data: " + json.dumps(data))
 
     return post_to_response_url(event["response_url"], data)
 
 def post_button(event, button, type="response"):
-    logging.info("post_button: " + json.dumps(event) + ",  " + button + ",  " + type)
     data = {
         "token": event["token"],
         "channel": event["channel"]
@@ -87,7 +78,6 @@ def post_button(event, button, type="response"):
 
     button_set = json.load(open(button, 'r'))
     data.update(button_set)
-    logging.info("post_button, data: " + json.dumps(data))
 
     if "response" in type:
         response = post_to_response_url(event["response_url"], data)
@@ -102,7 +92,6 @@ def create_button(event, button):
     return button
 
 def post_field_button(event, button, pretext=None, type="response"):
-    logging.info("post_field_button: " + json.dumps(event) + ",  " + button + ",  " + type)
     data = {
         "token": event["token"],
         "channel": event["channel"]
@@ -117,7 +106,6 @@ def post_field_button(event, button, pretext=None, type="response"):
         )
     
     data.update(button_set)
-    logging.info("post_field_button, data: " + json.dumps(data))
     
     if "response" in type:
         response = post_to_response_url(event["response_url"], data)
