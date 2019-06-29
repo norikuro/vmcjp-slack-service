@@ -150,6 +150,7 @@ def event_handler(event):
             if result["command"] == "link_aws" or "subnet":
                 logging.info("pre event!!! " + json.dumps(event))
                 logging.info("result!!! " + json.dumps(result))
+                logging.info("event!!! type" + str(type(event)))
                 logging.info("result!!! type" + str(type(result)))
                 e = event.update(result)
                 logging.info("event.update!!! " + json.dumps(e))
