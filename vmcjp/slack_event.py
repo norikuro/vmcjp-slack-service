@@ -62,66 +62,65 @@ def create_configmation_button(result, button):
 
 def event_handler(event):
     text = event["text"].lower()
-    data = {
-        "token": event["token"],
-        "channel": event["channel"]
-    }
     
     db = dbutils2.DocmentDb(event["db_url"], constant.USER)
     current = db.read_event_db(event["user_id"], 120)
     if current is not None and current.get("command") == "create":
-        post_text(
+        response = post_text(
             event,
             "Creating sddc now, please wait until the task is finished.",
             "bot"
         )
+#        logging.info(response.read())
         return
     
     result = db.read_event_db(event["user_id"], 5)
     if result is None:
         if "create sddc" in text:
-            logging.info("!!text, ceate sddc, bot")
-            post_text(
+            response = post_text(
                 event,
                 "OK, starting create sddc wizard.",
                 "bot"
             )
-            logging.info("!!text, this conversaion..., bot")
-            post_text(
+#            logging.info(response.read())
+            response = post_text(
                 event,
                 "This conversation will end by typing `cancel` or doing nothing for 5 minutes",
                 "bot"
             )
-            logging.info("!!text, checking current.., bot")
-            post_text(
+            logging.info(response.read())
+            response = post_text(
                 event,
                 "Checking current resources...",
                 "bot"
             )
+#            logging.info(response.read())
             max_hosts = get_max_num_hosts(event["token"], event["org_id"])
             if max_hosts < 1:
-                post_text(
+                response = post_text(
                     event,
                     "Sorry, we don't have enough space to deploy hosts on this org.",
                     "bot"
                 )
-                post_text(
+#                logging.info(response.read())
+                response = post_text(
                     event,
                     "Canceled to create sddc.",
                     "bot"
                 )
+#                logging.info(response.read())
                 db.delete_event_db(event["user_id"])
                 return
-            logging.info("!!text, you can deploy..., bot")
-            post_text(
+            response = post_text(
                 event,
                 "You can deploy max {} hosts.".format(
                     max_hosts
                 ),
                 "bot"
             )
-            logging.info("!!button, precheck, bot")
-            post_button(event, PRECHECK_BUTTON, "bot")
+#            logging.info(response.read())
+            response = post_button(event, PRECHECK_BUTTON, "bot")
+#            logging.info(response.read())
             db.write_event_db(
                 event["user_id"], 
                 {
@@ -130,17 +129,19 @@ def event_handler(event):
                 }
             )
         else:
-            post_text(event, help_message, "bot")
+            response = post_text(event, help_message, "bot")
+#            logging.info(response.read())
         return
     else:
         if "create sddc" in text:
             return
         elif "cancel" in text:
-            post_text(
+            response = post_text(
                 event,
                 "OK, create SDDC has cenceled.",
                 "bot"
             )
+#            logging.info(response.read())
             db.delete_event_db(event["user_id"])
             return
         elif text.find(" ") != -1:
@@ -171,11 +172,11 @@ def event_handler(event):
         else:
             if result["command"] == "region":
                 if result["max_hosts"] == 1:
-                    logging.info("!!button, link aws , bot")
-                    post_button(event, LINK_AWS_BUTTON, "bot")
+                    response = post_button(event, LINK_AWS_BUTTON, "bot")
+#                    logging.info(response.read())
                 else:
-                    logging.info("!!button, single multi , bot")
-                    post_button(event, SINGLE_MULTI_BUTTON, "bot")
+                    response = post_button(event, SINGLE_MULTI_BUTTON, "bot")
+#                    logging.info(response.read())
                 db.write_event_db(
                     event["user_id"], 
                     {
@@ -184,4 +185,3 @@ def event_handler(event):
                     }
                 )
             return
-#    logging.info(response.read())
