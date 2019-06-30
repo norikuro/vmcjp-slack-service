@@ -84,9 +84,9 @@ def lambda_handler(event, context):
     vmc_client
   )
     
-  event["task_id"] = task.id
+  event.update({"task_id": task.id})
 #  event["task_id"] = "xxxxxxxx" #for test
-  event["lambda_name"] = "check_task"
+  event.update({"lambda_name": "check_task"})
 #  logging.info(event)
 
 #  response = post_to_webhook(
@@ -99,7 +99,7 @@ def lambda_handler(event, context):
     event, 
     TASK_BUTTON, 
     "Hi <@{}>, started to create sddc".format(
-      event["user_id"]
+      event.get("user_id")
     ), 
     type="bot"
   )
