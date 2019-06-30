@@ -104,23 +104,23 @@ def list_num_hosts(num_hosts):
     ]
 
 def interactive_handler(event):
-    user_id = event["user_id"]
+    user_id = event.get("user_id")
     
-    db = dbutils2.DocmentDb(event["db_url"], constant.USER)
+    db = dbutils2.DocmentDb(event.get("db_url"), constant.USER)
     result = db.read_event_db(user_id, 5)
     if result is None:
         response = post_text(event, help_message)
 #        logging.info(response.read())
         return
     
-    if event["callback_id"] == "create_sddc":
-        if event["response"] == "yes":
+    if "create_sddc" in event.get("callback_id"):
+        if "yes" in event.get("response"):
             response = post_option(
                 event,
                 REGION_BUTTON,
 #                list_region(
-#                    get_vmc_client(event["token"]),
-#                    event["org_id"]
+#                    get_vmc_client(event.get("token")),
+#                    event.get("org_id")
 #                )
                 [
                     {
@@ -138,14 +138,14 @@ def interactive_handler(event):
 #            logging.info(response.read())
             db.delete_event_db(user_id)
         return
-    elif event["callback_id"] == "link_aws_sddc":
-        if event["response"] == "True":
+    elif "link_aws_sddc" in event.get("callback_id"):
+        if "True" in event.get("response"):
             response = post_option(
                 event,
                 ACCOUNT_BUTTON,
 #                list_aws_account(
-#                    get_vmc_client(event["token"]),
-#                    event["org_id"]
+#                    get_vmc_client(event.get("token")),
+#                    event.get("org_id")
 #                )
                 [
                     {
@@ -182,7 +182,7 @@ def interactive_handler(event):
             }
         )
         return
-    elif event["callback_id"] == "region":
+    elif "region" in event.get("callback_id"):
         response = post_text(
             event,
             "Please enter SDDC name"
@@ -196,8 +196,8 @@ def interactive_handler(event):
             }
         )
         return
-    elif event["callback_id"] == "single_multi":
-        if "single" in event["response"]:
+    elif "single_multi" in event.get("callback_id"):
+        if "single" in event.get("response"):
             response = post_button(event, LINK_AWS_BUTTON)
 #            logging.info(response.read())
         else:
@@ -214,7 +214,7 @@ def interactive_handler(event):
             }
         )
         return
-    elif event["callback_id"] == "num_hosts":
+    elif "num_hosts" in event.get("callback_id"):
         response = post_option(
             event,
             ACCOUNT_BUTTON,
@@ -234,22 +234,22 @@ def interactive_handler(event):
             user_id, 
             {
                 "command": "num_hosts",
-                "num_hosts": int(event["response"]), 
+                "num_hosts": int(event.get("response")), 
                 "link_aws": "True"
             }
         )
         return
-    elif event["callback_id"] == "aws_account":
-        aws_account = event["response"].split("+")[0]
-        aws_id = event["response"].split("+")[1]
+    elif "aws_account" in event.get("callback_id"):
+        aws_account = event.get("response").split("+")[0]
+        aws_id = event.get("response").split("+")[1]
         response = post_option(
             event,
             VPC_BUTTON,
             list_vpc(
-                get_vmc_client(event["token"]),
-                event["org_id"],
+                get_vmc_client(event.get("token")),
+                event.get("org_id"),
                 aws_id,
-                result["region"]
+                result.get("region")
             )
         )
 #        logging.info(response.read())
@@ -262,16 +262,16 @@ def interactive_handler(event):
             }
         )
         return
-    elif event["callback_id"] == "vpc":
+    elif "vpc" in event.get("callback_id"):
         response = post_option(
             event,
             SUBNET_BUTTON,
             list_subnet(
-                get_vmc_client(event["token"]),
-                event["org_id"],
-                result["connected_account_id"],
-                result["region"],
-                event["response"]
+                get_vmc_client(event.get("token")),
+                event.get("org_id"),
+                result.get("connected_account_id"),
+                result.get("region"),
+                event.get("response")
             )
         )
 #        logging.info(response.read())
