@@ -47,7 +47,7 @@ def create_sddc(
 #    name="nk_api_test", #for test
     name=sddc_name,
     sddc_type=sddc_type,
-    account_link_sddc_config=None if sddc_type is None else [
+    account_link_sddc_config=None if sddc_type else [
       AccountLinkSddcConfig(
         customer_subnet_ids=[customer_subnet_id],
         connected_account_id=connected_account_id
@@ -59,7 +59,7 @@ def create_sddc(
     num_hosts=num_hosts,
 #    num_hosts=3, #for test
     account_link_config=AccountLinkConfig(
-      True if sddc_type is None else False
+      True if sddc_type else False
     ),
     deployment_type=SddcConfig.DEPLOYMENT_TYPE_SINGLEAZ
   )
