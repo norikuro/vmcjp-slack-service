@@ -4,11 +4,11 @@ import logging
 import requests
 import atexit
 
+from distutils.util import strtobool
 from com.vmware.vmc.model_client import AwsSddcConfig, AccountLinkSddcConfig, SddcConfig
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.slack_post import post_text, post_field_button
 from vmcjp.utils.task_helper import task_handler
-
 from vmcjp.utils import constant
 
 TASK_BUTTON = constant.BUTTON_DIR + "task_button.json"
@@ -26,6 +26,7 @@ def create_sddc(
   org_id,
   sddc_name,
   region,
+  link_aws,
   vpc_cidr,
   customer_subnet_id,
   connected_account_id,
@@ -41,7 +42,7 @@ def create_sddc(
         customer_subnet_ids=[customer_subnet_id],
         connected_account_id=connected_account_id
       )
-    ],
+    ] if link_aws else None,
     provider="ZEROCLOUD", #for test
 #    provider=SddcConfig.PROVIDER_AWS,
     num_hosts=num_hosts,
@@ -61,6 +62,7 @@ def lambda_handler(event, context):
     event.get("org_id"),
     event.get("sddc_name"),
     event.get("region"),
+    True if strtobool(event.get("link_aws")) == 1 else False,
     event.get("vpc_cidr"),
     event.get("customer_subnet_id"),
     event.get("connected_account_id"),
