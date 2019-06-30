@@ -61,10 +61,10 @@ def create_configmation_button(result, button):
     return button
 
 def event_handler(event):
-    text = event["text"].lower()
+    text = event.get("text").lower()
     
-    db = dbutils2.DocmentDb(event["db_url"], constant.USER)
-    current = db.read_event_db(event["user_id"], 120)
+    db = dbutils2.DocmentDb(event.get("db_url"), constant.USER)
+    current = db.read_event_db(event.get("user_id"), 120)
     if current is not None and current.get("command") == "create":
         response = post_text(
             event,
@@ -74,7 +74,7 @@ def event_handler(event):
 #        logging.info(response.read())
         return
     
-    result = db.read_event_db(event["user_id"], 5)
+    result = db.read_event_db(event.get("user_id"), 5)
     if result is None:
         if "create sddc" in text:
             response = post_text(
@@ -95,7 +95,10 @@ def event_handler(event):
                 "bot"
             )
 #            logging.info(response.read())
-            max_hosts = get_max_num_hosts(event["token"], event["org_id"])
+            max_hosts = get_max_num_hosts(
+                event.get("token"), 
+                event.get("org_id")
+            )
             if max_hosts < 1:
                 response = post_text(
                     event,
@@ -109,7 +112,7 @@ def event_handler(event):
                     "bot"
                 )
 #                logging.info(response.read())
-                db.delete_event_db(event["user_id"])
+                db.delete_event_db(event.get("user_id"))
                 return
             response = post_text(
                 event,
@@ -122,7 +125,7 @@ def event_handler(event):
             response = post_button(event, PRECHECK_BUTTON, "bot")
 #            logging.info(response.read())
             db.write_event_db(
-                event["user_id"], 
+                event.get("user_id"), 
                 {
                     "command": "create_sddc", 
                     "max_hosts": max_hosts
@@ -142,12 +145,12 @@ def event_handler(event):
                 "bot"
             )
 #            logging.info(response.read())
-            db.delete_event_db(event["user_id"])
+            db.delete_event_db(event.get("user_id"))
             return
         elif text.find(" ") != -1:
             return
         elif is_valid_network(text):
-            if result["command"] == "link_aws" or "subnet":
+            if result.get("command") == "link_aws" or "subnet":
                 event.update(result)
                 post_field_button(
                     event, 
@@ -160,26 +163,26 @@ def event_handler(event):
 #                    "bot"
 #                )
                 db.write_event_db(
-                    event["user_id"], 
+                    event.get("user_id"), 
                     {
                         "command": "vpc_cidr", 
-                        "vpc_cidr": event["text"]
+                        "vpc_cidr": event.get("text")
                     }
                 )
             return
         else:
-            if result["command"] == "region":
-                if result["max_hosts"] == 1:
+            if result.get("command") == "region":
+                if result.get("max_hosts") == 1:
                     response = post_button(event, LINK_AWS_BUTTON, "bot")
 #                    logging.info(response.read())
                 else:
                     response = post_button(event, SINGLE_MULTI_BUTTON, "bot")
 #                    logging.info(response.read())
                 db.write_event_db(
-                    event["user_id"], 
+                    event.get("user_id"), 
                     {
                         "command": "sddc_name", 
-                        "sddc_name": event["text"]
+                        "sddc_name": event.get("text")
                     }
                 )
             return
