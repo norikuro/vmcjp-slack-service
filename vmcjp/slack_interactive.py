@@ -192,7 +192,7 @@ def interactive_handler(event):
             user_id, 
             {
                 "command": "region", 
-                "region": event["response"]
+                "region": event.get("response")
             }
         )
         return
