@@ -89,10 +89,7 @@ def lambda_handler(event, context):
 #  logging.info(response.read())
     
   text = {
-    "text": task_handler(
-      vmc_client.orgs.Tasks, 
-      event
-    )
+    "text": 
   }
 #  response = post_to_webhook(
 #    event.get("slack_webhook_url"), 
@@ -100,7 +97,10 @@ def lambda_handler(event, context):
 #  )
   response = post_text(
     event,
-    text,
+    task_handler(
+      vmc_client.orgs.Tasks, 
+      event
+    ),
     "bot"
   )
 #  logging.info(response.read())
