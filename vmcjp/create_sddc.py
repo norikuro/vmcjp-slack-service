@@ -55,9 +55,18 @@ def create_sddc(
   )
 
 def lambda_handler(event, context):
-#  logging.info(event)
+  logging.info(event)
   vmc_client = get_vmc_client(event.get("token"))
   
+  logging.info("org: " + event.get("org_id"))
+  logging.info("sddc: " + event.get("sddc_name"))
+  logging.info("region: " + event.get("region"))
+  logging.info("link: " + str(True if strtobool(event.get("link_aws")) == 1 else False))
+  logging.info("cidr: " + event.get("vpc_cidr"))
+  logging.info("subnet: " + event.get("customer_subnet_id"))
+  logging.info("account: " + event.get("connected_account_id"))
+  logging.info("hosts: " + str(event.get("num_hosts")))
+
   task = create_sddc(
     event.get("org_id"),
     event.get("sddc_name"),
@@ -69,16 +78,7 @@ def lambda_handler(event, context):
     event.get("num_hosts"),
     vmc_client
   )
-  
-  logging.info("org: " + event.get("org_id"))
-  logging.info("sddc: " + event.get("sddc_name"))
-  logging.info("region: " + event.get("region"))
-  logging.info("link: " + str(True if strtobool(event.get("link_aws")) == 1 else False))
-  logging.info("cidr: " + event.get("vpc_cidr"))
-  logging.info("subnet: " + event.get("customer_subnet_id"))
-  logging.info("account: " + event.get("connected_account_id"))
-  logging.info("hosts: " + str(event.get("num_hosts")))
-  
+    
   event["task_id"] = task.id
 #  event["task_id"] = "xxxxxxxx" #for test
   event["lambda_name"] = "check_task"
