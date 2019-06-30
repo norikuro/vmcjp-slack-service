@@ -176,7 +176,7 @@ def interactive_handler(event):
             {
                 "command": "link_aws", 
                 "num_hosts": 1, 
-                "link_aws": event["response"]
+                "sddc_type": "1NODE"
             }
         )
         return
