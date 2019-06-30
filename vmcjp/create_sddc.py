@@ -11,7 +11,6 @@ from vmcjp.utils.task_helper import task_handler
 
 from vmcjp.utils import constant
 
-TEST_ORG_ID = os.environ["test_org"] #for test
 TASK_BUTTON = constant.BUTTON_DIR + "task_button.json"
 
 logger = logging.getLogger()
@@ -35,7 +34,7 @@ def create_sddc(
 ):  
   sddc_config = AwsSddcConfig(
     region=region,
-    name="nk_single_api_test", #for test
+    name="nk_api_test", #for test
 #    name=sddc_name,
     account_link_sddc_config=[
       AccountLinkSddcConfig(
@@ -45,15 +44,14 @@ def create_sddc(
     ],
     provider="ZEROCLOUD", #for test
 #    provider=SddcConfig.PROVIDER_AWS,
-#    num_hosts=num_hosts,
-    num_hosts=3, #for test
+    num_hosts=num_hosts,
+#    num_hosts=3, #for test
     deployment_type=SddcConfig.DEPLOYMENT_TYPE_SINGLEAZ
   )
 
-#  return vmc_client.orgs.Sddcs.create(
-##    org=org_id, sddc_config=sddc_config
-#    TEST_ORG_ID, sddc_config=sddc_config
-#  )
+  return vmc_client.orgs.Sddcs.create(
+    org=org_id, sddc_config=sddc_config
+  )
 
 def lambda_handler(event, context):
 #  logging.info(event)
@@ -70,8 +68,8 @@ def lambda_handler(event, context):
     vmc_client
   )
   
-#  event["task_id"] = task.id
-  event["task_id"] = "xxxxxxxx" #for test
+  event["task_id"] = task.id
+#  event["task_id"] = "xxxxxxxx" #for test
   event["lambda_name"] = "check_task"
 #  logging.info(event)
 
