@@ -219,8 +219,8 @@ def interactive_handler(event):
             event,
             ACCOUNT_BUTTON,
 #            list_aws_account(
-#                get_vmc_client(event["token"]),
-#                event["org_id"]
+#                get_vmc_client(event.get("token")),
+#                event.get("org_id")
 #            )
             [
                 {
