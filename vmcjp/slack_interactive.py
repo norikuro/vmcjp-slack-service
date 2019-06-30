@@ -37,7 +37,9 @@ def list_aws_account(vmc_client, org_id):
     return [
         {
             "text": account.account_number,
-            "value": "{}+{}".format(account.account_number, account.id)
+            "value": "{}+{}".format(
+                account.account_number, 
+                account.id)
         } for account in accounts
     ]
 
