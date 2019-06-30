@@ -24,29 +24,35 @@ def get_vmc_client(token):
 
 def create_sddc(
   org_id,
-  sddc_name,
   region,
-  link_aws,
+  sddc_name,
+  sddc_type,
   vpc_cidr,
   customer_subnet_id,
   connected_account_id,
   num_hosts,
+  
   vmc_client
 ):  
   sddc_config = AwsSddcConfig(
     region=region,
 #    name="nk_api_test", #for test
     name=sddc_name,
-    account_link_sddc_config=[
+    sddc_type=sddc_type,
+    account_link_sddc_config=None if sddc_type is None else [
       AccountLinkSddcConfig(
         customer_subnet_ids=[customer_subnet_id],
         connected_account_id=connected_account_id
       )
-    ] if link_aws else None,
+    ],
+    vpc_cidr=vpc_cidr,
     provider="ZEROCLOUD", #for test
 #    provider=SddcConfig.PROVIDER_AWS,
     num_hosts=num_hosts,
 #    num_hosts=3, #for test
+    account_link_config=AccountLinkConfig(
+      True if sddc_type is None else False
+    ),
     deployment_type=SddcConfig.DEPLOYMENT_TYPE_SINGLEAZ
   )
 
@@ -58,19 +64,11 @@ def lambda_handler(event, context):
   logging.info(event)
   vmc_client = get_vmc_client(event.get("token"))
   
-  logging.info("org: " + event.get("org_id"))
-  logging.info("sddc: " + event.get("sddc_name"))
-  logging.info("region: " + event.get("region"))
-  logging.info("link: " + str(True if strtobool(event.get("link_aws")) == 1 else False))
-  logging.info("cidr: " + event.get("vpc_cidr"))
-  logging.info("subnet: " + event.get("customer_subnet_id"))
-  logging.info("account: " + event.get("connected_account_id"))
-  logging.info("hosts: " + str(event.get("num_hosts")))
-
   task = create_sddc(
     event.get("org_id"),
-    event.get("sddc_name"),
     event.get("region"),
+    event.get("sddc_name"),
+    event.get("sddc_type"),
     True if strtobool(event.get("link_aws")) == 1 else False,
     event.get("vpc_cidr"),
     event.get("customer_subnet_id"),
