@@ -55,27 +55,6 @@ def create_sddc(
 #    TEST_ORG_ID, sddc_config=sddc_config
 #  )
 
-def create_button(user_id, sddc_name, task_id):
-    button_set = json.load(open(TASK_BUTTON, 'r'))
-    
-    pretext = "Hi <@{}>, started to create sddc".format(user_id)
-    fields = [
-        {
-            "title": "SDDC name",
-            "value": sddc_name,
-            "short": "true"
-        },
-        {
-            "title": "Task id",
-            "value": task_id,
-            "short": "true"
-        }
-    ]
-      
-    button_set["attachments"][0]["pretext"] = pretext
-    button_set["attachments"][0]["fields"] = fields
-    return button_set    
-
 def lambda_handler(event, context):
 #  logging.info(event)
   vmc_client = get_vmc_client(event.get("token"))
@@ -95,19 +74,12 @@ def lambda_handler(event, context):
   event["task_id"] = "xxxxxxxx"
   event["lambda_name"] = "check_task"
 
-#  text = create_button(
-#    event["user_id"], 
-#    event["sddc_name"], 
-##    event["task_id"]
-#    "xxxxxxxxxxx" #for test
-#  ) 
-  
 #  response = post_to_webhook(
 #    event.get("webhook_url"), 
 #    text
 #  )
   
-  post_field_button(
+  response = post_field_button(
     event, 
     TASK_BUTTON, 
     "Hi <@{}>, started to create sddc".format(event["user_id"]), 
