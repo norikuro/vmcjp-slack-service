@@ -71,13 +71,15 @@ def lambda_handler(event, context):
   )
   
 #  event["task_id"] = task.id
-  event["task_id"] = "xxxxxxxx"
+  event["task_id"] = "xxxxxxxx" #for test
   event["lambda_name"] = "check_task"
+#  logging.info(event)
 
 #  response = post_to_webhook(
 #    event.get("webhook_url"), 
 #    text
 #  )
+#  logging.info(response.read())
   
   response = post_field_button(
     event, 
@@ -85,13 +87,8 @@ def lambda_handler(event, context):
     "Hi <@{}>, started to create sddc".format(event["user_id"]), 
     type="bot"
   )
-  
 #  logging.info(response.read())
     
-#  response = post_to_webhook(
-#    event.get("slack_webhook_url"), 
-#    text
-#  )
   response = post_text(
     event,
     task_handler(
@@ -101,4 +98,3 @@ def lambda_handler(event, context):
     "bot"
   )
 #  logging.info(response.read())
-#  logging.info(event)
