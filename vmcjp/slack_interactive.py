@@ -204,7 +204,7 @@ def interactive_handler(event):
             response = post_option(
                 event, 
                 NUM_HOSTS_BUTTON,
-                list_num_hosts(result["max_hosts"])
+                list_num_hosts(result.get("max_hosts"))
             )
 #            logging.info(response.read())
         db.write_event_db(
