@@ -60,7 +60,7 @@ def create_sddc(
   )
 
 def lambda_handler(event, context):
-  logging.info(event)
+#  logging.info(event)
   vmc_client = get_vmc_client(event.get("token"))
   
   task = create_sddc(
