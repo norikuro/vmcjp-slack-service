@@ -38,8 +38,6 @@ def create_sddc(
   logging.info("region: " + region)
   logging.info("sddc: " + sddc_name)
   logging.info("cidr: " + vpc_cidr)
-  logging.info("subnet: " + customer_subnet_id)
-  logging.info("account: " + connected_account_id)
   logging.info("hosts: " + str(num_hosts))
   
   sddc_config = AwsSddcConfig(
