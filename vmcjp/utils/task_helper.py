@@ -16,7 +16,7 @@ def task_handler(task_client, event):
     return "{} to create sddc, {}".format(resp["message"], event["sddc_name"])
   elif resp["status"] == True and resp.has_key("time"):
     event["event_name"] = "{}-{}-{}".format(
-      event["user"],
+      event["user_id"],
       event["task_id"],
       datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     )
