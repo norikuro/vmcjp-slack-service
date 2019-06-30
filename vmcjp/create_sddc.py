@@ -33,14 +33,6 @@ def create_sddc(
   num_hosts,
   vmc_client
 ):
-  
-  logging.info("org: " + org_id)
-  logging.info("region: " + region)
-  logging.info("sddc: " + sddc_name)
-  logging.info("type: " + sddc_type)
-  logging.info("cidr: " + vpc_cidr)
-  logging.info("hosts: " + str(num_hosts))
-  
   sddc_config = AwsSddcConfig(
     region=region,
 #    name="nk_api_test", #for test
