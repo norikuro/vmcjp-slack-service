@@ -8,8 +8,14 @@ from vmcjp.utils.cron import get_next_time
 def put_event(minutes, data):  
 #  event_name = "boto3_test"
 #  lambda_name = "event_test"
-  lambda_arn = "arn:aws:lambda:ap-northeast-1:{}:function:{}".format(data["aws_account"], data["lambda_name"])
-  event_arn = "arn:aws:events:ap-northeast-1:{}:rule/{}".format(data["aws_account"], data["event_name"])
+  lambda_arn = "arn:aws:lambda:ap-northeast-1:{}:function:{}".format(
+    data["cloudwatch_account"], 
+    data["lambda_name"]
+  )
+  event_arn = "arn:aws:events:ap-northeast-1:{}:rule/{}".format(
+    data["cloudwatch_account"], 
+    data["event_name"]
+  )
   
   boto3.client("events").put_rule(
     Name=data["event_name"],
