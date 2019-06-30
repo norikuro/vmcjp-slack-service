@@ -283,7 +283,7 @@ def interactive_handler(event):
             }
         )
         return
-    elif event["callback_id"] == "subnet":
+    elif "subnet" in event.get("callback_id"):
         response = post_text(
             event,
             "Please enter CIDR block for management subnet."
@@ -305,12 +305,12 @@ def interactive_handler(event):
             user_id, 
             {
                 "command": "subnet", 
-                "customer_subnet_id": event["response"]
+                "customer_subnet_id": event.get("response")
             }
         )
         return
-    elif event["callback_id"] == "confirmation":
-        if event["response"] == "yes":
+    elif "confirmation" in event.get("callback_id"):
+        if "yes" in event.get("response"):
             response = post_text(
                 event,
                 "OK, started to create sddc!"
