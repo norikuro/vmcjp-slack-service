@@ -35,8 +35,8 @@ def create_sddc(
 ):  
   sddc_config = AwsSddcConfig(
     region=region,
-    name="nk_api_test", #for test
-#    name=sddc_name,
+#    name="nk_api_test", #for test
+    name=sddc_name,
     account_link_sddc_config=[
       AccountLinkSddcConfig(
         customer_subnet_ids=[customer_subnet_id],
