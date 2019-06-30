@@ -103,5 +103,5 @@ def lambda_handler(event, context):
     text,
     "bot"
   )
-    #  logging.info(response.read())
+#  logging.info(response.read())
 #  logging.info(event)
