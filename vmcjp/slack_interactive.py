@@ -279,7 +279,7 @@ def interactive_handler(event):
             user_id, 
             {
                 "command": "vpc", 
-                "vpc_id": event["response"]
+                "vpc_id": event.get("response")
             }
         )
         return
