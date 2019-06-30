@@ -70,16 +70,14 @@ def lambda_handler(event, context):
     vmc_client
   )
   
-  logging.info(
-    "org: " + event.get("org_id") + 
-    ", sddc: " + event.get("sddc_name") +
-    ", region: " + event.get("region"),
-    ", link: " + str(True if strtobool(event.get("link_aws")) == 1 else False) +
-    ", cidr: " + event.get("vpc_cidr") +
-    ", subnet: " + event.get("customer_subnet_id") +
-    ", account: " + event.get("connected_account_id") +
-    ", hosts: " + str(event.get("num_hosts"))
-  )
+  logging.info("org: " + event.get("org_id"))
+  logging.info("sddc: " + event.get("sddc_name"))
+  logging.info("region: " + event.get("region"))
+  logging.info("link: " + str(True if strtobool(event.get("link_aws")) == 1 else False))
+  logging.info("cidr: " + event.get("vpc_cidr"))
+  logging.info("subnet: " + event.get("customer_subnet_id"))
+  logging.info("account: " + event.get("connected_account_id"))
+  logging.info("hosts: " + str(event.get("num_hosts")))
   
   event["task_id"] = task.id
 #  event["task_id"] = "xxxxxxxx" #for test
