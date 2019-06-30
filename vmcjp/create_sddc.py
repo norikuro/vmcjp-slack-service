@@ -71,14 +71,14 @@ def lambda_handler(event, context):
   )
   
   logging.info(
-    "org, " + event.get("org_id") + 
-    "sddc, " + event.get("sddc_name") +
-    "region, " + event.get("region"),
-    "link, " + str(True if strtobool(event.get("link_aws")) == 1 else False) +
-    "cidr, " + event.get("vpc_cidr") +
-    "subnet, " + event.get("customer_subnet_id") +
-    "account, " + event.get("connected_account_id") +
-    "hosts, " + str(event.get("num_hosts"))
+    "org: " + event.get("org_id") + 
+    ", sddc: " + event.get("sddc_name") +
+    ", region: " + event.get("region"),
+    ", link: " + str(True if strtobool(event.get("link_aws")) == 1 else False) +
+    ", cidr: " + event.get("vpc_cidr") +
+    ", subnet: " + event.get("customer_subnet_id") +
+    ", account: " + event.get("connected_account_id") +
+    ", hosts: " + str(event.get("num_hosts"))
   )
   
   event["task_id"] = task.id
