@@ -94,9 +94,14 @@ def lambda_handler(event, context):
       event
     )
   }
-  response = post_to_webhook(
-    event.get("slack_webhook_url"), 
-    text
+#  response = post_to_webhook(
+#    event.get("slack_webhook_url"), 
+#    text
+#  )
+  response = post_text(
+    event,
+    text,
+    "bot"
   )
-#  logging.info(response.read())
+    #  logging.info(response.read())
 #  logging.info(event)
