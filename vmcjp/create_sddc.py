@@ -6,7 +6,7 @@ import atexit
 
 from com.vmware.vmc.model_client import AwsSddcConfig, AccountLinkSddcConfig, SddcConfig
 from vmware.vapi.vmc.client import create_vmc_client
-from vmcjp.utils.slack_post import post_to_webhook, post_field_button
+from vmcjp.utils.slack_post import post_text, post_to_webhook, post_field_button
 from vmcjp.utils.task_helper import task_handler
 
 from vmcjp.utils import constant
