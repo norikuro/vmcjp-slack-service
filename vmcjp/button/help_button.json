@@ -8,6 +8,10 @@
       "callback_id": "help",
       "fields": [
         {
+          "title": "List SDDCs",
+          "value": "Type `list sddcs` to list sddc which deployed on VMC JP SET org."
+        },
+        {
           "title": "Create SDDC",
           "value": "Type `create sddc` to create sddc on VMC JP SET org. You can create single or multi host sddc."
         }
