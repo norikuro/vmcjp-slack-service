@@ -130,6 +130,16 @@ def event_handler(event):
                     "max_hosts": max_hosts
                 }
             )
+        elif "list sddcs" in text:
+            vmc_client = get_vmc_client(event.get("token"))
+            sddcs = vmc_client.orgs.Sddcs.list(event.get("org_id"))
+            for sddc in sddcs:
+                event.update({"sddc_name": sddc.name})
+                event.update({"user_name": sddc.user_name})
+                event.update({"created": sddc.created})
+                event.update(
+                    {"num_hosts": len(sddc.resource_config.esx_hosts)}
+                )
         elif "help" in text:
             response = post_button(event, HELP_BUTTON, "bot")
 #            logging.info(response.read())
