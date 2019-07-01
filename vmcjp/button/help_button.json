@@ -1,1 +1,18 @@
-aa
+{
+  "attachments": 
+  [
+    {
+      "pretext": "You can use following messages to vmcjp app.",
+      "color": "#3AA3E3",
+      "attachment_type": "default",
+      "callback_id": "help",
+      "fields": [
+        {
+          "title": "`create sddc`",
+          "value": "create sddc on VMC JP SET org. You can create single or multi host sddc.",
+          "short": "true"
+        }
+      ]
+    }
+  ]
+}
