@@ -3,8 +3,10 @@ import pymongo
 import datetime
 
 class DocmentDb(object):
-    def __init__(self, url, db_name): 
+    def __init__(self, url): 
         self.client = pymongo.MongoClient(url)
+
+    def init_db(self, db_name):
         self.db = self.client["{}_db".format(db_name)]
         self.collection = self.db["{}_collection".format(db_name)]
     
