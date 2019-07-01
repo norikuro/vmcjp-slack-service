@@ -128,17 +128,17 @@ def event_handler(event):
         elif "list sddcs" in text:
             vmc_client = get_vmc_client(event.get("token"))
             sddcs = vmc_client.orgs.Sddcs.list(event.get("org_id"))
+            response = post_text(
+                event,
+                "Here is SDDCs list in this org.",
+                "bot"
+            )
             for sddc in sddcs:
                 event.update({"sddc_name": sddc.name})
                 event.update({"user_name": sddc.user_name})
                 event.update({"created": sddc.created.isoformat()})
                 event.update(
                     {"num_hosts": len(sddc.resource_config.esx_hosts)}
-                )
-                response = post_text(
-                    event,
-                    "Here is SDDCs list in this org.",
-                    "bot"
                 )
                 post_field_button(
                     event, 
