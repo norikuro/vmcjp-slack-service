@@ -135,6 +135,11 @@ def event_handler(event):
                 event.update(
                     {"num_hosts": len(sddc.resource_config.esx_hosts)}
                 )
+                response = post_text(
+                    event,
+                    "Here is SDDCs list in this org.",
+                    "bot"
+                )
                 post_field_button(
                     event, 
                     LIST_BUTTON, 
