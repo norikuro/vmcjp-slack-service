@@ -15,6 +15,7 @@ PRECHECK_BUTTON = constant.BUTTON_DIR + "precheck_button.json"
 LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws_button.json"
 SINGLE_MULTI_BUTTON = constant.BUTTON_DIR + "single_multi_button.json"
 CREATE_BUTTON = constant.BUTTON_DIR + "create_button.json"
+HELP_BUTTON = constant.BUTTON_DIR + "help_button.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -129,6 +130,9 @@ def event_handler(event):
                     "max_hosts": max_hosts
                 }
             )
+        elif "help" in text:
+            response = post_button(event, HELP_BUTTON, "bot")
+#            logging.info(response.read())
         else:
             response = post_text(event, constant.HELP, "bot")
 #            logging.info(response.read())
