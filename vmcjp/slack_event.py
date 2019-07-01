@@ -146,6 +146,7 @@ def event_handler(event):
                     type="bot"
                 )
         elif "help" in text:
+            logging.info(HELP_BUTTON)
             response = post_button(event, HELP_BUTTON, "bot")
 #            logging.info(response.read())
         else:
