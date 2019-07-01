@@ -11,8 +11,6 @@ from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_option, post_button
 from vmcjp.utils.lambdautils import call_lambda
 
-help_message = "May I help you? please type `help`."
-
 TEST_ORG_ID = os.environ["test_org"] #for test
 AWS_ACCOUNT = os.environ["aws_account"] #for internal use
 AWS_ID = os.environ["aws_id"] #for internal use
