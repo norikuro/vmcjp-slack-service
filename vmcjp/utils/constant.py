@@ -12,6 +12,7 @@ class _const:
   SDDC = "sddc"
   USER = "user"
   BUTTON_DIR = "vmcjp/button/"
+  HELP = "May I help you? please type `help`."
   
 
   class ConstError(TypeError):
