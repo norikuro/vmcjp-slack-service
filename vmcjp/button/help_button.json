@@ -9,7 +9,7 @@
       "fields": [
         {
           "title": "Create SDDC",
-          "value": "type `create sddc` to create sddc on VMC JP SET org. You can create single or multi host sddc."
+          "value": "Type `create sddc` to create sddc on VMC JP SET org. You can create single or multi host sddc."
         }
       ]
     }
