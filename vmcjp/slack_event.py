@@ -132,7 +132,7 @@ def event_handler(event):
                 }
             )
         else:
-            response = post_text(event, help_message, "bot")
+            response = post_text(event, constant.HELP, "bot")
 #            logging.info(response.read())
         return
     else:
