@@ -11,6 +11,7 @@ class _const:
   USER_COLLECTION = "user_collection"
   SDDC = "sddc"
   USER = "user"
+  CRED = "cred"
   BUTTON_DIR = "vmcjp/button/"
   HELP = "May I help you? please type `help`."
   
