@@ -10,7 +10,14 @@
         {
           "title": "List SDDCs",
           "value": "Type `list sddcs` to list sddc which deployed on VMC JP SET org."
-        },
+        }
+      ]
+    },
+    {
+      "color": "#3AA3E3",
+      "attachment_type": "default",
+      "callback_id": "help",
+      "fields": [
         {
           "title": "Create SDDC",
           "value": "Type `create sddc` to create sddc on VMC JP SET org. You can create single or multi host sddc."
