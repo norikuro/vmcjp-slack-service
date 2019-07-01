@@ -10,7 +10,6 @@
         {
           "title": "`create sddc`",
           "value": "create sddc on VMC JP SET org. You can create single or multi host sddc.",
-          "short": "true"
         }
       ]
     }
