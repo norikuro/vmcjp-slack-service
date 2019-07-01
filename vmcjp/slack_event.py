@@ -53,12 +53,6 @@ def is_valid_network(address):
     except ValueError:
         return False
     
-def create_configmation_button(result, button):
-    fields = button.get("attachments")[0].get("fields")
-    for field in fields:
-        field.update({"value": result.get(field.get("value"))})
-    return button
-
 def event_handler(event):
     text = event.get("text").lower()
     
