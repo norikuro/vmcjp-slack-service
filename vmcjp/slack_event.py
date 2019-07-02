@@ -71,80 +71,98 @@ def event_handler(event):
     result = db.read_event_db(event.get("user_id"), 5)
     if result is None:
         if "create sddc" in text:
-            response = post_text(
-                event,
-                "OK, starting create sddc wizard.",
-                "bot"
-            )
-#            logging.info(response.read())
-            response = post_text(
-                event,
-                "This conversation will end by typing `cancel` or doing nothing for 5 minutes",
-                "bot"
-            )
-#            logging.info(response.read())
-            response = post_text(
-                event,
-                "Checking current resources...",
-                "bot"
-            )
-#            logging.info(response.read())
-            max_hosts = get_max_num_hosts(
-                event.get("token"), 
-                event.get("org_id")
-            )
-            if max_hosts < 1:
+            __cred_data = db.read_cred_db(event.get("user_id"))
+            if __cred_data is None:
                 response = post_text(
                     event,
-                    "Sorry, we don't have enough space to deploy hosts on this org.",
+                    "Please register VMC reresh token at first, type `register token`.",
+                    "bot"
+                )
+            elif "registered" in __cred_data.get("status"):
+                event.update({"token": __cred_data.get("token")})
+                response = post_text(
+                    event,
+                    "OK, starting create sddc wizard.",
                     "bot"
                 )
 #                logging.info(response.read())
                 response = post_text(
-                    event,
-                    "Canceled to create sddc.",
-                    "bot"
-                )
-#                logging.info(response.read())
-                db.delete_event_db(event.get("user_id"))
-                return
-            response = post_text(
-                event,
-                "You can deploy max {} hosts.".format(
-                    max_hosts
-                ),
-                "bot"
-            )
-#            logging.info(response.read())
-            response = post_button(event, PRECHECK_BUTTON, "bot")
-#            logging.info(response.read())
-            db.write_event_db(
-                event.get("user_id"), 
-                {
-                    "command": "create_sddc", 
-                    "max_hosts": max_hosts
-                }
-            )
-        elif "list sddcs" in text:
-            vmc_client = get_vmc_client(event.get("token"))
-            sddcs = vmc_client.orgs.Sddcs.list(event.get("org_id"))
-            response = post_text(
-                event,
-                "Here is SDDCs list in this org.",
-                "bot"
-            )
-            for sddc in sddcs:
-                event.update({"sddc_name": sddc.name})
-                event.update({"user_name": sddc.user_name})
-                event.update({"created": sddc.created.isoformat()})
-                event.update(
-                    {"num_hosts": len(sddc.resource_config.esx_hosts)}
-                )
-                post_field_button(
                     event, 
-                    LIST_BUTTON, 
-                    type="bot"
+                    "This conversation will end by typing `cancel` or doing nothing for 5 minutes", 
+                    "bot"
                 )
+#                logging.info(response.read())
+                response = post_text(
+                    event,
+                    "Checking current resources...",
+                    "bot"
+                )
+#                logging.info(response.read())
+                max_hosts = get_max_num_hosts(
+                    event.get("token"), 
+                    event.get("org_id")
+                )
+                if max_hosts < 1:
+                    response = post_text(
+                        event,
+                        "Sorry, we don't have enough space to deploy hosts on this org.",
+                        "bot"
+                    )
+#                    logging.info(response.read())
+                    response = post_text(
+                        event,
+                        "Canceled to create sddc.",
+                        "bot"
+                    )
+#                    logging.info(response.read())
+                    db.delete_event_db(event.get("user_id"))
+                    return
+                response = post_text(
+                    event,
+                    "You can deploy max {} hosts.".format(
+                        max_hosts
+                    ),
+                    "bot"
+                )
+#                logging.info(response.read())
+                response = post_button(event, PRECHECK_BUTTON, "bot")
+#                logging.info(response.read())
+                db.write_event_db(
+                    event.get("user_id"), 
+                    {
+                        "command": "create_sddc", 
+                        "max_hosts": max_hosts
+                    }
+                )
+        elif "list sddcs" in text:
+            __cred_data = db.read_cred_db(event.get("user_id"))
+            if __cred_data is None:
+                response = post_text(
+                    event,
+                    "Please register VMC reresh token at first, type `register token`.",
+                    "bot"
+                )
+            elif "registered" in __cred_data.get("status"):
+                event.update({"token": __cred_data.get("token")})
+                vmc_client = get_vmc_client(event.get("token"))
+                sddcs = vmc_client.orgs.Sddcs.list(event.get("org_id"))
+                response = post_text(
+                    event,
+                    "Here is SDDCs list in this org.",
+                    "bot"
+                )
+                for sddc in sddcs:
+                    event.update({"sddc_name": sddc.name})
+                    event.update({"user_name": sddc.user_name})
+                    event.update({"created": sddc.created.isoformat()})
+                    event.update(
+                        {"num_hosts": len(sddc.resource_config.esx_hosts)}
+                    )
+                    post_field_button(
+                        event, 
+                        LIST_BUTTON, 
+                        type="bot"
+                    )
         elif "register token" in text:
             response = post_text(
                 event,
@@ -162,8 +180,18 @@ def event_handler(event):
             response = post_button(event, HELP_BUTTON, "bot")
 #            logging.info(response.read())
         else:
-            response = post_text(event, constant.HELP, "bot")
-#            logging.info(response.read())
+            __cred_data = db.read_cred_db(event.get("user_id"))
+            if __cred_data is not None and "registering" in __cred_data.get("status"):
+                db.write_cred_db(
+                    event.get("user_id"), 
+                    {
+                        "status": "registered",
+                        "token": event.get("text")
+                    }
+                )
+            else:
+                response = post_text(event, constant.HELP, "bot")
+#                logging.info(response.read())
         return
     else:
         if "create sddc" in text:
