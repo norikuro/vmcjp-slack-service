@@ -48,10 +48,15 @@ def get_vmc_client(token):
     return vmc_client
 
 def is_valid_network(address):
+    if "0.0.0.0/0" in address:
+        return False
     try:
         ip4 = ipaddress.ip_network(address)
-        logging.info(ip4)
-        return True
+        if ip4.is_private:
+            logging.info(ip4)
+            return True
+        else:
+            return False
     except ValueError:
         return False
     
