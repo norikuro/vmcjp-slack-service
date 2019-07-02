@@ -8,7 +8,7 @@ class DocmentDb(object):
     def __init__(self, url): 
         self.client = pymongo.MongoClient(url)
         self.event_db = self.client[constant.USER_DB]
-        self.event_col = self.db[constant.USER_COLLECTION]
+        self.event_col = self.event_db[constant.USER_COLLECTION]
     
     def get_client(self):
       return self.client
