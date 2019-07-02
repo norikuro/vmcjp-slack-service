@@ -175,6 +175,13 @@ def event_handler(event):
                     "status": "registering"
                 }
             )
+        elif "delete token" in text:
+            response = post_text(
+                event,
+                "Deleted VMC refresh token from system db.",
+                "bot"
+            )
+            db.delete_cred_db(event["user_id"])
         elif "help" in text:
             logging.info(HELP_BUTTON)
             response = post_button(event, HELP_BUTTON, "bot")
