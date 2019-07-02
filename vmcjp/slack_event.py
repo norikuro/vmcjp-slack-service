@@ -49,7 +49,8 @@ def get_vmc_client(token):
 
 def is_valid_network(address):
     try:
-        ipaddress.ip_network(address)
+        ip4 = ipaddress.ip_network(address)
+        logging.info(ip4.is_private())
         return True
     except ValueError:
         return False
