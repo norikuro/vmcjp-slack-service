@@ -9,6 +9,8 @@ class _const:
   SDDC_COLLECTION = "sddc_collection"
   USER_DB = "user_db"
   USER_COLLECTION = "user_collection"
+  USER_DB = "cred_db"
+  USER_COLLECTION = "cred_collection"
   SDDC = "sddc"
   USER = "user"
   CRED = "cred"
