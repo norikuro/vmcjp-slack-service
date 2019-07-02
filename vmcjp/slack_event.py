@@ -72,6 +72,8 @@ def is_valid_network(address):
         logging.info("prefix error!!!" + str(prefix))
         return False        
     elif prefix != 16:
+        logging.info(prefix != 16)
+        logging.info(type(prefix))
         logging.info(nw)
         logging.info("prefix error!!!" + str(prefix))
         return False
