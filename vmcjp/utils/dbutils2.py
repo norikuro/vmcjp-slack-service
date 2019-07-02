@@ -32,8 +32,8 @@ class DocmentDb(object):
 #        else:
 #            return
 
-    def remove(self, data_to_remove):
-        self.collection.remove(data_to_remove)
+#    def remove(self, data_to_remove):
+#        self.collection.remove(data_to_remove)
 
     def read_event_db(self, user_id, minutes):
         past = (
