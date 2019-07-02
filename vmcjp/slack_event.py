@@ -51,7 +51,7 @@ def is_valid_network(address):
     try:
         ipaddress.ip_network(address)
         return True
-    except ValueError:
+    except ipaddress.AddressValueError:
         return False
     
 def event_handler(event):
