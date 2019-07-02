@@ -15,11 +15,17 @@ class DocmentDb(object):
     def get_client(self):
       return self.client
 
-#    def get_db(self):
-#        return self.db
+    def get_event_db(self):
+        return self.event_db
+    
+    def get_cred_db(self):
+        return self.cred_db
 
-#    def get_collection(self):
-#        return self.collection
+    def get_event_collection(self):
+        return self.event_col
+    
+    def get_cred_collection(self):
+        return self.cred_col
   
 #    def upsert(self, query, update_data):
 #        self.collection.update(query, update_data, upsert=True)
