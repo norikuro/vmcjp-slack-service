@@ -285,26 +285,28 @@ def event_handler(event):
             return
         elif text.find(" ") != -1:
             return
-        elif is_valid_network(text):
+        elif is_network(text):
             if result.get("command") == "link_aws" or "subnet":
-                event.update(result)
-                post_field_button(
-                    event, 
-                    CREATE_BUTTON, 
-                    type="bot"
-                )
-#                post_text(
-#                    event,
-#                    "Creating sddc....",
-#                    "bot"
-#                )
-                db.write_event_db(
-                    event.get("user_id"), 
-                    {
-                        "command": "vpc_cidr", 
-                        "vpc_cidr": event.get("text")
-                    }
-                )
+                if is_valid_network(text):
+                    event.update(result)
+                    post_field_button(
+                        event, 
+                        CREATE_BUTTON, 
+                        type="bot"
+                    )
+                    db.write_event_db(
+                        event.get("user_id"), 
+                        {
+                            "command": "vpc_cidr", 
+                            "vpc_cidr": event.get("text")
+                        }
+                    )
+                else:
+                    response = post_text(
+                        event,
+                        "Please enter correct network cidr block.",
+                        "bot"
+                    )
             return
         else:
             if result.get("command") == "region":
