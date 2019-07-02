@@ -195,7 +195,7 @@ def event_handler(event):
                 except KeyError:
                     response = post_text(
                         event,
-                        "Token number you entered is something wrong, please check your token, and enter correct token.",
+                        "Token number you entered is something wrong, please check your token and enter correct token.",
                         "bot"
                     )
                     return
