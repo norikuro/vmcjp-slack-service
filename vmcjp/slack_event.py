@@ -57,7 +57,7 @@ def is_valid_network(address):
 def event_handler(event):
     text = event.get("text").lower()
     
-    db = dbutils2.DocmentDb(event.get("db_url"), constant.USER)
+    db = dbutils2.DocmentDb(event.get("db_url"))
     current = db.read_event_db(event.get("user_id"), 120)
     if current is not None and current.get("command") == "create":
         response = post_text(
