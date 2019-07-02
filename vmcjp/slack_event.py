@@ -189,6 +189,7 @@ def event_handler(event):
         else:
             __cred_data = db.read_cred_db(event.get("user_id"))
             if __cred_data is not None and "registering" in __cred_data.get("status"):
+                get_vmc_client(event.get("text")).orgs.Sddcs
                 response = post_text(
                     event,
                     "Registered VMC refresh token to system db, you can delete it with `delete token`.",
