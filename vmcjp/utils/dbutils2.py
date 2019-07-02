@@ -40,7 +40,7 @@ class DocmentDb(object):
           datetime.datetime.now() - datetime.timedelta(minutes=minutes)
         ).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
         
-        cur = self.event_db.find({"start_time": {"$gt": past}, "_id": user_id})
+        cur = self.event_col.find({"start_time": {"$gt": past}, "_id": user_id})
         if cur.count() != 0:
             return cur[0]
         else:
@@ -50,7 +50,7 @@ class DocmentDb(object):
         now = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
         data.update({"start_time": now})
         
-        self.event_db.update({"_id": user_id}, {"$set": data}, upsert=True)
+        self.event_col.update({"_id": user_id}, {"$set": data}, upsert=True)
 
     def delete_event_db(self, user_id):
-        self.event_db.remove({"_id": user_id})
+        self.event_col.remove({"_id": user_id})
