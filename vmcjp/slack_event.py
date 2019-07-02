@@ -61,7 +61,15 @@ def is_valid_network(address):
         return False
     
     prefix = nw.prefixlen
-    if (prefix != 23) or (prefix != 20) or (prefix != 16):
+    if prefix != 23:
+        logging.info(nw)
+        logging.info("prefix error!!!" + str(prefix))
+        return False        
+    elif prefix != 20:
+        logging.info(nw)
+        logging.info("prefix error!!!" + str(prefix))
+        return False        
+    elif prefix != 16:
         logging.info(nw)
         logging.info("prefix error!!!" + str(prefix))
         return False
