@@ -190,6 +190,7 @@ def event_handler(event):
             __cred_data = db.read_cred_db(event.get("user_id"))
             if __cred_data is not None and "registering" in __cred_data.get("status"):
                 try:
+#                    get_vmc_client(event.get("text")).orgs.Sddcs.list(event.get("org_id"))
                     get_vmc_client(event.get("text")).orgs.Sddcs.list(TEST_ORG_ID)
                 except KeyError:
                     response = post_text(
