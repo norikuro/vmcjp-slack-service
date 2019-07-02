@@ -47,12 +47,15 @@ def get_vmc_client(token):
     atexit.register(session.close)
     return vmc_client
 
-def is_valid_network(address):
+def is_network(address):
     try:
-        nw = ipaddress.ip_network(address)
+        ipaddress.ip_network(address)
+        return True
     except ValueError:
         return False
     
+def is_valid_network(address):
+    nw = ipaddress.ip_network(address)
     prefix = nw.prefixlen
     if prefix != 23 or prefix != 20 or  prefix != 16:
         return False
