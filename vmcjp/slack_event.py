@@ -186,6 +186,13 @@ def event_handler(event):
 #            logging.info(HELP_BUTTON)
             response = post_button(event, HELP_BUTTON, "bot")
 #            logging.info(response.read())
+        elif "cancel" in text:
+            db.delete_cred_db(event.get("user_id"))
+            response = post_text(
+                event,
+                "Canceled to register VMC refresh token.",
+                "bot"
+            )
         else:
             __cred_data = db.read_cred_db(event.get("user_id"))
             if __cred_data is not None and "registering" in __cred_data.get("status"):
