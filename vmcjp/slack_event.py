@@ -78,6 +78,7 @@ def event_handler(event):
                     "Please register VMC reresh token at first, type `register token`.",
                     "bot"
                 )
+#                logging.info(response.read())
             elif "registered" in __cred_data.get("status"):
                 event.update({"token": __cred_data.get("token")})
                 response = post_text(
@@ -134,6 +135,7 @@ def event_handler(event):
                         "max_hosts": max_hosts
                     }
                 )
+            return
         elif "list sddcs" in text:
             __cred_data = db.read_cred_db(event.get("user_id"))
             if __cred_data is None:
@@ -142,6 +144,7 @@ def event_handler(event):
                     "Please register VMC reresh token at first, type `register token`.",
                     "bot"
                 )
+#                logging.info(response.read())
             elif "registered" in __cred_data.get("status"):
                 event.update({"token": __cred_data.get("token")})
                 vmc_client = get_vmc_client(event.get("token"))
@@ -151,6 +154,7 @@ def event_handler(event):
                     "Here is SDDCs list in this org.",
                     "bot"
                 )
+#                logging.info(response.read())
                 for sddc in sddcs:
                     event.update({"sddc_name": sddc.name})
                     event.update({"user_name": sddc.user_name})
@@ -158,41 +162,54 @@ def event_handler(event):
                     event.update(
                         {"num_hosts": len(sddc.resource_config.esx_hosts)}
                     )
-                    post_field_button(
+                    response = post_field_button(
                         event, 
                         LIST_BUTTON, 
                         type="bot"
                     )
+#                    logging.info(response.read())
+            return
         elif "register token" in text:
             response = post_text(
                 event,
                 "Please enter VMC refresh token.",
                 "bot"
             )
+#            logging.info(response.read())
             db.write_cred_db(
                 event.get("user_id"), 
                 {
                     "status": "registering"
                 }
             )
+            return
         elif "delete token" in text:
             response = post_text(
                 event,
                 "Deleted VMC refresh token from system db.",
                 "bot"
             )
+#            logging.info(response.read())
             db.delete_cred_db(event["user_id"])
+            return
         elif "help" in text:
 #            logging.info(HELP_BUTTON)
             response = post_button(event, HELP_BUTTON, "bot")
 #            logging.info(response.read())
+            return
         elif "cancel" in text:
-            db.delete_cred_db(event.get("user_id"))
-            response = post_text(
-                event,
-                "Canceled to register VMC refresh token.",
-                "bot"
-            )
+            __cred_data = db.read_cred_db(event.get("user_id"))
+            if __cred_data is not None and "registering" in __cred_data.get("status"):
+                db.delete_cred_db(event.get("user_id"))
+                response = post_text(
+                    event,
+                    "Canceled to register VMC refresh token.",
+                    "bot"
+                )
+#                logging.info(response.read())
+            else:
+                response = post_text(event, constant.HELP, "bot")
+            return
         else:
             __cred_data = db.read_cred_db(event.get("user_id"))
             if __cred_data is not None and "registering" in __cred_data.get("status"):
@@ -205,12 +222,14 @@ def event_handler(event):
                         "Token number you entered is something wrong, please check your token and enter correct token.",
                         "bot"
                     )
+#                    logging.info(response.read())
                     return
                 response = post_text(
                     event,
                     "Registered VMC refresh token to system db, you can delete it with `delete token`.",
                     "bot"
                 )
+#                logging.info(response.read())
                 db.write_cred_db(
                     event.get("user_id"), 
                     {
@@ -221,7 +240,7 @@ def event_handler(event):
             else:
                 response = post_text(event, constant.HELP, "bot")
 #                logging.info(response.read())
-        return
+            return
     else:
         if "create sddc" in text:
             return
