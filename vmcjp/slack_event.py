@@ -182,6 +182,11 @@ def event_handler(event):
         else:
             __cred_data = db.read_cred_db(event.get("user_id"))
             if __cred_data is not None and "registering" in __cred_data.get("status"):
+                response = post_text(
+                    event,
+                    "Registered VMC refresh token to system db, you can delete it with `delete token`.",
+                    "bot"
+                )
                 db.write_cred_db(
                     event.get("user_id"), 
                     {
