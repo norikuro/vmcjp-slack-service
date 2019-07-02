@@ -239,7 +239,6 @@ def event_handler(event):
             db.delete_cred_db(event["user_id"])
             return
         elif "help" in text:
-#            logging.info(HELP_BUTTON)
             response = post_button(event, HELP_BUTTON, "bot")
 #            logging.info(response.read())
             return
@@ -261,7 +260,7 @@ def event_handler(event):
             if __cred_data is not None and "registering" in __cred_data.get("status"):
                 try:
 #                    get_vmc_client(event.get("text")).orgs.Sddcs.list(event.get("org_id"))
-                    get_vmc_client(event.get("text")).orgs.Sddcs.list(TEST_ORG_ID)
+                    get_vmc_client(event.get("text")).orgs.Sddcs.list(TEST_ORG_ID) #for test
                 except KeyError:
                     response = post_text(
                         event,
