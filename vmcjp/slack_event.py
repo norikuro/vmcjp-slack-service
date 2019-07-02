@@ -55,9 +55,15 @@ def is_network(address):
         return False
     
 def is_valid_network(address):
-    nw = ipaddress.ip_network(address)
+    try:
+        nw = ipaddress.ip_network(address)
+    except ValueError:
+        return False
+    
     prefix = nw.prefixlen
     if prefix != 23 or prefix != 20 or  prefix != 16:
+        logging.info(nw)
+        logging.info("prefix error!!!" + str(prefix))
         return False
     
     rs10 = ipaddress.ip_network(u'10.0.0.0/15')
@@ -65,10 +71,16 @@ def is_valid_network(address):
     rs172 = ipaddress.ip_network(u'172.31.0.0/16')
 
     if nw.subnet_of(rs10):
+        logging.info(nw)
+        logging.info("reseved error!!!  " + rs10)
         return False
     elif rs192.subnet_of(nw):
+        logging.info(nw)
+        logging.info("reseved error!!!  " + rs192)
         return False
     elif nw.subnet_of(rs172):
+        logging.info(nw)
+        logging.info("reseved error!!!  " + rs172)
         return False
     
     nw10 = ipaddress.ip_network(u'10.0.0.0/8')
@@ -76,12 +88,20 @@ def is_valid_network(address):
     nw192 = ipaddress.ip_network(u'192.168.0.0/16')
     
     if nw.subnet_of(nw10):
+        logging.info(nw)
+        logging.info("ok! private network!!!  " + nw10)
         return True
     elif nw.subnet_of(nw172):
+        logging.info(nw)
+        logging.info("ok! private network!!!  " + nw172)
         return True
     elif nw.subnet_of(nw192):
+        logging.info(nw)
+        logging.info("ok! private network!!!  " + nw192)
         return True
     else:
+        logging.info(nw)
+        logging.info("ok! private error!!!  ")
         return False
     
 def event_handler(event):
