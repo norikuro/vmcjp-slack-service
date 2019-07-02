@@ -154,7 +154,7 @@ def event_handler(event):
             db.write_cred_db(
                 event.get("user_id"), 
                 {
-                    "status": "register"
+                    "status": "registering"
                 }
             )
         elif "help" in text:
