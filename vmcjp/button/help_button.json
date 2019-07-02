@@ -9,7 +9,7 @@
       "fields": [
         {
           "title": "Register VMC's API token",
-          "value": "Type `register token` to register VMC JP SET org's API token. This token will stored in this system db."
+          "value": "Type `register token` to register VMC JP SET org's API token. This token will stored in this system db. You need to register your token at first if you want to use this slack app."
         }
       ]
     },
