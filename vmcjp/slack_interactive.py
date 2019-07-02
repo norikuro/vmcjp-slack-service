@@ -110,6 +110,9 @@ def interactive_handler(event):
         response = post_text(event, constant.HELP)
 #        logging.info(response.read())
         return
+
+    __cred_data = db.read_cred_db(event.get("user_id"))
+    event.update({"token": __cred_data.get("token")})
     
     if "create_sddc" in event.get("callback_id"):
         if "yes" in event.get("response"):
