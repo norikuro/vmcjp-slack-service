@@ -145,6 +145,18 @@ def event_handler(event):
                     LIST_BUTTON, 
                     type="bot"
                 )
+        elif "register token" in text:
+            response = post_text(
+                event,
+                "Please enter VMC refresh token.",
+                "bot"
+            )
+            db.write_cred_db(
+                event.get("user_id"), 
+                {
+                    "status": "register"
+                }
+            )
         elif "help" in text:
             logging.info(HELP_BUTTON)
             response = post_button(event, HELP_BUTTON, "bot")
