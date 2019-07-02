@@ -47,12 +47,25 @@ class DocmentDb(object):
             return cur[0]
         else:
             return
+        
+    def read_cred_db(self, user_id):
+        cur = self.cred_col.find({"_id": user_id})
+        if cur.count() != 0:
+            return cur[0]
+        else:
+            return
 
     def write_event_db(self, user_id, data):
         now = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
         data.update({"start_time": now})
         
         self.event_col.update({"_id": user_id}, {"$set": data}, upsert=True)
+        
+    def write_cred_db(self, user_id, data):
+        self.cred_col.update({"_id": user_id}, {"$set": data}, upsert=True)
 
     def delete_event_db(self, user_id):
         self.event_col.remove({"_id": user_id})
+        
+    def delete_cred_db(self, user_id):
+        self.cred_col.remove({"_id": user_id})
