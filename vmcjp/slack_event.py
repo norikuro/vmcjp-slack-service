@@ -48,16 +48,37 @@ def get_vmc_client(token):
     return vmc_client
 
 def is_valid_network(address):
-    if "0.0.0.0/0" in address:
-        return False
     try:
-        ip4 = ipaddress.ip_network(address)
-        if ip4.is_private:
-            logging.info(ip4)
-            return True
-        else:
-            return False
+        nw = ipaddress.ip_network(address)
     except ValueError:
+        return False
+    
+    prefix = nw.prefixlen
+    if prefix != 23 or prefix != 20 or  prefix != 16:
+        return False
+    
+    rs10 = ipaddress.ip_network(u'10.0.0.0/15')
+    rs192 = ipaddress.ip_network(u'192.168.1.0/24')
+    rs172 = ipaddress.ip_network(u'172.31.0.0/16')
+
+    if nw.subnet_of(rs10):
+        return False
+    elif rs192.subnet_of(nw):
+        return False
+    elif nw.subnet_of(rs172):
+        return False
+    
+    nw10 = ipaddress.ip_network(u'10.0.0.0/8')
+    nw172 = ipaddress.ip_network(u'172.16.0.0/12')
+    nw192 = ipaddress.ip_network(u'192.168.0.0/16')
+    
+    if nw.subnet_of(nw10):
+        return True
+    elif nw.subnet_of(nw172):
+        return True
+    elif nw.subnet_of(nw192):
+        return True
+    else:
         return False
     
 def event_handler(event):
