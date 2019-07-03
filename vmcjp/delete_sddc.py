@@ -9,6 +9,7 @@ import atexit
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.slack_post import post_text, post_field_button
 from vmcjp.utils.task_helper import task_handler
+from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils import constant
 
 TASK_BUTTON = constant.BUTTON_DIR + "task_button.json"
@@ -65,12 +66,16 @@ def lambda_handler(event, context):
   )
 #  logging.info(response.read())
     
-  response = post_text(
-    event,
-    task_handler(
-      vmc_client.orgs.Tasks, 
-      event
-    ),
-    "bot"
-  )
+#  response = post_text(
+#    event,
+#    task_handler(
+#      vmc_client.orgs.Tasks, 
+#      event
+#    ),
+#    "bot"
+#  )
+  event.update(
+    {"command": "task_started"}
+   )
+  call_lambda("check_task", event)
 #  logging.info(response.read())
