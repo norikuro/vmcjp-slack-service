@@ -43,7 +43,7 @@ class DocmentDb(object):
 #    def remove(self, data_to_remove):
 #        self.collection.remove(data_to_remove)
 
-    def read_event_db(self, user_id, minutes):
+    def read_event_db(self, user_id, minutes=None):
         past = (
           datetime.datetime.now() - datetime.timedelta(minutes=minutes)
         ).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
