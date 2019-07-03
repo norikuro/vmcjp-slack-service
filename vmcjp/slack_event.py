@@ -198,12 +198,6 @@ def event_handler(event):
                     "bot"
                 )
 #                logging.info(response.read())
-                db.write_event_db(
-                    event.get("user_id"), 
-                    {
-                        "command": "delete_sddc", 
-                    }
-                )
             elif "registered" in __cred_data.get("status"):
                 event.update({"token": __cred_data.get("token")})
                 response = post_option(
@@ -215,6 +209,13 @@ def event_handler(event):
                         event.get("org_id")
                     ),
                     "bot"
+                )
+#                logging.info(response.read())
+                db.write_event_db(
+                    event.get("user_id"), 
+                    {
+                        "command": "delete_sddc", 
+                    }
                 )
         elif "list sddcs" in text:
             __cred_data = db.read_cred_db(event.get("user_id"))
