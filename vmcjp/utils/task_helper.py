@@ -8,29 +8,30 @@ from vmcjp.utils.cloudwatch import put_event
 TEST_ORG_ID = os.environ["test_org"] #for test
 
 def task_handler(task_client, event):
-  resp = wait_for_task(task_client, event["org_id"], event["task_id"])
+  resp = wait_for_task(task_client, event.get("org_id"), event.get("task_id"))
 #  resp = wait_for_task(task_client, TEST_ORG_ID, event["task_id"]) #for test
 #  resp = {"status": True, "time": 60} #for test
   
-  if resp["status"] == False:
+  if resp.get("status") == False:
     return "{} to {} sddc, {}".format(
-      resp["message"], 
-      event["command"], 
-      event["sddc_name"]
+      resp.get("message"), 
+      event.get("command"), 
+      event("sddc_name")
     )
-  elif resp["status"] == True and resp.has_key("time"):
+  elif resp.get("status") == True and resp.has_key("time"):
     event["event_name"] = "{}-{}-{}".format(
-      event["user_id"],
-      event["task_id"],
+      event.get("user_id"),
+      event.get("task_id"),
       datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     )
-    put_event(resp["time"], event) #for test
+    put_event(resp.get("time"), event) #for test
 #    put_event(15, event) #for test
     return "It takes around {} min".format(resp["time"])
-  elif resp["status"] == True:
+  elif resp.get("status") == True:
     return "{} successfully to {} sddc, task id: {}".format(
-      resp["message"], 
-      event["task_id"]
+      resp.get("message"), 
+      event.get("command"),
+      event.get("task_id")
     )
 
 def wait_for_task(task_client, org_id, task_id):
