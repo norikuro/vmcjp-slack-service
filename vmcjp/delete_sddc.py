@@ -75,7 +75,7 @@ def lambda_handler(event, context):
 #    "bot"
 #  )
   event.update(
-    {"command": "task_started"}
+    {"status": "task_started"}
    )
   call_lambda("check_task", event)
 #  logging.info(response.read())
