@@ -14,12 +14,12 @@ from vmcjp.utils.lambdautils import call_lambda
 TEST_ORG_ID = os.environ["test_org"] #for test
 AWS_ACCOUNT = os.environ["aws_account"] #for internal use
 AWS_ID = os.environ["aws_id"] #for internal use
-ACCOUNT_BUTTON = constant.BUTTON_DIR + "account_button.json"
-REGION_BUTTON = constant.BUTTON_DIR + "region_button.json"
-VPC_BUTTON = constant.BUTTON_DIR + "vpc_button.json"
-SUBNET_BUTTON = constant.BUTTON_DIR + "subnet_button.json"
-LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws_button.json"
-NUM_HOSTS_BUTTON = constant.BUTTON_DIR + "num_hosts_button.json"
+ACCOUNT_BUTTON = constant.BUTTON_DIR + "account.json"
+REGION_BUTTON = constant.BUTTON_DIR + "region.json"
+VPC_BUTTON = constant.BUTTON_DIR + "vpc.json"
+SUBNET_BUTTON = constant.BUTTON_DIR + "subnet.json"
+LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws.json"
+NUM_HOSTS_BUTTON = constant.BUTTON_DIR + "num_hosts.json"
 DELETE_CONFIRM_BUTTON = constant.BUTTON_DIR + "delete_confirm.json"
 
 logger = logging.getLogger()
