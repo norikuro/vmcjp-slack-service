@@ -112,29 +112,3 @@ def post_field_button(event, button, pretext=None, type="response"):
     else:
         response = post(event["post_url"], data, event["bot_token"])
     return response
-
-def post_attachment_button(event, button, pretext=None, type="response"):
-    data = {
-        "token": event["token"],
-        "channel": event["channel"]
-    }
-    
-    button_set = json.load(open(button, 'r'))
-    attachments = button_set.get("attachments")
-    for sddc in sddcs:
-        fields = attachments[0].get("fields")
-        for field in fields:
-            field.update({"value": event.get(field.get("value"))})
-    ##!!!!need to implement
-    if pretext is not None:
-        data.update(
-            {"pretext": pretext}
-        )
-    
-    data.update(button_set)
-    
-    if "response" in type:
-        response = post_to_response_url(event["response_url"], data)
-    else:
-        response = post(event["post_url"], data, event["bot_token"])
-    return response
