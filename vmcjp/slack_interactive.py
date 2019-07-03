@@ -142,7 +142,7 @@ def interactive_handler(event):
 #            logging.info(response.read())
             event.update(result)
             logging.info(event)
-#            call_lambda("delete_sddc", event)
+            call_lambda("delete_sddc", event)
             db.write_event_db(
                 user_id, 
                 {
