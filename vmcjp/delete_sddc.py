@@ -30,7 +30,7 @@ def delete_sddc(
 
   return vmc_client.orgs.Sddcs.delete(
     org=org_id, 
-    sddc_id=sddc_id
+    sddc=sddc_id
   )
 
 def lambda_handler(event, context):
