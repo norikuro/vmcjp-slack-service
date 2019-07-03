@@ -30,7 +30,6 @@ def task_handler(task_client, event):
   elif resp["status"] == True:
     return "{} successfully to {} sddc, task id: {}".format(
       resp["message"], 
-      event["command"]
       event["task_id"]
     )
 
