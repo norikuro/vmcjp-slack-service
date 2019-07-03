@@ -207,7 +207,8 @@ def event_handler(event):
                         get_vmc_client(event.get("token")), 
                         event.get("token"), 
                         event.get("org_id")
-                    )
+                    ),
+                    "bot"
                 )
         elif "list sddcs" in text:
             __cred_data = db.read_cred_db(event.get("user_id"))
