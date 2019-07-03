@@ -96,7 +96,17 @@ def is_valid_network(address):
         return True
     else:
         return False
-    
+
+def list_sddcs(vmc_client, token, org_id):
+    vmc_client = get_vmc_client(token)
+    sddcs = vmc_client.orgs.Sddcs.list(org_id)
+    return [
+        {
+            "text": sddc.name,
+            "value": sddc.id
+        } for sddc in sddcs
+    ]
+
 def event_handler(event):
     text = event.get("text").lower()
     
@@ -179,6 +189,26 @@ def event_handler(event):
                     }
                 )
             return
+        elif "delete sddc" in text:
+            __cred_data = db.read_cred_db(event.get("user_id"))
+            if __cred_data is None:
+                response = post_text(
+                    event,
+                    "Please register VMC reresh token at first, type `register token`.",
+                    "bot"
+                )
+#                logging.info(response.read())
+            elif "registered" in __cred_data.get("status"):
+                event.update({"token": __cred_data.get("token")})
+                response = post_option(
+                    event,
+                    DELETE_BUTTON,
+                    list_sddcs(
+                        get_vmc_client(get("token")), 
+                        event.get("token"), 
+                        event.get("org_id")
+                    )
+                )
         elif "list sddcs" in text:
             __cred_data = db.read_cred_db(event.get("user_id"))
             if __cred_data is None:
