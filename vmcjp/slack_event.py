@@ -103,7 +103,7 @@ def list_sddcs(vmc_client, token, org_id):
     return [
         {
             "text": sddc.name,
-            "value": sddc.id
+            "value": "{}+{}".format(sddc.name, sddc.id)
         } for sddc in sddcs
     ]
 
