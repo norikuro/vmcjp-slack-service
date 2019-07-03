@@ -57,7 +57,7 @@ def post_text(event, text, type="response"):
         response = post(event["post_url"], data, event["bot_token"])
     return response
 
-def post_option(event, button, option_list):
+def post_option(event, button, option_list, type="response"):
     data = {
         "token": event["token"],
         "channel": event["channel"]
@@ -68,7 +68,11 @@ def post_option(event, button, option_list):
     )
     data.update(button_set)
 
-    return post_to_response_url(event["response_url"], data)
+    if "response" in type:
+        response = post_to_response_url(event["response_url"], data)
+    else:
+        response = post(event["post_url"], data, event["bot_token"])
+    return response
 
 def post_button(event, button, type="response"):
     data = {
