@@ -13,7 +13,11 @@ def task_handler(task_client, event):
 #  resp = {"status": True, "time": 60} #for test
   
   if resp["status"] == False:
-    return "{} to create sddc, {}".format(resp["message"], event["sddc_name"])
+    return "{} to {} sddc, {}".format(
+      resp["message"], 
+      event["command"], 
+      event["sddc_name"]
+    )
   elif resp["status"] == True and resp.has_key("time"):
     event["event_name"] = "{}-{}-{}".format(
       event["user_id"],
@@ -24,8 +28,9 @@ def task_handler(task_client, event):
 #    put_event(15, event) #for test
     return "It takes around {} min".format(resp["time"])
   elif resp["status"] == True:
-    return "{} successfully to create sddc, task id: {}".format(
+    return "{} successfully to {} sddc, task id: {}".format(
       resp["message"], 
+      event["command"]
       event["task_id"]
     )
 
