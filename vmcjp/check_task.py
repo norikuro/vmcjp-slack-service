@@ -5,12 +5,10 @@ import requests
 import atexit
 
 from vmware.vapi.vmc.client import create_vmc_client
-from vmcjp.utils.s3utils import read_json_from_s3
 from vmcjp.utils.cloudwatch import remove_event
 from vmcjp.utils.task_helper import task_handler
 from vmcjp.utils.slack_post import post_text
 from vmcjp.utils import dbutils2
-from vmcjp.utils import constant
 
 TEST_ORG_ID = os.environ["test_org"] #for test
 
@@ -24,9 +22,7 @@ def get_vmc_client(token):
   return vmc_client
 
 def lambda_handler(event, context):
-    logging.info(event)
-#    f = json.load(open(constant.S3_CONFIG, "r"))
-#    j = read_json_from_s3(f["bucket"], f["config"])
+#    logging.info(event)
 
     vmc_client = get_vmc_client(event.get("token"))
     db = dbutils2.DocmentDb(event.get("db_url"))
