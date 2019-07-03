@@ -198,11 +198,13 @@ def event_handler(event):
                 )
 #                logging.info(response.read())
                 for sddc in sddcs:
-                    event.update({"sddc_name": sddc.name})
-                    event.update({"user_name": sddc.user_name})
-                    event.update({"created": sddc.created.isoformat()})
                     event.update(
-                        {"num_hosts": len(sddc.resource_config.esx_hosts)}
+                        {
+                            "sddc_name": sddc.name,
+                            "user_name": sddc.user_name,
+                            "created": sddc.created.isoformat(),
+                            "num_hosts": len(sddc.resource_config.esx_hosts)
+                        }
                     )
                     response = post_field_button(
                         event, 
