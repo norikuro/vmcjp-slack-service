@@ -198,6 +198,12 @@ def event_handler(event):
                     "bot"
                 )
 #                logging.info(response.read())
+                db.write_event_db(
+                    event.get("user_id"), 
+                    {
+                        "command": "delete_sddc", 
+                    }
+                )
             elif "registered" in __cred_data.get("status"):
                 event.update({"token": __cred_data.get("token")})
                 response = post_option(
