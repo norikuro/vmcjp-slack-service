@@ -44,8 +44,14 @@ def lambda_handler(event, context):
         status,
         "bot"
       )
-      if "Failed" in status or "Canceled" in status or "Finished" in status:
-        db.delete_event_db(user_id)
     else:
-      remove_event(event["event_name"], event["lambda_name"])
-      task_handler(vmc_client.orgs.Tasks, event)
+      remove_event(
+        event.get("event_name"), 
+        event.get("lambda_name")
+      )
+      status = task_handler(
+        vmc_client.orgs.Tasks, 
+        event
+      )
+    if "Failed" in status or "Canceled" in status or "Finished" in status:
+      db.delete_event_db(user_id)
