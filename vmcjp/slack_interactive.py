@@ -20,6 +20,7 @@ VPC_BUTTON = constant.BUTTON_DIR + "vpc_button.json"
 SUBNET_BUTTON = constant.BUTTON_DIR + "subnet_button.json"
 LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws_button.json"
 NUM_HOSTS_BUTTON = constant.BUTTON_DIR + "num_hosts_button.json"
+DELETE_CONFIRM_BUTTON = constant.BUTTON_DIR + "delete_confirm.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -113,8 +114,23 @@ def interactive_handler(event):
 
     __cred_data = db.read_cred_db(event.get("user_id"))
     event.update({"token": __cred_data.get("token")})
-    
-    if "create_sddc" in event.get("callback_id"):
+    if "delete_sddc" in event.get("callback_id"):
+        if "delete_sddc" in result.get("command"):
+            event.update(
+                {"sddc_id": event.get("response")}
+            )
+            db.write_event_db(
+                user_id, 
+                {
+                    "sddc_id": event.get("response")
+                }
+            )
+            post_field_button(
+                event, 
+                DELETE_CONFIRM_BUTTON, 
+                "bot"
+            )
+    elif "create_sddc" in event.get("callback_id"):
         if "yes" in event.get("response"):
             response = post_option(
                 event,
