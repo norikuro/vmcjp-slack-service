@@ -31,9 +31,9 @@ def lambda_handler(event, context):
     vmc_client = get_vmc_client(event.get("token"))
     db = dbutils2.DocmentDb(event.get("db_url"))
     
-    if "task_started" in event.get("command"):
+    if "task_started" in event.get("status"):
       event.update(
-        {"command": "task_progress"}
+        {"status": "task_progress"}
       )
       status = task_handler(
         vmc_client.orgs.Tasks, 
