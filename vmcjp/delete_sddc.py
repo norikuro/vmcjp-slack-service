@@ -46,6 +46,7 @@ def lambda_handler(event, context):
   event.update({"task_id": task.id})
 #  event["task_id"] = "xxxxxxxx" #for test
   event.update({"lambda_name": "check_task"})
+  event.update({"command": "delete"})
 #  logging.info(event)
 
 #  response = post_to_webhook(
