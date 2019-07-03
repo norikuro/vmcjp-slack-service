@@ -37,10 +37,10 @@ def lambda_handler(event, context):
       status = task_handler(
         vmc_client.orgs.Tasks, 
         event
-      ),
+      )
       response = post_text(
         event,
-        status
+        status,
         "bot"
       )
       if "Failed" in status or "Canceled" in status or "Finished" in status:
