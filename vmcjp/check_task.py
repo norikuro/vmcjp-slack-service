@@ -49,5 +49,10 @@ def lambda_handler(event, context):
         vmc_client.orgs.Tasks, 
         event
       )
+      response = post_text(
+        event,
+        status,
+        "bot"
+      )     
     if "Failed" in status or "Canceled" in status or "Finished" in status:
       db.delete_event_db(user_id)
