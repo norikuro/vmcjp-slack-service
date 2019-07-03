@@ -296,6 +296,9 @@ def event_handler(event):
         elif is_network(text):
             if result.get("command") == "link_aws" or "subnet":
                 if is_valid_network(text):
+                    event.update(
+                        {"vpc_cidr": event.get("text")}
+                    )
                     event.update(result)
                     post_field_button(
                         event, 
