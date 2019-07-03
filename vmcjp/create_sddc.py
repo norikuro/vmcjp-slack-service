@@ -54,7 +54,9 @@ def create_sddc(
     ),
     deployment_type=SddcConfig.DEPLOYMENT_TYPE_SINGLEAZ
   )
-
+  
+  logging.info(sddc_config)
+  
   return vmc_client.orgs.Sddcs.create(
     org=org_id, sddc_config=sddc_config
   )
