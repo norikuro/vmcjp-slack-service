@@ -254,18 +254,7 @@ def event_handler(event):
         else:
             __cred_data = db.read_cred_db(event.get("user_id"))
             if __cred_data is not None and "registering" in __cred_data.get("status"):
-                if is_valid_token(event):                    
-#                try:
-##                    get_vmc_client(event.get("text")).orgs.Sddcs.list(event.get("org_id"))
-#                    get_vmc_client(event.get("text")).orgs.Sddcs.list(TEST_ORG_ID) #for test
-#                except KeyError:
-#                    response = post_text(
-#                        event,
-#                        "Token number you entered is something wrong, please check your token and enter correct token.",
-#                        "bot"
-#                    )
-#                    logging.info(response.read())
-#                    return
+                if is_valid_token(event):
                     response = post_text(
                         event,
                         "Registered VMC refresh token to system db, you can delete it with `delete token`.",
