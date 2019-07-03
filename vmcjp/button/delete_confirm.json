@@ -2,7 +2,7 @@
   "attachments": 
   [
     {
-      "text": "",
+      "text": "The following sddc will be deleted, please check! Do you want to proceed with it?",
       "color": "#3AA3E3",
       "attachment_type": "default",
       "callback_id": "",
