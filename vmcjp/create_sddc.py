@@ -49,9 +49,7 @@ def create_sddc(
 #    provider=SddcConfig.PROVIDER_AWS,
     num_hosts=num_hosts,
 #    num_hosts=3, #for test
-    account_link_config=AccountLinkConfig(
-      True if sddc_type else False
-    ),
+    account_link_config=None if not sddc_type else AccountLinkConfig(True),
     deployment_type=SddcConfig.DEPLOYMENT_TYPE_SINGLEAZ
   )
   
