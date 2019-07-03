@@ -204,7 +204,7 @@ def event_handler(event):
                     event,
                     DELETE_BUTTON,
                     list_sddcs(
-                        get_vmc_client(get("token")), 
+                        get_vmc_client(event.get("token")), 
                         event.get("token"), 
                         event.get("org_id")
                     )
