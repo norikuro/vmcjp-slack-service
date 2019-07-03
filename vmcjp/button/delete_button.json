@@ -5,7 +5,7 @@
       "text": "Please select SDDC which you want to delete.",
       "color": "#3AA3E3",
       "attachment_type": "default",
-      "callback_id": "subnet",
+      "callback_id": "delete_sddc",
       "actions": [
         {
           "name": "delete_sddc",
