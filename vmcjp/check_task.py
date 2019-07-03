@@ -29,7 +29,6 @@ def lambda_handler(event, context):
 
     vmc_client = get_vmc_client(event.get("token"))
     db = dbutils2.DocmentDb(event.get("db_url"))
-    db.read_event_db(user_id)
     
     if "task_started" in event.get("command"):
       event.update(
@@ -44,12 +43,8 @@ def lambda_handler(event, context):
         status
         "bot"
       )
-      if "Failed" in status:
-        aa
-      elif "Canceled" in status:
-        aaa
-      elif "Finished" in status:
-        aaaa
+      if "Failed" in status or "Canceled" in status or "Finished" in status:
+        db.delete_event_db(user_id)
     else:
       remove_event(event["event_name"], event["lambda_name"])
       task_handler(vmc_client.orgs.Tasks, event)
