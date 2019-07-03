@@ -133,6 +133,29 @@ def interactive_handler(event):
                 DELETE_CONFIRM_BUTTON, 
                 "bot"
             )
+    elif "delete_confirmation" in event.get("callback_id"):
+        if "yes" in event.get("response"):
+            response = post_text(
+                event,
+                "OK, started to delete sddc!"
+            )
+#            logging.info(response.read())
+            event.update(result)
+            logging.info(event)
+#            call_lambda("delete_sddc", event)
+            db.write_event_db(
+                user_id, 
+                {
+                    "command": "delete"
+                }
+            )
+        else:
+            response = post_text(
+                event,
+                "OK, delete SDDC has cenceled."
+            )
+#            logging.info(response.read())
+            db.delete_event_db(user_id)
     elif "create_sddc" in event.get("callback_id"):
         if "yes" in event.get("response"):
             response = post_option(
