@@ -48,7 +48,11 @@ class DocmentDb(object):
           datetime.datetime.now() - datetime.timedelta(minutes=minutes)
         ).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
         
-        cur = self.event_col.find({"start_time": {"$gt": past}, "_id": user_id})
+        if minutes is None:
+            cur = self.event_col.find({"_id": user_id})
+        else:
+            cur = self.event_col.find({"start_time": {"$gt": past}, "_id": user_id})
+        
         if cur.count() != 0:
             return cur[0]
         else:
