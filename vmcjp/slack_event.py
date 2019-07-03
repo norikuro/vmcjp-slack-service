@@ -17,6 +17,7 @@ SINGLE_MULTI_BUTTON = constant.BUTTON_DIR + "single_multi_button.json"
 CREATE_BUTTON = constant.BUTTON_DIR + "create_button.json"
 HELP_BUTTON = constant.BUTTON_DIR + "help_button.json"
 LIST_BUTTON = constant.BUTTON_DIR + "list_button.json"
+DELETE_BUTTON = constant.BUTTON_DIR + "delete_button.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
