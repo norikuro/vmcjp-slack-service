@@ -8,7 +8,7 @@ from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.s3utils import read_json_from_s3
 from vmcjp.utils.cloudwatch import remove_event
 from vmcjp.utils.task_helper import task_handler
-
+from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
 
 TEST_ORG_ID = os.environ["test_org"] #for test
