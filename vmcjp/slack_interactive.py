@@ -116,13 +116,16 @@ def interactive_handler(event):
     event.update({"token": __cred_data.get("token")})
     if "delete_sddc" in event.get("callback_id"):
         if "delete_sddc" in result.get("command"):
+            sddc_name = event.get("response").split("+")[0]
+            sddc_id = event.get("response").split("+")[1]
             event.update(
-                {"sddc_id": event.get("response")}
+                {"sddc_name": sddc_name}
             )
             db.write_event_db(
                 user_id, 
                 {
-                    "sddc_id": event.get("response")
+                    "sddc_name": sddc_name,
+                    "sddc_id": sddc_id
                 }
             )
             post_field_button(
