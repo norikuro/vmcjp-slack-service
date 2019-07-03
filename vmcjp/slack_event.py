@@ -47,18 +47,6 @@ def get_vmc_client(token):
     atexit.register(session.close)
     return vmc_client
 
-def list_sddcs(event):
-    vmc_client = get_vmc_client(event.get("token"))
-    sddcs = vmc_client.orgs.Sddcs.list(event.get("org_id"))
-    for sddc in sddcs:
-        event.update({"sddc_name": sddc.name})
-        event.update({"user_name": sddc.user_name})
-        event.update({"created": sddc.created.isoformat()})
-        event.update(
-            {"num_hosts": len(sddc.resource_config.esx_hosts)}
-        )
-    return event
-
 def is_network(address):
     try:
         ipaddress.ip_network(address)
