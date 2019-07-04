@@ -198,13 +198,6 @@ def interactive_handler(event):
                 ]
             )
 #            logging.info(response.read())
-            db.write_event_db(
-                user_id, 
-                {
-                    "command": "link_aws", 
-                    "num_hosts": 1
-                }
-            )
         else:
             response = post_text(
                 event,
@@ -223,14 +216,14 @@ def interactive_handler(event):
                 "bot"
             )
 #            logging.info(response.read())
-            db.write_event_db(
-                user_id, 
-                {
-                    "command": "link_aws", 
-                    "num_hosts": 1, 
-                    "sddc_type": "1NODE"
-                }
-            )
+        db.write_event_db(
+            user_id, 
+            {
+                "command": "link_aws", 
+                "num_hosts": 1, 
+                "sddc_type": "1NODE"
+            }
+        )
         return
     elif "region" in event.get("callback_id"):
         response = post_text(
