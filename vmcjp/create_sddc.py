@@ -53,7 +53,6 @@ def create_sddc(
     account_link_config=None if not sddc_type else AccountLinkConfig(True),
     deployment_type=SddcConfig.DEPLOYMENT_TYPE_SINGLEAZ
   )
-  
   logging.info(sddc_config)
   
   return vmc_client.orgs.Sddcs.create(
