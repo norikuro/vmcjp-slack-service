@@ -45,6 +45,7 @@ def lambda_handler(event, context):
       event,
       status,
       "bot"
-    )     
+    )
+    
     if "Failed" in status or "Canceled" in status or "Finished" in status:
       db.delete_event_db(user_id)
