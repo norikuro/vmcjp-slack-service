@@ -28,8 +28,8 @@ def create_sddc(
   region,
   sddc_name,
   sddc_type,
-  vxlan_subnet,
-#  vpc_cidr,
+#  vxlan_subnet,
+  vpc_cidr,
   customer_subnet_id,
   connected_account_id,
   num_hosts,
@@ -37,21 +37,19 @@ def create_sddc(
 ):
   sddc_config = AwsSddcConfig(
     region=region,
-#    name="nk_api_test", #for test
     name=sddc_name,
     sddc_type=sddc_type,
-    vxlan_subnet=vxlan_subnet,
+#    vxlan_subnet=vxlan_subnet,
     account_link_sddc_config=None if sddc_type else [
       AccountLinkSddcConfig(
         customer_subnet_ids=[customer_subnet_id],
         connected_account_id=connected_account_id
       )
     ],
-#    vpc_cidr=vpc_cidr,
+    vpc_cidr=vpc_cidr,
     provider="ZEROCLOUD", #for test
 #    provider=SddcConfig.PROVIDER_AWS,
     num_hosts=num_hosts,
-#    num_hosts=3, #for test
     account_link_config=None if not sddc_type else AccountLinkConfig(True),
     deployment_type=SddcConfig.DEPLOYMENT_TYPE_SINGLEAZ
   )
