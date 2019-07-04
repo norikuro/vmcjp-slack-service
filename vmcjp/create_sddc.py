@@ -28,7 +28,6 @@ def create_sddc(
   region,
   sddc_name,
   sddc_type,
-#  vxlan_subnet,
   vpc_cidr,
   customer_subnet_id,
   connected_account_id,
@@ -39,7 +38,6 @@ def create_sddc(
     region=region,
     name=sddc_name,
     sddc_type=sddc_type,
-#    vxlan_subnet=vxlan_subnet,
     account_link_sddc_config=None if sddc_type else [
       AccountLinkSddcConfig(
         customer_subnet_ids=[customer_subnet_id],
@@ -53,7 +51,6 @@ def create_sddc(
     account_link_config=None if not sddc_type else AccountLinkConfig(True),
     deployment_type=SddcConfig.DEPLOYMENT_TYPE_SINGLEAZ
   )
-  logging.info(sddc_config)
   
   return vmc_client.orgs.Sddcs.create(
     org=org_id, sddc_config=sddc_config
