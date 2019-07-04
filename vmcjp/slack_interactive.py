@@ -197,7 +197,7 @@ def interactive_handler(event):
                         "text": event.get("aws_internal_account"), #for internal use
                         "value": "{}+{}".format(
                             event.get("aws_internal_account"), 
-                            AWS_ID
+                            event.get("aws_internal_id")
                         ) #for internal use
                     }
                 ]
