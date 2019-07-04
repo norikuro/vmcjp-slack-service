@@ -11,7 +11,7 @@ from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_option, post_button, post_field_button
 from vmcjp.utils.lambdautils import call_lambda
 
-TEST_ORG_ID = os.environ["test_org"] #for test
+#TEST_ORG_ID = os.environ["test_org"] #for test
 AWS_ACCOUNT = os.environ["aws_account"] #for internal use
 AWS_ID = os.environ["aws_id"] #for internal use
 ACCOUNT_BUTTON = constant.BUTTON_DIR + "account.json"
