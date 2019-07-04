@@ -244,6 +244,12 @@ def interactive_handler(event):
         if "single" in event.get("response"):
             response = post_button(event, LINK_AWS_BUTTON)
 #            logging.info(response.read())
+            db.write_event_db(
+                user_id,
+                {
+                    "command": "single_multi"
+                }
+            )
         else:
             response = post_option(
                 event, 
@@ -251,12 +257,13 @@ def interactive_handler(event):
                 list_num_hosts(result.get("max_hosts"))
             )
 #            logging.info(response.read())
-        db.write_event_db(
-            user_id,
-            {
-                "command": "single_multi"
-            }
-        )
+            db.write_event_db(
+                user_id,
+                {
+                    "command": "single_multi",
+                    "link_aws": "True"
+                }
+            )
         return
     elif "num_hosts" in event.get("callback_id"):
         response = post_option(
