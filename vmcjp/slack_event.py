@@ -10,7 +10,7 @@ from vmcjp.utils.slack_post import post_text, post_button, post_option, post_fie
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
 
-TEST_ORG_ID = os.environ["test_org"] #for test
+#TEST_ORG_ID = os.environ["test_org"] #for test
 PRECHECK_BUTTON = constant.BUTTON_DIR + "precheck_button.json"
 LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws_button.json"
 SINGLE_MULTI_BUTTON = constant.BUTTON_DIR + "single_multi_button.json"
