@@ -4,8 +4,6 @@ import logging
 import requests
 import atexit
 
-#from distutils.util import strtobool
-#from com.vmware.vmc.model_client import AwsSddcConfig, AccountLinkSddcConfig, SddcConfig, AccountLinkConfig
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.slack_post import post_text, post_field_button
 from vmcjp.utils.task_helper import task_handler
@@ -48,7 +46,6 @@ def lambda_handler(event, context):
 #  event["task_id"] = "xxxxxxxx" #for test
   event.update({"lambda_name": "check_task"})
   event.update({"command": "delete"})
-#  logging.info(event)
 
 #  response = post_to_webhook(
 #    event.get("webhook_url"), 
@@ -65,17 +62,8 @@ def lambda_handler(event, context):
     type="bot"
   )
 #  logging.info(response.read())
-    
-#  response = post_text(
-#    event,
-#    task_handler(
-#      vmc_client.orgs.Tasks, 
-#      event
-#    ),
-#    "bot"
-#  )
+
   event.update(
     {"status": "task_started"}
    )
   call_lambda("check_task", event)
-#  logging.info(response.read())
