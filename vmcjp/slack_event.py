@@ -28,14 +28,14 @@ def get_max_num_hosts(token, org_id):
     
     vmc_client = get_vmc_client(token)
     
-#    sddcs = vmc_client.orgs.Sddcs.list(org_id)
-    sddcs = vmc_client.orgs.Sddcs.list(TEST_ORG_ID) #for test 
+    sddcs = vmc_client.orgs.Sddcs.list(org_id)
+#    sddcs = vmc_client.orgs.Sddcs.list(TEST_ORG_ID) #for test 
     
     i = 0
     for sddc in sddcs:
         i += len(sddc.resource_config.esx_hosts)
-#    max_hosts = (int(vmc_client.Orgs.get(org_id).properties.values["sddcLimit"]) - 1) - i
-    max_hosts = (int(vmc_client.Orgs.get(TEST_ORG_ID).properties.values["sddcLimit"]) - 1) - i #for test
+    max_hosts = (int(vmc_client.Orgs.get(org_id).properties.values["sddcLimit"]) - 1) - i
+#    max_hosts = (int(vmc_client.Orgs.get(TEST_ORG_ID).properties.values["sddcLimit"]) - 1) - i #for test
 #    if max_hosts < 1:
 #        return max_hosts
 #    else:
@@ -57,8 +57,8 @@ def is_network(address):
 
 def is_valid_token(event):
     try:
-#        get_vmc_client(event.get("text")).orgs.Sddcs.list(event.get("org_id"))
-        get_vmc_client(event.get("text")).orgs.Sddcs.list(TEST_ORG_ID) #for test
+        get_vmc_client(event.get("text")).orgs.Sddcs.list(event.get("org_id"))
+#        get_vmc_client(event.get("text")).orgs.Sddcs.list(TEST_ORG_ID) #for test
         return True
     except KeyError:
         return False
