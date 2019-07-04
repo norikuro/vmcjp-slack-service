@@ -17,8 +17,8 @@ def lambda_handler(event, context):
     event.update(
         {
             "db_url": j["db_url"],
-#            "token": j["token"],
-            "org_id": j["org_id"],
+#            "org_id": j["org_id"],
+            "org_id": os.environ["test_org"], #for test
             "cloudwatch_account": j["cloudwatch_account"]
         }
     )
