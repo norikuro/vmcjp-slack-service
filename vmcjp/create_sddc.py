@@ -32,13 +32,14 @@ def create_sddc(
   customer_subnet_id,
   connected_account_id,
   num_hosts,
+  link_aws,
   vmc_client
 ):
   sddc_config = AwsSddcConfig(
     region=region,
     name=sddc_name,
     sddc_type=sddc_type,
-    account_link_sddc_config=None if sddc_type else [
+    account_link_sddc_config=None if link_aws else [
       AccountLinkSddcConfig(
         customer_subnet_ids=[customer_subnet_id],
         connected_account_id=connected_account_id
@@ -69,6 +70,7 @@ def lambda_handler(event, context):
     event.get("customer_subnet_id"),
     event.get("connected_account_id"),
     event.get("num_hosts"),
+    event.get("link_aws"),
     vmc_client
   )
     
