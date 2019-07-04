@@ -97,17 +97,8 @@ def lambda_handler(event, context):
     type="bot"
   )
 #  logging.info(response.read())
-    
-#  response = post_text(
-#    event,
-#    task_handler(
-#      vmc_client.orgs.Tasks, 
-#      event
-#    ),
-#    "bot"
-#  )
+
   event.update(
     {"status": "task_started"}
    )
   call_lambda("check_task", event)
-#  logging.info(response.read())
