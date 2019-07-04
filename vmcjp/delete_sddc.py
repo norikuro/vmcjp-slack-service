@@ -10,6 +10,7 @@ from vmcjp.utils.task_helper import task_handler
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils import constant
 
+
 TASK_BUTTON = constant.BUTTON_DIR + "task_button.json"
 
 logger = logging.getLogger()
