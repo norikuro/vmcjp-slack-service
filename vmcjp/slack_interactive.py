@@ -192,8 +192,13 @@ def interactive_handler(event):
 #                )
                 [
                     {
-                        "text": AWS_ACCOUNT, #for internal use
-                        "value": "{}+{}".format(AWS_ACCOUNT, AWS_ID) #for internal use
+#                        "text": AWS_ACCOUNT, #for internal use
+#                        "value": "{}+{}".format(AWS_ACCOUNT, AWS_ID) #for internal use
+                        "text": event.get("aws_internal_account"), #for internal use
+                        "value": "{}+{}".format(
+                            event.get("aws_internal_account"), 
+                            AWS_ID
+                        ) #for internal use
                     }
                 ]
             )
