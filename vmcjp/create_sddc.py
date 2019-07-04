@@ -70,7 +70,7 @@ def lambda_handler(event, context):
     event.get("customer_subnet_id"),
     event.get("connected_account_id"),
     event.get("num_hosts"),
-    event.get("link_aws"),
+    strtobool(event.get("link_aws")) == 1,
     vmc_client
   )
     
