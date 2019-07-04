@@ -48,4 +48,4 @@ def lambda_handler(event, context):
     )
     
     if "Failed" in status or "Canceled" in status or "Finished" in status:
-      db.delete_event_db(user_id)
+      db.delete_event_db(event.get("user_id"))
