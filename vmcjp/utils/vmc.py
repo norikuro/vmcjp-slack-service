@@ -1,11 +1,7 @@
 import requests
-import logging
 
 BASE_URL = "https://console.cloud.vmware.com/csp/gateway"
 HEADERS = {"Content-Type": "application/json"}
-
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
 
 def login(token):
   uri = "/am/api/auth/api-tokens/authorize"
@@ -15,9 +11,7 @@ def login(token):
     headers=HEADERS, 
     params=payload
   )
-  logging.info(token)
-  logging.info(response.status_code)
-  logging.info(response.json().get("access_token"))
+  
   if response.status_code != 200:
     return
   else:
