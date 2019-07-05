@@ -12,17 +12,20 @@ def login(token):
     headers=HEADERS, 
     params=payload
   )
+  
   if response.status_code != 200:
     return
   else:
-    auth_json = response.json().get("access_token")
-    return {
-      "Content-Type": "application/json", 
-      "csp-auth-token": auth_json
-    }
+    access_token = response.json().get("access_token")
+    return access_token
 
-def get_username(auth_header):
+def get_username(access_token):
   uri = "/am/api/loggedin/user"
+  auth_header = {
+      "Content-Type": "application/json", 
+      "csp-auth-token": access_token
+  }
+  
   response = requests.get('{}{}'.format(BASE_URL, uri), headers = auth_header)
   if response.status_code != 200:
     return
@@ -31,6 +34,7 @@ def get_username(auth_header):
 
 def validate_token(event):
     response = login(event.get("token"))
+    
     if response is None:
       return
     else:
