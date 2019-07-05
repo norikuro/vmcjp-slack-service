@@ -99,6 +99,16 @@ def list_num_hosts(num_hosts):
         } for i in range(2, num_hosts)
     ]
 
+def check_sddc_user(event):
+    vmc_client = get_vmc_client(event.get("token"))
+    sddc = vmc_client.orgs.Sddcs.get(event.get("org_id"), event.get("sddc_id"))
+    user_name = sddc.user_name
+    logging.info("sddc user name {}, slack user name {}".format(user_name, event.get("user_name")))
+    if user_name in event.get("user_name"):
+        return True
+    else:
+        return False
+
 def interactive_handler(event):
     user_id = event.get("user_id")
     
@@ -138,14 +148,23 @@ def interactive_handler(event):
             )
 #            logging.info(response.read())
             event.update(result)
-            logging.info(event)
-            call_lambda("delete_sddc", event)
-            db.write_event_db(
-                user_id, 
-                {
-                    "command": "delete"
-                }
+            event.update(
+                {"user_name": __cred_data.get("user_name")}
             )
+            if check_sddc_user(event):
+                call_lambda("delete_sddc", event)
+                db.write_event_db(
+                    user_id, 
+                    {
+                        "command": "delete"
+                    }
+                )
+            else:
+                response = post_text(
+                    event,
+                    "You can delete sddcs which you created only. So canceling to delete sddc."
+                )
+                db.delete_event_db(user_id)
         else:
             response = post_text(
                 event,
@@ -153,6 +172,7 @@ def interactive_handler(event):
             )
 #            logging.info(response.read())
             db.delete_event_db(user_id)
+        return
     elif "create_sddc" in event.get("callback_id"):
         if "yes" in event.get("response"):
             response = post_option(
