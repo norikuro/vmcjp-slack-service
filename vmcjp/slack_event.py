@@ -7,6 +7,7 @@ import requests
 
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
+from vmcjp.utils.vmc import validate_token
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
 
