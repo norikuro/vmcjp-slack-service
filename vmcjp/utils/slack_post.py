@@ -44,7 +44,7 @@ def post_to_webhook(url, data):
 
 def post_text(event, text, type="response"):
     data = {
-        "token": event["token"],
+        "token": event["slack_token"],
         "channel": event["channel"],
         "text": text
     }
@@ -59,7 +59,7 @@ def post_text(event, text, type="response"):
 
 def post_option(event, button, option_list, type="response"):
     data = {
-        "token": event["token"],
+        "token": event["slack_token"],
         "channel": event["channel"]
     }
     button_set = json.load(open(button, 'r'))
@@ -76,7 +76,7 @@ def post_option(event, button, option_list, type="response"):
 
 def post_button(event, button, type="response"):
     data = {
-        "token": event["token"],
+        "token": event["slack_token"],
         "channel": event["channel"]
     }
 
@@ -97,7 +97,7 @@ def create_button(event, button):
 
 def post_field_button(event, button, pretext=None, type="response"):
     data = {
-        "token": event["token"],
+        "token": event["slack_token"],
         "channel": event["channel"]
     }
     
