@@ -11,9 +11,6 @@ from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_option, post_button, post_field_button
 from vmcjp.utils.lambdautils import call_lambda
 
-#TEST_ORG_ID = os.environ["test_org"] #for test
-#AWS_ACCOUNT = os.environ["aws_account"] #for internal use
-#AWS_ID = os.environ["aws_id"] #for internal use
 ACCOUNT_BUTTON = constant.BUTTON_DIR + "account.json"
 REGION_BUTTON = constant.BUTTON_DIR + "region.json"
 VPC_BUTTON = constant.BUTTON_DIR + "vpc.json"
@@ -192,8 +189,6 @@ def interactive_handler(event):
 #                )
                 [
                     {
-#                        "text": AWS_ACCOUNT, #for internal use
-#                        "value": "{}+{}".format(AWS_ACCOUNT, AWS_ID) #for internal use
                         "text": event.get("aws_internal_account"), #for internal use
                         "value": "{}+{}".format(
                             event.get("aws_internal_account"), 
