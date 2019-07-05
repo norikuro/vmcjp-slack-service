@@ -10,8 +10,6 @@ from vmcjp.utils.task_helper import task_handler
 from vmcjp.utils.slack_post import post_text
 from vmcjp.utils import dbutils2
 
-#TEST_ORG_ID = os.environ["test_org"] #for test
-
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
