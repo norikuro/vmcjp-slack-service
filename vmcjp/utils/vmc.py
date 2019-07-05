@@ -15,6 +15,7 @@ def login(token):
     headers=HEADERS, 
     params=payload
   )
+  logging.info(token)
   logging.info(response.status_code)
   logging.info(response.json().get("access_token"))
   if response.status_code != 200:
