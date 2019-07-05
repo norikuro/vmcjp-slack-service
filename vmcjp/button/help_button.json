@@ -41,6 +41,17 @@
       "callback_id": "help",
       "fields": [
         {
+          "title": "Delete SDDC",
+          "value": "Type `delete sddc` to delete sddc from VMC JP SET org. You can delete only the sddc which you created."
+        }
+      ]
+    },
+    {
+      "color": "#3AA3E3",
+      "attachment_type": "default",
+      "callback_id": "help",
+      "fields": [
+        {
           "title": "List SDDCs",
           "value": "Type `list sddcs` to list sddc which deployed on VMC JP SET org."
         }
