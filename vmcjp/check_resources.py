@@ -12,7 +12,7 @@ from vmcjp.utils.s3utils import read_json_from_s3
 from vmcjp.utils import dbutils
 from vmcjp.utils import constant
 
-TEST_ORG_ID = os.environ["test_org"] #for test
+#TEST_ORG_ID = os.environ["test_org"] #for test
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
