@@ -11,7 +11,6 @@ from vmcjp.utils.vmc import validate_token
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
 
-#TEST_ORG_ID = os.environ["test_org"] #for test
 PRECHECK_BUTTON = constant.BUTTON_DIR + "precheck_button.json"
 LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws_button.json"
 SINGLE_MULTI_BUTTON = constant.BUTTON_DIR + "single_multi_button.json"
@@ -59,7 +58,6 @@ def is_network(address):
 def is_valid_token(event):
     try:
         get_vmc_client(event.get("text")).orgs.Sddcs.list(event.get("org_id"))
-#        get_vmc_client(event.get("text")).orgs.Sddcs.list(TEST_ORG_ID) #for test
         return True
     except KeyError:
         return False
