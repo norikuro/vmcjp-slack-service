@@ -21,9 +21,17 @@ def login(token):
       "csp-auth-token": auth_json
     }
 
+def get_username(auth_header):
+  uri = "/am/api/loggedin/user"
+  response = requests.get('{}{}'.format(BASE_URL, uri), headers = auth_header)
+  if response.status_code != 200:
+    return
+  else:
+    return response.json().get("username")
+
 def validate_token(event):
     response = login(event.get("token"))
     if response is None:
       return
     else:
-      return response
+      return get_username(response)
