@@ -1,4 +1,4 @@
-import os
+#import os
 import datetime
 
 from time import sleep
@@ -6,7 +6,7 @@ from vmcjp.utils import dbutils2
 from com.vmware.vmc.model_client import Task
 from vmcjp.utils.cloudwatch import put_event
 
-TEST_ORG_ID = os.environ["test_org"] #for test
+#TEST_ORG_ID = os.environ["test_org"] #for test
 
 def task_handler(task_client, event):
   resp = wait_for_task(task_client, event.get("org_id"), event.get("task_id"))
