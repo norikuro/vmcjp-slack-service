@@ -1,20 +1,23 @@
 import datetime
 
-from vmcjp.utils import dbutils
+from vmcjp.utils import dbutils2
 
 class Test(object):
   def db(self):
-    db = dbutils.DocmentDb("vmcjp/s3config.json", "user_db", "user_collection")
-    collection = db.get_collection()
+    db = dbutils2.DocmentDb("mongodb://master:VMware1!@ip-172-30-20-57.ap-northeast-1.compute.internal:27017/")
+    event_col = db.get_event_collection()
+    cred_col = db.get_cred_collection()
 #    collection.remove()
 #    delta = datetime.datetime.now() - datetime.timedelta(minutes=5)
 #    past = delta.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
 #    now = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
 #    print(past)
 #    col = collection.find({"start_time": {"$gt": past}})
-    col = collection.find()
+#    data = cred_col.find()
+#    cur = cred_col.find()
+    cur = event_col.find()
 #    print(col.count())
-    for data in col:
+    for data in cur:
       print(data)
   
 def main():
