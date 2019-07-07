@@ -1,13 +1,9 @@
-#!/usr/bin/env python
-
 import json
 import boto3
 
 from vmcjp.utils.cron import get_next_time
 
-def put_event(minutes, data):  
-#  event_name = "boto3_test"
-#  lambda_name = "event_test"
+def put_event(minutes, data):
   lambda_arn = "arn:aws:lambda:ap-northeast-1:{}:function:{}".format(
     data["cloudwatch_account"], 
     data["lambda_name"]
@@ -29,7 +25,6 @@ def put_event(minutes, data):
         "Id": data["lambda_name"],
         "Arn": lambda_arn,
         "Input": json.dumps(data)
-#        "Input": json.dumps({"key1": "test1", "key2": "test2"})
       }
     ]
   )
