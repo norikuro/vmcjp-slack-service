@@ -47,7 +47,3 @@ def lambda_handler(event, context):
     
     if "Failed" in status or "Canceled" in status or "Finished" in status:
       db.delete_event_db(event.get("user_id"))
-      remove_event(
-        event.get("event_name"), 
-        event.get("lambda_name")
-      )
