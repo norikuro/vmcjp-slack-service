@@ -12,7 +12,7 @@ from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
 
 PRECHECK_BUTTON = constant.BUTTON_DIR + "precheck_button.json"
-LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws_button.json"
+LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws.json"
 SINGLE_MULTI_BUTTON = constant.BUTTON_DIR + "single_multi_button.json"
 CREATE_BUTTON = constant.BUTTON_DIR + "create_button.json"
 HELP_BUTTON = constant.BUTTON_DIR + "help_button.json"
