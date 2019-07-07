@@ -26,22 +26,6 @@ class DocmentDb(object):
     
     def get_cred_collection(self):
         return self.cred_col
-  
-#    def upsert(self, query, update_data):
-#        self.collection.update(query, update_data, upsert=True)
-
-#    def find_with_fields(self, query, fields):
-#        return self.collection.find(query, fields)[0]
-  
-#    def find(self, query):
-#        cur = self.collection.find(query)
-#        if cur.count() != 0:
-#            return cur[0]
-#        else:
-#            return
-
-#    def remove(self, data_to_remove):
-#        self.collection.remove(data_to_remove)
 
     def read_event_db(self, user_id, minutes=None):
         past = (
