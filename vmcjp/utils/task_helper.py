@@ -1,4 +1,3 @@
-#import os
 import datetime
 
 from time import sleep
@@ -6,12 +5,9 @@ from vmcjp.utils import dbutils2
 from com.vmware.vmc.model_client import Task
 from vmcjp.utils.cloudwatch import put_event
 
-#TEST_ORG_ID = os.environ["test_org"] #for test
 
 def task_handler(task_client, event):
   resp = wait_for_task(task_client, event.get("org_id"), event.get("task_id"))
-#  resp = wait_for_task(task_client, TEST_ORG_ID, event["task_id"]) #for test
-#  resp = {"status": True, "time": 60} #for test
 
   db = dbutils2.DocmentDb(event.get("db_url"))
   
@@ -28,8 +24,7 @@ def task_handler(task_client, event):
       event.get("task_id"),
       datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     )
-    put_event(resp.get("time"), event) #for test
-#    put_event(15, event) #for test
+    put_event(resp.get("time"), event)
     return "It takes around {} min".format(resp["time"])
   elif resp.get("status") == True:
     db.delete_event_db(event.get("user_id"))
