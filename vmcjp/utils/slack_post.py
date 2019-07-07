@@ -1,5 +1,4 @@
 import json
-#import os
 import urllib2
 
 def post(url, data, bot_oauth_token):
