@@ -16,8 +16,8 @@ LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws.json"
 SINGLE_MULTI_BUTTON = constant.BUTTON_DIR + "single_multi.json"
 CREATE_BUTTON = constant.BUTTON_DIR + "create.json"
 HELP_BUTTON = constant.BUTTON_DIR + "help.json"
-LIST_BUTTON = constant.BUTTON_DIR + "list_button.json"
-DELETE_BUTTON = constant.BUTTON_DIR + "delete_button.json"
+LIST_BUTTON = constant.BUTTON_DIR + "list.json"
+DELETE_BUTTON = constant.BUTTON_DIR + "delete.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
