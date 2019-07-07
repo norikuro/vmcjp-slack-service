@@ -59,8 +59,6 @@ def wait_for_task(task_client, org_id, task_id):
           time = 7
         elif est_time <= 10 and est_time > 30:
           time = 20
-        elif est_time <= 30 and est_time > 60:
-          time = 45
         else:
           time = 30
         return {"status": True, "time": est_time}
