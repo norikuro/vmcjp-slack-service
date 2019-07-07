@@ -18,8 +18,8 @@ def lambda_handler(event, context):
     event.update(
         {
             "db_url": j["db_url"],
-#            "org_id": j["org_id"],
-            "org_id": os.environ["test_org"], #for test
+            "org_id": j["org_id"],
+#            "org_id": os.environ["test_org"], #for test
             "aws_internal_account": os.environ["aws_account"], #for internal use
             "aws_internal_id": os.environ["aws_id"], #for internal use
             "cloudwatch_account": j["cloudwatch_account"]
