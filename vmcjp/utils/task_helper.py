@@ -20,7 +20,7 @@ def task_handler(task_client, event):
     return "{} to {} sddc, {}".format(
       resp.get("message"), 
       event.get("command"), 
-      event("sddc_name")
+      event.get("sddc_name")
     )
   elif resp.get("status") == True and resp.has_key("time"):
     event["event_name"] = "{}-{}-{}".format(
