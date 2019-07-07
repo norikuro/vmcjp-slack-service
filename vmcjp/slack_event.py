@@ -11,13 +11,13 @@ from vmcjp.utils.vmc import validate_token
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
 
-PRECHECK_BUTTON = constant.BUTTON_DIR + "precheck_button.json"
-LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws_button.json"
-SINGLE_MULTI_BUTTON = constant.BUTTON_DIR + "single_multi_button.json"
-CREATE_BUTTON = constant.BUTTON_DIR + "create_button.json"
-HELP_BUTTON = constant.BUTTON_DIR + "help_button.json"
-LIST_BUTTON = constant.BUTTON_DIR + "list_button.json"
-DELETE_BUTTON = constant.BUTTON_DIR + "delete_button.json"
+PRECHECK_BUTTON = constant.BUTTON_DIR + "precheck.json"
+LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws.json"
+SINGLE_MULTI_BUTTON = constant.BUTTON_DIR + "single_multi.json"
+CREATE_BUTTON = constant.BUTTON_DIR + "create.json"
+HELP_BUTTON = constant.BUTTON_DIR + "help.json"
+LIST_BUTTON = constant.BUTTON_DIR + "list.json"
+DELETE_BUTTON = constant.BUTTON_DIR + "delete.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
