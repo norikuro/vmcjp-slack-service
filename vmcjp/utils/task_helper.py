@@ -18,13 +18,13 @@ def task_handler(task_client, event):
       event.get("command"), 
       event.get("sddc_name")
     )
-  elif resp.get("status") == True and resp.has_key("time"):
+  elif resp.get("status") == True and resp.has_key("check_time"):
     event["event_name"] = "{}-{}-{}".format(
       event.get("user_id"),
       event.get("task_id"),
       datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     )
-    put_event(resp.get("time"), event)
+    put_event(resp.get("check_time"), event)
     return "It takes around {} min".format(resp["time"])
   elif resp.get("status") == True:
     db.delete_event_db(event.get("user_id"))
