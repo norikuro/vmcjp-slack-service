@@ -103,7 +103,6 @@ def check_sddc_user(event):
     vmc_client = get_vmc_client(event.get("token"))
     sddc = vmc_client.orgs.Sddcs.get(event.get("org_id"), event.get("sddc_id"))
     user_name = sddc.user_name
-    logging.info("sddc user name {}, slack user name {}".format(user_name, event.get("user_name")))
     if user_name in event.get("user_name"):
         return True
     else:
