@@ -25,7 +25,7 @@ def task_handler(task_client, event):
       datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     )
     put_event(resp.get("check_time"), event)
-    return "It takes around {} min".format(resp["time"])
+    return "It takes around {} min".format(resp["estimated_time"])
   elif resp.get("status") == True:
     db.delete_event_db(event.get("user_id"))
     return "{} successfully to {} sddc, task id: {}".format(
