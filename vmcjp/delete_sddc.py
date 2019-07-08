@@ -48,19 +48,18 @@ def lambda_handler(event, context):
   event.update({"lambda_name": "check_task"})
   event.update({"command": "delete"})
 
-#  response = post_to_webhook(
-#    event.get("webhook_url"), 
-#    text
-#  )
-#  logging.info(response.read())
-  
   response = post_field_button(
     event, 
     TASK_BUTTON, 
+    type="bot"
+  )
+#  logging.info(response.read())
+
+  response = post_to_webhook(
+    event.get("webhook_url"), 
     "Hi <@{}>, started to delete sddc".format(
       event.get("user_id")
-    ), 
-    type="bot"
+    )
   )
 #  logging.info(response.read())
 
