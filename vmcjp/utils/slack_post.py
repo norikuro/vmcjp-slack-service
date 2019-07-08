@@ -28,9 +28,13 @@ def post_to_response_url(url, data):
     
     return urllib2.urlopen(request)
 
-def post_to_webhook(url, data):
+def post_to_webhook(url, text):
     headers = {
         "Content-Type": "application/json"
+    }
+    
+    data = {
+        "text": text
     }
     
     request = urllib2.Request(
