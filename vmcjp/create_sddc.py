@@ -84,15 +84,13 @@ def lambda_handler(event, context):
     TASK_BUTTON, 
     type="bot"
   )
-  
 #  logging.info(response.read())
-  text="Hi <@{}>, started to create sddc".format(
-    event.get("user_id")
-  )
 
   response = post_to_webhook(
     event.get("webhook_url"), 
-    text
+    "Hi <@{}>, started to create sddc".format(
+      event.get("user_id")
+    )
   )
 #  logging.info(response.read())
   
