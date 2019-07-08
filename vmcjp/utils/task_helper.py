@@ -56,6 +56,10 @@ def wait_for_task(task_client, org_id, task_id):
           time = 20
         else:
           time = 30
-        return {"status": True, "time": est_time}
+        return {
+            "status": True, 
+            "estimated_time": est_time,
+            "check_time": time
+        }
       else:
         sleep(interval_sec)
