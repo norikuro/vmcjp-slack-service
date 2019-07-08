@@ -88,7 +88,7 @@ def list_subnet(
         {
             "text": "{}, {}".format(sub.subnet_id, sub.name),
             "value": sub.subnet_id
-        } for sub in vpc_subnets
+        } for sub in vpc_subnets if sub.compatible
     ]
 
 def list_num_hosts(num_hosts):
