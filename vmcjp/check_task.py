@@ -6,7 +6,7 @@ import atexit
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.cloudwatch import remove_event
 from vmcjp.utils.task_helper import task_handler
-from vmcjp.utils.slack_post import post_text
+from vmcjp.utils.slack_post import post_text, post_to_webhook
 from vmcjp.utils import dbutils2
 
 logger = logging.getLogger()
