@@ -8,7 +8,7 @@ from distutils.util import strtobool
 from com.vmware.vmc.model_client import AwsSddcConfig, AccountLinkSddcConfig, SddcConfig, AccountLinkConfig
 from com.vmware.vapi.std.errors_client import Unauthorized
 from vmware.vapi.vmc.client import create_vmc_client
-from vmcjp.utils.slack_post import post_field_button, post_to_webhook
+from vmcjp.utils.slack_post import post_text, post_field_button, post_to_webhook
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils import constant
 
@@ -57,10 +57,20 @@ def create_sddc(
     task = vmc_client.orgs.Sddcs.create(
       org=org_id, sddc_config=sddc_config
     )
+    return {
+      "success": True,
+      "task_id": task.id
+    }
   except Unauthorized:
-    aaa
+    return {
+      "success": False,
+      "message": "Failed, you are not authorized to create sddc."
+    }
   except:
-    aaaa
+    return {
+      "success": False,
+      "message": "Something wrong, failed to create sddc."
+    }
   
   return task
 
@@ -68,7 +78,7 @@ def lambda_handler(event, context):
 #  logging.info(event)
   vmc_client = get_vmc_client(event.get("token"))
   
-  task = create_sddc(
+  result = create_sddc(
     event.get("org_id"),
     event.get("region"),
     event.get("sddc_name"),
@@ -80,8 +90,17 @@ def lambda_handler(event, context):
     strtobool(event.get("link_aws")) == 1,
     vmc_client
   )
-    
-  event.update({"task_id": task.id})
+  
+  if result.get("success"):
+    event.update({"task_id": result.get("task_id")})
+  else:
+    response = post_text(
+      event,
+      result.get("message"),
+      "bot"
+    )
+    return
+  
   event.update({"lambda_name": "check_task"})
   event.update({"command": "create"})
   logging.info(event) #need this log to ckech config later.
