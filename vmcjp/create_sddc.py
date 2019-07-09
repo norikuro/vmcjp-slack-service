@@ -6,6 +6,7 @@ import atexit
 
 from distutils.util import strtobool
 from com.vmware.vmc.model_client import AwsSddcConfig, AccountLinkSddcConfig, SddcConfig, AccountLinkConfig
+from com.vmware.vapi.std.errors_client import Unauthorized
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.slack_post import post_field_button, post_to_webhook
 from vmcjp.utils.lambdautils import call_lambda
@@ -52,9 +53,16 @@ def create_sddc(
     deployment_type=SddcConfig.DEPLOYMENT_TYPE_SINGLEAZ
   )
   
-  return vmc_client.orgs.Sddcs.create(
-    org=org_id, sddc_config=sddc_config
-  )
+  try:
+    task = vmc_client.orgs.Sddcs.create(
+      org=org_id, sddc_config=sddc_config
+    )
+  except Unauthorized:
+    aaa
+  except:
+    aaaa
+  
+  return task
 
 def lambda_handler(event, context):
 #  logging.info(event)
