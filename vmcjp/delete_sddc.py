@@ -81,10 +81,15 @@ def lambda_handler(event, context):
 
   response = post_to_webhook(
     event.get("webhook_url"), 
-    "Hi <@{}>, started to delete sddc: {}".format(
-      event.get("user_id"),
-      event.get("sddc_name")
+    "Hi <@{}>, started to delete sddc.".format(
+      event.get("user_id")
     )
+  )
+#  logging.info(response.read())  
+  response = post_field_button(
+    event, 
+    TASK_BUTTON, 
+    type="webhook"
   )
 #  logging.info(response.read())
 
