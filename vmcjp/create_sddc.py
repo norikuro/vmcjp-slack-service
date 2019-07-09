@@ -71,8 +71,6 @@ def create_sddc(
       "success": False,
       "message": "Something wrong, failed to create sddc."
     }
-  
-  return task
 
 def lambda_handler(event, context):
 #  logging.info(event)
