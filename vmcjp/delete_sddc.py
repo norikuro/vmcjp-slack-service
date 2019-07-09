@@ -6,7 +6,7 @@ import atexit
 
 from vmware.vapi.vmc.client import create_vmc_client
 from com.vmware.vapi.std.errors_client import Unauthorized
-from vmcjp.utils.slack_post import post_field_button, post_to_webhook
+from vmcjp.utils.slack_post import post_text, post_field_button, post_to_webhook
 from vmcjp.utils.task_helper import task_handler
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils import constant
