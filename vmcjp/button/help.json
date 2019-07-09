@@ -42,7 +42,7 @@
       "fields": [
         {
           "title": "Delete SDDC",
-          "value": "Type `delete sddc` to delete sddc from this org. You can delete only the sddc which you created."
+          "value": "Type `delete sddc` to delete sddc from this org.  You can delete only the sddc which you created.  You can check results in #vmcjpdemo channel."
         }
       ]
     },
