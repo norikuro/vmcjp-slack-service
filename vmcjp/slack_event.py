@@ -1,5 +1,4 @@
 import json
-#import os
 import logging
 import ipaddress
 import atexit
