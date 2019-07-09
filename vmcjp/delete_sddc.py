@@ -5,6 +5,7 @@ import requests
 import atexit
 
 from vmware.vapi.vmc.client import create_vmc_client
+from com.vmware.vapi.std.errors_client import Unauthorized
 from vmcjp.utils.slack_post import post_field_button, post_to_webhook
 from vmcjp.utils.task_helper import task_handler
 from vmcjp.utils.lambdautils import call_lambda
@@ -40,25 +41,34 @@ def delete_sddc(
   except Unauthorized:
     return {
       "success": False,
-      "message": "Failed, you are not authorized to create sddc."
+      "message": "Failed, you are not authorized to delete sddc."
     }
   except:
     return {
       "success": False,
-      "message": "Something wrong, failed to create sddc."
+      "message": "Something wrong, failed to delete sddc."
     }
 
 def lambda_handler(event, context):
 #  logging.info(event)
   vmc_client = get_vmc_client(event.get("token"))
   
-  task = delete_sddc(
+  result = delete_sddc(
     event.get("org_id"),
     event.get("sddc_id"),
     vmc_client
   )
-    
-  event.update({"task_id": task.id})
+  if result.get("success"):
+    event.update({"task_id": result.get("task_id")})
+  else:
+    response = post_text(
+      event,
+      result.get("message"),
+      "bot"
+    )
+    return 
+  
+#  event.update({"task_id": task.id})
   event.update({"lambda_name": "check_task"})
   event.update({"command": "delete"})
 
