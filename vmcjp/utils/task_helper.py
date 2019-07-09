@@ -7,7 +7,8 @@ from vmcjp.utils.cloudwatch import put_event
 
 
 def task_handler(task_client, event):
-  resp = wait_for_task(task_client, event.get("org_id"), event.get("task_id"))
+#  resp = wait_for_task(task_client, event.get("org_id"), event.get("task_id"))
+  resp = {"status": True, "check_time": 3, "estimated_time": 3}
 
   db = dbutils2.DocmentDb(event.get("db_url"))
   
@@ -25,7 +26,7 @@ def task_handler(task_client, event):
       datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     )
     put_event(resp.get("check_time"), event)
-    return "It takes around {} min".format(resp["estimated_time"])
+    return "It takes around {} min".format(resp.get("estimated_time"))
   elif resp.get("status") == True:
     db.delete_event_db(event.get("user_id"))
     return "{} successfully to {} sddc, task id: {}".format(
@@ -37,7 +38,6 @@ def task_handler(task_client, event):
 def wait_for_task(task_client, org_id, task_id):
   interval_sec = 60
   
-  sleep(interval_sec)
   while True:
     task = task_client.get(org_id, task_id)
     
