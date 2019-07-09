@@ -31,7 +31,7 @@
       "fields": [
         {
           "title": "Create SDDC",
-          "value": "Type `create sddc` to create sddc on this org. You can create single or multi host sddc."
+          "value": "Type `create sddc` to create sddc on this org.  You can create single or multi host sddc.  You can check results in #vmcjpdemo channel."
         }
       ]
     },
