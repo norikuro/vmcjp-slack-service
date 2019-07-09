@@ -47,6 +47,6 @@ def lambda_handler(event, context):
       event.get("webhook_url"), 
       status
     )
-  )    
+
     if "Failed" in status or "Canceled" in status or "Finished" in status:
       db.delete_event_db(event.get("user_id"))
