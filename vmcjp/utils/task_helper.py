@@ -38,6 +38,7 @@ def task_handler(task_client, event):
 def wait_for_task(task_client, org_id, task_id):
   interval_sec = 60
   
+  sleep(30)
   while True:
     task = task_client.get(org_id, task_id)
     
