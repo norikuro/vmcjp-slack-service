@@ -116,6 +116,8 @@ def post_field_button(event, button, pretext=None, type="response"):
     
     if "response" in type:
         response = post_to_response_url(event["response_url"], data)
+    elif "webhook" in type:
+        response = post_to_response_url(event["webhook_url"], data)
     else:
         response = post(event["post_url"], data, event["bot_token"])
     return response
