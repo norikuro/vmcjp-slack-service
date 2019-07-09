@@ -20,7 +20,7 @@
       "fields": [
         {
           "title": "Delete VMC's API token",
-          "value": "Type `delete token` to delete token stored in this system db."
+          "value": "Type `delete token` to delete your token stored in this system db."
         }
       ]
     },
