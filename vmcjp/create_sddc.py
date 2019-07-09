@@ -23,7 +23,7 @@ def get_vmc_client(token):
   atexit.register(session.close)
   return vmc_client
 
-def check_zero_cloud(vmc_client, org_id):
+def check_cloud_provider(vmc_client, org_id):
   
 
 def create_sddc(
