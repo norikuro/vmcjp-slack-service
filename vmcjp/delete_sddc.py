@@ -28,10 +28,25 @@ def delete_sddc(
   vmc_client
 ):
 
-  return vmc_client.orgs.Sddcs.delete(
-    org=org_id, 
-    sddc=sddc_id
-  )
+  try:
+    task = vmc_client.orgs.Sddcs.delete(
+      org=org_id, 
+      sddc=sddc_id
+    )
+    return {
+      "success": True,
+      "task_id": task.id
+    }
+  except Unauthorized:
+    return {
+      "success": False,
+      "message": "Failed, you are not authorized to create sddc."
+    }
+  except:
+    return {
+      "success": False,
+      "message": "Something wrong, failed to create sddc."
+    }
 
 def lambda_handler(event, context):
 #  logging.info(event)
