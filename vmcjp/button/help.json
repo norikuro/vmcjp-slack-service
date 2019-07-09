@@ -9,7 +9,7 @@
       "fields": [
         {
           "title": "Register VMC's API token",
-          "value": "Type `register token` to register VMC JP SET org's API token. This token will stored in this system db. You need to register your token at first if you want to use this slack app."
+          "value": "Type `register token` to register this org's API token. This token will stored in this system db. You need to register your token at first if you want to use this slack app."
         }
       ]
     },
@@ -31,7 +31,7 @@
       "fields": [
         {
           "title": "Create SDDC",
-          "value": "Type `create sddc` to create sddc on VMC JP SET org. You can create single or multi host sddc."
+          "value": "Type `create sddc` to create sddc on this org. You can create single or multi host sddc."
         }
       ]
     },
@@ -42,7 +42,7 @@
       "fields": [
         {
           "title": "Delete SDDC",
-          "value": "Type `delete sddc` to delete sddc from VMC JP SET org. You can delete only the sddc which you created."
+          "value": "Type `delete sddc` to delete sddc from this org. You can delete only the sddc which you created."
         }
       ]
     },
