@@ -160,7 +160,7 @@ def interactive_handler(event):
             else:
                 response = post_text(
                     event,
-                    "You can delete sddcs which you created only. So canceling to delete sddc."
+                    "You cannot delete this sddc because the owner is someone else. You can delete sddcs which you created only. So canceling to delete sddc."
                 )
                 db.delete_event_db(user_id)
         else:
