@@ -14,8 +14,8 @@ class Test(object):
 #    print(past)
 #    col = collection.find({"start_time": {"$gt": past}})
 #    data = cred_col.find()
-    cur = cred_col.find()
-#    cur = event_col.find()
+#    cur = cred_col.find()
+    cur = event_col.find()
 #    print(col.count())
     for data in cur:
       print(data)
