@@ -46,7 +46,8 @@ def get_backedup_sddc_config(db):
         "vpc_cidr": config["sddc"]["vpc_cidr"],
         "aws_account": config["customer_vpc"]["linked_account"],
         "customer_subnet_id": config["customer_vpc"]["linked_vpc_subnets_id"],
-        "connected_account_id": a_id
+        "connected_account_id": a_id,
+        "link_aws": "True"
     }
 
 def lambda_handler(event, context):
