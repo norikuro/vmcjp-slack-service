@@ -14,11 +14,6 @@
           "short": "true"
         },
         {
-          "title": "Org Name",
-          "value": "org_name",
-          "short": "true"
-        },
-        {
           "title": "SDDC name",
           "value": "sddc_name",
           "short": "true"
@@ -26,6 +21,11 @@
         {
           "title": "Number of hosts",
           "value": "num_hosts",
+          "short": "true"
+        },
+        {
+          "title": "Management network CIDR",
+          "value": "vpc_cidr",
           "short": "true"
         },
         {
