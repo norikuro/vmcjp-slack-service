@@ -6,6 +6,7 @@ import requests
 
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
+from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils.vmc import validate_token
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
@@ -214,6 +215,18 @@ def event_handler(event):
                         "command": "delete_sddc", 
                     }
                 )
+        elif "restore sddc" in text: #for internal use
+            __cred_data = db.read_cred_db(event.get("user_id"))
+            if __cred_data is None:
+                response = post_text(
+                    event,
+                    "Please register VMC reresh token at first, type `register token`.",
+                    "bot"
+                )
+#                logging.info(response.read())
+            elif "registered" in __cred_data.get("status"):
+                event.update({"token": __cred_data.get("token")})
+                call_lambda("restore_sddc", event)
         elif "list sddcs" in text:
             __cred_data = db.read_cred_db(event.get("user_id"))
             if __cred_data is None:
