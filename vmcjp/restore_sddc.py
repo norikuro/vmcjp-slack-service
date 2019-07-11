@@ -9,7 +9,7 @@ from vmcjp.utils import constant
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-RESTORE_BUTTON = constant.BUTTON_DIR + "restore_button.json"
+RESTORE_BUTTON = constant.BUTTON_DIR + "restore.json"
 
 def restore_sddc():
     db = dbutils.DocmentDb(
