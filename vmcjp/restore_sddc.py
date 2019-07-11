@@ -27,6 +27,7 @@ def restore_sddc():
             "sddc.name": 1,
             "sddc.region": 1,
             "sddc.num_hosts": 1,
+            "vpc_cidr": 1,
             "org.display_name": 1,
             "customer_vpc.linked_account": 1,
             "customer_vpc.linked_vpc_subnets_id": 1,
