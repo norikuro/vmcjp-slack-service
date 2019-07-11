@@ -53,5 +53,5 @@ def lambda_handler(event, context):
 #    logging.info(event)
     db = sddc_db.DocmentDb(event.get("db_url"))
     event.update(get_backedup_sddc_config(db))
-    response = post_field_button(event, RESTORE_BUTTON)
+    response = post_field_button(event, RESTORE_BUTTON, type="bot")
 #    logging.info(response.read())
