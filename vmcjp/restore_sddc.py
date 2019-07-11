@@ -53,55 +53,6 @@ def restore_sddc():
         "connected_account_id": a_id
     }
 
-def create_button(config):
-    button_set = json.load(open(RESTORE_BUTTON, 'r'))
-    
-    fields = [
-        {
-            "title": "Backed up date",
-            "value": config["updated"],
-            "short": "true"
-        },
-        {
-            "title": "Org Name",
-#            "value": config["org_name"],
-            "value": "APJ SME Zero Cloud Org", #for test
-            "short": "true"
-        },
-        {
-            "title": "SDDC name",
-#            "value": config["sddc_name"],
-            "value": "nk_single_api_test", #for test
-            "short": "true"
-        },
-        {
-            "title": "Number of hosts",
-#            "value": config["num_hosts"],
-            "value": 3, #for test
-            "short": "true"
-        },
-        {
-            "title": "AWS account",
-            "value": config["aws_account"],
-            "short": "true"
-        },
-        {
-            "title": "AWS linked subnet",
-#            "value": config["customer_subnet_id"],
-            "value": "subnet-4c80da05", #for test,
-            "short": "true"
-        },
-        {
-            "title": "Region",
-            "value": config["region"],
-            "short": "true"
-        }
-    ]
-
-    button_set["attachments"][0]["fields"] = fields
-#    logging.info(button_set)
-    return button_set
-
 def write_db(event, config):
     db = dbutils.DocmentDb(
         constant.S3_CONFIG,
