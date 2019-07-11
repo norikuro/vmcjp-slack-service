@@ -2,8 +2,8 @@ import json
 import os
 import logging
 
-from vmcjp.utils.slack_post import post_to_response_url
-from vmcjp.utils import dbutils
+from vmcjp.utils.slack_post import post_field_button
+from vmcjp.utils import sddc_db
 from vmcjp.utils import constant
 
 logger = logging.getLogger()
@@ -11,13 +11,7 @@ logger.setLevel(logging.INFO)
 
 RESTORE_BUTTON = constant.BUTTON_DIR + "restore.json"
 
-def restore_sddc():
-    db = dbutils.DocmentDb(
-        constant.S3_CONFIG,
-        constant.SDDC_DB,
-        constant.SDDC_COLLECTION
-    )
-    
+def get_backedup_sddc_config(db):    
     config = db.find_with_fields(
         {},
         {
@@ -49,27 +43,15 @@ def restore_sddc():
         "sddc_name": config["sddc"]["name"],
         "region": config["sddc"]["region"],
         "num_hosts": config["sddc"]["num_hosts"],
+        "vpc_cidr": config["sddc"]["vpc_cidr"]
         "aws_account": config["customer_vpc"]["linked_account"],
         "customer_subnet_id": config["customer_vpc"]["linked_vpc_subnets_id"],
         "connected_account_id": a_id
     }
 
-def write_db(event, config):
-    db = dbutils.DocmentDb(
-        constant.S3_CONFIG,
-        constant.USER_DB,
-        constant.USER_COLLECTION
-    )
-    db.upsert({"_id": event["user"]}, {"$set": config})    
-
 def lambda_handler(event, context):
 #    logging.info(event)
-    
-    url = event["response_url"]
-    config = restore_sddc()
-    button = create_button(config)
-    
-    response = post_to_response_url(url, button)
-    
-    write_db(event, config)
+    db = sddc_db.DocmentDb(url)
+    event.update(get_backedup_sddc_config(db))
+    response = post_field_button(event, RESTORE_BUTTON)
 #    logging.info(response.read())
