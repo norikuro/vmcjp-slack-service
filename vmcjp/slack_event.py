@@ -112,12 +112,7 @@ def event_handler(event):
     db = dbutils2.DocmentDb(event.get("db_url"))
     current = db.read_event_db(event.get("user_id"), 120)
     if current is not None and current.get("status") == "creating":
-        response = post_text(
-            event,
-            "Creating sddc now, please wait until the task is finished.",
-            "bot"
-        )
-#        logging.info(response.read())
+        slack_message.ask_wait_to_finish_task(event)
         return
     
     result = db.read_event_db(event.get("user_id"), 5)
