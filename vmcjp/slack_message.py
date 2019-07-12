@@ -1,9 +1,12 @@
 import logging
 
+from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
+
+PRECHECK_BUTTON = constant.BUTTON_DIR + "precheck.json"
 
 def ask_wait_to_finish_task_message(event):
     response = post_text( 
@@ -53,4 +56,16 @@ def start_create_sddc_wizard_message(event):
             "Canceled to create sddc.",
             "bot"
         )
+#        logging.info(response.read())
+
+    def max_hosts_message(event):
+        response = post_text(
+            event,
+            "You can deploy max {} hosts.".format(
+                event.get("max_hosts")
+            ),
+            "bot"
+        )
+#        logging.info(response.read())
+        response = post_button(event, PRECHECK_BUTTON, "bot")
 #        logging.info(response.read())
