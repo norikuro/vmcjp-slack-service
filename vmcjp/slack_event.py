@@ -315,44 +315,15 @@ def event_handler(event):
                 response = post_text(event, constant.HELP, "bot")
             return
         else:
-            if __cred_data is not None and "registering" in __cred_data.get("status"):
-                user_name = validate_token(event.get("text"))
-                if user_name is not None:
-                    response = post_text(
-                        event,
-                        "Registered VMC refresh token to system db, you can delete it with `delete token`.",
-                        "bot"
-                    )
-#                    logging.info(response.read())
-                    db.write_cred_db(
-                        event.get("user_id"), 
-                        {
-                            "status": "registered",
-                            "token": event.get("text"),
-                            "user_name": user_name
-                        }
-                    )
-                    db.delete_event_db(event["user_id"])
-                else:
-                    response = post_text(
-                        event,
-                        "Token number you entered is something wrong, please check your token and enter correct token.",
-                        "bot"
-                    )
-#                    logging.info(response.read())
-            else:
-                response = post_text(event, constant.HELP, "bot")
-#                logging.info(response.read())
+            response = post_text(event, constant.HELP, "bot")
+#            logging.info(response.read())
             return
-    else:
+    elif "create" in result.get("command"):
         if "create sddc" in text:
             return
         elif "cancel" in text:
             response = post_text(
                 event,
-                "OK, token registration has canceled" 
-                if "register" in result.get("command") 
-                else 
                 "OK, {} sddc has cenceled.".format(
                     result.get("command")
                 ),
@@ -405,3 +376,38 @@ def event_handler(event):
                     }
                 )
             return
+    elif "register" in result.get("command"):
+        if "cancel" in text:
+            response = post_text(
+                event,
+                "OK, token registration has canceled",
+                "bot"
+            )
+#            logging.info(response.read())
+            db.delete_event_db(event.get("user_id"))
+            db.delete_cred_db(event.get("user_id"))
+        else:
+            user_name = validate_token(event.get("text"))
+            if user_name is not None:
+                response = post_text(
+                    event,
+                    "Registered VMC refresh token to system db, you can delete it with `delete token`.",
+                    "bot"
+                )
+#                logging.info(response.read())
+                db.write_cred_db(
+                    event.get("user_id"), 
+                    {
+                        "status": "registered", 
+                        "token": event.get("text"), 
+                        "user_name": user_name
+                    }
+                )
+                db.delete_event_db(event["user_id"])
+            else:
+                response = post_text(
+                    event,
+                    "Token number you entered is something wrong, please check your token and enter correct token.",
+                    "bot"
+                )
+#                logging.info(response.read())
