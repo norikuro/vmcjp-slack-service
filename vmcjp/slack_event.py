@@ -229,6 +229,13 @@ def event_handler(event):
             elif "registered" in __cred_data.get("status"):
                 event.update({"token": __cred_data.get("token")})
                 call_lambda("restore_sddc", event)
+                db.write_event_db(
+                    event.get("user_id"), 
+                    {
+                        "command": "restore", 
+                        "status": "restore_sddc"
+                    }
+                )
         elif "list sddcs" in text:
             __cred_data = db.read_cred_db(event.get("user_id"))
             if __cred_data is None:
