@@ -120,7 +120,7 @@ def interactive_handler(event):
     __cred_data = db.read_cred_db(event.get("user_id"))
     event.update({"token": __cred_data.get("token")})
     if "delete_sddc" in event.get("callback_id"):
-        if "delete_sddc" in result.get("command"):
+        if "delete_sddc" in result.get("status"):
             sddc_name = event.get("response").split("+")[0]
             sddc_id = event.get("response").split("+")[1]
             event.update(
@@ -154,7 +154,8 @@ def interactive_handler(event):
                 db.write_event_db(
                     user_id, 
                     {
-                        "command": "delete"
+                        "command": "delete",
+                        "status": "delete_sddc"
                     }
                 )
             else:
@@ -237,7 +238,7 @@ def interactive_handler(event):
         db.write_event_db(
             user_id, 
             {
-                "command": "link_aws", 
+                "status": "link_aws", 
                 "num_hosts": 1, 
                 "sddc_type": "1NODE",
                 "link_aws": event.get("response")
@@ -253,7 +254,7 @@ def interactive_handler(event):
         db.write_event_db(
             user_id, 
             {
-                "command": "region", 
+                "status": "region", 
                 "region": event.get("response")
             }
         )
@@ -265,7 +266,7 @@ def interactive_handler(event):
             db.write_event_db(
                 user_id,
                 {
-                    "command": "single_multi"
+                    "status": "single_multi"
                 }
             )
         else:
@@ -278,7 +279,7 @@ def interactive_handler(event):
             db.write_event_db(
                 user_id,
                 {
-                    "command": "single_multi",
+                    "status": "single_multi",
                     "link_aws": "True"
                 }
             )
@@ -305,7 +306,7 @@ def interactive_handler(event):
         db.write_event_db(
             user_id, 
             {
-                "command": "num_hosts",
+                "status": "num_hosts",
                 "num_hosts": int(event.get("response")), 
                 "link_aws": "True"
             }
@@ -328,7 +329,7 @@ def interactive_handler(event):
         db.write_event_db(
             user_id, 
             {
-                "command": "aws_account", 
+                "status": "aws_account", 
                 "aws_account": aws_account,
                 "connected_account_id": aws_id
             }
@@ -350,7 +351,7 @@ def interactive_handler(event):
         db.write_event_db(
             user_id, 
             {
-                "command": "vpc", 
+                "status": "vpc", 
                 "vpc_id": event.get("response")
             }
         )
@@ -376,7 +377,7 @@ def interactive_handler(event):
         db.write_event_db(
             user_id, 
             {
-                "command": "subnet", 
+                "status": "subnet", 
                 "customer_subnet_id": event.get("response")
             }
         )
