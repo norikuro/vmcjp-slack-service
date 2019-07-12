@@ -155,7 +155,6 @@ def interactive_handler(event):
                     user_id, 
                     {
                         "command": "delete",
-                        "status": "delete_sddc"
                     }
                 )
             else:
