@@ -24,6 +24,19 @@ def ask_register_token_message(event):
     )
 #    logging.info(response.read())
 
+def delete_sddc_message(event):
+    response = post_option(
+        event,
+        DELETE_BUTTON,
+        list_sddcs(
+            get_vmc_client(event.get("token")), 
+            event.get("token"), 
+            event.get("org_id")]
+        ),
+        "bot"
+    )
+#    logging.info(response.read())
+
 def start_create_sddc_wizard_message(event):
     response = post_text(
         event,
