@@ -44,28 +44,28 @@ def start_create_sddc_wizard_message(event):
     )
 #    logging.info(response.read())
 
-    def no_enough_resouces_message(event):
-        response = post_text(
-            event,
-            "Sorry, we don't have enough space to deploy hosts on this org.",
-            "bot"
-        )
-#        logging.info(response.read())
-        response = post_text(
-            event,
-            "Canceled to create sddc.",
-            "bot"
-        )
-#        logging.info(response.read())
+def no_enough_resouces_message(event):
+    response = post_text(
+        event,
+        "Sorry, we don't have enough space to deploy hosts on this org.",
+        "bot"
+    )
+#    logging.info(response.read())
+    response = post_text(
+        event,
+        "Canceled to create sddc.",
+        "bot"
+    )
+#    logging.info(response.read())
 
-    def hosts_message(event):
-        response = post_text(
-            event,
-            "You can deploy max {} hosts.".format(
-                event.get("max_hosts")
-            ),
-            "bot"
-        )
-#        logging.info(response.read())
-#        response = post_button(event, PRECHECK_BUTTON, "bot")
-#        logging.info(response.read())
+def max_hosts_message(event):
+    response = post_text(
+        event,
+        "You can deploy max {} hosts.".format(
+            event.get("max_hosts")
+        ),
+        "bot"
+    )
+#    logging.info(response.read())
+    response = post_button(event, PRECHECK_BUTTON, "bot")
+#    logging.info(response.read())
