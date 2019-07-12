@@ -189,7 +189,6 @@ def event_handler(event):
                 )
             return
         elif "delete sddc" in text:
-            __cred_data = db.read_cred_db(event.get("user_id"))
             if __cred_data is None:
                 response = post_text(
                     event,
