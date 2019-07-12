@@ -126,12 +126,6 @@ def event_handler(event):
         if "create sddc" in text:
             if __cred_data is None:
                 slack_message.ask_register_token_message(event)
-#                response = post_text(
-#                    event,
-#                    "Please register VMC reresh token at first, type `register token`.",
-#                    "bot"
-#                )
-#                logging.info(response.read())
             elif "registered" in __cred_data.get("status"):
                 event.update({"token": __cred_data.get("token")})
                 response = post_text(
@@ -192,12 +186,7 @@ def event_handler(event):
             return
         elif "delete sddc" in text:
             if __cred_data is None:
-                response = post_text(
-                    event,
-                    "Please register VMC reresh token at first, type `register token`.",
-                    "bot"
-                )
-#                logging.info(response.read())
+                slack_message.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
                 event.update({"token": __cred_data.get("token")})
                 response = post_option(
@@ -220,12 +209,7 @@ def event_handler(event):
                 )
         elif "restore sddc" in text: #for internal use
             if __cred_data is None:
-                response = post_text(
-                    event,
-                    "Please register VMC reresh token at first, type `register token`.",
-                    "bot"
-                )
-#                logging.info(response.read())
+                slack_message.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
                 event.update({"token": __cred_data.get("token")})
                 call_lambda("restore_sddc", event)
@@ -238,12 +222,7 @@ def event_handler(event):
                 )
         elif "list sddcs" in text:
             if __cred_data is None:
-                response = post_text(
-                    event,
-                    "Please register VMC reresh token at first, type `register token`.",
-                    "bot"
-                )
-#                logging.info(response.read())
+                slack_message.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
                 event.update({"token": __cred_data.get("token")})
                 vmc_client = get_vmc_client(event.get("token"))
