@@ -123,53 +123,20 @@ def event_handler(event):
                 slack_message.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
                 event.update({"token": __cred_data.get("token")})
-                response = post_text(
-                    event,
-                    "OK, starting create sddc wizard.",
-                    "bot"
+                slack_message.start_create_sddc_wizard_message(event)
+                event.update(
+                    {
+                        "max_hosts": get_max_num_hosts(
+                            event.get("token"), 
+                            event.get("org_id")
+                        )
+                    }
                 )
-#                logging.info(response.read())
-                response = post_text(
-                    event, 
-                    "This conversation will end by typing `cancel` or doing nothing for 5 minutes", 
-                    "bot"
-                )
-#                logging.info(response.read())
-                response = post_text(
-                    event,
-                    "Checking current resources...",
-                    "bot"
-                )
-#                logging.info(response.read())
-                max_hosts = get_max_num_hosts(
-                    event.get("token"), 
-                    event.get("org_id")
-                )
-                if max_hosts < 1:
-                    response = post_text(
-                        event,
-                        "Sorry, we don't have enough space to deploy hosts on this org.",
-                        "bot"
-                    )
-#                    logging.info(response.read())
-                    response = post_text(
-                        event,
-                        "Canceled to create sddc.",
-                        "bot"
-                    )
-#                    logging.info(response.read())
+                if event.get("max_hosts") < 1:
+                    slack_message.no_enough_resouces_message(event)
                     db.delete_event_db(event.get("user_id"))
                     return
-                response = post_text(
-                    event,
-                    "You can deploy max {} hosts.".format(
-                        max_hosts
-                    ),
-                    "bot"
-                )
-#                logging.info(response.read())
-                response = post_button(event, PRECHECK_BUTTON, "bot")
-#                logging.info(response.read())
+                slack_message.max_hosts_message(event)
                 db.write_event_db(
                     event.get("user_id"), 
                     {
