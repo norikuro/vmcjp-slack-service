@@ -324,9 +324,7 @@ def event_handler(event):
         elif "cancel" in text:
             response = post_text(
                 event,
-                "OK, {} sddc has cenceled.".format(
-                    result.get("command")
-                ),
+                "OK, canceled a create sddc wizard.",
                 "bot"
             )
 #            logging.info(response.read())
