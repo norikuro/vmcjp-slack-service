@@ -281,6 +281,13 @@ def event_handler(event):
                     "status": "registering"
                 }
             )
+            db.write_event_db(
+                event.get("user_id"), 
+                {
+                    "command": "registration"
+                    "status": "registering"
+                }
+            )
             return
         elif "delete token" in text:
             response = post_text(
@@ -297,13 +304,13 @@ def event_handler(event):
             return
         elif "cancel" in text:
             if __cred_data is not None and "registering" in __cred_data.get("status"):
-                db.delete_cred_db(event.get("user_id"))
                 response = post_text(
                     event,
                     "Canceled to register VMC refresh token.",
                     "bot"
                 )
 #                logging.info(response.read())
+                db.delete_cred_db(event.get("user_id"))
             else:
                 response = post_text(event, constant.HELP, "bot")
             return
@@ -325,6 +332,7 @@ def event_handler(event):
                             "user_name": user_name
                         }
                     )
+                    db.delete_event_db(event["user_id"])
                 else:
                     response = post_text(
                         event,
@@ -342,7 +350,7 @@ def event_handler(event):
         elif "cancel" in text:
             response = post_text(
                 event,
-                "OK, create SDDC has cenceled.",
+                "OK, {} has cenceled.".format(result.get("command")),
                 "bot"
             )
 #            logging.info(response.read())
