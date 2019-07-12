@@ -151,17 +151,16 @@ def event_handler(event):
                 slack_message.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
                 event.update({"token": __cred_data.get("token")})
-                response = post_option(
-                    event,
-                    DELETE_BUTTON,
-                    list_sddcs(
-                        get_vmc_client(event.get("token")), 
-                        event.get("token"), 
-                        event.get("org_id")
-                    ),
-                    "bot"
+                event.update(
+                    {
+                        "option_list": list_sddcs(
+                            get_vmc_client(event.get("token")), 
+                            event.get("token"), 
+                            event.get("org_id")
+                        )
+                    }
                 )
-#                logging.info(response.read())
+                slack_message.delete_sddc_message(event)
                 db.write_event_db(
                     event.get("user_id"), 
                     {
