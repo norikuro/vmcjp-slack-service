@@ -58,7 +58,7 @@ def start_create_sddc_wizard_message(event):
         )
 #        logging.info(response.read())
 
-    def max_hosts_message(event):
+    def hosts_message(event):
         response = post_text(
             event,
             "You can deploy max {} hosts.".format(
@@ -67,5 +67,5 @@ def start_create_sddc_wizard_message(event):
             "bot"
         )
 #        logging.info(response.read())
-        response = post_button(event, PRECHECK_BUTTON, "bot")
+#        response = post_button(event, PRECHECK_BUTTON, "bot")
 #        logging.info(response.read())
