@@ -120,9 +120,9 @@ def event_handler(event):
         return
     
     result = db.read_event_db(event.get("user_id"), 5)
+    __cred_data = db.read_cred_db(event.get("user_id"))
     if result is None:
         if "create sddc" in text:
-            __cred_data = db.read_cred_db(event.get("user_id"))
             if __cred_data is None:
                 response = post_text(
                     event,
@@ -218,7 +218,6 @@ def event_handler(event):
                     }
                 )
         elif "restore sddc" in text: #for internal use
-            __cred_data = db.read_cred_db(event.get("user_id"))
             if __cred_data is None:
                 response = post_text(
                     event,
@@ -237,7 +236,6 @@ def event_handler(event):
                     }
                 )
         elif "list sddcs" in text:
-            __cred_data = db.read_cred_db(event.get("user_id"))
             if __cred_data is None:
                 response = post_text(
                     event,
@@ -299,7 +297,6 @@ def event_handler(event):
 #            logging.info(response.read())
             return
         elif "cancel" in text:
-            __cred_data = db.read_cred_db(event.get("user_id"))
             if __cred_data is not None and "registering" in __cred_data.get("status"):
                 db.delete_cred_db(event.get("user_id"))
                 response = post_text(
@@ -312,7 +309,6 @@ def event_handler(event):
                 response = post_text(event, constant.HELP, "bot")
             return
         else:
-            __cred_data = db.read_cred_db(event.get("user_id"))
             if __cred_data is not None and "registering" in __cred_data.get("status"):
                 user_name = validate_token(event.get("text"))
                 if user_name is not None:
