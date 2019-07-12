@@ -136,14 +136,13 @@ def event_handler(event):
                     slack_message.no_enough_resouces_message(event)
                     db.delete_event_db(event.get("user_id"))
                     return
-                slack_message.start_create_sddc_wizard_message(event)
-#                slack_message.max_hosts_message(event)
+                slack_message.max_hosts_message(event)
                 db.write_event_db(
                     event.get("user_id"), 
                     {
                         "command": "create",
                         "status": "create_sddc", 
-                        "max_hosts": max_hosts
+                        "max_hosts": event.get("max_hosts")
                     }
                 )
             return
