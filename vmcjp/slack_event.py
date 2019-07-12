@@ -10,6 +10,7 @@ from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils.vmc import validate_token
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
+from vmcjp import slack_message
 
 PRECHECK_BUTTON = constant.BUTTON_DIR + "precheck.json"
 LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws.json"
@@ -124,11 +125,12 @@ def event_handler(event):
     if result is None:
         if "create sddc" in text:
             if __cred_data is None:
-                response = post_text(
-                    event,
-                    "Please register VMC reresh token at first, type `register token`.",
-                    "bot"
-                )
+                slack_message.ask_register_token_message(event)
+#                response = post_text(
+#                    event,
+#                    "Please register VMC reresh token at first, type `register token`.",
+#                    "bot"
+#                )
 #                logging.info(response.read())
             elif "registered" in __cred_data.get("status"):
                 event.update({"token": __cred_data.get("token")})
