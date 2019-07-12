@@ -7,6 +7,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 PRECHECK_BUTTON = constant.BUTTON_DIR + "precheck.json"
+DELETE_BUTTON = constant.BUTTON_DIR + "delete.json"
 
 def ask_wait_to_finish_task_message(event):
     response = post_text( 
