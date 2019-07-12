@@ -284,7 +284,7 @@ def event_handler(event):
             db.write_event_db(
                 event.get("user_id"), 
                 {
-                    "command": "register"
+                    "command": "register",
                     "status": "registering"
                 }
             )
