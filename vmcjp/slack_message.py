@@ -28,11 +28,7 @@ def delete_sddc_message(event):
     response = post_option(
         event,
         DELETE_BUTTON,
-        list_sddcs(
-            get_vmc_client(event.get("token")), 
-            event.get("token"), 
-            event.get("org_id")]
-        ),
+        event.get("option_list"),
         "bot"
     )
 #    logging.info(response.read())
