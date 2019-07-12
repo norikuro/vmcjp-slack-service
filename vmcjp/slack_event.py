@@ -110,7 +110,7 @@ def event_handler(event):
     
     db = dbutils2.DocmentDb(event.get("db_url"))
     current = db.read_event_db(event.get("user_id"), 120)
-    if current is not None and current.get("command") == "create":
+    if current is not None and current.get("status") == "creating":
         response = post_text(
             event,
             "Creating sddc now, please wait until the task is finished.",
@@ -182,7 +182,8 @@ def event_handler(event):
                 db.write_event_db(
                     event.get("user_id"), 
                     {
-                        "command": "create_sddc", 
+                        "command": "create",
+                        "status": "create_sddc", 
                         "max_hosts": max_hosts
                     }
                 )
@@ -212,7 +213,8 @@ def event_handler(event):
                 db.write_event_db(
                     event.get("user_id"), 
                     {
-                        "command": "delete_sddc", 
+                        "command": "delete", 
+                        "status": "delete_sddc"
                     }
                 )
         elif "restore sddc" in text: #for internal use
@@ -347,7 +349,7 @@ def event_handler(event):
         elif text.find(" ") != -1:
             return
         elif is_network(text):
-            if result.get("command") == "link_aws" or "subnet":
+            if result.get("status") == "link_aws" or "subnet":
                 if is_valid_network(text):
                     event.update(
                         {"vpc_cidr": event.get("text")}
@@ -361,7 +363,7 @@ def event_handler(event):
                     db.write_event_db(
                         event.get("user_id"), 
                         {
-                            "command": "vpc_cidr", 
+                            "status": "vpc_cidr", 
                             "vpc_cidr": event.get("text")
                         }
                     )
@@ -373,7 +375,7 @@ def event_handler(event):
                     )
             return
         else:
-            if result.get("command") == "region":
+            if result.get("status") == "region":
                 if result.get("max_hosts") == 1:
                     response = post_button(event, LINK_AWS_BUTTON, "bot")
 #                    logging.info(response.read())
@@ -383,7 +385,7 @@ def event_handler(event):
                 db.write_event_db(
                     event.get("user_id"), 
                     {
-                        "command": "sddc_name", 
+                        "status": "sddc_name", 
                         "sddc_name": event.get("text")
                     }
                 )
