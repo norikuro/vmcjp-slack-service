@@ -40,3 +40,17 @@ def start_create_sddc_wizard_message(event):
         "bot"
     )
 #    logging.info(response.read())
+
+    def no_enough_resouces_message(event):
+        response = post_text(
+            event,
+            "Sorry, we don't have enough space to deploy hosts on this org.",
+            "bot"
+        )
+#        logging.info(response.read())
+        response = post_text(
+            event,
+            "Canceled to create sddc.",
+            "bot"
+        )
+#        logging.info(response.read())
