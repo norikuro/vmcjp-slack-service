@@ -284,7 +284,7 @@ def event_handler(event):
             db.write_event_db(
                 event.get("user_id"), 
                 {
-                    "command": "registration"
+                    "command": "register"
                     "status": "registering"
                 }
             )
@@ -350,7 +350,12 @@ def event_handler(event):
         elif "cancel" in text:
             response = post_text(
                 event,
-                "OK, {} has cenceled.".format(result.get("command")),
+                "OK, token registration has canceled" 
+                if "register" in result.get("command") 
+                else 
+                "OK, {} sddc has cenceled.".format(
+                    result.get("command")
+                ),
                 "bot"
             )
 #            logging.info(response.read())
