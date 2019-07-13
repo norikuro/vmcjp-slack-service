@@ -101,9 +101,7 @@ def create_button(event, button):
     attachments = button_set.get("attachments")
     for attachment in attachments:
         fields = attachment.get("fields")
-        if fields is not None:
-            for field in fields:
-                field.update({"value": event.get(field.get("value"))})
+        field.update({"value": event.get(field.get("value"))}) if fields is not None for field in fields
     return button_set
 
 def post_field_button(event, button, pretext=None, type="response"):
