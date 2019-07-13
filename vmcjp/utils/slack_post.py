@@ -93,10 +93,11 @@ def post_button(event, button, type="response"):
     return response
 
 def create_button(event, button):
-    fields = button.get("attachments")[0].get("fields")
+    button_set = json.load(open(button, 'r'))
+    fields = button_set.get("attachments")[0].get("fields")
     for field in fields:
         field.update({"value": event.get(field.get("value"))})
-    return button
+    return button_set
 
 def post_field_button(event, button, pretext=None, type="response"):
     data = {
@@ -104,8 +105,7 @@ def post_field_button(event, button, pretext=None, type="response"):
         "channel": event["channel"]
     }
     
-    button_set = json.load(open(button, 'r'))
-    button_set = create_button(event, button_set)
+    button_set = create_button(event, button)
     
     if pretext is not None:
         data.update(
