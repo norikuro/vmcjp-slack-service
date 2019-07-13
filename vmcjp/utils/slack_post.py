@@ -96,7 +96,7 @@ def create_button(event, button):
     button_set = json.load(open(button, 'r'))
     attachments = button_set.get("attachments")
     for attachment in attachments:
-        fields = attachments.get("fields")
+        fields = attachment.get("fields")
         for field in fields:
             field.update({"value": event.get(field.get("value"))})
     return button_set
