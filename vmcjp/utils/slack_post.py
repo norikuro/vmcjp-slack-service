@@ -99,6 +99,7 @@ def post_button(event, button, type="response"):
 def create_button(event, button):
     button_set = json.load(open(button, 'r'))
     attachments = button_set.get("attachments")
+    logging.info("attachments size: " + str(len(attachments)))
     for attachment in attachments:
         fields = attachment.get("fields")
         logging.info(fields)
