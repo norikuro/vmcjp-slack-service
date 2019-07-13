@@ -100,7 +100,6 @@ def create_button(event, button):
     button_set = json.load(open(button, 'r'))
     attachments = button_set.get("attachments")
     for attachment in attachments:
-        logging.info(attachment)
         fields = attachment.get("fields")
         logging.info(fields)
         for field in fields:
