@@ -1,5 +1,9 @@
 import json
 import urllib2
+import logging
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def post(url, data, bot_oauth_token):
     headers = {
@@ -96,7 +100,9 @@ def create_button(event, button):
     button_set = json.load(open(button, 'r'))
     attachments = button_set.get("attachments")
     for attachment in attachments:
+        logging.info(attachment)
         fields = attachment.get("fields")
+        logging.info(fields)
         for field in fields:
             field.update({"value": event.get(field.get("value"))})
     return button_set
