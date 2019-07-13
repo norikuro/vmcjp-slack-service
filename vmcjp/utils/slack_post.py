@@ -94,9 +94,11 @@ def post_button(event, button, type="response"):
 
 def create_button(event, button):
     button_set = json.load(open(button, 'r'))
-    fields = button_set.get("attachments")[0].get("fields")
-    for field in fields:
-        field.update({"value": event.get(field.get("value"))})
+    attachments = button_set.get("attachments")
+    for attachment in attachments:
+        fields = attachments.get("fields")
+        for field in fields:
+            field.update({"value": event.get(field.get("value"))})
     return button_set
 
 def post_field_button(event, button, pretext=None, type="response"):
