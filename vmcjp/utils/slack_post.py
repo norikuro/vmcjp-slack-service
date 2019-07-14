@@ -7,14 +7,15 @@ HEADERS = {"Content-Type": "application/json"}
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-def post(url, data, bot_oauth_token):
+def post(url, data, bot_oauth_token=None):
 #    headers = {
 #        "Content-Type": "application/json; charset=UTF-8",
 #        "Authorization": "Bearer {}".format(bot_oauth_token)
 #    }
-    HEADERS.update(
-        "Authorization": "Bearer {}".format(bot_oauth_token)
-    )
+    if bot_oauth_token is not None:
+        HEADERS.update(
+            "Authorization": "Bearer {}".format(bot_oauth_token)
+        )
     
     request = urllib2.Request(
         url, 
