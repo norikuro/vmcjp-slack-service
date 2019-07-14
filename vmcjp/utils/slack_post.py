@@ -8,10 +8,6 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 def post(url, data, bot_oauth_token=None):
-#    headers = {
-#        "Content-Type": "application/json; charset=UTF-8",
-#        "Authorization": "Bearer {}".format(bot_oauth_token)
-#    }
     if bot_oauth_token is not None:
         HEADERS.update(
             {
@@ -24,7 +20,6 @@ def post(url, data, bot_oauth_token=None):
     request = urllib2.Request(
         url, 
         data=json.dumps(data).encode("utf-8"), 
-#        headers=headers
         headers=HEADERS
     )
     
@@ -68,10 +63,8 @@ def post_text(event, text, type="response"):
     }
     
     if "response" in type:
-#        response = post_to_response_url(event["response_url"], data)
         response = post(event["response_url"], data)
     elif "webhook" in type:
-#        response = post_to_webhook(event["webhook_url"], data)
         response = post(event["webhook_url"], data)
     else:
         response = post(event["post_url"], data, event["bot_token"])
@@ -87,10 +80,8 @@ def post_option(event, button, option_list, type="response"):
         {"options": option_list}
     )
     data.update(button_set)
-#    response = post_text(event, button_set, type)
 
     if "response" in type:
-#        response = post_to_response_url(event["response_url"], data)
         response = post(event["response_url"], data)
     else:
         response = post(event["post_url"], data, event["bot_token"])
@@ -107,7 +98,6 @@ def post_button(event, button, type="response"):
 
     if "response" in type:
         response = post(event["response_url"], data)
-#        response = post_to_response_url(event["response_url"], data)
     else:
         response = post(event["post_url"], data, event["bot_token"])
     return response
@@ -151,9 +141,7 @@ def post_field_button(event, button, pretext=None, type="response"):
     
     if "response" in type:
         response = post(event["response_url"], data)
-#        response = post_to_response_url(event["response_url"], data)
     elif "webhook" in type:
-#        response = post_to_response_url(event["webhook_url"], data)
         response = post(event["webhook_url"], data)
     else:
         response = post(event["post_url"], data, event["bot_token"])
