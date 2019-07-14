@@ -2,6 +2,8 @@ import json
 import urllib2
 import logging
 
+HEADERS = {"Content-Type": "application/json; charset=UTF-8"}
+
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
