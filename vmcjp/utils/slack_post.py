@@ -14,7 +14,11 @@ def post(url, data, bot_oauth_token=None):
 #    }
     if bot_oauth_token is not None:
         HEADERS.update(
-            "Authorization": "Bearer {}".format(bot_oauth_token)
+            {
+                "Authorization": "Bearer {}".format(
+                    bot_oauth_token
+                )
+            }
         )
     
     request = urllib2.Request(
