@@ -225,30 +225,19 @@ def event_handler(event):
             return
         elif "cancel" in text:
             if __cred_data is not None and "registering" in __cred_data.get("status"):
-                response = post_text(
-                    event,
-                    "Canceled to register VMC refresh token.",
-                    "bot"
-                )
-#                logging.info(response.read())
+                slack_message.cancel_token_registration_message(event)
                 db.delete_cred_db(event.get("user_id"))
             else:
-                response = post_text(event, constant.HELP, "bot")
+                slack_message.help_message(event)
             return
         else:
-            response = post_text(event, constant.HELP, "bot")
-#            logging.info(response.read())
+            slack_message.help_message(event)
             return
     elif "create" in result.get("command"):
         if "create sddc" in text:
             return
         elif "cancel" in text:
-            response = post_text(
-                event,
-                "OK, canceled a create sddc wizard.",
-                "bot"
-            )
-#            logging.info(response.read())
+            slack_message.cancel_sddc_creation_message(event)
             db.delete_event_db(event.get("user_id"))
             return
         elif text.find(" ") != -1:
@@ -260,11 +249,7 @@ def event_handler(event):
                         {"vpc_cidr": event.get("text")}
                     )
                     event.update(result)
-                    post_field_button(
-                        event, 
-                        CREATE_BUTTON, 
-                        type="bot"
-                    )
+                    slack_message.create_sddc_confirmation_message(event)
                     db.write_event_db(
                         event.get("user_id"), 
                         {
@@ -273,20 +258,14 @@ def event_handler(event):
                         }
                     )
                 else:
-                    response = post_text(
-                        event,
-                        "Please enter correct network cidr block.",
-                        "bot"
-                    )
+                    slack_message.wrong_network_message(event)
             return
         else:
             if result.get("status") == "region":
                 if result.get("max_hosts") == 1:
-                    response = post_button(event, LINK_AWS_BUTTON, "bot")
-#                    logging.info(response.read())
+                    slack_message.link_aws_message(event)
                 else:
-                    response = post_button(event, SINGLE_MULTI_BUTTON, "bot")
-#                    logging.info(response.read())
+                    slack_message.single_multi_message(event)
                 db.write_event_db(
                     event.get("user_id"), 
                     {
@@ -297,23 +276,13 @@ def event_handler(event):
             return
     elif "register" in result.get("command"):
         if "cancel" in text:
-            response = post_text(
-                event,
-                "OK, token registration has canceled",
-                "bot"
-            )
-#            logging.info(response.read())
+            slack_message.cancel_token_registration_message(event)
             db.delete_event_db(event.get("user_id"))
             db.delete_cred_db(event.get("user_id"))
         else:
             user_name = validate_token(event.get("text"))
             if user_name is not None:
-                response = post_text(
-                    event,
-                    "Registered VMC refresh token to system db, you can delete it with `delete token`.",
-                    "bot"
-                )
-#                logging.info(response.read())
+                slack_message.succeed_token_registratuin_message(event)
                 db.write_cred_db(
                     event.get("user_id"), 
                     {
@@ -324,9 +293,4 @@ def event_handler(event):
                 )
                 db.delete_event_db(event["user_id"])
             else:
-                response = post_text(
-                    event,
-                    "Token number you entered is something wrong, please check your token and enter correct token.",
-                    "bot"
-                )
-#                logging.info(response.read())
+                slack_message.wrong_token_message(event)
