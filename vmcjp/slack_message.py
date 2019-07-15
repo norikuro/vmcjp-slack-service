@@ -37,7 +37,7 @@ def post_text_to_response_url(event, text):
         event.get("response_url"),
         event.get("slack_token"),
         event.get("channel"),
-        data,
+        data
     )
     return response
 
