@@ -41,6 +41,16 @@ def post_text_to_response_url(event, text):
     )
     return response
 
+def post_option_to_response_url(event, button, option_list):
+    response = post_option2(
+        event.get("response_url"),
+        event.get("slack_token"), 
+        event.get("channel"),
+        button, 
+        option_list, 
+    )
+    return response
+
 def help_message(event):
     response = post_button(event, HELP_BUTTON, "bot")
 #    logging.info(response.read())
@@ -150,11 +160,16 @@ def max_hosts_message(event):
 #    logging.info(response.read())
 
 def region_list_message(event):
-    response = post_option(
-        event,
-        REGION_BUTTON,
+    response = post_option_to_response_url(
+        event, 
+        REGION_BUTTON, 
         event.get("region_list")
     )
+#    response = post_option(
+#        event,
+#        REGION_BUTTON,
+#        event.get("region_list")
+#    )
 #    logging.info(response.read())
 
 def ask_sddc_name_message(event):
