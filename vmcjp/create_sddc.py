@@ -118,7 +118,7 @@ def lambda_handler(event, context):
   )
 #  logging.info(response.read())
 
-  slack_message.started_create_sddc_message(event)
+  slack_message.started_crud_sddc_message(event)
 #  response = post_to_webhook(
 #    event.get("webhook_url"), 
 #    "Hi <@{}>, started to create sddc.".format(
