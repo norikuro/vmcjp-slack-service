@@ -262,3 +262,7 @@ def list_sddcs_message(event):
         type="bot"
     )
 #    logging.info(response.read())
+
+def create_sddc_result_message(event):
+    response = post_text_with_bot_token(event, event.get("message"))
+#    logging.info(response.read())
