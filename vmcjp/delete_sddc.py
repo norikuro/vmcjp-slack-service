@@ -63,7 +63,9 @@ def lambda_handler(event, context):
     event.update({"task_id": result.get("task_id")})
   else:
     event.update({"message": result.get("message")})
+    event.update({"status": "task_failed"})
     slack_message.crud_sddc_result_message(event)
+    call_lambda("check_task", event)
 #    response = post_text(
 #      event,
 #      result.get("message"),
