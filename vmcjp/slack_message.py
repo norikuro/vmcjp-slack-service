@@ -266,6 +266,13 @@ def create_sddc_confirmation_message(event):
     )
 #    logging.info(response.read())
 
+def start_create_sddc_message(event):
+    response = post_text(
+        event,
+        "OK, started to create sddc!"
+    )
+#    logging.info(response.read())
+
 def list_sddcs_text_message(event):
     response = post_text(
         event,
