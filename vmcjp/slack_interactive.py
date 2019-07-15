@@ -263,7 +263,7 @@ def interactive_handler(event):
                     }
                 ]
             }
-            slack_message.aws_account_list_message(event):
+            slack_message.aws_account_list_message(event)
             db.write_event_db(
             user_id, 
             {
