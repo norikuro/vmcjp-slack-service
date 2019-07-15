@@ -270,3 +270,5 @@ def crud_sddc_result_message(event):
 def check_task_message(event):
     response = post_text_with_bot_token(event, event.get("status"))
 #    logging.info(response.read())
+
+def started_create_sddc_message(event):
