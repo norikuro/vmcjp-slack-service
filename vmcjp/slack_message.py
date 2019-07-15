@@ -33,10 +33,17 @@ def ask_wait_to_finish_task_message(event):
 #    logging.info(response.read())
 
 def ask_register_token_message(event):
-    response = post_text(
-        event,
+#    response = post_text(
+#        event,
+#        "Please register VMC reresh token at first, type `register token`.",
+#        "bot"
+#    )
+    response = post_text2(
+        event.get("post_url"),
+        event.get("slack_token"),
+        event.get("channel"),
         "Please register VMC reresh token at first, type `register token`.",
-        "bot"
+        event.get("bot_token")
     )
 #    logging.info(response.read())
 
