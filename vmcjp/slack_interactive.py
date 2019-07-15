@@ -182,12 +182,6 @@ def interactive_handler(event):
     elif "link_aws_sddc" in event.get("callback_id"):
         if "True" in event.get("response"):
             event.update(
-#                {
-#                    "aws_account_list": list_aws_account(
-#                        get_vmc_client(event.get("token")),
-#                        event.get("org_id")
-#                    )
-#                }
                 {
                     "aws_account_list": [
                         {
@@ -200,7 +194,7 @@ def interactive_handler(event):
                     ]
                 }
             )
-            slack_message.aws_account_list_message(event):
+            slack_message.aws_account_list_message(event)
         else:
             slack_message.ask_cidr_message(event)
         db.write_event_db(
