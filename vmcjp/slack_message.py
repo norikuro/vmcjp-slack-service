@@ -15,6 +15,7 @@ SINGLE_MULTI_BUTTON = constant.BUTTON_DIR + "single_multi.json"
 CREATE_BUTTON = constant.BUTTON_DIR + "create.json"
 DELETE_CONFIRM_BUTTON = constant.BUTTON_DIR + "delete_confirm.json"
 REGION_BUTTON = constant.BUTTON_DIR + "region.json"
+ACCOUNT_BUTTON = constant.BUTTON_DIR + "account.json"
 
 def help_message(event):
     response = post_button(event, HELP_BUTTON, "bot")
@@ -176,6 +177,12 @@ def region_list_message(event):
     )
 #    logging.info(response.read())
 
+def ask_sddc_name_message(event):
+    response = post_text(
+        event,
+        "Please enter SDDC name"
+    )
+#    logging.info(response.read())
 
 def link_aws_message(event):
     response = post_button(event, LINK_AWS_BUTTON, "bot")
@@ -185,6 +192,32 @@ def single_multi_message(event):
     response = post_button(event, SINGLE_MULTI_BUTTON, "bot")
 #    logging.info(response.read())
 
+def aws_account_list_message(event):
+    response = post_option(
+        event,
+        ACCOUNT_BUTTON,
+        event.get("aws_account_list")
+    )
+#    logging.info(response.read())
+
+def ask_cidr_message(event):
+    response = post_text(
+        event,
+        "Please enter CIDR block for management subnet."
+    )
+#    logging.info(response.read())
+    response = post_text(
+        event,
+        "/23 is max 27 hosts, /20 is max 251, /16 is 4091.",
+        "bot"
+    )
+#    logging.info(response.read())
+    response = post_text(
+        event,
+        "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved.",
+        "bot"
+    )
+#    logging.info(response.read())
 
 def wrong_network_message(event):
     response = post_text(
