@@ -87,7 +87,7 @@ def post_option(event, button, option_list, type="response"):
     button_set["attachments"][0]["actions"][0].update(
         {"options": option_list}
     )
-    data.update(button_set)
+#    data.update(button_set)
 
     if "response" in type:
 #        response = post(event["response_url"], data)
@@ -95,7 +95,7 @@ def post_option(event, button, option_list, type="response"):
             event["response_url"],
             event["slack_token"],
             event["channel"],
-            data
+            button_set
         )
     else:
 #        response = post(event["post_url"], data, event["bot_token"])
@@ -103,7 +103,7 @@ def post_option(event, button, option_list, type="response"):
             event["post_url"],
             event["slack_token"],
             event["channel"],
-            data,
+            button_set,
             event["bot_token"]
         )
     return response
