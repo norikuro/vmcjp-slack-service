@@ -61,19 +61,21 @@ def post_text2(
     url,
     slack_token, 
     channel,
-    text, 
+#    text, 
+    data,
     bot_token=None
 ):
-    data = {
+    post_data = {
         "token": slack_token,
         "channel": channel,
-        "text": text
+#        "text": text
+        data
     }
     
     if bot_token is None:
-        response = post(url, data)
+        response = post(url, post_data)
     else:
-        response = post(url, data, bot_token)
+        response = post(url, post_data, bot_token)
     return response
 
 def post_option(event, button, option_list, type="response"):
