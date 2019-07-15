@@ -21,21 +21,23 @@ VPC_BUTTON = constant.BUTTON_DIR + "vpc.json"
 SUBNET_BUTTON = constant.BUTTON_DIR + "subnet.json"
 
 def post_text_with_bot_token(event, text):
+    data = {"text": text}
     response = post_text2(
         event.get("post_url"),
         event.get("slack_token"),
         event.get("channel"),
-        text,
+        data,
         event.get("bot_token")
     )
     return response
 
 def post_text_to_response_url(event, text):
+    data = {"text": text}
     response = post_text2(
         event.get("response_url"),
         event.get("slack_token"),
         event.get("channel"),
-        text,
+        data,
     )
     return response
 
