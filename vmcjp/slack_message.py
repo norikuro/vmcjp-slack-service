@@ -146,6 +146,13 @@ def cancel_sddc_creation_message(event):
     )
 #    logging.info(response.read())
 
+def cancel_sddc_creation_message2(event):
+    response = post_text(
+        event,
+        "OK, canceled a create sddc wizard.",
+    )
+#    logging.info(response.read())
+
 def no_enough_resouces_message(event):
     response = post_text(
         event,
