@@ -54,73 +54,30 @@ def ask_wait_to_finish_task_message(event):
 def ask_register_token_message(event):
     text = "Please register VMC reresh token at first, type `register token`."
     response = post_text_with_bot_token(event, text)
-#    response = post_text2(
-#        event.get("post_url"),
-#        event.get("slack_token"),
-#        event.get("channel"),
-#        "Please register VMC reresh token at first, type `register token`.",
-#        event.get("bot_token")
-#    )
-#    logging.info(response.read())
 
 def register_token_message(event):
     text = "Please enter VMC refresh token."
     response = post_text_with_bot_token(event, text)
-#    response = post_text2(
-#        event.get("post_url"),
-#        event.get("slack_token"),
-#        event.get("channel"),
-#        "Please enter VMC refresh token.",
-#        event.get("bot_token")
-#    )
 #    logging.info(response.read())
 
 def delete_token_message(event):
     text = "Deleted VMC refresh token from system db."
     response = post_text_with_bot_token(event, text)
-#    response = post_text2(
-#        event.get("post_url"),
-#        event.get("slack_token"),
-#        event.get("channel"),
-#        "Deleted VMC refresh token from system db.",
-#        event.get("bot_token")
-#    )
 #    logging.info(response.read())
 
 def cancel_token_registration_message(event):
     text = "OK, token registration has canceled."
     response = post_text_with_bot_token(event, text)
-#    response = post_text2(
-#        event.get("post_url"),
-#        event.get("slack_token"),
-#        event.get("channel"),
-#        "OK, token registration has canceled.",
-#        event.get("bot_token")
-#    )
 #    logging.info(response.read())
 
 def succeed_token_registratuin_message(event):
     text = "Registered VMC refresh token to system db, you can delete it with `delete token`."
     response = post_text_with_bot_token(event, text)
-#    response = post_text2(
-#        event.get("post_url"),
-#        event.get("slack_token"),
-#        event.get("channel"),
-#        "Registered VMC refresh token to system db, you can delete it with `delete token`.",
-#        event.get("bot_token")
-#    )
 #    logging.info(response.read())
 
 def wrong_token_message(event):
     text = "Token number you entered is something wrong, please check your token and enter correct token."
     response = post_text_with_bot_token(event, text)
-#    response = post_text2(
-#        event.get("post_url"),
-#        event.get("slack_token"),
-#        event.get("channel"),
-#        "Token number you entered is something wrong, please check your token and enter correct token.",
-#        event.get("bot_token")
-#    )
 #    logging.info(response.read())
 
 def delete_sddc_message(event):
@@ -143,103 +100,52 @@ def sddc_deletion_confirmation_message(event):
 def started_delete_sddc_message(event):
     text = "OK, started to delete sddc!"
     response = post_text_to_response_url(event, text)
-#    response = post_text2(
-#        event.get("response_url"),
-#        event.get("slack_token"),
-#        event.get("channel"),
-#        "OK, started to delete sddc!"
-#    )
 #    logging.info(response.read())
 
 def cannot_delete_sddc_message(event):
     text = "You cannot delete this sddc because the owner is someone else.  You can delete sddcs which you created only.  So canceling this delete task."
     response = post_text_to_response_url(event, text)
-#    response = post_text2(
-#        event.get("response_url"),
-#        event.get("slack_token"),
-#        event.get("channel"),
-#        "You cannot delete this sddc because the owner is someone else.  You can delete sddcs which you created only.  So canceling this delete task."
-#    )
 #    logging.info(response.read())
 
 def cancel_sddc_deletion_message(event):
     text = "OK, delete SDDC has cenceled."
     response = post_text_to_response_url(event, text)
-#    response = post_text2(
-#        event.get("response_url"),
-#        event.get("slack_token"),
-#        event.get("channel"),
-#        "OK, delete SDDC has cenceled."
-#    )
 #    logging.info(response.read())
 
 def start_create_sddc_wizard_message(event):
     text = "OK, starting create sddc wizard."
     response = post_text_with_bot_token(event, text)
-#    response = post_text2(
-#        event.get("post_url"),
-#        event.get("slack_token"),
-#        event.get("channel"),
-#        "OK, starting create sddc wizard.",
-#        event.get("bot_token")
-#    )
 #    logging.info(response.read())
     text = "This conversation will end by typing `cancel` or doing nothing for 5 minutes"
     response = post_text_with_bot_token(event, text)
-#    response = post_text2(
-#        event.get("post_url"),
-#        event.get("slack_token"),
-#        event.get("channel"),
-#        "This conversation will end by typing `cancel` or doing nothing for 5 minutes", 
-#        event.get("bot_token")
-#    )
 #    logging.info(response.read())
     text = "Checking current resources..."
     response = post_text_with_bot_token(event, text)
-#    response = post_text(
-#        event,
-#        "Checking current resources...",
-#        "bot"
-#    )
 #    logging.info(response.read())
 
 def cancel_sddc_creation_message(event):
-    response = post_text(
-        event,
-        "OK, canceled a create sddc wizard.",
-        "bot"
-    )
+    text = "OK, canceled a create sddc wizard."
+    response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
 def cancel_sddc_creation_message2(event):
-    response = post_text(
-        event,
-        "OK, canceled a create sddc wizard.",
-    )
+    text = "OK, canceled a create sddc wizard."
+    response = post_text_to_response_url(event, text)
 #    logging.info(response.read())
 
 def no_enough_resouces_message(event):
-    response = post_text(
-        event,
-        "Sorry, we don't have enough space to deploy hosts on this org.",
-        "bot"
-    )
+    text = "Sorry, we don't have enough space to deploy hosts on this org."
+    response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
-    response = post_text(
-        event,
-        "Canceled to create sddc.",
-        "bot"
-    )
+    text = "Canceled to create sddc."
+    response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
 def max_hosts_message(event):
-    response = post_text(
-        event,
-        "You can deploy max {} hosts.".format(
-            event.get("max_hosts")
-        ),
-        "bot"
+    text = "You can deploy max {} hosts.".format(
+        event.get("max_hosts")
     )
+    response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
     response = post_button(event, PRECHECK_BUTTON, "bot")
 #    logging.info(response.read())
@@ -309,25 +215,16 @@ def ask_cidr_message(event):
         "Please enter CIDR block for management subnet."
     )
 #    logging.info(response.read())
-    response = post_text(
-        event,
-        "/23 is max 27 hosts, /20 is max 251, /16 is 4091.",
-        "bot"
-    )
+    text = "/23 is max 27 hosts, /20 is max 251, /16 is 4091."
+    response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
-    response = post_text(
-        event,
-        "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved.",
-        "bot"
-    )
+    text = "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved."
+    response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
 def wrong_network_message(event):
-    response = post_text(
-        event,
-        "Please enter correct network cidr block.",
-        "bot"
-    )
+    text = "Please enter correct network cidr block."
+    response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
 def create_sddc_confirmation_message(event):
@@ -346,11 +243,8 @@ def start_create_sddc_message(event):
 #    logging.info(response.read())
 
 def list_sddcs_text_message(event):
-    response = post_text(
-        event,
-        "Here is SDDCs list in this org.",
-        "bot"
-    )
+    text = "Here is SDDCs list in this org."
+    response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
 def list_sddcs_message(event):
