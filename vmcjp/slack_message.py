@@ -188,6 +188,10 @@ def link_aws_message(event):
     response = post_button(event, LINK_AWS_BUTTON, "bot")
 #    logging.info(response.read())
 
+def link_aws_single_message(event):
+    response = post_button(event, LINK_AWS_BUTTON)
+#    logging.info(response.read())
+
 def single_multi_message(event):
     response = post_button(event, SINGLE_MULTI_BUTTON, "bot")
 #    logging.info(response.read())
