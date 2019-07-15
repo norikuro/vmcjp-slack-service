@@ -9,6 +9,7 @@ from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_option, post_button, post_field_button
 from vmcjp.utils.lambdautils import call_lambda
+from vmcjp import slack_message
 
 ACCOUNT_BUTTON = constant.BUTTON_DIR + "account.json"
 REGION_BUTTON = constant.BUTTON_DIR + "region.json"
@@ -113,8 +114,7 @@ def interactive_handler(event):
     db = dbutils2.DocmentDb(event.get("db_url"))
     result = db.read_event_db(user_id, 5)
     if result is None:
-        response = post_text(event, constant.HELP)
-#        logging.info(response.read())
+        slack_message.help_message(event)
         return
 
     __cred_data = db.read_cred_db(event.get("user_id"))
@@ -133,18 +133,10 @@ def interactive_handler(event):
                     "sddc_id": sddc_id
                 }
             )
-            post_field_button(
-                event, 
-                DELETE_CONFIRM_BUTTON, 
-                "bot"
-            )
+            slack_message.sddc_deletion_confirmation_message(event)
     elif "delete_confirmation" in event.get("callback_id"):
         if "yes" in event.get("response"):
-            response = post_text(
-                event,
-                "OK, started to delete sddc!"
-            )
-#            logging.info(response.read())
+            slack_message.started_delete_sddc_message(event)
             event.update(result)
             event.update(
                 {"user_name": __cred_data.get("user_name")}
@@ -158,17 +150,10 @@ def interactive_handler(event):
                     }
                 )
             else:
-                response = post_text(
-                    event,
-                    "You cannot delete this sddc because the owner is someone else.  You can delete sddcs which you created only.  So canceling this delete task."
-                )
+                slack_message.cannot_delete_sddc_message(event)
                 db.delete_event_db(user_id)
         else:
-            response = post_text(
-                event,
-                "OK, delete SDDC has cenceled."
-            )
-#            logging.info(response.read())
+            slack_message.cancel_sddc_deletion_message(event)
             db.delete_event_db(user_id)
         return
     elif "create_sddc" in event.get("callback_id"):
