@@ -85,14 +85,14 @@ def post_option(event, button, option_list, type="response"):
     )
 
     if "response" in type:
-        post_text2(
+        response = post_text2(
             event["response_url"],
             event["slack_token"],
             event["channel"],
             button_set
         )
     else:
-        post_text2(
+        response = post_text2(
             event["post_url"],
             event["slack_token"],
             event["channel"],
@@ -112,7 +112,7 @@ def post_button(event, button, type="response"):
 
     if "response" in type:
 #        response = post(event["response_url"], data)
-        post_text2(
+        response = post_text2(
             event["response_url"],
             event["slack_token"],
             event["channel"],
@@ -120,7 +120,7 @@ def post_button(event, button, type="response"):
         )
     else:
 #        response = post(event["post_url"], data, event["bot_token"])
-        post_text2(
+        response = post_text2(
             event["post_url"],
             event["slack_token"],
             event["channel"],
@@ -172,7 +172,7 @@ def post_field_button(event, button, pretext=None, type="response"):
     
     if "response" in type:
 #        response = post(event["response_url"], data)
-        post_text2(
+        response = post_text2(
             event["response_url"],
             event["slack_token"],
             event["channel"],
@@ -180,7 +180,7 @@ def post_field_button(event, button, pretext=None, type="response"):
         )
     elif "webhook" in type:
 #        response = post(event["webhook_url"], data)
-        post_text2(
+        response = post_text2(
             event["webhook_url"],
             event["slack_token"],
             event["channel"],
@@ -188,7 +188,7 @@ def post_field_button(event, button, pretext=None, type="response"):
         )
     else:
 #        response = post(event["post_url"], data, event["bot_token"])
-        post_text2(
+        response = post_text2(
             event["post_url"],
             event["slack_token"],
             event["channel"],
