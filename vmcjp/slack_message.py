@@ -101,17 +101,17 @@ def wrong_token_message(event):
 #    logging.info(response.read())
 
 def delete_sddc_message(event):
-#    response = post_option_with_bot_token(
-#        event, 
-#        DELETE_BUTTON, 
-#        event.get("option_list")
-#    )
-    response = post_option(
-        event,
-        DELETE_BUTTON,
-        event.get("option_list"),
-        "bot"
+    response = post_option_with_bot_token(
+        event, 
+        DELETE_BUTTON, 
+        event.get("option_list")
     )
+#    response = post_option(
+#        event,
+#        DELETE_BUTTON,
+#        event.get("option_list"),
+#        "bot"
+#    )
 #    logging.info(response.read())
 
 def sddc_deletion_confirmation_message(event):
