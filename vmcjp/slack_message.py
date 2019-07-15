@@ -1,7 +1,7 @@
 import logging
 
 from vmcjp.utils import constant
-from vmcjp.utils.slack_post import post_text2, post_button, post_option, post_option2, post_field_button
+from vmcjp.utils.slack_post import post_text2, post_button, post_option2, post_field_button
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -101,12 +101,17 @@ def wrong_token_message(event):
 #    logging.info(response.read())
 
 def delete_sddc_message(event):
-    response = post_option(
-        event,
-        DELETE_BUTTON,
-        event.get("option_list"),
-        "bot"
+    response = post_option_with_bot_token(
+        event, 
+        DELETE_BUTTON, 
+        event.get("option_list")
     )
+#    response = post_option(
+#        event,
+#        DELETE_BUTTON,
+#        event.get("option_list"),
+#        "bot"
+#    )
 #    logging.info(response.read())
 
 def sddc_deletion_confirmation_message(event):
