@@ -74,8 +74,8 @@ def create_sddc(
 #      "message": "Something wrong, failed to create sddc."
 #    }
   return {
-    "success": True,
-    "task_id": "xxxxxx"
+    "success": False,
+    "message": "Something wrong, failed to create sddc."
   }
 
 def lambda_handler(event, context):
