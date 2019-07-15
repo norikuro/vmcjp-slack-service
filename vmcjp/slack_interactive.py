@@ -183,6 +183,10 @@ def interactive_handler(event):
         if "True" in event.get("response"):
             event.update(
                 {
+#                    "aws_account_list": list_aws_account(
+#                        get_vmc_client(event.get("token")),
+#                        event.get("org_id")
+#                    )
                     "aws_account_list": [
                         {
                             "text": event.get("aws_internal_account"), #for internal use
