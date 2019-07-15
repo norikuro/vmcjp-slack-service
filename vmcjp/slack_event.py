@@ -204,11 +204,12 @@ def event_handler(event):
                             "num_hosts": len(sddc.resource_config.esx_hosts)
                         }
                     )
-                    response = post_field_button(
-                        event, 
-                        LIST_BUTTON, 
-                        type="bot"
-                    )
+                    slack_message.list_sddcs_message(event)
+#                    response = post_field_button(
+#                        event, 
+#                        LIST_BUTTON, 
+#                        type="bot"
+#                    )
 #                    logging.info(response.read())
             return
         elif "register token" in text:
