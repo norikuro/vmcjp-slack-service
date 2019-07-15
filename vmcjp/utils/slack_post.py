@@ -69,8 +69,8 @@ def post_text2(
         "token": slack_token,
         "channel": channel,
 #        "text": text
-        data
     }
+    post_data.update(data)
     
     if bot_token is None:
         response = post(url, post_data)
