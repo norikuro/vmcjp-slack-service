@@ -79,3 +79,11 @@ def max_hosts_message(event):
 #    logging.info(response.read())
     response = post_button(event, PRECHECK_BUTTON, "bot")
 #    logging.info(response.read())
+
+def list_sddcs_text_message(event):
+    response = post_text(
+        event,
+        "Here is SDDCs list in this org.",
+        "bot"
+    )
+#    logging.info(response.read())
