@@ -21,7 +21,6 @@ def get_max_num_hosts(token, org_id):
     vmc_client = get_vmc_client(token)
     
     sddcs = vmc_client.orgs.Sddcs.list(org_id)
-#    sddcs = vmc_client.orgs.Sddcs.list(TEST_ORG_ID) #for test 
     
     i = 0
     for sddc in sddcs:
