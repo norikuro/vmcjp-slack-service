@@ -205,7 +205,7 @@ def aws_subnet_list_message(event):
     response = post_option(
         event,
         SUBNET_BUTTON,
-        subnet_list
+        event.get("subnet_list")
     )
 #    logging.info(response.read())
 
