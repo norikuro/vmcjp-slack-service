@@ -57,6 +57,25 @@ def post_text(event, text, type="response"):
         response = post(event["post_url"], data, event["bot_token"])
     return response
 
+def post_text2(
+    url,
+    slack_token, 
+    channel,
+    text, 
+    bot_token=None
+):
+    data = {
+        "token": slack_token,
+        "channel": channel,
+        "text": text
+    }
+    
+    if bot_token is None:
+        response = post(url, data)
+    else:
+        response = post(url, data, bot_token)
+    return response
+
 def post_option(event, button, option_list, type="response"):
     data = {
         "token": event["slack_token"],
