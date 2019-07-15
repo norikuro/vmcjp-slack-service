@@ -181,23 +181,25 @@ def interactive_handler(event):
         return
     elif "link_aws_sddc" in event.get("callback_id"):
         if "True" in event.get("response"):
-        event.update(
-#            {
-#                "aws_account_list": list_aws_account(
-#                    get_vmc_client(event.get("token")),
-#                    event.get("org_id")
-#                )
-            {
-                "aws_account_list": [
-                    {
-                        "text": event.get("aws_internal_account"), #for internal use
-                        "value": "{}+{}".format(
-                            event.get("aws_internal_account"), 
-                            event.get("aws_internal_id")
-                        ) #for internal use
-                    }
-                ]
-            }
+            event.update(
+#                {
+#                    "aws_account_list": list_aws_account(
+#                        get_vmc_client(event.get("token")),
+#                        event.get("org_id")
+#                    )
+#                }
+                {
+                    "aws_account_list": [
+                        {
+                            "text": event.get("aws_internal_account"), #for internal use
+                            "value": "{}+{}".format(
+                                event.get("aws_internal_account"), 
+                                event.get("aws_internal_id")
+                            ) #for internal use
+                        }
+                    ]
+                }
+            )
             slack_message.aws_account_list_message(event):
         else:
             slack_message.ask_cidr_message(event)
