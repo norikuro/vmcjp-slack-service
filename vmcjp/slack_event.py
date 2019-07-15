@@ -5,20 +5,11 @@ import atexit
 import requests
 
 from vmware.vapi.vmc.client import create_vmc_client
-from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils.vmc import validate_token
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
 from vmcjp import slack_message
-
-PRECHECK_BUTTON = constant.BUTTON_DIR + "precheck.json"
-LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws.json"
-SINGLE_MULTI_BUTTON = constant.BUTTON_DIR + "single_multi.json"
-CREATE_BUTTON = constant.BUTTON_DIR + "create.json"
-HELP_BUTTON = constant.BUTTON_DIR + "help.json"
-LIST_BUTTON = constant.BUTTON_DIR + "list.json"
-DELETE_BUTTON = constant.BUTTON_DIR + "delete.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
