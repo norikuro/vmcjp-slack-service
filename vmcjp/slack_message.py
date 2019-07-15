@@ -41,13 +41,24 @@ def post_text_to_response_url(event, text):
     )
     return response
 
-def post_option_to_response_url(event, button, option_list):
+def post_option_with_bot_token(event, button, option_list):
     response = post_option2(
         event.get("response_url"),
         event.get("slack_token"), 
         event.get("channel"),
         button, 
         option_list, 
+        event.get("bot_token")
+    )
+    return response
+
+def post_option_to_response_url(event, button, option_list):
+    response = post_option2(
+        event.get("response_url"),
+        event.get("slack_token"), 
+        event.get("channel"),
+        button, 
+        option_list
     )
     return response
 
