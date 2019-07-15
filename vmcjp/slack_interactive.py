@@ -276,17 +276,17 @@ def interactive_handler(event):
     elif "aws_account" in event.get("callback_id"):
         aws_account = event.get("response").split("+")[0]
         aws_id = event.get("response").split("+")[1]
-        response = post_option(
-            event,
-            VPC_BUTTON,
-            list_vpc(
-                get_vmc_client(event.get("token")),
-                event.get("org_id"),
-                aws_id,
-                result.get("region")
-            )
+        event.update(
+            {
+                "vpc_list": list_vpc(
+                    get_vmc_client(event.get("token")),
+                    event.get("org_id"),
+                    aws_id,
+                    result.get("region")
+                )
+            }
         )
-#        logging.info(response.read())
+        slack_message.aws_vpc_list_message(event)
         db.write_event_db(
             user_id, 
             {
@@ -297,18 +297,18 @@ def interactive_handler(event):
         )
         return
     elif "vpc" in event.get("callback_id"):
-        response = post_option(
-            event,
-            SUBNET_BUTTON,
-            list_subnet(
-                get_vmc_client(event.get("token")),
-                event.get("org_id"),
-                result.get("connected_account_id"),
-                result.get("region"),
-                event.get("response")
-            )
+        event.update(
+            {
+                "subnet_list": list_subnet(
+                    get_vmc_client(event.get("token")),
+                    event.get("org_id"),
+                    result.get("connected_account_id"),
+                    result.get("region"),
+                    event.get("response")
+                )
+            }
         )
-#        logging.info(response.read())
+        slack_message.aws_subnet_list_message(event)
         db.write_event_db(
             user_id, 
             {
@@ -318,23 +318,7 @@ def interactive_handler(event):
         )
         return
     elif "subnet" in event.get("callback_id"):
-        response = post_text(
-            event,
-            "Please enter CIDR block for management subnet."
-        )
-#        logging.info(response.read())
-        response = post_text(
-            event,
-            "/23 is max 27 hosts, /20 is max 251, /16 is 4091.",
-            "bot"
-        )
-#        logging.info(response.read())
-        response = post_text(
-            event,
-            "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved.",
-            "bot"
-        )
-#        logging.info(response.read())
+        slack_message.ask_cidr_message(event)
         db.write_event_db(
             user_id, 
             {
@@ -345,11 +329,7 @@ def interactive_handler(event):
         return
     elif "confirmation" in event.get("callback_id"):
         if "yes" in event.get("response"):
-            response = post_text(
-                event,
-                "OK, started to create sddc!"
-            )
-#            logging.info(response.read())
+            slack_message.start_create_sddc_message(event)
             event.update(result)
             call_lambda("create_sddc", event)
             db.write_event_db(
@@ -359,11 +339,7 @@ def interactive_handler(event):
                 }
             )
         else:
-            response = post_text(
-                event,
-                "OK, create SDDC has cenceled."
-            )
-#            logging.info(response.read())
+            slack_message.cancel_sddc_creation_message2(event)
             db.delete_event_db(user_id)
         return
     else:
