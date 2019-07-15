@@ -197,12 +197,6 @@ def aws_account_list_message(event):
         ACCOUNT_BUTTON, 
         event.get("aws_account_list")
     )
-#    response = post_option(
-#        event,
-#        ACCOUNT_BUTTON,
-#        event.get("aws_account_list")
-#    )
-#    logging.info(response.read())
 
 def aws_vpc_list_message(event):
     response = post_option_to_response_url(
@@ -210,12 +204,6 @@ def aws_vpc_list_message(event):
         VPC_BUTTON, 
         event.get("vpc_list")
     )
-#    response = post_option(
-#        event,
-#        VPC_BUTTON,
-#        event.get("vpc_list")
-#    )
-#    logging.info(response.read())
 
 def aws_subnet_list_message(event):
     response = post_option_to_response_url(
@@ -223,12 +211,6 @@ def aws_subnet_list_message(event):
         SUBNET_BUTTON, 
         event.get("subnet_list")
     )
-#    response = post_option(
-#        event,
-#        SUBNET_BUTTON,
-#        event.get("subnet_list")
-#    )
-#    logging.info(response.read())
 
 def ask_cidr_message(event):
     text = "Please enter CIDR block for management subnet."
