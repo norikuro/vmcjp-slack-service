@@ -102,11 +102,6 @@ def lambda_handler(event, context):
     event.update({"status": "task_failed"})
     slack_message.crud_sddc_result_message(event)
     call_lambda("check_task", event)
-#    response = post_text(
-#      event,
-#      result.get("message"),
-#      "bot"
-#    )
     return
   
   event.update({"lambda_name": "check_task"})
@@ -121,12 +116,6 @@ def lambda_handler(event, context):
 #  logging.info(response.read())
 
   slack_message.started_crud_sddc_message(event)
-#  response = post_to_webhook(
-#    event.get("webhook_url"), 
-#    "Hi <@{}>, started to create sddc.".format(
-#      event.get("user_id")
-#    )
-#  )
 #  logging.info(response.read())  
   response = post_field_button(
     event, 
