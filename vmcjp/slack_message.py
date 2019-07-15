@@ -8,6 +8,7 @@ logger.setLevel(logging.INFO)
 
 PRECHECK_BUTTON = constant.BUTTON_DIR + "precheck.json"
 DELETE_BUTTON = constant.BUTTON_DIR + "delete.json"
+LIST_BUTTON = constant.BUTTON_DIR + "list.json"
 
 def ask_wait_to_finish_task_message(event):
     response = post_text( 
@@ -85,5 +86,13 @@ def list_sddcs_text_message(event):
         event,
         "Here is SDDCs list in this org.",
         "bot"
+    )
+#    logging.info(response.read())
+
+def list_sddcs_message(event):
+    response = post_field_button(
+        event, 
+        LIST_BUTTON, 
+        type="bot"
     )
 #    logging.info(response.read())
