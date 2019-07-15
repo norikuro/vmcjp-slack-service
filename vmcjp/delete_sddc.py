@@ -82,12 +82,13 @@ def lambda_handler(event, context):
   )
 #  logging.info(response.read())
 
-  response = post_to_webhook(
-    event.get("webhook_url"), 
-    "Hi <@{}>, started to delete sddc.".format(
-      event.get("user_id")
-    )
-  )
+  slack_message.started_crud_sddc_message(event)
+#  response = post_to_webhook(
+#    event.get("webhook_url"), 
+#    "Hi <@{}>, started to delete sddc.".format(
+#      event.get("user_id")
+#    )
+#  )
 #  logging.info(response.read())  
   response = post_field_button(
     event, 
