@@ -22,20 +22,22 @@ def get_vmc_client(token):
 
 def lambda_handler(event, context):
 #    logging.info(event)
-
-    vmc_client = get_vmc_client(event.get("token"))
     db = dbutils2.DocmentDb(event.get("db_url"))
 
     if "task_started" in event.get("status"):
       event.update(
         {"status": "task_progress"}
       )
+    elif "task_failed" in event.get("status"):
+      db.delete_event_db(event.get("user_id"))
+      return
     else:
       remove_event(
         event.get("event_name"), 
         event.get("lambda_name")
       )
-
+      
+    vmc_client = get_vmc_client(event.get("token"))
     status = task_handler(
       vmc_client.orgs.Tasks, 
       event
