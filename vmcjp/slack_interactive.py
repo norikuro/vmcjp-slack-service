@@ -134,12 +134,6 @@ def interactive_handler(event):
             )
             if check_sddc_user(event):
                 call_lambda("delete_sddc", event)
-                db.write_event_db(
-                    user_id, 
-                    {
-                        "command": "delete",
-                    }
-                )
             else:
                 slack_message.cannot_delete_sddc_message(event)
                 db.delete_event_db(user_id)
