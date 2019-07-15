@@ -33,11 +33,6 @@ def ask_wait_to_finish_task_message(event):
 #    logging.info(response.read())
 
 def ask_register_token_message(event):
-#    response = post_text(
-#        event,
-#        "Please register VMC reresh token at first, type `register token`.",
-#        "bot"
-#    )
     response = post_text2(
         event.get("post_url"),
         event.get("slack_token"),
@@ -48,42 +43,52 @@ def ask_register_token_message(event):
 #    logging.info(response.read())
 
 def register_token_message(event):
-    response = post_text(
-        event,
+    response = post_text2(
+        event.get("post_url"),
+        event.get("slack_token"),
+        event.get("channel"),
         "Please enter VMC refresh token.",
-        "bot"
+        event.get("bot_token")
     )
 #    logging.info(response.read())
 
 def delete_token_message(event):
-    response = post_text(
-        event,
+    response = post_text2(
+        event.get("post_url"),
+        event.get("slack_token"),
+        event.get("channel"),
         "Deleted VMC refresh token from system db.",
-        "bot"
+        event.get("bot_token")
     )
 #    logging.info(response.read())
 
 def cancel_token_registration_message(event):
-    response = post_text(
-        event,
+    response = post_text2(
+        event.get("post_url"),
+        event.get("slack_token"),
+        event.get("channel"),
         "OK, token registration has canceled.",
-        "bot"
+        event.get("bot_token")
     )
 #    logging.info(response.read())
 
 def succeed_token_registratuin_message(event):
-    response = post_text(
-        event,
+    response = post_text2(
+        event.get("post_url"),
+        event.get("slack_token"),
+        event.get("channel"),
         "Registered VMC refresh token to system db, you can delete it with `delete token`.",
-        "bot"
+        event.get("bot_token")
     )
 #    logging.info(response.read())
 
 def wrong_token_message(event):
-    response = post_text(
-        event,
+    response = post_text2(
+        event.get("post_url"),
+        event.get("slack_token"),
+        event.get("channel"),
         "Token number you entered is something wrong, please check your token and enter correct token.",
-        "bot"
+        event.get("bot_token")
     )
 #    logging.info(response.read())
 
