@@ -158,39 +158,37 @@ def interactive_handler(event):
         return
     elif "create_sddc" in event.get("callback_id"):
         if "yes" in event.get("response"):
-            response = post_option(
-                event,
-                REGION_BUTTON,
-#                list_region(
-#                    get_vmc_client(event.get("token")),
-#                    event.get("org_id")
-#                )
-                [
-                    {
-                        "text": "AP_NORTHEAST_1", #for internal use
-                        "value": "AP_NORTHEAST_1" #for internal use
-                    }
-                ]
+            event.update(
+#                {
+#                    "region_list": list_region(
+#                        get_vmc_client(event.get("token")),
+#                        event.get("org_id")
+#                    )
+#                }
+                {
+                    "region_list": [
+                        {
+                            "text": "AP_NORTHEAST_1", #for internal use
+                            "value": "AP_NORTHEAST_1" #for internal use
+                        }
+                    ]
+                }
             )
-#            logging.info(response.read())
+            slack_message.region_list_message(event)
         else:
-            response = post_text(
-                event,
-                "OK, create SDDC has cenceled."
-            )
-#            logging.info(response.read())
+            slack_message.cancel_sddc_creation_message(event)
             db.delete_event_db(user_id)
         return
     elif "link_aws_sddc" in event.get("callback_id"):
         if "True" in event.get("response"):
-            response = post_option(
-                event,
-                ACCOUNT_BUTTON,
-#                list_aws_account(
+        event.update(
+#            {
+#                "aws_account_list": list_aws_account(
 #                    get_vmc_client(event.get("token")),
 #                    event.get("org_id")
 #                )
-                [
+            {
+                "aws_account_list": [
                     {
                         "text": event.get("aws_internal_account"), #for internal use
                         "value": "{}+{}".format(
@@ -199,26 +197,10 @@ def interactive_handler(event):
                         ) #for internal use
                     }
                 ]
-            )
-#            logging.info(response.read())
+            }
+            slack_message.aws_account_list_message(event):
         else:
-            response = post_text(
-                event,
-                "Please enter CIDR block for management subnet."
-            )
-#            logging.info(response.read())
-            response = post_text(
-                event,
-                "/23 is max 27 hosts, /20 is max 251, /16 is 4091.",
-                "bot"
-            )
-#            logging.info(response.read())
-            response = post_text(
-                event,
-                "You can not use 10.0.0.0/15 and 172.31.0.0/16 which are reserved.",
-                "bot"
-            )
-#            logging.info(response.read())
+            slack_message.ask_cidr_message(event)
         db.write_event_db(
             user_id, 
             {
@@ -230,11 +212,7 @@ def interactive_handler(event):
         )
         return
     elif "region" in event.get("callback_id"):
-        response = post_text(
-            event,
-            "Please enter SDDC name"
-        )
-#        logging.info(response.read())
+        slack_message.ask_sddc_name_message(event)
         db.write_event_db(
             user_id, 
             {
