@@ -61,14 +61,12 @@ def post_text2(
     url,
     slack_token, 
     channel,
-#    text, 
     data,
     bot_token=None
 ):
     post_data = {
         "token": slack_token,
         "channel": channel,
-#        "text": text
     }
     post_data.update(data)
     
@@ -102,16 +100,9 @@ def post_option(event, button, option_list, type="response"):
     return response
 
 def post_button(event, button, type="response"):
-#    data = {
-#        "token": event["slack_token"],
-#        "channel": event["channel"]
-#    }
-
     button_set = json.load(open(button, 'r'))
-#    data.update(button_set)
 
     if "response" in type:
-#        response = post(event["response_url"], data)
         response = post_text2(
             event["response_url"],
             event["slack_token"],
@@ -119,7 +110,6 @@ def post_button(event, button, type="response"):
             button_set
         )
     else:
-#        response = post(event["post_url"], data, event["bot_token"])
         response = post_text2(
             event["post_url"],
             event["slack_token"],
@@ -152,26 +142,15 @@ def create_button(event, button):
     return button_set
 
 def post_field_button(event, button, pretext=None, type="response"):
-#    data = {
-#        "token": event["slack_token"],
-#        "channel": event["channel"]
-#    }
-    
     button_set = create_button(event, button)
     
     if pretext is not None:
         button_set.update(
             {"pretext": pretext}
         )
-#        data.update(
-#            {"pretext": pretext}
-#        )
-    
-#    data.update(button_set)
     button_set.update(button_set)
     
     if "response" in type:
-#        response = post(event["response_url"], data)
         response = post_text2(
             event["response_url"],
             event["slack_token"],
@@ -179,7 +158,6 @@ def post_field_button(event, button, pretext=None, type="response"):
             button_set
         )
     elif "webhook" in type:
-#        response = post(event["webhook_url"], data)
         response = post_text2(
             event["webhook_url"],
             event["slack_token"],
@@ -187,7 +165,6 @@ def post_field_button(event, button, pretext=None, type="response"):
             button_set
         )
     else:
-#        response = post(event["post_url"], data, event["bot_token"])
         response = post_text2(
             event["post_url"],
             event["slack_token"],
