@@ -7,8 +7,8 @@ from vmcjp.utils.cloudwatch import put_event
 
 
 def task_handler(task_client, event):
-  resp = wait_for_task(task_client, event.get("org_id"), event.get("task_id"))
-#  resp = {"status": True, "check_time": 3, "estimated_time": 3}
+#  resp = wait_for_task(task_client, event.get("org_id"), event.get("task_id"))
+  resp = {"status": True, "check_time": 3, "estimated_time": 3} #for test
 
   db = dbutils2.DocmentDb(event.get("db_url"))
   
