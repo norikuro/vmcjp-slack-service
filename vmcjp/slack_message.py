@@ -17,6 +17,7 @@ DELETE_CONFIRM_BUTTON = constant.BUTTON_DIR + "delete_confirm.json"
 REGION_BUTTON = constant.BUTTON_DIR + "region.json"
 ACCOUNT_BUTTON = constant.BUTTON_DIR + "account.json"
 NUM_HOSTS_BUTTON = constant.BUTTON_DIR + "num_hosts.json"
+VPC_BUTTON = constant.BUTTON_DIR + "vpc.json"
 
 def help_message(event):
     response = post_button(event, HELP_BUTTON, "bot")
@@ -205,12 +206,27 @@ def num_hosts_list(event):
     )
 #    logging.info(response.read())
 
-
 def aws_account_list_message(event):
     response = post_option(
         event,
         ACCOUNT_BUTTON,
         event.get("aws_account_list")
+    )
+#    logging.info(response.read())
+
+def aws_vpc_list_message(event):
+    response = post_option(
+        event,
+        VPC_BUTTON,
+        event.get("vpc_list")
+    )
+#    logging.info(response.read())
+
+def aws_subnet_list_message(event):
+    response = post_option(
+        event,
+        SUBNET_BUTTON,
+        subnet_list
     )
 #    logging.info(response.read())
 
