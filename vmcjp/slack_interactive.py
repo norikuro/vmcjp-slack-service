@@ -246,25 +246,25 @@ def interactive_handler(event):
             )
         return
     elif "num_hosts" in event.get("callback_id"):
-        response = post_option(
-            event,
-            ACCOUNT_BUTTON,
-#            list_aws_account(
-#                get_vmc_client(event.get("token")),
-#                event.get("org_id")
-#            )
-            [
-                {
-                    "text": event.get("aws_internal_account"), #for internal use
-                    "value": "{}+{}".format(
-                        event.get("aws_internal_account"), 
-                        event.get("aws_internal_id")
-                    ) #for internal use
-                }
-            ]
-        )
-#        logging.info(response.read())
-        db.write_event_db(
+        event.update(
+#            {
+#                "aws_account_list": list_aws_account(
+#                    get_vmc_client(event.get("token")),
+#                    event.get("org_id")
+#                )
+            {
+                "aws_account_list": [
+                    {
+                        "text": event.get("aws_internal_account"), #for internal use
+                        "value": "{}+{}".format(
+                            event.get("aws_internal_account"), 
+                            event.get("aws_internal_id")
+                        ) #for internal use
+                    }
+                ]
+            }
+            slack_message.aws_account_list_message(event):
+            db.write_event_db(
             user_id, 
             {
                 "status": "num_hosts",
