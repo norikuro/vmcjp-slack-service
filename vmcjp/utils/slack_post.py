@@ -79,14 +79,35 @@ def post_text2(
     return response
 
 def post_option(event, button, option_list, type="response"):
-#    data = {
-#        "token": event["slack_token"],
-#        "channel": event["channel"]
-#    }
     button_set = json.load(open(button, 'r'))
     button_set["attachments"][0]["actions"][0].update(
         {"options": option_list}
     )
+
+    if "response" in type:
+        post_text2(
+            event["response_url"],
+            event["slack_token"],
+            event["channel"],
+            button_set
+        )
+    else:
+        post_text2(
+            event["post_url"],
+            event["slack_token"],
+            event["channel"],
+            button_set,
+            event["bot_token"]
+        )
+    return response
+
+def post_button(event, button, type="response"):
+#    data = {
+#        "token": event["slack_token"],
+#        "channel": event["channel"]
+#    }
+
+    button_set = json.load(open(button, 'r'))
 #    data.update(button_set)
 
     if "response" in type:
@@ -106,21 +127,6 @@ def post_option(event, button, option_list, type="response"):
             button_set,
             event["bot_token"]
         )
-    return response
-
-def post_button(event, button, type="response"):
-    data = {
-        "token": event["slack_token"],
-        "channel": event["channel"]
-    }
-
-    button_set = json.load(open(button, 'r'))
-    data.update(button_set)
-
-    if "response" in type:
-        response = post(event["response_url"], data)
-    else:
-        response = post(event["post_url"], data, event["bot_token"])
     return response
 
 def create_button(event, button):
@@ -146,24 +152,47 @@ def create_button(event, button):
     return button_set
 
 def post_field_button(event, button, pretext=None, type="response"):
-    data = {
-        "token": event["slack_token"],
-        "channel": event["channel"]
-    }
+#    data = {
+#        "token": event["slack_token"],
+#        "channel": event["channel"]
+#    }
     
     button_set = create_button(event, button)
     
     if pretext is not None:
-        data.update(
+        button_set.update(
             {"pretext": pretext}
         )
+#        data.update(
+#            {"pretext": pretext}
+#        )
     
-    data.update(button_set)
+#    data.update(button_set)
+    button_set.update(button_set)
     
     if "response" in type:
-        response = post(event["response_url"], data)
+#        response = post(event["response_url"], data)
+        post_text2(
+            event["response_url"],
+            event["slack_token"],
+            event["channel"],
+            button_set
+        )
     elif "webhook" in type:
-        response = post(event["webhook_url"], data)
+#        response = post(event["webhook_url"], data)
+        post_text2(
+            event["webhook_url"],
+            event["slack_token"],
+            event["channel"],
+            button_set
+        )
     else:
-        response = post(event["post_url"], data, event["bot_token"])
+#        response = post(event["post_url"], data, event["bot_token"])
+        post_text2(
+            event["post_url"],
+            event["slack_token"],
+            event["channel"],
+            button_set,
+            event["bot_token"]
+        )
     return response
