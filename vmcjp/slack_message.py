@@ -266,3 +266,7 @@ def list_sddcs_message(event):
 def crud_sddc_result_message(event):
     response = post_text_with_bot_token(event, event.get("message"))
 #    logging.info(response.read())
+
+def check_task_message(event):
+    response = post_text_with_bot_token(event, event.get("status"))
+#    logging.info(response.read())
