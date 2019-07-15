@@ -231,12 +231,12 @@ def interactive_handler(event):
                 }
             )
         else:
-            response = post_option(
-                event, 
-                NUM_HOSTS_BUTTON,
-                list_num_hosts(result.get("max_hosts"))
+            event.update(
+                {
+                    "num_hosts_list": list_num_hosts(result.get("max_hosts"))
+                }
             )
-#            logging.info(response.read())
+            slack_message.num_hosts_list(event)
             db.write_event_db(
                 user_id,
                 {
