@@ -18,6 +18,7 @@ REGION_BUTTON = constant.BUTTON_DIR + "region.json"
 ACCOUNT_BUTTON = constant.BUTTON_DIR + "account.json"
 NUM_HOSTS_BUTTON = constant.BUTTON_DIR + "num_hosts.json"
 VPC_BUTTON = constant.BUTTON_DIR + "vpc.json"
+SUBNET_BUTTON = constant.BUTTON_DIR + "subnet.json"
 
 def help_message(event):
     response = post_button(event, HELP_BUTTON, "bot")
