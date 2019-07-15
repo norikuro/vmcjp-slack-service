@@ -52,12 +52,7 @@ def delete_sddc(
 
 def lambda_handler(event, context):
 #  logging.info(event)
-  event.update(
-    {
-      "lambda_name": "check_task",
-      "command": "delete"
-    }
-  )
+  event.update({"lambda_name": "check_task"})
   
   vmc_client = get_vmc_client(event.get("token"))
   result = delete_sddc(
