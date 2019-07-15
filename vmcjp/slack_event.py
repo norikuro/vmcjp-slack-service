@@ -188,11 +188,12 @@ def event_handler(event):
                 event.update({"token": __cred_data.get("token")})
                 vmc_client = get_vmc_client(event.get("token"))
                 sddcs = vmc_client.orgs.Sddcs.list(event.get("org_id"))
-                response = post_text(
-                    event,
-                    "Here is SDDCs list in this org.",
-                    "bot"
-                )
+                slack_message.list_sddcs_text_message(event)
+#                response = post_text(
+#                    event,
+#                    "Here is SDDCs list in this org.",
+#                    "bot"
+#                )
 #                logging.info(response.read())
                 for sddc in sddcs:
                     event.update(
