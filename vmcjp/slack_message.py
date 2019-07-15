@@ -12,6 +12,7 @@ LIST_BUTTON = constant.BUTTON_DIR + "list.json"
 HELP_BUTTON = constant.BUTTON_DIR + "help.json"
 LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws.json"
 SINGLE_MULTI_BUTTON = constant.BUTTON_DIR + "single_multi.json"
+CREATE_BUTTON = constant.BUTTON_DIR + "create.json"
 
 def help_message(event):
     response = post_button(event, HELP_BUTTON, "bot")
