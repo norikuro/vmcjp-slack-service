@@ -8,9 +8,11 @@ from distutils.util import strtobool
 from com.vmware.vmc.model_client import AwsSddcConfig, AccountLinkSddcConfig, SddcConfig, AccountLinkConfig
 from com.vmware.vapi.std.errors_client import Unauthorized
 from vmware.vapi.vmc.client import create_vmc_client
-from vmcjp.utils.slack_post import post_text, post_field_button, post_to_webhook
+#from vmcjp.utils.slack_post import post_text, post_field_button, post_to_webhook
+from vmcjp.utils.slack_post import post_field_button, post_to_webhook
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils import constant
+from vmcjp import slack_message
 
 TASK_BUTTON = constant.BUTTON_DIR + "task.json"
 
@@ -53,23 +55,27 @@ def create_sddc(
     deployment_type=SddcConfig.DEPLOYMENT_TYPE_SINGLEAZ
   )
   
-  try:
-    task = vmc_client.orgs.Sddcs.create(
-      org=org_id, sddc_config=sddc_config
-    )
+#  try:
+#    task = vmc_client.orgs.Sddcs.create(
+#      org=org_id, sddc_config=sddc_config
+#    )
+#    return {
+#      "success": True,
+#      "task_id": task.id
+#    }
+#  except Unauthorized:
+#    return {
+#      "success": False,
+#      "message": "Failed, you are not authorized to create sddc."
+#    }
+#  except:
+#    return {
+#      "success": False,
+#      "message": "Something wrong, failed to create sddc."
+#    }
     return {
       "success": True,
-      "task_id": task.id
-    }
-  except Unauthorized:
-    return {
-      "success": False,
-      "message": "Failed, you are not authorized to create sddc."
-    }
-  except:
-    return {
-      "success": False,
-      "message": "Something wrong, failed to create sddc."
+      "task_id": "xxxxxx"
     }
 
 def lambda_handler(event, context):
@@ -92,11 +98,13 @@ def lambda_handler(event, context):
   if result.get("success"):
     event.update({"task_id": result.get("task_id")})
   else:
-    response = post_text(
-      event,
-      result.get("message"),
-      "bot"
-    )
+    event.update({"message": result.get("message")})
+    slack_message.create_sddc_result_message(event)
+#    response = post_text(
+#      event,
+#      result.get("message"),
+#      "bot"
+#    )
     return
   
   event.update({"lambda_name": "check_task"})
