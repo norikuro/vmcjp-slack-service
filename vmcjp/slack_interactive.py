@@ -223,8 +223,7 @@ def interactive_handler(event):
         return
     elif "single_multi" in event.get("callback_id"):
         if "single" in event.get("response"):
-            response = post_button(event, LINK_AWS_BUTTON)
-#            logging.info(response.read())
+            slack_message.link_aws_single_message(event)
             db.write_event_db(
                 user_id,
                 {
