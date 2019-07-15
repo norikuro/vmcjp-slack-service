@@ -80,8 +80,14 @@ def create_sddc(
 
 def lambda_handler(event, context):
 #  logging.info(event)
-  vmc_client = get_vmc_client(event.get("token"))
-  
+  event.update(
+    {
+      "lambda_name": "check_task",
+      "command": "create"
+    }
+  )
+
+  vmc_client = get_vmc_client(event.get("token"))  
   result = create_sddc(
     event.get("org_id"),
     event.get("region"),
@@ -98,14 +104,16 @@ def lambda_handler(event, context):
   if result.get("success"):
     event.update({"task_id": result.get("task_id")})
   else:
-    event.update({"message": result.get("message")})
-    event.update({"status": "task_failed"})
+    event.update(
+      {
+        "message": result.get("message"),
+        "status": "task_failed"
+      }
+    )
     slack_message.crud_sddc_result_message(event)
     call_lambda("check_task", event)
     return
   
-  event.update({"lambda_name": "check_task"})
-  event.update({"command": "create"})
   logging.info(event) #need this log to ckech config later.
   
   response = post_field_button(
@@ -116,7 +124,6 @@ def lambda_handler(event, context):
 #  logging.info(response.read())
 
   slack_message.started_crud_sddc_message(event)
-#  logging.info(response.read())  
   response = post_field_button(
     event, 
     TASK_BUTTON, 
