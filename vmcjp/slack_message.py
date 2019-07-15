@@ -9,6 +9,11 @@ logger.setLevel(logging.INFO)
 PRECHECK_BUTTON = constant.BUTTON_DIR + "precheck.json"
 DELETE_BUTTON = constant.BUTTON_DIR + "delete.json"
 LIST_BUTTON = constant.BUTTON_DIR + "list.json"
+HELP_BUTTON = constant.BUTTON_DIR + "help.json"
+
+def help_message(event):
+    response = post_button(event, HELP_BUTTON, "bot")
+#    logging.info(response.read())
 
 def ask_wait_to_finish_task_message(event):
     response = post_text( 
@@ -22,6 +27,22 @@ def ask_register_token_message(event):
     response = post_text(
         event,
         "Please register VMC reresh token at first, type `register token`.",
+        "bot"
+    )
+#    logging.info(response.read())
+
+def register_token_message(event):
+    response = post_text(
+        event,
+        "Please enter VMC refresh token.",
+        "bot"
+    )
+#    logging.info(response.read())
+
+def delete_token_message(event):
+    response = post_text(
+        event,
+        "Deleted VMC refresh token from system db.",
         "bot"
     )
 #    logging.info(response.read())
