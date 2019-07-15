@@ -76,6 +76,36 @@ def post_text2(
         response = post(url, post_data, bot_token)
     return response
 
+def post_option2(
+    url,
+    slack_token, 
+    channel,
+    button, 
+    option_list, 
+    bot_token=None
+):
+    button_set = json.load(open(button, 'r'))
+    button_set["attachments"][0]["actions"][0].update(
+        {"options": option_list}
+    )
+    
+    if bot_token is None:
+        response = post_text2(
+            url,
+            slack_token,
+            channel,
+            button_set
+        )
+    else:
+        response = post_text2(
+            url,
+            slack_token,
+            channel,
+            button_set,
+            bot_token
+        )
+    return response
+
 def post_option(event, button, option_list, type="response"):
     button_set = json.load(open(button, 'r'))
     button_set["attachments"][0]["actions"][0].update(
