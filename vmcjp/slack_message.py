@@ -52,11 +52,26 @@ def delete_token_message(event):
 def cancel_token_registration_message(event):
     response = post_text(
         event,
-        "Canceled to register VMC refresh token.",
+        "OK, token registration has canceled.",
         "bot"
     )
 #    logging.info(response.read())
 
+def succeed_token_registratuin_message(event):
+    response = post_text(
+        event,
+        "Registered VMC refresh token to system db, you can delete it with `delete token`.",
+        "bot"
+    )
+#    logging.info(response.read())
+
+def wrong_token_message(event):
+    response = post_text(
+        event,
+        "Token number you entered is something wrong, please check your token and enter correct token.",
+        "bot"
+    )
+#    logging.info(response.read())
 
 def delete_sddc_message(event):
     response = post_option(
