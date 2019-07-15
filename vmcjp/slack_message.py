@@ -14,6 +14,7 @@ LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws.json"
 SINGLE_MULTI_BUTTON = constant.BUTTON_DIR + "single_multi.json"
 CREATE_BUTTON = constant.BUTTON_DIR + "create.json"
 DELETE_CONFIRM_BUTTON = constant.BUTTON_DIR + "delete_confirm.json"
+REGION_BUTTON = constant.BUTTON_DIR + "region.json"
 
 def help_message(event):
     response = post_button(event, HELP_BUTTON, "bot")
@@ -166,6 +167,15 @@ def max_hosts_message(event):
 #    logging.info(response.read())
     response = post_button(event, PRECHECK_BUTTON, "bot")
 #    logging.info(response.read())
+
+def region_list_message(event):
+    response = post_option(
+        event,
+        REGION_BUTTON,
+        event.get("region_list")
+    )
+#    logging.info(response.read())
+
 
 def link_aws_message(event):
     response = post_button(event, LINK_AWS_BUTTON, "bot")
