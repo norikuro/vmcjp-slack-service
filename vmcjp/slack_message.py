@@ -165,11 +165,6 @@ def region_list_message(event):
         REGION_BUTTON, 
         event.get("region_list")
     )
-#    response = post_option(
-#        event,
-#        REGION_BUTTON,
-#        event.get("region_list")
-#    )
 #    logging.info(response.read())
 
 def ask_sddc_name_message(event):
@@ -190,11 +185,16 @@ def single_multi_message(event):
 #    logging.info(response.read())
 
 def num_hosts_list(event):
-    response = post_option(
+    response = post_option_to_response_url(
         event, 
-        NUM_HOSTS_BUTTON,
+        NUM_HOSTS_BUTTON, 
         event.get("num_hosts_list")
     )
+#    response = post_option(
+#        event, 
+#        NUM_HOSTS_BUTTON,
+#        event.get("num_hosts_list")
+#    )
 #    logging.info(response.read())
 
 def aws_account_list_message(event):
