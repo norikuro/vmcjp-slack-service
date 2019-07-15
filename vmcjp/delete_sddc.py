@@ -52,18 +52,29 @@ def delete_sddc(
 
 def lambda_handler(event, context):
 #  logging.info(event)
-  vmc_client = get_vmc_client(event.get("token"))
+  event.update(
+    {
+      "lambda_name": "check_task",
+      "command": "delete"
+    }
+  )
   
+  vmc_client = get_vmc_client(event.get("token"))
   result = delete_sddc(
     event.get("org_id"),
     event.get("sddc_id"),
     vmc_client
   )
+  
   if result.get("success"):
     event.update({"task_id": result.get("task_id")})
   else:
-    event.update({"message": result.get("message")})
-    event.update({"status": "task_failed"})
+    event.update(
+      {
+        "message": result.get("message"),
+        "status": "task_failed"
+      }
+    )
     slack_message.crud_sddc_result_message(event)
     call_lambda("check_task", event)
 #    response = post_text(
@@ -73,10 +84,6 @@ def lambda_handler(event, context):
 #    )
     return 
   
-#  event.update({"task_id": task.id})
-  event.update({"lambda_name": "check_task"})
-  event.update({"command": "delete"})
-
   response = post_field_button(
     event, 
     TASK_BUTTON, 
