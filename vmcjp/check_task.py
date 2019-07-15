@@ -6,8 +6,10 @@ import atexit
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.cloudwatch import remove_event
 from vmcjp.utils.task_helper import task_handler
-from vmcjp.utils.slack_post import post_text, post_to_webhook
+from vmcjp.utils.slack_post import post_to_webhook
+#from vmcjp.utils.slack_post import post_text, post_to_webhook
 from vmcjp.utils import dbutils2
+from vmcjp import slack_message
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -38,11 +40,13 @@ def lambda_handler(event, context):
       vmc_client.orgs.Tasks, 
       event
     )
-    response = post_text(
-      event,
-      status,
-      "bot"
-    )
+    event.update({"status": status})
+    slack_message.check_task_message(event)
+#    response = post_text(
+#      event,
+#      status,
+#      "bot"
+#    )
     response = post_to_webhook(
       event.get("webhook_url"), 
       status
