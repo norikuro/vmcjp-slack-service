@@ -13,6 +13,7 @@ HELP_BUTTON = constant.BUTTON_DIR + "help.json"
 LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws.json"
 SINGLE_MULTI_BUTTON = constant.BUTTON_DIR + "single_multi.json"
 CREATE_BUTTON = constant.BUTTON_DIR + "create.json"
+DELETE_CONFIRM_BUTTON = constant.BUTTON_DIR + "delete_confirm.json"
 
 def help_message(event):
     response = post_button(event, HELP_BUTTON, "bot")
@@ -80,6 +81,35 @@ def delete_sddc_message(event):
         DELETE_BUTTON,
         event.get("option_list"),
         "bot"
+    )
+#    logging.info(response.read())
+
+def sddc_deletion_confirmation_message(event):
+    response = post_field_button(
+        event, 
+        DELETE_CONFIRM_BUTTON,
+        "bot"
+    )
+#    logging.info(response.read())
+
+def started_delete_sddc_message(event):
+    response = post_text(
+        event,
+        "OK, started to delete sddc!"
+    )
+#    logging.info(response.read())
+
+def cannot_delete_sddc_message(event):
+    response = post_text(
+        event,
+        "You cannot delete this sddc because the owner is someone else.  You can delete sddcs which you created only.  So canceling this delete task."
+    )
+#    logging.info(response.read())
+
+def cancel_sddc_deletion_message(event):
+    response = post_text(
+        event,
+        "OK, delete SDDC has cenceled."
     )
 #    logging.info(response.read())
 
