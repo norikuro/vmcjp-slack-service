@@ -317,12 +317,6 @@ def interactive_handler(event):
             slack_message.start_create_sddc_message(event)
             event.update(result)
             call_lambda("create_sddc", event)
-            db.write_event_db(
-                user_id, 
-                {
-                    "command": "create"
-                }
-            )
         else:
             slack_message.cancel_sddc_creation_message2(event)
             db.delete_event_db(user_id)
