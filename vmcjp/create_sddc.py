@@ -9,7 +9,7 @@ from com.vmware.vmc.model_client import AwsSddcConfig, AccountLinkSddcConfig, Sd
 from com.vmware.vapi.std.errors_client import Unauthorized
 from vmware.vapi.vmc.client import create_vmc_client
 #from vmcjp.utils.slack_post import post_text, post_field_button, post_to_webhook
-from vmcjp.utils.slack_post import post_field_button, post_to_webhook
+from vmcjp.utils.slack_post import post_field_button
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils import constant
 from vmcjp import slack_message
@@ -118,12 +118,13 @@ def lambda_handler(event, context):
   )
 #  logging.info(response.read())
 
-  response = post_to_webhook(
-    event.get("webhook_url"), 
-    "Hi <@{}>, started to create sddc.".format(
-      event.get("user_id")
-    )
-  )
+  slack_message.started_create_sddc_message(event)
+#  response = post_to_webhook(
+#    event.get("webhook_url"), 
+#    "Hi <@{}>, started to create sddc.".format(
+#      event.get("user_id")
+#    )
+#  )
 #  logging.info(response.read())  
   response = post_field_button(
     event, 
