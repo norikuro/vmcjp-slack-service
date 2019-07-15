@@ -189,12 +189,6 @@ def event_handler(event):
                 vmc_client = get_vmc_client(event.get("token"))
                 sddcs = vmc_client.orgs.Sddcs.list(event.get("org_id"))
                 slack_message.list_sddcs_text_message(event)
-#                response = post_text(
-#                    event,
-#                    "Here is SDDCs list in this org.",
-#                    "bot"
-#                )
-#                logging.info(response.read())
                 for sddc in sddcs:
                     event.update(
                         {
@@ -205,20 +199,9 @@ def event_handler(event):
                         }
                     )
                     slack_message.list_sddcs_message(event)
-#                    response = post_field_button(
-#                        event, 
-#                        LIST_BUTTON, 
-#                        type="bot"
-#                    )
-#                    logging.info(response.read())
             return
         elif "register token" in text:
-            response = post_text(
-                event,
-                "Please enter VMC refresh token.",
-                "bot"
-            )
-#            logging.info(response.read())
+            slack_message.register_token_message(event)
             db.write_cred_db(
                 event.get("user_id"), 
                 {
@@ -234,17 +217,11 @@ def event_handler(event):
             )
             return
         elif "delete token" in text:
-            response = post_text(
-                event,
-                "Deleted VMC refresh token from system db.",
-                "bot"
-            )
-#            logging.info(response.read())
+            slack_message.delete_token_message(event)
             db.delete_cred_db(event["user_id"])
             return
         elif "help" in text:
-            response = post_button(event, HELP_BUTTON, "bot")
-#            logging.info(response.read())
+            slack_message.help_message(event)
             return
         elif "cancel" in text:
             if __cred_data is not None and "registering" in __cred_data.get("status"):
