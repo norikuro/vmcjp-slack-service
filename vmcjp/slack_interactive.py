@@ -7,17 +7,8 @@ from vmware.vapi.vmc.client import create_vmc_client
 
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
-from vmcjp.utils.slack_post import post_text, post_option, post_button, post_field_button
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp import slack_message
-
-ACCOUNT_BUTTON = constant.BUTTON_DIR + "account.json"
-REGION_BUTTON = constant.BUTTON_DIR + "region.json"
-VPC_BUTTON = constant.BUTTON_DIR + "vpc.json"
-SUBNET_BUTTON = constant.BUTTON_DIR + "subnet.json"
-LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws.json"
-NUM_HOSTS_BUTTON = constant.BUTTON_DIR + "num_hosts.json"
-DELETE_CONFIRM_BUTTON = constant.BUTTON_DIR + "delete_confirm.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
