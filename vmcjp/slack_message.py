@@ -44,11 +44,8 @@ def help_message(event):
 #    logging.info(response.read())
 
 def ask_wait_to_finish_task_message(event):
-    response = post_text( 
-        event,
-        "Creating sddc now, please wait until the task is finished.",
-        "bot"
-    )
+    text = "Creating sddc now, please wait until the task is finished."
+    response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
 def ask_register_token_message(event):
@@ -159,10 +156,8 @@ def region_list_message(event):
 #    logging.info(response.read())
 
 def ask_sddc_name_message(event):
-    response = post_text(
-        event,
-        "Please enter SDDC name"
-    )
+    text = "Please enter SDDC name"
+    response = post_text_to_response_url(event, text)
 #    logging.info(response.read())
 
 def link_aws_message(event):
@@ -210,10 +205,8 @@ def aws_subnet_list_message(event):
 #    logging.info(response.read())
 
 def ask_cidr_message(event):
-    response = post_text(
-        event,
-        "Please enter CIDR block for management subnet."
-    )
+    text = "Please enter CIDR block for management subnet."
+    response = post_text_to_response_url(event, text)
 #    logging.info(response.read())
     text = "/23 is max 27 hosts, /20 is max 251, /16 is 4091."
     response = post_text_with_bot_token(event, text)
@@ -236,10 +229,8 @@ def create_sddc_confirmation_message(event):
 #    logging.info(response.read())
 
 def start_create_sddc_message(event):
-    response = post_text(
-        event,
-        "OK, started to create sddc!"
-    )
+    text = "OK, started to create sddc!"
+    response = post_text_to_response_url(event, text)
 #    logging.info(response.read())
 
 def list_sddcs_text_message(event):
