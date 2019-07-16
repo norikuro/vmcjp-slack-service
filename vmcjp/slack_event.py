@@ -272,7 +272,11 @@ def event_handler(event):
     elif "delete" in result.get("command"):
         if "cancel" in text:
             slack_message.cancel_sddc_deletion_message(event)
-            db.delete_event_db(event.get("user_id"))            
+            db.delete_event_db(event.get("user_id"))
+    elif "restore" in result.get("command"):
+        if "cancel" in text:
+            slack_message.cancel_sddc_restoration_message(event)
+            db.delete_event_db(event.get("user_id"))
     elif "register" in result.get("command"):
         if "cancel" in text:
             slack_message.cancel_token_registration_message(event)
