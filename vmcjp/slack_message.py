@@ -147,11 +147,15 @@ def delete_sddc_message(event):
     )
 
 def sddc_deletion_confirmation_message(event):
-    response = post_field_button(
+    response = post_field_button_with_bot_token(
         event, 
-        DELETE_CONFIRM_BUTTON,
-        "bot"
+        DELETE_CONFIRM_BUTTON
     )
+#    response = post_field_button(
+#        event, 
+#        DELETE_CONFIRM_BUTTON,
+#        "bot"
+#    )
 #    logging.info(response.read())
 
 def started_delete_sddc_message(event):
