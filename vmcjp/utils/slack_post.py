@@ -177,7 +177,7 @@ def post_button(event, button, type="response"):
         )
     return response
 
-def create_button(event, button):
+def create_button(field_dics, button):
     button_set = json.load(open(button, 'r'))
     attachments = button_set.get("attachments")
     for attachment in attachments:
@@ -196,8 +196,42 @@ def create_button(event, button):
 #        )
         if fields is not None:
             for field in fields:
-                field.update({"value": event.get(field.get("value"))})
+                field.update({"value": field_dics.get(field.get("value"))})
     return button_set
+
+def post_field_button2(
+    url, 
+    slack_token, 
+    channel, 
+    button, 
+    field_dics, 
+    pretext=None, 
+    bot_token=None
+):
+    button_set = create_button(field_dics, button)
+    
+    if pretext is not None:
+        button_set.update(
+            {"pretext": pretext}
+        )
+    button_set.update(button_set)
+    
+    if bot_token is None:
+        response = post_text2(
+            url
+            slack_token,
+            channel,
+            button_set
+        )
+    else:
+        response = post_text2(
+            url,
+            slack_token,
+            channel,
+            button_set,
+            bot_token
+        )
+    return response
 
 def post_field_button(event, button, pretext=None, type="response"):
     button_set = create_button(event, button)
