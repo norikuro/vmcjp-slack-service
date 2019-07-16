@@ -14,7 +14,7 @@ from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils import constant
 from vmcjp import slack_message
 
-TASK_BUTTON = constant.BUTTON_DIR + "task.json"
+#TASK_BUTTON = constant.BUTTON_DIR + "task.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
