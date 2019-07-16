@@ -111,19 +111,21 @@ def lambda_handler(event, context):
   
   logging.info(event) #need this log to ckech config later.
   
-  response = post_field_button(
-    event, 
-    TASK_BUTTON, 
-    type="bot"
-  )
+  slack_message.task_message(event)
+#  response = post_field_button(
+#    event, 
+#    TASK_BUTTON, 
+#    type="bot"
+#  )
 #  logging.info(response.read())
 
   slack_message.started_crud_sddc_message(event)
-  response = post_field_button(
-    event, 
-    TASK_BUTTON, 
-    type="webhook"
-  )
+  slack_message.task_webhook_message(event)
+#  response = post_field_button(
+#    event, 
+#    TASK_BUTTON, 
+#    type="webhook"
+#  )
 #  logging.info(response.read())
   
   event.update(
