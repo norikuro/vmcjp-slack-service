@@ -10,7 +10,7 @@ from vmcjp import slack_message
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-RESTORE_BUTTON = constant.BUTTON_DIR + "restore.json"
+#RESTORE_BUTTON = constant.BUTTON_DIR + "restore.json"
 
 def get_backedup_sddc_config(db):    
     config = db.find_with_fields(
