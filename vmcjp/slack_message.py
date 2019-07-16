@@ -1,7 +1,7 @@
 import logging
 
 from vmcjp.utils import constant
-from vmcjp.utils.slack_post import post_text2, post_button2, post_option2, post_field_button
+from vmcjp.utils.slack_post import post_text2, post_button2, post_option2, post_field_button, post_field_button2
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
