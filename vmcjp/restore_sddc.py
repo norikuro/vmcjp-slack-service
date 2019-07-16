@@ -54,6 +54,7 @@ def lambda_handler(event, context):
 #    logging.info(event)
     db = sddc_db.DocmentDb(event.get("db_url"))
     event.update(get_backedup_sddc_config(db))
+    slack_message.restore_message(event)
     response = post_field_button(event, RESTORE_BUTTON, type="bot")
 #    logging.info(response.read())
     logging.info(event)
