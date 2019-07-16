@@ -140,7 +140,7 @@ def post_button2(
 ):
     button_set = json.load(open(button, 'r'))
 
-    if "response" in type:
+    if bot_token is None:
         response = post_text2(
             url,
             slack_token,
