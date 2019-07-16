@@ -58,8 +58,9 @@ def lambda_handler(event, context):
     db = dbutils2.DocmentDb(event.get("db_url"))
     db.init_sddc_db()
     config = db.get_backedup_sddc_config()
+    
     event.update(config)
     db.write_event_db(event.get("user_id"), config)
+    
     slack_message.restore_message(event)
-#    response = post_field_button(event, RESTORE_BUTTON, type="bot")
 #    logging.info(response.read())
