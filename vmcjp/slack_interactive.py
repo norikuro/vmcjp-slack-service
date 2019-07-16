@@ -337,10 +337,11 @@ def interactive_handler(event):
         if "yes" in event.get("response"):
             slack_message.check_resources_message(event)
             event.update(result)
+            call_lambda("check_resources", event)
             db.write_event_db(
                 event.get("user_id"), 
                 {
-                    "status": "check_resource"
+                    "status": "check_resources"
                 }
             )
     else:
