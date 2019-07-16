@@ -358,9 +358,18 @@ def task_message(event):
         event, 
         TASK_BUTTON
     )
+#    logging.info(response.read())
     
 def task_webhook_message(event):
     response = post_field_button_to_webhook(
         event, 
         TASK_BUTTON
     )
+#    logging.info(response.read())
+
+def restore_message(event):
+    reponse = post_field_button_with_bot_token(
+        event, 
+        RESTORE_BUTTON
+    )
+#    logging.info(response.read())
