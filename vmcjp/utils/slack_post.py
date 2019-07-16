@@ -27,37 +27,37 @@ def post(url, data, bot_oauth_token=None):
     
     return urllib2.urlopen(request)
 
-def post_to_webhook(url, text):
-    headers = {
-        "Content-Type": "application/json"
-    }
+#def post_to_webhook(url, text):
+#    headers = {
+#        "Content-Type": "application/json"
+#    }
     
-    data = {
-        "text": text
-    }
+#    data = {
+#        "text": text
+#    }
     
-    request = urllib2.Request(
-        url, 
-        data=json.dumps(data).encode("utf-8"), 
-        headers=headers
-    )
+#    request = urllib2.Request(
+#        url, 
+#        data=json.dumps(data).encode("utf-8"), 
+#        headers=headers
+#    )
     
-    return urllib2.urlopen(request)
+#    return urllib2.urlopen(request)
 
-def post_text(event, text, type="response"):
-    data = {
-        "token": event["slack_token"],
-        "channel": event["channel"],
-        "text": text
-    }
+#def post_text(event, text, type="response"):
+#    data = {
+#        "token": event["slack_token"],
+#        "channel": event["channel"],
+#        "text": text
+#    }
     
-    if "response" in type:
-        response = post(event["response_url"], data)
-    elif "webhook" in type:
-        response = post(event["webhook_url"], data)
-    else:
-        response = post(event["post_url"], data, event["bot_token"])
-    return response
+#    if "response" in type:
+#        response = post(event["response_url"], data)
+#    elif "webhook" in type:
+#        response = post(event["webhook_url"], data)
+#    else:
+#        response = post(event["post_url"], data, event["bot_token"])
+#    return response
 
 def post_text2(
     url,
