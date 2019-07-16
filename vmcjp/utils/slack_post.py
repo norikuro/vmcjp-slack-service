@@ -210,11 +210,11 @@ def post_field_button2(
 ):
     button_set = create_button(field_dics, button)
     
-    if pretext is not None:
-        button_set.update(
-            {"pretext": pretext}
-        )
-    button_set.update(button_set)
+#    if pretext is not None:
+#        button_set.update(
+#            {"pretext": pretext}
+#        )
+#    button_set.update(button_set)
     
     if bot_token is None:
         response = post_text2(
@@ -245,7 +245,7 @@ def post_field_button(
 #        button_set.update(
 #            {"pretext": pretext}
 #        )
-    button_set.update(button_set)
+#    button_set.update(button_set)
     
     if "response" in type:
         response = post_text2(
