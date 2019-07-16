@@ -218,10 +218,10 @@ def event_handler(event):
                 slack_message.cancel_token_registration_message(event)
                 db.delete_cred_db(event.get("user_id"))
             else:
-                slack_message.help_message(event)
+                slack_message.may_i_message(event)
             return
         else:
-            slack_message.help_message(event)
+            slack_message.may_i_message(event)
             return
     elif "create" in result.get("command"):
         if "create sddc" in text:
