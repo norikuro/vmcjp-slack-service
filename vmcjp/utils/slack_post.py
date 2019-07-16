@@ -27,7 +27,7 @@ def post(url, data, bot_oauth_token=None):
     
     return urllib2.urlopen(request)
 
-def post_text2(
+def post_text(
     url,
     slack_token, 
     channel,
@@ -43,7 +43,7 @@ def post_text2(
     response = post(url, post_data, bot_token)
     return response
 
-def post_option2(
+def post_option(
     url,
     slack_token, 
     channel,
@@ -57,7 +57,7 @@ def post_option2(
         {"options": option_list}
     )
     
-    response = post_text2(
+    response = post_text(
         url,
         slack_token,
         channel,
@@ -66,7 +66,7 @@ def post_option2(
     )
     return response
 
-def post_button2(
+def post_button(
     url, 
     slack_token,
     channel,
@@ -76,7 +76,7 @@ def post_button2(
     
     button_set = json.load(open(button, 'r'))
 
-    response = post_text2(
+    response = post_text(
         url,
         slack_token,
         channel,
@@ -107,7 +107,7 @@ def create_button(field_dics, button):
                 field.update({"value": field_dics.get(field.get("value"))})
     return button_set
 
-def post_field_button2(
+def post_field_button(
     url, 
     slack_token, 
     channel, 
@@ -118,7 +118,7 @@ def post_field_button2(
     
     button_set = create_button(field_dics, button)
     
-    response = post_text2(
+    response = post_text(
         url,
         slack_token,
         channel,
