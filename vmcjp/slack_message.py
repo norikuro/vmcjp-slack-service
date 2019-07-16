@@ -195,7 +195,8 @@ def max_hosts_message(event):
     )
     response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
-    response = post_button(event, PRECHECK_BUTTON, "bot")
+#    response = post_button(event, PRECHECK_BUTTON, "bot")
+    response = post_button_with_bot_token(event, PRECHECK_BUTTON)
 #    logging.info(response.read())
 
 def region_list_message(event):
