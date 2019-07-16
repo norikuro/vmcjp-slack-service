@@ -121,6 +121,11 @@ def post_field_button_with_bot_token(event, button):
         event.get("bot_token")
     )
 
+def may_i_message(event):
+    text = "May I help you?  Please type `help` if you want to know how to use this Slack App."
+    response = post_text_with_bot_token(event, text)
+#    logging.info(response.read())
+
 def help_message(event):
     response = post_button_with_bot_token(event, HELP_BUTTON)
 #    logging.info(response.read())
