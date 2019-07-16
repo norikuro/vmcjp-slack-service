@@ -1,7 +1,7 @@
 import logging
 
 from vmcjp.utils import constant
-from vmcjp.utils.slack_post import post_text2, post_button2, post_option2, post_field_button2
+from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -24,7 +24,7 @@ RESTORE_BUTTON = constant.BUTTON_DIR + "restore.json"
 
 def post_text_with_bot_token(event, text):
     data = {"text": text}
-    response = post_text2(
+    response = post_text(
         event.get("post_url"),
         event.get("slack_token"),
         event.get("channel"),
@@ -35,7 +35,7 @@ def post_text_with_bot_token(event, text):
 
 def post_text_to_response_url(event, text):
     data = {"text": text}
-    response = post_text2(
+    response = post_text(
         event.get("response_url"),
         event.get("slack_token"),
         event.get("channel"),
@@ -45,7 +45,7 @@ def post_text_to_response_url(event, text):
 
 def post_text_to_webhook(event, text):
     data = {"text": text}
-    response = post_text2(
+    response = post_text(
         event.get("webhook_url"),
         event.get("slack_token"),
         event.get("channel"),
@@ -54,7 +54,7 @@ def post_text_to_webhook(event, text):
     return response
 
 def post_option_with_bot_token(event, button, option_list):
-    response = post_option2(
+    response = post_option(
         event.get("post_url"),
         event.get("slack_token"), 
         event.get("channel"),
@@ -65,7 +65,7 @@ def post_option_with_bot_token(event, button, option_list):
     return response
 
 def post_option_to_response_url(event, button, option_list):
-    response = post_option2(
+    response = post_option(
         event.get("response_url"),
         event.get("slack_token"), 
         event.get("channel"),
@@ -75,7 +75,7 @@ def post_option_to_response_url(event, button, option_list):
     return response
 
 def post_button_to_response_url(event, button):
-    response = post_button2(
+    response = post_button(
         event.get("response_url"),
         event.get("slack_token"), 
         event.get("channel"),
@@ -84,7 +84,7 @@ def post_button_to_response_url(event, button):
     return response
 
 def post_button_with_bot_token(event, button):
-    response = post_button2(
+    response = post_button(
         event.get("post_url"),
         event.get("slack_token"), 
         event.get("channel"),
@@ -94,7 +94,7 @@ def post_button_with_bot_token(event, button):
     return response
 
 def post_field_button_to_response_url(event, button):
-    response = post_field_button2(
+    response = post_field_button(
         event.get("response_url"),
         event.get("slack_token"), 
         event.get("channel"),
@@ -103,7 +103,7 @@ def post_field_button_to_response_url(event, button):
     )
 
 def post_field_button_to_webhook(event, button):
-    response = post_field_button2(
+    response = post_field_button(
         event.get("webhook_url"),
         event.get("slack_token"), 
         event.get("channel"),
@@ -112,7 +112,7 @@ def post_field_button_to_webhook(event, button):
     )
 
 def post_field_button_with_bot_token(event, button):
-    response = post_field_button2(
+    response = post_field_button(
         event.get("post_url"),
         event.get("slack_token"), 
         event.get("channel"),
@@ -262,6 +262,7 @@ def num_hosts_list(event):
         NUM_HOSTS_BUTTON, 
         event.get("num_hosts_list")
     )
+#    logging.info(response.read())
 
 def aws_account_list_message(event):
     response = post_option_to_response_url(
@@ -269,6 +270,7 @@ def aws_account_list_message(event):
         ACCOUNT_BUTTON, 
         event.get("aws_account_list")
     )
+#    logging.info(response.read())
 
 def aws_vpc_list_message(event):
     response = post_option_to_response_url(
@@ -276,6 +278,7 @@ def aws_vpc_list_message(event):
         VPC_BUTTON, 
         event.get("vpc_list")
     )
+#    logging.info(response.read())
 
 def aws_subnet_list_message(event):
     response = post_option_to_response_url(
@@ -283,6 +286,7 @@ def aws_subnet_list_message(event):
         SUBNET_BUTTON, 
         event.get("subnet_list")
     )
+#    logging.info(response.read())
 
 def ask_cidr_message(event):
     text = "Please enter CIDR block for management subnet."
@@ -305,11 +309,6 @@ def create_sddc_confirmation_message(event):
         event, 
         CREATE_BUTTON
     )
-#    response = post_field_button(
-#        event, 
-#        CREATE_BUTTON, 
-#        type="bot"
-#    )
 #    logging.info(response.read())
 
 def start_create_sddc_message(event):
@@ -327,11 +326,6 @@ def list_sddcs_message(event):
         event, 
         LIST_BUTTON
     )
-#    response = post_field_button(
-#        event, 
-#        LIST_BUTTON, 
-#        type="bot"
-#    )
 #    logging.info(response.read())
 
 def crud_sddc_result_message(event):
