@@ -66,7 +66,7 @@ class DocmentDb(object):
 
     def init_sddc_db():
         self.sddc_db = self.client[constant.SDDC_DB]
-        self.sddc_col = self.event_db[constant.SDDC_COLLECTION]
+        self.sddc_col = self.sddc_db[constant.SDDC_COLLECTION]
 
     def get_backedup_sddc_config(self):
         config = self.sddc_col.find(
