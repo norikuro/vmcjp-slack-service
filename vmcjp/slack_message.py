@@ -290,11 +290,15 @@ def wrong_network_message(event):
 #    logging.info(response.read())
 
 def create_sddc_confirmation_message(event):
-    response = post_field_button(
+    response = post_field_button_with_bot_token(
         event, 
-        CREATE_BUTTON, 
-        type="bot"
+        CREATE_BUTTON
     )
+#    response = post_field_button(
+#        event, 
+#        CREATE_BUTTON, 
+#        type="bot"
+#    )
 #    logging.info(response.read())
 
 def start_create_sddc_message(event):
