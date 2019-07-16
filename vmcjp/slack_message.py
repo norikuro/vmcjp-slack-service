@@ -215,9 +215,9 @@ def cancel_sddc_creation_message(event):
         response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
-def cancel_sddc_creation_message2(event):
-    text = "OK, canceled a create sddc wizard."
-    response = post_text_to_response_url(event, text)
+#def cancel_sddc_creation_message2(event):
+#    text = "OK, canceled a create sddc wizard."
+#    response = post_text_to_response_url(event, text)
 #    logging.info(response.read())
 
 def no_enough_resouces_message(event):
