@@ -252,6 +252,8 @@ def event_handler(event):
                     slack_message.wrong_network_message(event)
             return
         else:
+            logging.info(result.get("status"))
+            logging.info(int_status)
             if result.get("status") == "region":
                 if result.get("max_hosts") == 1:
                     slack_message.link_aws_message(event)
