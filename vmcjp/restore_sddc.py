@@ -2,9 +2,10 @@ import json
 import os
 import logging
 
-from vmcjp.utils.slack_post import post_field_button
+#from vmcjp.utils.slack_post import post_field_button
 from vmcjp.utils import sddc_db
 from vmcjp.utils import constant
+from vmcjp import slack_message
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -55,6 +56,6 @@ def lambda_handler(event, context):
     db = sddc_db.DocmentDb(event.get("db_url"))
     event.update(get_backedup_sddc_config(db))
     slack_message.restore_message(event)
-    response = post_field_button(event, RESTORE_BUTTON, type="bot")
+#    response = post_field_button(event, RESTORE_BUTTON, type="bot")
 #    logging.info(response.read())
     logging.info(event)
