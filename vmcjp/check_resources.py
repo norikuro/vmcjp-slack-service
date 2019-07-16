@@ -69,7 +69,7 @@ def check_customer_aws(org_id, aws_account, vmc_client):
 
 def lambda_handler(event, context):
 #  logging.info(event)
-  resp = check(event, get_vmc_client())
+  resp = check(event, get_vmc_client(event.get("token")))
   event.update(
     {
       "check_result": resp
