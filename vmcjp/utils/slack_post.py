@@ -92,21 +92,28 @@ def post_option2(
         {"options": option_list}
     )
     
-    if bot_token is None:
-        response = post_text2(
-            url,
-            slack_token,
-            channel,
-            button_set
-        )
-    else:
-        response = post_text2(
-            url,
-            slack_token,
-            channel,
-            button_set,
-            bot_token
-        )
+#    if bot_token is None:
+#        response = post_text2(
+#            url,
+#            slack_token,
+#            channel,
+#            button_set
+#        )
+#    else:
+#        response = post_text2(
+#            url,
+#            slack_token,
+#            channel,
+#            button_set,
+#            bot_token
+#        )
+    response = post_text2(
+        url,
+        slack_token,
+        channel,
+        button_set,
+        bot_token
+    )
     return response
 
 #def post_option(event, button, option_list, type="response"):
@@ -141,21 +148,28 @@ def post_button2(
 ):
     button_set = json.load(open(button, 'r'))
 
-    if bot_token is None:
-        response = post_text2(
-            url,
-            slack_token,
-            channel,
-            button_set
-        )
-    else:
-        response = post_text2(
-            url,
-            slack_token,
-            channel,
-            button_set,
-            bot_token
-        )
+#    if bot_token is None:
+#        response = post_text2(
+#            url,
+#            slack_token,
+#            channel,
+#            button_set
+#        )
+#    else:
+#        response = post_text2(
+#            url,
+#            slack_token,
+#            channel,
+#            button_set,
+#            bot_token
+#        )
+    response = post_text2(
+        url,
+        slack_token,
+        channel,
+        button_set,
+        bot_token
+    )
     return response
 
 #def post_button(event, button, type="response"):
@@ -217,21 +231,28 @@ def post_field_button2(
 #        )
 #    button_set.update(button_set)
     
-    if bot_token is None:
-        response = post_text2(
-            url,
-            slack_token,
-            channel,
-            button_set
-        )
-    else:
-        response = post_text2(
-            url,
-            slack_token,
-            channel,
-            button_set,
-            bot_token
-        )
+#    if bot_token is None:
+#        response = post_text2(
+#            url,
+#            slack_token,
+#            channel,
+#            button_set
+#        )
+#    else:
+#        response = post_text2(
+#            url,
+#            slack_token,
+#            channel,
+#            button_set,
+#            bot_token
+#        )
+    response = post_text2(
+        url,
+        slack_token,
+        channel,
+        button_set,
+        bot_token
+    )
     return response
 
 #def post_field_button(
