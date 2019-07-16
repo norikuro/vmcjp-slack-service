@@ -65,8 +65,8 @@ class DocmentDb(object):
         self.cred_col.remove({"_id": user_id})
 
     def init_sddc_db():
-        self.sddc_db = self.client[constant.SDDC_DB]
-        self.sddc_col = self.sddc_db[constant.SDDC_COLLECTION]
+        sddc_db = self.client[constant.SDDC_DB]
+        self.sddc_col = sddc_db[constant.SDDC_COLLECTION]
 
     def get_backedup_sddc_config(self):
         config = self.sddc_col.find(
