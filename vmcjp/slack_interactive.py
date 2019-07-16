@@ -321,6 +321,12 @@ def interactive_handler(event):
     elif "confirmation" in event.get("callback_id"):
         if "yes" in event.get("response"):
             slack_message.start_create_sddc_message(event)
+            db.write_event_db(
+                user_id, 
+                {
+                    "status": "creating", 
+                }
+            )
             event.update(result)
             call_lambda("create_sddc", event)
         else:
