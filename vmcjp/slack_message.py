@@ -312,11 +312,15 @@ def list_sddcs_text_message(event):
 #    logging.info(response.read())
 
 def list_sddcs_message(event):
-    response = post_field_button(
+    response = post_field_button_with_bot_token(
         event, 
-        LIST_BUTTON, 
-        type="bot"
+        LIST_BUTTON
     )
+#    response = post_field_button(
+#        event, 
+#        LIST_BUTTON, 
+#        type="bot"
+#    )
 #    logging.info(response.read())
 
 def crud_sddc_result_message(event):
