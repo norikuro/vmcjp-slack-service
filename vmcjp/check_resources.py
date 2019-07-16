@@ -6,7 +6,6 @@ import os
 
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.lambdautils import call_lambda
-#from vmcjp.utils.slack_post import post_to_response_url
 from vmcjp.utils.s3utils import read_json_from_s3
 from vmcjp.utils import dbutils
 from vmcjp.utils import constant
@@ -71,15 +70,9 @@ def check_customer_aws(org_id, aws_account, vmc_client):
 def lambda_handler(event, context):
 #  logging.info(event)
   resp = check(event, get_vmc_client())
-#  text = {
-#    "channel": event["channel_id"],
-#    "text": resp
-#  }
   event.update(
     {
       "check_result": resp
     }
   )
   slack_message.check_result_message(event)
-#  response = post_to_response_url(url, text)
-#  logging.info(response.read())
