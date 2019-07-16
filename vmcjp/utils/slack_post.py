@@ -131,6 +131,32 @@ def post_option(event, button, option_list, type="response"):
         )
     return response
 
+def post_button2(
+    url, 
+    slack_token,
+    channel,
+    button, 
+    bot_token=None
+):
+    button_set = json.load(open(button, 'r'))
+
+    if "response" in type:
+        response = post_text2(
+            url,
+            slack_token,
+            channel,
+            button_set
+        )
+    else:
+        response = post_text2(
+            url,
+            slack_token,
+            channel,
+            button_set,
+            bot_token
+        )
+    return response
+
 def post_button(event, button, type="response"):
     button_set = json.load(open(button, 'r'))
 
