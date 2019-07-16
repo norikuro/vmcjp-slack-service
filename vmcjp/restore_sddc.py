@@ -3,7 +3,7 @@ import os
 import logging
 
 #from vmcjp.utils.slack_post import post_field_button
-from vmcjp.utils import sddc_db
+#from vmcjp.utils import sddc_db
 from vmcjp.utils import dbutils2
 from vmcjp.utils import constant
 from vmcjp import slack_message
