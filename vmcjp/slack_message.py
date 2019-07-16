@@ -93,7 +93,7 @@ def post_button_with_bot_token(event, button):
 
 def help_message(event):
 #    response = post_button(event, HELP_BUTTON, "bot")
-    response = post_button_with_bot_token(event, button)
+    response = post_button_with_bot_token(event, HELP_BUTTON)
 #    logging.info(response.read())
 
 def ask_wait_to_finish_task_message(event):
