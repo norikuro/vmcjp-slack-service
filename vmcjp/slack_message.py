@@ -3,9 +3,6 @@ import logging
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
 PRECHECK_BUTTON = constant.BUTTON_DIR + "precheck.json"
 DELETE_BUTTON = constant.BUTTON_DIR + "delete.json"
 LIST_BUTTON = constant.BUTTON_DIR + "list.json"
@@ -21,6 +18,9 @@ VPC_BUTTON = constant.BUTTON_DIR + "vpc.json"
 SUBNET_BUTTON = constant.BUTTON_DIR + "subnet.json"
 TASK_BUTTON = constant.BUTTON_DIR + "task.json"
 RESTORE_BUTTON = constant.BUTTON_DIR + "restore.json"
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def post_text_with_bot_token(event, text):
     data = {"text": text}
