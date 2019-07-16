@@ -341,6 +341,10 @@ def check_task_message(event):
     response = post_text_with_bot_token(event, event.get("status"))
 #    logging.info(response.read())
 
+def check_task_webhook_message(event):
+    response = post_text_to_webhook(event, event.get("status"))
+#    logging.info(response.read())
+
 def started_crud_sddc_message(event):
     text = "Hi <@{}>, started to {} sddc.".format(
         event.get("user_id"),
