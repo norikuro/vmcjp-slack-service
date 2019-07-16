@@ -91,6 +91,17 @@ def post_button_with_bot_token(event, button):
     )
     return response
 
+def post_field_button_with_bot_token(event, button):
+    response = post_field_button2(
+        event.get("post_url"),
+        event.get("slack_token"), 
+        event.get("channel"),
+        button,
+        event,
+        event.get("pretext")
+        event.get("bot_token")
+    )
+
 def help_message(event):
     response = post_button_with_bot_token(event, HELP_BUTTON)
 #    logging.info(response.read())
