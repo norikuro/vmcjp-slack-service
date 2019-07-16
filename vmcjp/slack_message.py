@@ -387,7 +387,10 @@ def check_resources_message(event):
 
 def cancel_sddc_restoration_message(event):
     text = "OK, canceled a restore sddc wizard."
-    response = post_text_to_response_url(event, text)
+    if event.get("response_url") is not None:
+        response = post_text_to_response_url(event, text)
+    else:
+        response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
 def check_result_message(event):
