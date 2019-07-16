@@ -205,7 +205,7 @@ def post_field_button2(
     channel, 
     button, 
     field_dics, 
-    pretext=None, 
+#    pretext=None, 
     bot_token=None
 ):
     button_set = create_button(field_dics, button)
