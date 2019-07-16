@@ -213,7 +213,8 @@ def ask_sddc_name_message(event):
 #    logging.info(response.read())
 
 def link_aws_message(event):
-    response = post_button(event, LINK_AWS_BUTTON, "bot")
+#    response = post_button(event, LINK_AWS_BUTTON, "bot")
+    response = post_button_with_bot_token(event, LINK_AWS_BUTTON)
 #    logging.info(response.read())
 
 def link_aws_single_message(event):
