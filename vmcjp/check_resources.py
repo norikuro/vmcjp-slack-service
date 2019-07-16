@@ -73,9 +73,15 @@ def check_customer_aws(org_id, aws_account, vmc_client):
 def lambda_handler(event, context):
 #  logging.info(event)
   resp = check(event, get_vmc_client())
-  text = {
+#  text = {
 #    "channel": event["channel_id"],
-    "text": resp
-  }
-  response = post_to_response_url(url, text)
+#    "text": resp
+#  }
+  event.update(
+    {
+      "check_result": resp
+    }
+  )
+  slack_message.check_result_message(event)
+#  response = post_to_response_url(url, text)
 #  logging.info(response.read())
