@@ -92,7 +92,6 @@ def post_button_with_bot_token(event, button):
     return response
 
 def help_message(event):
-#    response = post_button(event, HELP_BUTTON, "bot")
     response = post_button_with_bot_token(event, HELP_BUTTON)
 #    logging.info(response.read())
 
@@ -195,7 +194,6 @@ def max_hosts_message(event):
     )
     response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
-#    response = post_button(event, PRECHECK_BUTTON, "bot")
     response = post_button_with_bot_token(event, PRECHECK_BUTTON)
 #    logging.info(response.read())
 
@@ -213,17 +211,14 @@ def ask_sddc_name_message(event):
 #    logging.info(response.read())
 
 def link_aws_message(event):
-#    response = post_button(event, LINK_AWS_BUTTON, "bot")
     response = post_button_with_bot_token(event, LINK_AWS_BUTTON)
 #    logging.info(response.read())
 
 def link_aws_single_message(event):
-#    response = post_button(event, LINK_AWS_BUTTON)
     response = post_button_to_response_url(event, LINK_AWS_BUTTON)
 #    logging.info(response.read())
 
 def single_multi_message(event):
-#    response = post_button(event, SINGLE_MULTI_BUTTON, "bot")
     response = post_button_with_bot_token(event, SINGLE_MULTI_BUTTON)
 #    logging.info(response.read())
 
