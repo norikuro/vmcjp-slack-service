@@ -12,8 +12,7 @@ class _const:
   CRED_DB = "cred_db"
   CRED_COLLECTION = "cred_collection"
   BUTTON_DIR = "vmcjp/button/"
-  HELP = "May I help you? please type `help`."
-  
+  INT_STATUS = ["create_sddc", "resource_check", "sddc_name", "single_multi", "num_hosts", "aws_account", "vpc", "vpc_cidr", "link_aws"]  
 
   class ConstError(TypeError):
     pass
