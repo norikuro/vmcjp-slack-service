@@ -222,7 +222,8 @@ def link_aws_single_message(event):
 #    logging.info(response.read())
 
 def single_multi_message(event):
-    response = post_button(event, SINGLE_MULTI_BUTTON, "bot")
+#    response = post_button(event, SINGLE_MULTI_BUTTON, "bot")
+    response = post_button_with_bot_token(event, SINGLE_MULTI_BUTTON)
 #    logging.info(response.read())
 
 def num_hosts_list(event):
