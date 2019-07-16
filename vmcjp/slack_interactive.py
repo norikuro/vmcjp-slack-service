@@ -333,5 +333,15 @@ def interactive_handler(event):
             slack_message.cancel_sddc_creation_message(event)
             db.delete_event_db(user_id)
         return
+    elif "restore_sddc" in event.get("callback_id"):
+        if "yes" in event.get("response"):
+            slack_message.check_resources_message(event)
+            event.update(result)
+            db.write_event_db(
+                event.get("user_id"), 
+                {
+                    "status": "check_resource"
+                }
+            )
     else:
         return
