@@ -75,4 +75,5 @@ def lambda_handler(event, context):
       "check_result": resp
     }
   )
+  event.update({"org_id": os.environ["test_org"]}) #for internal use
   slack_message.check_result_message(event)
