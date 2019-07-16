@@ -19,6 +19,7 @@ ACCOUNT_BUTTON = constant.BUTTON_DIR + "account.json"
 NUM_HOSTS_BUTTON = constant.BUTTON_DIR + "num_hosts.json"
 VPC_BUTTON = constant.BUTTON_DIR + "vpc.json"
 SUBNET_BUTTON = constant.BUTTON_DIR + "subnet.json"
+TASK_BUTTON = constant.BUTTON_DIR + "task.json"
 
 def post_text_with_bot_token(event, text):
     data = {"text": text}
@@ -94,6 +95,15 @@ def post_button_with_bot_token(event, button):
 def post_field_button_to_response_url(event, button):
     response = post_field_button2(
         event.get("response_url"),
+        event.get("slack_token"), 
+        event.get("channel"),
+        button,
+        event
+    )
+
+def post_field_button_to_webhook(event, button):
+    response = post_field_button2(
+        event.get("webhook_url"),
         event.get("slack_token"), 
         event.get("channel"),
         button,
@@ -339,3 +349,14 @@ def started_crud_sddc_message(event):
     response = post_text_to_webhook(event, text)
 #    logging.info(response.read())
 
+def task_message(event):
+    response = post_field_button_with_bot_token(
+        event, 
+        TASK_BUTTON
+    )
+    
+def task_webhook_message(event):
+    response = post_field_button_to_webhook(
+        event, 
+        TASK_BUTTON
+    )
