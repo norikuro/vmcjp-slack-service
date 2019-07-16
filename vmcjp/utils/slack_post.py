@@ -72,10 +72,11 @@ def post_text2(
     }
     post_data.update(data)
     
-    if bot_token is None:
-        response = post(url, post_data)
-    else:
-        response = post(url, post_data, bot_token)
+#    if bot_token is None:
+#        response = post(url, post_data)
+#    else:
+#        response = post(url, post_data, bot_token)
+    response = post(url, post_data, bot_token)
     return response
 
 def post_option2(
