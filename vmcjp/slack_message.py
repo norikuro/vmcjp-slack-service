@@ -20,6 +20,7 @@ NUM_HOSTS_BUTTON = constant.BUTTON_DIR + "num_hosts.json"
 VPC_BUTTON = constant.BUTTON_DIR + "vpc.json"
 SUBNET_BUTTON = constant.BUTTON_DIR + "subnet.json"
 TASK_BUTTON = constant.BUTTON_DIR + "task.json"
+RESTORE_BUTTON = constant.BUTTON_DIR + "restore.json"
 
 def post_text_with_bot_token(event, text):
     data = {"text": text}
