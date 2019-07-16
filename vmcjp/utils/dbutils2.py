@@ -68,9 +68,9 @@ class DocmentDb(object):
         self.sddc_db = self.client[constant.SDDC_DB]
         self.sddc_col = self.event_db[constant.SDDC_COLLECTION]
 
-    def get_backedup_sddc_config(db):
-        config = db.find_with_fields(
-            {},
+    def get_backedup_sddc_config(self):
+        config = self.sddc_col.find(
+            {}, 
             {
                 "org.id": 1,
                 "sddc_updated": 1,
@@ -85,12 +85,12 @@ class DocmentDb(object):
                 "aws_connected_account": 1,
                 "_id": 0
             }
-        )
+        )[0]
         
-        ca = config["aws_connected_account"]
+        ca = config.get("aws_connected_account")
         for a in ca:
-            if config["customer_vpc"]["linked_account"] == a["account_number"]:
-                a_id = a["id"]
+            if config.get("customer_vpc").get("linked_account") == a.get("account_number"):
+                a_id = a.get("id")
         
         return {
             "org_id": config["org"]["id"],
@@ -106,4 +106,3 @@ class DocmentDb(object):
             "connected_account_id": a_id,
             "link_aws": "True"
         }
-
