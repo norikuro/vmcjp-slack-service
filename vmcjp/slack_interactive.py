@@ -105,7 +105,7 @@ def interactive_handler(event):
     db = dbutils2.DocmentDb(event.get("db_url"))
     result = db.read_event_db(user_id, 5)
     if result is None:
-        slack_message.help_message(event)
+        slack_message.may_i_message(event)
         return
 
     __cred_data = db.read_cred_db(event.get("user_id"))
