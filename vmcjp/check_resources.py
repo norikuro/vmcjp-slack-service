@@ -28,7 +28,7 @@ def check(event, vmc_client):
   if not check_customer_aws(event.get("org_id"), event.get("aws_account"), vmc_client):
     return "AWS Account with ID {} doesn't exist or connected to this Org".format(event.get("aws_account"))
   else:
-    call_lambda("create_sddc", event)
+#    call_lambda("create_sddc", event)
     return "Checked, no pronlem. Then I will create sddc."
 
 def check_sddc(org_id, sddc_id, vmc_client):
