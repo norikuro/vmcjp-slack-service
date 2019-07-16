@@ -233,13 +233,18 @@ def post_field_button2(
         )
     return response
 
-def post_field_button(event, button, pretext=None, type="response"):
+def post_field_button(
+    event, 
+    button, 
+#    pretext=None, 
+    type="response"
+):
     button_set = create_button(event, button)
     
-    if pretext is not None:
-        button_set.update(
-            {"pretext": pretext}
-        )
+#    if pretext is not None:
+#        button_set.update(
+#            {"pretext": pretext}
+#        )
     button_set.update(button_set)
     
     if "response" in type:
