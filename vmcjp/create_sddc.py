@@ -8,8 +8,6 @@ from distutils.util import strtobool
 from com.vmware.vmc.model_client import AwsSddcConfig, AccountLinkSddcConfig, SddcConfig, AccountLinkConfig
 from com.vmware.vapi.std.errors_client import Unauthorized
 from vmware.vapi.vmc.client import create_vmc_client
-#from vmcjp.utils.slack_post import post_text, post_field_button, post_to_webhook
-from vmcjp.utils.slack_post import post_field_button
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils import constant
 from vmcjp import slack_message
