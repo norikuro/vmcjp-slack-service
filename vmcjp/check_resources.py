@@ -105,4 +105,4 @@ def lambda_handler(event, context):
       }
     )
   else:
-    db.delete_event_db(user_id)
+    db.delete_event_db(event.get("user_id"))
