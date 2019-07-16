@@ -49,10 +49,11 @@ def lambda_handler(event, context):
 #      status,
 #      "bot"
 #    )
-    response = post_to_webhook(
-      event.get("webhook_url"), 
-      status
-    )
+    slack_message.check_task_webhook_message(event)
+#    response = post_to_webhook(
+#      event.get("webhook_url"), 
+#      status
+#    )
 
     if "Failed" in status or "Canceled" in status or "Finished" in status:
       db.delete_event_db(event.get("user_id"))
