@@ -6,14 +6,10 @@ import atexit
 
 from vmware.vapi.vmc.client import create_vmc_client
 from com.vmware.vapi.std.errors_client import Unauthorized
-from vmcjp.utils.slack_post import post_field_button
-#from vmcjp.utils.slack_post import post_text, post_field_button, post_to_webhook
 from vmcjp.utils.task_helper import task_handler
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils import constant
 from vmcjp import slack_message
-
-#TASK_BUTTON = constant.BUTTON_DIR + "task.json"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -75,21 +71,8 @@ def lambda_handler(event, context):
     return 
   
   slack_message.task_message(event)
-#  response = post_field_button(
-#    event, 
-#    TASK_BUTTON, 
-#    type="bot"
-#  )
-#  logging.info(response.read())
-
   slack_message.started_crud_sddc_message(event)
   slack_message.task_webhook_message(event)
-#  response = post_field_button(
-#    event, 
-#    TASK_BUTTON, 
-#    type="webhook"
-#  )
-#  logging.info(response.read())
 
   event.update(
     {"status": "task_started"}
