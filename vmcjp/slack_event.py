@@ -97,7 +97,6 @@ def list_sddcs(vmc_client, token, org_id):
     ]
 
 def event_handler(event):
-    int_status = ["create_sddc", "resource_check", "sddc_name", "single_multi", "num_hosts", "aws_account", "vpc", "vpc_cidr", "link_aws"]
     text = event.get("text").lower()
     
     db = dbutils2.DocmentDb(event.get("db_url"))
@@ -266,7 +265,7 @@ def event_handler(event):
                         "sddc_name": event.get("text")
                     }
                 )
-            elif result.get("status") in int_status:
+            elif result.get("status") in constant.INT_STATUS:
                 slack_message.ask_select_button_message(event)
             return
     elif "delete" in result.get("command"):
