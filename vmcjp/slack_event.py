@@ -162,6 +162,7 @@ def event_handler(event):
             if __cred_data is None:
                 slack_message.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
+                slack_message.start_restore_wizard_message(event)
                 event.update({"token": __cred_data.get("token")})
                 call_lambda("restore_sddc", event)
                 db.write_event_db(
