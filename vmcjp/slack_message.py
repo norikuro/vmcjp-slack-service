@@ -374,3 +374,10 @@ def restore_message(event):
         RESTORE_BUTTON
     )
 #    logging.info(response.read())
+
+def check_result_message(event):
+    response = post_text_to_response_url(
+        event, 
+        event.get("check_result")
+    )
+#    logging.info(response.read())
