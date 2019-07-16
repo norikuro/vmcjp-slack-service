@@ -368,11 +368,26 @@ def task_webhook_message(event):
     )
 #    logging.info(response.read())
 
+def start_restore_wizard_message(event):
+    text = "OK, start to restore sddc."
+    response = post_text_with_bot_token(event, text)
+#    logging.info(response.read())
+
 def restore_message(event):
     reponse = post_field_button_with_bot_token(
         event, 
         RESTORE_BUTTON
     )
+#    logging.info(response.read())
+
+def check_resources_message(event):
+    text = "OK, checking current VMC resources."
+    response = post_text_to_response_url(event, text)
+#    logging.info(response.read())
+
+def cancel_sddc_restoration_message(event):
+    text = "OK, canceled a restore sddc wizard."
+    response = post_text_to_response_url(event, text)
 #    logging.info(response.read())
 
 def check_result_message(event):
