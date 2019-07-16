@@ -344,5 +344,8 @@ def interactive_handler(event):
                     "status": "check_resources"
                 }
             )
+        else:
+            slack_message.cancel_sddc_restoration_message(event)
+            db.delete_event_db(user_id)
     else:
         return
