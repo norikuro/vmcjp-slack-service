@@ -71,10 +71,12 @@ def lambda_handler(event, context):
 #  logging.info(event)
   event.update({"org_id": os.environ["test_org"]}) #for test
 
-  resp = check(event, get_vmc_client(event.get("token")))
   event.update(
     {
-      "check_result": resp
+      "check_result": check(
+        event, 
+        get_vmc_client(event.get("token"))
+      )
     }
   )
   slack_message.check_result_message(event)
