@@ -160,6 +160,12 @@ def interactive_handler(event):
                 }
             )
             slack_message.region_list_message(event)
+            db.write_event_db(
+                event.get("user_id"), 
+                {
+                    "status": "resource_check"
+                }
+            ) 
         else:
             slack_message.cancel_sddc_creation_message(event)
             db.delete_event_db(user_id)
