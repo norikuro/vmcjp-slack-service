@@ -6,13 +6,11 @@ import os
 
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.lambdautils import call_lambda
-from vmcjp.utils.slack_post import post_to_response_url
+#from vmcjp.utils.slack_post import post_to_response_url
 from vmcjp.utils.s3utils import read_json_from_s3
-
 from vmcjp.utils import dbutils
 from vmcjp.utils import constant
-
-#TEST_ORG_ID = os.environ["test_org"] #for test
+from vmcjp import slack_message
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
