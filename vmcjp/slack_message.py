@@ -72,8 +72,28 @@ def post_option_to_response_url(event, button, option_list):
     )
     return response
 
+def post_button_to_response_url(event, button):
+    response = post_button2(
+        event.get("response_url"),
+        event.get("slack_token"), 
+        event.get("channel"),
+        button
+    )
+    return response
+
+def post_button_with_bot_token(event, button):
+    response = post_button2(
+        event.get("post_url"),
+        event.get("slack_token"), 
+        event.get("channel"),
+        button,
+        event.get("bot_token")
+    )
+    return response
+
 def help_message(event):
-    response = post_button(event, HELP_BUTTON, "bot")
+#    response = post_button(event, HELP_BUTTON, "bot")
+    response = post_button_with_bot_token(event, button)
 #    logging.info(response.read())
 
 def ask_wait_to_finish_task_message(event):
