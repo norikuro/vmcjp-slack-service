@@ -98,7 +98,6 @@ def post_field_button_with_bot_token(event, button):
         event.get("channel"),
         button,
         event,
-        event.get("pretext")
         event.get("bot_token")
     )
 
