@@ -3,8 +3,8 @@
 import sys
 
 class _const:
-#  S3_CONFIG = "vmcjp/s3config.json"
-  S3_CONFIG = "vmcjp/test_s3config.json" #for test
+  S3_CONFIG = "vmcjp/s3config.json"
+#  S3_CONFIG = "vmcjp/test_s3config.json" #for test
   SDDC_DB = "sddc_db"
   SDDC_COLLECTION = "sddc_collection"
   USER_DB = "user_db"
