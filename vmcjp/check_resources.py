@@ -7,7 +7,7 @@ import os
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils.s3utils import read_json_from_s3
-from vmcjp.utils import dbutils2
+from vmcjp.utils import dbutils
 from vmcjp.utils import constant
 from vmcjp import slack_message
 
@@ -95,7 +95,7 @@ def lambda_handler(event, context):
   )
   slack_message.check_result_message(event)
   
-  db = dbutils2.DocmentDb(event.get("db_url"))
+  db = dbutils.DocmentDb(event.get("db_url"))
   if result.get("result"):
     db.write_event_db(
       event.get("user_id"), 
