@@ -168,8 +168,10 @@ def event_handler(event):
                 event.update(config) #added
                 event.update({"token": __cred_data.get("token")})
                 config.update( #added
-                    "command": "restore", 
-                    "status": "restore_sddc"
+                    {
+                        "command": "restore", 
+                        "status": "restore_sddc"
+                    }
                 )
                 db.write_event_db(event.get("user_id"), config) #added
                 slack_message.restore_message(event) #added
