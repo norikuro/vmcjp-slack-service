@@ -5,7 +5,7 @@ import requests
 
 from vmware.vapi.vmc.client import create_vmc_client
 
-from vmcjp.utils import dbutils2
+from vmcjp.utils import dbutils
 from vmcjp.utils import constant
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp import slack_message
@@ -102,7 +102,7 @@ def check_sddc_user(event):
 def interactive_handler(event):
     user_id = event.get("user_id")
     
-    db = dbutils2.DocmentDb(event.get("db_url"))
+    db = dbutils.DocmentDb(event.get("db_url"))
     result = db.read_event_db(user_id, 5)
     if result is None:
         slack_message.may_i_message(event)
