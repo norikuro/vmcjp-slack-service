@@ -6,7 +6,7 @@ import atexit
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.cloudwatch import remove_event
 from vmcjp.utils.task_helper import task_handler
-from vmcjp.utils import dbutils2
+from vmcjp.utils import dbutils
 from vmcjp import slack_message
 
 logger = logging.getLogger()
@@ -20,7 +20,7 @@ def get_vmc_client(token):
 
 def lambda_handler(event, context):
 #    logging.info(event)
-    db = dbutils2.DocmentDb(event.get("db_url"))
+    db = dbutils.DocmentDb(event.get("db_url"))
 
     if "task_started" in event.get("status"):
       event.update(
