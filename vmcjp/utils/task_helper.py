@@ -1,7 +1,7 @@
 import datetime
 
 from time import sleep
-from vmcjp.utils import dbutils2
+from vmcjp.utils import dbutils
 from com.vmware.vmc.model_client import Task
 from vmcjp.utils.cloudwatch import put_event
 
@@ -10,7 +10,7 @@ def task_handler(task_client, event):
 #  resp = wait_for_task(task_client, event.get("org_id"), event.get("task_id"))
   resp = {"status": True, "check_time": 3, "estimated_time": 3} #for test
 
-  db = dbutils2.DocmentDb(event.get("db_url"))
+  db = dbutils.DocmentDb(event.get("db_url"))
   
   if resp.get("status") == False:
     db.delete_event_db(event.get("user_id"))
