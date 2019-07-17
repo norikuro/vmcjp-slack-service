@@ -203,10 +203,16 @@ def cancel_sddc_deletion_message(event):
 
 def start_create_sddc_wizard_message(event):
     text = "OK, starting create sddc wizard."
-    response = post_text_with_bot_token(event, text)
+    if event.get("response_url") is not None:
+        response = post_text_to_response_url(event, text)
+    else:
+        response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
     text = "This conversation will end by typing `cancel` or doing nothing for 5 minutes"
-    response = post_text_with_bot_token(event, text)
+    if event.get("response_url") is not None:
+        response = post_text_to_response_url(event, text)
+    else:
+        response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
 def check_resources_message(event):
