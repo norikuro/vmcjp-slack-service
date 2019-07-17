@@ -53,7 +53,7 @@ def delete_sddc(
   except:
     return {
       "success": False,
-      "message": "Something wrong, failed to delete sddc."
+      "message": "Something wrong, failed to delete sddc. You may not have delete privilidge."
     }
 
 def lambda_handler(event, context):
