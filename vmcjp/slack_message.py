@@ -208,6 +208,8 @@ def start_create_sddc_wizard_message(event):
     text = "This conversation will end by typing `cancel` or doing nothing for 5 minutes"
     response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
+
+def check_resources_message(event):
     text = "Checking current resources..."
     response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
