@@ -51,24 +51,24 @@ def create_sddc(
     deployment_type=SddcConfig.DEPLOYMENT_TYPE_SINGLEAZ
   )
   
-#  try:
-#    task = vmc_client.orgs.Sddcs.create(
-#      org=org_id, sddc_config=sddc_config
-#    )
-#    return {
-#      "success": True,
-#      "task_id": task.id
-#    }
-#  except Unauthorized:
-#    return {
-#      "success": False,
-#      "message": "Failed, you are not authorized to create sddc."
-#    }
-#  except:
-#    return {
-#      "success": False,
-#      "message": "Something wrong, failed to create sddc."
-#    }
+  try:
+    task = vmc_client.orgs.Sddcs.create(
+      org=org_id, sddc_config=sddc_config
+    )
+    return {
+      "success": True,
+      "task_id": task.id
+    }
+  except Unauthorized:
+    return {
+      "success": False,
+      "message": "Failed, you are not authorized to create sddc."
+    }
+  except:
+    return {
+      "success": False,
+      "message": "Something wrong, failed to create sddc."
+    }
   return {
       "success": True,
       "task_id": "xxxxxxxxx"
