@@ -163,26 +163,17 @@ def event_handler(event):
                 slack_message.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
                 slack_message.start_restore_wizard_message(event)
-#                db.init_sddc_db() #added
-                config = db.get_backedup_sddc_config() #added
-                event.update(config) #added
+                config = db.get_backedup_sddc_config()
+                event.update(config)
                 event.update({"token": __cred_data.get("token")})
-                config.update( #added
+                config.update(
                     {
                         "command": "restore", 
                         "status": "restore_sddc"
                     }
                 )
-                db.write_event_db(event.get("user_id"), config) #added
-                slack_message.restore_message(event) #added
-#                call_lambda("restore_sddc", event)
-#                db.write_event_db(
-#                    event.get("user_id"), 
-#                    {
-#                        "command": "restore", 
-#                        "status": "restore_sddc"
-#                    }
-#                )
+                db.write_event_db(event.get("user_id"), config)
+                slack_message.restore_message(event)
         elif "list sddcs" in text:
             if __cred_data is None:
                 slack_message.ask_register_token_message(event)
