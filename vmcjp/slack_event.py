@@ -163,7 +163,7 @@ def event_handler(event):
                 slack_message.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
                 slack_message.start_restore_wizard_message(event)
-                db.init_sddc_db() #added
+#                db.init_sddc_db() #added
                 config = db.get_backedup_sddc_config() #added
                 event.update(config) #added
                 event.update({"token": __cred_data.get("token")})
