@@ -69,7 +69,7 @@ class DocmentDb(object):
         self.sddc_col = sddc_db[constant.SDDC_COLLECTION]
 
     def get_backedup_sddc_config(self):
-        init_sddc_db(self)
+        self.init_sddc_db()
         config = self.sddc_col.find(
             {}, 
             {
