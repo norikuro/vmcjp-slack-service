@@ -385,11 +385,6 @@ def restore_message(event):
     )
 #    logging.info(response.read())
 
-def check_resources_message(event):
-    text = "OK, checking current VMC resources."
-    response = post_text_to_response_url(event, text)
-#    logging.info(response.read())
-
 def cancel_sddc_restoration_message(event):
     text = "OK, canceled a restore sddc wizard."
     if event.get("response_url") is not None:
