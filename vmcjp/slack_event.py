@@ -146,6 +146,7 @@ def event_handler(event):
             elif "registered" in __cred_data.get("status"):
                 event.update({"token": __cred_data.get("token")})
                 slack_message.start_create_sddc_wizard_message(event)
+                slack_message.check_resources_message(event)
                 event.update(
                     {
                         "max_hosts": get_max_num_hosts(
