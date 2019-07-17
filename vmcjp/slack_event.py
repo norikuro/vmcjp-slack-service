@@ -117,7 +117,7 @@ def event_handler(event):
     result = db.read_event_db(event.get("user_id"), 5)
     __cred_data = db.read_cred_db(event.get("user_id"))
     if result is None:
-        if "create sddc on zerocloud" in text:
+        if "create sddc on zerocloud" in text: #for internal use only
             if __cred_data is None:
                 slack_message.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
