@@ -1,1 +1,28 @@
-aa
+{
+  "attachments": 
+  [
+    {
+      "text": "Please select provider type.",
+      "color": "#3AA3E3",
+      "attachment_type": "default",
+      "callback_id": "provider",
+      "actions": [
+        {
+          "name": "provider_list",
+          "text": "Select provider type",
+          "type": "select",
+          "options": [
+            {
+              "text": "AWS",
+              "value": "AWS"
+            },
+            {
+              "text": "ZEROCLOUD",
+              "value": "ZEROCLOUD"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
