@@ -336,22 +336,14 @@ def interactive_handler(event):
     elif "restore_sddc" in event.get("callback_id"):
         if "yes" in event.get("response"):
             slack_message.check_resources_message(event)
-            slack_message.restore_message(event)
             event.update(result)
-#            call_lambda("check_resources", event)
-            db.init_sddc_db()
-            config = db.get_backedup_sddc_config()
-            event.update(config)
+            call_lambda("check_resources", event)
             db.write_event_db(
                 event.get("user_id"), 
-                config
+                {
+                    "status": "check_resources"
+                }
             )
-#            db.write_event_db(
-#                event.get("user_id"), 
-#                {
-#                    "status": "check_resources"
-#                }
-#            )
         else:
             slack_message.cancel_sddc_restoration_message(event)
             db.delete_event_db(user_id)
