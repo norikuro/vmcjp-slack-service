@@ -38,6 +38,15 @@ def get_vmc_client(token):
     atexit.register(session.close)
     return vmc_client
 
+def list_region(vmc_client, org_id):
+    regions = vmc_client.Orgs.get(org_id).properties.values.get("defaultAwsRegions").split(",")
+    return [
+        {
+            "text": region,
+            "value": region
+        } for region in regions
+    ]
+
 def is_network(address):
     try:
         ipaddress.ip_network(address)
@@ -108,7 +117,30 @@ def event_handler(event):
     result = db.read_event_db(event.get("user_id"), 5)
     __cred_data = db.read_cred_db(event.get("user_id"))
     if result is None:
-        if "create sddc" in text:
+        if "create sddc on zerocloud" in text:
+            if __cred_data is None:
+                slack_message.ask_register_token_message(event)
+            elif "registered" in __cred_data.get("status"):
+                event.update({"token": __cred_data.get("token")})
+                slack_message.start_create_sddc_wizard_message(event)
+                event.update(
+                    {
+                        "region_list": list_region(
+                            get_vmc_client(event.get("token")),
+                            event.get("org_id")
+                        )
+                    }
+                )
+            slack_message.region_list_message(event)
+            db.write_event_db(
+                    event.get("user_id"), 
+                    {
+                        "command": "create",
+                        "status": "create_sddc", 
+                        "provider": "ZEROCLOUD"
+                    }
+                )
+        elif "create sddc" in text:
             if __cred_data is None:
                 slack_message.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
@@ -132,7 +164,8 @@ def event_handler(event):
                     {
                         "command": "create",
                         "status": "create_sddc", 
-                        "max_hosts": event.get("max_hosts")
+                        "max_hosts": event.get("max_hosts"),
+                        "provider": "AWS"
                     }
                 )
             return
