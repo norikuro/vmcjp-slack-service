@@ -27,6 +27,7 @@ def create_sddc(
   sddc_name,
   sddc_type,
   vpc_cidr,
+  provider,
   customer_subnet_id,
   connected_account_id,
   num_hosts,
@@ -44,7 +45,8 @@ def create_sddc(
       )
     ] if link_aws else None,
     vpc_cidr=vpc_cidr,
-    provider="ZEROCLOUD", #for test
+    provider=provider
+#    provider="ZEROCLOUD", #for test
 #    provider=SddcConfig.PROVIDER_AWS,
     num_hosts=num_hosts,
     account_link_config=None if link_aws else AccountLinkConfig(True),
@@ -85,6 +87,7 @@ def lambda_handler(event, context):
     event.get("sddc_name"),
     event.get("sddc_type"),
     event.get("vpc_cidr"),
+    event.get("provider"),
     event.get("customer_subnet_id"),
     event.get("connected_account_id"),
     event.get("num_hosts"),
