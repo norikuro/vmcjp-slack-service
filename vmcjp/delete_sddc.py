@@ -40,6 +40,16 @@ def delete_sddc(
       "success": False,
       "message": "Failed, you are not authorized to delete sddc."
     }
+  except InvalidRequest:
+    return {
+      "success": False,
+      "message": "InvalidRequest"
+    }
+  except Unauthenticated:
+    return {
+      "success": False,
+      "message": "Unauthenticated"
+    }
   except:
     return {
       "success": False,
