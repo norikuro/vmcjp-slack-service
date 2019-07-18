@@ -144,7 +144,7 @@ def event_handler(event):
                         "max_hosts": get_max_num_hosts_zerocloud(
                             event.get("token"), 
                             event.get("org_id")
-                        )
+                        ),
                         "provider": "ZEROCLOUD"
                     }
                 )
