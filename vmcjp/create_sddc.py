@@ -45,7 +45,7 @@ def create_sddc(
       )
     ] if link_aws else None,
     vpc_cidr=vpc_cidr,
-    provider=provider
+    provider=provider,
 #    provider="ZEROCLOUD", #for test
 #    provider=SddcConfig.PROVIDER_AWS,
     num_hosts=num_hosts,
