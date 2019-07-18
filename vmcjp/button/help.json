@@ -41,6 +41,17 @@
       "callback_id": "help",
       "fields": [
         {
+          "title": "Create SDDC on ZEROCLOUD",
+          "value": "Type `create sddc on zerocloud` to create sddc on zerocloud.  This will deploy virtual SDDC and this type of sddc will not consume AWS's bare metal.  You can check results in #vmcjpdemo channel."
+        }
+      ]
+    },
+    {
+      "color": "#3AA3E3",
+      "attachment_type": "default",
+      "callback_id": "help",
+      "fields": [
+        {
           "title": "Delete SDDC",
           "value": "Type `delete sddc` to delete sddc from this org.  You can delete only the sddc which you created.  You can check results in #vmcjpdemo channel."
         }
