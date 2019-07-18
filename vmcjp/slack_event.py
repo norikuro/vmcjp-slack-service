@@ -128,11 +128,19 @@ def event_handler(event):
                 event.update({"token": __cred_data.get("token")})
                 slack_message.start_create_sddc_wizard_message(event)
                 event.update(
+#                    {
+#                        "region_list": list_region(
+#                            get_vmc_client(event.get("token")),
+#                            event.get("org_id")
+#                        )
+#                    }
                     {
-                        "region_list": list_region(
-                            get_vmc_client(event.get("token")),
-                            event.get("org_id")
-                        )
+                        "region_list": [
+                            {
+                                "text": "AP_NORTHEAST_1", #for internal use
+                                "value": "AP_NORTHEAST_1" #for internal use
+                            }
+                        ]
                     }
                 )
             slack_message.region_list_message(event)
