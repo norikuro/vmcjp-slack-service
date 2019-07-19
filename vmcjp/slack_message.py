@@ -3,7 +3,6 @@ import logging
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 
-REGION_BUTTON = constant.BUTTON_DIR + "region.json"
 ACCOUNT_BUTTON = constant.BUTTON_DIR + "account.json"
 NUM_HOSTS_BUTTON = constant.BUTTON_DIR + "num_hosts.json"
 VPC_BUTTON = constant.BUTTON_DIR + "vpc.json"
@@ -245,16 +244,17 @@ def max_hosts_message(event):
 #    logging.info(response.read())
 
 def region_list_message(event):
+    region_button = constant.BUTTON_DIR + "region.json"
     if event.get("response_url") is not None:
         response = post_option_to_response_url(
             event, 
-            REGION_BUTTON, 
+            region_button, 
             event.get("region_list")
         )
     else:
         response = post_option_with_bot_token(
             event, 
-            REGION_BUTTON, 
+            region_button, 
             event.get("region_list")
         )
 #    logging.info(response.read())
