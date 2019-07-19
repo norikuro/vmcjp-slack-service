@@ -3,7 +3,6 @@ import logging
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 
-DELETE_BUTTON = constant.BUTTON_DIR + "delete.json"
 LIST_BUTTON = constant.BUTTON_DIR + "list.json"
 HELP_BUTTON = constant.BUTTON_DIR + "help.json"
 LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws.json"
@@ -169,9 +168,10 @@ def wrong_token_message(event):
 #    logging.info(response.read())
 
 def delete_sddc_message(event):
+    delete_button = constant.BUTTON_DIR + "delete.json"
     response = post_option_with_bot_token(
         event, 
-        DELETE_BUTTON, 
+        delete_button, 
         event.get("option_list")
     )
 
