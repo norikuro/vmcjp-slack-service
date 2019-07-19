@@ -3,8 +3,6 @@ import logging
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 
-RESTORE_BUTTON = constant.BUTTON_DIR + "restore.json"
-
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
@@ -397,9 +395,10 @@ def start_restore_wizard_message(event):
 #    logging.info(response.read())
 
 def restore_message(event):
+    restore_button = constant.BUTTON_DIR + "restore.json"
     reponse = post_field_button_with_bot_token(
         event, 
-        RESTORE_BUTTON
+        restore_button
     )
 #    logging.info(response.read())
 
