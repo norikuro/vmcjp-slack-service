@@ -3,7 +3,6 @@ import logging
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 
-TASK_BUTTON = constant.BUTTON_DIR + "task.json"
 RESTORE_BUTTON = constant.BUTTON_DIR + "restore.json"
 
 logger = logging.getLogger()
@@ -377,16 +376,18 @@ def started_crud_sddc_message(event):
 #    logging.info(response.read())
 
 def task_message(event):
+    task_button = constant.BUTTON_DIR + "task.json"
     response = post_field_button_with_bot_token(
         event, 
-        TASK_BUTTON
+        task_button
     )
 #    logging.info(response.read())
     
 def task_webhook_message(event):
+    task_button = constant.BUTTON_DIR + "task.json"
     response = post_field_button_to_webhook(
         event, 
-        TASK_BUTTON
+        task_button
     )
 #    logging.info(response.read())
 
