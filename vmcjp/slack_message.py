@@ -3,7 +3,6 @@ import logging
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 
-SUBNET_BUTTON = constant.BUTTON_DIR + "subnet.json"
 TASK_BUTTON = constant.BUTTON_DIR + "task.json"
 RESTORE_BUTTON = constant.BUTTON_DIR + "restore.json"
 
@@ -307,9 +306,10 @@ def aws_vpc_list_message(event):
 #    logging.info(response.read())
 
 def aws_subnet_list_message(event):
+    subnet_button = constant.BUTTON_DIR + "subnet.json"
     response = post_option_to_response_url(
         event, 
-        SUBNET_BUTTON, 
+        subnet_button, 
         event.get("subnet_list")
     )
 #    logging.info(response.read())
