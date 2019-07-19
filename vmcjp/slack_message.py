@@ -3,7 +3,6 @@ import logging
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 
-CREATE_BUTTON = constant.BUTTON_DIR + "create.json"
 DELETE_CONFIRM_BUTTON = constant.BUTTON_DIR + "delete_confirm.json"
 REGION_BUTTON = constant.BUTTON_DIR + "region.json"
 ACCOUNT_BUTTON = constant.BUTTON_DIR + "account.json"
@@ -332,9 +331,10 @@ def wrong_network_message(event):
 #    logging.info(response.read())
 
 def create_sddc_confirmation_message(event):
+    create_button = constant.BUTTON_DIR + "create.json"
     response = post_field_button_with_bot_token(
         event, 
-        CREATE_BUTTON
+        create_button
     )
 #    logging.info(response.read())
 
