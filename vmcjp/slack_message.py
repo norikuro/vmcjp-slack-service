@@ -3,7 +3,6 @@ import logging
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 
-LIST_BUTTON = constant.BUTTON_DIR + "list.json"
 HELP_BUTTON = constant.BUTTON_DIR + "help.json"
 LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws.json"
 SINGLE_MULTI_BUTTON = constant.BUTTON_DIR + "single_multi.json"
@@ -346,9 +345,10 @@ def list_sddcs_text_message(event):
 #    logging.info(response.read())
 
 def list_sddcs_message(event):
+    list_button = constant.BUTTON_DIR + "list.json"
     response = post_field_button_with_bot_token(
         event, 
-        LIST_BUTTON
+        list_button
     )
 #    logging.info(response.read())
 
