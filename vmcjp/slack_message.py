@@ -3,7 +3,6 @@ import logging
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 
-ACCOUNT_BUTTON = constant.BUTTON_DIR + "account.json"
 NUM_HOSTS_BUTTON = constant.BUTTON_DIR + "num_hosts.json"
 VPC_BUTTON = constant.BUTTON_DIR + "vpc.json"
 SUBNET_BUTTON = constant.BUTTON_DIR + "subnet.json"
@@ -291,9 +290,10 @@ def num_hosts_list(event):
 #    logging.info(response.read())
 
 def aws_account_list_message(event):
+    account_button = constant.BUTTON_DIR + "account.json"
     response = post_option_to_response_url(
         event, 
-        ACCOUNT_BUTTON, 
+        account_button, 
         event.get("aws_account_list")
     )
 #    logging.info(response.read())
