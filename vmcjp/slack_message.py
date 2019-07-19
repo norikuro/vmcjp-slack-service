@@ -3,7 +3,6 @@ import logging
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 
-DELETE_CONFIRM_BUTTON = constant.BUTTON_DIR + "delete_confirm.json"
 REGION_BUTTON = constant.BUTTON_DIR + "region.json"
 ACCOUNT_BUTTON = constant.BUTTON_DIR + "account.json"
 NUM_HOSTS_BUTTON = constant.BUTTON_DIR + "num_hosts.json"
@@ -172,9 +171,10 @@ def delete_sddc_message(event):
     )
 
 def sddc_deletion_confirmation_message(event):
+    delete_confirm_button = constant.BUTTON_DIR + "delete_confirm.json"
     response = post_field_button_to_response_url(
         event, 
-        DELETE_CONFIRM_BUTTON
+        delete_confirm_button
     )
 #    logging.info(response.read())
 
