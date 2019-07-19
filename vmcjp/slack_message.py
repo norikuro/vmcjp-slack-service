@@ -3,7 +3,6 @@ import logging
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 
-HELP_BUTTON = constant.BUTTON_DIR + "help.json"
 LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws.json"
 SINGLE_MULTI_BUTTON = constant.BUTTON_DIR + "single_multi.json"
 CREATE_BUTTON = constant.BUTTON_DIR + "create.json"
@@ -124,7 +123,8 @@ def may_i_message(event):
 #    logging.info(response.read())
 
 def help_message(event):
-    response = post_button_with_bot_token(event, HELP_BUTTON)
+    help_button = constant.BUTTON_DIR + "help.json"
+    response = post_button_with_bot_token(event, help_button)
 #    logging.info(response.read())
 
 def ask_select_button_message(event):
