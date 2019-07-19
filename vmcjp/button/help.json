@@ -3,6 +3,7 @@
   [
     {
       "pretext": "You can use following messages for vmcjp app.",
+      "fallback": "Here is help.",
       "color": "#3AA3E3",
       "attachment_type": "default",
       "callback_id": "help",
