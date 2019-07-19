@@ -3,6 +3,7 @@
   [
     {
       "text": "Which type do you want to deploy, Single host or Multi host?",
+      "fallback": "Single host or Multi host?",
       "color": "#3AA3E3",
       "attachment_type": "default",
       "callback_id": "single_multi",
