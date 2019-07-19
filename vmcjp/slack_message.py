@@ -3,7 +3,6 @@ import logging
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 
-PRECHECK_BUTTON = constant.BUTTON_DIR + "precheck.json"
 DELETE_BUTTON = constant.BUTTON_DIR + "delete.json"
 LIST_BUTTON = constant.BUTTON_DIR + "list.json"
 HELP_BUTTON = constant.BUTTON_DIR + "help.json"
@@ -240,12 +239,13 @@ def no_enough_resouces_message(event):
 #    logging.info(response.read())
 
 def max_hosts_message(event):
+    precheck_button = constant.BUTTON_DIR + "precheck.json"
     text = "You can deploy max {} hosts.".format(
         event.get("max_hosts")
     )
     response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
-    response = post_button_with_bot_token(event, PRECHECK_BUTTON)
+    response = post_button_with_bot_token(event, precheck_button)
 #    logging.info(response.read())
 
 def region_list_message(event):
