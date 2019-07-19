@@ -125,6 +125,7 @@ def interactive_handler(event):
                 }
             )
             slack_message.sddc_deletion_confirmation_message(event)
+        return
     elif "delete_confirmation" in event.get("callback_id"):
         if "yes" in event.get("response"):
             slack_message.started_delete_sddc_message(event)
@@ -347,5 +348,6 @@ def interactive_handler(event):
         else:
             slack_message.cancel_sddc_restoration_message(event)
             db.delete_event_db(user_id)
+        return
     else:
         return
