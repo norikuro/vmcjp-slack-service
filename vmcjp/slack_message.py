@@ -105,6 +105,13 @@ def post_field_button_with_bot_token(event, button):
         event.get("bot_token")
     )
 
+def post_text(event, text):
+    if event.get("response_url") is not None:
+        response = post_text_to_response_url(event, text)
+    else:
+        response = post_text_with_bot_token(event, text)
+    return response
+
 def may_i_message(event):
     text = "May I help you?  Please type `help` if you want to know how to use this Slack App."
     response = post_text_with_bot_token(event, text)
@@ -190,32 +197,20 @@ def cancel_sddc_deletion_message(event):
 
 def start_create_sddc_wizard_message(event):
     text = "OK, starting create sddc wizard."
-    if event.get("response_url") is not None:
-        response = post_text_to_response_url(event, text)
-    else:
-        response = post_text_with_bot_token(event, text)
+    response = post_text(event, text)
 #    logging.info(response.read())
     text = "This conversation will end by typing `cancel` or doing nothing for 5 minutes"
-    if event.get("response_url") is not None:
-        response = post_text_to_response_url(event, text)
-    else:
-        response = post_text_with_bot_token(event, text)
+    response = post_text(event, text)
 #    logging.info(response.read())
 
 def check_resources_message(event):
     text = "Checking current resources..."
-    if event.get("response_url") is not None:
-        response = post_text_to_response_url(event, text)
-    else:
-        response = post_text_with_bot_token(event, text)
+    response = post_text(event, text)
 #    logging.info(response.read())
 
 def cancel_sddc_creation_message(event):
     text = "OK, canceled a create sddc wizard."
-    if event.get("response_url") is not None:
-        response = post_text_to_response_url(event, text)
-    else:
-        response = post_text_with_bot_token(event, text)
+    response = post_text(event, text)
 #    logging.info(response.read())
 
 def no_enough_resouces_message(event):
@@ -404,10 +399,7 @@ def restore_message(event):
 
 def cancel_sddc_restoration_message(event):
     text = "OK, canceled a restore sddc wizard."
-    if event.get("response_url") is not None:
-        response = post_text_to_response_url(event, text)
-    else:
-        response = post_text_with_bot_token(event, text)
+    response = post_text(event, text)
 #    logging.info(response.read())
 
 def check_result_message(event):
