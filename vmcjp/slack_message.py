@@ -105,7 +105,7 @@ def post_field_button_with_bot_token(event, button):
         event.get("bot_token")
     )
 
-def post_text(event, text):
+def post_text_(event, text):
     if event.get("response_url") is not None:
         response = post_text_to_response_url(event, text)
     else:
@@ -189,28 +189,25 @@ def cannot_delete_sddc_message(event):
 
 def cancel_sddc_deletion_message(event):
     text = "OK, delete SDDC has cenceled."
-    if event.get("response_url") is not None:
-        response = post_text_to_response_url(event, text)
-    else:
-        response = post_text_with_bot_token(event, text)
+    response = post_text_(event, text)
 #    logging.info(response.read())
 
 def start_create_sddc_wizard_message(event):
     text = "OK, starting create sddc wizard."
-    response = post_text(event, text)
+    response = post_text_(event, text)
 #    logging.info(response.read())
     text = "This conversation will end by typing `cancel` or doing nothing for 5 minutes"
-    response = post_text(event, text)
+    response = post_text_(event, text)
 #    logging.info(response.read())
 
 def check_resources_message(event):
     text = "Checking current resources..."
-    response = post_text(event, text)
+    response = post_text_(event, text)
 #    logging.info(response.read())
 
 def cancel_sddc_creation_message(event):
     text = "OK, canceled a create sddc wizard."
-    response = post_text(event, text)
+    response = post_text_(event, text)
 #    logging.info(response.read())
 
 def no_enough_resouces_message(event):
@@ -399,7 +396,7 @@ def restore_message(event):
 
 def cancel_sddc_restoration_message(event):
     text = "OK, canceled a restore sddc wizard."
-    response = post_text(event, text)
+    response = post_text_(event, text)
 #    logging.info(response.read())
 
 def check_result_message(event):
