@@ -3,7 +3,6 @@ import logging
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 
-LINK_AWS_BUTTON = constant.BUTTON_DIR + "link_aws.json"
 SINGLE_MULTI_BUTTON = constant.BUTTON_DIR + "single_multi.json"
 CREATE_BUTTON = constant.BUTTON_DIR + "create.json"
 DELETE_CONFIRM_BUTTON = constant.BUTTON_DIR + "delete_confirm.json"
@@ -268,14 +267,16 @@ def ask_sddc_name_message(event):
 #    logging.info(response.read())
 
 def link_aws_message(event):
+    link_aws_button = constant.BUTTON_DIR + "link_aws.json"
     if event.get("response_url") is not None:
-        response = post_button_to_response_url(event, LINK_AWS_BUTTON)
+        response = post_button_to_response_url(event, link_aws_button)
     else:
-        response = post_button_with_bot_token(event, LINK_AWS_BUTTON)
+        response = post_button_with_bot_token(event, link_aws_button)
 #    logging.info(response.read())
 
 #def link_aws_single_message(event):
-#    response = post_button_to_response_url(event, LINK_AWS_BUTTON)
+#    link_aws_button = constant.BUTTON_DIR + "link_aws.json"
+#    response = post_button_to_response_url(event, link_aws_button)
 ##    logging.info(response.read())
 
 def single_multi_message(event):
