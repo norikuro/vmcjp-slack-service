@@ -3,7 +3,6 @@ import logging
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 
-NUM_HOSTS_BUTTON = constant.BUTTON_DIR + "num_hosts.json"
 VPC_BUTTON = constant.BUTTON_DIR + "vpc.json"
 SUBNET_BUTTON = constant.BUTTON_DIR + "subnet.json"
 TASK_BUTTON = constant.BUTTON_DIR + "task.json"
@@ -282,9 +281,10 @@ def single_multi_message(event):
 #    logging.info(response.read())
 
 def num_hosts_list(event):
+    num_hosts_button = constant.BUTTON_DIR + "num_hosts.json"
     response = post_option_to_response_url(
         event, 
-        NUM_HOSTS_BUTTON, 
+        num_hosts_button, 
         event.get("num_hosts_list")
     )
 #    logging.info(response.read())
