@@ -3,7 +3,6 @@ import logging
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 
-SINGLE_MULTI_BUTTON = constant.BUTTON_DIR + "single_multi.json"
 CREATE_BUTTON = constant.BUTTON_DIR + "create.json"
 DELETE_CONFIRM_BUTTON = constant.BUTTON_DIR + "delete_confirm.json"
 REGION_BUTTON = constant.BUTTON_DIR + "region.json"
@@ -280,7 +279,8 @@ def link_aws_message(event):
 ##    logging.info(response.read())
 
 def single_multi_message(event):
-    response = post_button_with_bot_token(event, SINGLE_MULTI_BUTTON)
+    single_multi_button = constant.BUTTON_DIR + "single_multi.json"
+    response = post_button_with_bot_token(event, single_multi_button)
 #    logging.info(response.read())
 
 def num_hosts_list(event):
