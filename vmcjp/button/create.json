@@ -4,7 +4,7 @@
     {
       "pretext": "Please confirm following configuration.",
       "color": "#3AA3E3",
-      "fallback": "You are able to choose Yes or No.",
+      "fallback": "Please confirm...",
       "attachment_type": "default",
       "callback_id": "confirmation",
       "fields": [
