@@ -61,15 +61,15 @@ def create_sddc(
       "success": True,
       "task_id": task.id
     }
-  except Unauthorized:
+#  except Unauthorized:
+#    return {
+#      "success": False,
+#      "message": "Failed, you are not authorized to create sddc."
+#    }
+  except as e:
     return {
       "success": False,
-      "message": "Failed, you are not authorized to create sddc."
-    }
-  except:
-    return {
-      "success": False,
-      "message": "Something wrong, failed to create sddc."
+      "message": "Failed to create sddc.  {}".format(e.message)
     }
 #  return {
 #      "success": True,
