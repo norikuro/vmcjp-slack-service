@@ -117,13 +117,13 @@ def post_option_(event, button, option_list):
         response = post_option_to_response_url(
             event, 
             button, 
-            region_list
+            option_list
         )
     else:
         response = post_option_with_bot_token(
             event, 
             button, 
-            region_list
+            option_list
         )
     return response
 
