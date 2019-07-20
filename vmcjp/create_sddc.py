@@ -66,7 +66,7 @@ def create_sddc(
 #      "success": False,
 #      "message": "Failed, you are not authorized to create sddc."
 #    }
-  except as e:
+  except Exception as e:
     return {
       "success": False,
       "message": "Failed to create sddc.  {}".format(e.message)
