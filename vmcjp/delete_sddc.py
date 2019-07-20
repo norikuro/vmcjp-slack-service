@@ -35,25 +35,10 @@ def delete_sddc(
       "success": True,
       "task_id": task.id
     }
-  except Unauthorized:
+  except as e:
     return {
       "success": False,
-      "message": "Failed, you are not authorized to delete sddc."
-    }
-  except InvalidRequest:
-    return {
-      "success": False,
-      "message": "InvalidRequest"
-    }
-  except Unauthenticated:
-    return {
-      "success": False,
-      "message": "Unauthenticated"
-    }
-  except:
-    return {
-      "success": False,
-      "message": "Something wrong, failed to delete sddc. You may not have delete privilidge."
+      "message": "Failed to delete sddc.  {}".format(e.message)
     }
 
 def lambda_handler(event, context):
