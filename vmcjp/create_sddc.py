@@ -62,7 +62,6 @@ def create_sddc(
 #      "success": True,
 #      "task_id": task.id
 #    }
-    return task.id
   except InvalidRequest as err:
     error_response = err.data.convert_to(ErrorResponse)
     raise Exception(error_response.error_messages)
@@ -79,6 +78,7 @@ def create_sddc(
 #      "success": True,
 #      "task_id": "xxxxxxxxx"
 #  }
+  return task.id
 
 def lambda_handler(event, context):
 #  logging.info(event)
