@@ -5,7 +5,7 @@ import requests
 import atexit
 
 from distutils.util import strtobool
-from com.vmware.vmc.model_client import AwsSddcConfig, AccountLinkSddcConfig, SddcConfig, AccountLinkConfig
+from com.vmware.vmc.model_client import AwsSddcConfig, AccountLinkSddcConfig, SddcConfig, AccountLinkConfig, ErrorResponse
 from com.vmware.vapi.std.errors_client import Error, InvalidRequest, Unauthorized
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.lambdautils import call_lambda
@@ -62,19 +62,20 @@ def create_sddc(
       "success": True,
       "task_id": task.id
     }
-  except Unauthorized:
-    return {
-      "success": False,
-      "message": "Failed, you are not authorized to create sddc."
-    }
+#  except Unauthorized:
+#    return {
+#      "success": False,
+#      "message": "Failed, you are not authorized to create sddc."
+#    }
   except InvalidRequest as err:
-    logging.info(get_members(err))
-    logging.info(err)
-    messages = err.messages
-    logging.info(messages)
-    for message in messages:
-      logging.info(message)
-      logging.info(get_members(message))
+    error_response = err.data.convert_to(ErrorResponse)
+    logging.info(get_members(error_response))
+    logging.info(error_response)
+#    messages = err.messages
+#    logging.info(messages)
+#    for message in messages:
+#      logging.info(message)
+#      logging.info(get_members(message))
     return {
       "success": False,
       "message": "Failed to create sddc."
