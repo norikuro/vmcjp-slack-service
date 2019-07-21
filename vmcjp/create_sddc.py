@@ -112,7 +112,9 @@ def lambda_handler(event, context):
       strtobool(event.get("link_aws")) == 1,
       vmc_client
     )
-    event.update({"task_id": result})
+    event.update(
+      {"task_id": result}
+    )
   catch Exception as e:
     event.update(
       {
