@@ -32,15 +32,6 @@ def delete_sddc(
       org=org_id, 
       sddc=sddc_id
     )
-#    return {
-#      "success": True,
-#      "task_id": task.id
-#    }
-#  except as e:
-#    return {
-#      "success": False,
-#      "message": "Failed to delete sddc.  {}".format(e.message)
-#    }
   except InvalidRequest as err:
     error_response = err.data.convert_to(ErrorResponse)
     messages = error_response.error_messages
@@ -53,11 +44,6 @@ def lambda_handler(event, context):
   event.update({"lambda_name": "check_task"})
   
   vmc_client = get_vmc_client(event.get("token"))
-#  result = delete_sddc(
-#    event.get("org_id"),
-#    event.get("sddc_id"),
-#    vmc_client
-#  )
   try:
     task_id = delete_sddc(
       event.get("org_id"),
@@ -72,15 +58,6 @@ def lambda_handler(event, context):
         "status": "task_failed"
       }
     )
-#  if result.get("success"):
-#    event.update({"task_id": result.get("task_id")})
-#  else:
-#    event.update(
-#      {
-#        "message": result.get("message"),
-#        "status": "task_failed"
-#      }
-#    )
     slack_message.crud_sddc_result_message(event)
     call_lambda("check_task", event)
     return 
