@@ -6,11 +6,10 @@ import atexit
 
 from distutils.util import strtobool
 from com.vmware.vmc.model_client import AwsSddcConfig, AccountLinkSddcConfig, SddcConfig, AccountLinkConfig, ErrorResponse
-from com.vmware.vapi.std.errors_client import Error, InvalidRequest
+from com.vmware.vapi.std.errors_client import InvalidRequest
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils import constant
-from vmcjp.utils.metadata import get_members
 from vmcjp import slack_message
 
 logger = logging.getLogger()
