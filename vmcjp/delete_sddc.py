@@ -64,7 +64,7 @@ def lambda_handler(event, context):
       event.get("sddc_id"),
       vmc_client
     )
-    event.update({"task_id": result.get("task_id")})
+    event.update({"task_id": result})
   except Exception as e:
     event.update(
       {
