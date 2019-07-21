@@ -68,6 +68,7 @@ def create_sddc(
 #      "message": "Failed, you are not authorized to create sddc."
 #    }
   except Error as err:
+    logging.info(messages)
     messages = err.messages
     for message in messages:
       logging.info(message)
