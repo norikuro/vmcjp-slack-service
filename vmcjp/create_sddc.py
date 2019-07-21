@@ -6,7 +6,7 @@ import atexit
 
 from distutils.util import strtobool
 from com.vmware.vmc.model_client import AwsSddcConfig, AccountLinkSddcConfig, SddcConfig, AccountLinkConfig, ErrorResponse
-from com.vmware.vapi.std.errors_client import Error, InvalidRequest, Unauthorized
+from com.vmware.vapi.std.errors_client import Error, InvalidRequest
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils import constant
