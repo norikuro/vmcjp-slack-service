@@ -74,7 +74,7 @@ def create_sddc(
       logging.info(get_members(message))
     return {
       "success": False,
-      "message": "Failed to create sddc.  {}".format(e.message)
+      "message": "Failed to create sddc."
     }
 #  return {
 #      "success": True,
