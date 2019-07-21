@@ -6,10 +6,11 @@ import atexit
 
 from distutils.util import strtobool
 from com.vmware.vmc.model_client import AwsSddcConfig, AccountLinkSddcConfig, SddcConfig, AccountLinkConfig
-from com.vmware.vapi.std.errors_client import Unauthorized
+from com.vmware.vapi.std.errors_client import Error, Unauthorized
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils import constant
+from vmcjp.utils.metadata import get_members
 from vmcjp import slack_message
 
 logger = logging.getLogger()
@@ -66,7 +67,11 @@ def create_sddc(
 #      "success": False,
 #      "message": "Failed, you are not authorized to create sddc."
 #    }
-  except Exception as e:
+  except Error as err:
+    messages = err.messages
+    for message in messages:
+      logging.info(message)
+      logging.info(get_members(message))
     return {
       "success": False,
       "message": "Failed to create sddc.  {}".format(e.message)
