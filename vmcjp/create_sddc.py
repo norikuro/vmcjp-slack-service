@@ -58,21 +58,23 @@ def create_sddc(
     task = vmc_client.orgs.Sddcs.create(
       org=org_id, sddc_config=sddc_config
     )
-    return {
-      "success": True,
-      "task_id": task.id
-    }
+#    return {
+#      "success": True,
+#      "task_id": task.id
+#    }
+    return task.id
   except InvalidRequest as err:
     error_response = err.data.convert_to(ErrorResponse)
-    messages = error_response.error_messages
-    for message in messages:
-      logger.error(message)
-    if len(messages) > 0:
-        message = messages[0]
-    return {
-      "success": False,
-      "message": "Failed to create sddc.  {}".format(message)
-    }
+    raise Exception(error_response.error_messages)
+#    messages = error_response.error_messages
+#    for message in messages:
+#      logger.error(message)
+#    if len(messages) > 0:
+#        message = messages[0]
+#    return {
+#      "success": False,
+#      "message": "Failed to create sddc.  {}".format(message)
+#    }
 #  return { # for test
 #      "success": True,
 #      "task_id": "xxxxxxxxx"
@@ -83,29 +85,51 @@ def lambda_handler(event, context):
   event.update({"lambda_name": "check_task"})
 
   vmc_client = get_vmc_client(event.get("token"))  
-  result = create_sddc(
-    event.get("org_id"),
-    event.get("region"),
-    event.get("sddc_name"),
-    event.get("sddc_type"),
-    event.get("vpc_cidr"),
-    event.get("provider"),
-    event.get("customer_subnet_id"),
-    event.get("connected_account_id"),
-    event.get("num_hosts"),
-    strtobool(event.get("link_aws")) == 1,
-    vmc_client
-  )
-  
-  if result.get("success"):
-    event.update({"task_id": result.get("task_id")})
-  else:
+#  result = create_sddc(
+#    event.get("org_id"),
+#    event.get("region"),
+#    event.get("sddc_name"),
+#    event.get("sddc_type"),
+#    event.get("vpc_cidr"),
+#    event.get("provider"),
+#    event.get("customer_subnet_id"),
+#    event.get("connected_account_id"),
+#    event.get("num_hosts"),
+#    strtobool(event.get("link_aws")) == 1,
+#    vmc_client
+#  )
+  try:
+    result = create_sddc(
+      event.get("org_id"),
+      event.get("region"),
+      event.get("sddc_name"),
+      event.get("sddc_type"),
+      event.get("vpc_cidr"),
+      event.get("provider"),
+      event.get("customer_subnet_id"),
+      event.get("connected_account_id"),
+      event.get("num_hosts"),
+      strtobool(event.get("link_aws")) == 1,
+      vmc_client
+    )
+    event.update({"task_id": result})
+  catch Exception as e:
     event.update(
       {
-        "message": result.get("message"),
+        "message": e.message,
         "status": "task_failed"
       }
     )
+  
+#  if result.get("success"):
+#    event.update({"task_id": result.get("task_id")})
+#  else:
+#    event.update(
+#      {
+#        "message": result.get("message"),
+#        "status": "task_failed"
+#      }
+#    )
     slack_message.crud_sddc_result_message(event)
     call_lambda("check_task", event)
     return
