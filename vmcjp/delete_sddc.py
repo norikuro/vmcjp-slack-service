@@ -59,12 +59,12 @@ def lambda_handler(event, context):
 #    vmc_client
 #  )
   try:
-    result = delete_sddc(
+    task_id = delete_sddc(
       event.get("org_id"),
       event.get("sddc_id"),
       vmc_client
     )
-    event.update({"task_id": result})
+    event.update({"task_id": task_id})
   except Exception as e:
     event.update(
       {
