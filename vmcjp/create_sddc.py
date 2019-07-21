@@ -62,27 +62,18 @@ def create_sddc(
       "success": True,
       "task_id": task.id
     }
-#  except Unauthorized:
-#    return {
-#      "success": False,
-#      "message": "Failed, you are not authorized to create sddc."
-#    }
   except InvalidRequest as err:
     error_response = err.data.convert_to(ErrorResponse)
-#    logging.info(get_members(error_response))
-#    logging.info(error_response)
     messages = error_response.error_messages
-#    logging.info(messages)
     for message in messages:
       logger.error(message)
-#      logging.info(get_members(message))
     if len(messages) > 0:
         message = messages[0]
     return {
       "success": False,
       "message": "Failed to create sddc.  {}".format(message)
     }
-#  return {
+#  return { # for test
 #      "success": True,
 #      "task_id": "xxxxxxxxx"
 #  }
