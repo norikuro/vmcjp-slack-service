@@ -115,7 +115,7 @@ def lambda_handler(event, context):
     event.update(
       {"task_id": result}
     )
-  catch Exception as e:
+  except Exception as e:
     event.update(
       {
         "message": e.message,
