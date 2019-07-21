@@ -64,7 +64,9 @@ def create_sddc(
 #    }
   except InvalidRequest as err:
     error_response = err.data.convert_to(ErrorResponse)
-    raise Exception(error_response.error_messages)
+    messages = error_response.error_messages
+    message = None if len(messages) <= 0 else messages[0]
+    raise Exception(message)
 #    messages = error_response.error_messages
 #    for message in messages:
 #      logger.error(message)
