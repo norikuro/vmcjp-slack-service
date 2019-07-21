@@ -90,7 +90,7 @@ def lambda_handler(event, context):
   except Exception as e:
     event.update(
       {
-        "message": "Sorry, faled to create sddc.  {}".format(e.message),
+        "message": "Sorry, failed to create sddc.  {}".format(e.message),
         "status": "task_failed"
       }
     )
