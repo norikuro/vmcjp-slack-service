@@ -69,6 +69,7 @@ def create_sddc(
 #    }
   except Error as err:
     logging.info(get_members(err))
+    logging.info(err)
     messages = err.messages
     logging.info(messages)
     for message in messages:
