@@ -54,31 +54,31 @@ def create_sddc(
     deployment_type=SddcConfig.DEPLOYMENT_TYPE_SINGLEAZ
   )
   
-#  try:
-  task = vmc_client.orgs.Sddcs.create(
-    org=org_id, sddc_config=sddc_config
-  )
-  return {
-    "success": True,
-    "task_id": task.id
-  }
-#  except Unauthorized:
-#    return {
-#      "success": False,
-#      "message": "Failed, you are not authorized to create sddc."
-#    }
-#  except Error as err:
-#    logging.info(get_members(err))
-#    logging.info(err)
-#    messages = err.messages
-#    logging.info(messages)
-#    for message in messages:
-#      logging.info(message)
-#      logging.info(get_members(message))
-#    return {
-#      "success": False,
-#      "message": "Failed to create sddc."
-#    }
+  try:
+    task = vmc_client.orgs.Sddcs.create(
+      org=org_id, sddc_config=sddc_config
+    )
+    return {
+      "success": True,
+      "task_id": task.id
+    }
+  except Unauthorized:
+    return {
+      "success": False,
+      "message": "Failed, you are not authorized to create sddc."
+    }
+  except InvalidRequest as err:
+    logging.info(get_members(err))
+    logging.info(err)
+    messages = err.messages
+    logging.info(messages)
+    for message in messages:
+      logging.info(message)
+      logging.info(get_members(message))
+    return {
+      "success": False,
+      "message": "Failed to create sddc."
+    }
 #  return {
 #      "success": True,
 #      "task_id": "xxxxxxxxx"
