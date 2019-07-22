@@ -87,6 +87,7 @@ def lambda_handler(event, context):
   event.update({"customer_subnet_id": "subnet-1b128540"}) #for test
   event.update("org_id": os.environ["test_org"]) #for test
   event.update("token": os.environ["token"]) #for test
+  logging.info(event)
 
   result = check(
     event, 
