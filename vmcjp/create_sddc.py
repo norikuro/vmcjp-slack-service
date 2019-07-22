@@ -46,8 +46,6 @@ def create_sddc(
     ] if link_aws else None,
     vpc_cidr=vpc_cidr,
     provider=provider,
-#    provider="ZEROCLOUD", #for test
-#    provider=SddcConfig.PROVIDER_AWS,
     num_hosts=num_hosts,
     account_link_config=None if link_aws else AccountLinkConfig(True),
     deployment_type=SddcConfig.DEPLOYMENT_TYPE_SINGLEAZ
@@ -70,7 +68,7 @@ def lambda_handler(event, context):
 
   vmc_client = get_vmc_client(event.get("token"))  
   try:
-    result = create_sddc(
+    task = create_sddc(
       event.get("org_id"),
       event.get("region"),
       event.get("sddc_name"),
@@ -84,7 +82,7 @@ def lambda_handler(event, context):
       vmc_client
     )
     event.update(
-      {"task_id": result}
+      {"task_id": task}
     )
   except Exception as e:
     event.update(
