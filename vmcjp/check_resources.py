@@ -82,6 +82,9 @@ def check_customer_aws(org_id, aws_account, vmc_client):
 def lambda_handler(event, context):
 #  logging.info(event)
   event.update({"org_id": os.environ["test_org"]}) #for test
+  event.update({"sddc_name": "sddc_test_nk"}) #for test
+  event.update({"vpc_cidr": "10.4.0.0/16"}) #for test
+  event.update({"customer_subnet_id": "subnet-1b128540"}) #for test
 
   result = check(
     event, 
