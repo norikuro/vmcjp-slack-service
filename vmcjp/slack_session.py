@@ -28,7 +28,7 @@ def lambda_handler(event, context):
         }
     )
     
-    if event.has_key("callback_id"):
-        interactive_handler(event)
-    else:
-        event_handler(event)
+#    if event.has_key("callback_id"):
+#        interactive_handler(event)
+#    else:
+#        event_handler(event)
