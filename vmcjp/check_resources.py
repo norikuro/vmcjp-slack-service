@@ -26,11 +26,11 @@ def check(event, vmc_client):
       "result": False,
       "message": "SDDC ID {} already exists".format(event.get("sddc_id"))
     }
-  if not check_num_hosts(event.get("org_id"), event.get("num_hosts"), vmc_client):
-    return {
-      "result": False,
-      "message": "Maximum deployable number of hosts exeeded"
-    }
+#  if not check_num_hosts(event.get("org_id"), event.get("num_hosts"), vmc_client):
+#    return {
+#      "result": False,
+#      "message": "Maximum deployable number of hosts exeeded"
+#    }
   if not check_customer_aws(event.get("org_id"), event.get("aws_account"), vmc_client):
     return {
       "result": False,
