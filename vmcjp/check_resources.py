@@ -84,9 +84,10 @@ def lambda_handler(event, context):
   event.update({"org_id": os.environ["test_org"]}) #for test
   event.update({"sddc_name": "sddc_test_nk"}) #for test
   event.update({"vpc_cidr": "10.4.0.0/16"}) #for test
-  event.update({"customer_subnet_id": "subnet-1b128540"}) #for test
   event.update({"org_id": os.environ["test_org"]}) #for test
   event.update({"token": os.environ["token"]}) #for test
+  event.update({"connected_account_id": "e462f412-be3a-3fa4-9d97-59f1217339a6"}) #for test
+  event.update({"customer_subnet_id": "subnet-1b128540"}) #for test
   logging.info(event)
 
   result = check(
