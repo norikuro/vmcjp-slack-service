@@ -67,6 +67,7 @@ def check_num_hosts(org_id, num_hosts, vmc_client):
   
 def check_customer_aws(org_id, aws_account, vmc_client):
 #  check if customer aws is exist
+  logging.info(org_id)
   accounts = vmc_client.orgs.account_link.ConnectedAccounts.get(org_id)
   for account in accounts:
     if aws_account == account.account_number:
