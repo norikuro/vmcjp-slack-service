@@ -110,19 +110,19 @@ def list_sddcs(vmc_client, token, org_id):
     ]
 
 def event_handler(event):
-    text = event.get("text").lower()
+#    text = event.get("text").lower()
 
-    db = dbutils.DocmentDb(event.get("db_url"))
-    current = db.read_event_db(event.get("user_id"), 120)
-    if current is not None and current.get("status") == "creating":
-        slack_message.ask_wait_to_finish_task_message(event)
-        return
+#    db = dbutils.DocmentDb(event.get("db_url"))
+#    current = db.read_event_db(event.get("user_id"), 120)
+#    if current is not None and current.get("status") == "creating":
+#        slack_message.ask_wait_to_finish_task_message(event)
+#        return
     
-    result = db.read_event_db(event.get("user_id"), 5)
-    __cred_data = db.read_cred_db(event.get("user_id"))
-    slack_message.ask_wait_to_finish_task_message(event)
+#    result = db.read_event_db(event.get("user_id"), 5)
+#    __cred_data = db.read_cred_db(event.get("user_id"))
+#    slack_message.ask_wait_to_finish_task_message(event)
 
-def event_handler2(event):
+#def event_handler2(event):
     text = event.get("text").lower()
 
     db = dbutils.DocmentDb(event.get("db_url"))
