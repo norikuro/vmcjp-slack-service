@@ -127,35 +127,30 @@ def event_handler(event):
             elif "registered" in __cred_data.get("status"):
                 event.update({"token": __cred_data.get("token")})
                 slack_message.start_create_sddc_wizard_message(event)
+                slack_message.check_resources_message(event)
                 event.update(
-#                    {
-#                        "region_list": list_region(
-#                            get_vmc_client(event.get("token")),
-#                            event.get("org_id")
-#                        )
-#                    }
                     {
-                        "region_list": [
-                            {
-                                "text": "AP_NORTHEAST_1", #for internal use
-                                "value": "AP_NORTHEAST_1" #for internal use
-                            }
-                        ]
+                        "max_hosts": get_max_num_hosts(
+                            event.get("token"), 
+                            event.get("org_id")
+                        )
                     }
                 )
-            slack_message.region_list_message(event)
-            db.write_event_db(
+                if event.get("max_hosts") < 1:
+                    slack_message.no_enough_resouces_message(event)
+                    db.delete_event_db(event.get("user_id"))
+                    return
+                slack_message.max_hosts_message(event)
+                db.write_event_db(
                     event.get("user_id"), 
                     {
                         "command": "create",
                         "status": "create_sddc", 
-                        "max_hosts": get_max_num_hosts_zerocloud(
-                            event.get("token"), 
-                            event.get("org_id")
-                        ),
+                        "max_hosts": event.get("max_hosts"),
                         "provider": "ZEROCLOUD"
                     }
                 )
+            return
         elif "create sddc" in text:
             if __cred_data is None:
                 slack_message.ask_register_token_message(event)
