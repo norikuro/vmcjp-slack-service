@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -137,6 +137,7 @@ class Forwarding(VapiInterface):
             self.protocol = protocol
             VapiStruct.__init__(self)
 
+
     Config._set_binding_type(type.StructType(
         'com.vmware.appliance.logging.forwarding.config', {
             'hostname': type.StringType(),
@@ -191,6 +192,7 @@ class Forwarding(VapiInterface):
             self.state = state
             self.message = message
             VapiStruct.__init__(self)
+
 
         class State(Enum):
             """

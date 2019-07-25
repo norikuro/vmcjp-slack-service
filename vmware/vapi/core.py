@@ -3,7 +3,7 @@ Core Protocol Definition classes
 """
 
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015, 2017 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015, 2017, 2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 import abc
 import six
@@ -32,7 +32,6 @@ class ApiProvider(object):
         :rtype: :class:`MethodResult`
         :return: Result of the method invocation
         """
-        pass
 
     def __hash__(self):
         return str(self).__hash__()
@@ -50,7 +49,6 @@ class ApiInterface(object):
         """
         Initialize the Api Interface instance
         """
-        pass
 
     def get_identifier(self):
         """
@@ -124,8 +122,8 @@ class InterfaceIdentifier(object):
         return self.iface
 
     def __eq__(self, other):
-        return (isinstance(other, InterfaceIdentifier) and
-                self.iface == other.iface)
+        return (isinstance(other, InterfaceIdentifier)
+                and self.iface == other.iface)
 
     def __ne__(self, other):
         return not (self == other)
@@ -178,9 +176,9 @@ class MethodIdentifier(object):
         return self.method
 
     def __eq__(self, other):
-        return (isinstance(other, MethodIdentifier) and
-                self.iface == other.iface and
-                self.method == other.method)
+        return (isinstance(other, MethodIdentifier)
+                and self.iface == other.iface
+                and self.method == other.method)
 
     def __ne__(self, other):
         return not (self == other)
@@ -217,8 +215,8 @@ class ProviderDefinition(object):
         return self._name
 
     def __eq__(self, other):
-        return (isinstance(other, ProviderDefinition) and
-                self._name == other.get_identifier())
+        return (isinstance(other, ProviderDefinition)
+                and self._name == other.get_identifier())
 
     def __ne__(self, other):
         return not (self == other)
@@ -393,9 +391,9 @@ class MethodDefinition(object):
                     error_name):
                 return False
 
-        return (self.id_ == other.id_ and
-                self.input_ == other.input_ and
-                self.output == other.output)
+        return (self.id_ == other.id_
+                and self.input_ == other.input_
+                and self.output == other.output)
 
     def __ne__(self, other):
         return not (self == other)
@@ -510,7 +508,7 @@ class ApplicationContext(CustomDict):
     def __setitem__(self, key, value):
         if not isinstance(key, six.string_types):
             raise TypeError('Type of key should be a string, but got %s' %
-                            type(value).__name__)
+                            type(key).__name__)
         if not isinstance(value, six.string_types):
             raise TypeError('Type of value should be a string, but got %s' %
                             type(value).__name__)
@@ -531,8 +529,8 @@ class SecurityContext(CustomDict):
 
     def __setitem__(self, key, value):
         if not isinstance(key, six.string_types):
-            raise TypeError('Type of value should be a string, but got %s' %
-                            type(value).__name__)
+            raise TypeError('Type of key should be a string, but got %s' %
+                            type(key).__name__)
         dict.__setitem__(self, key, value)
 
     def __repr__(self):
@@ -542,31 +540,63 @@ class SecurityContext(CustomDict):
         return '<security-context>'
 
 
+class RuntimeData(CustomDict):
+    """
+    Implementations of this interface will provide custom runtime data.
+    """
+    def __init__(self, *args, **kwargs):
+        CustomDict.__init__(self)
+        self.update(*args, **kwargs)
+
+    def __setitem__(self, key, value):
+        if not isinstance(key, six.string_types):
+            raise TypeError('Type of key should be a string, but got %s' %
+                            type(key).__name__)
+        dict.__setitem__(self, key, value)
+
+    def __repr__(self):
+        return 'RuntimeData(<hidden>)'
+
+    def __str__(self):
+        return '<runtime-data>'
+
+
 class ExecutionContext(object):
     """
     This class provides out-of-band context information that is passed along
     with a method invocation
     """
-    def __init__(self, application_context=None, security_context=None):
+    def __init__(self,
+                 application_context=None,
+                 security_context=None,
+                 runtime_data=None):
         """
         Initialize Execution Context
         """
-        if (application_context is not None and
-                not isinstance(application_context, ApplicationContext)):
+        if (application_context is not None
+                and not isinstance(application_context, ApplicationContext)):
             raise TypeError('Application context should be of type '
                             'vmware.vapi.core.ApplicationContext')
         if application_context is None:
             application_context = ApplicationContext()
 
-        if (security_context is not None and
-                not isinstance(security_context, SecurityContext)):
+        if (security_context is not None
+                and not isinstance(security_context, SecurityContext)):
             raise TypeError('Security context should be of type '
                             'vmware.vapi.core.SecurityContext')
         if security_context is None:
             security_context = SecurityContext()
 
+        if (runtime_data is not None
+                and not isinstance(runtime_data, RuntimeData)):
+            raise TypeError('Runtime Data should be of type '
+                            'vmware.vapi.core.RuntimeData')
+        if runtime_data is None:
+            runtime_data = RuntimeData()
+
         self.application_context = application_context
         self.security_context = security_context
+        self.runtime_data = runtime_data
 
     def __hash__(self):
         return str(self).__hash__()
@@ -574,4 +604,5 @@ class ExecutionContext(object):
     def __repr__(self):
         app_ctx = 'application_context=%s' % repr(self.application_context)
         sec_ctx = 'security_context=%s' % repr(self.security_context)
-        return 'ExecutionContext(%s, %s)' % (app_ctx, sec_ctx)
+        runtime_data = 'runtime_data=%s' % repr(self.runtime_data)
+        return 'ExecutionContext(%s, %s, %s)' % (app_ctx, sec_ctx, runtime_data)

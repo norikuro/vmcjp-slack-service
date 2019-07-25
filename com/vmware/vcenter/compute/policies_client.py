@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -63,6 +63,7 @@ class CreateSpec(VapiStruct):
         self.description = description
         VapiStruct.__init__(self)
 
+
 CreateSpec._set_binding_type(type.StructType(
     'com.vmware.vcenter.compute.policies.create_spec', {
         'name': type.StringType(),
@@ -116,6 +117,7 @@ class Info(VapiStruct):
         self.capability = capability
         VapiStruct.__init__(self)
 
+
 Info._set_binding_type(type.StructType(
     'com.vmware.vcenter.compute.policies.info', {
         'name': type.StringType(),
@@ -153,6 +155,7 @@ class Status(VapiStruct):
         """
         self.status = status
         VapiStruct.__init__(self)
+
 
     class Compliance(Enum):
         """
@@ -292,6 +295,7 @@ class Capabilities(VapiInterface):
             self.description = description
             VapiStruct.__init__(self)
 
+
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.compute.policies.capabilities.summary', {
             'capability': type.IdType(resource_types='com.vmware.vcenter.compute.policies.Capability'),
@@ -359,6 +363,7 @@ class Capabilities(VapiInterface):
             self.create_spec_type = create_spec_type
             self.info_type = info_type
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.compute.policies.capabilities.info', {
@@ -507,6 +512,7 @@ class TagUsage(VapiInterface):
             self.category_name = category_name
             VapiStruct.__init__(self)
 
+
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.compute.policies.tag_usage.summary', {
             'policy': type.IdType(resource_types='com.vmware.vcenter.compute.Policy'),
@@ -580,6 +586,7 @@ class TagUsage(VapiInterface):
             self.tags = tags
             self.tag_types = tag_types
             VapiStruct.__init__(self)
+
 
     FilterSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.compute.policies.tag_usage.filter_spec', {

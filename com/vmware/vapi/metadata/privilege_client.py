@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -82,6 +82,7 @@ class ComponentData(VapiStruct):
         self.fingerprint = fingerprint
         VapiStruct.__init__(self)
 
+
 ComponentData._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.privilege.component_data', {
         'info': type.ReferenceType(__name__, 'ComponentInfo'),
@@ -131,6 +132,7 @@ class ComponentInfo(VapiStruct):
         self.packages = packages
         VapiStruct.__init__(self)
 
+
 ComponentInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.privilege.component_info', {
         'packages': type.MapType(type.IdType(), type.ReferenceType(__name__, 'PackageInfo')),
@@ -172,6 +174,7 @@ class OperationInfo(VapiStruct):
         self.privileges = privileges
         self.privilege_info = privilege_info
         VapiStruct.__init__(self)
+
 
 OperationInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.privilege.operation_info', {
@@ -228,6 +231,7 @@ class PackageInfo(VapiStruct):
         self.services = services
         VapiStruct.__init__(self)
 
+
 PackageInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.privilege.package_info', {
         'privileges': type.ListType(type.StringType()),
@@ -276,6 +280,7 @@ class PrivilegeInfo(VapiStruct):
         self.property_path = property_path
         self.privileges = privileges
         VapiStruct.__init__(self)
+
 
 PrivilegeInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.privilege.privilege_info', {
@@ -327,6 +332,7 @@ class ServiceInfo(VapiStruct):
         """
         self.operations = operations
         VapiStruct.__init__(self)
+
 
 ServiceInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.privilege.service_info', {
@@ -657,6 +663,7 @@ class Source(VapiInterface):
             self.address = address
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vapi.metadata.privilege.source.info', {
             'description': type.StringType(),
@@ -725,6 +732,7 @@ class Source(VapiInterface):
             self.filepath = filepath
             self.address = address
             VapiStruct.__init__(self)
+
 
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vapi.metadata.privilege.source.create_spec', {

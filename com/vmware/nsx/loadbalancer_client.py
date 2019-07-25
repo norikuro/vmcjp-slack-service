@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -51,7 +51,10 @@ class ApplicationProfiles(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.loadbalancer.application_profiles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -229,7 +232,10 @@ class ClientSslProfiles(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.loadbalancer.client_ssl_profiles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -428,7 +434,10 @@ class Monitors(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.loadbalancer.monitors'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -616,7 +625,10 @@ class PersistenceProfiles(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.loadbalancer.persistence_profiles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -809,7 +821,10 @@ class Pools(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.loadbalancer.pools'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1014,7 +1029,10 @@ class Rules(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.loadbalancer.rules'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1178,7 +1196,10 @@ class ServerSslProfiles(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.loadbalancer.server_ssl_profiles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1342,7 +1363,10 @@ class Services(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.loadbalancer.services'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1513,7 +1537,10 @@ class TcpProfiles(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.loadbalancer.tcp_profiles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1677,7 +1704,10 @@ class VirtualServers(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.loadbalancer.virtual_servers'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1942,7 +1972,8 @@ class _ApplicationProfilesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1973,7 +2004,8 @@ class _ApplicationProfilesStub(ApiInterfaceStub):
                 'application_profile_id': 'application-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -2005,7 +2037,8 @@ class _ApplicationProfilesStub(ApiInterfaceStub):
                 'application_profile_id': 'application-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -2047,7 +2080,8 @@ class _ApplicationProfilesStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'type': 'type',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -2082,7 +2116,8 @@ class _ApplicationProfilesStub(ApiInterfaceStub):
                 'application_profile_id': 'application-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2169,7 +2204,8 @@ class _ClientSslProfilesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -2200,7 +2236,8 @@ class _ClientSslProfilesStub(ApiInterfaceStub):
                 'client_ssl_profile_id': 'client-ssl-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -2231,7 +2268,8 @@ class _ClientSslProfilesStub(ApiInterfaceStub):
                 'client_ssl_profile_id': 'client-ssl-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -2270,7 +2308,8 @@ class _ClientSslProfilesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -2303,7 +2342,8 @@ class _ClientSslProfilesStub(ApiInterfaceStub):
                 'client_ssl_profile_id': 'client-ssl-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2392,7 +2432,8 @@ class _MonitorsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -2423,7 +2464,8 @@ class _MonitorsStub(ApiInterfaceStub):
                 'monitor_id': 'monitor-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -2455,7 +2497,8 @@ class _MonitorsStub(ApiInterfaceStub):
                 'monitor_id': 'monitor-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -2497,7 +2540,8 @@ class _MonitorsStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'type': 'type',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -2532,7 +2576,8 @@ class _MonitorsStub(ApiInterfaceStub):
                 'monitor_id': 'monitor-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2621,7 +2666,8 @@ class _PersistenceProfilesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -2652,7 +2698,8 @@ class _PersistenceProfilesStub(ApiInterfaceStub):
                 'persistence_profile_id': 'persistence-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -2684,7 +2731,8 @@ class _PersistenceProfilesStub(ApiInterfaceStub):
                 'persistence_profile_id': 'persistence-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -2726,7 +2774,8 @@ class _PersistenceProfilesStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'type': 'type',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -2761,7 +2810,8 @@ class _PersistenceProfilesStub(ApiInterfaceStub):
                 'persistence_profile_id': 'persistence-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2850,7 +2900,8 @@ class _PoolsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for create_0 operation
@@ -2886,7 +2937,8 @@ class _PoolsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'action': 'action',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -2917,7 +2969,8 @@ class _PoolsStub(ApiInterfaceStub):
                 'pool_id': 'pool-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -2949,7 +3002,8 @@ class _PoolsStub(ApiInterfaceStub):
                 'pool_id': 'pool-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -2989,7 +3043,8 @@ class _PoolsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -3024,7 +3079,8 @@ class _PoolsStub(ApiInterfaceStub):
                 'pool_id': 'pool-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -3122,7 +3178,8 @@ class _RulesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -3153,7 +3210,8 @@ class _RulesStub(ApiInterfaceStub):
                 'rule_id': 'rule-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -3185,7 +3243,8 @@ class _RulesStub(ApiInterfaceStub):
                 'rule_id': 'rule-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -3225,7 +3284,8 @@ class _RulesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -3260,7 +3320,8 @@ class _RulesStub(ApiInterfaceStub):
                 'rule_id': 'rule-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -3347,7 +3408,8 @@ class _ServerSslProfilesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -3378,7 +3440,8 @@ class _ServerSslProfilesStub(ApiInterfaceStub):
                 'server_ssl_profile_id': 'server-ssl-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -3409,7 +3472,8 @@ class _ServerSslProfilesStub(ApiInterfaceStub):
                 'server_ssl_profile_id': 'server-ssl-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -3448,7 +3512,8 @@ class _ServerSslProfilesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -3481,7 +3546,8 @@ class _ServerSslProfilesStub(ApiInterfaceStub):
                 'server_ssl_profile_id': 'server-ssl-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -3568,7 +3634,8 @@ class _ServicesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -3599,7 +3666,8 @@ class _ServicesStub(ApiInterfaceStub):
                 'service_id': 'service-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -3630,7 +3698,8 @@ class _ServicesStub(ApiInterfaceStub):
                 'service_id': 'service-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -3671,7 +3740,8 @@ class _ServicesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -3704,7 +3774,8 @@ class _ServicesStub(ApiInterfaceStub):
                 'service_id': 'service-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -3791,7 +3862,8 @@ class _TcpProfilesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -3822,7 +3894,8 @@ class _TcpProfilesStub(ApiInterfaceStub):
                 'tcp_profile_id': 'tcp-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -3853,7 +3926,8 @@ class _TcpProfilesStub(ApiInterfaceStub):
                 'tcp_profile_id': 'tcp-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -3892,7 +3966,8 @@ class _TcpProfilesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -3925,7 +4000,8 @@ class _TcpProfilesStub(ApiInterfaceStub):
                 'tcp_profile_id': 'tcp-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -4012,7 +4088,8 @@ class _VirtualServersStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for createwithrules operation
@@ -4045,7 +4122,8 @@ class _VirtualServersStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -4078,7 +4156,8 @@ class _VirtualServersStub(ApiInterfaceStub):
             },
             query_parameters={
                 'delete_associated_rules': 'delete_associated_rules',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -4109,7 +4188,8 @@ class _VirtualServersStub(ApiInterfaceStub):
                 'virtual_server_id': 'virtual-server-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -4148,7 +4228,8 @@ class _VirtualServersStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -4181,7 +4262,8 @@ class _VirtualServersStub(ApiInterfaceStub):
                 'virtual_server_id': 'virtual-server-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for updatewithrules operation
@@ -4216,7 +4298,8 @@ class _VirtualServersStub(ApiInterfaceStub):
                 'virtual_server_id': 'virtual-server-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

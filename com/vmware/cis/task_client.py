@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -124,6 +124,7 @@ class Progress(VapiStruct):
         self.message = message
         VapiStruct.__init__(self)
 
+
 Progress._set_binding_type(type.StructType(
     'com.vmware.cis.task.progress', {
         'total': type.IntegerType(),
@@ -240,6 +241,7 @@ class CommonInfo(VapiStruct):
         self.end_time = end_time
         self.user = user
         VapiStruct.__init__(self)
+
 
 CommonInfo._set_binding_type(type.StructType(
     'com.vmware.cis.task.common_info', {
@@ -384,6 +386,7 @@ class Info(VapiStruct):
         self.end_time = end_time
         self.user = user
         VapiStruct.__init__(self)
+
 
 Info._set_binding_type(type.StructType(
     'com.vmware.cis.task.info', {

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -77,6 +77,7 @@ class InvocationRequest(VapiStruct):
         self.groups = groups
         VapiStruct.__init__(self)
 
+
 InvocationRequest._set_binding_type(type.StructType(
     'com.vmware.vapi.std.interposition.invocation_request', {
         'service_id': type.StringType(),
@@ -136,6 +137,7 @@ class InvocationResult(VapiStruct):
         self.output = output
         self.error = error
         VapiStruct.__init__(self)
+
 
     class ResultType(Enum):
         """
@@ -214,6 +216,7 @@ class SecurityPrincipal(VapiStruct):
         self.name = name
         self.domain = domain
         VapiStruct.__init__(self)
+
 
 SecurityPrincipal._set_binding_type(type.StructType(
     'com.vmware.vapi.std.interposition.security_principal', {

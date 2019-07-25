@@ -3,7 +3,7 @@ Introspection services
 """
 
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015, 2017 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015, 2017, 2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 from com.vmware.vapi.std.introspection_client import Operation
 from vmware.vapi.core import (
@@ -16,22 +16,126 @@ from vmware.vapi.stdlib.client.factories import StubConfigurationFactory
 logger = get_vapi_logger(__name__)
 
 
+def opt_def(element):
+    """
+    Internal function to create DataDefinition for an optional element.
+    :type  element: :class:`com.vmware.vapi.std.introspection_client.Operation.DataDefinition`
+    :param element: element type definition
+    :rtype: :class:`com.vmware.vapi.std.introspection_client.Operation.DataDefinition`
+    :return: definition for optional value of element type.
+    """
+    return Operation.DataDefinition(
+        type=Operation.DataDefinition.DataType.OPTIONAL,
+        element_definition=element
+    )
+
+
+def list_def(element):
+    """
+    Internal function to create DataDefinition for a list.
+    :type  element: :class:`com.vmware.vapi.std.introspection_client.Operation.DataDefinition`
+    :param element: list element type definition
+    :rtype: :class:`com.vmware.vapi.std.introspection_client.Operation.DataDefinition`
+    :return: definition for a list of element values.
+    """
+    return Operation.DataDefinition(
+        type=Operation.DataDefinition.DataType.LIST,
+        element_definition=element
+    )
+
+
+def map_def(key, value):
+    """
+    Internal function to create map definition from a key and value definitions
+    definitions. For use only by vAPI runtime.
+    :type  key: :class:`com.vmware.vapi.std.introspection_client.Operation.DataDefinition`
+    :param key: DataDefintion for the map key
+    :type  value: :class:`com.vmware.vapi.std.introspection_client.Operation.DataDefinition`
+    :param value: DataDefintion for the map value
+    :rtype: :class:`com.vmware.vapi.std.introspection_client.Operation.DataDefinition`
+    :return: structure reference definition used to break circular references.
+    """
+    return list_def(
+        Operation.DataDefinition(
+            type=Operation.DataDefinition.DataType.STRUCTURE,
+            name='map-entry',
+            fields={
+                'key': key,
+                'value': value
+            }
+        )
+    )
+
+
+def struct_ref_def(name):
+    """
+    Internal function to create structure reference from name.
+    :type  name: :`str`
+    :param name: name of the referred to structure
+    :rtype: :class:`com.vmware.vapi.std.introspection_client.Operation.DataDefinition`
+    :return: structure reference definition used to break circular references.
+    """
+    return Operation.DataDefinition(
+        type=Operation.DataDefinition.DataType.STRUCTURE_REF,
+        name=name
+    )
+
+
+string_def = Operation.DataDefinition(
+    type=Operation.DataDefinition.DataType.STRING
+)
+
+optional_string_def = opt_def(string_def)
+
+optional_long_def = opt_def(
+    Operation.DataDefinition(
+        type=Operation.DataDefinition.DataType.LONG
+    )
+)
+
+optional_double_def = opt_def(
+    Operation.DataDefinition(
+        type=Operation.DataDefinition.DataType.DOUBLE
+    )
+)
+
+_LOCALIZATION_PARAM = 'com.vmware.vapi.std.localization_param'
+_NESTED_LOCALIZABLE_MESSAGE = 'com.vmware.vapi.std.nested_localizable_message'
+_LOCALIZABLE_MESSAGE = 'com.vmware.vapi.std.localizable_message'
+
+nested_localizable_message_def = Operation.DataDefinition(
+    type=Operation.DataDefinition.DataType.STRUCTURE,
+    name=_NESTED_LOCALIZABLE_MESSAGE,
+    fields={
+        'id': string_def,
+        'params': opt_def(map_def(string_def,
+                                  struct_ref_def(_LOCALIZATION_PARAM)))
+    }
+)
+
+localization_param_def = Operation.DataDefinition(
+    type=Operation.DataDefinition.DataType.STRUCTURE,
+    name=_LOCALIZATION_PARAM,
+    fields={
+        's': optional_string_def,
+        'dt': optional_string_def,
+        'i': optional_long_def,
+        'd': optional_double_def,
+        'l': opt_def(nested_localizable_message_def),
+        'precision': optional_long_def,
+        'format': optional_string_def
+    }
+)
+
 localizable_message_def = Operation.DataDefinition(
     type=Operation.DataDefinition.DataType.STRUCTURE,
-    name='com.vmware.vapi.std.localizable_message',
+    name=_LOCALIZABLE_MESSAGE,
     fields={
-        'default_message': Operation.DataDefinition(
-            type=Operation.DataDefinition.DataType.STRING
-        ),
-        'args': Operation.DataDefinition(
-            type=Operation.DataDefinition.DataType.LIST,
-            element_definition=Operation.DataDefinition(
-                type=Operation.DataDefinition.DataType.STRING
-            )
-        ),
-        'id': Operation.DataDefinition(
-            type=Operation.DataDefinition.DataType.STRING
-        )
+        'default_message': string_def,
+        'args': list_def(string_def),
+        'id': string_def,
+        'localized': optional_string_def,
+        'params': opt_def(map_def(string_def, localization_param_def))
     }
 )
 
@@ -51,15 +155,11 @@ def make_introspection_error_def(error_name):
         type=Operation.DataDefinition.DataType.ERROR,
         name=error_name,
         fields={
-            'messages': Operation.DataDefinition(
-                type=Operation.DataDefinition.DataType.LIST,
-                element_definition=localizable_message_def
-            ),
-            'data': Operation.DataDefinition(
-                type=Operation.DataDefinition.DataType.OPTIONAL,
-                element_definition=Operation.DataDefinition(
+            'messages': list_def(localizable_message_def),
+            'data': opt_def(Operation.DataDefinition(
                     type=Operation.DataDefinition.DataType.DYNAMIC_STRUCTURE)
-            )
+            ),
+            'error_type': optional_string_def
         }
     )
 
@@ -90,7 +190,8 @@ class IntrospectableApiProvider(object):
         :rtype: :class:`vmware.vapi.core.MethodDefinition`
         :return: Method definition of the specified operation
         """
-        info = self._operation.get(service_id=service_id, operation_id=operation_id)
+        info = self._operation.get(service_id=service_id,
+                                   operation_id=operation_id)
         input_def = convert_data_value_to_data_def(
             info.input_definition.get_struct_value())
         output_def = convert_data_value_to_data_def(

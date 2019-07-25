@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -39,7 +39,7 @@ class LibraryItems(VapiInterface):
     create library items containing virtual machine templates. The
     ``LibraryItems`` class also provides an operation to retrieve information
     about the template contained in the library item. This class was added in
-    vSphere API 6.7 U1.
+    vSphere API 6.8.
     """
 
     _VAPI_SERVICE_ID = 'com.vmware.vcenter.vm_template.library_items'
@@ -57,7 +57,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.CreateSpec`` class defines the information required to
         create a library item containing a virtual machine template. This class was
-        added in vSphere API 6.7 U1.
+        added in vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -80,7 +80,7 @@ class LibraryItems(VapiInterface):
             """
             :type  source_vm: :class:`str`
             :param source_vm: Identifier of the source virtual machine to create the library item
-                from. This attribute was added in vSphere API 6.7 U1.
+                from. This attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``VirtualMachine``. When methods return a value of this class as a
@@ -88,15 +88,15 @@ class LibraryItems(VapiInterface):
                 type: ``VirtualMachine``.
             :type  name: :class:`str`
             :param name: Name of the library item. This attribute was added in vSphere API
-                6.7 U1.
+                6.8.
             :type  description: :class:`str` or ``None``
             :param description: Description of the library item. This attribute was added in
-                vSphere API 6.7 U1.
+                vSphere API 6.8.
                 If None, the newly created library item has the same description as
                 the source virtual machine.
             :type  library: :class:`str`
             :param library: Identifier of the library in which the new library item should be
-                created. This attribute was added in vSphere API 6.7 U1.
+                created. This attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``com.vmware.content.Library``. When methods return a value of this
@@ -104,13 +104,13 @@ class LibraryItems(VapiInterface):
                 the resource type: ``com.vmware.content.Library``.
             :type  vm_home_storage: :class:`LibraryItems.CreateSpecVmHomeStorage` or ``None``
             :param vm_home_storage: Storage location for the virtual machine template's configuration
-                and log files. This attribute was added in vSphere API 6.7 U1.
+                and log files. This attribute was added in vSphere API 6.8.
                 If None, the virtual machine template's configuration and log files
                 are placed on the default storage backing associated with the
                 library specified by ``library``.
             :type  disk_storage: :class:`LibraryItems.CreateSpecDiskStorage` or ``None``
             :param disk_storage: Storage specification for the virtual machine template's disks.
-                This attribute was added in vSphere API 6.7 U1.
+                This attribute was added in vSphere API 6.8.
                 If both ``diskStorageOverrides`` and ``diskStorage`` are None, the
                 virtual machine template's disks are placed in the default storage
                 backing associated with the library specified by ``library``. 
@@ -131,7 +131,7 @@ class LibraryItems(VapiInterface):
             :param disk_storage_overrides: Storage specification for individual disks in the virtual machine
                 template. This is specified as a mapping between disk identifiers
                 in the source virtual machine and their respective storage
-                specifications. This attribute was added in vSphere API 6.7 U1.
+                specifications. This attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the key in
                 the attribute :class:`dict` must be an identifier for the resource
                 type: ``com.vmware.vcenter.vm.hardware.Disk``. When methods return
@@ -156,7 +156,7 @@ class LibraryItems(VapiInterface):
                 created with the storage spec specified by ``diskStorage``. 
             :type  placement: :class:`LibraryItems.CreatePlacementSpec` or ``None``
             :param placement: Information used to place the virtual machine template. This
-                attribute was added in vSphere API 6.7 U1.
+                attribute was added in vSphere API 6.8.
                 This attribute is currently required. In the future, if this
                 attribute is None, the system will place the virtual machine
                 template on a suitable resource. 
@@ -176,6 +176,7 @@ class LibraryItems(VapiInterface):
             self.disk_storage_overrides = disk_storage_overrides
             self.placement = placement
             VapiStruct.__init__(self)
+
 
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.create_spec', {
@@ -197,7 +198,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.CreatePlacementSpec`` class contains information used to
         place a virtual machine template onto resources within the vCenter
-        inventory. This class was added in vSphere API 6.7 U1.
+        inventory. This class was added in vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -216,7 +217,7 @@ class LibraryItems(VapiInterface):
             """
             :type  folder: :class:`str` or ``None``
             :param folder: Virtual machine folder into which the virtual machine template
-                should be placed. This attribute was added in vSphere API 6.7 U1.
+                should be placed. This attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type: ``Folder``.
                 When methods return a value of this class as a return value, the
@@ -225,7 +226,7 @@ class LibraryItems(VapiInterface):
                 folder as the source virtual machine.
             :type  resource_pool: :class:`str` or ``None``
             :param resource_pool: Resource pool into which the virtual machine template should be
-                placed. This attribute was added in vSphere API 6.7 U1.
+                placed. This attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``ResourcePool``. When methods return a value of this class as a
@@ -239,7 +240,7 @@ class LibraryItems(VapiInterface):
                 ``host`` and ``resourcePool`` are both specified, ``resourcePool``
                 must belong to ``host``. If ``host`` and ``cluster`` are both
                 specified, ``host`` must be a member of ``cluster``. This attribute
-                was added in vSphere API 6.7 U1.
+                was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``HostSystem``. When methods return a value of this class as a
@@ -254,7 +255,7 @@ class LibraryItems(VapiInterface):
                 If ``cluster`` and ``resourcePool`` are both specified,
                 ``resourcePool`` must belong to ``cluster``. If ``cluster`` and
                 ``host`` are both specified, ``host`` must be a member of
-                ``cluster``. This attribute was added in vSphere API 6.7 U1.
+                ``cluster``. This attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``ClusterComputeResource``. When methods return a value of this
@@ -268,6 +269,7 @@ class LibraryItems(VapiInterface):
             self.host = host
             self.cluster = cluster
             VapiStruct.__init__(self)
+
 
     CreatePlacementSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.create_placement_spec', {
@@ -285,7 +287,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.CreateSpecVmHomeStoragePolicy`` class defines the
         storage policy specification for a virtual machine template's configuration
-        and log files. This class was added in vSphere API 6.7 U1.
+        and log files. This class was added in vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -311,10 +313,10 @@ class LibraryItems(VapiInterface):
             :type  type: :class:`LibraryItems.CreateSpecVmHomeStoragePolicy.Type`
             :param type: Policy type to be used when creating the virtual machine template's
                 configuration and log files. This attribute was added in vSphere
-                API 6.7 U1.
+                API 6.8.
             :type  policy: :class:`str`
             :param policy: Identifier for the storage policy to use. This attribute was added
-                in vSphere API 6.7 U1.
+                in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``com.vmware.spbm.StorageProfile``. When methods return a value of
@@ -328,10 +330,11 @@ class LibraryItems(VapiInterface):
             self.policy = policy
             VapiStruct.__init__(self)
 
+
         class Type(Enum):
             """
             Policy type for the virtual machine template's configuration and log files.
-            This enumeration was added in vSphere API 6.7 U1.
+            This enumeration was added in vSphere API 6.8.
 
             .. note::
                 This class represents an enumerated type in the interface language
@@ -344,8 +347,8 @@ class LibraryItems(VapiInterface):
             """
             USE_SPECIFIED_POLICY = None
             """
-            Use the specified policy. This class attribute was added in vSphere API 6.7
-            U1.
+            Use the specified policy. This class attribute was added in vSphere API
+            6.8.
 
             """
 
@@ -377,7 +380,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.CreateSpecVmHomeStorage`` class defines the storage
         specification for a virtual machine template's configuration and log files.
-        This class was added in vSphere API 6.7 U1.
+        This class was added in vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -395,7 +398,7 @@ class LibraryItems(VapiInterface):
             :type  datastore: :class:`str` or ``None``
             :param datastore: Identifier of the datastore for the virtual machine template's
                 configuration and log files. This attribute was added in vSphere
-                API 6.7 U1.
+                API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``Datastore``. When methods return a value of this class as a
@@ -411,7 +414,7 @@ class LibraryItems(VapiInterface):
                 with the specified storage policy. 
             :type  storage_policy: :class:`LibraryItems.CreateSpecVmHomeStoragePolicy` or ``None``
             :param storage_policy: Storage policy for the virtual machine template's configuration and
-                log files. This attribute was added in vSphere API 6.7 U1.
+                log files. This attribute was added in vSphere API 6.8.
                 If None, ``datastore`` must be specified and the virtual machine
                 template's configuration and log files are created with the default
                 storage policy associated with the ``datastore``.
@@ -419,6 +422,7 @@ class LibraryItems(VapiInterface):
             self.datastore = datastore
             self.storage_policy = storage_policy
             VapiStruct.__init__(self)
+
 
     CreateSpecVmHomeStorage._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.create_spec_vm_home_storage', {
@@ -434,7 +438,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.CreateSpecDiskStoragePolicy`` class defines the storage
         policy specification for a virtual machine template's disks. This class was
-        added in vSphere API 6.7 U1.
+        added in vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -459,10 +463,10 @@ class LibraryItems(VapiInterface):
             """
             :type  type: :class:`LibraryItems.CreateSpecDiskStoragePolicy.Type`
             :param type: Policy type to be used when creating a virtual machine template's
-                disk. This attribute was added in vSphere API 6.7 U1.
+                disk. This attribute was added in vSphere API 6.8.
             :type  policy: :class:`str`
             :param policy: Identifier for the storage policy to use. This attribute was added
-                in vSphere API 6.7 U1.
+                in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``com.vmware.spbm.StorageProfile``. When methods return a value of
@@ -476,10 +480,11 @@ class LibraryItems(VapiInterface):
             self.policy = policy
             VapiStruct.__init__(self)
 
+
         class Type(Enum):
             """
             Policy type for a virtual machine template's disk. This enumeration was
-            added in vSphere API 6.7 U1.
+            added in vSphere API 6.8.
 
             .. note::
                 This class represents an enumerated type in the interface language
@@ -492,8 +497,8 @@ class LibraryItems(VapiInterface):
             """
             USE_SPECIFIED_POLICY = None
             """
-            Use the specified policy. This class attribute was added in vSphere API 6.7
-            U1.
+            Use the specified policy. This class attribute was added in vSphere API
+            6.8.
 
             """
 
@@ -525,7 +530,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.CreateSpecDiskStorage`` class defines the storage
         specification for a virtual machine template's disks. This class was added
-        in vSphere API 6.7 U1.
+        in vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -542,7 +547,7 @@ class LibraryItems(VapiInterface):
             """
             :type  datastore: :class:`str` or ``None``
             :param datastore: Identifier for the datastore associated with a virtual machine
-                template's disk. This attribute was added in vSphere API 6.7 U1.
+                template's disk. This attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``Datastore``. When methods return a value of this class as a
@@ -558,7 +563,7 @@ class LibraryItems(VapiInterface):
                 storage policy. 
             :type  storage_policy: :class:`LibraryItems.CreateSpecDiskStoragePolicy` or ``None``
             :param storage_policy: Storage policy for a virtual machine template's disk. This
-                attribute was added in vSphere API 6.7 U1.
+                attribute was added in vSphere API 6.8.
                 If None, ``datastore`` must be specified and the virtual machine
                 template's disk is created with the default storage policy
                 associated with the ``datastore``.
@@ -566,6 +571,7 @@ class LibraryItems(VapiInterface):
             self.datastore = datastore
             self.storage_policy = storage_policy
             VapiStruct.__init__(self)
+
 
     CreateSpecDiskStorage._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.create_spec_disk_storage', {
@@ -581,7 +587,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.DeploySpec`` class defines the deployment parameters
         that can be specified for the ``deploy`` method. This class was added in
-        vSphere API 6.7 U1.
+        vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -605,21 +611,21 @@ class LibraryItems(VapiInterface):
             """
             :type  name: :class:`str`
             :param name: Name of the deployed virtual machine. This attribute was added in
-                vSphere API 6.7 U1.
+                vSphere API 6.8.
             :type  description: :class:`str` or ``None``
             :param description: Description of the deployed virtual machine. This attribute was
-                added in vSphere API 6.7 U1.
+                added in vSphere API 6.8.
                 If None, the deployed virtual machine has the same description as
                 the source library item.
             :type  vm_home_storage: :class:`LibraryItems.DeploySpecVmHomeStorage` or ``None``
             :param vm_home_storage: Storage location for the deployed virtual machine's configuration
-                and log files. This attribute was added in vSphere API 6.7 U1.
+                and log files. This attribute was added in vSphere API 6.8.
                 If None, the deployed virtual machine's configuration and log files
                 are created with the same storage spec as the source virtual
                 machine template's configuration and log files.
             :type  disk_storage: :class:`LibraryItems.DeploySpecDiskStorage` or ``None``
             :param disk_storage: Storage specification for the deployed virtual machine's disks.
-                This attribute was added in vSphere API 6.7 U1.
+                This attribute was added in vSphere API 6.8.
                 If both ``diskStorageOverrides`` and ``diskStorage`` are None, the
                 deployed virtual machine's disks are created with the same storage
                 spec as the corresponding disks in the source virtual machine
@@ -643,7 +649,7 @@ class LibraryItems(VapiInterface):
                 machine. This is specified as a mapping between disk identifiers in
                 the source virtual machine template contained in the library item
                 and their storage specifications. This attribute was added in
-                vSphere API 6.7 U1.
+                vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the key in
                 the attribute :class:`dict` must be an identifier for the resource
                 type: ``com.vmware.vcenter.vm.hardware.Disk``. When methods return
@@ -670,7 +676,7 @@ class LibraryItems(VapiInterface):
                 created with the storage spec specified by ``diskStorage``. 
             :type  placement: :class:`LibraryItems.DeployPlacementSpec` or ``None``
             :param placement: Information used to place the deployed virtual machine. This
-                attribute was added in vSphere API 6.7 U1.
+                attribute was added in vSphere API 6.8.
                 This attribute is currently required. In the future, if this
                 attribute is None, the system will use the values from the source
                 virtual machine template contained in the library item. 
@@ -682,17 +688,17 @@ class LibraryItems(VapiInterface):
                 operation will fail. 
             :type  powered_on: :class:`bool` or ``None``
             :param powered_on: Specifies whether the deployed virtual machine should be powered on
-                after deployment. This attribute was added in vSphere API 6.7 U1.
+                after deployment. This attribute was added in vSphere API 6.8.
                 If None, the virtual machine will not be powered on after
                 deployment.
             :type  guest_customization: :class:`LibraryItems.GuestCustomizationSpec` or ``None``
             :param guest_customization: Guest customization spec to apply to the deployed virtual machine.
-                This attribute was added in vSphere API 6.7 U1.
+                This attribute was added in vSphere API 6.8.
                 If None, the guest operating system is not customized after
                 deployment.
             :type  hardware_customization: :class:`LibraryItems.HardwareCustomizationSpec` or ``None``
             :param hardware_customization: Hardware customization spec which specifies updates to the deployed
-                virtual machine. This attribute was added in vSphere API 6.7 U1.
+                virtual machine. This attribute was added in vSphere API 6.8.
                 If None, the deployed virtual machine has the same hardware
                 configuration as the source virtual machine template contained in
                 the library item.
@@ -707,6 +713,7 @@ class LibraryItems(VapiInterface):
             self.guest_customization = guest_customization
             self.hardware_customization = hardware_customization
             VapiStruct.__init__(self)
+
 
     DeploySpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.deploy_spec', {
@@ -729,7 +736,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.HardwareCustomizationSpec`` class defines the hardware
         customization options that are applied to the deployed virtual machine.
-        This class was added in vSphere API 6.7 U1.
+        This class was added in vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -749,7 +756,7 @@ class LibraryItems(VapiInterface):
             """
             :type  nics: (:class:`dict` of :class:`str` and :class:`LibraryItems.EthernetUpdateSpec`) or ``None``
             :param nics: Map of Ethernet network adapters to update. This attribute was
-                added in vSphere API 6.7 U1.
+                added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the key in
                 the attribute :class:`dict` must be an identifier for the resource
                 type: ``com.vmware.vcenter.vm.hardware.Ethernet``. When methods
@@ -763,7 +770,7 @@ class LibraryItems(VapiInterface):
                 will receive a new address.
             :type  disks_to_remove: :class:`set` of :class:`str` or ``None``
             :param disks_to_remove: Idenfiers of disks to remove from the deployed virtual machine.
-                This attribute was added in vSphere API 6.7 U1.
+                This attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must contain identifiers for the resource type:
                 ``com.vmware.vcenter.vm.hardware.Disk``. When methods return a
@@ -773,7 +780,7 @@ class LibraryItems(VapiInterface):
                 If None, all disks will be copied.
             :type  disks_to_update: (:class:`dict` of :class:`str` and :class:`LibraryItems.DiskUpdateSpec`) or ``None``
             :param disks_to_update: Disk update specification for individual disks in the deployed
-                virtual machine. This attribute was added in vSphere API 6.7 U1.
+                virtual machine. This attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the key in
                 the attribute :class:`dict` must be an identifier for the resource
                 type: ``com.vmware.vcenter.vm.hardware.Disk``. When methods return
@@ -785,13 +792,13 @@ class LibraryItems(VapiInterface):
                 template contained in the library item.
             :type  cpu_update: :class:`LibraryItems.CpuUpdateSpec` or ``None``
             :param cpu_update: CPU update specification for the deployed virtual machine. This
-                attribute was added in vSphere API 6.7 U1.
+                attribute was added in vSphere API 6.8.
                 If {\\\\@term.unset}, the deployed virtual machine has the same CPU
                 settings as the source virtual machine template contained in the
                 library item.
             :type  memory_update: :class:`LibraryItems.MemoryUpdateSpec` or ``None``
             :param memory_update: Memory update specification for the deployed virtual machine. This
-                attribute was added in vSphere API 6.7 U1.
+                attribute was added in vSphere API 6.8.
                 If {\\\\@term.unset}, the deployed virtual machine has the same
                 memory settings as the source virtual machine template contained in
                 the library item.
@@ -802,6 +809,7 @@ class LibraryItems(VapiInterface):
             self.cpu_update = cpu_update
             self.memory_update = memory_update
             VapiStruct.__init__(self)
+
 
     HardwareCustomizationSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.hardware_customization_spec', {
@@ -820,7 +828,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.DiskUpdateSpec`` class describes updates to the
         configuration of a virtual disk in the deployed virtual machine. This class
-        was added in vSphere API 6.7 U1.
+        was added in vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -837,10 +845,11 @@ class LibraryItems(VapiInterface):
             :type  capacity: :class:`long`
             :param capacity: Updated capacity of the virtual disk backing in bytes. This value
                 has to be larger than the original capacity of the disk. This
-                attribute was added in vSphere API 6.7 U1.
+                attribute was added in vSphere API 6.8.
             """
             self.capacity = capacity
             VapiStruct.__init__(self)
+
 
     DiskUpdateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.disk_update_spec', {
@@ -855,7 +864,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.CpuUpdateSpec`` class describes updates to the CPU
         configuration of the deployed virtual machine. This class was added in
-        vSphere API 6.7 U1.
+        vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -872,13 +881,13 @@ class LibraryItems(VapiInterface):
             """
             :type  num_cpus: :class:`long` or ``None``
             :param num_cpus: Number of virtual processors in the deployed virtual machine. This
-                attribute was added in vSphere API 6.7 U1.
+                attribute was added in vSphere API 6.8.
                 If {\\\\@term.unset}, the deployed virtual machine has the same CPU
                 count as the source virtual machine template contained in the
                 library item.
             :type  num_cores_per_socket: :class:`long` or ``None``
             :param num_cores_per_socket: Number of cores among which to distribute CPUs in the deployed
-                virtual machine. This attribute was added in vSphere API 6.7 U1.
+                virtual machine. This attribute was added in vSphere API 6.8.
                 If {\\\\@term.unset}, the deployed virtual machine has the same
                 number of cores per socket as the source virtual machine template
                 contained in the library item.
@@ -886,6 +895,7 @@ class LibraryItems(VapiInterface):
             self.num_cpus = num_cpus
             self.num_cores_per_socket = num_cores_per_socket
             VapiStruct.__init__(self)
+
 
     CpuUpdateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.cpu_update_spec', {
@@ -901,7 +911,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.MemoryUpdateSpec`` class describes updates to the memory
         configuration of the deployed virtual machine. This class was added in
-        vSphere API 6.7 U1.
+        vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -917,12 +927,13 @@ class LibraryItems(VapiInterface):
             """
             :type  memory: :class:`long` or ``None``
             :param memory: Size of a virtual machine's memory in MB. This attribute was added
-                in vSphere API 6.7 U1.
+                in vSphere API 6.8.
                 If {\\\\@term.unset}, the deployed virtual machine has the same
                 memory size as the source virtual machine template.
             """
             self.memory = memory
             VapiStruct.__init__(self)
+
 
     MemoryUpdateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.memory_update_spec', {
@@ -937,7 +948,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.EthernetUpdateSpec`` class describes the network that
         the ethernet adapter of the deployed virtual machine should be connected
-        to. This class was added in vSphere API 6.7 U1.
+        to. This class was added in vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -953,7 +964,7 @@ class LibraryItems(VapiInterface):
             """
             :type  network: :class:`str` or ``None``
             :param network: Identifier of the network backing the virtual Ethernet adapter.
-                This attribute was added in vSphere API 6.7 U1.
+                This attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type: ``Network``.
                 When methods return a value of this class as a return value, the
@@ -965,6 +976,7 @@ class LibraryItems(VapiInterface):
             """
             self.network = network
             VapiStruct.__init__(self)
+
 
     EthernetUpdateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.ethernet_update_spec', {
@@ -979,7 +991,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.DeployPlacementSpec`` class contains information used to
         place a virtual machine onto resources within the vCenter inventory. This
-        class was added in vSphere API 6.7 U1.
+        class was added in vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -998,7 +1010,7 @@ class LibraryItems(VapiInterface):
             """
             :type  folder: :class:`str` or ``None``
             :param folder: Virtual machine folder into which the deployed virtual machine
-                should be placed. This attribute was added in vSphere API 6.7 U1.
+                should be placed. This attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type: ``Folder``.
                 When methods return a value of this class as a return value, the
@@ -1010,7 +1022,7 @@ class LibraryItems(VapiInterface):
                 machine deployment operation will fail. 
             :type  resource_pool: :class:`str` or ``None``
             :param resource_pool: Resource pool into which the deployed virtual machine should be
-                placed. This attribute was added in vSphere API 6.7 U1.
+                placed. This attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``ResourcePool``. When methods return a value of this class as a
@@ -1024,7 +1036,7 @@ class LibraryItems(VapiInterface):
                 and ``resourcePool`` are both specified, ``resourcePool`` must
                 belong to ``host``. If ``host`` and ``cluster`` are both specified,
                 ``host`` must be a member of ``cluster``. This attribute was added
-                in vSphere API 6.7 U1.
+                in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``HostSystem``. When methods return a value of this class as a
@@ -1039,7 +1051,7 @@ class LibraryItems(VapiInterface):
                 If ``cluster`` and ``resourcePool`` are both specified,
                 ``resourcePool`` must belong to ``cluster``. If ``cluster`` and
                 ``host`` are both specified, ``host`` must be a member of
-                ``cluster``. This attribute was added in vSphere API 6.7 U1.
+                ``cluster``. This attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``ClusterComputeResource``. When methods return a value of this
@@ -1053,6 +1065,7 @@ class LibraryItems(VapiInterface):
             self.host = host
             self.cluster = cluster
             VapiStruct.__init__(self)
+
 
     DeployPlacementSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.deploy_placement_spec', {
@@ -1070,7 +1083,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.DeploySpecVmHomeStoragePolicy`` class defines the
         storage policy specification for the deployed virtual machine's
-        configuration and log files. This class was added in vSphere API 6.7 U1.
+        configuration and log files. This class was added in vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -1097,10 +1110,10 @@ class LibraryItems(VapiInterface):
             :type  type: :class:`LibraryItems.DeploySpecVmHomeStoragePolicy.Type`
             :param type: Policy type to be used when creating the deployed virtual machine's
                 configuration and log files. This attribute was added in vSphere
-                API 6.7 U1.
+                API 6.8.
             :type  policy: :class:`str`
             :param policy: Identifier for the storage policy to use. This attribute was added
-                in vSphere API 6.7 U1.
+                in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``com.vmware.spbm.StorageProfile``. When methods return a value of
@@ -1114,10 +1127,11 @@ class LibraryItems(VapiInterface):
             self.policy = policy
             VapiStruct.__init__(self)
 
+
         class Type(Enum):
             """
             Policy type for the deployed virtual machine's configuration and log files.
-            This enumeration was added in vSphere API 6.7 U1.
+            This enumeration was added in vSphere API 6.8.
 
             .. note::
                 This class represents an enumerated type in the interface language
@@ -1130,15 +1144,15 @@ class LibraryItems(VapiInterface):
             """
             USE_SPECIFIED_POLICY = None
             """
-            Use the specified policy. This class attribute was added in vSphere API 6.7
-            U1.
+            Use the specified policy. This class attribute was added in vSphere API
+            6.8.
 
             """
             USE_SOURCE_POLICY = None
             """
             Use the storage policy that is associated with the source virtual machine
             template's configuration and log files. This class attribute was added in
-            vSphere API 6.7 U1.
+            vSphere API 6.8.
 
             """
 
@@ -1171,7 +1185,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.DeploySpecVmHomeStorage`` class defines the storage
         specification for a deployed virtual machine's configuration and log files.
-        This class was added in vSphere API 6.7 U1.
+        This class was added in vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -1189,7 +1203,7 @@ class LibraryItems(VapiInterface):
             :type  datastore: :class:`str` or ``None``
             :param datastore: Identifier of the datastore for the deployed virtual machine's
                 configuration and log files. This attribute was added in vSphere
-                API 6.7 U1.
+                API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``Datastore``. When methods return a value of this class as a
@@ -1205,7 +1219,7 @@ class LibraryItems(VapiInterface):
                 with the specified storage policy. 
             :type  storage_policy: :class:`LibraryItems.DeploySpecVmHomeStoragePolicy` or ``None``
             :param storage_policy: Storage policy for the deployed virtual machine's configuration and
-                log files. This attribute was added in vSphere API 6.7 U1.
+                log files. This attribute was added in vSphere API 6.8.
                 If None, ``datastore`` must be specified and the deployed virtual
                 machine's configuration and log files are created with the default
                 storage policy associated with the ``datastore``.
@@ -1213,6 +1227,7 @@ class LibraryItems(VapiInterface):
             self.datastore = datastore
             self.storage_policy = storage_policy
             VapiStruct.__init__(self)
+
 
     DeploySpecVmHomeStorage._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.deploy_spec_vm_home_storage', {
@@ -1228,7 +1243,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.DeploySpecDiskStoragePolicy`` class describes the
         storage policy specification for the deployed virtual machine's disks. This
-        class was added in vSphere API 6.7 U1.
+        class was added in vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -1254,10 +1269,10 @@ class LibraryItems(VapiInterface):
             """
             :type  type: :class:`LibraryItems.DeploySpecDiskStoragePolicy.Type`
             :param type: Policy type to be used when creating the deployed virtual machine's
-                disk. This attribute was added in vSphere API 6.7 U1.
+                disk. This attribute was added in vSphere API 6.8.
             :type  policy: :class:`str`
             :param policy: Identifier of the storage policy to use. This attribute was added
-                in vSphere API 6.7 U1.
+                in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``com.vmware.spbm.StorageProfile``. When methods return a value of
@@ -1271,10 +1286,11 @@ class LibraryItems(VapiInterface):
             self.policy = policy
             VapiStruct.__init__(self)
 
+
         class Type(Enum):
             """
             Policy type for the deployed virtual machine's disk. This enumeration was
-            added in vSphere API 6.7 U1.
+            added in vSphere API 6.8.
 
             .. note::
                 This class represents an enumerated type in the interface language
@@ -1287,15 +1303,15 @@ class LibraryItems(VapiInterface):
             """
             USE_SPECIFIED_POLICY = None
             """
-            Use the specified policy. This class attribute was added in vSphere API 6.7
-            U1.
+            Use the specified policy. This class attribute was added in vSphere API
+            6.8.
 
             """
             USE_SOURCE_POLICY = None
             """
             Use the storage policy that is associated with the corresponding disk in
             the source virtual machine template. This class attribute was added in
-            vSphere API 6.7 U1.
+            vSphere API 6.8.
 
             """
 
@@ -1328,7 +1344,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.DeploySpecDiskStorage`` class contains the storage
         specification for disks in the virtual machine. This class was added in
-        vSphere API 6.7 U1.
+        vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -1345,7 +1361,7 @@ class LibraryItems(VapiInterface):
             """
             :type  datastore: :class:`str` or ``None``
             :param datastore: Identifier for the datastore associated the deployed virtual
-                machine's disk. This attribute was added in vSphere API 6.7 U1.
+                machine's disk. This attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``Datastore``. When methods return a value of this class as a
@@ -1361,7 +1377,7 @@ class LibraryItems(VapiInterface):
                 storage policy. 
             :type  storage_policy: :class:`LibraryItems.DeploySpecDiskStoragePolicy` or ``None``
             :param storage_policy: Storage policy for the deployed virtual machine's disk. This
-                attribute was added in vSphere API 6.7 U1.
+                attribute was added in vSphere API 6.8.
                 If None, ``datastore`` must be specified and the deployed virtual
                 machine's disk is created with the default storage policy
                 associated with the ``datastore``.
@@ -1369,6 +1385,7 @@ class LibraryItems(VapiInterface):
             self.datastore = datastore
             self.storage_policy = storage_policy
             VapiStruct.__init__(self)
+
 
     DeploySpecDiskStorage._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.deploy_spec_disk_storage', {
@@ -1384,7 +1401,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.GuestCustomizationSpec`` class contains information
         required to customize the deployed virtual machine. This class was added in
-        vSphere API 6.7 U1.
+        vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -1400,11 +1417,12 @@ class LibraryItems(VapiInterface):
             """
             :type  name: :class:`str` or ``None``
             :param name: Name of the customization specification. This attribute was added
-                in vSphere API 6.7 U1.
+                in vSphere API 6.8.
                 If None, no guest customization is performed.
             """
             self.name = name
             VapiStruct.__init__(self)
+
 
     GuestCustomizationSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.guest_customization_spec', {
@@ -1419,7 +1437,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.Info`` class contains information about a virtual
         machine template item in content library. This class was added in vSphere
-        API 6.7 U1.
+        API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -1444,20 +1462,20 @@ class LibraryItems(VapiInterface):
             """
             :type  guest_os: :class:`com.vmware.vcenter.vm_client.GuestOS`
             :param guest_os: Configured guest operating system of the virtual machine template.
-                This attribute was added in vSphere API 6.7 U1.
+                This attribute was added in vSphere API 6.8.
             :type  cpu: :class:`LibraryItems.CpuInfo`
             :param cpu: CPU configuration of the virtual machine template. This attribute
-                was added in vSphere API 6.7 U1.
+                was added in vSphere API 6.8.
             :type  memory: :class:`LibraryItems.MemoryInfo`
             :param memory: Memory configuration of the virtual machine template. This
-                attribute was added in vSphere API 6.7 U1.
+                attribute was added in vSphere API 6.8.
             :type  vm_home_storage: :class:`LibraryItems.VmHomeStorageInfo`
             :param vm_home_storage: Storage information about the virtual machine template's
                 configuration and log files. This attribute was added in vSphere
-                API 6.7 U1.
+                API 6.8.
             :type  disks: :class:`dict` of :class:`str` and :class:`LibraryItems.DiskInfo`
             :param disks: Storage information about the virtual machine template's virtual
-                disks. This attribute was added in vSphere API 6.7 U1.
+                disks. This attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the key in
                 the attribute :class:`dict` must be an identifier for the resource
                 type: ``com.vmware.vcenter.vm.hardware.Disk``. When methods return
@@ -1466,7 +1484,7 @@ class LibraryItems(VapiInterface):
                 ``com.vmware.vcenter.vm.hardware.Disk``.
             :type  nics: :class:`dict` of :class:`str` and :class:`LibraryItems.EthernetInfo`
             :param nics: Information about the virtual machine template's virtual ethernet
-                adapters. This attribute was added in vSphere API 6.7 U1.
+                adapters. This attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the key in
                 the attribute :class:`dict` must be an identifier for the resource
                 type: ``com.vmware.vcenter.vm.hardware.Ethernet``. When methods
@@ -1474,14 +1492,10 @@ class LibraryItems(VapiInterface):
                 attribute :class:`dict` will be an identifier for the resource
                 type: ``com.vmware.vcenter.vm.hardware.Ethernet``.
             :type  vm_template: :class:`str`
-            :param vm_template: Identifier of the virtual machine template contained in the library
-                item. This field is used to identify the virtual machine template
-                in legacy APIs. This attribute was added in vSphere API 6.7 U1.
-                When clients pass a value of this class as a parameter, the
-                attribute must be an identifier for the resource type:
-                ``VirtualMachine``. When methods return a value of this class as a
-                return value, the attribute will be an identifier for the resource
-                type: ``VirtualMachine``.
+            :param vm_template: Identifier of the latest virtual machine template contained in the
+                library item. This attribute is the managed object identifier used
+                to identify the virtual machine template in the vSphere Management
+                (SOAP) API. This attribute was added in vSphere API 6.8.
             """
             self.guest_os = guest_os
             self.cpu = cpu
@@ -1492,6 +1506,7 @@ class LibraryItems(VapiInterface):
             self.vm_template = vm_template
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.info', {
             'guest_OS': type.ReferenceType('com.vmware.vcenter.vm_client', 'GuestOS'),
@@ -1500,7 +1515,7 @@ class LibraryItems(VapiInterface):
             'vm_home_storage': type.ReferenceType(__name__, 'LibraryItems.VmHomeStorageInfo'),
             'disks': type.MapType(type.IdType(), type.ReferenceType(__name__, 'LibraryItems.DiskInfo')),
             'nics': type.MapType(type.IdType(), type.ReferenceType(__name__, 'LibraryItems.EthernetInfo')),
-            'vm_template': type.IdType(resource_types='VirtualMachine'),
+            'vm_template': type.StringType(),
         },
         Info,
         False,
@@ -1510,7 +1525,7 @@ class LibraryItems(VapiInterface):
     class CpuInfo(VapiStruct):
         """
         The ``LibraryItems.CpuInfo`` class contains CPU related information about
-        the virtual machine template. This class was added in vSphere API 6.7 U1.
+        the virtual machine template. This class was added in vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -1526,15 +1541,15 @@ class LibraryItems(VapiInterface):
                     ):
             """
             :type  count: :class:`long`
-            :param count: Number of CPU cores. This attribute was added in vSphere API 6.7
-                U1.
+            :param count: Number of CPU cores. This attribute was added in vSphere API 6.8.
             :type  cores_per_socket: :class:`long`
             :param cores_per_socket: Number of CPU cores per socket. This attribute was added in vSphere
-                API 6.7 U1.
+                API 6.8.
             """
             self.count = count
             self.cores_per_socket = cores_per_socket
             VapiStruct.__init__(self)
+
 
     CpuInfo._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.cpu_info', {
@@ -1549,8 +1564,8 @@ class LibraryItems(VapiInterface):
     class MemoryInfo(VapiStruct):
         """
         The ``LibraryItems.MemoryInfo`` class contains memory related information
-        about the virtual machine template. This class was added in vSphere API 6.7
-        U1.
+        about the virtual machine template. This class was added in vSphere API
+        6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -1569,10 +1584,11 @@ class LibraryItems(VapiInterface):
             """
             :type  size_mib: :class:`long`
             :param size_mib: Memory size in mebibytes. This attribute was added in vSphere API
-                6.7 U1.
+                6.8.
             """
             self.size_mib = size_mib
             VapiStruct.__init__(self)
+
 
     MemoryInfo._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.memory_info', {
@@ -1587,7 +1603,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.VmHomeStorageInfo`` class contains storage information
         about the virtual machine template's configuration and log files. This
-        class was added in vSphere API 6.7 U1.
+        class was added in vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -1605,7 +1621,7 @@ class LibraryItems(VapiInterface):
             :type  datastore: :class:`str`
             :param datastore: Identifier of the datastore where the virtual machine template's
                 configuration and log files are stored. This attribute was added in
-                vSphere API 6.7 U1.
+                vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``Datastore``. When methods return a value of this class as a
@@ -1614,7 +1630,7 @@ class LibraryItems(VapiInterface):
             :type  storage_policy: :class:`str` or ``None``
             :param storage_policy: Identifier of the storage policy associated with the virtual
                 machine template's configuration and log files. This attribute was
-                added in vSphere API 6.7 U1.
+                added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``com.vmware.spbm.StorageProfile``. When methods return a value of
@@ -1626,6 +1642,7 @@ class LibraryItems(VapiInterface):
             self.datastore = datastore
             self.storage_policy = storage_policy
             VapiStruct.__init__(self)
+
 
     VmHomeStorageInfo._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.vm_home_storage_info', {
@@ -1640,8 +1657,7 @@ class LibraryItems(VapiInterface):
     class DiskInfo(VapiStruct):
         """
         The ``LibraryItems.DiskInfo`` class contains information about the virtual
-        machine template's virtual disk. This class was added in vSphere API 6.7
-        U1.
+        machine template's virtual disk. This class was added in vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -1658,15 +1674,16 @@ class LibraryItems(VapiInterface):
             """
             :type  capacity: :class:`long` or ``None``
             :param capacity: Capacity of the virtual disk in bytes. This attribute was added in
-                vSphere API 6.7 U1.
+                vSphere API 6.8.
                 This attribute will be None if the virtual disk is inaccessible.
             :type  disk_storage: :class:`LibraryItems.DiskStorageInfo`
             :param disk_storage: Disk storage related information. This attribute was added in
-                vSphere API 6.7 U1.
+                vSphere API 6.8.
             """
             self.capacity = capacity
             self.disk_storage = disk_storage
             VapiStruct.__init__(self)
+
 
     DiskInfo._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.disk_info', {
@@ -1682,7 +1699,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.DiskStorageInfo`` class contains storage related
         information about a virtual machine template's virtual disk. This class was
-        added in vSphere API 6.7 U1.
+        added in vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -1699,7 +1716,7 @@ class LibraryItems(VapiInterface):
             """
             :type  datastore: :class:`str`
             :param datastore: Identifier of the datastore where the disk is stored. This
-                attribute was added in vSphere API 6.7 U1.
+                attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``Datastore``. When methods return a value of this class as a
@@ -1707,7 +1724,7 @@ class LibraryItems(VapiInterface):
                 type: ``Datastore``.
             :type  storage_policy: :class:`str` or ``None``
             :param storage_policy: Identifier of the storage policy associated with the virtual disk.
-                This attribute was added in vSphere API 6.7 U1.
+                This attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``com.vmware.spbm.StorageProfile``. When methods return a value of
@@ -1719,6 +1736,7 @@ class LibraryItems(VapiInterface):
             self.datastore = datastore
             self.storage_policy = storage_policy
             VapiStruct.__init__(self)
+
 
     DiskStorageInfo._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm_template.library_items.disk_storage_info', {
@@ -1734,7 +1752,7 @@ class LibraryItems(VapiInterface):
         """
         The ``LibraryItems.EthernetInfo`` class contains information about a
         virtual machine template's virtual Ethernet adapter. This class was added
-        in vSphere API 6.7 U1.
+        in vSphere API 6.8.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -1752,13 +1770,13 @@ class LibraryItems(VapiInterface):
             """
             :type  backing_type: :class:`LibraryItems.EthernetInfo.NetworkBackingType`
             :param backing_type: Network backing type for the virtual Ethernet adapter. This
-                attribute was added in vSphere API 6.7 U1.
+                attribute was added in vSphere API 6.8.
             :type  mac_type: :class:`LibraryItems.EthernetInfo.MacAddressType`
             :param mac_type: MAC address type of the ethernet adapter. This attribute was added
-                in vSphere API 6.7 U1.
+                in vSphere API 6.8.
             :type  network: :class:`str` or ``None``
             :param network: Identifier of the network backing the virtual Ethernet adapter.
-                This attribute was added in vSphere API 6.7 U1.
+                This attribute was added in vSphere API 6.8.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type: ``Network``.
                 When methods return a value of this class as a return value, the
@@ -1771,11 +1789,12 @@ class LibraryItems(VapiInterface):
             self.network = network
             VapiStruct.__init__(self)
 
+
         class NetworkBackingType(Enum):
             """
             The ``LibraryItems.EthernetInfo.NetworkBackingType`` class defines valid
             network backing types for a virtual Ethernet adapter. This enumeration was
-            added in vSphere API 6.7 U1.
+            added in vSphere API 6.8.
 
             .. note::
                 This class represents an enumerated type in the interface language
@@ -1789,7 +1808,7 @@ class LibraryItems(VapiInterface):
             STANDARD_PORTGROUP = None
             """
             vSphere standard portgroup network backing. This class attribute was added
-            in vSphere API 6.7 U1.
+            in vSphere API 6.8.
 
             """
             HOST_DEVICE = None
@@ -1797,19 +1816,18 @@ class LibraryItems(VapiInterface):
             Legacy host device network backing. Imported VMs may have virtual Ethernet
             adapters with this type of backing, but this type of backing cannot be used
             to create or to update a virtual Ethernet adapter. This class attribute was
-            added in vSphere API 6.7 U1.
+            added in vSphere API 6.8.
 
             """
             DISTRIBUTED_PORTGROUP = None
             """
             Distributed virtual switch backing. This class attribute was added in
-            vSphere API 6.7 U1.
+            vSphere API 6.8.
 
             """
             OPAQUE_NETWORK = None
             """
-            Opaque network backing. This class attribute was added in vSphere API 6.7
-            U1.
+            Opaque network backing. This class attribute was added in vSphere API 6.8.
 
             """
 
@@ -1834,7 +1852,7 @@ class LibraryItems(VapiInterface):
             """
             The ``LibraryItems.EthernetInfo.MacAddressType`` class defines the valid
             MAC address origins for a virtual Ethernet adapter. This enumeration was
-            added in vSphere API 6.7 U1.
+            added in vSphere API 6.8.
 
             .. note::
                 This class represents an enumerated type in the interface language
@@ -1848,19 +1866,19 @@ class LibraryItems(VapiInterface):
             MANUAL = None
             """
             MAC address is assigned statically. This class attribute was added in
-            vSphere API 6.7 U1.
+            vSphere API 6.8.
 
             """
             GENERATED = None
             """
             MAC address is generated automatically. This class attribute was added in
-            vSphere API 6.7 U1.
+            vSphere API 6.8.
 
             """
             ASSIGNED = None
             """
             MAC address is assigned by vCenter Server. This class attribute was added
-            in vSphere API 6.7 U1.
+            in vSphere API 6.8.
 
             """
 
@@ -1901,7 +1919,7 @@ class LibraryItems(VapiInterface):
         virtual machine template created from the source virtual machine, using
         the supplied create specification. The virtual machine template is
         stored in a newly created library item. This method was added in
-        vSphere API 6.7 U1.
+        vSphere API 6.8.
 
         :type  spec: :class:`LibraryItems.CreateSpec`
         :param spec: information used to create the library item from the source virtual
@@ -1997,7 +2015,7 @@ class LibraryItems(VapiInterface):
         :attr:`LibraryItems.DeploySpec.guest_customization` are specified, the
         server triggers the power on and/or guest customization operations,
         which are executed asynchronously. This method was added in vSphere API
-        6.7 U1.
+        6.8.
 
         :type  template_library_item: :class:`str`
         :param template_library_item: identifier of the content library item containing the source
@@ -2107,7 +2125,7 @@ class LibraryItems(VapiInterface):
         """
         Returns information about a virtual machine template contained in the
         library item specified by ``template_library_item``. This method was
-        added in vSphere API 6.7 U1.
+        added in vSphere API 6.8.
 
         :type  template_library_item: :class:`str`
         :param template_library_item: identifier of the library item containing the virtual machine

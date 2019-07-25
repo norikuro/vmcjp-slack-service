@@ -2,7 +2,7 @@
 StubConfiguration factory
 """
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015, 2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 import itertools
 
@@ -33,7 +33,7 @@ class StubConfigurationFactory(object):
         return config
 
     @staticmethod
-    def new_runtime_configuration(connector, *errorTypes):
+    def new_runtime_configuration(connector, *errorTypes, **kwargs):
         """
         Return a stub configuration using the specified connection, with the
         errors reported by the vAPI runtime registered.
@@ -44,15 +44,19 @@ class StubConfigurationFactory(object):
                           ApiProvider
         :type  error_types: :class:`list` of
             :class:`vmware.vapi.bindings.type.ErrorType`
+        :type kwargs: :class: `vmware.vapi.bindings.http_helper.ResponseExtractor`    # pylint: disable=line-too-long
+        :param kwargs: Extract rest http response status
         :param error_types: additional error types to be registered in the
                             configuration
         """
-        return StubConfigurationFactory.new_configuration(
+        extractor = kwargs.get('response_extractor', None)
+        return StubConfiguration(
             connector,
             errors_client.InternalServerError.get_binding_type(),
             errors_client.InvalidArgument.get_binding_type(),
             errors_client.OperationNotFound.get_binding_type(),
-            *errorTypes)
+            *errorTypes,
+            response_extractor=extractor)
 
     @staticmethod
     def new_std_configuration(connector, *errorTypes):

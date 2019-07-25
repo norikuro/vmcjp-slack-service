@@ -413,7 +413,7 @@ class ProviderConfig(object):
             return self._parse_list(handlers)
         return []
 
-    def get_authorization_handlers_and_file(self):
+    def get_authorization_handlers_and_files(self):
         """
         Get authorization handlers and authentication file
 
@@ -423,9 +423,9 @@ class ProviderConfig(object):
         handlers = self._get_value(
             Sections.AUTHORIZATION_FILTER, 'handlers')
         if handlers:
+            files = self._get_value(Sections.AUTHORIZATION_FILTER, 'file')
+            files_list = self._parse_list(files) if files else []
             return (
                 self._parse_list(handlers),
-                self._get_value(
-                    Sections.AUTHORIZATION_FILTER,
-                    'file'))
-        return ([], None)
+                files_list)
+        return ([], [])

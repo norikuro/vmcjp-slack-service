@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -31,6 +31,102 @@ from vmware.vapi.lib.constants import TaskType
 from vmware.vapi.lib.rest import OperationRestMetadata
 
 
+class AdvertisedRoutes(VapiInterface):
+    """
+    
+    """
+
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers.routing.bgp.neighbors.advertised_routes'
+    """
+    Identifier of the service in canonical form.
+    """
+    def __init__(self, config):
+        """
+        :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
+        :param config: Configuration to be used for creating the stub.
+        """
+        VapiInterface.__init__(self, config, _AdvertisedRoutesStub)
+
+
+    def get(self,
+            logical_router_id,
+            neighbor_id,
+            ):
+        """
+        Returns routes advertised by BGP neighbor from all edge transport nodes
+        on which this neighbor is currently enabled. It always returns realtime
+        response.
+
+        :type  logical_router_id: :class:`str`
+        :param logical_router_id: (required)
+        :type  neighbor_id: :class:`str`
+        :param neighbor_id: (required)
+        :rtype: :class:`com.vmware.nsx.model_client.BgpNeighborRouteDetails`
+        :return: com.vmware.nsx.model.BgpNeighborRouteDetails
+        :raise: :class:`com.vmware.vapi.std.errors_client.ServiceUnavailable` 
+             Service Unavailable
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidRequest` 
+             Bad Request, Precondition Failed
+        :raise: :class:`com.vmware.vapi.std.errors_client.InternalServerError` 
+             Internal Server Error
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
+             Forbidden
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
+             Not Found
+        """
+        return self._invoke('get',
+                            {
+                            'logical_router_id': logical_router_id,
+                            'neighbor_id': neighbor_id,
+                            })
+class Routes(VapiInterface):
+    """
+    
+    """
+
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers.routing.bgp.neighbors.routes'
+    """
+    Identifier of the service in canonical form.
+    """
+    def __init__(self, config):
+        """
+        :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
+        :param config: Configuration to be used for creating the stub.
+        """
+        VapiInterface.__init__(self, config, _RoutesStub)
+
+
+    def get(self,
+            logical_router_id,
+            neighbor_id,
+            ):
+        """
+        Returns routes learned by BGP neighbor from all edge transport nodes on
+        which this neighbor is currently enabled. It always returns realtime
+        response.
+
+        :type  logical_router_id: :class:`str`
+        :param logical_router_id: (required)
+        :type  neighbor_id: :class:`str`
+        :param neighbor_id: (required)
+        :rtype: :class:`com.vmware.nsx.model_client.BgpNeighborRouteDetails`
+        :return: com.vmware.nsx.model.BgpNeighborRouteDetails
+        :raise: :class:`com.vmware.vapi.std.errors_client.ServiceUnavailable` 
+             Service Unavailable
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidRequest` 
+             Bad Request, Precondition Failed
+        :raise: :class:`com.vmware.vapi.std.errors_client.InternalServerError` 
+             Internal Server Error
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
+             Forbidden
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
+             Not Found
+        """
+        return self._invoke('get',
+                            {
+                            'logical_router_id': logical_router_id,
+                            'neighbor_id': neighbor_id,
+                            })
 class Status(VapiInterface):
     """
     
@@ -46,7 +142,10 @@ class Status(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers.routing.bgp.neighbors.status'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -111,6 +210,114 @@ class Status(VapiInterface):
                             'source': source,
                             'transport_node_id': transport_node_id,
                             })
+class _AdvertisedRoutesStub(ApiInterfaceStub):
+    def __init__(self, config):
+        # properties for get operation
+        get_input_type = type.StructType('operation-input', {
+            'logical_router_id': type.StringType(),
+            'neighbor_id': type.StringType(),
+        })
+        get_error_dict = {
+            'com.vmware.vapi.std.errors.service_unavailable':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'ServiceUnavailable'),
+            'com.vmware.vapi.std.errors.invalid_request':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidRequest'),
+            'com.vmware.vapi.std.errors.internal_server_error':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InternalServerError'),
+            'com.vmware.vapi.std.errors.unauthorized':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+            'com.vmware.vapi.std.errors.not_found':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+
+        }
+        get_input_value_validator_list = [
+        ]
+        get_output_validator_list = [
+        ]
+        get_rest_metadata = OperationRestMetadata(
+            http_method='GET',
+            url_template='/api/v1/logical-routers/{logical-router-id}/routing/bgp/neighbors/{neighbor-id}/advertised-routes',
+            path_variables={
+                'logical_router_id': 'logical-router-id',
+                'neighbor_id': 'neighbor-id',
+            },
+            query_parameters={
+            },
+            content_type='application/json'
+        )
+
+        operations = {
+            'get': {
+                'input_type': get_input_type,
+                'output_type': type.ReferenceType('com.vmware.nsx.model_client', 'BgpNeighborRouteDetails'),
+                'errors': get_error_dict,
+                'input_value_validator_list': get_input_value_validator_list,
+                'output_validator_list': get_output_validator_list,
+                'task_type': TaskType.NONE,
+            },
+        }
+        rest_metadata = {
+            'get': get_rest_metadata,
+        }
+        ApiInterfaceStub.__init__(
+            self, iface_name='com.vmware.nsx.logical_routers.routing.bgp.neighbors.advertised_routes',
+            config=config, operations=operations, rest_metadata=rest_metadata,
+            is_vapi_rest=False)
+
+class _RoutesStub(ApiInterfaceStub):
+    def __init__(self, config):
+        # properties for get operation
+        get_input_type = type.StructType('operation-input', {
+            'logical_router_id': type.StringType(),
+            'neighbor_id': type.StringType(),
+        })
+        get_error_dict = {
+            'com.vmware.vapi.std.errors.service_unavailable':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'ServiceUnavailable'),
+            'com.vmware.vapi.std.errors.invalid_request':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidRequest'),
+            'com.vmware.vapi.std.errors.internal_server_error':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InternalServerError'),
+            'com.vmware.vapi.std.errors.unauthorized':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+            'com.vmware.vapi.std.errors.not_found':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+
+        }
+        get_input_value_validator_list = [
+        ]
+        get_output_validator_list = [
+        ]
+        get_rest_metadata = OperationRestMetadata(
+            http_method='GET',
+            url_template='/api/v1/logical-routers/{logical-router-id}/routing/bgp/neighbors/{neighbor-id}/routes',
+            path_variables={
+                'logical_router_id': 'logical-router-id',
+                'neighbor_id': 'neighbor-id',
+            },
+            query_parameters={
+            },
+            content_type='application/json'
+        )
+
+        operations = {
+            'get': {
+                'input_type': get_input_type,
+                'output_type': type.ReferenceType('com.vmware.nsx.model_client', 'BgpNeighborRouteDetails'),
+                'errors': get_error_dict,
+                'input_value_validator_list': get_input_value_validator_list,
+                'output_validator_list': get_output_validator_list,
+                'task_type': TaskType.NONE,
+            },
+        }
+        rest_metadata = {
+            'get': get_rest_metadata,
+        }
+        ApiInterfaceStub.__init__(
+            self, iface_name='com.vmware.nsx.logical_routers.routing.bgp.neighbors.routes',
+            config=config, operations=operations, rest_metadata=rest_metadata,
+            is_vapi_rest=False)
+
 class _StatusStub(ApiInterfaceStub):
     def __init__(self, config):
         # properties for list operation
@@ -155,7 +362,8 @@ class _StatusStub(ApiInterfaceStub):
                 'sort_by': 'sort_by',
                 'source': 'source',
                 'transport_node_id': 'transport_node_id',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -179,6 +387,8 @@ class _StatusStub(ApiInterfaceStub):
 
 class StubFactory(StubFactoryBase):
     _attrs = {
+        'AdvertisedRoutes': AdvertisedRoutes,
+        'Routes': Routes,
         'Status': Status,
     }
 

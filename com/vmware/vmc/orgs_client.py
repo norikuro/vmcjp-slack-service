@@ -244,6 +244,7 @@ class Sddcs(VapiInterface):
     def create(self,
                org,
                sddc_config,
+               validate_only=None,
                ):
         """
         Provision an SDDC in target cloud
@@ -252,8 +253,9 @@ class Sddcs(VapiInterface):
         :param org: Organization identifier. (required)
         :type  sddc_config: :class:`com.vmware.vmc.model_client.AwsSddcConfig`
         :param sddc_config: sddcConfig (required)
-        :rtype: :class:`com.vmware.vmc.model_client.Task`
-        :return: com.vmware.vmc.model.Task
+        :type  validate_only: :class:`bool` or ``None``
+        :param validate_only: When true, only validates the given sddc configuration without
+            provisioning. (optional)
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
              Unauthorized
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
@@ -263,6 +265,7 @@ class Sddcs(VapiInterface):
                             {
                             'org': org,
                             'sddc_config': sddc_config,
+                            'validate_only': validate_only,
                             })
 
     def delete(self,
@@ -339,12 +342,16 @@ class Sddcs(VapiInterface):
 
     def list(self,
              org,
+             include_deleted=None,
              ):
         """
         List all the SDDCs of an organization
 
         :type  org: :class:`str`
         :param org: Organization identifier. (required)
+        :type  include_deleted: :class:`bool` or ``None``
+        :param include_deleted: When true, forces the result to also include deleted SDDCs.
+            (optional)
         :rtype: :class:`list` of :class:`com.vmware.vmc.model_client.Sddc`
         :return: 
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
@@ -355,6 +362,39 @@ class Sddcs(VapiInterface):
         return self._invoke('list',
                             {
                             'org': org,
+                            'include_deleted': include_deleted,
+                            })
+
+    def patch(self,
+              org,
+              sddc,
+              sddc_patch_request,
+              ):
+        """
+        Patch SDDC
+
+        :type  org: :class:`str`
+        :param org: Organization identifier. (required)
+        :type  sddc: :class:`str`
+        :param sddc: Sddc Identifier. (required)
+        :type  sddc_patch_request: :class:`com.vmware.vmc.model_client.SddcPatchRequest`
+        :param sddc_patch_request: Patch request for the SDDC (required)
+        :rtype: :class:`com.vmware.vmc.model_client.Sddc`
+        :return: com.vmware.vmc.model.Sddc
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             Unauthorized
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidRequest` 
+             SDDC cannot be patched
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
+             Forbidden
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
+             Cannot find the SDDC with given identifier
+        """
+        return self._invoke('patch',
+                            {
+                            'org': org,
+                            'sddc': sddc,
+                            'sddc_patch_request': sddc_patch_request,
                             })
 class Subscriptions(VapiInterface):
     """
@@ -841,6 +881,7 @@ class _SddcsStub(ApiInterfaceStub):
         create_input_type = type.StructType('operation-input', {
             'org': type.StringType(),
             'sddc_config': type.ReferenceType('com.vmware.vmc.model_client', 'AwsSddcConfig'),
+            'validate_only': type.OptionalType(type.BooleanType()),
         })
         create_error_dict = {
             'com.vmware.vapi.std.errors.unauthenticated':
@@ -861,6 +902,7 @@ class _SddcsStub(ApiInterfaceStub):
                 'org': 'org',
             },
             query_parameters={
+                'validate_only': 'validateOnly',
             },
             content_type='application/json'
         )
@@ -936,6 +978,7 @@ class _SddcsStub(ApiInterfaceStub):
         # properties for list operation
         list_input_type = type.StructType('operation-input', {
             'org': type.StringType(),
+            'include_deleted': type.OptionalType(type.BooleanType()),
         })
         list_error_dict = {
             'com.vmware.vapi.std.errors.unauthenticated':
@@ -955,6 +998,41 @@ class _SddcsStub(ApiInterfaceStub):
                 'org': 'org',
             },
             query_parameters={
+                'include_deleted': 'includeDeleted',
+            },
+            content_type='application/json'
+        )
+
+        # properties for patch operation
+        patch_input_type = type.StructType('operation-input', {
+            'org': type.StringType(),
+            'sddc': type.StringType(),
+            'sddc_patch_request': type.ReferenceType('com.vmware.vmc.model_client', 'SddcPatchRequest'),
+        })
+        patch_error_dict = {
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
+            'com.vmware.vapi.std.errors.invalid_request':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidRequest'),
+            'com.vmware.vapi.std.errors.unauthorized':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+            'com.vmware.vapi.std.errors.not_found':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+
+        }
+        patch_input_value_validator_list = [
+        ]
+        patch_output_validator_list = [
+        ]
+        patch_rest_metadata = OperationRestMetadata(
+            http_method='PATCH',
+            url_template='/vmc/api/orgs/{org}/sddcs/{sddc}',
+            request_body_parameter='sddc_patch_request',
+            path_variables={
+                'org': 'org',
+                'sddc': 'sddc',
+            },
+            query_parameters={
             },
             content_type='application/json'
         )
@@ -962,7 +1040,7 @@ class _SddcsStub(ApiInterfaceStub):
         operations = {
             'create': {
                 'input_type': create_input_type,
-                'output_type': type.ReferenceType('com.vmware.vmc.model_client', 'Task'),
+                'output_type': type.VoidType(),
                 'errors': create_error_dict,
                 'input_value_validator_list': create_input_value_validator_list,
                 'output_validator_list': create_output_validator_list,
@@ -992,12 +1070,21 @@ class _SddcsStub(ApiInterfaceStub):
                 'output_validator_list': list_output_validator_list,
                 'task_type': TaskType.NONE,
             },
+            'patch': {
+                'input_type': patch_input_type,
+                'output_type': type.ReferenceType('com.vmware.vmc.model_client', 'Sddc'),
+                'errors': patch_error_dict,
+                'input_value_validator_list': patch_input_value_validator_list,
+                'output_validator_list': patch_output_validator_list,
+                'task_type': TaskType.NONE,
+            },
         }
         rest_metadata = {
             'create': create_rest_metadata,
             'delete': delete_rest_metadata,
             'get': get_rest_metadata,
             'list': list_rest_metadata,
+            'patch': patch_rest_metadata,
         }
         ApiInterfaceStub.__init__(
             self, iface_name='com.vmware.vmc.orgs.sddcs',

@@ -313,7 +313,7 @@ class HttpRpcProvider(HTTPProvider):
             # Unix domain socket: hostname is '!' followed by
             # the URL-encoded socket path
             self.host = None
-            self.uds = urllib.parse.unquote(host[1:]).parse
+            self.uds = urllib.parse.unquote(host[1:])
             # SSL currently not supported for Unix domain sockets
             if self.ssl_enabled:
                 raise Exception('SSL not supported on Unix domain sockets')
@@ -532,7 +532,7 @@ class HttpRpcProvider(HTTPProvider):
                 conn = self._get_connection()
                 logger.debug('do_request: request_len %d', request_length)
 
-                conn.request('POST', self.path, request, headers)
+                conn.request(http_request.method, self.path, request, headers)
                 resp = conn.getresponse()
             except (socket.error, http_client.HTTPException):
                 raise

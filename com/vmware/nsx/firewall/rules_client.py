@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class State(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.firewall.rules.state'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -112,7 +115,8 @@ class _StateStub(ApiInterfaceStub):
             query_parameters={
                 'barrier_id': 'barrier_id',
                 'request_id': 'request_id',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

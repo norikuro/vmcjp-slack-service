@@ -206,7 +206,6 @@ def create_servers(spec, singleton=False):
     :return: list of servers
     """
     server_providers = {
-        'asyncore': 'vmware.vapi.server.asyncore_server.get_server',
         'twisted': 'vmware.vapi.server.twisted_server.get_server',
         'stdio': 'vmware.vapi.server.stdio_server.get_server',
         'wsgi': 'vmware.vapi.server.wsgi_server.get_server',

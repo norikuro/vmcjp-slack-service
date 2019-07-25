@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class AppProfiles(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.app_discovery.app_profiles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -225,7 +228,10 @@ class Sessions(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.app_discovery.sessions'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -394,7 +400,8 @@ class _AppProfilesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -427,7 +434,8 @@ class _AppProfilesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -458,7 +466,8 @@ class _AppProfilesStub(ApiInterfaceStub):
                 'app_profile_id': 'app-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -497,7 +506,8 @@ class _AppProfilesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -530,7 +540,8 @@ class _AppProfilesStub(ApiInterfaceStub):
                 'app_profile_id': 'app-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -617,7 +628,8 @@ class _SessionsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -648,7 +660,8 @@ class _SessionsStub(ApiInterfaceStub):
                 'session_id': 'session-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -679,7 +692,8 @@ class _SessionsStub(ApiInterfaceStub):
                 'session_id': 'session-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -722,7 +736,8 @@ class _SessionsStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'status': 'status',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

@@ -59,7 +59,7 @@ class Reservation(VapiInterface):
         :param org: Organization identifier. (required)
         :type  sddc_state: :class:`com.vmware.vmc.model_client.SddcStateRequest` or ``None``
         :param sddc_state: SDDCs and/or states to query (optional)
-        :rtype: :class:`dict` of :class:`str` and :class:`list` of :class:`com.vmware.vmc.model_client.ReservationWindow`
+        :rtype: :class:`list` of :class:`com.vmware.vmc.model_client.ReservationWindow`
         :return: 
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
              Unauthorized
@@ -92,12 +92,19 @@ class SupportWindow(VapiInterface):
 
     def get(self,
             org,
+            minimum_seats_available=None,
+            created_by=None,
             ):
         """
         Get all available support windows
 
         :type  org: :class:`str`
         :param org: Organization identifier. (required)
+        :type  minimum_seats_available: :class:`long` or ``None``
+        :param minimum_seats_available: minimum seats available (used as a filter) (optional)
+        :type  created_by: :class:`str` or ``None``
+        :param created_by: user name which was used to create the support window (used as a
+            filter) (optional)
         :rtype: :class:`list` of :class:`com.vmware.vmc.model_client.SupportWindow`
         :return: 
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
@@ -112,6 +119,8 @@ class SupportWindow(VapiInterface):
         return self._invoke('get',
                             {
                             'org': org,
+                            'minimum_seats_available': minimum_seats_available,
+                            'created_by': created_by,
                             })
 
     def put(self,
@@ -180,7 +189,7 @@ class _ReservationStub(ApiInterfaceStub):
         operations = {
             'post': {
                 'input_type': post_input_type,
-                'output_type': type.MapType(type.StringType(), type.ListType(type.ReferenceType('com.vmware.vmc.model_client', 'ReservationWindow'))),
+                'output_type': type.ListType(type.ReferenceType('com.vmware.vmc.model_client', 'ReservationWindow')),
                 'errors': post_error_dict,
                 'input_value_validator_list': post_input_value_validator_list,
                 'output_validator_list': post_output_validator_list,
@@ -200,6 +209,8 @@ class _SupportWindowStub(ApiInterfaceStub):
         # properties for get operation
         get_input_type = type.StructType('operation-input', {
             'org': type.StringType(),
+            'minimum_seats_available': type.OptionalType(type.IntegerType()),
+            'created_by': type.OptionalType(type.StringType()),
         })
         get_error_dict = {
             'com.vmware.vapi.std.errors.unauthenticated':
@@ -223,6 +234,8 @@ class _SupportWindowStub(ApiInterfaceStub):
                 'org': 'org',
             },
             query_parameters={
+                'minimum_seats_available': 'minimumSeatsAvailable',
+                'created_by': 'createdBy',
             },
             content_type='application/json'
         )

@@ -98,7 +98,7 @@ class VsphereClient(ApiClient):
         else:
             raise ValueError('Please provide exactly one of the following '
                              'authentication scheme: username/password, '
-                             'bear_token or hok_token/private_key')
+                             'bearer_token or hok_token/private_key')
 
         session_svc = Session(
             StubConfigurationFactory.new_std_configuration(
@@ -144,7 +144,7 @@ def create_vsphere_client(server, username=None, password=None,
     Helper method to create an instance of the vSphere API client.
     Please provide one of the following options to authenticate:
         * username and password,
-        * bear_token,
+        * bearer_token,
         * hok_token and private_key
 
     :type  server: :class:`str`

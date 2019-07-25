@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -46,7 +46,10 @@ class NatRules(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.transport_nodes.statistics.nat_rules'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -62,8 +65,8 @@ class NatRules(VapiInterface):
         """
         Returns the summation of statistics for all rules from all logical
         routers which are present on given transport node. Only cached
-        statistics are supported. The query parameter \\\\"source=realtime\\\\"
-        is not supported.
+        statistics are supported. The query parameter \"source=realtime\" is
+        not supported.
 
         :type  node_id: :class:`str`
         :param node_id: (required)
@@ -119,7 +122,8 @@ class _NatRulesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

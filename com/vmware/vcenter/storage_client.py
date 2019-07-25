@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -87,6 +87,7 @@ class Policies(VapiInterface):
             self.policies = policies
             VapiStruct.__init__(self)
 
+
     FilterSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.storage.policies.filter_spec', {
             'policies': type.OptionalType(type.SetType(type.IdType())),
@@ -136,6 +137,7 @@ class Policies(VapiInterface):
             self.description = description
             VapiStruct.__init__(self)
 
+
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.storage.policies.summary', {
             'policy': type.IdType(resource_types='com.vmware.vcenter.StoragePolicy'),
@@ -176,6 +178,7 @@ class Policies(VapiInterface):
             self.datastore = datastore
             VapiStruct.__init__(self)
 
+
     CompatibleDatastoreInfo._set_binding_type(type.StructType(
         'com.vmware.vcenter.storage.policies.compatible_datastore_info', {
             'datastore': type.IdType(resource_types='Datastore'),
@@ -209,6 +212,7 @@ class Policies(VapiInterface):
             """
             self.compatible_datastores = compatible_datastores
             VapiStruct.__init__(self)
+
 
     CompatibilityInfo._set_binding_type(type.StructType(
         'com.vmware.vcenter.storage.policies.compatibility_info', {

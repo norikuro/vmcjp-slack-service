@@ -2,12 +2,12 @@
 Connecter interface
 """
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015, 2017 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015, 2017, 2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 import abc
 import six
 
-from vmware.vapi.core import ExecutionContext
+from vmware.vapi.core import ExecutionContext, RuntimeData
 from vmware.vapi.lib.context import create_default_application_context
 from vmware.vapi.security.client.security_context_filter import (
     SecurityContextFilter, LegacySecurityContextFilter)
@@ -52,12 +52,10 @@ class Connector(object):
     @abc.abstractmethod
     def connect(self):
         """ rpc provider connect """
-        pass
 
     @abc.abstractmethod
     def disconnect(self):
         """ rpc provider disconnect """
-        pass
 
     def set_application_context(self, ctx):
         """
@@ -88,10 +86,12 @@ class Connector(object):
             # raise?
         self._legacy_security_context_filter.set_security_context(ctx)
 
-    def new_context(self):
+    def new_context(self, runtime_data=None):
         """
         create new execution context object
 
+        :type  runtime_data: :class:`vmware.vapi.core.RuntimeData`    # pylint: disable=line-too-long
+        :param runtime_data: Http runtime data
         :rtype:  :class:`vmware.vapi.core.ExecutionContext`
         :return: execution context
         """
@@ -100,7 +100,12 @@ class Connector(object):
         # the user has not provided anything
         if app_ctx is None:
             app_ctx = create_default_application_context()
-        return ExecutionContext(app_ctx)
+
+        if runtime_data is None:
+            runtime_data = RuntimeData()
+
+        return ExecutionContext(application_context=app_ctx,
+                                runtime_data=runtime_data)
 
     def get_api_provider(self):
         """

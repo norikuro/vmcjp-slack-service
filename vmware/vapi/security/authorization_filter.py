@@ -3,7 +3,7 @@ Authorization API Provider filter
 """
 
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015, 2017-2018 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015, 2017-2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 import json
 import six
@@ -20,21 +20,49 @@ from vmware.vapi.security.authentication_filter import NO_AUTH
 logger = get_vapi_logger(__name__)
 
 
-def get_metadata(metadata_file):
+def get_metadata(metadata_files):
     """
-    Get the metadata from the json file
+    Get the metadata from the json files
 
+    :type  metadata_files: :class:`list` of `str`
+    :param metadata_files: List of authentication metadata files
     :rtype: :class:`dict` or :class:`None`
     :return: Authorization metadata
     """
-    if metadata_file:
+    if metadata_files:
         metadata = None
-        with open(metadata_file, 'r') as fp:
-            metadata = fp.read()
-        authn_metadata = json.loads(metadata).get('authentication', {})  # pylint: disable=E1103
-        component_data = authn_metadata.get('component', {})
-        if not component_data:
-            component_data = authn_metadata.get('product', {})
+        component_data = {}
+        for metadata_file in metadata_files:
+            with open(metadata_file, 'r') as fp:
+                metadata = fp.read()
+            authn_metadata = json.loads(metadata).get('authentication', {})  # pylint: disable=E1103
+            tmp_component_data = authn_metadata.get('component', {})
+            if not tmp_component_data:
+                tmp_component_data = authn_metadata.get('product', {})
+
+            component_name = tmp_component_data.get('name')
+            for key, val in tmp_component_data.items():
+                if key == 'schemes':
+                    # Prefix every scheme name with component name
+                    value = {'%s:%s' % (component_name, k): v
+                             for k, v in val.items()}
+                elif key in ['operations', 'services', 'packages']:
+                    # Prefix every scheme name for packages, services and
+                    # operations with component name
+                    component_value = {}
+                    for k, v in val.items():
+                        if not isinstance(v, list):
+                            v = [v]
+                        component_value.setdefault(k, []).extend(
+                            ['%s:%s' % (component_name, value) for value in v])
+                    value = component_value
+                else:
+                    value = val
+
+                if isinstance(value, dict):
+                    component_data.setdefault(key, {}).update(value)
+                else:
+                    component_data[key] = value
         return component_data
     return None
 
@@ -61,9 +89,9 @@ class AuthorizationFilter(ApiProviderFilter):
 
         if provider_config:
             # Get the registered AuthN handlers from config file
-            (handler_names, metadata_file) = \
-                provider_config.get_authorization_handlers_and_file()
-            self._metadata = get_metadata(metadata_file)
+            (handler_names, metadata_files) = \
+                provider_config.get_authorization_handlers_and_files()
+            self._metadata = get_metadata(metadata_files)
 
             # If tasks are enabled add Tasks Authz Handler as well
             if provider_config.are_tasks_enabled():

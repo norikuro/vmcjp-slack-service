@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class CommunityLists(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers.routing.bgp.community_lists'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -186,7 +189,10 @@ class CommuntyLists(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers.routing.bgp.communty_lists'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -238,7 +244,10 @@ class Neighbors(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers.routing.bgp.neighbors'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -514,7 +523,8 @@ class _CommunityListsStub(ApiInterfaceStub):
                 'logical_router_id': 'logical-router-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -547,7 +557,8 @@ class _CommunityListsStub(ApiInterfaceStub):
                 'community_list_id': 'community-list-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -580,7 +591,8 @@ class _CommunityListsStub(ApiInterfaceStub):
                 'community_list_id': 'community-list-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -621,7 +633,8 @@ class _CommunityListsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -703,7 +716,8 @@ class _CommuntyListsStub(ApiInterfaceStub):
                 'community_list_id': 'community-list-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -756,7 +770,8 @@ class _NeighborsStub(ApiInterfaceStub):
                 'logical_router_id': 'logical-router-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -789,7 +804,8 @@ class _NeighborsStub(ApiInterfaceStub):
                 'id': 'id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -822,7 +838,8 @@ class _NeighborsStub(ApiInterfaceStub):
                 'id': 'id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -863,7 +880,8 @@ class _NeighborsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for showsensitivedata operation
@@ -896,7 +914,8 @@ class _NeighborsStub(ApiInterfaceStub):
                 'id': 'id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for unsetpassword operation
@@ -931,7 +950,8 @@ class _NeighborsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'action': 'action',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -966,7 +986,8 @@ class _NeighborsStub(ApiInterfaceStub):
                 'id': 'id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

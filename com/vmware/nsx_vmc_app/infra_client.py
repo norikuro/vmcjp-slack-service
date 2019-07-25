@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class Accounts(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_vmc_app.infra.accounts'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -70,7 +73,10 @@ class LinkedVpcs(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_vmc_app.infra.linked_vpcs'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -129,7 +135,10 @@ class MgmtVms(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_vmc_app.infra.mgmt_vms'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -188,7 +197,10 @@ class PublicIps(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_vmc_app.infra.public_ips'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -308,7 +320,10 @@ class SddcUserConfig(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_vmc_app.infra.sddc_user_config'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -363,7 +378,8 @@ class _AccountsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -414,7 +430,8 @@ class _LinkedVpcsStub(ApiInterfaceStub):
                 'linked_vpc_id': 'linked-vpc-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -442,7 +459,8 @@ class _LinkedVpcsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -502,7 +520,8 @@ class _MgmtVmsStub(ApiInterfaceStub):
                 'vm_id': 'vm-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -530,7 +549,8 @@ class _MgmtVmsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -592,7 +612,8 @@ class _PublicIpsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -623,7 +644,8 @@ class _PublicIpsStub(ApiInterfaceStub):
                 'public_ip_id': 'public-ip-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -651,7 +673,8 @@ class _PublicIpsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -684,7 +707,8 @@ class _PublicIpsStub(ApiInterfaceStub):
                 'public_ip_id': 'public-ip-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -759,7 +783,8 @@ class _SddcUserConfigStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -790,5 +815,6 @@ class StubFactory(StubFactoryBase):
         'SddcUserConfig': SddcUserConfig,
         'direct_connect': 'com.vmware.nsx_vmc_app.infra.direct_connect_client.StubFactory',
         'linked_vpcs': 'com.vmware.nsx_vmc_app.infra.linked_vpcs_client.StubFactory',
+        'realized_state': 'com.vmware.nsx_vmc_app.infra.realized_state_client.StubFactory',
     }
 

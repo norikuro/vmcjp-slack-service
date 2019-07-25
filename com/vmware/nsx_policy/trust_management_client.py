@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -41,7 +41,10 @@ class Certificates(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_policy.trust_management.certificates'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -210,7 +213,10 @@ class Crls(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_policy.trust_management.crls'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -394,7 +400,10 @@ class Csrs(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_policy.trust_management.csrs'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -603,7 +612,10 @@ class PrincipalIdentities(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_policy.trust_management.principal_identities'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -764,7 +776,8 @@ class _CertificatesStub(ApiInterfaceStub):
                 'cert_id': 'cert-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -797,7 +810,8 @@ class _CertificatesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'details': 'details',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for importcertificate operation
@@ -828,7 +842,8 @@ class _CertificatesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -871,7 +886,8 @@ class _CertificatesStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'type': 'type',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -949,7 +965,8 @@ class _CrlsStub(ApiInterfaceStub):
                 'crl_id': 'crl-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -982,7 +999,8 @@ class _CrlsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'details': 'details',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for importcrl operation
@@ -1013,7 +1031,8 @@ class _CrlsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1056,7 +1075,8 @@ class _CrlsStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'type': 'type',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1089,7 +1109,8 @@ class _CrlsStub(ApiInterfaceStub):
                 'crl_id': 'crl-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1176,7 +1197,8 @@ class _CsrsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1207,7 +1229,8 @@ class _CsrsStub(ApiInterfaceStub):
                 'csr_id': 'csr-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1238,7 +1261,8 @@ class _CsrsStub(ApiInterfaceStub):
                 'csr_id': 'csr-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for importcsr operation
@@ -1271,7 +1295,8 @@ class _CsrsStub(ApiInterfaceStub):
                 'csr_id': 'csr-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1310,7 +1335,8 @@ class _CsrsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for selfsign operation
@@ -1343,7 +1369,8 @@ class _CsrsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'days_valid': 'days_valid',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1439,7 +1466,8 @@ class _PrincipalIdentitiesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1470,7 +1498,8 @@ class _PrincipalIdentitiesStub(ApiInterfaceStub):
                 'principal_identity_id': 'principal-identity-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1501,7 +1530,8 @@ class _PrincipalIdentitiesStub(ApiInterfaceStub):
                 'principal_identity_id': 'principal-identity-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1529,7 +1559,8 @@ class _PrincipalIdentitiesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for updatecertificate operation
@@ -1560,7 +1591,8 @@ class _PrincipalIdentitiesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

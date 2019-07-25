@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -77,6 +77,7 @@ class Thumbprint(VapiInterface):
             self.address = address
             self.https_port = https_port
             VapiStruct.__init__(self)
+
 
     RemoteSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.deployment.install.initial_config.remote_psc.thumbprint.remote_spec', {

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class Services(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.vpn.l2vpn.services'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -206,7 +209,10 @@ class Sessions(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.vpn.l2vpn.sessions'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -400,7 +406,8 @@ class _ServicesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -433,7 +440,8 @@ class _ServicesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -464,7 +472,8 @@ class _ServicesStub(ApiInterfaceStub):
                 'l2vpn_service_id': 'l2vpn-service-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -503,7 +512,8 @@ class _ServicesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -536,7 +546,8 @@ class _ServicesStub(ApiInterfaceStub):
                 'l2vpn_service_id': 'l2vpn-service-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -623,7 +634,8 @@ class _SessionsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -654,7 +666,8 @@ class _SessionsStub(ApiInterfaceStub):
                 'l2vpn_session_id': 'l2vpn-session-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -685,7 +698,8 @@ class _SessionsStub(ApiInterfaceStub):
                 'l2vpn_session_id': 'l2vpn-session-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -726,7 +740,8 @@ class _SessionsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -759,7 +774,8 @@ class _SessionsStub(ApiInterfaceStub):
                 'l2vpn_session_id': 'l2vpn-session-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

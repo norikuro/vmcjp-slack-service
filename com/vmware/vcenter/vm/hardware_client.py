@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -126,6 +126,7 @@ class IdeAddressInfo(VapiStruct):
         self.master = master
         VapiStruct.__init__(self)
 
+
 IdeAddressInfo._set_binding_type(type.StructType(
     'com.vmware.vcenter.vm.hardware.ide_address_info', {
         'primary': type.BooleanType(),
@@ -165,6 +166,7 @@ class ScsiAddressInfo(VapiStruct):
         self.unit = unit
         VapiStruct.__init__(self)
 
+
 ScsiAddressInfo._set_binding_type(type.StructType(
     'com.vmware.vcenter.vm.hardware.scsi_address_info', {
         'bus': type.IntegerType(),
@@ -203,6 +205,7 @@ class SataAddressInfo(VapiStruct):
         self.bus = bus
         self.unit = unit
         VapiStruct.__init__(self)
+
 
 SataAddressInfo._set_binding_type(type.StructType(
     'com.vmware.vcenter.vm.hardware.sata_address_info', {
@@ -250,6 +253,7 @@ class IdeAddressSpec(VapiStruct):
         self.master = master
         VapiStruct.__init__(self)
 
+
 IdeAddressSpec._set_binding_type(type.StructType(
     'com.vmware.vcenter.vm.hardware.ide_address_spec', {
         'primary': type.OptionalType(type.BooleanType()),
@@ -292,6 +296,7 @@ class ScsiAddressSpec(VapiStruct):
         self.unit = unit
         VapiStruct.__init__(self)
 
+
 ScsiAddressSpec._set_binding_type(type.StructType(
     'com.vmware.vcenter.vm.hardware.scsi_address_spec', {
         'bus': type.IntegerType(),
@@ -333,6 +338,7 @@ class SataAddressSpec(VapiStruct):
         self.bus = bus
         self.unit = unit
         VapiStruct.__init__(self)
+
 
 SataAddressSpec._set_binding_type(type.StructType(
     'com.vmware.vcenter.vm.hardware.sata_address_spec', {
@@ -378,6 +384,7 @@ class ConnectionInfo(VapiStruct):
         self.allow_guest_control = allow_guest_control
         VapiStruct.__init__(self)
 
+
 ConnectionInfo._set_binding_type(type.StructType(
     'com.vmware.vcenter.vm.hardware.connection_info', {
         'state': type.ReferenceType(__name__, 'ConnectionState'),
@@ -421,6 +428,7 @@ class ConnectionCreateSpec(VapiStruct):
         self.allow_guest_control = allow_guest_control
         VapiStruct.__init__(self)
 
+
 ConnectionCreateSpec._set_binding_type(type.StructType(
     'com.vmware.vcenter.vm.hardware.connection_create_spec', {
         'start_connected': type.OptionalType(type.BooleanType()),
@@ -462,6 +470,7 @@ class ConnectionUpdateSpec(VapiStruct):
         self.start_connected = start_connected
         self.allow_guest_control = allow_guest_control
         VapiStruct.__init__(self)
+
 
 ConnectionUpdateSpec._set_binding_type(type.StructType(
     'com.vmware.vcenter.vm.hardware.connection_update_spec', {
@@ -643,6 +652,7 @@ class Boot(VapiInterface):
             self.enter_setup_mode = enter_setup_mode
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.boot.info', {
             'type': type.ReferenceType(__name__, 'Boot.Type'),
@@ -732,6 +742,7 @@ class Boot(VapiInterface):
             self.enter_setup_mode = enter_setup_mode
             VapiStruct.__init__(self)
 
+
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.boot.create_spec', {
             'type': type.OptionalType(type.ReferenceType(__name__, 'Boot.Type')),
@@ -818,6 +829,7 @@ class Boot(VapiInterface):
             self.retry_delay = retry_delay
             self.enter_setup_mode = enter_setup_mode
             VapiStruct.__init__(self)
+
 
     UpdateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.boot.update_spec', {
@@ -1123,6 +1135,7 @@ class Cdrom(VapiInterface):
             self.device_access_type = device_access_type
             VapiStruct.__init__(self)
 
+
     BackingInfo._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.cdrom.backing_info', {
             'type': type.ReferenceType(__name__, 'Cdrom.BackingType'),
@@ -1187,6 +1200,7 @@ class Cdrom(VapiInterface):
             self.host_device = host_device
             self.device_access_type = device_access_type
             VapiStruct.__init__(self)
+
 
     BackingSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.cdrom.backing_spec', {
@@ -1266,6 +1280,7 @@ class Cdrom(VapiInterface):
             self.allow_guest_control = allow_guest_control
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.cdrom.info', {
             'type': type.ReferenceType(__name__, 'Cdrom.HostBusAdapterType'),
@@ -1344,6 +1359,7 @@ class Cdrom(VapiInterface):
             self.allow_guest_control = allow_guest_control
             VapiStruct.__init__(self)
 
+
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.cdrom.create_spec', {
             'type': type.OptionalType(type.ReferenceType(__name__, 'Cdrom.HostBusAdapterType')),
@@ -1397,6 +1413,7 @@ class Cdrom(VapiInterface):
             self.allow_guest_control = allow_guest_control
             VapiStruct.__init__(self)
 
+
     UpdateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.cdrom.update_spec', {
             'backing': type.OptionalType(type.ReferenceType(__name__, 'Cdrom.BackingSpec')),
@@ -1436,6 +1453,7 @@ class Cdrom(VapiInterface):
             """
             self.cdrom = cdrom
             VapiStruct.__init__(self)
+
 
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.cdrom.summary', {
@@ -1808,6 +1826,7 @@ class Cpu(VapiInterface):
             self.hot_remove_enabled = hot_remove_enabled
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.cpu.info', {
             'count': type.IntegerType(),
@@ -1877,6 +1896,7 @@ class Cpu(VapiInterface):
             self.hot_add_enabled = hot_add_enabled
             self.hot_remove_enabled = hot_remove_enabled
             VapiStruct.__init__(self)
+
 
     UpdateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.cpu.update_spec', {
@@ -2124,6 +2144,7 @@ class Disk(VapiInterface):
             self.vmdk_file = vmdk_file
             VapiStruct.__init__(self)
 
+
     BackingInfo._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.disk.backing_info', {
             'type': type.ReferenceType(__name__, 'Disk.BackingType'),
@@ -2170,6 +2191,7 @@ class Disk(VapiInterface):
             self.type = type
             self.vmdk_file = vmdk_file
             VapiStruct.__init__(self)
+
 
     BackingSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.disk.backing_spec', {
@@ -2224,6 +2246,7 @@ class Disk(VapiInterface):
             self.capacity = capacity
             self.storage_policy = storage_policy
             VapiStruct.__init__(self)
+
 
     VmdkCreateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.disk.vmdk_create_spec', {
@@ -2296,6 +2319,7 @@ class Disk(VapiInterface):
             self.capacity = capacity
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.disk.info', {
             'label': type.StringType(),
@@ -2341,6 +2365,7 @@ class Disk(VapiInterface):
             """
             self.policy = policy
             VapiStruct.__init__(self)
+
 
     StoragePolicySpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.disk.storage_policy_spec', {
@@ -2416,6 +2441,7 @@ class Disk(VapiInterface):
             self.new_vmdk = new_vmdk
             VapiStruct.__init__(self)
 
+
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.disk.create_spec', {
             'type': type.OptionalType(type.ReferenceType(__name__, 'Disk.HostBusAdapterType')),
@@ -2457,6 +2483,7 @@ class Disk(VapiInterface):
             self.backing = backing
             VapiStruct.__init__(self)
 
+
     UpdateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.disk.update_spec', {
             'backing': type.OptionalType(type.ReferenceType(__name__, 'Disk.BackingSpec')),
@@ -2494,6 +2521,7 @@ class Disk(VapiInterface):
             """
             self.disk = disk
             VapiStruct.__init__(self)
+
 
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.disk.summary', {
@@ -3009,6 +3037,7 @@ class Ethernet(VapiInterface):
             self.opaque_network_id = opaque_network_id
             VapiStruct.__init__(self)
 
+
     BackingInfo._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.ethernet.backing_info', {
             'type': type.ReferenceType(__name__, 'Ethernet.BackingType'),
@@ -3090,6 +3119,7 @@ class Ethernet(VapiInterface):
             self.network = network
             self.distributed_port = distributed_port
             VapiStruct.__init__(self)
+
 
     BackingSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.ethernet.backing_spec', {
@@ -3192,6 +3222,7 @@ class Ethernet(VapiInterface):
             self.start_connected = start_connected
             self.allow_guest_control = allow_guest_control
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.ethernet.info', {
@@ -3305,6 +3336,7 @@ class Ethernet(VapiInterface):
             self.allow_guest_control = allow_guest_control
             VapiStruct.__init__(self)
 
+
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.ethernet.create_spec', {
             'type': type.OptionalType(type.ReferenceType(__name__, 'Ethernet.EmulationType')),
@@ -3400,6 +3432,7 @@ class Ethernet(VapiInterface):
             self.allow_guest_control = allow_guest_control
             VapiStruct.__init__(self)
 
+
     UpdateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.ethernet.update_spec', {
             'upt_compatibility_enabled': type.OptionalType(type.BooleanType()),
@@ -3443,6 +3476,7 @@ class Ethernet(VapiInterface):
             """
             self.nic = nic
             VapiStruct.__init__(self)
+
 
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.ethernet.summary', {
@@ -3877,6 +3911,7 @@ class Floppy(VapiInterface):
             self.auto_detect = auto_detect
             VapiStruct.__init__(self)
 
+
     BackingInfo._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.floppy.backing_info', {
             'type': type.ReferenceType(__name__, 'Floppy.BackingType'),
@@ -3936,6 +3971,7 @@ class Floppy(VapiInterface):
             self.host_device = host_device
             VapiStruct.__init__(self)
 
+
     BackingSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.floppy.backing_spec', {
             'type': type.ReferenceType(__name__, 'Floppy.BackingType'),
@@ -3988,6 +4024,7 @@ class Floppy(VapiInterface):
             self.allow_guest_control = allow_guest_control
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.floppy.info', {
             'label': type.StringType(),
@@ -4036,6 +4073,7 @@ class Floppy(VapiInterface):
             self.start_connected = start_connected
             self.allow_guest_control = allow_guest_control
             VapiStruct.__init__(self)
+
 
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.floppy.create_spec', {
@@ -4087,6 +4125,7 @@ class Floppy(VapiInterface):
             self.allow_guest_control = allow_guest_control
             VapiStruct.__init__(self)
 
+
     UpdateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.floppy.update_spec', {
             'backing': type.OptionalType(type.ReferenceType(__name__, 'Floppy.BackingSpec')),
@@ -4126,6 +4165,7 @@ class Floppy(VapiInterface):
             """
             self.floppy = floppy
             VapiStruct.__init__(self)
+
 
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.floppy.summary', {
@@ -4508,6 +4548,7 @@ class Memory(VapiInterface):
             self.hot_add_limit_mib = hot_add_limit_mib
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.memory.info', {
             'size_MiB': type.IntegerType(),
@@ -4569,6 +4610,7 @@ class Memory(VapiInterface):
             self.size_mib = size_mib
             self.hot_add_enabled = hot_add_enabled
             VapiStruct.__init__(self)
+
 
     UpdateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.memory.update_spec', {
@@ -4772,6 +4814,7 @@ class Parallel(VapiInterface):
             self.auto_detect = auto_detect
             VapiStruct.__init__(self)
 
+
     BackingInfo._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.parallel.backing_info', {
             'type': type.ReferenceType(__name__, 'Parallel.BackingType'),
@@ -4830,6 +4873,7 @@ class Parallel(VapiInterface):
             self.host_device = host_device
             VapiStruct.__init__(self)
 
+
     BackingSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.parallel.backing_spec', {
             'type': type.ReferenceType(__name__, 'Parallel.BackingType'),
@@ -4882,6 +4926,7 @@ class Parallel(VapiInterface):
             self.allow_guest_control = allow_guest_control
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.parallel.info', {
             'label': type.StringType(),
@@ -4930,6 +4975,7 @@ class Parallel(VapiInterface):
             self.start_connected = start_connected
             self.allow_guest_control = allow_guest_control
             VapiStruct.__init__(self)
+
 
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.parallel.create_spec', {
@@ -4981,6 +5027,7 @@ class Parallel(VapiInterface):
             self.allow_guest_control = allow_guest_control
             VapiStruct.__init__(self)
 
+
     UpdateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.parallel.update_spec', {
             'backing': type.OptionalType(type.ReferenceType(__name__, 'Parallel.BackingSpec')),
@@ -5020,6 +5067,7 @@ class Parallel(VapiInterface):
             """
             self.port = port
             VapiStruct.__init__(self)
+
 
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.parallel.summary', {
@@ -5523,6 +5571,7 @@ class Serial(VapiInterface):
             self.proxy = proxy
             VapiStruct.__init__(self)
 
+
     BackingInfo._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.serial.backing_info', {
             'type': type.ReferenceType(__name__, 'Serial.BackingType'),
@@ -5627,6 +5676,7 @@ class Serial(VapiInterface):
             self.proxy = proxy
             VapiStruct.__init__(self)
 
+
     BackingSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.serial.backing_spec', {
             'type': type.ReferenceType(__name__, 'Serial.BackingType'),
@@ -5690,6 +5740,7 @@ class Serial(VapiInterface):
             self.allow_guest_control = allow_guest_control
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.serial.info', {
             'label': type.StringType(),
@@ -5748,6 +5799,7 @@ class Serial(VapiInterface):
             self.start_connected = start_connected
             self.allow_guest_control = allow_guest_control
             VapiStruct.__init__(self)
+
 
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.serial.create_spec', {
@@ -5812,6 +5864,7 @@ class Serial(VapiInterface):
             self.allow_guest_control = allow_guest_control
             VapiStruct.__init__(self)
 
+
     UpdateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.serial.update_spec', {
             'yield_on_poll': type.OptionalType(type.BooleanType()),
@@ -5852,6 +5905,7 @@ class Serial(VapiInterface):
             """
             self.port = port
             VapiStruct.__init__(self)
+
 
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.serial.summary', {

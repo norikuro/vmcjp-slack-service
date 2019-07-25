@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -146,6 +146,7 @@ class Job(VapiInterface):
             self.ignore_warnings = ignore_warnings
             VapiStruct.__init__(self)
 
+
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.reconciliation.job.create_spec', {
             'sso_admin_user_name': type.OptionalType(type.StringType()),
@@ -272,6 +273,7 @@ class Job(VapiInterface):
             self.messages = messages
             self.progress = progress
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.reconciliation.job.info', {

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class Backups(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.cluster.backups'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -76,7 +79,10 @@ class Node(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.cluster.node'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -115,7 +121,10 @@ class Nodes(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.cluster.nodes'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -160,7 +169,7 @@ class Nodes(VapiInterface):
         """
         Removes the specified controller node from the NSX cluster. Before you
         can remove a controller node from the cluster, you must shut down the
-        controller service with the \\\\"stop service controller\\\\" command.
+        controller service with the \"stop service controller\" command.
 
         :type  node_id: :class:`str`
         :param node_id: (required)
@@ -255,7 +264,10 @@ class Restore(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.cluster.restore'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -422,7 +434,10 @@ class Status(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.cluster.status'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -487,7 +502,8 @@ class _BackupsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -535,7 +551,8 @@ class _NodeStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -588,7 +605,8 @@ class _NodesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'action': 'action',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -619,7 +637,8 @@ class _NodesStub(ApiInterfaceStub):
                 'node_id': 'node-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -650,7 +669,8 @@ class _NodesStub(ApiInterfaceStub):
                 'node_id': 'node-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -689,7 +709,8 @@ class _NodesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -769,7 +790,8 @@ class _RestoreStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for cancel operation
@@ -799,7 +821,8 @@ class _RestoreStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for retry operation
@@ -829,7 +852,8 @@ class _RestoreStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for start operation
@@ -862,7 +886,8 @@ class _RestoreStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for suspend operation
@@ -892,7 +917,8 @@ class _RestoreStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -979,7 +1005,8 @@ class _StatusStub(ApiInterfaceStub):
             },
             query_parameters={
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

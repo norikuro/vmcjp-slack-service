@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -134,6 +134,23 @@ class Backup(VapiInterface):
         Destination is SSH server
 
         """
+        SFTP = None
+        """
+        Destination is SFTP server
+
+        """
+        NFS = None
+        """
+        Destination is NFS server. This class attribute was added in vSphere API
+        6.7.2.
+
+        """
+        SMB = None
+        """
+        Destination is SMB server. This class attribute was added in vSphere API
+        6.7.2.
+
+        """
 
         def __init__(self, string):
             """
@@ -148,6 +165,9 @@ class Backup(VapiInterface):
         LocationType('FTPS'),
         LocationType('HTTPS'),
         LocationType('SCP'),
+        LocationType('SFTP'),
+        LocationType('NFS'),
+        LocationType('SMB'),
     ])
     LocationType._set_binding_type(type.EnumType(
         'com.vmware.appliance.recovery.backup.location_type',
@@ -183,6 +203,7 @@ class Backup(VapiInterface):
             self.default_message = default_message
             self.args = args
             VapiStruct.__init__(self)
+
 
     LocalizableMessage._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.localizable_message', {
@@ -220,6 +241,7 @@ class Backup(VapiInterface):
             self.status = status
             self.messages = messages
             VapiStruct.__init__(self)
+
 
     ReturnResult._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.return_result', {
@@ -288,6 +310,7 @@ class Backup(VapiInterface):
             self.location_password = location_password
             self.comment = comment
             VapiStruct.__init__(self)
+
 
     BackupRequest._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.backup_request', {
@@ -379,6 +402,23 @@ class Restore(VapiInterface):
         Destination is SSH server
 
         """
+        SFTP = None
+        """
+        Destination is SFTP server
+
+        """
+        NFS = None
+        """
+        Destination is NFS server. This class attribute was added in vSphere API
+        6.7.2.
+
+        """
+        SMB = None
+        """
+        Destination is SMB server. This class attribute was added in vSphere API
+        6.7.2.
+
+        """
 
         def __init__(self, string):
             """
@@ -393,6 +433,9 @@ class Restore(VapiInterface):
         LocationType('FTPS'),
         LocationType('HTTPS'),
         LocationType('SCP'),
+        LocationType('SFTP'),
+        LocationType('NFS'),
+        LocationType('SMB'),
     ])
     LocationType._set_binding_type(type.EnumType(
         'com.vmware.appliance.recovery.restore.location_type',
@@ -458,6 +501,7 @@ class Restore(VapiInterface):
             self.sso_admin_user_password = sso_admin_user_password
             VapiStruct.__init__(self)
 
+
     RestoreRequest._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.restore.restore_request', {
             'backup_password': type.OptionalType(type.SecretType()),
@@ -502,6 +546,7 @@ class Restore(VapiInterface):
             self.default_message = default_message
             self.args = args
             VapiStruct.__init__(self)
+
 
     LocalizableMessage._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.restore.localizable_message', {
@@ -567,6 +612,7 @@ class Restore(VapiInterface):
             self.applicable = applicable
             self.messages = messages
             VapiStruct.__init__(self)
+
 
     Metadata._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.restore.metadata', {

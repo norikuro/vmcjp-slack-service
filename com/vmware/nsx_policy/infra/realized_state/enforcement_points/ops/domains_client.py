@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -56,7 +56,10 @@ class DiscoverySessions(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_policy.infra.realized_state.enforcement_points.ops.domains.discovery_sessions'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -156,7 +159,8 @@ class _DiscoverySessionsStub(ApiInterfaceStub):
                 'destination_id': 'destination_id',
                 'source_id': 'source_id',
                 'view': 'view',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

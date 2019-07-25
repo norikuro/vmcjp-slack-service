@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -192,6 +192,7 @@ class Proxy(VapiInterface):
             self.enabled = enabled
             VapiStruct.__init__(self)
 
+
     Config._set_binding_type(type.StructType(
         'com.vmware.appliance.networking.proxy.config', {
             'server': type.StringType(),
@@ -233,6 +234,7 @@ class Proxy(VapiInterface):
             self.status = status
             self.message = message
             VapiStruct.__init__(self)
+
 
     TestResult._set_binding_type(type.StructType(
         'com.vmware.appliance.networking.proxy.test_result', {
@@ -494,6 +496,7 @@ class Interfaces(VapiInterface):
             self.ipv4 = ipv4
             self.ipv6 = ipv6
             VapiStruct.__init__(self)
+
 
     InterfaceInfo._set_binding_type(type.StructType(
         'com.vmware.appliance.networking.interfaces.interface_info', {

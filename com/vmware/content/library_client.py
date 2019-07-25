@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -104,7 +104,13 @@ class ItemModel(VapiStruct):
             always be present in the return value of the ``get`` or ``list``
             methods. It is not used for the ``update`` method.
         :type  content_version: :class:`str`
-        :param content_version: The version of the file content list of this library item.
+        :param content_version: The latest version of the file content list of this library item.
+            When clients pass a value of this class as a parameter, the
+            attribute must be an identifier for the resource type:
+            ``com.vmware.content.library.item.Version``. When methods return a
+            value of this class as a return value, the attribute will be an
+            identifier for the resource type:
+            ``com.vmware.content.library.item.Version``.
             This attribute is not used for the ``create`` method. It will
             always be present in the return value of the ``get`` or ``list``
             methods. It is not used for the ``update`` method.
@@ -234,11 +240,12 @@ class ItemModel(VapiStruct):
         self.source_id = source_id
         VapiStruct.__init__(self)
 
+
 ItemModel._set_binding_type(type.StructType(
     'com.vmware.content.library.item_model', {
         'id': type.OptionalType(type.IdType()),
         'library_id': type.OptionalType(type.IdType()),
-        'content_version': type.OptionalType(type.StringType()),
+        'content_version': type.OptionalType(type.IdType()),
         'creation_time': type.OptionalType(type.DateTimeType()),
         'description': type.OptionalType(type.StringType()),
         'last_modified_time': type.OptionalType(type.DateTimeType()),
@@ -298,6 +305,7 @@ class OptimizationInfo(VapiStruct):
         """
         self.optimize_remote_publishing = optimize_remote_publishing
         VapiStruct.__init__(self)
+
 
 OptimizationInfo._set_binding_type(type.StructType(
     'com.vmware.content.library.optimization_info', {
@@ -445,6 +453,7 @@ class PublishInfo(VapiStruct):
         self.persist_json_enabled = persist_json_enabled
         VapiStruct.__init__(self)
 
+
     class AuthenticationMethod(Enum):
         """
         The ``PublishInfo.AuthenticationMethod`` class indicates how a subscribed
@@ -497,6 +506,64 @@ PublishInfo._set_binding_type(type.StructType(
         'persist_json_enabled': type.OptionalType(type.BooleanType()),
     },
     PublishInfo,
+    False,
+    None))
+
+
+
+class SourceInfo(VapiStruct):
+    """
+    The ``SourceInfo`` class contains information about the source published
+    library of a subscribed library. This class was added in vSphere API 6.7.2.
+
+    .. tip::
+        The arguments are used to initialize data attributes with the same
+        names.
+    """
+
+
+
+
+    def __init__(self,
+                 source_library=None,
+                 subscription=None,
+                ):
+        """
+        :type  source_library: :class:`str`
+        :param source_library: Identifier of the published library. This attribute was added in
+            vSphere API 6.7.2.
+            When clients pass a value of this class as a parameter, the
+            attribute must be an identifier for the resource type:
+            ``com.vmware.content.Library``. When methods return a value of this
+            class as a return value, the attribute will be an identifier for
+            the resource type: ``com.vmware.content.Library``.
+            This attribute must be provided for the ``create`` method. It will
+            always be present in the return value of the ``get`` or ``list``
+            methods. It is optional for the ``update`` method.
+        :type  subscription: :class:`str`
+        :param subscription: Identifier of the subscription associated with the subscribed
+            library. This attribute was added in vSphere API 6.7.2.
+            When clients pass a value of this class as a parameter, the
+            attribute must be an identifier for the resource type:
+            ``com.vmware.content.library.Subscriptions``. When methods return a
+            value of this class as a return value, the attribute will be an
+            identifier for the resource type:
+            ``com.vmware.content.library.Subscriptions``.
+            This attribute must be provided for the ``create`` method. It will
+            always be present in the return value of the ``get`` or ``list``
+            methods. It is optional for the ``update`` method.
+        """
+        self.source_library = source_library
+        self.subscription = subscription
+        VapiStruct.__init__(self)
+
+
+SourceInfo._set_binding_type(type.StructType(
+    'com.vmware.content.library.source_info', {
+        'source_library': type.OptionalType(type.IdType()),
+        'subscription': type.OptionalType(type.IdType()),
+    },
+    SourceInfo,
     False,
     None))
 
@@ -589,6 +656,7 @@ class StorageBacking(VapiStruct):
         self.storage_uri = storage_uri
         VapiStruct.__init__(self)
 
+
     class Type(Enum):
         """
         The ``StorageBacking.Type`` class specifies the type of the
@@ -679,6 +747,7 @@ class SubscriptionInfo(VapiStruct):
                  ssl_thumbprint=None,
                  subscription_url=None,
                  user_name=None,
+                 source_info=None,
                 ):
         """
         :type  authentication_method: :class:`SubscriptionInfo.AuthenticationMethod`
@@ -790,6 +859,14 @@ class SubscriptionInfo(VapiStruct):
             This attribute is optional for the ``create`` method. It is
             optional in the return value of the ``get`` or ``list`` methods. It
             is optional for the ``update`` method.
+        :type  source_info: :class:`SourceInfo`
+        :param source_info: Information about the source published library. This attribute will
+            be set for a subscribed library which is associated with a
+            subscription of the published library. This attribute was added in
+            vSphere API 6.7.2.
+            This attribute is optional for the ``create`` method. It is
+            optional in the return value of the ``get`` or ``list`` methods. It
+            is optional for the ``update`` method.
         """
         self.authentication_method = authentication_method
         self.automatic_sync_enabled = automatic_sync_enabled
@@ -798,7 +875,9 @@ class SubscriptionInfo(VapiStruct):
         self.ssl_thumbprint = ssl_thumbprint
         self.subscription_url = subscription_url
         self.user_name = user_name
+        self.source_info = source_info
         VapiStruct.__init__(self)
+
 
     class AuthenticationMethod(Enum):
         """
@@ -850,6 +929,7 @@ SubscriptionInfo._set_binding_type(type.StructType(
         'ssl_thumbprint': type.OptionalType(type.StringType()),
         'subscription_url': type.OptionalType(type.URIType()),
         'user_name': type.OptionalType(type.StringType()),
+        'source_info': type.OptionalType(type.ReferenceType(__name__, 'SourceInfo')),
     },
     SubscriptionInfo,
     False,
@@ -938,6 +1018,7 @@ class Item(VapiInterface):
             self.cached = cached
             VapiStruct.__init__(self)
 
+
     FindSpec._set_binding_type(type.StructType(
         'com.vmware.content.library.item.find_spec', {
             'name': type.OptionalType(type.StringType()),
@@ -947,6 +1028,47 @@ class Item(VapiInterface):
             'cached': type.OptionalType(type.BooleanType()),
         },
         FindSpec,
+        False,
+        None))
+
+
+    class DestinationSpec(VapiStruct):
+        """
+        The ``Item.DestinationSpec`` class contains information required to publish
+        the library item to a specific subscription. This class was added in
+        vSphere API 6.7.2.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     subscription=None,
+                    ):
+            """
+            :type  subscription: :class:`str`
+            :param subscription: Identifier of the subscription associated with the subscribed
+                library. This attribute was added in vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``com.vmware.content.library.Subscriptions``. When methods return a
+                value of this class as a return value, the attribute will be an
+                identifier for the resource type:
+                ``com.vmware.content.library.Subscriptions``.
+            """
+            self.subscription = subscription
+            VapiStruct.__init__(self)
+
+
+    DestinationSpec._set_binding_type(type.StructType(
+        'com.vmware.content.library.item.destination_spec', {
+            'subscription': type.IdType(resource_types='com.vmware.content.library.Subscriptions'),
+        },
+        DestinationSpec,
         False,
         None))
 
@@ -1069,12 +1191,14 @@ class Item(VapiInterface):
         :raise: :class:`com.vmware.vapi.std.errors_client.InvalidArgument` 
              if the ``client_token`` does not conform to the UUID format.
         :raise: :class:`com.vmware.vapi.std.errors_client.InvalidElementType` 
-            if the :attr:`ItemModel.library_id` property of
-            ``destinationCreateSpec`` refers to a subscribed library.
+            if the :attr:`ItemModel.library_id` property of ``create_spec``
+            refers to a subscribed library.
         :raise: :class:`com.vmware.vapi.std.errors_client.NotAllowedInCurrentState` 
             if the content of the library specified by the library ID (see
             :attr:`ItemModel.library_id`) property of ``create_spec`` has been
             deleted from the storage backings (see null) associated with it.
+        :raise: :class:`com.vmware.vapi.std.errors_client.AlreadyExists` 
+             if there is already a library item with same name in the library.
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
             if you do not have all of the privileges described as follows: 
             
@@ -1115,6 +1239,9 @@ class Item(VapiInterface):
         :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
             if the library item with the specified ``library_item_id`` does not
             exist.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotAllowedInCurrentState` 
+            if the library item contains a virtual machine template and a
+            virtual machine is checked out of the library item.
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
             if you do not have all of the privileges described as follows: 
             
@@ -1248,6 +1375,8 @@ class Item(VapiInterface):
             and the content of the library item specified by
             ``library_item_id`` has been deleted from the storage backings (see
             null) associated with it.
+        :raise: :class:`com.vmware.vapi.std.errors_client.AlreadyExists` 
+             if there is already a library item with same name in the library.
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
             if you do not have all of the privileges described as follows: 
             
@@ -1259,6 +1388,58 @@ class Item(VapiInterface):
                             {
                             'library_item_id': library_item_id,
                             'update_spec': update_spec,
+                            })
+
+    def publish(self,
+                library_item_id,
+                force_sync_content,
+                subscriptions=None,
+                ):
+        """
+        Publishes the library item to specified subscriptions of the library.
+        If no subscriptions are specified, then publishes the library item to
+        all subscriptions of the library. This method was added in vSphere API
+        6.7.2.
+
+        :type  library_item_id: :class:`str`
+        :param library_item_id: Library item identifier.
+            The parameter must be an identifier for the resource type:
+            ``com.vmware.content.library.Item``.
+        :type  force_sync_content: :class:`bool`
+        :param force_sync_content: Whether to synchronize file content as well as metadata. This
+            parameter applies only if the subscription is on-demand.
+        :type  subscriptions: :class:`list` of :class:`Item.DestinationSpec` or ``None``
+        :param subscriptions: The list of subscriptions to publish this library item to.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Error` 
+             If the system reports an error while responding to the request.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
+            If the library item specified by ``library_item_id`` does not
+            exist.
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidArgument` 
+             If one or more arguments in ``subscriptions`` is not valid.
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidElementType` 
+            If the library item specified by ``library_item_id`` is a member of
+            a subscribed library.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotAllowedInCurrentState` 
+            If the library item specified by ``library_item_id`` does not
+            belong to a published library.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             If the user that requested the method cannot be authenticated.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
+            If the user that requested the method is not authorized to perform
+            the method.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
+            if you do not have all of the privileges described as follows: 
+            
+            * The resource ``com.vmware.content.library.Item`` referenced by
+              the parameter ``library_item_id`` requires
+              ``ContentLibrary.PublishLibraryItem``.
+        """
+        return self._invoke('publish',
+                            {
+                            'library_item_id': library_item_id,
+                            'force_sync_content': force_sync_content,
+                            'subscriptions': subscriptions,
                             })
 class SubscribedItem(VapiInterface):
     """
@@ -1393,6 +1574,1224 @@ class SubscribedItem(VapiInterface):
                             'library_item_id': library_item_id,
                             'force_sync_content': force_sync_content,
                             })
+class Subscriptions(VapiInterface):
+    """
+    The ``Subscriptions`` class provides methods for managing the subscription
+    information of the subscribers of a published library. This class was added
+    in vSphere API 6.7.2.
+    """
+    RESOURCE_TYPE = "com.vmware.content.library.Subscriptions"
+    """
+    Resource type for Subscription resource. This class attribute was added in
+    vSphere API 6.7.2.
+
+    """
+
+    _VAPI_SERVICE_ID = 'com.vmware.content.library.subscriptions'
+    """
+    Identifier of the service in canonical form.
+    """
+    def __init__(self, config):
+        """
+        :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
+        :param config: Configuration to be used for creating the stub.
+        """
+        VapiInterface.__init__(self, config, _SubscriptionsStub)
+
+    class Location(Enum):
+        """
+        The ``Subscriptions.Location`` class defines the location of subscribed
+        library relative to the published library. This enumeration was added in
+        vSphere API 6.7.2.
+
+        .. note::
+            This class represents an enumerated type in the interface language
+            definition. The class contains class attributes which represent the
+            values in the current version of the enumerated type. Newer versions of
+            the enumerated type may contain new values. To use new values of the
+            enumerated type in communication with a server that supports the newer
+            version of the API, you instantiate this class. See :ref:`enumerated
+            type description page <enumeration_description>`.
+        """
+        LOCAL = None
+        """
+        The subscribed library belongs to the same vCenter instance as the
+        published library. This class attribute was added in vSphere API 6.7.2.
+
+        """
+        REMOTE = None
+        """
+        The subscribed library belongs to a different vCenter instance than the
+        published library. This class attribute was added in vSphere API 6.7.2.
+
+        """
+
+        def __init__(self, string):
+            """
+            :type  string: :class:`str`
+            :param string: String value for the :class:`Location` instance.
+            """
+            Enum.__init__(string)
+
+    Location._set_values([
+        Location('LOCAL'),
+        Location('REMOTE'),
+    ])
+    Location._set_binding_type(type.EnumType(
+        'com.vmware.content.library.subscriptions.location',
+        Location))
+
+
+    class CreateSpecNewSubscribedLibrary(VapiStruct):
+        """
+        The ``Subscriptions.CreateSpecNewSubscribedLibrary`` class defines the
+        information required to create a new subscribed library. This class was
+        added in vSphere API 6.7.2.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     name=None,
+                     description=None,
+                     storage_backings=None,
+                     automatic_sync_enabled=None,
+                     on_demand=None,
+                    ):
+            """
+            :type  name: :class:`str`
+            :param name: Name of the subscribed library. This attribute was added in vSphere
+                API 6.7.2.
+            :type  description: :class:`str` or ``None``
+            :param description: Description of the subscribed library. This attribute was added in
+                vSphere API 6.7.2.
+                If None, the description will be an empty string.
+            :type  storage_backings: :class:`list` of :class:`StorageBacking`
+            :param storage_backings: The list of default storage backings for this library. 
+                
+                The list must contain exactly one storage backing. Multiple default
+                storage locations are not currently supported but may become
+                supported in future releases.. This attribute was added in vSphere
+                API 6.7.2.
+            :type  automatic_sync_enabled: :class:`bool`
+            :param automatic_sync_enabled: Specifies whether the library should participate in automatic
+                library synchronization. This attribute was added in vSphere API
+                6.7.2.
+            :type  on_demand: :class:`bool`
+            :param on_demand: Specifies whether a library item's content will be synchronized
+                only on demand. This attribute was added in vSphere API 6.7.2.
+            """
+            self.name = name
+            self.description = description
+            self.storage_backings = storage_backings
+            self.automatic_sync_enabled = automatic_sync_enabled
+            self.on_demand = on_demand
+            VapiStruct.__init__(self)
+
+
+    CreateSpecNewSubscribedLibrary._set_binding_type(type.StructType(
+        'com.vmware.content.library.subscriptions.create_spec_new_subscribed_library', {
+            'name': type.StringType(),
+            'description': type.OptionalType(type.StringType()),
+            'storage_backings': type.ListType(type.ReferenceType(__name__, 'StorageBacking')),
+            'automatic_sync_enabled': type.BooleanType(),
+            'on_demand': type.BooleanType(),
+        },
+        CreateSpecNewSubscribedLibrary,
+        False,
+        None))
+
+
+    class CreateSpecVcenter(VapiStruct):
+        """
+        The ``Subscriptions.CreateSpecVcenter`` class defines information about the
+        vCenter Server instance where the subscribed library associated with the
+        subscription exists or will be created. This class was added in vSphere API
+        6.7.2.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     hostname=None,
+                     https_port=None,
+                    ):
+            """
+            :type  hostname: :class:`str`
+            :param hostname: The hostname of the subscribed library's vCenter Server. This
+                attribute was added in vSphere API 6.7.2.
+            :type  https_port: :class:`long` or ``None``
+            :param https_port: The HTTPS port of the vCenter Server instance where the subscribed
+                library exists. This attribute was added in vSphere API 6.7.2.
+                If None, port 443 will be used.
+            """
+            self.hostname = hostname
+            self.https_port = https_port
+            VapiStruct.__init__(self)
+
+
+    CreateSpecVcenter._set_binding_type(type.StructType(
+        'com.vmware.content.library.subscriptions.create_spec_vcenter', {
+            'hostname': type.StringType(),
+            'https_port': type.OptionalType(type.IntegerType()),
+        },
+        CreateSpecVcenter,
+        False,
+        None))
+
+
+    class CreateSpecPlacement(VapiStruct):
+        """
+        The ``Subscriptions.CreateSpecPlacement`` class defines the placement
+        information for the subscribed library's virtual machine template library
+        items. Storage location of the virtual machine template items is defined by
+        the subscribed library's storage backing. This placement information needs
+        to be compatible with the subscribed library's storage backing. The
+        ``Subscriptions.CreateSpecPlacement`` class is only applicable for the
+        virtual machine template library items of the subscribed library. This
+        class was added in vSphere API 6.7.2.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     folder=None,
+                     cluster=None,
+                     resource_pool=None,
+                     host=None,
+                     network=None,
+                    ):
+            """
+            :type  folder: :class:`str` or ``None``
+            :param folder: Virtual machine folder into which the virtual machine template
+                should be placed. This attribute was added in vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``Folder:VCenter``. When methods return a value of this class as a
+                return value, the attribute will be an identifier for the resource
+                type: ``Folder:VCenter``.
+                This attribute is currently required. In future, if this is None,
+                the system will attempt to choose a suitable folder for the virtual
+                machine template; if a folder cannot be chosen, publishing a
+                virtual machine template item will fail.
+            :type  cluster: :class:`str` or ``None``
+            :param cluster: Cluster onto which the virtual machine template should be placed.
+                If ``cluster`` and ``resourcePool`` are both specified,
+                ``resourcePool`` must belong to ``cluster``. If ``cluster`` and
+                ``host`` are both specified, ``host`` must be a member of
+                ``cluster``. This attribute was added in vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``ClusterComputeResource:VCenter``. When methods return a value of
+                this class as a return value, the attribute will be an identifier
+                for the resource type: ``ClusterComputeResource:VCenter``.
+                If ``resourcePool`` or ``host`` is specified, it is recommended
+                that this attribute be None.
+            :type  resource_pool: :class:`str` or ``None``
+            :param resource_pool: Resource pool into which the virtual machine template should be
+                placed. If ``host`` and ``resourcePool`` are both specified,
+                ``resourcePool`` must belong to ``host``. If ``cluster`` and
+                ``resourcePool`` are both specified, ``resourcePool`` must belong
+                to ``cluster``. This attribute was added in vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``ResourcePool:VCenter``. When methods return a value of this class
+                as a return value, the attribute will be an identifier for the
+                resource type: ``ResourcePool:VCenter``.
+                This attribute is currently required. In future, if this is None,
+                the system will attempt to choose a suitable resource pool for the
+                virtual machine template; if a resource pool cannot be chosen,
+                publish of virtual machine template item will fail.
+            :type  host: :class:`str` or ``None``
+            :param host: Host onto which the virtual machine template should be placed. If
+                ``host`` and ``resourcePool`` are both specified, ``resourcePool``
+                must belong to ``host``. If ``host`` and ``cluster`` are both
+                specified, ``host`` must be a member of ``cluster``. This attribute
+                was added in vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``HostSystem:VCenter``. When methods return a value of this class
+                as a return value, the attribute will be an identifier for the
+                resource type: ``HostSystem:VCenter``.
+                If this is None, the system will attempt to choose a suitable host
+                for the virtual machine template; if a host cannot be chosen,
+                publishing the virtual machine template item will fail.
+            :type  network: :class:`str` or ``None``
+            :param network: Network that backs the virtual Ethernet adapters in the virtual
+                machine template. This attribute was added in vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``Network:VCenter``. When methods return a value of this class as a
+                return value, the attribute will be an identifier for the resource
+                type: ``Network:VCenter``.
+                If None, the virtual Ethernet adapters will not be backed by a
+                network.
+            """
+            self.folder = folder
+            self.cluster = cluster
+            self.resource_pool = resource_pool
+            self.host = host
+            self.network = network
+            VapiStruct.__init__(self)
+
+
+    CreateSpecPlacement._set_binding_type(type.StructType(
+        'com.vmware.content.library.subscriptions.create_spec_placement', {
+            'folder': type.OptionalType(type.IdType()),
+            'cluster': type.OptionalType(type.IdType()),
+            'resource_pool': type.OptionalType(type.IdType()),
+            'host': type.OptionalType(type.IdType()),
+            'network': type.OptionalType(type.IdType()),
+        },
+        CreateSpecPlacement,
+        False,
+        None))
+
+
+    class CreateSpecSubscribedLibrary(VapiStruct):
+        """
+        The ``Subscriptions.CreateSpecSubscribedLibrary`` class defines the
+        subscribed library information used to create the subscription. This class
+        was added in vSphere API 6.7.2.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+        _validator_list = [
+            UnionValidator(
+                'target',
+                {
+                    'CREATE_NEW' : [('new_subscribed_library', True)],
+                    'USE_EXISTING' : [('subscribed_library', True)],
+                }
+            ),
+            UnionValidator(
+                'location',
+                {
+                    'REMOTE' : [('vcenter', True)],
+                    'LOCAL' : [],
+                }
+            ),
+        ]
+
+
+
+        def __init__(self,
+                     target=None,
+                     new_subscribed_library=None,
+                     subscribed_library=None,
+                     location=None,
+                     vcenter=None,
+                     placement=None,
+                    ):
+            """
+            :type  target: :class:`Subscriptions.CreateSpecSubscribedLibrary.Target`
+            :param target: Specifies whether the target subscribed library should be newly
+                created or an existing subscribed library should be used. This
+                attribute was added in vSphere API 6.7.2.
+            :type  new_subscribed_library: :class:`Subscriptions.CreateSpecNewSubscribedLibrary`
+            :param new_subscribed_library: Specification for creating a new subscribed library associated with
+                the subscription. This attribute was added in vSphere API 6.7.2.
+                This attribute is optional and it is only relevant when the value
+                of ``target`` is
+                :attr:`Subscriptions.CreateSpecSubscribedLibrary.Target.CREATE_NEW`.
+            :type  subscribed_library: :class:`str`
+            :param subscribed_library: Identifier of the existing subscribed library to associate with the
+                subscription. Only the subscribed libraries for which
+                :attr:`SubscriptionInfo.subscription_url` property is set to the
+                :attr:`PublishInfo.publish_url` of the published library can be
+                associated with the subscription. This attribute was added in
+                vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``com.vmware.content.Library``. When methods return a value of this
+                class as a return value, the attribute will be an identifier for
+                the resource type: ``com.vmware.content.Library``.
+                This attribute is optional and it is only relevant when the value
+                of ``target`` is
+                :attr:`Subscriptions.CreateSpecSubscribedLibrary.Target.USE_EXISTING`.
+            :type  location: :class:`Subscriptions.Location`
+            :param location: Location of the subscribed library relative to the published
+                library. This attribute was added in vSphere API 6.7.2.
+            :type  vcenter: :class:`Subscriptions.CreateSpecVcenter`
+            :param vcenter: Specification for the subscribed library's vCenter Server instance.
+                This attribute was added in vSphere API 6.7.2.
+                This attribute is optional and it is only relevant when the value
+                of ``location`` is :attr:`Subscriptions.Location.REMOTE`.
+            :type  placement: :class:`Subscriptions.CreateSpecPlacement` or ``None``
+            :param placement: Placement specification for the virtual machine template library
+                items on the subscribed library. This attribute was added in
+                vSphere API 6.7.2.
+                This attribute is currently required. In future, if this is None,
+                the system will attempt to choose a suitable placement
+                specification for the virtual machine template items; if a
+                placement specification cannot be chosen, publish of virtual
+                machine template items will fail.
+            """
+            self.target = target
+            self.new_subscribed_library = new_subscribed_library
+            self.subscribed_library = subscribed_library
+            self.location = location
+            self.vcenter = vcenter
+            self.placement = placement
+            VapiStruct.__init__(self)
+
+
+        class Target(Enum):
+            """
+            The ``Subscriptions.CreateSpecSubscribedLibrary.Target`` class defines the
+            options related to the target subscribed library which will be associated
+            with the subscription. This enumeration was added in vSphere API 6.7.2.
+
+            .. note::
+                This class represents an enumerated type in the interface language
+                definition. The class contains class attributes which represent the
+                values in the current version of the enumerated type. Newer versions of
+                the enumerated type may contain new values. To use new values of the
+                enumerated type in communication with a server that supports the newer
+                version of the API, you instantiate this class. See :ref:`enumerated
+                type description page <enumeration_description>`.
+            """
+            CREATE_NEW = None
+            """
+            Create a new subscribed library. This class attribute was added in vSphere
+            API 6.7.2.
+
+            """
+            USE_EXISTING = None
+            """
+            Use the specified existing subscribed library. This class attribute was
+            added in vSphere API 6.7.2.
+
+            """
+
+            def __init__(self, string):
+                """
+                :type  string: :class:`str`
+                :param string: String value for the :class:`Target` instance.
+                """
+                Enum.__init__(string)
+
+        Target._set_values([
+            Target('CREATE_NEW'),
+            Target('USE_EXISTING'),
+        ])
+        Target._set_binding_type(type.EnumType(
+            'com.vmware.content.library.subscriptions.create_spec_subscribed_library.target',
+            Target))
+
+    CreateSpecSubscribedLibrary._set_binding_type(type.StructType(
+        'com.vmware.content.library.subscriptions.create_spec_subscribed_library', {
+            'target': type.ReferenceType(__name__, 'Subscriptions.CreateSpecSubscribedLibrary.Target'),
+            'new_subscribed_library': type.OptionalType(type.ReferenceType(__name__, 'Subscriptions.CreateSpecNewSubscribedLibrary')),
+            'subscribed_library': type.OptionalType(type.IdType()),
+            'location': type.ReferenceType(__name__, 'Subscriptions.Location'),
+            'vcenter': type.OptionalType(type.ReferenceType(__name__, 'Subscriptions.CreateSpecVcenter')),
+            'placement': type.OptionalType(type.ReferenceType(__name__, 'Subscriptions.CreateSpecPlacement')),
+        },
+        CreateSpecSubscribedLibrary,
+        False,
+        None))
+
+
+    class CreateSpec(VapiStruct):
+        """
+        The ``Subscriptions.CreateSpec`` class defines the information required to
+        create a new subscription of the published library. This class was added in
+        vSphere API 6.7.2.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     subscribed_library=None,
+                    ):
+            """
+            :type  subscribed_library: :class:`Subscriptions.CreateSpecSubscribedLibrary`
+            :param subscribed_library: Specification for the subscribed library to be associated with the
+                subscription. This attribute was added in vSphere API 6.7.2.
+            """
+            self.subscribed_library = subscribed_library
+            VapiStruct.__init__(self)
+
+
+    CreateSpec._set_binding_type(type.StructType(
+        'com.vmware.content.library.subscriptions.create_spec', {
+            'subscribed_library': type.ReferenceType(__name__, 'Subscriptions.CreateSpecSubscribedLibrary'),
+        },
+        CreateSpec,
+        False,
+        None))
+
+
+    class Summary(VapiStruct):
+        """
+        The ``Subscriptions.Summary`` class contains commonly used information
+        about the subscription. This class was added in vSphere API 6.7.2.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     subscription=None,
+                     subscribed_library=None,
+                     subscribed_library_name=None,
+                     subscribed_library_vcenter_hostname=None,
+                    ):
+            """
+            :type  subscription: :class:`str`
+            :param subscription: Identifier of the subscription. This attribute was added in vSphere
+                API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``com.vmware.content.library.Subscriptions``. When methods return a
+                value of this class as a return value, the attribute will be an
+                identifier for the resource type:
+                ``com.vmware.content.library.Subscriptions``.
+            :type  subscribed_library: :class:`str`
+            :param subscribed_library: Identifier of the subscribed library. This attribute was added in
+                vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``com.vmware.content.Library``. When methods return a value of this
+                class as a return value, the attribute will be an identifier for
+                the resource type: ``com.vmware.content.Library``.
+            :type  subscribed_library_name: :class:`str`
+            :param subscribed_library_name: Name of the subscribed library. This attribute was added in vSphere
+                API 6.7.2.
+            :type  subscribed_library_vcenter_hostname: :class:`str` or ``None``
+            :param subscribed_library_vcenter_hostname: Hostname of the vCenter instance where the subscribed library
+                exists. This attribute was added in vSphere API 6.7.2.
+                This attribute is unset if the subscribed library is on the same
+                vCenter Server instance as the published library.
+            """
+            self.subscription = subscription
+            self.subscribed_library = subscribed_library
+            self.subscribed_library_name = subscribed_library_name
+            self.subscribed_library_vcenter_hostname = subscribed_library_vcenter_hostname
+            VapiStruct.__init__(self)
+
+
+    Summary._set_binding_type(type.StructType(
+        'com.vmware.content.library.subscriptions.summary', {
+            'subscription': type.IdType(resource_types='com.vmware.content.library.Subscriptions'),
+            'subscribed_library': type.IdType(resource_types='com.vmware.content.Library'),
+            'subscribed_library_name': type.StringType(),
+            'subscribed_library_vcenter_hostname': type.OptionalType(type.StringType()),
+        },
+        Summary,
+        False,
+        None))
+
+
+    class UpdateSpecVcenter(VapiStruct):
+        """
+        The ``Subscriptions.UpdateSpecVcenter`` class defines information about the
+        vCenter Server instance where the subscribed library associated with the
+        subscription exists. The ``Subscriptions.UpdateSpecVcenter`` class is only
+        applicable to subscribed library which exists on remote vCenter Server
+        instance. This class was added in vSphere API 6.7.2.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     hostname=None,
+                     https_port=None,
+                    ):
+            """
+            :type  hostname: :class:`str` or ``None``
+            :param hostname: The hostname of the subscribed library's vCenter Server. This
+                attribute was added in vSphere API 6.7.2.
+                If None, the value is unchanged.
+            :type  https_port: :class:`long` or ``None``
+            :param https_port: The HTTPS port of the vCenter Server instance where the subscribed
+                library exists. This attribute was added in vSphere API 6.7.2.
+                If None, the value is unchanged.
+            """
+            self.hostname = hostname
+            self.https_port = https_port
+            VapiStruct.__init__(self)
+
+
+    UpdateSpecVcenter._set_binding_type(type.StructType(
+        'com.vmware.content.library.subscriptions.update_spec_vcenter', {
+            'hostname': type.OptionalType(type.StringType()),
+            'https_port': type.OptionalType(type.IntegerType()),
+        },
+        UpdateSpecVcenter,
+        False,
+        None))
+
+
+    class UpdateSpecPlacement(VapiStruct):
+        """
+        The ``Subscriptions.UpdateSpecPlacement`` class defines the placement
+        information for the subscribed library's virtual machine template library
+        items. Storage location of the virtual machine template items is defined by
+        the subscribed library's storage backing. This placement information needs
+        to be compatible with the subscribed library's storage backing. The
+        ``Subscriptions.UpdateSpecPlacement`` class is only applicable for the
+        newly published virtual machine template library items of the subscribed
+        library. Existing items will not be moved. This class was added in vSphere
+        API 6.7.2.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     folder=None,
+                     cluster=None,
+                     resource_pool=None,
+                     host=None,
+                     network=None,
+                    ):
+            """
+            :type  folder: :class:`str` or ``None``
+            :param folder: Virtual machine folder into which the virtual machine template
+                should be placed. This attribute was added in vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``Folder:VCenter``. When methods return a value of this class as a
+                return value, the attribute will be an identifier for the resource
+                type: ``Folder:VCenter``.
+                This attribute is currently required. In future, if this is None,
+                the system will attempt to choose a suitable folder for the virtual
+                machine template; if a folder cannot be chosen, publishing a
+                virtual machine template item will fail.
+            :type  cluster: :class:`str` or ``None``
+            :param cluster: Cluster onto which the virtual machine template should be placed.
+                If ``cluster`` and ``resourcePool`` are both specified,
+                ``resourcePool`` must belong to ``cluster``. If ``cluster`` and
+                ``host`` are both specified, ``host`` must be a member of
+                ``cluster``. If ``resourcePool`` or ``host`` is specified, it is
+                recommended that this attribute be None. This attribute was added
+                in vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``ClusterComputeResource:VCenter``. When methods return a value of
+                this class as a return value, the attribute will be an identifier
+                for the resource type: ``ClusterComputeResource:VCenter``.
+                If ``resourcePool`` or ``host`` is specified, it is recommended
+                that this attribute be None.
+            :type  resource_pool: :class:`str` or ``None``
+            :param resource_pool: Resource pool into which the virtual machine template should be
+                placed. This attribute was added in vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``ResourcePool:VCenter``. When methods return a value of this class
+                as a return value, the attribute will be an identifier for the
+                resource type: ``ResourcePool:VCenter``.
+                This attribute is currently required. In future, if this is None,
+                the system will attempt to choose a suitable resource pool for the
+                virtual machine template; if a resource pool cannot be chosen,
+                publish of virtual machine template item will fail.
+            :type  host: :class:`str` or ``None``
+            :param host: Host onto which the virtual machine template should be placed. If
+                ``host`` and ``resourcePool`` are both specified, ``resourcePool``
+                must belong to ``host``. If ``host`` and ``cluster`` are both
+                specified, ``host`` must be a member of ``cluster``. This attribute
+                was added in vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``HostSystem:VCenter``. When methods return a value of this class
+                as a return value, the attribute will be an identifier for the
+                resource type: ``HostSystem:VCenter``.
+                If this is None, the system will attempt to choose a suitable host
+                for the virtual machine template; if a host cannot be chosen,
+                publishing the virtual machine template item will fail.
+            :type  network: :class:`str` or ``None``
+            :param network: Network that backs the virtual Ethernet adapters in the virtual
+                machine template. This attribute was added in vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``Network:VCenter``. When methods return a value of this class as a
+                return value, the attribute will be an identifier for the resource
+                type: ``Network:VCenter``.
+                If None, newly published virtual machine template library items
+                will not be backed by a network.
+            """
+            self.folder = folder
+            self.cluster = cluster
+            self.resource_pool = resource_pool
+            self.host = host
+            self.network = network
+            VapiStruct.__init__(self)
+
+
+    UpdateSpecPlacement._set_binding_type(type.StructType(
+        'com.vmware.content.library.subscriptions.update_spec_placement', {
+            'folder': type.OptionalType(type.IdType()),
+            'cluster': type.OptionalType(type.IdType()),
+            'resource_pool': type.OptionalType(type.IdType()),
+            'host': type.OptionalType(type.IdType()),
+            'network': type.OptionalType(type.IdType()),
+        },
+        UpdateSpecPlacement,
+        False,
+        None))
+
+
+    class UpdateSpec(VapiStruct):
+        """
+        The ``Subscriptions.UpdateSpec`` class defines information required to
+        update the subscription. This class was added in vSphere API 6.7.2.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     subscribed_library_vcenter=None,
+                     subscribed_library_placement=None,
+                    ):
+            """
+            :type  subscribed_library_vcenter: :class:`Subscriptions.UpdateSpecVcenter` or ``None``
+            :param subscribed_library_vcenter: Specification for the subscribed library's vCenter Server instance.
+                This attribute was added in vSphere API 6.7.2.
+                If None, the value is unchanged.
+            :type  subscribed_library_placement: :class:`Subscriptions.UpdateSpecPlacement` or ``None``
+            :param subscribed_library_placement: Placement specification for the virtual machine template items of
+                the subscribed library. Updating this information will only affect
+                new or updated items, existing items will not be moved. The entire
+                placement configuration of the subscribed library will replaced by
+                the new specification. This attribute was added in vSphere API
+                6.7.2.
+                If None, the placement configuration of the subscribed library will
+                be unchanged.
+            """
+            self.subscribed_library_vcenter = subscribed_library_vcenter
+            self.subscribed_library_placement = subscribed_library_placement
+            VapiStruct.__init__(self)
+
+
+    UpdateSpec._set_binding_type(type.StructType(
+        'com.vmware.content.library.subscriptions.update_spec', {
+            'subscribed_library_vcenter': type.OptionalType(type.ReferenceType(__name__, 'Subscriptions.UpdateSpecVcenter')),
+            'subscribed_library_placement': type.OptionalType(type.ReferenceType(__name__, 'Subscriptions.UpdateSpecPlacement')),
+        },
+        UpdateSpec,
+        False,
+        None))
+
+
+    class VcenterInfo(VapiStruct):
+        """
+        The ``Subscriptions.VcenterInfo`` class contains information about the
+        vCenter Server instance where the subscribed library associated with the
+        subscription exists. This class was added in vSphere API 6.7.2.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     hostname=None,
+                     https_port=None,
+                     server_guid=None,
+                    ):
+            """
+            :type  hostname: :class:`str`
+            :param hostname: Hostname of the vCenter Server instance where the subscribed
+                library exists. This attribute was added in vSphere API 6.7.2.
+            :type  https_port: :class:`long` or ``None``
+            :param https_port: The HTTPS port of the vCenter Server instance where the subscribed
+                library exists. This attribute was added in vSphere API 6.7.2.
+                If None, port 443 will be used.
+            :type  server_guid: :class:`str`
+            :param server_guid: The unique identifier of the vCenter Server where the subscribed
+                library exists. This attribute was added in vSphere API 6.7.2.
+            """
+            self.hostname = hostname
+            self.https_port = https_port
+            self.server_guid = server_guid
+            VapiStruct.__init__(self)
+
+
+    VcenterInfo._set_binding_type(type.StructType(
+        'com.vmware.content.library.subscriptions.vcenter_info', {
+            'hostname': type.StringType(),
+            'https_port': type.OptionalType(type.IntegerType()),
+            'server_guid': type.StringType(),
+        },
+        VcenterInfo,
+        False,
+        None))
+
+
+    class PlacementInfo(VapiStruct):
+        """
+        The ``Subscriptions.PlacementInfo`` class contains the placement
+        information for the subscribed library's virtual machine template library
+        items. The ``Subscriptions.PlacementInfo`` class is only applicable for the
+        virtual machine template library items of the subscribed library. This
+        class was added in vSphere API 6.7.2.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     folder=None,
+                     cluster=None,
+                     resource_pool=None,
+                     host=None,
+                     network=None,
+                    ):
+            """
+            :type  folder: :class:`str` or ``None``
+            :param folder: Virtual machine folder into which the virtual machine template
+                should be placed. This attribute was added in vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``Folder:VCenter``. When methods return a value of this class as a
+                return value, the attribute will be an identifier for the resource
+                type: ``Folder:VCenter``.
+                The attribute will be None if the subscribed library associated
+                with the subscription does not have a virtual machine folder.
+            :type  cluster: :class:`str` or ``None``
+            :param cluster: Cluster onto which the virtual machine template should be placed.
+                This attribute was added in vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``ClusterComputeResource:VCenter``. When methods return a value of
+                this class as a return value, the attribute will be an identifier
+                for the resource type: ``ClusterComputeResource:VCenter``.
+                The attribute will be None if the subscribed library associated
+                with the subscription does not have a cluster.
+            :type  resource_pool: :class:`str` or ``None``
+            :param resource_pool: Resource pool into which the virtual machine template should be
+                placed. This attribute was added in vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``ResourcePool:VCenter``. When methods return a value of this class
+                as a return value, the attribute will be an identifier for the
+                resource type: ``ResourcePool:VCenter``.
+                The attribute will be None if the subscribed library associated
+                with the subscription does not have a resource pool.
+            :type  host: :class:`str` or ``None``
+            :param host: Host onto which the virtual machine template should be placed. If
+                ``host`` and ``resourcePool`` are both specified, ``resourcePool``
+                must belong to ``host``. If ``host`` and ``cluster`` are both
+                specified, ``host`` must be a member of ``cluster``. This attribute
+                was added in vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``HostSystem:VCenter``. When methods return a value of this class
+                as a return value, the attribute will be an identifier for the
+                resource type: ``HostSystem:VCenter``.
+                The attribute will be None if the subscribed library associated
+                with the subscription does not have a host.
+            :type  network: :class:`str` or ``None``
+            :param network: Network that backs the virtual Ethernet adapters in the virtual
+                machine template. This attribute was added in vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``Network:VCenter``. When methods return a value of this class as a
+                return value, the attribute will be an identifier for the resource
+                type: ``Network:VCenter``.
+                The attribute will be None if the subscribed library associated
+                with the subscription does not have a network.
+            """
+            self.folder = folder
+            self.cluster = cluster
+            self.resource_pool = resource_pool
+            self.host = host
+            self.network = network
+            VapiStruct.__init__(self)
+
+
+    PlacementInfo._set_binding_type(type.StructType(
+        'com.vmware.content.library.subscriptions.placement_info', {
+            'folder': type.OptionalType(type.IdType()),
+            'cluster': type.OptionalType(type.IdType()),
+            'resource_pool': type.OptionalType(type.IdType()),
+            'host': type.OptionalType(type.IdType()),
+            'network': type.OptionalType(type.IdType()),
+        },
+        PlacementInfo,
+        False,
+        None))
+
+
+    class Info(VapiStruct):
+        """
+        The ``Subscriptions.Info`` class contains information about the
+        subscription. This class was added in vSphere API 6.7.2.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+        _validator_list = [
+            UnionValidator(
+                'subscribed_library_location',
+                {
+                    'REMOTE' : [('subscribed_library_vcenter', True)],
+                    'LOCAL' : [],
+                }
+            ),
+        ]
+
+
+
+        def __init__(self,
+                     subscribed_library=None,
+                     subscribed_library_name=None,
+                     subscribed_library_location=None,
+                     subscribed_library_vcenter=None,
+                     subscribed_library_placement=None,
+                    ):
+            """
+            :type  subscribed_library: :class:`str`
+            :param subscribed_library: Identifier of the subscribed library associated with the
+                subscription. This attribute was added in vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``com.vmware.content.Library``. When methods return a value of this
+                class as a return value, the attribute will be an identifier for
+                the resource type: ``com.vmware.content.Library``.
+            :type  subscribed_library_name: :class:`str`
+            :param subscribed_library_name: Name of the subscribed library associated with the subscription.
+                This attribute was added in vSphere API 6.7.2.
+            :type  subscribed_library_location: :class:`Subscriptions.Location`
+            :param subscribed_library_location: Location of the subscribed library relative to the published
+                library. This attribute was added in vSphere API 6.7.2.
+            :type  subscribed_library_vcenter: :class:`Subscriptions.VcenterInfo`
+            :param subscribed_library_vcenter: Information about the vCenter Server instance where the subscribed
+                library exists. This attribute was added in vSphere API 6.7.2.
+                This attribute is optional and it is only relevant when the value
+                of ``subscribedLibraryLocation`` is
+                :attr:`Subscriptions.Location.REMOTE`.
+            :type  subscribed_library_placement: :class:`Subscriptions.PlacementInfo`
+            :param subscribed_library_placement: Placement information about the subscribed library's virtual
+                machine template items. This attribute was added in vSphere API
+                6.7.2.
+            """
+            self.subscribed_library = subscribed_library
+            self.subscribed_library_name = subscribed_library_name
+            self.subscribed_library_location = subscribed_library_location
+            self.subscribed_library_vcenter = subscribed_library_vcenter
+            self.subscribed_library_placement = subscribed_library_placement
+            VapiStruct.__init__(self)
+
+
+    Info._set_binding_type(type.StructType(
+        'com.vmware.content.library.subscriptions.info', {
+            'subscribed_library': type.IdType(resource_types='com.vmware.content.Library'),
+            'subscribed_library_name': type.StringType(),
+            'subscribed_library_location': type.ReferenceType(__name__, 'Subscriptions.Location'),
+            'subscribed_library_vcenter': type.OptionalType(type.ReferenceType(__name__, 'Subscriptions.VcenterInfo')),
+            'subscribed_library_placement': type.ReferenceType(__name__, 'Subscriptions.PlacementInfo'),
+        },
+        Info,
+        False,
+        None))
+
+
+
+    def create(self,
+               library,
+               spec,
+               client_token=None,
+               ):
+        """
+        Creates a subscription of the published library. This method was added
+        in vSphere API 6.7.2.
+
+        :type  client_token: :class:`str` or ``None``
+        :param client_token: A unique token generated on the client for each creation request.
+            The token should be a universally unique identifier (UUID), for
+            example: ``b8a2a2e3-2314-43cd-a871-6ede0f429751``. This token can
+            be used to guarantee idempotent creation.
+            If not specified, creation is not idempotent.
+        :type  library: :class:`str`
+        :param library: Identifier of the published library.
+            The parameter must be an identifier for the resource type:
+            ``com.vmware.content.Library``.
+        :type  spec: :class:`Subscriptions.CreateSpec`
+        :param spec: Specification for the subscription.
+        :rtype: :class:`str`
+        :return: Subscription identifier.
+            The return value will be an identifier for the resource type:
+            ``com.vmware.content.library.Subscriptions``.
+        :raise: :class:`com.vmware.vapi.std.errors_client.AlreadyExists` 
+            If a subscription of the published library to the specified
+            subscribed library already exists. This is only applicable when
+            ``subscribedLibrary#subscribedLibrary`` is specified.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Error` 
+             If the system reports an error while responding to the request.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
+             If the library specified by ``library`` does not exist.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
+            If the subscribed library specified by
+            ``subscribedLibrary#subscribedLibrary`` does not exist at the
+            vCenter instance specified by ``subscribedLibrary#vcenter``.
+        :raise: :class:`com.vmware.vapi.std.errors_client.ResourceInaccessible` 
+            If the vCenter instance specified by ``subscribedLibrary#vcenter``
+            cannot be contacted or found.
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidArgument` 
+             If :class:`Subscriptions.CreateSpec` contains invalid arguments.
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidElementType` 
+             If the library specified by ``library`` is a subscribed library.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotAllowedInCurrentState` 
+            If the library specified by ``library`` is not a published library.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             If the user that requested the method cannot be authenticated.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
+            If the user that requested the method is not authorized to perform
+            the method.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
+            if you do not have all of the privileges described as follows: 
+            
+            * The resource ``com.vmware.content.Library`` referenced by the
+              parameter ``library`` requires ``ContentLibrary.AddSubscription``.
+        """
+        return self._invoke('create',
+                            {
+                            'client_token': client_token,
+                            'library': library,
+                            'spec': spec,
+                            })
+
+    def delete(self,
+               library,
+               subscription,
+               ):
+        """
+        Deletes the specified subscription of the published library. The
+        subscribed library associated with the subscription will not be
+        deleted. This method was added in vSphere API 6.7.2.
+
+        :type  library: :class:`str`
+        :param library: Identifier of the published library.
+            The parameter must be an identifier for the resource type:
+            ``com.vmware.content.Library``.
+        :type  subscription: :class:`str`
+        :param subscription: Subscription identifier.
+            The parameter must be an identifier for the resource type:
+            ``com.vmware.content.library.Subscriptions``.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Error` 
+             If the system reports an error while responding to the request.
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidElementType` 
+             If the library specified by ``library`` is a subscribed library.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotAllowedInCurrentState` 
+            If the library specified by ``library`` is not a published library.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
+             If the library specified by ``library`` does not exist.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
+            If the subscription specified by ``subscription`` does not exist
+            for the library specified by ``library``.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             If the user that requested the method cannot be authenticated.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
+            If the user that requested the method is not authorized to perform
+            the method.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
+            if you do not have all of the privileges described as follows: 
+            
+            * The resource ``com.vmware.content.Library`` referenced by the
+              parameter ``library`` requires
+              ``ContentLibrary.DeleteSubscription``.
+        """
+        return self._invoke('delete',
+                            {
+                            'library': library,
+                            'subscription': subscription,
+                            })
+
+    def list(self,
+             library,
+             ):
+        """
+        Lists the subscriptions of the published library. This method was added
+        in vSphere API 6.7.2.
+
+        :type  library: :class:`str`
+        :param library: Identifier of the published library.
+            The parameter must be an identifier for the resource type:
+            ``com.vmware.content.Library``.
+        :rtype: :class:`list` of :class:`Subscriptions.Summary`
+        :return: List of commonly used information about subscriptions of the
+            published library.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Error` 
+             If the system reports an error while responding to the request.
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidElementType` 
+             If the library specified by ``library`` is a subscribed library.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
+             If the library specified by ``library`` does not exist.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotAllowedInCurrentState` 
+            If the library specified by ``library`` is not a published library.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             If the user that requested the method cannot be authenticated.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
+            If the user that requested the method is not authorized to perform
+            the method.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
+            if you do not have all of the privileges described as follows: 
+            
+            * The resource ``com.vmware.content.Library`` referenced by the
+              parameter ``library`` requires ``System.Read``.
+        """
+        return self._invoke('list',
+                            {
+                            'library': library,
+                            })
+
+    def update(self,
+               library,
+               subscription,
+               spec,
+               ):
+        """
+        Updates the specified subscription of the published library. 
+        
+        This is an incremental update to the subscription. Except for the
+        :class:`Subscriptions.UpdateSpecPlacement` class, attributes that are
+        None in the update specification will be left unchanged. If
+        ``spec#subscribedLibraryPlacement`` is specified, all attributes of the
+        current subscribed library placement will be replaced by this
+        placement.. This method was added in vSphere API 6.7.2.
+
+        :type  library: :class:`str`
+        :param library: Identifier of the published library.
+            The parameter must be an identifier for the resource type:
+            ``com.vmware.content.Library``.
+        :type  subscription: :class:`str`
+        :param subscription: subscription identifier.
+            The parameter must be an identifier for the resource type:
+            ``com.vmware.content.library.Subscriptions``.
+        :type  spec: :class:`Subscriptions.UpdateSpec`
+        :param spec: Specification of the new property values to set on the
+            subscription.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Error` 
+             If the system reports an error while responding to the request.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
+             If the library specified by ``library`` does not exist.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
+            If the subscription specified by ``subscription`` does not exist
+            for the library specified by ``library``.
+        :raise: :class:`com.vmware.vapi.std.errors_client.ResourceInaccessible` 
+             If the subscribed library cannot be contacted or found.
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidArgument` 
+             If :class:`Subscriptions.UpdateSpec` contains invalid arguments.
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidElementType` 
+             If the library specified by ``library`` is a subscribed library.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotAllowedInCurrentState` 
+            If the library specified by ``library`` is not a published library.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             If the user that requested the method cannot be authenticated.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
+            If the user that requested the method is not authorized to perform
+            the method.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
+            if you do not have all of the privileges described as follows: 
+            
+            * The resource ``com.vmware.content.Library`` referenced by the
+              parameter ``library`` requires
+              ``ContentLibrary.UpdateSubscription``.
+        """
+        return self._invoke('update',
+                            {
+                            'library': library,
+                            'subscription': subscription,
+                            'spec': spec,
+                            })
+
+    def get(self,
+            library,
+            subscription,
+            ):
+        """
+        Returns information about the specified subscription of the published
+        library. This method was added in vSphere API 6.7.2.
+
+        :type  library: :class:`str`
+        :param library: Identifier of the published library.
+            The parameter must be an identifier for the resource type:
+            ``com.vmware.content.Library``.
+        :type  subscription: :class:`str`
+        :param subscription: Identifier of the subscription.
+            The parameter must be an identifier for the resource type:
+            ``com.vmware.content.library.Subscriptions``.
+        :rtype: :class:`Subscriptions.Info`
+        :return: Information about the subscription.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Error` 
+             If the system reports an error while responding to the request.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
+             If the library specified by ``library`` does not exist.
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidArgument` 
+             If the ``subscription`` is not valid.
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidElementType` 
+             If the library specified by ``library`` is a subscribed library.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotAllowedInCurrentState` 
+            If the library specified by ``library`` is not a published library.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             If the user that requested the method cannot be authenticated.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
+            If the user that requested the method is not authorized to perform
+            the method.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
+            if you do not have all of the privileges described as follows: 
+            
+            * The resource ``com.vmware.content.Library`` referenced by the
+              parameter ``library`` requires ``System.Read``.
+        """
+        return self._invoke('get',
+                            {
+                            'library': library,
+                            'subscription': subscription,
+                            })
 class _ItemStub(ApiInterfaceStub):
     def __init__(self, config):
         # properties for copy operation
@@ -1434,6 +2833,8 @@ class _ItemStub(ApiInterfaceStub):
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidElementType'),
             'com.vmware.vapi.std.errors.not_allowed_in_current_state':
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotAllowedInCurrentState'),
+            'com.vmware.vapi.std.errors.already_exists':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'AlreadyExists'),
 
         }
         create_input_value_validator_list = [
@@ -1451,6 +2852,8 @@ class _ItemStub(ApiInterfaceStub):
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidElementType'),
             'com.vmware.vapi.std.errors.not_found':
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+            'com.vmware.vapi.std.errors.not_allowed_in_current_state':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotAllowedInCurrentState'),
 
         }
         delete_input_value_validator_list = [
@@ -1518,6 +2921,8 @@ class _ItemStub(ApiInterfaceStub):
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidArgument'),
             'com.vmware.vapi.std.errors.not_allowed_in_current_state':
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotAllowedInCurrentState'),
+            'com.vmware.vapi.std.errors.already_exists':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'AlreadyExists'),
 
         }
         update_input_value_validator_list = [
@@ -1525,6 +2930,35 @@ class _ItemStub(ApiInterfaceStub):
         update_output_validator_list = [
         ]
         update_rest_metadata = None
+
+        # properties for publish operation
+        publish_input_type = type.StructType('operation-input', {
+            'library_item_id': type.IdType(resource_types='com.vmware.content.library.Item'),
+            'force_sync_content': type.BooleanType(),
+            'subscriptions': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'Item.DestinationSpec'))),
+        })
+        publish_error_dict = {
+            'com.vmware.vapi.std.errors.error':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Error'),
+            'com.vmware.vapi.std.errors.not_found':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+            'com.vmware.vapi.std.errors.invalid_argument':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidArgument'),
+            'com.vmware.vapi.std.errors.invalid_element_type':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidElementType'),
+            'com.vmware.vapi.std.errors.not_allowed_in_current_state':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotAllowedInCurrentState'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
+            'com.vmware.vapi.std.errors.unauthorized':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+
+        }
+        publish_input_value_validator_list = [
+        ]
+        publish_output_validator_list = [
+        ]
+        publish_rest_metadata = None
 
         operations = {
             'copy': {
@@ -1583,6 +3017,14 @@ class _ItemStub(ApiInterfaceStub):
                 'output_validator_list': update_output_validator_list,
                 'task_type': TaskType.NONE,
             },
+            'publish': {
+                'input_type': publish_input_type,
+                'output_type': type.VoidType(),
+                'errors': publish_error_dict,
+                'input_value_validator_list': publish_input_value_validator_list,
+                'output_validator_list': publish_output_validator_list,
+                'task_type': TaskType.NONE,
+            },
         }
         rest_metadata = {
             'copy': copy_rest_metadata,
@@ -1592,6 +3034,7 @@ class _ItemStub(ApiInterfaceStub):
             'list': list_rest_metadata,
             'find': find_rest_metadata,
             'update': update_rest_metadata,
+            'publish': publish_rest_metadata,
         }
         ApiInterfaceStub.__init__(
             self, iface_name='com.vmware.content.library.item',
@@ -1668,11 +3111,211 @@ class _SubscribedItemStub(ApiInterfaceStub):
             config=config, operations=operations, rest_metadata=rest_metadata,
             is_vapi_rest=True)
 
+class _SubscriptionsStub(ApiInterfaceStub):
+    def __init__(self, config):
+        # properties for create operation
+        create_input_type = type.StructType('operation-input', {
+            'client_token': type.OptionalType(type.StringType()),
+            'library': type.IdType(resource_types='com.vmware.content.Library'),
+            'spec': type.ReferenceType(__name__, 'Subscriptions.CreateSpec'),
+        })
+        create_error_dict = {
+            'com.vmware.vapi.std.errors.already_exists':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'AlreadyExists'),
+            'com.vmware.vapi.std.errors.error':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Error'),
+            'com.vmware.vapi.std.errors.not_found':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+            'com.vmware.vapi.std.errors.resource_inaccessible':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'ResourceInaccessible'),
+            'com.vmware.vapi.std.errors.invalid_argument':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidArgument'),
+            'com.vmware.vapi.std.errors.invalid_element_type':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidElementType'),
+            'com.vmware.vapi.std.errors.not_allowed_in_current_state':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotAllowedInCurrentState'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
+            'com.vmware.vapi.std.errors.unauthorized':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+
+        }
+        create_input_value_validator_list = [
+        ]
+        create_output_validator_list = [
+        ]
+        create_rest_metadata = None
+
+        # properties for delete operation
+        delete_input_type = type.StructType('operation-input', {
+            'library': type.IdType(resource_types='com.vmware.content.Library'),
+            'subscription': type.IdType(resource_types='com.vmware.content.library.Subscriptions'),
+        })
+        delete_error_dict = {
+            'com.vmware.vapi.std.errors.error':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Error'),
+            'com.vmware.vapi.std.errors.invalid_element_type':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidElementType'),
+            'com.vmware.vapi.std.errors.not_allowed_in_current_state':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotAllowedInCurrentState'),
+            'com.vmware.vapi.std.errors.not_found':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
+            'com.vmware.vapi.std.errors.unauthorized':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+
+        }
+        delete_input_value_validator_list = [
+        ]
+        delete_output_validator_list = [
+        ]
+        delete_rest_metadata = None
+
+        # properties for list operation
+        list_input_type = type.StructType('operation-input', {
+            'library': type.IdType(resource_types='com.vmware.content.Library'),
+        })
+        list_error_dict = {
+            'com.vmware.vapi.std.errors.error':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Error'),
+            'com.vmware.vapi.std.errors.invalid_element_type':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidElementType'),
+            'com.vmware.vapi.std.errors.not_found':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+            'com.vmware.vapi.std.errors.not_allowed_in_current_state':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotAllowedInCurrentState'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
+            'com.vmware.vapi.std.errors.unauthorized':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+
+        }
+        list_input_value_validator_list = [
+        ]
+        list_output_validator_list = [
+        ]
+        list_rest_metadata = None
+
+        # properties for update operation
+        update_input_type = type.StructType('operation-input', {
+            'library': type.IdType(resource_types='com.vmware.content.Library'),
+            'subscription': type.IdType(resource_types='com.vmware.content.library.Subscriptions'),
+            'spec': type.ReferenceType(__name__, 'Subscriptions.UpdateSpec'),
+        })
+        update_error_dict = {
+            'com.vmware.vapi.std.errors.error':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Error'),
+            'com.vmware.vapi.std.errors.not_found':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+            'com.vmware.vapi.std.errors.resource_inaccessible':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'ResourceInaccessible'),
+            'com.vmware.vapi.std.errors.invalid_argument':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidArgument'),
+            'com.vmware.vapi.std.errors.invalid_element_type':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidElementType'),
+            'com.vmware.vapi.std.errors.not_allowed_in_current_state':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotAllowedInCurrentState'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
+            'com.vmware.vapi.std.errors.unauthorized':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+
+        }
+        update_input_value_validator_list = [
+        ]
+        update_output_validator_list = [
+        ]
+        update_rest_metadata = None
+
+        # properties for get operation
+        get_input_type = type.StructType('operation-input', {
+            'library': type.IdType(resource_types='com.vmware.content.Library'),
+            'subscription': type.IdType(resource_types='com.vmware.content.library.Subscriptions'),
+        })
+        get_error_dict = {
+            'com.vmware.vapi.std.errors.error':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Error'),
+            'com.vmware.vapi.std.errors.not_found':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+            'com.vmware.vapi.std.errors.invalid_argument':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidArgument'),
+            'com.vmware.vapi.std.errors.invalid_element_type':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidElementType'),
+            'com.vmware.vapi.std.errors.not_allowed_in_current_state':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotAllowedInCurrentState'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
+            'com.vmware.vapi.std.errors.unauthorized':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+
+        }
+        get_input_value_validator_list = [
+        ]
+        get_output_validator_list = [
+        ]
+        get_rest_metadata = None
+
+        operations = {
+            'create': {
+                'input_type': create_input_type,
+                'output_type': type.IdType(resource_types='com.vmware.content.library.Subscriptions'),
+                'errors': create_error_dict,
+                'input_value_validator_list': create_input_value_validator_list,
+                'output_validator_list': create_output_validator_list,
+                'task_type': TaskType.NONE,
+            },
+            'delete': {
+                'input_type': delete_input_type,
+                'output_type': type.VoidType(),
+                'errors': delete_error_dict,
+                'input_value_validator_list': delete_input_value_validator_list,
+                'output_validator_list': delete_output_validator_list,
+                'task_type': TaskType.NONE,
+            },
+            'list': {
+                'input_type': list_input_type,
+                'output_type': type.ListType(type.ReferenceType(__name__, 'Subscriptions.Summary')),
+                'errors': list_error_dict,
+                'input_value_validator_list': list_input_value_validator_list,
+                'output_validator_list': list_output_validator_list,
+                'task_type': TaskType.NONE,
+            },
+            'update': {
+                'input_type': update_input_type,
+                'output_type': type.VoidType(),
+                'errors': update_error_dict,
+                'input_value_validator_list': update_input_value_validator_list,
+                'output_validator_list': update_output_validator_list,
+                'task_type': TaskType.NONE,
+            },
+            'get': {
+                'input_type': get_input_type,
+                'output_type': type.ReferenceType(__name__, 'Subscriptions.Info'),
+                'errors': get_error_dict,
+                'input_value_validator_list': get_input_value_validator_list,
+                'output_validator_list': get_output_validator_list,
+                'task_type': TaskType.NONE,
+            },
+        }
+        rest_metadata = {
+            'create': create_rest_metadata,
+            'delete': delete_rest_metadata,
+            'list': list_rest_metadata,
+            'update': update_rest_metadata,
+            'get': get_rest_metadata,
+        }
+        ApiInterfaceStub.__init__(
+            self, iface_name='com.vmware.content.library.subscriptions',
+            config=config, operations=operations, rest_metadata=rest_metadata,
+            is_vapi_rest=True)
+
 
 class StubFactory(StubFactoryBase):
     _attrs = {
         'Item': Item,
         'SubscribedItem': SubscribedItem,
+        'Subscriptions': Subscriptions,
         'item': 'com.vmware.content.library.item_client.StubFactory',
     }
 

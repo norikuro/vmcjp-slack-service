@@ -3,11 +3,11 @@ DataDefinition classes
 """
 
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015-2017 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015-2018 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 
 from vmware.vapi.data.type import Type
-from vmware.vapi.data.value import data_value_factory
+from vmware.vapi.data.value import data_value_factory, StructValue
 from vmware.vapi.exception import CoreException
 from vmware.vapi.l10n.runtime import message_factory
 from vmware.vapi.lib.constants import MAP_ENTRY, OPERATION_INPUT
@@ -35,8 +35,8 @@ class DataDefinition(object):
 
     def valid_instance_of(self, value):
         """
-        Validates that the specified :class:`vmware.vapi.data.value.DataValue` is an instance of
-        this data-definition
+        Validates that the specified :class:`vmware.vapi.data.value.DataValue`
+        is an instance of this data-definition
 
         :type  value: :class:`vmware.vapi.data.value.DataValue`
         :param value: the data value to validate
@@ -49,13 +49,14 @@ class DataDefinition(object):
 
     def validate(self, value):
         """
-        Validates that the specified :class:`vmware.vapi.data.value.DataValue` is an instance of
-        this data-definition
+        Validates that the specified :class:`vmware.vapi.data.value.DataValue`
+        is an instance of this data-definition
 
         :type  value: :class:`vmware.vapi.data.value.DataValue`
         :param value: the data value to validate
 
-        :rtype: :class:`list` of :class:`vmware.vapi.message.Message` or ``None``
+        :rtype: :class:`list` of :class:`vmware.vapi.message.Message`
+                or ``None``
         :return: a stack of messages indicating why the value is not an instance
                  of this data-definition, or None if the value is an instance of
                  this data-definition
@@ -83,7 +84,7 @@ class DataDefinition(object):
         :type  value: :class:`vmware.vapi.data.value.DataValue`
         :param value: DataValue
         """
-        pass
+        return None
 
     def accept(self, visitor):
         """
@@ -234,7 +235,8 @@ class OpaqueDefinition(SingletonDefinition):
 
         :type  value: :class:`vmware.vapi.data.value.DataValue`
         :param value: DataValue to be validated
-        :rtype: :class:`list` of :class:`vmware.vapi.message.Message` or ``None``
+        :rtype: :class:`list` of :class:`vmware.vapi.message.Message`
+                 or ``None``
         :return: a stack of messages indicating why the value is not an instance
                  of this data-definition, or None if the value is an instance of
                  this data-definition
@@ -267,7 +269,8 @@ class DynamicStructDefinition(SingletonDefinition):
         :type  value: :class:`vmware.vapi.data.value.DataValue`
         :param value: the data value to validate
 
-        :rtype: :class:`list` of :class:`vmware.vapi.message.Message` or ``None``
+        :rtype: :class:`list` of :class:`vmware.vapi.message.Message`
+                or ``None``
         :return: a stack of messages indicating why the value is not an instance
                  of this data-definition, or None if the value is an instance of
                  this data-definition
@@ -307,7 +310,8 @@ class AnyErrorDefinition(SingletonDefinition):
         :type  value: :class:`vmware.vapi.data.value.DataValue`
         :param value: the data value to validate
 
-        :rtype: :class:`list` of :class:`vmware.vapi.message.Message` or ``None``
+        :rtype: :class:`list` of :class:`vmware.vapi.message.Message`
+                or ``None``
         :return: a stack of messages indicating why the value is not an instance
                  of this data-definition, or None if the value is an instance of
                  this data-definition
@@ -376,7 +380,8 @@ class ListDefinition(DataDefinition):
         Initialize ListDefinition
 
         :type  element_type: :class:`DataDefinition`
-        :param element_type: DataDefinition of the elements inside ListDefinition
+        :param element_type: DataDefinition of the elements inside
+                ListDefinition
         """
         if not element_type:
             raise ValueError('ListDefinition requires element definition')
@@ -387,7 +392,8 @@ class ListDefinition(DataDefinition):
         """
         Create a new ListValue
 
-        :type  values: :class:`list` of :class:`vmware.vapi.data.value.DataValue`
+        :type  values: :class:`list` of
+                :class:`vmware.vapi.data.value.DataValue`
         :param values: List of elements
         :rtype: :class:`vmware.vapi.data.value.ListValue`
         :return: Newly created ListValue
@@ -404,11 +410,15 @@ class ListDefinition(DataDefinition):
 
         :type  other: :class:`vmware.vapi.data.value.ListValue`
         :param other: ListValue to be validated
-        :rtype: :class:`list` of :class:`vmware.vapi.message.Message` or ``None``
+        :rtype: :class:`list` of :class:`vmware.vapi.message.Message`
+                or ``None``
         :return: a stack of messages indicating why the value is not an instance
                  of this data-definition, or None if the value is an instance of
                  this data-definition
         """
+        if isinstance(list_value, StructValue):
+            return None
+
         errors = DataDefinition.validate(self, list_value)
         if errors:
             return errors
@@ -430,17 +440,20 @@ class ListDefinition(DataDefinition):
         :type  value: :class:`vmware.vapi.data.value.DataValue`
         :param value: DataValue
         """
+        if value.type == Type.STRUCTURE:
+            return None
         assert(value.type == Type.LIST)
 
         for element in value:
             self.element_type.complete_value(element)
+        return None
 
     def __eq__(self, other):
         if not isinstance(other, ListDefinition):
             return NotImplemented
 
-        return (DataDefinition.__eq__(self, other) and
-                self.element_type == other.element_type)
+        return (DataDefinition.__eq__(self, other)
+                and self.element_type == other.element_type)
 
     # Classes that override __eq__ should define __hash__ to make
     # its instances usable in hashed collections
@@ -463,7 +476,8 @@ class StructDefinition(DataDefinition):
         :param name: Name of the Structure
         :type  fields: :class:`tuple` of (:class:`str`, :class:`DataDefinition`)
         :param fields: A tuple consisting of the field name and the field
-                       definition for all the fields inside this StructDefinition
+                       definition for all the fields inside this
+                       StructDefinition
         """
         if not name:
             raise ValueError('Struct name may not be None or empty string')
@@ -508,8 +522,8 @@ class StructDefinition(DataDefinition):
         Validation will fail if
         - the name of the input StructValue does not match the name of this
         StructDefinition.
-        - any of the fields (either required or optional) in this StructDefinition
-        are not present in the input StructValue
+        - any of the fields (either required or optional) in this
+        StructDefinition are not present in the input StructValue
         - the validation fails for any field value in the input StructValue with
         its corresponding definition in this StructDefinition
 
@@ -519,7 +533,8 @@ class StructDefinition(DataDefinition):
 
         :type  other: :class:`vmware.vapi.data.value.StructValue`
         :param other: StructValue to be validated
-        :rtype: :class:`list` of :class:`vmware.vapi.message.Message` of ``None``
+        :rtype: :class:`list` of :class:`vmware.vapi.message.Message`
+                or ``None``
         :return: a stack of messages indicating why the value is not an instance
                  of this data-definition, or None if the value is an instance of
                  this data-definition
@@ -541,8 +556,8 @@ class StructDefinition(DataDefinition):
                 return [msg]
 
         for field in self._keys:
-            if (not other.has_field(field) and
-                    self._dict.get(field).type != Type.OPTIONAL):
+            if (not other.has_field(field)
+                    and self._dict.get(field).type != Type.OPTIONAL):
                 msg = message_factory.get_message(
                     'vapi.data.structure.field.missing',
                     self.name, field)
@@ -655,8 +670,8 @@ class StructRefDefinition(DataDefinition):
 
         :type  definition: :class:`DataDefinition`
         :param definition: structure definition
-        :raise: :class:`vmware.vapi.exception.CoreException`: if the reference is
-            already resolved (already has) a target) or if the name of the
+        :raise: :class:`vmware.vapi.exception.CoreException`: if the reference
+            is already resolved (already has) a target) or if the name of the
             reference does not match the name of the definition
         """
         if not definition:
@@ -703,7 +718,8 @@ class StructRefDefinition(DataDefinition):
 
         :type  other: :class:`vmware.vapi.data.value.StructValue`
         :param other: StructValue to be validated
-        :rtype: :class:`list` of :class:`vmware.vapi.message.Message` of ``None``
+        :rtype: :class:`list` of :class:`vmware.vapi.message.Message` of
+                ``None``
         :return: a stack of messages indicating that the reference is not
                  resolved or why the value is not an instance of this
                  data-definition, or None if the value is an instance of
@@ -719,8 +735,8 @@ class StructRefDefinition(DataDefinition):
         if not isinstance(other, StructRefDefinition):
             return NotImplemented
 
-        if not (DataDefinition.__eq__(self, other) and
-                other.name == self.name):
+        if not (DataDefinition.__eq__(self, other)
+                and other.name == self.name):
             return False
 
         return True
@@ -843,8 +859,8 @@ class OptionalDefinition(DataDefinition):
         if not isinstance(other, OptionalDefinition):
             return NotImplemented
 
-        return (DataDefinition.__eq__(self, other) and
-                self.element_type == other.element_type)
+        return (DataDefinition.__eq__(self, other)
+                and self.element_type == other.element_type)
 
     # Classes that override __eq__ should define __hash__ to make
     # its instances usable in hashed collections
@@ -1079,7 +1095,8 @@ class ReferenceResolver(object):
         structure
 
         :rtype: :class:`StructDefinition`
-        :return: Definition if the structure if it is already defined, None otherwise
+        :return: Definition if the structure if it is already defined,
+                 None otherwise
         """
         if self.is_defined(name):
             return self._definitions[name]

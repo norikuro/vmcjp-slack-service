@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class Interfaces(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.node.network.interfaces'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -135,7 +138,10 @@ class NameServers(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.node.network.name_servers'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -200,7 +206,10 @@ class Routes(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.node.network.routes'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -308,10 +317,10 @@ class Routes(VapiInterface):
         protocol from which the route was learned, the route source (which is
         the preferred egress interface), the route destination, and the route
         scope. The route scope refers to the distance to the destination
-        network: The \\\\"host\\\\" scope leads to a destination address on the
-        NSX Manager, such as a loopback address; the \\\\"link\\\\" scope leads
-        to a destination on the local network; and the \\\\"global\\\\" scope
-        leads to addresses that are more than one hop away.
+        network: The \"host\" scope leads to a destination address on the NSX
+        Manager, such as a loopback address; the \"link\" scope leads to a
+        destination on the local network; and the \"global\" scope leads to
+        addresses that are more than one hop away.
 
 
         :rtype: :class:`com.vmware.nsx.model_client.NodeRoutePropertiesListResult`
@@ -333,7 +342,10 @@ class SearchDomains(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.node.network.search_domains'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -427,7 +439,8 @@ class _InterfacesStub(ApiInterfaceStub):
                 'interface_id': 'interface-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -455,7 +468,8 @@ class _InterfacesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -488,7 +502,8 @@ class _InterfacesStub(ApiInterfaceStub):
                 'interface_id': 'interface-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -554,7 +569,8 @@ class _NameServersStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -587,7 +603,8 @@ class _NameServersStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -649,7 +666,8 @@ class _RoutesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -680,7 +698,8 @@ class _RoutesStub(ApiInterfaceStub):
                 'route_id': 'route-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -711,7 +730,8 @@ class _RoutesStub(ApiInterfaceStub):
                 'route_id': 'route-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -739,7 +759,8 @@ class _RoutesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -814,7 +835,8 @@ class _SearchDomainsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -847,7 +869,8 @@ class _SearchDomainsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

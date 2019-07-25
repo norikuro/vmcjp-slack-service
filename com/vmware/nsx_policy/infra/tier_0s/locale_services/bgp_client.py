@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class Neighbors(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_policy.infra.tier_0s.locale_services.bgp.neighbors'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -275,7 +278,8 @@ class _NeighborsStub(ApiInterfaceStub):
                 'neighbor_id': 'neighbor-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -310,7 +314,8 @@ class _NeighborsStub(ApiInterfaceStub):
                 'neighbor_id': 'neighbor-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -353,7 +358,8 @@ class _NeighborsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for patch operation
@@ -390,7 +396,8 @@ class _NeighborsStub(ApiInterfaceStub):
                 'neighbor_id': 'neighbor-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -427,7 +434,8 @@ class _NeighborsStub(ApiInterfaceStub):
                 'neighbor_id': 'neighbor-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -488,5 +496,6 @@ class _NeighborsStub(ApiInterfaceStub):
 class StubFactory(StubFactoryBase):
     _attrs = {
         'Neighbors': Neighbors,
+        'neighbors': 'com.vmware.nsx_policy.infra.tier_0s.locale_services.bgp.neighbors_client.StubFactory',
     }
 

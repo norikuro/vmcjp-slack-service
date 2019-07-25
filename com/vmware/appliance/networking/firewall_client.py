@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -34,7 +34,7 @@ from vmware.vapi.lib.rest import OperationRestMetadata
 class Inbound(VapiInterface):
     """
     The ``Inbound`` class provides methods to manage inbound firewall rules.
-    This class was added in vSphere API 6.7 U1.
+    This class was added in vSphere API 6.7.1.
     """
 
     _VAPI_SERVICE_ID = 'com.vmware.appliance.networking.firewall.inbound'
@@ -51,7 +51,7 @@ class Inbound(VapiInterface):
     class Policy(Enum):
         """
         ``Inbound.Policy`` class Defines firewall rule policies. This enumeration
-        was added in vSphere API 6.7 U1.
+        was added in vSphere API 6.7.1.
 
         .. note::
             This class represents an enumerated type in the interface language
@@ -65,25 +65,25 @@ class Inbound(VapiInterface):
         IGNORE = None
         """
         Drop packet with correpsonding address. This class attribute was added in
-        vSphere API 6.7 U1.
+        vSphere API 6.7.1.
 
         """
         ACCEPT = None
         """
         Allow packet with corresponding address. This class attribute was added in
-        vSphere API 6.7 U1.
+        vSphere API 6.7.1.
 
         """
         REJECT = None
         """
         Drop packet with corresponding address sending destination is not
-        reachable. This class attribute was added in vSphere API 6.7 U1.
+        reachable. This class attribute was added in vSphere API 6.7.1.
 
         """
         RETURN = None
         """
         Apply default or port-specific rules to packet with corresponding address.
-        This class attribute was added in vSphere API 6.7 U1.
+        This class attribute was added in vSphere API 6.7.1.
 
         """
 
@@ -108,7 +108,7 @@ class Inbound(VapiInterface):
     class Rule(VapiStruct):
         """
         ``Inbound.Rule`` class Structure that defines a single address-based
-        firewall rule. This class was added in vSphere API 6.7 U1.
+        firewall rule. This class was added in vSphere API 6.7.1.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -126,25 +126,26 @@ class Inbound(VapiInterface):
                     ):
             """
             :type  address: :class:`str`
-            :param address: IPv4 or IPv6 address. This attribute was added in vSphere API 6.7
-                U1.
+            :param address: IPv4 or IPv6 address. This attribute was added in vSphere API
+                6.7.1.
             :type  prefix: :class:`long`
             :param prefix: CIDR prefix used to mask address. For example, an IPv4 prefix of 24
                 ignores the low-order 8 bits of address. This attribute was added
-                in vSphere API 6.7 U1.
+                in vSphere API 6.7.1.
             :type  policy: :class:`Inbound.Policy`
             :param policy: The allow or deny policy of this rule. This attribute was added in
-                vSphere API 6.7 U1.
+                vSphere API 6.7.1.
             :type  interface_name: :class:`str` or ``None``
             :param interface_name: The interface to which this rule applies. An empty string indicates
                 that the rule applies to all interfaces. This attribute was added
-                in vSphere API 6.7 U1.
+                in vSphere API 6.7.1.
             """
             self.address = address
             self.prefix = prefix
             self.policy = policy
             self.interface_name = interface_name
             VapiStruct.__init__(self)
+
 
     Rule._set_binding_type(type.StructType(
         'com.vmware.appliance.networking.firewall.inbound.rule', {
@@ -169,11 +170,13 @@ class Inbound(VapiInterface):
         rules, rules are processed in order of appearance, from top to bottom.
         For example, the list of rules can be as follows: 
         
-        #. "address": "10.112.0.1", "prefix": 0, "interface_name":
-           "\*","policy": "REJECT"
-        "address": "10.112.0.1", "prefix": 0, "interface_name":
-        "nic0","policy": "ACCEPT"
-        
+        +------------+--------+----------------+--------+
+        | Address    | Prefix | Interface Name | Policy |
+        +============+========+================+========+
+        | 10.112.0.1 | 0      | \*             | REJECT |
+        +------------+--------+----------------+--------+
+        | 10.112.0.1 | 0      | nic0           | ACCEPT |
+        +------------+--------+----------------+--------+
         In the above example, the first rule drops all packets originating from
         10.112.0.1 and
         the second rule accepts all packets originating from 10.112.0.1 only on
@@ -181,7 +184,7 @@ class Inbound(VapiInterface):
         desired, hence the order has to be swapped. When a connection matches a
         firewall rule, further processing for the connection stops, and the
         appliance ignores any additional firewall rules you have set. This
-        method was added in vSphere API 6.7 U1.
+        method was added in vSphere API 6.7.1.
 
         :type  rules: :class:`list` of :class:`Inbound.Rule`
         :param rules: List of address-based firewall rules.
@@ -199,7 +202,7 @@ class Inbound(VapiInterface):
         rules, rules are processed in order of appearance, from top to bottom.
         When a connection matches a firewall rule, further processing for the
         connection stops, and the appliance ignores any additional firewall
-        rules you have set. This method was added in vSphere API 6.7 U1.
+        rules you have set. This method was added in vSphere API 6.7.1.
 
 
         :rtype: :class:`list` of :class:`Inbound.Rule`

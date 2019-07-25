@@ -3,7 +3,7 @@ Json client handler
 """
 
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015-2018 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015-2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 
 import itertools
@@ -12,8 +12,8 @@ import six
 from vmware.vapi.core import ApiProvider
 from vmware.vapi.protocol.client.http_lib import HTTPMethod, HTTPRequest
 from vmware.vapi.protocol.client.msg.generic_connector import GenericConnector
-from vmware.vapi.lib.constants import (HTTP_USER_AGENT_HEADER, JSON_CONTENT_TYPE,
-    HTTP_CONTENT_TYPE_HEADER)
+from vmware.vapi.lib.constants import (HTTP_USER_AGENT_HEADER, JSON_CONTENT_TYPE,    # pylint: disable=line-too-long
+                                       HTTP_CONTENT_TYPE_HEADER)
 from vmware.vapi.lib.load import dynamic_import_list
 from vmware.vapi.lib.log import get_client_wire_logger, get_vapi_logger
 from vmware.vapi.protocol.client.msg.user_agent_util import get_user_agent
@@ -76,19 +76,21 @@ class JsonClientProvider(ApiProvider):
             'input': input_value,
             'ctx': ctx,
         }
-        response = self._do_request(VAPI_INVOKE, params)
+        response = self._do_request(VAPI_INVOKE, ctx, params)
         result = self.to_vapi.method_result(response.result)
         return result
 
     #
     ## vapi methods end
 
-    def _do_request(self, method, params=None):
+    def _do_request(self, method, ctx, params=None):
         """
         Perform json rpc request
 
         :type  method: :class:`str`
         :param method: json rpc method name
+        :type  ctx: :class:`vmware.vapi.core.ExecutionContext`
+        :param ctx: execution context object
         :type  params: :class:`dict` or None
         :param params: json rpc method params
         :rtype: :class:`vmware.vapi.data.serializer.jsonrpc.JsonRpcResponse`
@@ -101,7 +103,7 @@ class JsonClientProvider(ApiProvider):
             logger.error('Connection refused')
             raise vapi_jsonrpc_error_transport_error()
         request_headers = {HTTP_CONTENT_TYPE_HEADER: JSON_CONTENT_TYPE,
-            HTTP_USER_AGENT_HEADER: get_user_agent()}
+                           HTTP_USER_AGENT_HEADER: get_user_agent()}
         id_ = six.advance_iterator(self.counter)    # atomic increment
         id_ = str(id_)    # TODO: Bypass java barf temporary
         request = vapi_jsonrpc_request_factory(method=method,
@@ -124,6 +126,16 @@ class JsonClientProvider(ApiProvider):
             # returned to keep existing behavior.
             http_response.data.raise_for_status()
         request_logger.debug('_do_request: response %s', http_response.body)
+
+        if ctx.runtime_data is not None:
+            response_extractor = ctx.runtime_data.get('response_extractor')
+            if response_extractor is not None:
+                response_extractor.set_http_status(http_response.status)
+                response_extractor.set_http_headers(http_response.headers)
+                response_extractor.set_http_body(http_response.body)
+                response_extractor.set_http_method(HTTPMethod.POST)
+                response_extractor.set_http_url(self.http_provider._base_url)    # pylint: disable=protected-access
+
         response = deserialize_response(http_response.body)
         request.validate_response(response)
         if response.error is not None:

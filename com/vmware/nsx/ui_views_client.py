@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class Widgetconfigurations(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.ui_views.widgetconfigurations'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -276,7 +279,8 @@ class _WidgetconfigurationsStub(ApiInterfaceStub):
                 'view_id': 'view-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -309,7 +313,8 @@ class _WidgetconfigurationsStub(ApiInterfaceStub):
                 'widgetconfiguration_id': 'widgetconfiguration-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -345,7 +350,8 @@ class _WidgetconfigurationsStub(ApiInterfaceStub):
             query_parameters={
                 'container': 'container',
                 'widget_ids': 'widget_ids',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get_0 operation
@@ -379,7 +385,8 @@ class _WidgetconfigurationsStub(ApiInterfaceStub):
                 'widgetconfiguration_id': 'widgetconfiguration-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -416,7 +423,8 @@ class _WidgetconfigurationsStub(ApiInterfaceStub):
                 'widgetconfiguration_id': 'widgetconfiguration-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

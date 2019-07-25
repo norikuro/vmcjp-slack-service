@@ -5,7 +5,7 @@ Json rpc de/serializer
 """
 
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015, 2017 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015, 2017, 2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 
 import base64
@@ -203,6 +203,8 @@ class VAPIJsonEncoder(json.JSONEncoder):
         elif value.output is not None:
             return '{"%s":%s}' % ('output', self.encode(value.output))
 
+        return None
+
     def visit_execution_context(self, value):
         """
         Visit an ExecutionContext object
@@ -254,7 +256,6 @@ class JsonRpcDictToVapi(object):
 
     def __init__(self):
         """ Json rpc dict to vapi type init """
-        pass
 
     @staticmethod
     def data_value(value):
@@ -369,6 +370,8 @@ class JsonRpcDictToVapi(object):
         """
         if ctx is not None:
             return SecurityContext(ctx)
+
+        return None
 
     @staticmethod
     def app_ctx(ctx):
@@ -507,6 +510,7 @@ class JsonRpc20Error(JsonRpcError):
     INVALID_PARAMS = -32602
     INTERNAL_ERROR = -32603
     PARSE_ERROR = -32700
+    INVALID_OPERATION = -31001
 
     # TRANSPORT_ERROR is defined in xmlrpc error code
     #  http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php
@@ -514,8 +518,9 @@ class JsonRpc20Error(JsonRpcError):
     # Need this for server connection error
     TRANSPORT_ERROR = -32300
 
+    # All errors codes above have to be in error range below.
     SERVER_ERROR_RANGE_MIN = -32768
-    SERVER_ERROR_RANGE_MAX = -32000
+    SERVER_ERROR_RANGE_MAX = -31000
 
     DEFAULT_MESSAGES = {
         INVALID_REQUEST: 'Invalid Request.',
@@ -524,6 +529,8 @@ class JsonRpc20Error(JsonRpcError):
         INTERNAL_ERROR: 'Internal error.',
         PARSE_ERROR: 'Parse error.',
         TRANSPORT_ERROR: 'Transport error.',
+        INVALID_OPERATION: 'Mismatching operation identifier in HTTP header'
+                           'and payload',
     }
 
     def __init__(self, code, message=None, data=None):
@@ -544,8 +551,8 @@ class JsonRpc20Error(JsonRpcError):
                          str(type(code)))
             raise
         self.code = code
-        if message is None and (code >= self.SERVER_ERROR_RANGE_MIN or
-                                code <= self.SERVER_ERROR_RANGE_MAX):
+        if message is None and (code >= self.SERVER_ERROR_RANGE_MIN
+                                or code <= self.SERVER_ERROR_RANGE_MAX):
             message = self.DEFAULT_MESSAGES.get(code, 'Server error.')
         self.json_message = message
         error = {'code': code, 'message': message}
@@ -631,6 +638,18 @@ def vapi_jsonrpc_error_transport_error(data=None):
     return JsonRpc20Error(code=JsonRpc20Error.TRANSPORT_ERROR, data=data)
 
 
+def vapi_jsonrpc_error_invalid_operation(data=None):
+    """
+    vapi json rpc invalid context
+
+    :type  data: :class:`dict`
+    :param data: json rpc error object
+    :rtype: :class:`JsonRpcError`
+    :return: json rpc error object
+    """
+    return JsonRpc20Error(code=JsonRpc20Error.INVALID_OPERATION, data=data)
+
+
 class JsonRpc20Request(JsonRpcRequest):
     """ Json rpc 2.0 request """
 
@@ -659,8 +678,8 @@ class JsonRpc20Request(JsonRpcRequest):
                 raise vapi_jsonrpc_error_invalid_request()
         method = kwargs.get('method')
         params = kwargs.get('params')
-        if not (params is None or isinstance(params, dict) or
-                isinstance(params, list)):
+        if not (params is None or isinstance(params, dict)
+                or isinstance(params, list)):
             raise vapi_jsonrpc_error_invalid_request()
         JsonRpcRequest.__init__(self, version=version,
                                 method=method,
@@ -721,9 +740,9 @@ class JsonRpc20Request(JsonRpcRequest):
 
         # Note: response_id MUST be Null for PARSE_ERROR / INVALID_REQUEST
         # NYI: Relax this requirement?
-        if (response.error and
-            (response.error.code == JsonRpc20Error.PARSE_ERROR or
-             response.error.code == JsonRpc20Error.INVALID_REQUEST)):
+        if (response.error
+                and (response.error.code == JsonRpc20Error.PARSE_ERROR
+                     or response.error.code == JsonRpc20Error.INVALID_REQUEST)):
             id_ = None
         else:
             id_ = self.id
@@ -786,8 +805,8 @@ class JsonRpc20Response(JsonRpcResponse):
         else:
             # result is None, error MUST not be None
             result_dict['error'] = self.error.error
-            if (self.error.code == JsonRpc20Error.PARSE_ERROR or
-                    self.error.code == JsonRpc20Error.INVALID_REQUEST):
+            if (self.error.code == JsonRpc20Error.PARSE_ERROR
+                    or self.error.code == JsonRpc20Error.INVALID_REQUEST):
                 result_dict['id'] = None
         output = json.dumps(result_dict,
                             check_circular=False,

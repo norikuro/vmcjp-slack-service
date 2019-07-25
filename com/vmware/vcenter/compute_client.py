@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -113,6 +113,7 @@ class Policies(VapiInterface):
             self.description = description
             self.capability = capability
             VapiStruct.__init__(self)
+
 
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.compute.policies.summary', {

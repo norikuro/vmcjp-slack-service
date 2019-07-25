@@ -3,7 +3,7 @@ SecurityContext API Provider filter
 """
 
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2017 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2017, 2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 import abc
 import six
@@ -40,7 +40,6 @@ class SecurityContextFilter(ApiProviderFilter):
         :rtype: :class:`int`
         :return: Number of retries
         """
-        pass
 
     @abc.abstractmethod
     def get_security_context(self, on_error):
@@ -54,7 +53,6 @@ class SecurityContextFilter(ApiProviderFilter):
         :rtype: :class:`vmware.vapi.core.SecurityContext`
         :return: Security context
         """
-        pass
 
     @abc.abstractmethod
     def should_retry(self, error_value):
@@ -67,9 +65,8 @@ class SecurityContextFilter(ApiProviderFilter):
         :return: Returns True if request should be retried based on the error
             value provided else False
         """
-        pass
 
-    def invoke(self, service_id, operation_id, input_value, ctx):
+    def invoke(self, service_id, operation_id, input_value, ctx):   # pylint: disable=R1710
         """
         Invoke an API request
 
@@ -92,11 +89,17 @@ class SecurityContextFilter(ApiProviderFilter):
             # security context. In case of LegacySecurityContextFilter,
             # get_security_context() may return None if no security context is
             # set and hence needs to be handled.
-            sec_ctx = (self.get_security_context(on_error) or
-                       (ctx.security_context if ctx else None))
-            new_ctx = ExecutionContext(app_ctx, sec_ctx)
+            sec_ctx = (self.get_security_context(on_error)
+                       or (ctx.security_context if ctx else None))
+            # Reuse the exist ExecutionContext object if present
+            # ExecutionContext object may contain more fields
+            if ctx is not None:
+                ctx.application_context = app_ctx
+                ctx.security_context = sec_ctx
+            else:
+                ctx = ExecutionContext(app_ctx, sec_ctx)
             method_result = ApiProviderFilter.invoke(
-                self, service_id, operation_id, input_value, new_ctx)
+                self, service_id, operation_id, input_value, ctx)
             if (method_result.error is None
                     or not self.should_retry(method_result.error)):
                 return method_result

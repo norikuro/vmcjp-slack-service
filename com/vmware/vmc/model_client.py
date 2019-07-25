@@ -132,6 +132,7 @@ class AbstractEntity(VapiStruct):
         self.id = id
         VapiStruct.__init__(self)
 
+
 AbstractEntity._set_binding_type(type.StructType(
     'com.vmware.vmc.model.abstract_entity', {
         'updated': type.DateTimeType(),
@@ -175,6 +176,7 @@ class AccountLinkConfig(VapiStruct):
         self.delay_account_link = delay_account_link
         VapiStruct.__init__(self)
 
+
 AccountLinkConfig._set_binding_type(type.StructType(
     'com.vmware.vmc.model.account_link_config', {
         'delay_account_link': type.OptionalType(type.BooleanType()),
@@ -214,6 +216,7 @@ class AccountLinkSddcConfig(VapiStruct):
         self.customer_subnet_ids = customer_subnet_ids
         self.connected_account_id = connected_account_id
         VapiStruct.__init__(self)
+
 
 AccountLinkSddcConfig._set_binding_type(type.StructType(
     'com.vmware.vmc.model.account_link_sddc_config', {
@@ -270,6 +273,7 @@ class AddressFWSourceDestination(VapiStruct):
         self.vnic_group_id = vnic_group_id
         VapiStruct.__init__(self)
 
+
 AddressFWSourceDestination._set_binding_type(type.StructType(
     'com.vmware.vmc.model.address_FW_source_destination', {
         'exclude': type.OptionalType(type.BooleanType()),
@@ -299,15 +303,45 @@ class Agent(VapiStruct):
     the actual type used in the polymorphic context.
 
     """
+    AGENT_STATE_NOT_READY = "NOT_READY"
+    """
+
+
+    """
+    AGENT_STATE_DEPLOYING = "DEPLOYING"
+    """
+
+
+    """
+    AGENT_STATE_CUSTOMIZING = "CUSTOMIZING"
+    """
+
+
+    """
+    AGENT_STATE_READY = "READY"
+    """
+
+
+    """
+    AGENT_STATE_DELETING = "DELETING"
+    """
+
+
+    """
+    AGENT_STATE_DELETED = "DELETED"
+    """
+
+
+    """
+    AGENT_STATE_FAILED = "FAILED"
+    """
+
+
+    """
 
 
 
     _canonical_to_pep_names = {
-                            'addresses': 'addresses',
-                            'reserved_ip': 'reserved_ip',
-                            'healthy': 'healthy',
-                            'custom_properties': 'custom_properties',
-                            'last_health_status_change': 'last_health_status_change',
                             'cert_enabled': 'cert_enabled',
                             'internal_ip': 'internal_ip',
                             'hostname_verifier_enabled': 'hostname_verifier_enabled',
@@ -315,17 +349,11 @@ class Agent(VapiStruct):
                             'network_gateway': 'network_gateway',
                             'provider': 'provider',
                             'is_master': 'is_master',
-                            'network_cidr': 'network_cidr',
-                            'id': 'id',
+                            'agent_state': 'agent_state',
                             'agent_url': 'agent_url',
                             }
 
     def __init__(self,
-                 addresses=None,
-                 reserved_ip=None,
-                 healthy=None,
-                 custom_properties=None,
-                 last_health_status_change=None,
                  cert_enabled=None,
                  internal_ip=None,
                  hostname_verifier_enabled=None,
@@ -333,68 +361,63 @@ class Agent(VapiStruct):
                  network_gateway=None,
                  provider='Agent',
                  is_master=None,
-                 network_cidr=None,
-                 id=None,
+                 agent_state=None,
                  agent_url=None,
                 ):
         """
-        :type  addresses: :class:`list` of :class:`str` or ``None``
-        :param addresses: 
-        :type  reserved_ip: :class:`str` or ``None``
-        :param reserved_ip: 
-        :type  healthy: :class:`bool` or ``None``
-        :param healthy: 
-        :type  custom_properties: (:class:`dict` of :class:`str` and :class:`str`) or ``None``
-        :param custom_properties: 
-        :type  last_health_status_change: :class:`long` or ``None``
-        :param last_health_status_change: 
         :type  cert_enabled: :class:`bool` or ``None``
         :param cert_enabled: Boolean flag to indicate if the agent is using CA signed
             certificate
         :type  internal_ip: :class:`str` or ``None``
-        :param internal_ip: 
+        :param internal_ip: Internal IP address of the agent
         :type  hostname_verifier_enabled: :class:`bool` or ``None``
         :param hostname_verifier_enabled: Boolean flag to indicate if the agent is using FQDN in the
             certificate
         :type  network_netmask: :class:`str` or ``None``
-        :param network_netmask: 
+        :param network_netmask: Network netmask of the agent
         :type  network_gateway: :class:`str` or ``None``
-        :param network_gateway: 
+        :param network_gateway: Network gateway of the agent
         :type  provider: :class:`str`
-        :param provider: 
+        :param provider: The cloud provider
         :type  is_master: :class:`bool` or ``None``
-        :param is_master: Boolean flag to indicate if the agent is the master
-        :type  network_cidr: :class:`str` or ``None``
-        :param network_cidr: 
-        :type  id: :class:`str` or ``None``
-        :param id: 
+        :param is_master: Boolean flag to indicate if the agent is the master, only the
+            master Agent is accessible
+        :type  agent_state: :class:`str` or ``None``
+        :param agent_state: Possible values are: 
+            
+            * :attr:`Agent.AGENT_STATE_NOT_READY`
+            * :attr:`Agent.AGENT_STATE_DEPLOYING`
+            * :attr:`Agent.AGENT_STATE_CUSTOMIZING`
+            * :attr:`Agent.AGENT_STATE_READY`
+            * :attr:`Agent.AGENT_STATE_DELETING`
+            * :attr:`Agent.AGENT_STATE_DELETED`
+            * :attr:`Agent.AGENT_STATE_FAILED`
+            
+             Agent state
         :type  agent_url: :class:`str` or ``None``
-        :param agent_url: 
+        :param agent_url: The accessible URL of the agent service, it is resolved to public
+            IP address from the Internet and private IP address within SDDC
         """
-        self.addresses = addresses
-        self.reserved_ip = reserved_ip
-        self.healthy = healthy
-        self.custom_properties = custom_properties
-        self.last_health_status_change = last_health_status_change
         self.cert_enabled = cert_enabled
         self.internal_ip = internal_ip
         self.hostname_verifier_enabled = hostname_verifier_enabled
         self.network_netmask = network_netmask
         self.network_gateway = network_gateway
-        self.provider = provider
+        self._provider = provider
         self.is_master = is_master
-        self.network_cidr = network_cidr
-        self.id = id
+        self.agent_state = agent_state
         self.agent_url = agent_url
         VapiStruct.__init__(self)
 
+    @property
+    def provider(self):
+        """
+        Return the discriminator value
+        """
+        return self._provider
+
 Agent._set_binding_type(type.StructType(
     'com.vmware.vmc.model.agent', {
-        'addresses': type.OptionalType(type.ListType(type.StringType())),
-        'reserved_ip': type.OptionalType(type.StringType()),
-        'healthy': type.OptionalType(type.BooleanType()),
-        'custom_properties': type.OptionalType(type.MapType(type.StringType(), type.StringType())),
-        'last_health_status_change': type.OptionalType(type.IntegerType()),
         'cert_enabled': type.OptionalType(type.BooleanType()),
         'internal_ip': type.OptionalType(type.StringType()),
         'hostname_verifier_enabled': type.OptionalType(type.BooleanType()),
@@ -402,8 +425,7 @@ Agent._set_binding_type(type.StructType(
         'network_gateway': type.OptionalType(type.StringType()),
         'provider': type.StringType(),
         'is_master': type.OptionalType(type.BooleanType()),
-        'network_cidr': type.OptionalType(type.StringType()),
-        'id': type.OptionalType(type.StringType()),
+        'agent_state': type.OptionalType(type.StringType()),
         'agent_url': type.OptionalType(type.StringType()),
     },
     Agent,
@@ -424,17 +446,21 @@ class AmiInfo(VapiStruct):
 
 
     _canonical_to_pep_names = {
+                            'instance_type': 'instance_type',
                             'region': 'region',
                             'id': 'id',
                             'name': 'name',
                             }
 
     def __init__(self,
+                 instance_type=None,
                  region=None,
                  id=None,
                  name=None,
                 ):
         """
+        :type  instance_type: :class:`str` or ``None``
+        :param instance_type: instance type of the esx ami
         :type  region: :class:`str` or ``None``
         :param region: the region of the esx ami
         :type  id: :class:`str` or ``None``
@@ -442,13 +468,16 @@ class AmiInfo(VapiStruct):
         :type  name: :class:`str` or ``None``
         :param name: the name of the esx ami
         """
+        self.instance_type = instance_type
         self.region = region
         self.id = id
         self.name = name
         VapiStruct.__init__(self)
 
+
 AmiInfo._set_binding_type(type.StructType(
     'com.vmware.vmc.model.ami_info', {
+        'instance_type': type.OptionalType(type.StringType()),
         'region': type.OptionalType(type.StringType()),
         'id': type.OptionalType(type.StringType()),
         'name': type.OptionalType(type.StringType()),
@@ -572,6 +601,7 @@ class AppliancesSummary(VapiStruct):
         self.host_moid_of_active_vse = host_moid_of_active_vse
         VapiStruct.__init__(self)
 
+
 AppliancesSummary._set_binding_type(type.StructType(
     'com.vmware.vmc.model.appliances_summary', {
         'dataStoreMoidOfActiveVse': type.OptionalType(type.StringType()),
@@ -630,6 +660,7 @@ class Application(VapiStruct):
         self.service = service
         VapiStruct.__init__(self)
 
+
 Application._set_binding_type(type.StructType(
     'com.vmware.vmc.model.application', {
         'applicationId': type.OptionalType(type.ListType(type.StringType())),
@@ -663,11 +694,6 @@ class AwsAgent(VapiStruct):
     _canonical_to_pep_names = {
                             'instance_id': 'instance_id',
                             'key_pair': 'key_pair',
-                            'addresses': 'addresses',
-                            'reserved_ip': 'reserved_ip',
-                            'healthy': 'healthy',
-                            'custom_properties': 'custom_properties',
-                            'last_health_status_change': 'last_health_status_change',
                             'cert_enabled': 'cert_enabled',
                             'internal_ip': 'internal_ip',
                             'hostname_verifier_enabled': 'hostname_verifier_enabled',
@@ -675,19 +701,13 @@ class AwsAgent(VapiStruct):
                             'network_gateway': 'network_gateway',
                             'provider': 'provider',
                             'is_master': 'is_master',
-                            'network_cidr': 'network_cidr',
-                            'id': 'id',
+                            'agent_state': 'agent_state',
                             'agent_url': 'agent_url',
                             }
 
     def __init__(self,
                  instance_id=None,
                  key_pair=None,
-                 addresses=None,
-                 reserved_ip=None,
-                 healthy=None,
-                 custom_properties=None,
-                 last_health_status_change=None,
                  cert_enabled=None,
                  internal_ip=None,
                  hostname_verifier_enabled=None,
@@ -695,8 +715,7 @@ class AwsAgent(VapiStruct):
                  network_gateway=None,
                  provider='AWS',
                  is_master=None,
-                 network_cidr=None,
-                 id=None,
+                 agent_state=None,
                  agent_url=None,
                 ):
         """
@@ -704,67 +723,63 @@ class AwsAgent(VapiStruct):
         :param instance_id: 
         :type  key_pair: :class:`AwsKeyPair` or ``None``
         :param key_pair: 
-        :type  addresses: :class:`list` of :class:`str` or ``None``
-        :param addresses: 
-        :type  reserved_ip: :class:`str` or ``None``
-        :param reserved_ip: 
-        :type  healthy: :class:`bool` or ``None``
-        :param healthy: 
-        :type  custom_properties: (:class:`dict` of :class:`str` and :class:`str`) or ``None``
-        :param custom_properties: 
-        :type  last_health_status_change: :class:`long` or ``None``
-        :param last_health_status_change: 
         :type  cert_enabled: :class:`bool` or ``None``
         :param cert_enabled: Boolean flag to indicate if the agent is using CA signed
             certificate
         :type  internal_ip: :class:`str` or ``None``
-        :param internal_ip: 
+        :param internal_ip: Internal IP address of the agent
         :type  hostname_verifier_enabled: :class:`bool` or ``None``
         :param hostname_verifier_enabled: Boolean flag to indicate if the agent is using FQDN in the
             certificate
         :type  network_netmask: :class:`str` or ``None``
-        :param network_netmask: 
+        :param network_netmask: Network netmask of the agent
         :type  network_gateway: :class:`str` or ``None``
-        :param network_gateway: 
+        :param network_gateway: Network gateway of the agent
         :type  provider: :class:`str`
-        :param provider: 
+        :param provider: The cloud provider
         :type  is_master: :class:`bool` or ``None``
-        :param is_master: Boolean flag to indicate if the agent is the master
-        :type  network_cidr: :class:`str` or ``None``
-        :param network_cidr: 
-        :type  id: :class:`str` or ``None``
-        :param id: 
+        :param is_master: Boolean flag to indicate if the agent is the master, only the
+            master Agent is accessible
+        :type  agent_state: :class:`str` or ``None``
+        :param agent_state: Possible values are: 
+            
+            * :attr:`Agent.AGENT_STATE_NOT_READY`
+            * :attr:`Agent.AGENT_STATE_DEPLOYING`
+            * :attr:`Agent.AGENT_STATE_CUSTOMIZING`
+            * :attr:`Agent.AGENT_STATE_READY`
+            * :attr:`Agent.AGENT_STATE_DELETING`
+            * :attr:`Agent.AGENT_STATE_DELETED`
+            * :attr:`Agent.AGENT_STATE_FAILED`
+            
+             Agent state
         :type  agent_url: :class:`str` or ``None``
-        :param agent_url: 
+        :param agent_url: The accessible URL of the agent service, it is resolved to public
+            IP address from the Internet and private IP address within SDDC
         """
         self.instance_id = instance_id
         self.key_pair = key_pair
-        self.addresses = addresses
-        self.reserved_ip = reserved_ip
-        self.healthy = healthy
-        self.custom_properties = custom_properties
-        self.last_health_status_change = last_health_status_change
         self.cert_enabled = cert_enabled
         self.internal_ip = internal_ip
         self.hostname_verifier_enabled = hostname_verifier_enabled
         self.network_netmask = network_netmask
         self.network_gateway = network_gateway
-        self.provider = provider
+        self._provider = provider
         self.is_master = is_master
-        self.network_cidr = network_cidr
-        self.id = id
+        self.agent_state = agent_state
         self.agent_url = agent_url
         VapiStruct.__init__(self)
+
+    @property
+    def provider(self):
+        """
+        Return the discriminator value
+        """
+        return self._provider
 
 AwsAgent._set_binding_type(type.StructType(
     'com.vmware.vmc.model.aws_agent', {
         'instance_id': type.OptionalType(type.StringType()),
         'key_pair': type.OptionalType(type.ReferenceType(__name__, 'AwsKeyPair')),
-        'addresses': type.OptionalType(type.ListType(type.StringType())),
-        'reserved_ip': type.OptionalType(type.StringType()),
-        'healthy': type.OptionalType(type.BooleanType()),
-        'custom_properties': type.OptionalType(type.MapType(type.StringType(), type.StringType())),
-        'last_health_status_change': type.OptionalType(type.IntegerType()),
         'cert_enabled': type.OptionalType(type.BooleanType()),
         'internal_ip': type.OptionalType(type.StringType()),
         'hostname_verifier_enabled': type.OptionalType(type.BooleanType()),
@@ -772,8 +787,7 @@ AwsAgent._set_binding_type(type.StructType(
         'network_gateway': type.OptionalType(type.StringType()),
         'provider': type.StringType(),
         'is_master': type.OptionalType(type.BooleanType()),
-        'network_cidr': type.OptionalType(type.StringType()),
-        'id': type.OptionalType(type.StringType()),
+        'agent_state': type.OptionalType(type.StringType()),
         'agent_url': type.OptionalType(type.StringType()),
     },
     AwsAgent,
@@ -817,8 +831,15 @@ class AwsCloudProvider(VapiStruct):
         :param provider: Name of the Cloud Provider
         """
         self.regions = regions
-        self.provider = provider
+        self._provider = provider
         VapiStruct.__init__(self)
+
+    @property
+    def provider(self):
+        """
+        Return the discriminator value
+        """
+        return self._provider
 
 AwsCloudProvider._set_binding_type(type.StructType(
     'com.vmware.vmc.model.aws_cloud_provider', {
@@ -861,6 +882,7 @@ class AwsCompatibleSubnets(VapiStruct):
         self.vpc_map = vpc_map
         VapiStruct.__init__(self)
 
+
 AwsCompatibleSubnets._set_binding_type(type.StructType(
     'com.vmware.vmc.model.aws_compatible_subnets', {
         'customer_available_zones': type.OptionalType(type.ListType(type.StringType())),
@@ -880,6 +902,21 @@ class AwsCustomerConnectedAccount(VapiStruct):
         The arguments are used to initialize data attributes with the same
         names.
     """
+    STATE_ACTIVE = "ACTIVE"
+    """
+
+
+    """
+    STATE_BROKEN = "BROKEN"
+    """
+
+
+    """
+    STATE_DELETED = "DELETED"
+    """
+
+
+    """
 
 
 
@@ -893,12 +930,14 @@ class AwsCustomerConnectedAccount(VapiStruct):
                             'user_name': 'user_name',
                             'id': 'id',
                             'policy_payer_arn': 'policy_payer_arn',
-                            'account_number': 'account_number',
-                            'policy_external_id': 'policy_external_id',
                             'region_to_az_to_shadow_mapping': 'region_to_az_to_shadow_mapping',
                             'org_id': 'org_id',
                             'cf_stack_name': 'cf_stack_name',
+                            'state': 'state',
+                            'account_number': 'account_number',
                             'policy_service_arn': 'policy_service_arn',
+                            'policy_external_id': 'policy_external_id',
+                            'policy_payer_linked_arn': 'policy_payer_linked_arn',
                             }
 
     def __init__(self,
@@ -911,12 +950,14 @@ class AwsCustomerConnectedAccount(VapiStruct):
                  user_name=None,
                  id=None,
                  policy_payer_arn=None,
-                 account_number=None,
-                 policy_external_id=None,
                  region_to_az_to_shadow_mapping=None,
                  org_id=None,
                  cf_stack_name=None,
+                 state=None,
+                 account_number=None,
                  policy_service_arn=None,
+                 policy_external_id=None,
+                 policy_payer_linked_arn=None,
                 ):
         """
         :type  updated: :class:`datetime.datetime`
@@ -937,19 +978,27 @@ class AwsCustomerConnectedAccount(VapiStruct):
         :param id: Unique ID for this entity
         :type  policy_payer_arn: :class:`str` or ``None``
         :param policy_payer_arn: 
-        :type  account_number: :class:`str` or ``None``
-        :param account_number: 
-        :type  policy_external_id: :class:`str` or ``None``
-        :param policy_external_id: 
-        :type  region_to_az_to_shadow_mapping: :class:`vmware.vapi.struct.VapiStruct` or ``None``
+        :type  region_to_az_to_shadow_mapping: (:class:`dict` of :class:`str` and (:class:`dict` of :class:`str` and :class:`str`)) or ``None``
         :param region_to_az_to_shadow_mapping: Provides a map of regions to availability zones from the shadow
             account's perspective
         :type  org_id: :class:`str` or ``None``
         :param org_id: 
         :type  cf_stack_name: :class:`str` or ``None``
         :param cf_stack_name: 
+        :type  state: :class:`str` or ``None``
+        :param state: Possible values are: 
+            
+            * :attr:`AwsCustomerConnectedAccount.STATE_ACTIVE`
+            * :attr:`AwsCustomerConnectedAccount.STATE_BROKEN`
+            * :attr:`AwsCustomerConnectedAccount.STATE_DELETED`
+        :type  account_number: :class:`str` or ``None``
+        :param account_number: 
         :type  policy_service_arn: :class:`str` or ``None``
         :param policy_service_arn: 
+        :type  policy_external_id: :class:`str` or ``None``
+        :param policy_external_id: 
+        :type  policy_payer_linked_arn: :class:`str` or ``None``
+        :param policy_payer_linked_arn: 
         """
         self.updated = updated
         self.user_id = user_id
@@ -960,13 +1009,16 @@ class AwsCustomerConnectedAccount(VapiStruct):
         self.user_name = user_name
         self.id = id
         self.policy_payer_arn = policy_payer_arn
-        self.account_number = account_number
-        self.policy_external_id = policy_external_id
         self.region_to_az_to_shadow_mapping = region_to_az_to_shadow_mapping
         self.org_id = org_id
         self.cf_stack_name = cf_stack_name
+        self.state = state
+        self.account_number = account_number
         self.policy_service_arn = policy_service_arn
+        self.policy_external_id = policy_external_id
+        self.policy_payer_linked_arn = policy_payer_linked_arn
         VapiStruct.__init__(self)
+
 
 AwsCustomerConnectedAccount._set_binding_type(type.StructType(
     'com.vmware.vmc.model.aws_customer_connected_account', {
@@ -979,12 +1031,14 @@ AwsCustomerConnectedAccount._set_binding_type(type.StructType(
         'user_name': type.StringType(),
         'id': type.StringType(),
         'policy_payer_arn': type.OptionalType(type.StringType()),
-        'account_number': type.OptionalType(type.StringType()),
-        'policy_external_id': type.OptionalType(type.StringType()),
-        'region_to_az_to_shadow_mapping': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'region_to_az_to_shadow_mapping': type.OptionalType(type.MapType(type.StringType(), type.MapType(type.StringType(), type.StringType()))),
         'org_id': type.OptionalType(type.StringType()),
         'cf_stack_name': type.OptionalType(type.StringType()),
+        'state': type.OptionalType(type.StringType()),
+        'account_number': type.OptionalType(type.StringType()),
         'policy_service_arn': type.OptionalType(type.StringType()),
+        'policy_external_id': type.OptionalType(type.StringType()),
+        'policy_payer_linked_arn': type.OptionalType(type.StringType()),
     },
     AwsCustomerConnectedAccount,
     False,
@@ -1055,22 +1109,33 @@ class AwsEsxHost(VapiStruct):
         :param esx_state: Possible values are: 
             
             * :attr:`EsxHost.ESX_STATE_DEPLOYING`
+            * :attr:`EsxHost.ESX_STATE_INITIALIZING`
             * :attr:`EsxHost.ESX_STATE_PROVISIONED`
             * :attr:`EsxHost.ESX_STATE_READY`
             * :attr:`EsxHost.ESX_STATE_DELETING`
             * :attr:`EsxHost.ESX_STATE_DELETED`
             * :attr:`EsxHost.ESX_STATE_FAILED`
+            * :attr:`EsxHost.ESX_STATE_ADDING_TO_VCENTER`
+            * :attr:`EsxHost.ESX_STATE_DELETING_FROM_VCENTER`
+            * :attr:`EsxHost.ESX_STATE_PENDING_CLOUD_DELETION`
         """
         self.internal_public_ip_pool = internal_public_ip_pool
         self.name = name
         self.availability_zone = availability_zone
         self.esx_id = esx_id
         self.hostname = hostname
-        self.provider = provider
+        self._provider = provider
         self.mac_address = mac_address
         self.custom_properties = custom_properties
         self.esx_state = esx_state
         VapiStruct.__init__(self)
+
+    @property
+    def provider(self):
+        """
+        Return the discriminator value
+        """
+        return self._provider
 
 AwsEsxHost._set_binding_type(type.StructType(
     'com.vmware.vmc.model.aws_esx_host', {
@@ -1125,6 +1190,7 @@ class AwsKeyPair(VapiStruct):
         self.key_material = key_material
         VapiStruct.__init__(self)
 
+
 AwsKeyPair._set_binding_type(type.StructType(
     'com.vmware.vmc.model.aws_key_pair', {
         'key_name': type.OptionalType(type.StringType()),
@@ -1161,6 +1227,7 @@ class AwsKmsInfo(VapiStruct):
         """
         self.amazon_resource_name = amazon_resource_name
         VapiStruct.__init__(self)
+
 
 AwsKmsInfo._set_binding_type(type.StructType(
     'com.vmware.vmc.model.aws_kms_info', {
@@ -1281,12 +1348,19 @@ class AwsSddcConfig(VapiStruct):
         self.sddc_type = sddc_type
         self.vxlan_subnet = vxlan_subnet
         self.account_link_config = account_link_config
-        self.provider = provider
+        self._provider = provider
         self.skip_creating_vxlan = skip_creating_vxlan
         self.sso_domain = sso_domain
         self.sddc_template_id = sddc_template_id
         self.deployment_type = deployment_type
         VapiStruct.__init__(self)
+
+    @property
+    def provider(self):
+        """
+        Return the discriminator value
+        """
+        return self._provider
 
 AwsSddcConfig._set_binding_type(type.StructType(
     'com.vmware.vmc.model.aws_sddc_config', {
@@ -1319,6 +1393,21 @@ class AwsSddcConnection(VapiStruct):
         The arguments are used to initialize data attributes with the same
         names.
     """
+    STATE_ACTIVE = "ACTIVE"
+    """
+
+
+    """
+    STATE_BROKEN = "BROKEN"
+    """
+
+
+    """
+    STATE_DELETED = "DELETED"
+    """
+
+
+    """
 
 
 
@@ -1335,12 +1424,14 @@ class AwsSddcConnection(VapiStruct):
                             'connected_account_id': 'connected_account_id',
                             'eni_group': 'eni_group',
                             'subnet_id': 'subnet_id',
+                            'cgw_present': 'cgw_present',
                             'org_id': 'org_id',
                             'sddc_id': 'sddc_id',
                             'cidr_block_vpc': 'cidr_block_vpc',
+                            'connection_order': 'connection_order',
+                            'state': 'state',
                             'subnet_availability_zone': 'subnet_availability_zone',
                             'vpc_id': 'vpc_id',
-                            'is_cgw_present': 'is_cgw_present',
                             'customer_eni_infos': 'customer_eni_infos',
                             'default_route_table': 'default_route_table',
                             }
@@ -1358,12 +1449,14 @@ class AwsSddcConnection(VapiStruct):
                  connected_account_id=None,
                  eni_group=None,
                  subnet_id=None,
+                 cgw_present=None,
                  org_id=None,
                  sddc_id=None,
                  cidr_block_vpc=None,
+                 connection_order=None,
+                 state=None,
                  subnet_availability_zone=None,
                  vpc_id=None,
-                 is_cgw_present=None,
                  customer_eni_infos=None,
                  default_route_table=None,
                 ):
@@ -1385,29 +1478,41 @@ class AwsSddcConnection(VapiStruct):
         :type  id: :class:`str`
         :param id: Unique ID for this entity
         :type  cidr_block_subnet: :class:`str` or ``None``
-        :param cidr_block_subnet: 
+        :param cidr_block_subnet: The CIDR block of the customer's subnet this link is in.
         :type  connected_account_id: :class:`str` or ``None``
-        :param connected_account_id: 
+        :param connected_account_id: The corresponding connected (customer) account UUID this connection
+            is attached to.
         :type  eni_group: :class:`str` or ``None``
-        :param eni_group: 
+        :param eni_group: Which group the ENIs belongs to. (deprecated)
         :type  subnet_id: :class:`str` or ``None``
-        :param subnet_id: 
+        :param subnet_id: The ID of the subnet this link is to.
+        :type  cgw_present: :class:`bool` or ``None``
+        :param cgw_present: Determines whether the CGW is present in this connection set or
+            not. Used for multi-az deployments.
         :type  org_id: :class:`str` or ``None``
-        :param org_id: 
+        :param org_id: The org this link belongs to.
         :type  sddc_id: :class:`str` or ``None``
-        :param sddc_id: 
+        :param sddc_id: The SDDC this link is used for.
         :type  cidr_block_vpc: :class:`str` or ``None``
-        :param cidr_block_vpc: 
+        :param cidr_block_vpc: The CIDR block of the customer's VPC.
+        :type  connection_order: :class:`long` or ``None``
+        :param connection_order: The order of the connection
+        :type  state: :class:`str` or ``None``
+        :param state: Possible values are: 
+            
+            * :attr:`AwsSddcConnection.STATE_ACTIVE`
+            * :attr:`AwsSddcConnection.STATE_BROKEN`
+            * :attr:`AwsSddcConnection.STATE_DELETED`
+            
+             The state of the connection.
         :type  subnet_availability_zone: :class:`str` or ``None``
-        :param subnet_availability_zone: 
+        :param subnet_availability_zone: Which availability zone is this connection in?
         :type  vpc_id: :class:`str` or ``None``
-        :param vpc_id: 
-        :type  is_cgw_present: :class:`bool` or ``None``
-        :param is_cgw_present: 
-        :type  customer_eni_infos: :class:`list` of :class:`str` or ``None``
-        :param customer_eni_infos: 
+        :param vpc_id: The VPC ID of the subnet this link is to.
+        :type  customer_eni_infos: :class:`list` of :class:`CustomerEniInfo` or ``None``
+        :param customer_eni_infos: A list of all ENIs used for this connection.
         :type  default_route_table: :class:`str` or ``None``
-        :param default_route_table: 
+        :param default_route_table: The default routing table in the customer's VPC.
         """
         self.updated = updated
         self.user_id = user_id
@@ -1421,15 +1526,18 @@ class AwsSddcConnection(VapiStruct):
         self.connected_account_id = connected_account_id
         self.eni_group = eni_group
         self.subnet_id = subnet_id
+        self.cgw_present = cgw_present
         self.org_id = org_id
         self.sddc_id = sddc_id
         self.cidr_block_vpc = cidr_block_vpc
+        self.connection_order = connection_order
+        self.state = state
         self.subnet_availability_zone = subnet_availability_zone
         self.vpc_id = vpc_id
-        self.is_cgw_present = is_cgw_present
         self.customer_eni_infos = customer_eni_infos
         self.default_route_table = default_route_table
         VapiStruct.__init__(self)
+
 
 AwsSddcConnection._set_binding_type(type.StructType(
     'com.vmware.vmc.model.aws_sddc_connection', {
@@ -1445,13 +1553,15 @@ AwsSddcConnection._set_binding_type(type.StructType(
         'connected_account_id': type.OptionalType(type.StringType()),
         'eni_group': type.OptionalType(type.StringType()),
         'subnet_id': type.OptionalType(type.StringType()),
+        'cgw_present': type.OptionalType(type.BooleanType()),
         'org_id': type.OptionalType(type.StringType()),
         'sddc_id': type.OptionalType(type.StringType()),
         'cidr_block_vpc': type.OptionalType(type.StringType()),
+        'connection_order': type.OptionalType(type.IntegerType()),
+        'state': type.OptionalType(type.StringType()),
         'subnet_availability_zone': type.OptionalType(type.StringType()),
         'vpc_id': type.OptionalType(type.StringType()),
-        'is_cgw_present': type.OptionalType(type.BooleanType()),
-        'customer_eni_infos': type.OptionalType(type.ListType(type.StringType())),
+        'customer_eni_infos': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'CustomerEniInfo'))),
         'default_route_table': type.OptionalType(type.StringType()),
     },
     AwsSddcConnection,
@@ -1486,7 +1596,6 @@ class AwsSddcResourceConfig(VapiStruct):
                             'kms_vpc_endpoint': 'kms_vpc_endpoint',
                             'max_num_public_ip': 'max_num_public_ip',
                             'account_link_sddc_config': 'account_link_sddc_config',
-                            'region': 'region',
                             'vsan_encryption_config': 'vsan_encryption_config',
                             'vpc_info_peered_agent': 'vpc_info_peered_agent',
                             'mgmt_appliance_network_name': 'mgmt_appliance_network_name',
@@ -1517,10 +1626,15 @@ class AwsSddcResourceConfig(VapiStruct):
                             'vxlan_subnet': 'vxlan_subnet',
                             'cloud_user_group': 'cloud_user_group',
                             'management_rp': 'management_rp',
+                            'region': 'region',
                             'witness_availability_zone': 'witness_availability_zone',
+                            'sddc_id': 'sddc_id',
+                            'pop_agent_xeni_connection': 'pop_agent_xeni_connection',
+                            'nsx_controller_ips': 'nsx_controller_ips',
                             'esx_host_subnet': 'esx_host_subnet',
                             'sso_domain': 'sso_domain',
                             'deployment_type': 'deployment_type',
+                            'nsxt_addons': 'nsxt_addons',
                             'dns_with_management_vm_private_ip': 'dns_with_management_vm_private_ip',
                             }
 
@@ -1531,7 +1645,6 @@ class AwsSddcResourceConfig(VapiStruct):
                  kms_vpc_endpoint=None,
                  max_num_public_ip=None,
                  account_link_sddc_config=None,
-                 region=None,
                  vsan_encryption_config=None,
                  vpc_info_peered_agent=None,
                  mgmt_appliance_network_name=None,
@@ -1562,10 +1675,15 @@ class AwsSddcResourceConfig(VapiStruct):
                  vxlan_subnet=None,
                  cloud_user_group=None,
                  management_rp=None,
+                 region=None,
                  witness_availability_zone=None,
+                 sddc_id=None,
+                 pop_agent_xeni_connection=None,
+                 nsx_controller_ips=None,
                  esx_host_subnet=None,
                  sso_domain=None,
                  deployment_type=None,
+                 nsxt_addons=None,
                  dns_with_management_vm_private_ip=None,
                 ):
         """
@@ -1581,8 +1699,6 @@ class AwsSddcResourceConfig(VapiStruct):
         :param max_num_public_ip: maximum number of public IP that user can allocate.
         :type  account_link_sddc_config: :class:`list` of :class:`SddcLinkConfig` or ``None``
         :param account_link_sddc_config: 
-        :type  region: :class:`str` or ``None``
-        :param region: 
         :type  vsan_encryption_config: :class:`VsanEncryptionConfig` or ``None``
         :param vsan_encryption_config: 
         :type  vpc_info_peered_agent: :class:`VpcInfo` or ``None``
@@ -1619,13 +1735,8 @@ class AwsSddcResourceConfig(VapiStruct):
             * :attr:`SddcResourceConfig.PROVIDER_AWS`
             
              Discriminator for additional properties
-        :type  clusters: :class:`list` of :class:`vmware.vapi.struct.VapiStruct` or ``None``
+        :type  clusters: :class:`list` of :class:`Cluster` or ``None``
         :param clusters: List of clusters in the SDDC.
-            When clients pass a value of this class as a parameter, the
-            attribute must contain all the attributes defined in
-            :class:`Cluster`. When methods return a value of this class as a
-            return value, the attribute will contain all the attributes defined
-            in :class:`Cluster`.
         :type  vc_management_ip: :class:`str` or ``None``
         :param vc_management_ip: vCenter internal management IP
         :type  sddc_networks: :class:`list` of :class:`str` or ``None``
@@ -1654,9 +1765,17 @@ class AwsSddcResourceConfig(VapiStruct):
         :param cloud_user_group: Group name for vCenter SDDC administrator
         :type  management_rp: :class:`str` or ``None``
         :param management_rp: 
+        :type  region: :class:`str` or ``None``
+        :param region: region in which sddc is deployed
         :type  witness_availability_zone: :class:`str` or ``None``
         :param witness_availability_zone: Availability zone where the witness node is provisioned for a
             MultiAZ SDDC. This is null for a SingleAZ SDDC.
+        :type  sddc_id: :class:`str` or ``None``
+        :param sddc_id: sddc identifier
+        :type  pop_agent_xeni_connection: :class:`PopAgentXeniConnection` or ``None``
+        :param pop_agent_xeni_connection: 
+        :type  nsx_controller_ips: :class:`list` of :class:`str` or ``None``
+        :param nsx_controller_ips: List of Controller IPs
         :type  esx_host_subnet: :class:`str` or ``None``
         :param esx_host_subnet: ESX host subnet
         :type  sso_domain: :class:`str` or ``None``
@@ -1668,6 +1787,8 @@ class AwsSddcResourceConfig(VapiStruct):
             * :attr:`SddcResourceConfig.DEPLOYMENT_TYPE_MULTI_AZ`
             
              Denotes if this is a SingleAZ SDDC or a MultiAZ SDDC.
+        :type  nsxt_addons: :class:`NsxtAddons` or ``None``
+        :param nsxt_addons: 
         :type  dns_with_management_vm_private_ip: :class:`bool` or ``None``
         :param dns_with_management_vm_private_ip: if true, use the private IP addresses to register DNS records for
             the management VMs
@@ -1678,7 +1799,6 @@ class AwsSddcResourceConfig(VapiStruct):
         self.kms_vpc_endpoint = kms_vpc_endpoint
         self.max_num_public_ip = max_num_public_ip
         self.account_link_sddc_config = account_link_sddc_config
-        self.region = region
         self.vsan_encryption_config = vsan_encryption_config
         self.vpc_info_peered_agent = vpc_info_peered_agent
         self.mgmt_appliance_network_name = mgmt_appliance_network_name
@@ -1693,7 +1813,7 @@ class AwsSddcResourceConfig(VapiStruct):
         self.nsx_api_public_endpoint_url = nsx_api_public_endpoint_url
         self.custom_properties = custom_properties
         self.cloud_password = cloud_password
-        self.provider = provider
+        self._provider = provider
         self.clusters = clusters
         self.vc_management_ip = vc_management_ip
         self.sddc_networks = sddc_networks
@@ -1709,12 +1829,24 @@ class AwsSddcResourceConfig(VapiStruct):
         self.vxlan_subnet = vxlan_subnet
         self.cloud_user_group = cloud_user_group
         self.management_rp = management_rp
+        self.region = region
         self.witness_availability_zone = witness_availability_zone
+        self.sddc_id = sddc_id
+        self.pop_agent_xeni_connection = pop_agent_xeni_connection
+        self.nsx_controller_ips = nsx_controller_ips
         self.esx_host_subnet = esx_host_subnet
         self.sso_domain = sso_domain
         self.deployment_type = deployment_type
+        self.nsxt_addons = nsxt_addons
         self.dns_with_management_vm_private_ip = dns_with_management_vm_private_ip
         VapiStruct.__init__(self)
+
+    @property
+    def provider(self):
+        """
+        Return the discriminator value
+        """
+        return self._provider
 
 AwsSddcResourceConfig._set_binding_type(type.StructType(
     'com.vmware.vmc.model.aws_sddc_resource_config', {
@@ -1724,7 +1856,6 @@ AwsSddcResourceConfig._set_binding_type(type.StructType(
         'kms_vpc_endpoint': type.OptionalType(type.ReferenceType(__name__, 'KmsVpcEndpoint')),
         'max_num_public_ip': type.OptionalType(type.IntegerType()),
         'account_link_sddc_config': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'SddcLinkConfig'))),
-        'region': type.OptionalType(type.StringType()),
         'vsan_encryption_config': type.OptionalType(type.ReferenceType(__name__, 'VsanEncryptionConfig')),
         'vpc_info_peered_agent': type.OptionalType(type.ReferenceType(__name__, 'VpcInfo')),
         'mgmt_appliance_network_name': type.OptionalType(type.StringType()),
@@ -1740,7 +1871,7 @@ AwsSddcResourceConfig._set_binding_type(type.StructType(
         'custom_properties': type.OptionalType(type.MapType(type.StringType(), type.StringType())),
         'cloud_password': type.OptionalType(type.StringType()),
         'provider': type.StringType(),
-        'clusters': type.OptionalType(type.ListType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct, [type.ReferenceType(__name__, 'Cluster')]))),
+        'clusters': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'Cluster'))),
         'vc_management_ip': type.OptionalType(type.StringType()),
         'sddc_networks': type.OptionalType(type.ListType(type.StringType())),
         'cloud_username': type.OptionalType(type.StringType()),
@@ -1755,10 +1886,15 @@ AwsSddcResourceConfig._set_binding_type(type.StructType(
         'vxlan_subnet': type.OptionalType(type.StringType()),
         'cloud_user_group': type.OptionalType(type.StringType()),
         'management_rp': type.OptionalType(type.StringType()),
+        'region': type.OptionalType(type.StringType()),
         'witness_availability_zone': type.OptionalType(type.StringType()),
+        'sddc_id': type.OptionalType(type.StringType()),
+        'pop_agent_xeni_connection': type.OptionalType(type.ReferenceType(__name__, 'PopAgentXeniConnection')),
+        'nsx_controller_ips': type.OptionalType(type.ListType(type.StringType())),
         'esx_host_subnet': type.OptionalType(type.StringType()),
         'sso_domain': type.OptionalType(type.StringType()),
         'deployment_type': type.OptionalType(type.StringType()),
+        'nsxt_addons': type.OptionalType(type.ReferenceType(__name__, 'NsxtAddons')),
         'dns_with_management_vm_private_ip': type.OptionalType(type.BooleanType()),
     },
     AwsSddcResourceConfig,
@@ -1838,6 +1974,7 @@ class AwsSubnet(VapiStruct):
         self.name = name
         VapiStruct.__init__(self)
 
+
 AwsSubnet._set_binding_type(type.StructType(
     'com.vmware.vmc.model.aws_subnet', {
         'connected_account_id': type.OptionalType(type.StringType()),
@@ -1880,6 +2017,7 @@ class CaCertificates(VapiStruct):
         """
         self.ca_certificate = ca_certificate
         VapiStruct.__init__(self)
+
 
 CaCertificates._set_binding_type(type.StructType(
     'com.vmware.vmc.model.ca_certificates', {
@@ -1931,6 +2069,7 @@ class CbmStatistic(VapiStruct):
         self.in_ = in_
         VapiStruct.__init__(self)
 
+
 CbmStatistic._set_binding_type(type.StructType(
     'com.vmware.vmc.model.cbm_statistic', {
         'vnic': type.OptionalType(type.IntegerType()),
@@ -1973,6 +2112,7 @@ class CbmStatistics(VapiStruct):
         self.data_dto = data_dto
         self.meta_dto = meta_dto
         VapiStruct.__init__(self)
+
 
 CbmStatistics._set_binding_type(type.StructType(
     'com.vmware.vmc.model.cbm_statistics', {
@@ -2055,6 +2195,7 @@ class CbmStatsData(VapiStruct):
         self.vnic0 = vnic0
         VapiStruct.__init__(self)
 
+
 CbmStatsData._set_binding_type(type.StructType(
     'com.vmware.vmc.model.cbm_stats_data', {
         'vnic_9': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'CbmStatistic'))),
@@ -2104,8 +2245,15 @@ class CloudProvider(VapiStruct):
         :type  provider: :class:`str`
         :param provider: Name of the Cloud Provider
         """
-        self.provider = provider
+        self._provider = provider
         VapiStruct.__init__(self)
+
+    @property
+    def provider(self):
+        """
+        Return the discriminator value
+        """
+        return self._provider
 
 CloudProvider._set_binding_type(type.StructType(
     'com.vmware.vmc.model.cloud_provider', {
@@ -2124,14 +2272,6 @@ class Cluster(VapiStruct):
     .. tip::
         The arguments are used to initialize data attributes with the same
         names.
-    """
-    _TYPE_IDENTIFIER = "Cluster"
-    """
-    Identifier denoting this class, when it is used in polymorphic context. 
-
-    This value should be assigned to the attribute which is used to discriminate
-    the actual type used in the polymorphic context.
-
     """
     CLUSTER_STATE_DEPLOYING = "DEPLOYING"
     """
@@ -2159,17 +2299,19 @@ class Cluster(VapiStruct):
     _canonical_to_pep_names = {
                             'esx_host_list': 'esx_host_list',
                             'cluster_state': 'cluster_state',
-                            'cluster_name': 'cluster_name',
                             'aws_kms_info': 'aws_kms_info',
+                            'host_cpu_cores_count': 'host_cpu_cores_count',
                             'cluster_id': 'cluster_id',
+                            'cluster_name': 'cluster_name',
                             }
 
     def __init__(self,
                  esx_host_list=None,
                  cluster_state=None,
-                 cluster_name=None,
                  aws_kms_info=None,
-                 cluster_id='Cluster',
+                 host_cpu_cores_count=None,
+                 cluster_id=None,
+                 cluster_name=None,
                 ):
         """
         :type  esx_host_list: :class:`list` of :class:`AwsEsxHost` or ``None``
@@ -2181,27 +2323,33 @@ class Cluster(VapiStruct):
             * :attr:`Cluster.CLUSTER_STATE_ADDING_HOSTS`
             * :attr:`Cluster.CLUSTER_STATE_READY`
             * :attr:`Cluster.CLUSTER_STATE_FAILED`
-        :type  cluster_name: :class:`str` or ``None``
-        :param cluster_name: 
         :type  aws_kms_info: :class:`AwsKmsInfo` or ``None``
         :param aws_kms_info: AWS Key Management Service information associated with this cluster
+        :type  host_cpu_cores_count: :class:`long` or ``None``
+        :param host_cpu_cores_count: Number of cores enabled on ESX hosts added to this cluster format:
+            int32
         :type  cluster_id: :class:`str`
         :param cluster_id: 
+        :type  cluster_name: :class:`str` or ``None``
+        :param cluster_name: 
         """
         self.esx_host_list = esx_host_list
         self.cluster_state = cluster_state
-        self.cluster_name = cluster_name
         self.aws_kms_info = aws_kms_info
+        self.host_cpu_cores_count = host_cpu_cores_count
         self.cluster_id = cluster_id
+        self.cluster_name = cluster_name
         VapiStruct.__init__(self)
+
 
 Cluster._set_binding_type(type.StructType(
     'com.vmware.vmc.model.cluster', {
         'esx_host_list': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'AwsEsxHost'))),
         'cluster_state': type.OptionalType(type.StringType()),
-        'cluster_name': type.OptionalType(type.StringType()),
         'aws_kms_info': type.OptionalType(type.ReferenceType(__name__, 'AwsKmsInfo')),
+        'host_cpu_cores_count': type.OptionalType(type.IntegerType()),
         'cluster_id': type.StringType(),
+        'cluster_name': type.OptionalType(type.StringType()),
     },
     Cluster,
     False,
@@ -2245,6 +2393,7 @@ class ClusterConfig(VapiStruct):
         self.storage_capacity = storage_capacity
         self.num_hosts = num_hosts
         VapiStruct.__init__(self)
+
 
 ClusterConfig._set_binding_type(type.StructType(
     'com.vmware.vmc.model.cluster_config', {
@@ -2317,6 +2466,7 @@ class ComputeGatewayTemplate(VapiStruct):
         self.nat_rules = nat_rules
         self.l2_vpn = l2_vpn
         VapiStruct.__init__(self)
+
 
 ComputeGatewayTemplate._set_binding_type(type.StructType(
     'com.vmware.vmc.model.compute_gateway_template', {
@@ -2431,6 +2581,7 @@ class ConnectivityAgentValidation(VapiStruct):
         self.path = path
         VapiStruct.__init__(self)
 
+
 ConnectivityAgentValidation._set_binding_type(type.StructType(
     'com.vmware.vmc.model.connectivity_agent_validation', {
         'source': type.OptionalType(type.StringType()),
@@ -2494,6 +2645,7 @@ class ConnectivityValidationGroup(VapiStruct):
         self.sub_groups = sub_groups
         VapiStruct.__init__(self)
 
+
 ConnectivityValidationGroup._set_binding_type(type.StructType(
     'com.vmware.vmc.model.connectivity_validation_group', {
         'id': type.OptionalType(type.StringType()),
@@ -2530,6 +2682,7 @@ class ConnectivityValidationGroups(VapiStruct):
         """
         self.groups = groups
         VapiStruct.__init__(self)
+
 
 ConnectivityValidationGroups._set_binding_type(type.StructType(
     'com.vmware.vmc.model.connectivity_validation_groups', {
@@ -2600,6 +2753,7 @@ class ConnectivityValidationInput(VapiStruct):
         self.value = value
         self.label = label
         VapiStruct.__init__(self)
+
 
 ConnectivityValidationInput._set_binding_type(type.StructType(
     'com.vmware.vmc.model.connectivity_validation_input', {
@@ -2723,6 +2877,7 @@ class ConnectivityValidationSubGroup(VapiStruct):
         self.id = id
         VapiStruct.__init__(self)
 
+
 ConnectivityValidationSubGroup._set_binding_type(type.StructType(
     'com.vmware.vmc.model.connectivity_validation_sub_group', {
         'inputs': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'ConnectivityValidationInput'))),
@@ -2762,11 +2917,60 @@ class CrlCertificates(VapiStruct):
         self.crl_certificate = crl_certificate
         VapiStruct.__init__(self)
 
+
 CrlCertificates._set_binding_type(type.StructType(
     'com.vmware.vmc.model.crl_certificates', {
         'crlCertificate': type.OptionalType(type.ListType(type.StringType())),
     },
     CrlCertificates,
+    False,
+    None))
+
+
+
+class CustomerEniInfo(VapiStruct):
+    """
+    Indicates a single cross-account ENI and its characteristics.
+
+    .. tip::
+        The arguments are used to initialize data attributes with the same
+        names.
+    """
+
+
+
+    _canonical_to_pep_names = {
+                            'secondary_ip_addresses': 'secondary_ip_addresses',
+                            'eni_id': 'eni_id',
+                            'primary_ip_address': 'primary_ip_address',
+                            }
+
+    def __init__(self,
+                 secondary_ip_addresses=None,
+                 eni_id=None,
+                 primary_ip_address=None,
+                ):
+        """
+        :type  secondary_ip_addresses: :class:`list` of :class:`str` or ``None``
+        :param secondary_ip_addresses: Indicates list of secondary IP created for this ENI.
+        :type  eni_id: :class:`str` or ``None``
+        :param eni_id: Interface ID on customer account.
+        :type  primary_ip_address: :class:`str` or ``None``
+        :param primary_ip_address: Indicates primary address of the ENI.
+        """
+        self.secondary_ip_addresses = secondary_ip_addresses
+        self.eni_id = eni_id
+        self.primary_ip_address = primary_ip_address
+        VapiStruct.__init__(self)
+
+
+CustomerEniInfo._set_binding_type(type.StructType(
+    'com.vmware.vmc.model.customer_eni_info', {
+        'secondary_ip_addresses': type.OptionalType(type.ListType(type.StringType())),
+        'eni_id': type.OptionalType(type.StringType()),
+        'primary_ip_address': type.OptionalType(type.StringType()),
+    },
+    CustomerEniInfo,
     False,
     None))
 
@@ -2817,6 +3021,7 @@ class DashboardData(VapiStruct):
         self.ipsec = ipsec
         VapiStruct.__init__(self)
 
+
 DashboardData._set_binding_type(type.StructType(
     'com.vmware.vmc.model.dashboard_data', {
         'firewall': type.OptionalType(type.ReferenceType(__name__, 'FirewallDashboardStats')),
@@ -2861,6 +3066,7 @@ class DashboardStat(VapiStruct):
         self.value = value
         VapiStruct.__init__(self)
 
+
 DashboardStat._set_binding_type(type.StructType(
     'com.vmware.vmc.model.dashboard_stat', {
         'timestamp': type.OptionalType(type.IntegerType()),
@@ -2901,6 +3107,7 @@ class DashboardStatistics(VapiStruct):
         self.data_dto = data_dto
         self.meta_dto = meta_dto
         VapiStruct.__init__(self)
+
 
 DashboardStatistics._set_binding_type(type.StructType(
     'com.vmware.vmc.model.dashboard_statistics', {
@@ -2943,6 +3150,7 @@ class DataPageEdgeSummary(VapiStruct):
         self.data = data
         VapiStruct.__init__(self)
 
+
 DataPageEdgeSummary._set_binding_type(type.StructType(
     'com.vmware.vmc.model.data_page_edge_summary', {
         'pagingInfo': type.OptionalType(type.ReferenceType(__name__, 'PagingInfo')),
@@ -2983,6 +3191,7 @@ class DataPageSddcNetwork(VapiStruct):
         self.paging_info = paging_info
         self.data = data
         VapiStruct.__init__(self)
+
 
 DataPageSddcNetwork._set_binding_type(type.StructType(
     'com.vmware.vmc.model.data_page_sddc_network', {
@@ -3025,6 +3234,7 @@ class DataPermissions(VapiStruct):
         self.publish_permission = publish_permission
         VapiStruct.__init__(self)
 
+
 DataPermissions._set_binding_type(type.StructType(
     'com.vmware.vmc.model.data_permissions', {
         'savePermission': type.OptionalType(type.BooleanType()),
@@ -3060,6 +3270,7 @@ class DhcpLeaseInfo(VapiStruct):
         """
         self.host_lease_info_dtos = host_lease_info_dtos
         VapiStruct.__init__(self)
+
 
 DhcpLeaseInfo._set_binding_type(type.StructType(
     'com.vmware.vmc.model.dhcp_lease_info', {
@@ -3100,6 +3311,7 @@ class DhcpLeases(VapiStruct):
         self.time_stamp = time_stamp
         self.host_lease_infos_dto = host_lease_infos_dto
         VapiStruct.__init__(self)
+
 
 DhcpLeases._set_binding_type(type.StructType(
     'com.vmware.vmc.model.dhcp_leases', {
@@ -3184,6 +3396,7 @@ class DnsConfig(VapiStruct):
         self.dns_servers = dns_servers
         VapiStruct.__init__(self)
 
+
 DnsConfig._set_binding_type(type.StructType(
     'com.vmware.vmc.model.dns_config', {
         'featureType': type.OptionalType(type.StringType()),
@@ -3226,6 +3439,7 @@ class DnsForwarders(VapiStruct):
         """
         self.ip_address = ip_address
         VapiStruct.__init__(self)
+
 
 DnsForwarders._set_binding_type(type.StructType(
     'com.vmware.vmc.model.dns_forwarders', {
@@ -3271,6 +3485,7 @@ class DnsListeners(VapiStruct):
         self.vnic = vnic
         self.type = type
         VapiStruct.__init__(self)
+
 
 DnsListeners._set_binding_type(type.StructType(
     'com.vmware.vmc.model.dns_listeners', {
@@ -3339,6 +3554,7 @@ class DnsResponseStats(VapiStruct):
         self.others = others
         VapiStruct.__init__(self)
 
+
 DnsResponseStats._set_binding_type(type.StructType(
     'com.vmware.vmc.model.dns_response_stats', {
         'total': type.OptionalType(type.IntegerType()),
@@ -3394,6 +3610,7 @@ class DnsStatusAndStats(VapiStruct):
         self.responses = responses
         self.cached_dbrr_set = cached_dbrr_set
         VapiStruct.__init__(self)
+
 
 DnsStatusAndStats._set_binding_type(type.StructType(
     'com.vmware.vmc.model.dns_status_and_stats', {
@@ -3459,6 +3676,7 @@ class DnsView(VapiStruct):
         self.enabled = enabled
         VapiStruct.__init__(self)
 
+
 DnsView._set_binding_type(type.StructType(
     'com.vmware.vmc.model.dns_view', {
         'name': type.StringType(),
@@ -3509,6 +3727,7 @@ class DnsViewMatch(VapiStruct):
         self.ip_address = ip_address
         VapiStruct.__init__(self)
 
+
 DnsViewMatch._set_binding_type(type.StructType(
     'com.vmware.vmc.model.dns_view_match', {
         'vnic': type.OptionalType(type.ListType(type.StringType())),
@@ -3546,11 +3765,48 @@ class DnsViews(VapiStruct):
         self.dns_view = dns_view
         VapiStruct.__init__(self)
 
+
 DnsViews._set_binding_type(type.StructType(
     'com.vmware.vmc.model.dns_views', {
         'dnsView': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'DnsView'))),
     },
     DnsViews,
+    False,
+    None))
+
+
+
+class EbsBackedVsanConfig(VapiStruct):
+    """
+    information for EBS-backed VSAN configuration
+
+    .. tip::
+        The arguments are used to initialize data attributes with the same
+        names.
+    """
+
+
+
+    _canonical_to_pep_names = {
+                            'instance_type': 'instance_type',
+                            }
+
+    def __init__(self,
+                 instance_type=None,
+                ):
+        """
+        :type  instance_type: :class:`str` or ``None``
+        :param instance_type: instance type for EBS-backed VSAN configuration
+        """
+        self.instance_type = instance_type
+        VapiStruct.__init__(self)
+
+
+EbsBackedVsanConfig._set_binding_type(type.StructType(
+    'com.vmware.vmc.model.ebs_backed_vsan_config', {
+        'instance_type': type.OptionalType(type.StringType()),
+    },
+    EbsBackedVsanConfig,
     False,
     None))
 
@@ -3621,6 +3877,7 @@ class EdgeJob(VapiStruct):
         self.message = message
         self.end_time = end_time
         VapiStruct.__init__(self)
+
 
 EdgeJob._set_binding_type(type.StructType(
     'com.vmware.vmc.model.edge_job', {
@@ -3723,6 +3980,7 @@ class EdgeStatus(VapiStruct):
         self.ha_vnic_in_use = ha_vnic_in_use
         self.edge_status = edge_status
         VapiStruct.__init__(self)
+
 
 EdgeStatus._set_binding_type(type.StructType(
     'com.vmware.vmc.model.edge_status', {
@@ -3943,6 +4201,7 @@ class EdgeSummary(VapiStruct):
         self.number_of_connected_vnics = number_of_connected_vnics
         VapiStruct.__init__(self)
 
+
 EdgeSummary._set_binding_type(type.StructType(
     'com.vmware.vmc.model.edge_summary', {
         'featureCapabilities': type.OptionalType(type.ReferenceType(__name__, 'FeatureCapabilities')),
@@ -4040,6 +4299,7 @@ class EdgeVmStatus(VapiStruct):
         self.pre_rules_generation_number = pre_rules_generation_number
         VapiStruct.__init__(self)
 
+
 EdgeVmStatus._set_binding_type(type.StructType(
     'com.vmware.vmc.model.edge_vm_status', {
         'index': type.OptionalType(type.IntegerType()),
@@ -4097,6 +4357,7 @@ class EdgeVnicAddressGroup(VapiStruct):
         self.subnet_mask = subnet_mask
         VapiStruct.__init__(self)
 
+
 EdgeVnicAddressGroup._set_binding_type(type.StructType(
     'com.vmware.vmc.model.edge_vnic_address_group', {
         'subnetPrefixLength': type.OptionalType(type.StringType()),
@@ -4136,11 +4397,72 @@ class EdgeVnicAddressGroups(VapiStruct):
         self.address_groups = address_groups
         VapiStruct.__init__(self)
 
+
 EdgeVnicAddressGroups._set_binding_type(type.StructType(
     'com.vmware.vmc.model.edge_vnic_address_groups', {
         'addressGroups': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'EdgeVnicAddressGroup'))),
     },
     EdgeVnicAddressGroups,
+    False,
+    None))
+
+
+
+class EniInfo(VapiStruct):
+    """
+    Information of the x-eni created.
+
+    .. tip::
+        The arguments are used to initialize data attributes with the same
+        names.
+    """
+
+
+
+    _canonical_to_pep_names = {
+                            'subnet_id': 'subnet_id',
+                            'id': 'id',
+                            'security_group_id': 'security_group_id',
+                            'private_ip': 'private_ip',
+                            'mac_address': 'mac_address',
+                            }
+
+    def __init__(self,
+                 subnet_id=None,
+                 id=None,
+                 security_group_id=None,
+                 private_ip=None,
+                 mac_address=None,
+                ):
+        """
+        :type  subnet_id: :class:`str` or ``None``
+        :param subnet_id: Subnet it belongs to.
+        :type  id: :class:`str` or ``None``
+        :param id: Interface ID.
+        :type  security_group_id: :class:`str` or ``None``
+        :param security_group_id: Security Group of Eni.
+        :type  private_ip: :class:`str` or ``None``
+        :param private_ip: Private ip of eni.
+        :type  mac_address: :class:`str` or ``None``
+        :param mac_address: Mac address of nic.
+        """
+        self.subnet_id = subnet_id
+        self.id = id
+        self.security_group_id = security_group_id
+        self.private_ip = private_ip
+        self.mac_address = mac_address
+        VapiStruct.__init__(self)
+
+
+EniInfo._set_binding_type(type.StructType(
+    'com.vmware.vmc.model.eni_info', {
+        'subnet_id': type.OptionalType(type.StringType()),
+        'id': type.OptionalType(type.StringType()),
+        'security_group_id': type.OptionalType(type.StringType()),
+        'private_ip': type.OptionalType(type.StringType()),
+        'mac_address': type.OptionalType(type.StringType()),
+    },
+    EniInfo,
     False,
     None))
 
@@ -4190,6 +4512,7 @@ class ErrorResponse(VapiStruct):
         self.error_code = error_code
         self.error_messages = error_messages
         VapiStruct.__init__(self)
+
 
 ErrorResponse._set_binding_type(type.StructType(
     'com.vmware.vmc.model.error_response', {
@@ -4247,6 +4570,7 @@ class EsxConfig(VapiStruct):
         self.num_hosts = num_hosts
         VapiStruct.__init__(self)
 
+
 EsxConfig._set_binding_type(type.StructType(
     'com.vmware.vmc.model.esx_config', {
         'availability_zone': type.OptionalType(type.StringType()),
@@ -4281,6 +4605,11 @@ class EsxHost(VapiStruct):
 
 
     """
+    ESX_STATE_INITIALIZING = "INITIALIZING"
+    """
+
+
+    """
     ESX_STATE_PROVISIONED = "PROVISIONED"
     """
 
@@ -4302,6 +4631,21 @@ class EsxHost(VapiStruct):
 
     """
     ESX_STATE_FAILED = "FAILED"
+    """
+
+
+    """
+    ESX_STATE_ADDING_TO_VCENTER = "ADDING_TO_VCENTER"
+    """
+
+
+    """
+    ESX_STATE_DELETING_FROM_VCENTER = "DELETING_FROM_VCENTER"
+    """
+
+
+    """
+    ESX_STATE_PENDING_CLOUD_DELETION = "PENDING_CLOUD_DELETION"
     """
 
 
@@ -4349,21 +4693,32 @@ class EsxHost(VapiStruct):
         :param esx_state: Possible values are: 
             
             * :attr:`EsxHost.ESX_STATE_DEPLOYING`
+            * :attr:`EsxHost.ESX_STATE_INITIALIZING`
             * :attr:`EsxHost.ESX_STATE_PROVISIONED`
             * :attr:`EsxHost.ESX_STATE_READY`
             * :attr:`EsxHost.ESX_STATE_DELETING`
             * :attr:`EsxHost.ESX_STATE_DELETED`
             * :attr:`EsxHost.ESX_STATE_FAILED`
+            * :attr:`EsxHost.ESX_STATE_ADDING_TO_VCENTER`
+            * :attr:`EsxHost.ESX_STATE_DELETING_FROM_VCENTER`
+            * :attr:`EsxHost.ESX_STATE_PENDING_CLOUD_DELETION`
         """
         self.name = name
         self.availability_zone = availability_zone
         self.esx_id = esx_id
         self.hostname = hostname
-        self.provider = provider
+        self._provider = provider
         self.mac_address = mac_address
         self.custom_properties = custom_properties
         self.esx_state = esx_state
         VapiStruct.__init__(self)
+
+    @property
+    def provider(self):
+        """
+        Return the discriminator value
+        """
+        return self._provider
 
 EsxHost._set_binding_type(type.StructType(
     'com.vmware.vmc.model.esx_host', {
@@ -4412,6 +4767,7 @@ class ExtendedAttribute(VapiStruct):
         self.value = value
         VapiStruct.__init__(self)
 
+
 ExtendedAttribute._set_binding_type(type.StructType(
     'com.vmware.vmc.model.extended_attribute', {
         'name': type.OptionalType(type.StringType()),
@@ -4454,6 +4810,7 @@ class FeatureCapabilities(VapiStruct):
         self.timestamp = timestamp
         self.feature_capabilities = feature_capabilities
         VapiStruct.__init__(self)
+
 
 FeatureCapabilities._set_binding_type(type.StructType(
     'com.vmware.vmc.model.feature_capabilities', {
@@ -4506,6 +4863,7 @@ class FeatureCapability(VapiStruct):
         self.service = service
         self.permission = permission
         VapiStruct.__init__(self)
+
 
 FeatureCapability._set_binding_type(type.StructType(
     'com.vmware.vmc.model.feature_capability', {
@@ -4564,6 +4922,7 @@ class FeatureStatus(VapiStruct):
         self.publish_status = publish_status
         self.service = service
         VapiStruct.__init__(self)
+
 
 FeatureStatus._set_binding_type(type.StructType(
     'com.vmware.vmc.model.feature_status', {
@@ -4641,6 +5000,7 @@ class FirewallConfig(VapiStruct):
         self.default_policy = default_policy
         VapiStruct.__init__(self)
 
+
 FirewallConfig._set_binding_type(type.StructType(
     'com.vmware.vmc.model.firewall_config', {
         'firewallRules': type.OptionalType(type.ReferenceType(__name__, 'FirewallRules')),
@@ -4682,6 +5042,7 @@ class FirewallDashboardStats(VapiStruct):
         self.connections = connections
         VapiStruct.__init__(self)
 
+
 FirewallDashboardStats._set_binding_type(type.StructType(
     'com.vmware.vmc.model.firewall_dashboard_stats', {
         'connections': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'DashboardStat'))),
@@ -4721,6 +5082,7 @@ class FirewallDefaultPolicy(VapiStruct):
         self.action = action
         self.logging_enabled = logging_enabled
         VapiStruct.__init__(self)
+
 
 FirewallDefaultPolicy._set_binding_type(type.StructType(
     'com.vmware.vmc.model.firewall_default_policy', {
@@ -4829,6 +5191,7 @@ class FirewallGlobalConfig(VapiStruct):
         self.tcp_timeout_established = tcp_timeout_established
         self.log_invalid_traffic = log_invalid_traffic
         VapiStruct.__init__(self)
+
 
 FirewallGlobalConfig._set_binding_type(type.StructType(
     'com.vmware.vmc.model.firewall_global_config', {
@@ -4966,6 +5329,7 @@ class FirewallRule(VapiStruct):
         self.revision = revision
         VapiStruct.__init__(self)
 
+
 FirewallRule._set_binding_type(type.StructType(
     'com.vmware.vmc.model.firewall_rule', {
         'rule_type': type.OptionalType(type.StringType()),
@@ -5096,6 +5460,7 @@ class FirewallRuleScope(VapiStruct):
         self.vnic_group_ids = vnic_group_ids
         VapiStruct.__init__(self)
 
+
 FirewallRuleScope._set_binding_type(type.StructType(
     'com.vmware.vmc.model.firewall_rule_scope', {
         'grouping_object_ids': type.OptionalType(type.ListType(type.StringType())),
@@ -5147,6 +5512,7 @@ class FirewallRuleStats(VapiStruct):
         self.packet_count = packet_count
         VapiStruct.__init__(self)
 
+
 FirewallRuleStats._set_binding_type(type.StructType(
     'com.vmware.vmc.model.firewall_rule_stats', {
         'timestamp': type.OptionalType(type.IntegerType()),
@@ -5184,6 +5550,7 @@ class FirewallRules(VapiStruct):
         """
         self.firewall_rules = firewall_rules
         VapiStruct.__init__(self)
+
 
 FirewallRules._set_binding_type(type.StructType(
     'com.vmware.vmc.model.firewall_rules', {
@@ -5225,6 +5592,7 @@ class FirewallService(VapiStruct):
         self.protocol = protocol
         self.ports = ports
         VapiStruct.__init__(self)
+
 
 FirewallService._set_binding_type(type.StructType(
     'com.vmware.vmc.model.firewall_service', {
@@ -5282,6 +5650,7 @@ class GatewayTemplate(VapiStruct):
         self.vpns = vpns
         VapiStruct.__init__(self)
 
+
 GatewayTemplate._set_binding_type(type.StructType(
     'com.vmware.vmc.model.gateway_template', {
         'public_ip': type.OptionalType(type.ReferenceType(__name__, 'SddcPublicIp')),
@@ -5325,6 +5694,7 @@ class GlcmBundle(VapiStruct):
         self.s3_bucket = s3_bucket
         self.id = id
         VapiStruct.__init__(self)
+
 
 GlcmBundle._set_binding_type(type.StructType(
     'com.vmware.vmc.model.glcm_bundle', {
@@ -5423,6 +5793,7 @@ class HostLeaseInfo(VapiStruct):
         self.tstp = tstp
         VapiStruct.__init__(self)
 
+
 HostLeaseInfo._set_binding_type(type.StructType(
     'com.vmware.vmc.model.host_lease_info', {
         'macAddress': type.OptionalType(type.StringType()),
@@ -5474,6 +5845,7 @@ class InteractionPermissions(VapiStruct):
         self.manage_permission = manage_permission
         self.view_permission = view_permission
         VapiStruct.__init__(self)
+
 
 InteractionPermissions._set_binding_type(type.StructType(
     'com.vmware.vmc.model.interaction_permissions', {
@@ -5706,6 +6078,7 @@ class InterfacesDashboardStats(VapiStruct):
         self.vnic6_in_pkt = vnic6_in_pkt
         VapiStruct.__init__(self)
 
+
 InterfacesDashboardStats._set_binding_type(type.StructType(
     'com.vmware.vmc.model.interfaces_dashboard_stats', {
         'vnic_7_in_pkt': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'DashboardStat'))),
@@ -5779,6 +6152,7 @@ class IpAddresses(VapiStruct):
         """
         self.ip_address = ip_address
         VapiStruct.__init__(self)
+
 
 IpAddresses._set_binding_type(type.StructType(
     'com.vmware.vmc.model.ip_addresses', {
@@ -5858,6 +6232,7 @@ class Ipsec(VapiStruct):
         self.template = template
         VapiStruct.__init__(self)
 
+
 Ipsec._set_binding_type(type.StructType(
     'com.vmware.vmc.model.ipsec', {
         'featureType': type.OptionalType(type.StringType()),
@@ -5909,6 +6284,7 @@ class IpsecDashboardStats(VapiStruct):
         self.ipsec_bytes_in = ipsec_bytes_in
         self.ipsec_tunnels = ipsec_tunnels
         VapiStruct.__init__(self)
+
 
 IpsecDashboardStats._set_binding_type(type.StructType(
     'com.vmware.vmc.model.ipsec_dashboard_stats', {
@@ -5969,6 +6345,7 @@ class IpsecGlobalConfig(VapiStruct):
         self.crl_certificates = crl_certificates
         self.extension = extension
         VapiStruct.__init__(self)
+
 
 IpsecGlobalConfig._set_binding_type(type.StructType(
     'com.vmware.vmc.model.ipsec_global_config', {
@@ -6104,6 +6481,7 @@ class IpsecSite(VapiStruct):
         self.local_subnets = local_subnets
         VapiStruct.__init__(self)
 
+
 IpsecSite._set_binding_type(type.StructType(
     'com.vmware.vmc.model.ipsec_site', {
         'psk': type.OptionalType(type.StringType()),
@@ -6191,6 +6569,7 @@ class IpsecSiteIKEStatus(VapiStruct):
         self.local_subnets = local_subnets
         VapiStruct.__init__(self)
 
+
 IpsecSiteIKEStatus._set_binding_type(type.StructType(
     'com.vmware.vmc.model.ipsec_site_IKE_status', {
         'channelStatus': type.OptionalType(type.StringType()),
@@ -6253,6 +6632,7 @@ class IpsecSiteStats(VapiStruct):
         self.tx_bytes_from_site = tx_bytes_from_site
         VapiStruct.__init__(self)
 
+
 IpsecSiteStats._set_binding_type(type.StructType(
     'com.vmware.vmc.model.ipsec_site_stats', {
         'rxBytesOnSite': type.OptionalType(type.IntegerType()),
@@ -6291,6 +6671,7 @@ class IpsecSites(VapiStruct):
         """
         self.sites = sites
         VapiStruct.__init__(self)
+
 
 IpsecSites._set_binding_type(type.StructType(
     'com.vmware.vmc.model.ipsec_sites', {
@@ -6336,6 +6717,7 @@ class IpsecStatusAndStats(VapiStruct):
         self.server_status = server_status
         self.site_statistics = site_statistics
         VapiStruct.__init__(self)
+
 
 IpsecStatusAndStats._set_binding_type(type.StructType(
     'com.vmware.vmc.model.ipsec_status_and_stats', {
@@ -6429,6 +6811,7 @@ class IpsecTunnelStats(VapiStruct):
         self.local_subnet = local_subnet
         VapiStruct.__init__(self)
 
+
 IpsecTunnelStats._set_binding_type(type.StructType(
     'com.vmware.vmc.model.ipsec_tunnel_stats', {
         'tunnelStatus': type.OptionalType(type.StringType()),
@@ -6481,6 +6864,7 @@ class KeyValueAttributes(VapiStruct):
         self.key = key
         VapiStruct.__init__(self)
 
+
 KeyValueAttributes._set_binding_type(type.StructType(
     'com.vmware.vmc.model.key_value_attributes', {
         'value': type.OptionalType(type.StringType()),
@@ -6523,6 +6907,7 @@ class KmsVpcEndpoint(VapiStruct):
         self.network_interface_ids = network_interface_ids
         VapiStruct.__init__(self)
 
+
 KmsVpcEndpoint._set_binding_type(type.StructType(
     'com.vmware.vmc.model.kms_vpc_endpoint', {
         'vpc_endpoint_id': type.OptionalType(type.StringType()),
@@ -6559,6 +6944,7 @@ class L2Extension(VapiStruct):
         """
         self.tunnel_id = tunnel_id
         VapiStruct.__init__(self)
+
 
 L2Extension._set_binding_type(type.StructType(
     'com.vmware.vmc.model.l2_extension', {
@@ -6605,6 +6991,7 @@ class L2Vpn(VapiStruct):
         self.sites = sites
         self.listener_ip = listener_ip
         VapiStruct.__init__(self)
+
 
 L2Vpn._set_binding_type(type.StructType(
     'com.vmware.vmc.model.l2_vpn', {
@@ -6688,6 +7075,7 @@ class L2vpnStats(VapiStruct):
         self.last_updated_time = last_updated_time
         VapiStruct.__init__(self)
 
+
 L2vpnStats._set_binding_type(type.StructType(
     'com.vmware.vmc.model.l2vpn_stats', {
         'tunnelStatus': type.OptionalType(type.StringType()),
@@ -6742,6 +7130,7 @@ class L2vpnStatusAndStats(VapiStruct):
         self.site_stats = site_stats
         VapiStruct.__init__(self)
 
+
 L2vpnStatusAndStats._set_binding_type(type.StructType(
     'com.vmware.vmc.model.l2vpn_status_and_stats', {
         'timeStamp': type.OptionalType(type.IntegerType()),
@@ -6788,6 +7177,7 @@ class LicenceAclPermissions(VapiStruct):
         self.is_licensed = is_licensed
         self.access_permission = access_permission
         VapiStruct.__init__(self)
+
 
 LicenceAclPermissions._set_binding_type(type.StructType(
     'com.vmware.vmc.model.licence_acl_permissions', {
@@ -6841,6 +7231,7 @@ class LoadBalancerDashboardStats(VapiStruct):
         self.lb_sessions = lb_sessions
         VapiStruct.__init__(self)
 
+
 LoadBalancerDashboardStats._set_binding_type(type.StructType(
     'com.vmware.vmc.model.load_balancer_dashboard_stats', {
         'lbBpsIn': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'DashboardStat'))),
@@ -6884,6 +7275,7 @@ class Logging(VapiStruct):
         self.log_level = log_level
         self.enable = enable
         VapiStruct.__init__(self)
+
 
 Logging._set_binding_type(type.StructType(
     'com.vmware.vmc.model.logging', {
@@ -6976,6 +7368,7 @@ class LogicalNetwork(VapiStruct):
         self.network_type = network_type
         VapiStruct.__init__(self)
 
+
 LogicalNetwork._set_binding_type(type.StructType(
     'com.vmware.vmc.model.logical_network', {
         'subnet_cidr': type.OptionalType(type.StringType()),
@@ -7023,6 +7416,7 @@ class LogicalRouterScope(VapiStruct):
         self.id = id
         VapiStruct.__init__(self)
 
+
 LogicalRouterScope._set_binding_type(type.StructType(
     'com.vmware.vmc.model.logical_router_scope', {
         'type': type.OptionalType(type.StringType()),
@@ -7058,6 +7452,7 @@ class LogicalRouterScopes(VapiStruct):
         """
         self.logical_router_scope = logical_router_scope
         VapiStruct.__init__(self)
+
 
 LogicalRouterScopes._set_binding_type(type.StructType(
     'com.vmware.vmc.model.logical_router_scopes', {
@@ -7098,6 +7493,7 @@ class MacAddress(VapiStruct):
         self.edge_vm_ha_index = edge_vm_ha_index
         self.value = value
         VapiStruct.__init__(self)
+
 
 MacAddress._set_binding_type(type.StructType(
     'com.vmware.vmc.model.mac_address', {
@@ -7183,6 +7579,7 @@ class MaintenanceWindow(VapiStruct):
         self.hour_of_day = hour_of_day
         VapiStruct.__init__(self)
 
+
 MaintenanceWindow._set_binding_type(type.StructType(
     'com.vmware.vmc.model.maintenance_window', {
         'day_of_week': type.OptionalType(type.StringType()),
@@ -7238,6 +7635,7 @@ class MaintenanceWindowEntry(VapiStruct):
         self.in_maintenance_mode = in_maintenance_mode
         self.sddc_id = sddc_id
         VapiStruct.__init__(self)
+
 
 MaintenanceWindowEntry._set_binding_type(type.StructType(
     'com.vmware.vmc.model.maintenance_window_entry', {
@@ -7336,6 +7734,7 @@ class MaintenanceWindowGet(VapiStruct):
         self.version = version
         VapiStruct.__init__(self)
 
+
 MaintenanceWindowGet._set_binding_type(type.StructType(
     'com.vmware.vmc.model.maintenance_window_get', {
         'day_of_week': type.OptionalType(type.StringType()),
@@ -7399,6 +7798,7 @@ class ManagementGatewayTemplate(VapiStruct):
         self.subnet_cidr = subnet_cidr
         VapiStruct.__init__(self)
 
+
 ManagementGatewayTemplate._set_binding_type(type.StructType(
     'com.vmware.vmc.model.management_gateway_template', {
         'public_ip': type.OptionalType(type.ReferenceType(__name__, 'SddcPublicIp')),
@@ -7448,6 +7848,7 @@ class MapZonesRequest(VapiStruct):
         self.org_id = org_id
         self.petronas_regions_to_map = petronas_regions_to_map
         VapiStruct.__init__(self)
+
 
 MapZonesRequest._set_binding_type(type.StructType(
     'com.vmware.vmc.model.map_zones_request', {
@@ -7501,6 +7902,7 @@ class MetaDashboardStats(VapiStruct):
         self.interval = interval
         VapiStruct.__init__(self)
 
+
 MetaDashboardStats._set_binding_type(type.StructType(
     'com.vmware.vmc.model.meta_dashboard_stats', {
         'vnics': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'Vnic'))),
@@ -7543,6 +7945,7 @@ class Metadata(VapiStruct):
         self.timestamp = timestamp
         self.cycle_id = cycle_id
         VapiStruct.__init__(self)
+
 
 Metadata._set_binding_type(type.StructType(
     'com.vmware.vmc.model.metadata', {
@@ -7606,6 +8009,7 @@ class Nat(VapiStruct):
         self.enabled = enabled
         self.template = template
         VapiStruct.__init__(self)
+
 
 Nat._set_binding_type(type.StructType(
     'com.vmware.vmc.model.nat', {
@@ -7707,6 +8111,7 @@ class NatRule(VapiStruct):
         self.revision = revision
         VapiStruct.__init__(self)
 
+
 NatRule._set_binding_type(type.StructType(
     'com.vmware.vmc.model.nat_rule', {
         'rule_type': type.OptionalType(type.StringType()),
@@ -7751,6 +8156,7 @@ class NatRules(VapiStruct):
         self.nat_rules_dtos = nat_rules_dtos
         VapiStruct.__init__(self)
 
+
 NatRules._set_binding_type(type.StructType(
     'com.vmware.vmc.model.nat_rules', {
         'natRulesDtos': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'Nsxnatrule'))),
@@ -7791,12 +8197,61 @@ class NetworkTemplate(VapiStruct):
         self.compute_gateway_templates = compute_gateway_templates
         VapiStruct.__init__(self)
 
+
 NetworkTemplate._set_binding_type(type.StructType(
     'com.vmware.vmc.model.network_template', {
         'management_gateway_templates': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'ManagementGatewayTemplate'))),
         'compute_gateway_templates': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'ComputeGatewayTemplate'))),
     },
     NetworkTemplate,
+    False,
+    None))
+
+
+
+class NewCredentials(VapiStruct):
+    """
+
+
+    .. tip::
+        The arguments are used to initialize data attributes with the same
+        names.
+    """
+
+
+
+    _canonical_to_pep_names = {
+                            'username': 'username',
+                            'password': 'password',
+                            'name': 'name',
+                            }
+
+    def __init__(self,
+                 username=None,
+                 password=None,
+                 name=None,
+                ):
+        """
+        :type  username: :class:`str`
+        :param username: Username of the credentials
+        :type  password: :class:`str`
+        :param password: Password associated with the credentials
+        :type  name: :class:`str`
+        :param name: Name of the credentials
+        """
+        self.username = username
+        self.password = password
+        self.name = name
+        VapiStruct.__init__(self)
+
+
+NewCredentials._set_binding_type(type.StructType(
+    'com.vmware.vmc.model.new_credentials', {
+        'username': type.StringType(),
+        'password': type.StringType(),
+        'name': type.StringType(),
+    },
+    NewCredentials,
     False,
     None))
 
@@ -7909,6 +8364,7 @@ class Nsxfirewallrule(VapiStruct):
         self.rule_tag = rule_tag
         VapiStruct.__init__(self)
 
+
 Nsxfirewallrule._set_binding_type(type.StructType(
     'com.vmware.vmc.model.nsxfirewallrule', {
         'ruleType': type.OptionalType(type.StringType()),
@@ -7975,6 +8431,7 @@ class Nsxfirewallservice(VapiStruct):
         self.icmp_type = icmp_type
         VapiStruct.__init__(self)
 
+
 Nsxfirewallservice._set_binding_type(type.StructType(
     'com.vmware.vmc.model.nsxfirewallservice', {
         'sourcePort': type.OptionalType(type.ListType(type.StringType())),
@@ -8022,6 +8479,7 @@ class Nsxl2vpn(VapiStruct):
         self.enabled = enabled
         self.sites = sites
         VapiStruct.__init__(self)
+
 
 Nsxl2vpn._set_binding_type(type.StructType(
     'com.vmware.vmc.model.nsxl2vpn', {
@@ -8153,6 +8611,7 @@ class Nsxnatrule(VapiStruct):
         self.rule_tag = rule_tag
         VapiStruct.__init__(self)
 
+
 Nsxnatrule._set_binding_type(type.StructType(
     'com.vmware.vmc.model.nsxnatrule', {
         'vnic': type.OptionalType(type.StringType()),
@@ -8235,6 +8694,7 @@ class Nsxsite(VapiStruct):
         self.description = description
         VapiStruct.__init__(self)
 
+
 Nsxsite._set_binding_type(type.StructType(
     'com.vmware.vmc.model.nsxsite', {
         'secureTraffic': type.OptionalType(type.BooleanType()),
@@ -8245,6 +8705,42 @@ Nsxsite._set_binding_type(type.StructType(
         'description': type.OptionalType(type.StringType()),
     },
     Nsxsite,
+    False,
+    None))
+
+
+
+class NsxtAddons(VapiStruct):
+    """
+    Details the state of different NSX add-ons.
+
+    .. tip::
+        The arguments are used to initialize data attributes with the same
+        names.
+    """
+
+
+
+    _canonical_to_pep_names = {
+                            'enable_nsx_advanced_addon': 'enable_nsx_advanced_addon',
+                            }
+
+    def __init__(self,
+                 enable_nsx_advanced_addon=None,
+                ):
+        """
+        :type  enable_nsx_advanced_addon: :class:`bool` or ``None``
+        :param enable_nsx_advanced_addon: Indicates whether NSX Advanced addon is enabled or disabled.
+        """
+        self.enable_nsx_advanced_addon = enable_nsx_advanced_addon
+        VapiStruct.__init__(self)
+
+
+NsxtAddons._set_binding_type(type.StructType(
+    'com.vmware.vmc.model.nsxt_addons', {
+        'enable_nsx_advanced_addon': type.OptionalType(type.BooleanType()),
+    },
+    NsxtAddons,
     False,
     None))
 
@@ -8274,6 +8770,7 @@ class ObjectType(VapiStruct):
         """
         self.name = name
         VapiStruct.__init__(self)
+
 
 ObjectType._set_binding_type(type.StructType(
     'com.vmware.vmc.model.object_type', {
@@ -8314,6 +8811,7 @@ class OfferInstancesHolder(VapiStruct):
         self.on_demand = on_demand
         self.offers = offers
         VapiStruct.__init__(self)
+
 
 OfferInstancesHolder._set_binding_type(type.StructType(
     'com.vmware.vmc.model.offer_instances_holder', {
@@ -8386,6 +8884,7 @@ class OnDemandOfferInstance(VapiStruct):
         self.description = description
         VapiStruct.__init__(self)
 
+
 OnDemandOfferInstance._set_binding_type(type.StructType(
     'com.vmware.vmc.model.on_demand_offer_instance', {
         'product_type': type.StringType(),
@@ -8428,6 +8927,7 @@ class OrgProperties(VapiStruct):
         self.values = values
         VapiStruct.__init__(self)
 
+
 OrgProperties._set_binding_type(type.StructType(
     'com.vmware.vmc.model.org_properties', {
         'values': type.OptionalType(type.MapType(type.StringType(), type.StringType())),
@@ -8469,10 +8969,10 @@ class Organization(VapiStruct):
                             'user_name': 'user_name',
                             'id': 'id',
                             'org_type': 'org_type',
-                            'properties': 'properties',
-                            'project_state': 'project_state',
-                            'name': 'name',
                             'display_name': 'display_name',
+                            'name': 'name',
+                            'project_state': 'project_state',
+                            'properties': 'properties',
                             }
 
     def __init__(self,
@@ -8485,10 +8985,10 @@ class Organization(VapiStruct):
                  user_name=None,
                  id=None,
                  org_type=None,
-                 properties=None,
-                 project_state=None,
-                 name=None,
                  display_name=None,
+                 name=None,
+                 project_state=None,
+                 properties=None,
                 ):
         """
         :type  updated: :class:`datetime.datetime`
@@ -8509,17 +9009,17 @@ class Organization(VapiStruct):
         :param id: Unique ID for this entity
         :type  org_type: :class:`str` or ``None``
         :param org_type: ORG_TYPE to be associated with the org
-        :type  properties: :class:`OrgProperties` or ``None``
-        :param properties: 
+        :type  display_name: :class:`str` or ``None``
+        :param display_name: 
+        :type  name: :class:`str` or ``None``
+        :param name: 
         :type  project_state: :class:`str` or ``None``
         :param project_state: Possible values are: 
             
             * :attr:`Organization.PROJECT_STATE_CREATED`
             * :attr:`Organization.PROJECT_STATE_DELETED`
-        :type  name: :class:`str` or ``None``
-        :param name: 
-        :type  display_name: :class:`str` or ``None``
-        :param display_name: 
+        :type  properties: :class:`OrgProperties` or ``None``
+        :param properties: 
         """
         self.updated = updated
         self.user_id = user_id
@@ -8530,11 +9030,12 @@ class Organization(VapiStruct):
         self.user_name = user_name
         self.id = id
         self.org_type = org_type
-        self.properties = properties
-        self.project_state = project_state
-        self.name = name
         self.display_name = display_name
+        self.name = name
+        self.project_state = project_state
+        self.properties = properties
         VapiStruct.__init__(self)
+
 
 Organization._set_binding_type(type.StructType(
     'com.vmware.vmc.model.organization', {
@@ -8547,10 +9048,10 @@ Organization._set_binding_type(type.StructType(
         'user_name': type.StringType(),
         'id': type.StringType(),
         'org_type': type.OptionalType(type.StringType()),
-        'properties': type.OptionalType(type.ReferenceType(__name__, 'OrgProperties')),
-        'project_state': type.OptionalType(type.StringType()),
-        'name': type.OptionalType(type.StringType()),
         'display_name': type.OptionalType(type.StringType()),
+        'name': type.OptionalType(type.StringType()),
+        'project_state': type.OptionalType(type.StringType()),
+        'properties': type.OptionalType(type.ReferenceType(__name__, 'OrgProperties')),
     },
     Organization,
     False,
@@ -8582,6 +9083,7 @@ class PagedEdgeList(VapiStruct):
         """
         self.edge_page = edge_page
         VapiStruct.__init__(self)
+
 
 PagedEdgeList._set_binding_type(type.StructType(
     'com.vmware.vmc.model.paged_edge_list', {
@@ -8638,6 +9140,7 @@ class PagingInfo(VapiStruct):
         self.page_size = page_size
         VapiStruct.__init__(self)
 
+
 PagingInfo._set_binding_type(type.StructType(
     'com.vmware.vmc.model.paging_info', {
         'sortOrderAscending': type.OptionalType(type.BooleanType()),
@@ -8647,6 +9150,48 @@ PagingInfo._set_binding_type(type.StructType(
         'pageSize': type.OptionalType(type.IntegerType()),
     },
     PagingInfo,
+    False,
+    None))
+
+
+
+class PopAgentXeniConnection(VapiStruct):
+    """
+
+
+    .. tip::
+        The arguments are used to initialize data attributes with the same
+        names.
+    """
+
+
+
+    _canonical_to_pep_names = {
+                            'default_subnet_route': 'default_subnet_route',
+                            'eni_info': 'eni_info',
+                            }
+
+    def __init__(self,
+                 default_subnet_route=None,
+                 eni_info=None,
+                ):
+        """
+        :type  default_subnet_route: :class:`str` or ``None``
+        :param default_subnet_route: The gateway route ip fo the subnet.
+        :type  eni_info: :class:`EniInfo` or ``None``
+        :param eni_info: 
+        """
+        self.default_subnet_route = default_subnet_route
+        self.eni_info = eni_info
+        VapiStruct.__init__(self)
+
+
+PopAgentXeniConnection._set_binding_type(type.StructType(
+    'com.vmware.vmc.model.pop_agent_xeni_connection', {
+        'default_subnet_route': type.OptionalType(type.StringType()),
+        'eni_info': type.OptionalType(type.ReferenceType(__name__, 'EniInfo')),
+    },
+    PopAgentXeniConnection,
     False,
     None))
 
@@ -8674,6 +9219,7 @@ class PopAmiInfo(VapiStruct):
 
 
     _canonical_to_pep_names = {
+                            'instance_type': 'instance_type',
                             'region': 'region',
                             'id': 'id',
                             'name': 'name',
@@ -8681,12 +9227,15 @@ class PopAmiInfo(VapiStruct):
                             }
 
     def __init__(self,
+                 instance_type=None,
                  region=None,
                  id=None,
                  name=None,
                  type=None,
                 ):
         """
+        :type  instance_type: :class:`str` or ``None``
+        :param instance_type: instance type of the esx ami
         :type  region: :class:`str` or ``None``
         :param region: the region of the esx ami
         :type  id: :class:`str` or ``None``
@@ -8701,14 +9250,17 @@ class PopAmiInfo(VapiStruct):
             
              PoP AMI type. CENTOS: a Centos AMI; POP: a PoP AMI.
         """
+        self.instance_type = instance_type
         self.region = region
         self.id = id
         self.name = name
         self.type = type
         VapiStruct.__init__(self)
 
+
 PopAmiInfo._set_binding_type(type.StructType(
     'com.vmware.vmc.model.pop_ami_info', {
+        'instance_type': type.OptionalType(type.StringType()),
         'region': type.OptionalType(type.StringType()),
         'id': type.OptionalType(type.StringType()),
         'name': type.OptionalType(type.StringType()),
@@ -8734,15 +9286,17 @@ class PopInfo(VapiStruct):
     _canonical_to_pep_names = {
                             'ami_infos': 'ami_infos',
                             'created_at': 'created_at',
-                            'id': 'id',
                             'service_infos': 'service_infos',
+                            'id': 'id',
+                            'manifest_version': 'manifest_version',
                             }
 
     def __init__(self,
                  ami_infos=None,
                  created_at=None,
-                 id=None,
                  service_infos=None,
+                 id=None,
+                 manifest_version=None,
                 ):
         """
         :type  ami_infos: :class:`dict` of :class:`str` and :class:`PopAmiInfo`
@@ -8750,23 +9304,28 @@ class PopInfo(VapiStruct):
         :type  created_at: :class:`datetime.datetime` or ``None``
         :param created_at: The PopInfo (or PoP AMI) created time. Using ISO 8601 date-time
             pattern. format: date-time
-        :type  id: :class:`str` or ``None``
-        :param id: UUID of the PopInfo format: UUID
         :type  service_infos: (:class:`dict` of :class:`str` and :class:`PopServiceInfo`) or ``None``
         :param service_infos: A map of [service type]:[PopServiceInfo]
+        :type  id: :class:`str` or ``None``
+        :param id: UUID of the PopInfo format: UUID
+        :type  manifest_version: :class:`str` or ``None``
+        :param manifest_version: version of the manifest.
         """
         self.ami_infos = ami_infos
         self.created_at = created_at
-        self.id = id
         self.service_infos = service_infos
+        self.id = id
+        self.manifest_version = manifest_version
         VapiStruct.__init__(self)
+
 
 PopInfo._set_binding_type(type.StructType(
     'com.vmware.vmc.model.pop_info', {
         'ami_infos': type.MapType(type.StringType(), type.ReferenceType(__name__, 'PopAmiInfo')),
         'created_at': type.OptionalType(type.DateTimeType()),
-        'id': type.OptionalType(type.StringType()),
         'service_infos': type.OptionalType(type.MapType(type.StringType(), type.ReferenceType(__name__, 'PopServiceInfo'))),
+        'id': type.OptionalType(type.StringType()),
+        'manifest_version': type.OptionalType(type.StringType()),
     },
     PopInfo,
     False,
@@ -8818,11 +9377,6 @@ class PopServiceInfo(VapiStruct):
 
     """
     SERVICE_RTS = "RTS"
-    """
-
-
-    """
-    SERVICE_FM_MANAGEMENT = "FM_MANAGEMENT"
     """
 
 
@@ -8906,7 +9460,6 @@ class PopServiceInfo(VapiStruct):
             * :attr:`PopServiceInfo.SERVICE_DOCKER`
             * :attr:`PopServiceInfo.SERVICE_AIDE`
             * :attr:`PopServiceInfo.SERVICE_RTS`
-            * :attr:`PopServiceInfo.SERVICE_FM_MANAGEMENT`
             * :attr:`PopServiceInfo.SERVICE_FM_LOG_COLLECTOR`
             * :attr:`PopServiceInfo.SERVICE_FM_METRICS_COLLECTOR`
             * :attr:`PopServiceInfo.SERVICE_BRE`
@@ -8924,6 +9477,7 @@ class PopServiceInfo(VapiStruct):
         self.build = build
         self.service = service
         VapiStruct.__init__(self)
+
 
 PopServiceInfo._set_binding_type(type.StructType(
     'com.vmware.vmc.model.pop_service_info', {
@@ -8967,6 +9521,7 @@ class Requests(VapiStruct):
         self.total = total
         self.queries = queries
         VapiStruct.__init__(self)
+
 
 Requests._set_binding_type(type.StructType(
     'com.vmware.vmc.model.requests', {
@@ -9025,6 +9580,7 @@ class Reservation(VapiStruct):
         self.metadata = metadata
         VapiStruct.__init__(self)
 
+
 Reservation._set_binding_type(type.StructType(
     'com.vmware.vmc.model.reservation', {
         'duration': type.OptionalType(type.IntegerType()),
@@ -9078,6 +9634,7 @@ class ReservationInMw(VapiStruct):
         self.create_time = create_time
         self.metadata = metadata
         VapiStruct.__init__(self)
+
 
 ReservationInMw._set_binding_type(type.StructType(
     'com.vmware.vmc.model.reservation_in_mw', {
@@ -9185,6 +9742,7 @@ class ReservationSchedule(VapiStruct):
         self.reservations_mw = reservations_mw
         VapiStruct.__init__(self)
 
+
 ReservationSchedule._set_binding_type(type.StructType(
     'com.vmware.vmc.model.reservation_schedule', {
         'day_of_week': type.OptionalType(type.StringType()),
@@ -9241,6 +9799,7 @@ class ReservationWindow(VapiStruct):
                             'manifest_id': 'manifest_id',
                             'duration_hours': 'duration_hours',
                             'start_date': 'start_date',
+                            'metadata': 'metadata',
                             }
 
     def __init__(self,
@@ -9253,6 +9812,7 @@ class ReservationWindow(VapiStruct):
                  manifest_id=None,
                  duration_hours=None,
                  start_date=None,
+                 metadata=None,
                 ):
         """
         :type  reservation_state: :class:`str` or ``None``
@@ -9278,6 +9838,8 @@ class ReservationWindow(VapiStruct):
         :param duration_hours: 
         :type  start_date: :class:`str` or ``None``
         :param start_date: 
+        :type  metadata: (:class:`dict` of :class:`str` and :class:`str`) or ``None``
+        :param metadata: Metadata for reservation window, in key-value form
         """
         self.reservation_state = reservation_state
         self.emergency = emergency
@@ -9288,7 +9850,9 @@ class ReservationWindow(VapiStruct):
         self.manifest_id = manifest_id
         self.duration_hours = duration_hours
         self.start_date = start_date
+        self.metadata = metadata
         VapiStruct.__init__(self)
+
 
 ReservationWindow._set_binding_type(type.StructType(
     'com.vmware.vmc.model.reservation_window', {
@@ -9301,6 +9865,7 @@ ReservationWindow._set_binding_type(type.StructType(
         'manifest_id': type.OptionalType(type.StringType()),
         'duration_hours': type.OptionalType(type.IntegerType()),
         'start_date': type.OptionalType(type.StringType()),
+        'metadata': type.OptionalType(type.MapType(type.StringType(), type.StringType())),
     },
     ReservationWindow,
     False,
@@ -9332,6 +9897,7 @@ class ReservationWindowMaintenanceProperties(VapiStruct):
         """
         self.status = status
         VapiStruct.__init__(self)
+
 
 ReservationWindowMaintenanceProperties._set_binding_type(type.StructType(
     'com.vmware.vmc.model.reservation_window_maintenance_properties', {
@@ -9373,6 +9939,7 @@ class Result(VapiStruct):
         self.value = value
         self.key = key
         VapiStruct.__init__(self)
+
 
 Result._set_binding_type(type.StructType(
     'com.vmware.vmc.model.result', {
@@ -9419,6 +9986,7 @@ class ScopeInfo(VapiStruct):
         self.id = id
         self.name = name
         VapiStruct.__init__(self)
+
 
 ScopeInfo._set_binding_type(type.StructType(
     'com.vmware.vmc.model.scope_info', {
@@ -9604,6 +10172,7 @@ class Sddc(VapiStruct):
         self.resource_config = resource_config
         VapiStruct.__init__(self)
 
+
 Sddc._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sddc', {
         'updated': type.DateTimeType(),
@@ -9665,6 +10234,7 @@ class SddcAllocatePublicIpSpec(VapiStruct):
         self.private_ips = private_ips
         self.names = names
         VapiStruct.__init__(self)
+
 
 SddcAllocatePublicIpSpec._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sddc_allocate_public_ip_spec', {
@@ -9797,12 +10367,19 @@ class SddcConfig(VapiStruct):
         self.sddc_type = sddc_type
         self.vxlan_subnet = vxlan_subnet
         self.account_link_config = account_link_config
-        self.provider = provider
+        self._provider = provider
         self.skip_creating_vxlan = skip_creating_vxlan
         self.sso_domain = sso_domain
         self.sddc_template_id = sddc_template_id
         self.deployment_type = deployment_type
         VapiStruct.__init__(self)
+
+    @property
+    def provider(self):
+        """
+        Return the discriminator value
+        """
+        return self._provider
 
 SddcConfig._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sddc_config', {
@@ -9851,6 +10428,7 @@ class SddcId(VapiStruct):
         self.sddc_id = sddc_id
         VapiStruct.__init__(self)
 
+
 SddcId._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sddc_id', {
         'sddc_id': type.OptionalType(type.StringType()),
@@ -9891,6 +10469,7 @@ class SddcLinkConfig(VapiStruct):
         self.connected_account_id = connected_account_id
         VapiStruct.__init__(self)
 
+
 SddcLinkConfig._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sddc_link_config', {
         'customer_subnet_ids': type.OptionalType(type.ListType(type.StringType())),
@@ -9918,6 +10497,8 @@ class SddcManifest(VapiStruct):
                             'glcm_bundle': 'glcm_bundle',
                             'pop_info': 'pop_info',
                             'vmc_internal_version': 'vmc_internal_version',
+                            'ebs_backed_vsan_config': 'ebs_backed_vsan_config',
+                            'vsan_witness_ami': 'vsan_witness_ami',
                             'esx_ami': 'esx_ami',
                             'esx_nsxt_ami': 'esx_nsxt_ami',
                             'metadata': 'metadata',
@@ -9928,6 +10509,8 @@ class SddcManifest(VapiStruct):
                  glcm_bundle=None,
                  pop_info=None,
                  vmc_internal_version=None,
+                 ebs_backed_vsan_config=None,
+                 vsan_witness_ami=None,
                  esx_ami=None,
                  esx_nsxt_ami=None,
                  metadata=None,
@@ -9941,6 +10524,10 @@ class SddcManifest(VapiStruct):
         :param pop_info: 
         :type  vmc_internal_version: :class:`str` or ``None``
         :param vmc_internal_version: the vmcInternalVersion of the sddc for internal use
+        :type  ebs_backed_vsan_config: :class:`EbsBackedVsanConfig` or ``None``
+        :param ebs_backed_vsan_config: 
+        :type  vsan_witness_ami: :class:`AmiInfo` or ``None``
+        :param vsan_witness_ami: 
         :type  esx_ami: :class:`AmiInfo` or ``None``
         :param esx_ami: 
         :type  esx_nsxt_ami: :class:`AmiInfo` or ``None``
@@ -9952,10 +10539,13 @@ class SddcManifest(VapiStruct):
         self.glcm_bundle = glcm_bundle
         self.pop_info = pop_info
         self.vmc_internal_version = vmc_internal_version
+        self.ebs_backed_vsan_config = ebs_backed_vsan_config
+        self.vsan_witness_ami = vsan_witness_ami
         self.esx_ami = esx_ami
         self.esx_nsxt_ami = esx_nsxt_ami
         self.metadata = metadata
         VapiStruct.__init__(self)
+
 
 SddcManifest._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sddc_manifest', {
@@ -9963,6 +10553,8 @@ SddcManifest._set_binding_type(type.StructType(
         'glcm_bundle': type.OptionalType(type.ReferenceType(__name__, 'GlcmBundle')),
         'pop_info': type.OptionalType(type.ReferenceType(__name__, 'PopInfo')),
         'vmc_internal_version': type.OptionalType(type.StringType()),
+        'ebs_backed_vsan_config': type.OptionalType(type.ReferenceType(__name__, 'EbsBackedVsanConfig')),
+        'vsan_witness_ami': type.OptionalType(type.ReferenceType(__name__, 'AmiInfo')),
         'esx_ami': type.OptionalType(type.ReferenceType(__name__, 'AmiInfo')),
         'esx_nsxt_ami': type.OptionalType(type.ReferenceType(__name__, 'AmiInfo')),
         'metadata': type.OptionalType(type.ReferenceType(__name__, 'Metadata')),
@@ -10031,6 +10623,7 @@ class SddcNetwork(VapiStruct):
         self.id = id
         VapiStruct.__init__(self)
 
+
 SddcNetwork._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sddc_network', {
         'subnets': type.OptionalType(type.ReferenceType(__name__, 'SddcNetworkAddressGroups')),
@@ -10077,6 +10670,7 @@ class SddcNetworkAddressGroup(VapiStruct):
         self.primary_address = primary_address
         VapiStruct.__init__(self)
 
+
 SddcNetworkAddressGroup._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sddc_network_address_group', {
         'prefixLength': type.OptionalType(type.StringType()),
@@ -10113,6 +10707,7 @@ class SddcNetworkAddressGroups(VapiStruct):
         self.address_groups = address_groups
         VapiStruct.__init__(self)
 
+
 SddcNetworkAddressGroups._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sddc_network_address_groups', {
         'addressGroups': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'SddcNetworkAddressGroup'))),
@@ -10147,6 +10742,7 @@ class SddcNetworkDhcpConfig(VapiStruct):
         """
         self.ip_pools = ip_pools
         VapiStruct.__init__(self)
+
 
 SddcNetworkDhcpConfig._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sddc_network_dhcp_config', {
@@ -10188,12 +10784,49 @@ class SddcNetworkDhcpIpPool(VapiStruct):
         self.domain_name = domain_name
         VapiStruct.__init__(self)
 
+
 SddcNetworkDhcpIpPool._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sddc_network_dhcp_ip_pool', {
         'ipRange': type.OptionalType(type.StringType()),
         'domainName': type.OptionalType(type.StringType()),
     },
     SddcNetworkDhcpIpPool,
+    False,
+    None))
+
+
+
+class SddcPatchRequest(VapiStruct):
+    """
+    Patch request body for SDDC
+
+    .. tip::
+        The arguments are used to initialize data attributes with the same
+        names.
+    """
+
+
+
+    _canonical_to_pep_names = {
+                            'name': 'name',
+                            }
+
+    def __init__(self,
+                 name=None,
+                ):
+        """
+        :type  name: :class:`str` or ``None``
+        :param name: The new name of the SDDC to be changed to.
+        """
+        self.name = name
+        VapiStruct.__init__(self)
+
+
+SddcPatchRequest._set_binding_type(type.StructType(
+    'com.vmware.vmc.model.sddc_patch_request', {
+        'name': type.OptionalType(type.StringType()),
+    },
+    SddcPatchRequest,
     False,
     None))
 
@@ -10248,6 +10881,7 @@ class SddcPublicIp(VapiStruct):
         self.associated_private_ip = associated_private_ip
         self.snat_rule_id = snat_rule_id
         VapiStruct.__init__(self)
+
 
 SddcPublicIp._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sddc_public_ip', {
@@ -10327,10 +10961,15 @@ class SddcResourceConfig(VapiStruct):
                             'vxlan_subnet': 'vxlan_subnet',
                             'cloud_user_group': 'cloud_user_group',
                             'management_rp': 'management_rp',
+                            'region': 'region',
                             'witness_availability_zone': 'witness_availability_zone',
+                            'sddc_id': 'sddc_id',
+                            'pop_agent_xeni_connection': 'pop_agent_xeni_connection',
+                            'nsx_controller_ips': 'nsx_controller_ips',
                             'esx_host_subnet': 'esx_host_subnet',
                             'sso_domain': 'sso_domain',
                             'deployment_type': 'deployment_type',
+                            'nsxt_addons': 'nsxt_addons',
                             'dns_with_management_vm_private_ip': 'dns_with_management_vm_private_ip',
                             }
 
@@ -10363,10 +11002,15 @@ class SddcResourceConfig(VapiStruct):
                  vxlan_subnet=None,
                  cloud_user_group=None,
                  management_rp=None,
+                 region=None,
                  witness_availability_zone=None,
+                 sddc_id=None,
+                 pop_agent_xeni_connection=None,
+                 nsx_controller_ips=None,
                  esx_host_subnet=None,
                  sso_domain=None,
                  deployment_type=None,
+                 nsxt_addons=None,
                  dns_with_management_vm_private_ip=None,
                 ):
         """
@@ -10402,13 +11046,8 @@ class SddcResourceConfig(VapiStruct):
             * :attr:`SddcResourceConfig.PROVIDER_AWS`
             
              Discriminator for additional properties
-        :type  clusters: :class:`list` of :class:`vmware.vapi.struct.VapiStruct` or ``None``
+        :type  clusters: :class:`list` of :class:`Cluster` or ``None``
         :param clusters: List of clusters in the SDDC.
-            When clients pass a value of this class as a parameter, the
-            attribute must contain all the attributes defined in
-            :class:`Cluster`. When methods return a value of this class as a
-            return value, the attribute will contain all the attributes defined
-            in :class:`Cluster`.
         :type  vc_management_ip: :class:`str` or ``None``
         :param vc_management_ip: vCenter internal management IP
         :type  sddc_networks: :class:`list` of :class:`str` or ``None``
@@ -10437,9 +11076,17 @@ class SddcResourceConfig(VapiStruct):
         :param cloud_user_group: Group name for vCenter SDDC administrator
         :type  management_rp: :class:`str` or ``None``
         :param management_rp: 
+        :type  region: :class:`str` or ``None``
+        :param region: region in which sddc is deployed
         :type  witness_availability_zone: :class:`str` or ``None``
         :param witness_availability_zone: Availability zone where the witness node is provisioned for a
             MultiAZ SDDC. This is null for a SingleAZ SDDC.
+        :type  sddc_id: :class:`str` or ``None``
+        :param sddc_id: sddc identifier
+        :type  pop_agent_xeni_connection: :class:`PopAgentXeniConnection` or ``None``
+        :param pop_agent_xeni_connection: 
+        :type  nsx_controller_ips: :class:`list` of :class:`str` or ``None``
+        :param nsx_controller_ips: List of Controller IPs
         :type  esx_host_subnet: :class:`str` or ``None``
         :param esx_host_subnet: ESX host subnet
         :type  sso_domain: :class:`str` or ``None``
@@ -10451,6 +11098,8 @@ class SddcResourceConfig(VapiStruct):
             * :attr:`SddcResourceConfig.DEPLOYMENT_TYPE_MULTI_AZ`
             
              Denotes if this is a SingleAZ SDDC or a MultiAZ SDDC.
+        :type  nsxt_addons: :class:`NsxtAddons` or ``None``
+        :param nsxt_addons: 
         :type  dns_with_management_vm_private_ip: :class:`bool` or ``None``
         :param dns_with_management_vm_private_ip: if true, use the private IP addresses to register DNS records for
             the management VMs
@@ -10467,7 +11116,7 @@ class SddcResourceConfig(VapiStruct):
         self.nsx_api_public_endpoint_url = nsx_api_public_endpoint_url
         self.custom_properties = custom_properties
         self.cloud_password = cloud_password
-        self.provider = provider
+        self._provider = provider
         self.clusters = clusters
         self.vc_management_ip = vc_management_ip
         self.sddc_networks = sddc_networks
@@ -10483,12 +11132,24 @@ class SddcResourceConfig(VapiStruct):
         self.vxlan_subnet = vxlan_subnet
         self.cloud_user_group = cloud_user_group
         self.management_rp = management_rp
+        self.region = region
         self.witness_availability_zone = witness_availability_zone
+        self.sddc_id = sddc_id
+        self.pop_agent_xeni_connection = pop_agent_xeni_connection
+        self.nsx_controller_ips = nsx_controller_ips
         self.esx_host_subnet = esx_host_subnet
         self.sso_domain = sso_domain
         self.deployment_type = deployment_type
+        self.nsxt_addons = nsxt_addons
         self.dns_with_management_vm_private_ip = dns_with_management_vm_private_ip
         VapiStruct.__init__(self)
+
+    @property
+    def provider(self):
+        """
+        Return the discriminator value
+        """
+        return self._provider
 
 SddcResourceConfig._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sddc_resource_config', {
@@ -10505,7 +11166,7 @@ SddcResourceConfig._set_binding_type(type.StructType(
         'custom_properties': type.OptionalType(type.MapType(type.StringType(), type.StringType())),
         'cloud_password': type.OptionalType(type.StringType()),
         'provider': type.StringType(),
-        'clusters': type.OptionalType(type.ListType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct, [type.ReferenceType(__name__, 'Cluster')]))),
+        'clusters': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'Cluster'))),
         'vc_management_ip': type.OptionalType(type.StringType()),
         'sddc_networks': type.OptionalType(type.ListType(type.StringType())),
         'cloud_username': type.OptionalType(type.StringType()),
@@ -10520,10 +11181,15 @@ SddcResourceConfig._set_binding_type(type.StructType(
         'vxlan_subnet': type.OptionalType(type.StringType()),
         'cloud_user_group': type.OptionalType(type.StringType()),
         'management_rp': type.OptionalType(type.StringType()),
+        'region': type.OptionalType(type.StringType()),
         'witness_availability_zone': type.OptionalType(type.StringType()),
+        'sddc_id': type.OptionalType(type.StringType()),
+        'pop_agent_xeni_connection': type.OptionalType(type.ReferenceType(__name__, 'PopAgentXeniConnection')),
+        'nsx_controller_ips': type.OptionalType(type.ListType(type.StringType())),
         'esx_host_subnet': type.OptionalType(type.StringType()),
         'sso_domain': type.OptionalType(type.StringType()),
         'deployment_type': type.OptionalType(type.StringType()),
+        'nsxt_addons': type.OptionalType(type.ReferenceType(__name__, 'NsxtAddons')),
         'dns_with_management_vm_private_ip': type.OptionalType(type.BooleanType()),
     },
     SddcResourceConfig,
@@ -10587,6 +11253,7 @@ class SddcStateRequest(VapiStruct):
         self.states = states
         VapiStruct.__init__(self)
 
+
 SddcStateRequest._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sddc_state_request', {
         'sddcs': type.OptionalType(type.ListType(type.StringType())),
@@ -10606,7 +11273,7 @@ class SddcTemplate(VapiStruct):
         The arguments are used to initialize data attributes with the same
         names.
     """
-    STATE_INITIALIZING = "INITIALIZING"
+    STATE_INITIALIZATION = "INITIALIZATION"
     """
 
 
@@ -10701,7 +11368,7 @@ class SddcTemplate(VapiStruct):
         :type  state: :class:`str` or ``None``
         :param state: Possible values are: 
             
-            * :attr:`SddcTemplate.STATE_INITIALIZING`
+            * :attr:`SddcTemplate.STATE_INITIALIZATION`
             * :attr:`SddcTemplate.STATE_AVAILABLE`
             * :attr:`SddcTemplate.STATE_INUSE`
             * :attr:`SddcTemplate.STATE_APPLIED`
@@ -10735,6 +11402,7 @@ class SddcTemplate(VapiStruct):
         self.org_id = org_id
         self.sddc = sddc
         VapiStruct.__init__(self)
+
 
 SddcTemplate._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sddc_template', {
@@ -10791,6 +11459,7 @@ class SecondaryAddresses(VapiStruct):
         self.ip_address = ip_address
         VapiStruct.__init__(self)
 
+
 SecondaryAddresses._set_binding_type(type.StructType(
     'com.vmware.vmc.model.secondary_addresses', {
         'type': type.OptionalType(type.StringType()),
@@ -10841,6 +11510,7 @@ class ServiceError(VapiStruct):
         self.localized_message = localized_message
         self.original_service_error_code = original_service_error_code
         VapiStruct.__init__(self)
+
 
 ServiceError._set_binding_type(type.StructType(
     'com.vmware.vmc.model.service_error', {
@@ -10965,6 +11635,7 @@ class Site(VapiStruct):
         self.tx_bytes_from_local_subnet = tx_bytes_from_local_subnet
         VapiStruct.__init__(self)
 
+
 Site._set_binding_type(type.StructType(
     'com.vmware.vmc.model.site', {
         'password': type.OptionalType(type.StringType()),
@@ -11009,6 +11680,7 @@ class Sites(VapiStruct):
         """
         self.sites = sites
         VapiStruct.__init__(self)
+
 
 Sites._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sites', {
@@ -11064,6 +11736,7 @@ class SslvpnDashboardStats(VapiStruct):
         self.sessions_created = sessions_created
         self.sslvpn_bytes_out = sslvpn_bytes_out
         VapiStruct.__init__(self)
+
 
 SslvpnDashboardStats._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sslvpn_dashboard_stats', {
@@ -11163,6 +11836,7 @@ class SubInterface(VapiStruct):
         self.enable_send_redirects = enable_send_redirects
         VapiStruct.__init__(self)
 
+
 SubInterface._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sub_interface', {
         'index': type.OptionalType(type.IntegerType()),
@@ -11207,6 +11881,7 @@ class SubInterfaces(VapiStruct):
         """
         self.sub_interfaces = sub_interfaces
         VapiStruct.__init__(self)
+
 
 SubInterfaces._set_binding_type(type.StructType(
     'com.vmware.vmc.model.sub_interfaces', {
@@ -11290,6 +11965,7 @@ class SubnetInfo(VapiStruct):
         self.name = name
         VapiStruct.__init__(self)
 
+
 SubnetInfo._set_binding_type(type.StructType(
     'com.vmware.vmc.model.subnet_info', {
         'compatible': type.OptionalType(type.BooleanType()),
@@ -11335,6 +12011,7 @@ class Subnets(VapiStruct):
         """
         self.subnets = subnets
         VapiStruct.__init__(self)
+
 
 Subnets._set_binding_type(type.StructType(
     'com.vmware.vmc.model.subnets', {
@@ -11484,6 +12161,7 @@ class SubscriptionDetails(VapiStruct):
         self.quantity = quantity
         VapiStruct.__init__(self)
 
+
 SubscriptionDetails._set_binding_type(type.StructType(
     'com.vmware.vmc.model.subscription_details', {
         'status': type.OptionalType(type.StringType()),
@@ -11538,6 +12216,7 @@ class SubscriptionProducts(VapiStruct):
         self.types = types
         VapiStruct.__init__(self)
 
+
 SubscriptionProducts._set_binding_type(type.StructType(
     'com.vmware.vmc.model.subscription_products', {
         'product': type.OptionalType(type.StringType()),
@@ -11563,23 +12242,31 @@ class SubscriptionRequest(VapiStruct):
     _canonical_to_pep_names = {
                             'product': 'product',
                             'product_type': 'product_type',
+                            'product_id': 'product_id',
                             'region': 'region',
                             'commitment_term': 'commitment_term',
-                            'offer_name': 'offer_name',
-                            'type': 'type',
+                            'offer_context_id': 'offer_context_id',
                             'offer_version': 'offer_version',
+                            'offer_name': 'offer_name',
                             'quantity': 'quantity',
+                            'type': 'type',
+                            'price': 'price',
+                            'product_charge_id': 'product_charge_id',
                             }
 
     def __init__(self,
                  product=None,
                  product_type=None,
+                 product_id=None,
                  region=None,
                  commitment_term=None,
-                 offer_name=None,
-                 type=None,
+                 offer_context_id=None,
                  offer_version=None,
+                 offer_name=None,
                  quantity=None,
+                 type=None,
+                 price=None,
+                 product_charge_id=None,
                 ):
         """
         :type  product: :class:`str` or ``None``
@@ -11587,40 +12274,57 @@ class SubscriptionRequest(VapiStruct):
             /vmc/api/orgs/{orgId}/products.
         :type  product_type: :class:`str`
         :param product_type: Old identifier for product. \*Deprecarted\*. See product and type
+        :type  product_id: :class:`str` or ``None``
+        :param product_id: 
         :type  region: :class:`str`
         :param region: 
         :type  commitment_term: :class:`str`
         :param commitment_term: 
+        :type  offer_context_id: :class:`str` or ``None``
+        :param offer_context_id: 
+        :type  offer_version: :class:`str`
+        :param offer_version: 
         :type  offer_name: :class:`str`
         :param offer_name: 
+        :type  quantity: :class:`long`
+        :param quantity: 
         :type  type: :class:`str` or ``None``
         :param type: The type of the product for which the subscription needs to be
             created.
-        :type  offer_version: :class:`str`
-        :param offer_version: 
-        :type  quantity: :class:`long`
-        :param quantity: 
+        :type  price: :class:`long` or ``None``
+        :param price: 
+        :type  product_charge_id: :class:`str` or ``None``
+        :param product_charge_id: 
         """
         self.product = product
         self.product_type = product_type
+        self.product_id = product_id
         self.region = region
         self.commitment_term = commitment_term
-        self.offer_name = offer_name
-        self.type = type
+        self.offer_context_id = offer_context_id
         self.offer_version = offer_version
+        self.offer_name = offer_name
         self.quantity = quantity
+        self.type = type
+        self.price = price
+        self.product_charge_id = product_charge_id
         VapiStruct.__init__(self)
+
 
 SubscriptionRequest._set_binding_type(type.StructType(
     'com.vmware.vmc.model.subscription_request', {
         'product': type.OptionalType(type.StringType()),
         'product_type': type.StringType(),
+        'product_id': type.OptionalType(type.StringType()),
         'region': type.StringType(),
         'commitment_term': type.StringType(),
-        'offer_name': type.StringType(),
-        'type': type.OptionalType(type.StringType()),
+        'offer_context_id': type.OptionalType(type.StringType()),
         'offer_version': type.StringType(),
+        'offer_name': type.StringType(),
         'quantity': type.IntegerType(),
+        'type': type.OptionalType(type.StringType()),
+        'price': type.OptionalType(type.IntegerType()),
+        'product_charge_id': type.OptionalType(type.StringType()),
     },
     SubscriptionRequest,
     False,
@@ -11726,6 +12430,7 @@ class SupportWindow(VapiStruct):
         self.metadata = metadata
         VapiStruct.__init__(self)
 
+
 SupportWindow._set_binding_type(type.StructType(
     'com.vmware.vmc.model.support_window', {
         'start_day': type.OptionalType(type.StringType()),
@@ -11766,6 +12471,7 @@ class SupportWindowId(VapiStruct):
         """
         self.window_id = window_id
         VapiStruct.__init__(self)
+
 
 SupportWindowId._set_binding_type(type.StructType(
     'com.vmware.vmc.model.support_window_id', {
@@ -11986,6 +12692,7 @@ class Task(VapiStruct):
         self.end_time = end_time
         VapiStruct.__init__(self)
 
+
 Task._set_binding_type(type.StructType(
     'com.vmware.vmc.model.task', {
         'updated': type.DateTimeType(),
@@ -12061,6 +12768,7 @@ class TaskProgressPhase(VapiStruct):
         self.progress_percent = progress_percent
         VapiStruct.__init__(self)
 
+
 TaskProgressPhase._set_binding_type(type.StructType(
     'com.vmware.vmc.model.task_progress_phase', {
         'id': type.StringType(),
@@ -12085,6 +12793,7 @@ class TermOfferInstance(VapiStruct):
 
 
     _canonical_to_pep_names = {
+                            'description': 'description',
                             'product_type': 'product_type',
                             'name': 'name',
                             'region': 'region',
@@ -12092,10 +12801,13 @@ class TermOfferInstance(VapiStruct):
                             'unit_price': 'unit_price',
                             'currency': 'currency',
                             'version': 'version',
-                            'description': 'description',
+                            'offer_context_id': 'offer_context_id',
+                            'product_id': 'product_id',
+                            'product_charge_id': 'product_charge_id',
                             }
 
     def __init__(self,
+                 description=None,
                  product_type=None,
                  name=None,
                  region=None,
@@ -12103,9 +12815,13 @@ class TermOfferInstance(VapiStruct):
                  unit_price=None,
                  currency=None,
                  version=None,
-                 description=None,
+                 offer_context_id=None,
+                 product_id=None,
+                 product_charge_id=None,
                 ):
         """
+        :type  description: :class:`str`
+        :param description: 
         :type  product_type: :class:`str`
         :param product_type: 
         :type  name: :class:`str`
@@ -12120,9 +12836,14 @@ class TermOfferInstance(VapiStruct):
         :param currency: 
         :type  version: :class:`str`
         :param version: 
-        :type  description: :class:`str`
-        :param description: 
+        :type  offer_context_id: :class:`str` or ``None``
+        :param offer_context_id: 
+        :type  product_id: :class:`str` or ``None``
+        :param product_id: 
+        :type  product_charge_id: :class:`str` or ``None``
+        :param product_charge_id: 
         """
+        self.description = description
         self.product_type = product_type
         self.name = name
         self.region = region
@@ -12130,11 +12851,15 @@ class TermOfferInstance(VapiStruct):
         self.unit_price = unit_price
         self.currency = currency
         self.version = version
-        self.description = description
+        self.offer_context_id = offer_context_id
+        self.product_id = product_id
+        self.product_charge_id = product_charge_id
         VapiStruct.__init__(self)
+
 
 TermOfferInstance._set_binding_type(type.StructType(
     'com.vmware.vmc.model.term_offer_instance', {
+        'description': type.StringType(),
         'product_type': type.StringType(),
         'name': type.StringType(),
         'region': type.StringType(),
@@ -12142,7 +12867,9 @@ TermOfferInstance._set_binding_type(type.StructType(
         'unit_price': type.StringType(),
         'currency': type.StringType(),
         'version': type.StringType(),
-        'description': type.StringType(),
+        'offer_context_id': type.OptionalType(type.StringType()),
+        'product_id': type.OptionalType(type.StringType()),
+        'product_charge_id': type.OptionalType(type.StringType()),
     },
     TermOfferInstance,
     False,
@@ -12195,6 +12922,7 @@ class TrafficShapingPolicy(VapiStruct):
         self.inherited = inherited
         VapiStruct.__init__(self)
 
+
 TrafficShapingPolicy._set_binding_type(type.StructType(
     'com.vmware.vmc.model.traffic_shaping_policy', {
         'burstSize': type.OptionalType(type.IntegerType()),
@@ -12204,6 +12932,48 @@ TrafficShapingPolicy._set_binding_type(type.StructType(
         'inherited': type.OptionalType(type.BooleanType()),
     },
     TrafficShapingPolicy,
+    False,
+    None))
+
+
+
+class UpdateCredentials(VapiStruct):
+    """
+
+
+    .. tip::
+        The arguments are used to initialize data attributes with the same
+        names.
+    """
+
+
+
+    _canonical_to_pep_names = {
+                            'username': 'username',
+                            'password': 'password',
+                            }
+
+    def __init__(self,
+                 username=None,
+                 password=None,
+                ):
+        """
+        :type  username: :class:`str`
+        :param username: Username of the credentials
+        :type  password: :class:`str`
+        :param password: Password associated with the credentials
+        """
+        self.username = username
+        self.password = password
+        VapiStruct.__init__(self)
+
+
+UpdateCredentials._set_binding_type(type.StructType(
+    'com.vmware.vmc.model.update_credentials', {
+        'username': type.StringType(),
+        'password': type.StringType(),
+    },
+    UpdateCredentials,
     False,
     None))
 
@@ -12233,6 +13003,7 @@ class VmcLocale(VapiStruct):
         """
         self.locale = locale
         VapiStruct.__init__(self)
+
 
 VmcLocale._set_binding_type(type.StructType(
     'com.vmware.vmc.model.vmc_locale', {
@@ -12362,6 +13133,7 @@ class Vnic(VapiStruct):
         self.portgroup_id = portgroup_id
         VapiStruct.__init__(self)
 
+
 Vnic._set_binding_type(type.StructType(
     'com.vmware.vmc.model.vnic', {
         'subInterfaces': type.OptionalType(type.ReferenceType(__name__, 'SubInterfaces')),
@@ -12413,6 +13185,7 @@ class Vnics(VapiStruct):
         """
         self.vnics = vnics
         VapiStruct.__init__(self)
+
 
 Vnics._set_binding_type(type.StructType(
     'com.vmware.vmc.model.vnics', {
@@ -12529,6 +13302,7 @@ class VpcInfo(VapiStruct):
         self.peering_connection_id = peering_connection_id
         VapiStruct.__init__(self)
 
+
 VpcInfo._set_binding_type(type.StructType(
     'com.vmware.vmc.model.vpc_info', {
         'vpc_cidr': type.OptionalType(type.StringType()),
@@ -12595,6 +13369,7 @@ class VpcInfoSubnets(VapiStruct):
         self.description = description
         self.subnets = subnets
         VapiStruct.__init__(self)
+
 
 VpcInfoSubnets._set_binding_type(type.StructType(
     'com.vmware.vmc.model.vpc_info_subnets', {
@@ -12851,6 +13626,7 @@ class Vpn(VapiStruct):
         self.digest_algorithm = digest_algorithm
         VapiStruct.__init__(self)
 
+
 Vpn._set_binding_type(type.StructType(
     'com.vmware.vmc.model.vpn', {
         'version': type.OptionalType(type.StringType()),
@@ -12936,6 +13712,7 @@ class VpnChannelStatus(VapiStruct):
         self.last_info_message = last_info_message
         self.failure_message = failure_message
         VapiStruct.__init__(self)
+
 
 VpnChannelStatus._set_binding_type(type.StructType(
     'com.vmware.vmc.model.vpn_channel_status', {
@@ -13023,6 +13800,7 @@ class VpnTunnelStatus(VapiStruct):
         self.failure_message = failure_message
         self.tunnel_status = tunnel_status
         VapiStruct.__init__(self)
+
 
 VpnTunnelStatus._set_binding_type(type.StructType(
     'com.vmware.vmc.model.vpn_tunnel_status', {
@@ -13115,6 +13893,7 @@ class VpnTunnelTrafficStats(VapiStruct):
         self.tx_bytes_from_local_subnet = tx_bytes_from_local_subnet
         VapiStruct.__init__(self)
 
+
 VpnTunnelTrafficStats._set_binding_type(type.StructType(
     'com.vmware.vmc.model.vpn_tunnel_traffic_stats', {
         'packets_out': type.OptionalType(type.StringType()),
@@ -13184,6 +13963,7 @@ class VsanConfigConstraints(VapiStruct):
         self.num_hosts = num_hosts
         VapiStruct.__init__(self)
 
+
 VsanConfigConstraints._set_binding_type(type.StructType(
     'com.vmware.vmc.model.vsan_config_constraints', {
         'max_capacity': type.IntegerType(),
@@ -13227,6 +14007,7 @@ class VsanEncryptionConfig(VapiStruct):
         self.port = port
         self.certificate = certificate
         VapiStruct.__init__(self)
+
 
 VsanEncryptionConfig._set_binding_type(type.StructType(
     'com.vmware.vmc.model.vsan_encryption_config', {

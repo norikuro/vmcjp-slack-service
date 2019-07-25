@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class IpBlocks(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.pools.ip_blocks'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -222,7 +225,10 @@ class IpPools(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.pools.ip_pools'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -302,8 +308,8 @@ class IpPools(VapiInterface):
         """
         Deletes the specified IP address pool. By default, if the IpPool is
         used in other configurations (such as transport node template), it
-        won't be deleted. In such situations, pass \\\\"force=true\\\\" as
-        query param to force delete the IpPool
+        won't be deleted. In such situations, pass \"force=true\" as query
+        param to force delete the IpPool
 
         :type  pool_id: :class:`str`
         :param pool_id: IP pool ID (required)
@@ -448,7 +454,10 @@ class IpSubnets(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.pools.ip_subnets'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -498,13 +507,13 @@ class IpSubnets(VapiInterface):
                ):
         """
         Carves out a subnet of requested size from the specified IP block. The
-        \\\\"size\\\\" parameter and the \\\\"block_id \\\\" are the requireds
-        field while invoking this API. If the IP block has sufficient
-        resources/space to allocate a subnet of specified size, the response
-        will contain all the details of the newly created subnet including the
-        display_name, description, cidr & allocation_ranges. Returns a conflict
-        error if the IP block does not have enough resources/space to allocate
-        a subnet of the requested size.
+        \"size\" parameter and the \"block_id \" are the requireds field while
+        invoking this API. If the IP block has sufficient resources/space to
+        allocate a subnet of specified size, the response will contain all the
+        details of the newly created subnet including the display_name,
+        description, cidr & allocation_ranges. Returns a conflict error if the
+        IP block does not have enough resources/space to allocate a subnet of
+        the requested size.
 
         :type  ip_block_subnet: :class:`com.vmware.nsx.model_client.IpBlockSubnet`
         :param ip_block_subnet: (required)
@@ -637,7 +646,10 @@ class MacPools(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.pools.mac_pools'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -721,7 +733,10 @@ class VniPools(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.pools.vni_pools'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -849,7 +864,10 @@ class VtepLabelPools(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.pools.vtep_label_pools'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -959,7 +977,8 @@ class _IpBlocksStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -990,7 +1009,8 @@ class _IpBlocksStub(ApiInterfaceStub):
                 'block_id': 'block-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1021,7 +1041,8 @@ class _IpBlocksStub(ApiInterfaceStub):
                 'block_id': 'block-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1060,7 +1081,8 @@ class _IpBlocksStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1095,7 +1117,8 @@ class _IpBlocksStub(ApiInterfaceStub):
                 'block_id': 'block-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1188,7 +1211,8 @@ class _IpPoolsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'action': 'action',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for create operation
@@ -1219,7 +1243,8 @@ class _IpPoolsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1252,7 +1277,8 @@ class _IpPoolsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1283,7 +1309,8 @@ class _IpPoolsStub(ApiInterfaceStub):
                 'pool_id': 'pool-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1322,7 +1349,8 @@ class _IpPoolsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1355,7 +1383,8 @@ class _IpPoolsStub(ApiInterfaceStub):
                 'pool_id': 'pool-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1457,7 +1486,8 @@ class _IpSubnetsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'action': 'action',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for create operation
@@ -1490,7 +1520,8 @@ class _IpSubnetsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1521,7 +1552,8 @@ class _IpSubnetsStub(ApiInterfaceStub):
                 'subnet_id': 'subnet-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1552,7 +1584,8 @@ class _IpSubnetsStub(ApiInterfaceStub):
                 'subnet_id': 'subnet-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1593,7 +1626,8 @@ class _IpSubnetsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1680,7 +1714,8 @@ class _MacPoolsStub(ApiInterfaceStub):
                 'pool_id': 'pool-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1719,7 +1754,8 @@ class _MacPoolsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1779,7 +1815,8 @@ class _VniPoolsStub(ApiInterfaceStub):
                 'pool_id': 'pool-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1818,7 +1855,8 @@ class _VniPoolsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1851,7 +1889,8 @@ class _VniPoolsStub(ApiInterfaceStub):
                 'pool_id': 'pool-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1920,7 +1959,8 @@ class _VtepLabelPoolsStub(ApiInterfaceStub):
                 'pool_id': 'pool-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1959,7 +1999,8 @@ class _VtepLabelPoolsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

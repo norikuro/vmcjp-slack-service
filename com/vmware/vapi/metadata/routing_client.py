@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -58,6 +58,7 @@ class ComponentData(VapiStruct):
         self.fingerprint = fingerprint
         VapiStruct.__init__(self)
 
+
 ComponentData._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.routing.component_data', {
         'info': type.ReferenceType(__name__, 'ComponentInfo'),
@@ -103,6 +104,7 @@ class ComponentInfo(VapiStruct):
         self.packages = packages
         VapiStruct.__init__(self)
 
+
 ComponentInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.routing.component_info', {
         'packages': type.MapType(type.IdType(), type.ReferenceType(__name__, 'PackageInfo')),
@@ -137,6 +139,7 @@ class OperationInfo(VapiStruct):
         """
         self.routing_info = routing_info
         VapiStruct.__init__(self)
+
 
 OperationInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.routing.operation_info', {
@@ -190,6 +193,7 @@ class PackageInfo(VapiStruct):
         self.routing_info = routing_info
         self.services = services
         VapiStruct.__init__(self)
+
 
 PackageInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.routing.package_info', {
@@ -268,6 +272,7 @@ class RoutingInfo(VapiStruct):
         self.id_types = id_types
         VapiStruct.__init__(self)
 
+
 RoutingInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.routing.routing_info', {
         'routing_path': type.StringType(),
@@ -324,6 +329,7 @@ class ServiceInfo(VapiStruct):
         self.routing_info = routing_info
         self.operations = operations
         VapiStruct.__init__(self)
+
 
 ServiceInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.routing.service_info', {
@@ -599,6 +605,7 @@ class Source(VapiInterface):
             self.address = address
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vapi.metadata.routing.source.info', {
             'description': type.StringType(),
@@ -666,6 +673,7 @@ class Source(VapiInterface):
             self.filepath = filepath
             self.address = address
             VapiStruct.__init__(self)
+
 
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vapi.metadata.routing.source.create_spec', {

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -130,6 +130,7 @@ class Sata(VapiInterface):
             self.pci_slot_number = pci_slot_number
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.adapter.sata.info', {
             'label': type.StringType(),
@@ -178,6 +179,7 @@ class Sata(VapiInterface):
             self.pci_slot_number = pci_slot_number
             VapiStruct.__init__(self)
 
+
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.adapter.sata.create_spec', {
             'type': type.OptionalType(type.ReferenceType(__name__, 'Sata.Type')),
@@ -217,6 +219,7 @@ class Sata(VapiInterface):
             """
             self.adapter = adapter
             VapiStruct.__init__(self)
+
 
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.adapter.sata.summary', {
@@ -556,6 +559,7 @@ class Scsi(VapiInterface):
             self.sharing = sharing
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.adapter.scsi.info', {
             'label': type.StringType(),
@@ -612,6 +616,7 @@ class Scsi(VapiInterface):
             self.sharing = sharing
             VapiStruct.__init__(self)
 
+
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.adapter.scsi.create_spec', {
             'type': type.OptionalType(type.ReferenceType(__name__, 'Scsi.Type')),
@@ -651,6 +656,7 @@ class Scsi(VapiInterface):
             self.sharing = sharing
             VapiStruct.__init__(self)
 
+
     UpdateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.adapter.scsi.update_spec', {
             'sharing': type.OptionalType(type.ReferenceType(__name__, 'Scsi.Sharing')),
@@ -688,6 +694,7 @@ class Scsi(VapiInterface):
             """
             self.adapter = adapter
             VapiStruct.__init__(self)
+
 
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.adapter.scsi.summary', {

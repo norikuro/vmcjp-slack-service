@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -113,6 +113,7 @@ class Cluster(VapiInterface):
             self.datacenters = datacenters
             VapiStruct.__init__(self)
 
+
     FilterSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.cluster.filter_spec', {
             'clusters': type.OptionalType(type.SetType(type.IdType())),
@@ -167,6 +168,7 @@ class Cluster(VapiInterface):
             self.drs_enabled = drs_enabled
             VapiStruct.__init__(self)
 
+
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.cluster.summary', {
             'cluster': type.IdType(resource_types='ClusterComputeResource'),
@@ -210,6 +212,7 @@ class Cluster(VapiInterface):
             self.name = name
             self.resource_pool = resource_pool
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.cluster.info', {
@@ -338,6 +341,7 @@ class Datacenter(VapiInterface):
             self.folder = folder
             VapiStruct.__init__(self)
 
+
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.datacenter.create_spec', {
             'name': type.StringType(),
@@ -396,6 +400,7 @@ class Datacenter(VapiInterface):
             self.folders = folders
             VapiStruct.__init__(self)
 
+
     FilterSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.datacenter.filter_spec', {
             'datacenters': type.OptionalType(type.SetType(type.IdType())),
@@ -438,6 +443,7 @@ class Datacenter(VapiInterface):
             self.datacenter = datacenter
             self.name = name
             VapiStruct.__init__(self)
+
 
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.datacenter.summary', {
@@ -503,6 +509,7 @@ class Datacenter(VapiInterface):
             self.network_folder = network_folder
             self.vm_folder = vm_folder
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.datacenter.info', {
@@ -797,6 +804,7 @@ class Datastore(VapiInterface):
             self.thin_provisioning_supported = thin_provisioning_supported
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.datastore.info', {
             'name': type.StringType(),
@@ -876,6 +884,7 @@ class Datastore(VapiInterface):
             self.datacenters = datacenters
             VapiStruct.__init__(self)
 
+
     FilterSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.datastore.filter_spec', {
             'datastores': type.OptionalType(type.SetType(type.IdType())),
@@ -941,6 +950,7 @@ class Datastore(VapiInterface):
             self.capacity = capacity
             VapiStruct.__init__(self)
 
+
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.datastore.summary', {
             'datastore': type.IdType(resource_types='Datastore'),
@@ -987,7 +997,7 @@ class Datastore(VapiInterface):
              filter=None,
              ):
         """
-        Returns information about at most 1000 visible (subject to permission
+        Returns information about at most 2500 visible (subject to permission
         checks) datastores in vCenter matching the
         :class:`Datastore.FilterSpec`.
 
@@ -1007,7 +1017,7 @@ class Datastore(VapiInterface):
             if the :attr:`Datastore.FilterSpec.types` attribute contains a
             value that is not supported by the server.
         :raise: :class:`com.vmware.vapi.std.errors_client.UnableToAllocateResource` 
-            if more than 1000 datastores match the
+            if more than 2500 datastores match the
             :class:`Datastore.FilterSpec`.
         :raise: :class:`com.vmware.vapi.std.errors_client.ServiceUnavailable` 
             if the system is unable to communicate with a service to complete
@@ -1167,6 +1177,7 @@ class Folder(VapiInterface):
             self.datacenters = datacenters
             VapiStruct.__init__(self)
 
+
     FilterSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.folder.filter_spec', {
             'folders': type.OptionalType(type.SetType(type.IdType())),
@@ -1215,6 +1226,7 @@ class Folder(VapiInterface):
             self.name = name
             self.type = type
             VapiStruct.__init__(self)
+
 
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.folder.summary', {
@@ -1462,6 +1474,7 @@ class Host(VapiInterface):
             self.force_add = force_add
             VapiStruct.__init__(self)
 
+
         class ThumbprintVerification(Enum):
             """
             The ``Host.CreateSpec.ThumbprintVerification`` class defines the thumbprint
@@ -1607,6 +1620,7 @@ class Host(VapiInterface):
             self.connection_states = connection_states
             VapiStruct.__init__(self)
 
+
     FilterSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.host.filter_spec', {
             'hosts': type.OptionalType(type.SetType(type.IdType())),
@@ -1673,6 +1687,7 @@ class Host(VapiInterface):
             self.connection_state = connection_state
             self.power_state = power_state
             VapiStruct.__init__(self)
+
 
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.host.summary', {
@@ -1778,7 +1793,7 @@ class Host(VapiInterface):
              filter=None,
              ):
         """
-        Returns information about at most 1000 visible (subject to permission
+        Returns information about at most 2500 visible (subject to permission
         checks) hosts in vCenter matching the :class:`Host.FilterSpec`.
 
         :type  filter: :class:`Host.FilterSpec` or ``None``
@@ -1793,7 +1808,7 @@ class Host(VapiInterface):
             if the :attr:`Host.FilterSpec.connection_states` attribute contains
             a value that is not supported by the server.
         :raise: :class:`com.vmware.vapi.std.errors_client.UnableToAllocateResource` 
-            if more than 1000 hosts match the :class:`Host.FilterSpec`.
+            if more than 2500 hosts match the :class:`Host.FilterSpec`.
         :raise: :class:`com.vmware.vapi.std.errors_client.ServiceUnavailable` 
             if the system is unable to communicate with a service to complete
             the request.
@@ -2003,6 +2018,7 @@ class Network(VapiInterface):
             self.datacenters = datacenters
             VapiStruct.__init__(self)
 
+
     FilterSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.network.filter_spec', {
             'networks': type.OptionalType(type.SetType(type.IdType())),
@@ -2051,6 +2067,7 @@ class Network(VapiInterface):
             self.name = name
             self.type = type
             VapiStruct.__init__(self)
+
 
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.network.summary', {
@@ -2155,6 +2172,7 @@ class ResourcePool(VapiInterface):
             self.resource_pools = resource_pools
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.resource_pool.info', {
             'name': type.StringType(),
@@ -2249,6 +2267,7 @@ class ResourcePool(VapiInterface):
             self.clusters = clusters
             VapiStruct.__init__(self)
 
+
     FilterSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.resource_pool.filter_spec', {
             'resource_pools': type.OptionalType(type.SetType(type.IdType())),
@@ -2294,6 +2313,7 @@ class ResourcePool(VapiInterface):
             self.resource_pool = resource_pool
             self.name = name
             VapiStruct.__init__(self)
+
 
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.resource_pool.summary', {
@@ -2372,6 +2392,11 @@ class VM(VapiInterface):
     The ``VM`` class provides methods for managing the lifecycle of a virtual
     machine.
     """
+    RESOURCE_TYPE = "VirtualMachine"
+    """
+    Resource type for virtual machines.
+
+    """
 
     _VAPI_SERVICE_ID = 'com.vmware.vcenter.VM'
     """
@@ -2383,6 +2408,173 @@ class VM(VapiInterface):
         :param config: Configuration to be used for creating the stub.
         """
         VapiInterface.__init__(self, config, _VMStub)
+
+    class InventoryPlacementSpec(VapiStruct):
+        """
+        The ``VM.InventoryPlacementSpec`` class contains information used to place
+        a virtual machine in the vCenter inventory.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     folder=None,
+                    ):
+            """
+            :type  folder: :class:`str` or ``None``
+            :param folder: Virtual machine folder into which the virtual machine should be
+                placed.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type: ``Folder``.
+                When methods return a value of this class as a return value, the
+                attribute will be an identifier for the resource type: ``Folder``.
+                This attribute is currently required. In the future, if this
+                attribute is None, the system will attempt to choose a suitable
+                folder for the virtual machine; if a folder cannot be chosen, the
+                virtual machine creation operation will fail.
+            """
+            self.folder = folder
+            VapiStruct.__init__(self)
+
+
+    InventoryPlacementSpec._set_binding_type(type.StructType(
+        'com.vmware.vcenter.VM.inventory_placement_spec', {
+            'folder': type.OptionalType(type.IdType()),
+        },
+        InventoryPlacementSpec,
+        False,
+        None))
+
+
+    class ComputePlacementSpec(VapiStruct):
+        """
+        The ``VM.ComputePlacementSpec`` class contains information used to place a
+        virtual machine on compute resources.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     resource_pool=None,
+                     host=None,
+                     cluster=None,
+                    ):
+            """
+            :type  resource_pool: :class:`str` or ``None``
+            :param resource_pool: Resource pool into which the virtual machine should be placed.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``ResourcePool``. When methods return a value of this class as a
+                return value, the attribute will be an identifier for the resource
+                type: ``ResourcePool``.
+                This attribute is currently required if both ``host`` and
+                ``cluster`` are None. In the future, if this attribute is None, the
+                system will attempt to choose a suitable resource pool for the
+                virtual machine; if a resource pool cannot be chosen, the virtual
+                machine creation operation will fail.
+            :type  host: :class:`str` or ``None``
+            :param host: Host onto which the virtual machine should be placed. 
+                
+                If ``host`` and ``resourcePool`` are both specified,
+                ``resourcePool`` must belong to ``host``. 
+                
+                If ``host`` and ``cluster`` are both specified, ``host`` must be a
+                member of ``cluster``.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``HostSystem``. When methods return a value of this class as a
+                return value, the attribute will be an identifier for the resource
+                type: ``HostSystem``.
+                This attribute may be None if ``resourcePool`` or ``cluster`` is
+                specified. If None, the system will attempt to choose a suitable
+                host for the virtual machine; if a host cannot be chosen, the
+                virtual machine creation operation will fail.
+            :type  cluster: :class:`str` or ``None``
+            :param cluster: Cluster into which the virtual machine should be placed. 
+                
+                If ``cluster`` and ``resourcePool`` are both specified,
+                ``resourcePool`` must belong to ``cluster``. 
+                
+                If ``cluster`` and ``host`` are both specified, ``host`` must be a
+                member of ``cluster``.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``ClusterComputeResource``. When methods return a value of this
+                class as a return value, the attribute will be an identifier for
+                the resource type: ``ClusterComputeResource``.
+                If ``resourcePool`` or ``host`` is specified, it is recommended
+                that this attribute be None.
+            """
+            self.resource_pool = resource_pool
+            self.host = host
+            self.cluster = cluster
+            VapiStruct.__init__(self)
+
+
+    ComputePlacementSpec._set_binding_type(type.StructType(
+        'com.vmware.vcenter.VM.compute_placement_spec', {
+            'resource_pool': type.OptionalType(type.IdType()),
+            'host': type.OptionalType(type.IdType()),
+            'cluster': type.OptionalType(type.IdType()),
+        },
+        ComputePlacementSpec,
+        False,
+        None))
+
+
+    class StoragePlacementSpec(VapiStruct):
+        """
+        The ``VM.StoragePlacementSpec`` class contains information used to store a
+        virtual machine's files.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     datastore=None,
+                    ):
+            """
+            :type  datastore: :class:`str` or ``None``
+            :param datastore: Datastore on which the virtual machine's configuration state should
+                be stored. This datastore will also be used for any virtual disks
+                that are created as part of the virtual machine creation operation.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``Datastore``. When methods return a value of this class as a
+                return value, the attribute will be an identifier for the resource
+                type: ``Datastore``.
+                This attribute is currently required. In the future, if this
+                attribute is None, the system will attempt to choose suitable
+                storage for the virtual machine; if storage cannot be chosen, the
+                virtual machine creation operation will fail.
+            """
+            self.datastore = datastore
+            VapiStruct.__init__(self)
+
+
+    StoragePlacementSpec._set_binding_type(type.StructType(
+        'com.vmware.vcenter.VM.storage_placement_spec', {
+            'datastore': type.OptionalType(type.IdType()),
+        },
+        StoragePlacementSpec,
+        False,
+        None))
+
 
     class PlacementSpec(VapiStruct):
         """
@@ -2481,6 +2673,7 @@ class VM(VapiInterface):
             self.datastore = datastore
             VapiStruct.__init__(self)
 
+
     PlacementSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.VM.placement_spec', {
             'folder': type.OptionalType(type.IdType()),
@@ -2524,6 +2717,7 @@ class VM(VapiInterface):
             """
             self.policy = policy
             VapiStruct.__init__(self)
+
 
     StoragePolicySpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.VM.storage_policy_spec', {
@@ -2661,6 +2855,7 @@ class VM(VapiInterface):
             self.storage_policy = storage_policy
             VapiStruct.__init__(self)
 
+
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.VM.create_spec', {
             'guest_OS': type.ReferenceType('com.vmware.vcenter.vm_client', 'GuestOS'),
@@ -2704,7 +2899,9 @@ class VM(VapiInterface):
         def __init__(self,
                      guest_os=None,
                      name=None,
+                     identity=None,
                      power_state=None,
+                     instant_clone_frozen=None,
                      hardware=None,
                      boot=None,
                      boot_devices=None,
@@ -2724,8 +2921,18 @@ class VM(VapiInterface):
             :param guest_os: Guest OS.
             :type  name: :class:`str`
             :param name: Virtual machine name.
+            :type  identity: :class:`com.vmware.vcenter.vm_client.Identity.Info`
+            :param identity: Identity of the virtual machine. This attribute was added in
+                vSphere API 6.7.1.
+                This attribute is optional because it was added in a newer version
+                than its parent node.
             :type  power_state: :class:`com.vmware.vcenter.vm_client.Power.State`
             :param power_state: Power state of the virtual machine.
+            :type  instant_clone_frozen: :class:`bool`
+            :param instant_clone_frozen: Indicates whether the virtual machine is frozen for instant clone,
+                or not. This attribute was added in vSphere API 6.7.1.
+                This attribute is optional because it was added in a newer version
+                than its parent node.
             :type  hardware: :class:`com.vmware.vcenter.vm_client.Hardware.Info`
             :param hardware: Virtual hardware version information.
             :type  boot: :class:`com.vmware.vcenter.vm.hardware_client.Boot.Info`
@@ -2804,7 +3011,9 @@ class VM(VapiInterface):
             """
             self.guest_os = guest_os
             self.name = name
+            self.identity = identity
             self.power_state = power_state
+            self.instant_clone_frozen = instant_clone_frozen
             self.hardware = hardware
             self.boot = boot
             self.boot_devices = boot_devices
@@ -2820,11 +3029,14 @@ class VM(VapiInterface):
             self.scsi_adapters = scsi_adapters
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.VM.info', {
             'guest_OS': type.ReferenceType('com.vmware.vcenter.vm_client', 'GuestOS'),
             'name': type.StringType(),
+            'identity': type.OptionalType(type.ReferenceType('com.vmware.vcenter.vm_client', 'Identity.Info')),
             'power_state': type.ReferenceType('com.vmware.vcenter.vm_client', 'Power.State'),
+            'instant_clone_frozen': type.OptionalType(type.BooleanType()),
             'hardware': type.ReferenceType('com.vmware.vcenter.vm_client', 'Hardware.Info'),
             'boot': type.ReferenceType('com.vmware.vcenter.vm.hardware_client', 'Boot.Info'),
             'boot_devices': type.ListType(type.ReferenceType('com.vmware.vcenter.vm.hardware.boot_client', 'Device.Entry')),
@@ -2840,6 +3052,189 @@ class VM(VapiInterface):
             'scsi_adapters': type.MapType(type.IdType(), type.ReferenceType('com.vmware.vcenter.vm.hardware.adapter_client', 'Scsi.Info')),
         },
         Info,
+        False,
+        None))
+
+
+    class InstantClonePlacementSpec(VapiStruct):
+        """
+        The ``VM.InstantClonePlacementSpec`` class contains information used to
+        place an InstantClone of a virtual machine onto resources within the
+        vCenter inventory. This class was added in vSphere API 6.7.1.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     folder=None,
+                     resource_pool=None,
+                     datastore=None,
+                    ):
+            """
+            :type  folder: :class:`str` or ``None``
+            :param folder: Virtual machine folder into which the InstantCloned virtual machine
+                should be placed. This attribute was added in vSphere API 6.7.1.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type: ``Folder``.
+                When methods return a value of this class as a return value, the
+                attribute will be an identifier for the resource type: ``Folder``.
+                If attribute is None, the system will use the virtual machine
+                folder of the source virtual machine.
+            :type  resource_pool: :class:`str` or ``None``
+            :param resource_pool: Resource pool into which the InstantCloned virtual machine should
+                be placed. This attribute was added in vSphere API 6.7.1.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``ResourcePool``. When methods return a value of this class as a
+                return value, the attribute will be an identifier for the resource
+                type: ``ResourcePool``.
+                If attribute is None, the system will use the resource pool of the
+                source virtual machine.
+            :type  datastore: :class:`str` or ``None``
+            :param datastore: Datastore on which the InstantCloned virtual machine's
+                configuration state should be stored. This datastore will also be
+                used for any virtual disks that are created as part of the virtual
+                machine InstantClone operation. This attribute was added in vSphere
+                API 6.7.1.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``Datastore``. When methods return a value of this class as a
+                return value, the attribute will be an identifier for the resource
+                type: ``Datastore``.
+                If attribute is None, the system will use the datastore of the
+                source virtual machine.
+            """
+            self.folder = folder
+            self.resource_pool = resource_pool
+            self.datastore = datastore
+            VapiStruct.__init__(self)
+
+
+    InstantClonePlacementSpec._set_binding_type(type.StructType(
+        'com.vmware.vcenter.VM.instant_clone_placement_spec', {
+            'folder': type.OptionalType(type.IdType()),
+            'resource_pool': type.OptionalType(type.IdType()),
+            'datastore': type.OptionalType(type.IdType()),
+        },
+        InstantClonePlacementSpec,
+        False,
+        None))
+
+
+    class InstantCloneSpec(VapiStruct):
+        """
+        Document-based InstantClone spec. This class was added in vSphere API
+        6.7.1.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     source=None,
+                     name=None,
+                     placement=None,
+                     nics_to_update=None,
+                     disconnect_all_nics=None,
+                     parallel_ports_to_update=None,
+                     serial_ports_to_update=None,
+                     bios_uuid=None,
+                    ):
+            """
+            :type  source: :class:`str`
+            :param source: Virtual machine to InstantClone from. This attribute was added in
+                vSphere API 6.7.1.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``VirtualMachine``. When methods return a value of this class as a
+                return value, the attribute will be an identifier for the resource
+                type: ``VirtualMachine``.
+            :type  name: :class:`str`
+            :param name: Name of the new virtual machine. This attribute was added in
+                vSphere API 6.7.1.
+            :type  placement: :class:`VM.InstantClonePlacementSpec` or ``None``
+            :param placement: Virtual machine placement information. This attribute was added in
+                vSphere API 6.7.1.
+                If this attribute is None, the system will use the values from the
+                source virtual machine. If specified, each field will be used for
+                placement. If the fields result in disjoint placement the operation
+                will fail. If the fields along with the placement values of the
+                source virtual machine result in disjoint placement the operation
+                will fail.
+            :type  nics_to_update: (:class:`dict` of :class:`str` and :class:`com.vmware.vcenter.vm.hardware_client.Ethernet.UpdateSpec`) or ``None``
+            :param nics_to_update: Map of NICs to update. This attribute was added in vSphere API
+                6.7.1.
+                When clients pass a value of this class as a parameter, the key in
+                the attribute :class:`dict` must be an identifier for the resource
+                type: ``com.vmware.vcenter.vm.hardware.Ethernet``. When methods
+                return a value of this class as a return value, the key in the
+                attribute :class:`dict` will be an identifier for the resource
+                type: ``com.vmware.vcenter.vm.hardware.Ethernet``.
+                If None, no NICs will be updated.
+            :type  disconnect_all_nics: :class:`bool` or ``None``
+            :param disconnect_all_nics: Indicates whether all NICs on the destination virtual machine
+                should be disconnected from the newtwork. This attribute was added
+                in vSphere API 6.7.1.
+                If None, connection status of all NICs on the destination virtual
+                machine will be the same as on the source virtual machine.
+            :type  parallel_ports_to_update: (:class:`dict` of :class:`str` and :class:`com.vmware.vcenter.vm.hardware_client.Parallel.UpdateSpec`) or ``None``
+            :param parallel_ports_to_update: Map of parallel ports to Update. This attribute was added in
+                vSphere API 6.7.1.
+                When clients pass a value of this class as a parameter, the key in
+                the attribute :class:`dict` must be an identifier for the resource
+                type: ``com.vmware.vcenter.vm.hardware.ParallelPort``. When methods
+                return a value of this class as a return value, the key in the
+                attribute :class:`dict` will be an identifier for the resource
+                type: ``com.vmware.vcenter.vm.hardware.ParallelPort``.
+                If None, no parallel ports will be updated.
+            :type  serial_ports_to_update: (:class:`dict` of :class:`str` and :class:`com.vmware.vcenter.vm.hardware_client.Serial.UpdateSpec`) or ``None``
+            :param serial_ports_to_update: Map of serial ports to Update. This attribute was added in vSphere
+                API 6.7.1.
+                When clients pass a value of this class as a parameter, the key in
+                the attribute :class:`dict` must be an identifier for the resource
+                type: ``com.vmware.vcenter.vm.hardware.SerialPort``. When methods
+                return a value of this class as a return value, the key in the
+                attribute :class:`dict` will be an identifier for the resource
+                type: ``com.vmware.vcenter.vm.hardware.SerialPort``.
+                If None, no serial ports will be updated.
+            :type  bios_uuid: :class:`str` or ``None``
+            :param bios_uuid: 128-bit SMBIOS UUID of a virtual machine represented as a
+                hexadecimal string in "12345678-abcd-1234-cdef-123456789abc"
+                format. This attribute was added in vSphere API 6.7.1.
+                If None, will be generated.
+            """
+            self.source = source
+            self.name = name
+            self.placement = placement
+            self.nics_to_update = nics_to_update
+            self.disconnect_all_nics = disconnect_all_nics
+            self.parallel_ports_to_update = parallel_ports_to_update
+            self.serial_ports_to_update = serial_ports_to_update
+            self.bios_uuid = bios_uuid
+            VapiStruct.__init__(self)
+
+
+    InstantCloneSpec._set_binding_type(type.StructType(
+        'com.vmware.vcenter.VM.instant_clone_spec', {
+            'source': type.IdType(resource_types='VirtualMachine'),
+            'name': type.StringType(),
+            'placement': type.OptionalType(type.ReferenceType(__name__, 'VM.InstantClonePlacementSpec')),
+            'nics_to_update': type.OptionalType(type.MapType(type.IdType(), type.ReferenceType('com.vmware.vcenter.vm.hardware_client', 'Ethernet.UpdateSpec'))),
+            'disconnect_all_nics': type.OptionalType(type.BooleanType()),
+            'parallel_ports_to_update': type.OptionalType(type.MapType(type.IdType(), type.ReferenceType('com.vmware.vcenter.vm.hardware_client', 'Parallel.UpdateSpec'))),
+            'serial_ports_to_update': type.OptionalType(type.MapType(type.IdType(), type.ReferenceType('com.vmware.vcenter.vm.hardware_client', 'Serial.UpdateSpec'))),
+            'bios_uuid': type.OptionalType(type.StringType()),
+        },
+        InstantCloneSpec,
         False,
         None))
 
@@ -2946,6 +3341,7 @@ class VM(VapiInterface):
             self.power_states = power_states
             VapiStruct.__init__(self)
 
+
     FilterSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.VM.filter_spec', {
             'vms': type.OptionalType(type.SetType(type.IdType())),
@@ -3019,6 +3415,7 @@ class VM(VapiInterface):
             self.memory_size_mib = memory_size_mib
             VapiStruct.__init__(self)
 
+
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.VM.summary', {
             'vm': type.IdType(resource_types='VirtualMachine'),
@@ -3028,6 +3425,191 @@ class VM(VapiInterface):
             'memory_size_MiB': type.OptionalType(type.IntegerType()),
         },
         Summary,
+        False,
+        None))
+
+
+    class RegisterPlacementSpec(VapiStruct):
+        """
+        The ``VM.RegisterPlacementSpec`` class contains information used to place a
+        virtual machine, created from existing virtual machine files on storage,
+        onto resources within the vCenter inventory. This class was added in
+        vSphere API 6.8.7.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     folder=None,
+                     resource_pool=None,
+                     host=None,
+                     cluster=None,
+                    ):
+            """
+            :type  folder: :class:`str` or ``None``
+            :param folder: Virtual machine folder into which the virtual machine should be
+                placed.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type: ``Folder``.
+                When methods return a value of this class as a return value, the
+                attribute will be an identifier for the resource type: ``Folder``.
+                This attribute is currently required. In the future, if this
+                attribute is None, the system will attempt to choose a suitable
+                folder for the virtual machine; if a folder cannot be chosen, the
+                virtual machine creation operation will fail.
+            :type  resource_pool: :class:`str` or ``None``
+            :param resource_pool: Resource pool into which the virtual machine should be placed.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``ResourcePool``. When methods return a value of this class as a
+                return value, the attribute will be an identifier for the resource
+                type: ``ResourcePool``.
+                This attribute is currently required if both ``host`` and
+                ``cluster`` are None. In the future, if this attribute is None, the
+                system will attempt to choose a suitable resource pool for the
+                virtual machine; if a resource pool cannot be chosen, the virtual
+                machine creation operation will fail.
+            :type  host: :class:`str` or ``None``
+            :param host: Host onto which the virtual machine should be placed. 
+                
+                If ``host`` and ``resourcePool`` are both specified,
+                ``resourcePool`` must belong to ``host``. 
+                
+                If ``host`` and ``cluster`` are both specified, ``host`` must be a
+                member of ``cluster``.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``HostSystem``. When methods return a value of this class as a
+                return value, the attribute will be an identifier for the resource
+                type: ``HostSystem``.
+                This attribute may be None if ``resourcePool`` or ``cluster`` is
+                specified. If None, the system will attempt to choose a suitable
+                host for the virtual machine; if a host cannot be chosen, the
+                virtual machine creation operation will fail.
+            :type  cluster: :class:`str` or ``None``
+            :param cluster: Cluster into which the virtual machine should be placed. 
+                
+                If ``cluster`` and ``resourcePool`` are both specified,
+                ``resourcePool`` must belong to ``cluster``. 
+                
+                If ``cluster`` and ``host`` are both specified, ``host`` must be a
+                member of ``cluster``.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``ClusterComputeResource``. When methods return a value of this
+                class as a return value, the attribute will be an identifier for
+                the resource type: ``ClusterComputeResource``.
+                If ``resourcePool`` or ``host`` is specified, it is recommended
+                that this attribute be None.
+            """
+            self.folder = folder
+            self.resource_pool = resource_pool
+            self.host = host
+            self.cluster = cluster
+            VapiStruct.__init__(self)
+
+
+    RegisterPlacementSpec._set_binding_type(type.StructType(
+        'com.vmware.vcenter.VM.register_placement_spec', {
+            'folder': type.OptionalType(type.IdType()),
+            'resource_pool': type.OptionalType(type.IdType()),
+            'host': type.OptionalType(type.IdType()),
+            'cluster': type.OptionalType(type.IdType()),
+        },
+        RegisterPlacementSpec,
+        False,
+        None))
+
+
+    class RegisterSpec(VapiStruct):
+        """
+        The ``VM.RegisterSpec`` class contains information used to create a virtual
+        machine from existing virtual machine files on storage. 
+        
+        The location of the virtual machine files on storage must be specified by
+        providing either :attr:`VM.RegisterSpec.datastore` and
+        :attr:`VM.RegisterSpec.path` or by providing
+        :attr:`VM.RegisterSpec.datastore_path`. If
+        :attr:`VM.RegisterSpec.datastore` and :attr:`VM.RegisterSpec.path` are
+        :class:`set`, :attr:`VM.RegisterSpec.datastore_path` must be None, and if
+        :attr:`VM.RegisterSpec.datastore_path` is :class:`set`,
+        :attr:`VM.RegisterSpec.datastore` and :attr:`VM.RegisterSpec.path` must be
+        None.. This class was added in vSphere API 6.8.7.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     datastore=None,
+                     path=None,
+                     datastore_path=None,
+                     name=None,
+                     placement=None,
+                    ):
+            """
+            :type  datastore: :class:`str` or ``None``
+            :param datastore: Identifier of the datastore on which the virtual machine's
+                configuration state is stored. This attribute was added in vSphere
+                API 6.8.7.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``Datastore``. When methods return a value of this class as a
+                return value, the attribute will be an identifier for the resource
+                type: ``Datastore``.
+                If None, :attr:`VM.RegisterSpec.path` must also be None and
+                :attr:`VM.RegisterSpec.datastore_path` must be :class:`set`.
+            :type  path: :class:`str` or ``None``
+            :param path: Path to the virtual machine's configuration file on the datastore
+                corresponding to {\\\\@link #datastore). This attribute was added
+                in vSphere API 6.8.7.
+                If None, :attr:`VM.RegisterSpec.datastore` must also be None and
+                :attr:`VM.RegisterSpec.datastore_path` must be :class:`set`.
+            :type  datastore_path: :class:`str` or ``None``
+            :param datastore_path: Datastore path for the virtual machine's configuration file in the
+                format "[datastore name] path". For example "[storage1]
+                Test-VM/Test-VM.vmx". This attribute was added in vSphere API
+                6.8.7.
+                If None, both :attr:`VM.RegisterSpec.datastore` and
+                :attr:`VM.RegisterSpec.path` must be :class:`set`.
+            :type  name: :class:`str` or ``None``
+            :param name: Virtual machine name. This attribute was added in vSphere API
+                6.8.7.
+                If None, the display name from the virtual machine's configuration
+                file will be used.
+            :type  placement: :class:`VM.RegisterPlacementSpec` or ``None``
+            :param placement: Virtual machine placement information. This attribute was added in
+                vSphere API 6.8.7.
+                This attribute is currently required. In the future, if this
+                attribute is None, the system will attempt to choose suitable
+                resources on which to place the virtual machine.
+            """
+            self.datastore = datastore
+            self.path = path
+            self.datastore_path = datastore_path
+            self.name = name
+            self.placement = placement
+            VapiStruct.__init__(self)
+
+
+    RegisterSpec._set_binding_type(type.StructType(
+        'com.vmware.vcenter.VM.register_spec', {
+            'datastore': type.OptionalType(type.IdType()),
+            'path': type.OptionalType(type.StringType()),
+            'datastore_path': type.OptionalType(type.StringType()),
+            'name': type.OptionalType(type.StringType()),
+            'placement': type.OptionalType(type.ReferenceType(__name__, 'VM.RegisterPlacementSpec')),
+        },
+        RegisterSpec,
         False,
         None))
 
@@ -3074,6 +3656,45 @@ class VM(VapiInterface):
             guest-specific values.
         """
         return self._invoke('create',
+                            {
+                            'spec': spec,
+                            })
+
+    def instant_clone(self,
+                      spec,
+                      ):
+        """
+        Create an instant clone of an existing virtual machine. This method was
+        added in vSphere API 6.7.1.
+
+        :type  spec: :class:`VM.InstantCloneSpec`
+        :param spec: Virtual machine InstantCloneSpec.
+        :rtype: :class:`str`
+        :return: ID of newly-created virtual machine.
+            The return value will be an identifier for the resource type:
+            ``VirtualMachine``.
+        :raise: :class:`com.vmware.vapi.std.errors_client.AlreadyExists` 
+            if a virtual machine with the specified name already exists.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Error` 
+            if the system reports an error while responding to the request.
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidArgument` 
+            if any of the specified parameters are invalid.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
+            if any of the resources specified in spec could not be found
+        :raise: :class:`com.vmware.vapi.std.errors_client.ResourceInaccessible` 
+            if a specified resource (eg. host) is not accessible.
+        :raise: :class:`com.vmware.vapi.std.errors_client.ServiceUnavailable` 
+            if the system is unable to communicate with a service to complete
+            the request.
+        :raise: :class:`com.vmware.vapi.std.errors_client.UnableToAllocateResource` 
+            if any of the resources needed to create an instant clone could not
+            be allocated.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+            if the user can not be authenticated.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
+            if the user doesn't have the required privileges.
+        """
+        return self._invoke('instant_clone',
                             {
                             'spec': spec,
                             })
@@ -3146,7 +3767,7 @@ class VM(VapiInterface):
              filter=None,
              ):
         """
-        Returns information about at most 1000 visible (subject to permission
+        Returns information about at most 4000 visible (subject to permission
         checks) virtual machines in vCenter matching the
         :class:`VM.FilterSpec`.
 
@@ -3163,7 +3784,7 @@ class VM(VapiInterface):
             if the :attr:`VM.FilterSpec.power_states` attribute contains a
             value that is not supported by the server.
         :raise: :class:`com.vmware.vapi.std.errors_client.UnableToAllocateResource` 
-            if more than 1000 virtual machines match the
+            if more than 4000 virtual machines match the
             :class:`VM.FilterSpec`.
         :raise: :class:`com.vmware.vapi.std.errors_client.ServiceUnavailable` 
             if the system is unable to communicate with a service to complete
@@ -3176,6 +3797,83 @@ class VM(VapiInterface):
         return self._invoke('list',
                             {
                             'filter': filter,
+                            })
+
+    def register(self,
+                 spec,
+                 ):
+        """
+        Creates a virtual machine from existing virtual machine files on
+        storage. This method was added in vSphere API 6.8.7.
+
+        :type  spec: :class:`VM.RegisterSpec`
+        :param spec: Specification of the location of the virtual machine files and the
+            placement of the new virtual machine.
+        :rtype: :class:`str`
+        :return: Identifier of the newly-created virtual machine.
+            The return value will be an identifier for the resource type:
+            ``VirtualMachine``.
+        :raise: :class:`com.vmware.vapi.std.errors_client.AlreadyExists` 
+            if a virtual machine with the specified name already exists or if a
+            virtual machine using the specified virtual machine files already
+            exists.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Error` 
+            if the system reports an error while responding to the request.
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidArgument` 
+            if any of the specified parameters are invalid.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
+            if any of the resources specified in spec could not be found.
+        :raise: :class:`com.vmware.vapi.std.errors_client.ResourceInaccessible` 
+            if a specified resource (eg. host) is not accessible.
+        :raise: :class:`com.vmware.vapi.std.errors_client.ServiceUnavailable` 
+            if the system is unable to communicate with a service to complete
+            the request.
+        :raise: :class:`com.vmware.vapi.std.errors_client.UnableToAllocateResource` 
+            if any of the resources needed to register the virtual machine
+            could not be allocated.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+            if the user cannot be authenticated.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
+            if the user doesn't have the required privileges.
+        """
+        return self._invoke('register',
+                            {
+                            'spec': spec,
+                            })
+
+    def unregister(self,
+                   vm,
+                   ):
+        """
+        Removes the virtual machine corresponding to ``vm`` from the vCenter
+        inventory without removing any of the virtual machine's files from
+        storage. All high-level information stored with the management server
+        (ESXi or vCenter) is removed, including information such as statistics,
+        resource pool association, permissions, and alarms. This method was
+        added in vSphere API 6.8.7.
+
+        :type  vm: :class:`str`
+        :param vm: Identifier of the virtual machine to be unregistered.
+            The parameter must be an identifier for the resource type:
+            ``VirtualMachine``.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotAllowedInCurrentState` 
+            if the virtual machine is running (powered on).
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
+            if there is no virtual machine associated with ``vm`` in the
+            system.
+        :raise: :class:`com.vmware.vapi.std.errors_client.ResourceBusy` 
+            if the virtual machine is busy performing another operation.
+        :raise: :class:`com.vmware.vapi.std.errors_client.ServiceUnavailable` 
+            if the system is unable to communicate with a service to complete
+            the request.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+            if the user can not be authenticated.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
+            if the user doesn't have the required privileges.
+        """
+        return self._invoke('unregister',
+                            {
+                            'vm': vm,
                             })
 class Deployment(VapiInterface):
     """
@@ -3320,6 +4018,7 @@ class Deployment(VapiInterface):
             self.end_time = end_time
             self.user = user
             VapiStruct.__init__(self)
+
 
     Task._set_binding_type(type.StructType(
         'com.vmware.vcenter.deployment.task', {
@@ -3481,6 +4180,7 @@ class Deployment(VapiInterface):
             self.end_time = end_time
             self.user = user
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.deployment.info', {
@@ -4339,6 +5039,44 @@ class _VMStub(ApiInterfaceStub):
             }
         )
 
+        # properties for instant_clone operation
+        instant_clone_input_type = type.StructType('operation-input', {
+            'spec': type.ReferenceType(__name__, 'VM.InstantCloneSpec'),
+        })
+        instant_clone_error_dict = {
+            'com.vmware.vapi.std.errors.already_exists':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'AlreadyExists'),
+            'com.vmware.vapi.std.errors.error':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Error'),
+            'com.vmware.vapi.std.errors.invalid_argument':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidArgument'),
+            'com.vmware.vapi.std.errors.not_found':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+            'com.vmware.vapi.std.errors.resource_inaccessible':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'ResourceInaccessible'),
+            'com.vmware.vapi.std.errors.service_unavailable':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'ServiceUnavailable'),
+            'com.vmware.vapi.std.errors.unable_to_allocate_resource':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'UnableToAllocateResource'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
+            'com.vmware.vapi.std.errors.unauthorized':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+
+        }
+        instant_clone_input_value_validator_list = [
+        ]
+        instant_clone_output_validator_list = [
+        ]
+        instant_clone_rest_metadata = OperationRestMetadata(
+            http_method='POST',
+            url_template='/vcenter/vm',
+            path_variables={
+            },
+            query_parameters={
+            }
+        )
+
         # properties for get operation
         get_input_type = type.StructType('operation-input', {
             'vm': type.IdType(resource_types='VirtualMachine'),
@@ -4439,6 +5177,77 @@ class _VMStub(ApiInterfaceStub):
             }
         )
 
+        # properties for register operation
+        register_input_type = type.StructType('operation-input', {
+            'spec': type.ReferenceType(__name__, 'VM.RegisterSpec'),
+        })
+        register_error_dict = {
+            'com.vmware.vapi.std.errors.already_exists':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'AlreadyExists'),
+            'com.vmware.vapi.std.errors.error':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Error'),
+            'com.vmware.vapi.std.errors.invalid_argument':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidArgument'),
+            'com.vmware.vapi.std.errors.not_found':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+            'com.vmware.vapi.std.errors.resource_inaccessible':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'ResourceInaccessible'),
+            'com.vmware.vapi.std.errors.service_unavailable':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'ServiceUnavailable'),
+            'com.vmware.vapi.std.errors.unable_to_allocate_resource':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'UnableToAllocateResource'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
+            'com.vmware.vapi.std.errors.unauthorized':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+
+        }
+        register_input_value_validator_list = [
+        ]
+        register_output_validator_list = [
+        ]
+        register_rest_metadata = OperationRestMetadata(
+            http_method='POST',
+            url_template='/vcenter/vm',
+            path_variables={
+            },
+            query_parameters={
+            }
+        )
+
+        # properties for unregister operation
+        unregister_input_type = type.StructType('operation-input', {
+            'vm': type.IdType(resource_types='VirtualMachine'),
+        })
+        unregister_error_dict = {
+            'com.vmware.vapi.std.errors.not_allowed_in_current_state':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotAllowedInCurrentState'),
+            'com.vmware.vapi.std.errors.not_found':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+            'com.vmware.vapi.std.errors.resource_busy':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'ResourceBusy'),
+            'com.vmware.vapi.std.errors.service_unavailable':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'ServiceUnavailable'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
+            'com.vmware.vapi.std.errors.unauthorized':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+
+        }
+        unregister_input_value_validator_list = [
+        ]
+        unregister_output_validator_list = [
+        ]
+        unregister_rest_metadata = OperationRestMetadata(
+            http_method='POST',
+            url_template='/vcenter/vm/{vm}',
+            path_variables={
+                'vm': 'vm',
+            },
+            query_parameters={
+            }
+        )
+
         operations = {
             'create': {
                 'input_type': create_input_type,
@@ -4446,6 +5255,14 @@ class _VMStub(ApiInterfaceStub):
                 'errors': create_error_dict,
                 'input_value_validator_list': create_input_value_validator_list,
                 'output_validator_list': create_output_validator_list,
+                'task_type': TaskType.NONE,
+            },
+            'instant_clone': {
+                'input_type': instant_clone_input_type,
+                'output_type': type.IdType(resource_types='VirtualMachine'),
+                'errors': instant_clone_error_dict,
+                'input_value_validator_list': instant_clone_input_value_validator_list,
+                'output_validator_list': instant_clone_output_validator_list,
                 'task_type': TaskType.NONE,
             },
             'get': {
@@ -4472,12 +5289,31 @@ class _VMStub(ApiInterfaceStub):
                 'output_validator_list': list_output_validator_list,
                 'task_type': TaskType.NONE,
             },
+            'register': {
+                'input_type': register_input_type,
+                'output_type': type.IdType(resource_types='VirtualMachine'),
+                'errors': register_error_dict,
+                'input_value_validator_list': register_input_value_validator_list,
+                'output_validator_list': register_output_validator_list,
+                'task_type': TaskType.NONE,
+            },
+            'unregister': {
+                'input_type': unregister_input_type,
+                'output_type': type.VoidType(),
+                'errors': unregister_error_dict,
+                'input_value_validator_list': unregister_input_value_validator_list,
+                'output_validator_list': unregister_output_validator_list,
+                'task_type': TaskType.NONE,
+            },
         }
         rest_metadata = {
             'create': create_rest_metadata,
+            'instant_clone': instant_clone_rest_metadata,
             'get': get_rest_metadata,
             'delete': delete_rest_metadata,
             'list': list_rest_metadata,
+            'register': register_rest_metadata,
+            'unregister': unregister_rest_metadata,
         }
         ApiInterfaceStub.__init__(
             self, iface_name='com.vmware.vcenter.VM',
@@ -4569,11 +5405,13 @@ class StubFactory(StubFactoryBase):
         'ResourcePool': ResourcePool,
         'VM': VM,
         'Deployment': Deployment,
+        'certificate_management': 'com.vmware.vcenter.certificate_management_client.StubFactory',
         'guest': 'com.vmware.vcenter.guest_client.StubFactory',
         'vcha': 'com.vmware.vcenter.vcha_client.StubFactory',
         'vm': 'com.vmware.vcenter.vm_client.StubFactory',
         'datastore': 'com.vmware.vcenter.datastore_client.StubFactory',
         'storage': 'com.vmware.vcenter.storage_client.StubFactory',
+        'topology': 'com.vmware.vcenter.topology_client.StubFactory',
         'deployment': 'com.vmware.vcenter.deployment_client.StubFactory',
         'services': 'com.vmware.vcenter.services_client.StubFactory',
         'system_config': 'com.vmware.vcenter.system_config_client.StubFactory',

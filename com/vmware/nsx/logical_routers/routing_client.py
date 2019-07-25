@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class Advertisement(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers.routing.advertisement'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -107,7 +110,10 @@ class BfdConfig(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers.routing.bfd_config'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -180,7 +186,10 @@ class Bgp(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers.routing.bgp'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -262,7 +271,10 @@ class ForwardingTable(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers.routing.forwarding_table'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -336,7 +348,10 @@ class IpPrefixLists(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers.routing.ip_prefix_lists'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -520,7 +535,10 @@ class Redistribution(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers.routing.redistribution'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -591,7 +609,10 @@ class RouteMaps(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers.routing.route_maps'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -785,7 +806,10 @@ class RouteTable(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers.routing.route_table'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -880,7 +904,10 @@ class RoutingTable(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers.routing.routing_table'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -959,7 +986,10 @@ class StaticRoutes(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers.routing.static_routes'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1169,7 +1199,8 @@ class _AdvertisementStub(ApiInterfaceStub):
                 'logical_router_id': 'logical-router-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1202,7 +1233,8 @@ class _AdvertisementStub(ApiInterfaceStub):
                 'logical_router_id': 'logical-router-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1262,7 +1294,8 @@ class _BfdConfigStub(ApiInterfaceStub):
                 'logical_router_id': 'logical-router-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1295,7 +1328,8 @@ class _BfdConfigStub(ApiInterfaceStub):
                 'logical_router_id': 'logical-router-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1355,7 +1389,8 @@ class _BgpStub(ApiInterfaceStub):
                 'logical_router_id': 'logical-router-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1388,7 +1423,8 @@ class _BgpStub(ApiInterfaceStub):
                 'logical_router_id': 'logical-router-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1464,7 +1500,8 @@ class _ForwardingTableStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1517,7 +1554,8 @@ class _IpPrefixListsStub(ApiInterfaceStub):
                 'logical_router_id': 'logical-router-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1550,7 +1588,8 @@ class _IpPrefixListsStub(ApiInterfaceStub):
                 'id': 'id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1583,7 +1622,8 @@ class _IpPrefixListsStub(ApiInterfaceStub):
                 'id': 'id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1624,7 +1664,8 @@ class _IpPrefixListsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1659,7 +1700,8 @@ class _IpPrefixListsStub(ApiInterfaceStub):
                 'id': 'id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1746,7 +1788,8 @@ class _RedistributionStub(ApiInterfaceStub):
                 'logical_router_id': 'logical-router-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1779,7 +1822,8 @@ class _RedistributionStub(ApiInterfaceStub):
                 'logical_router_id': 'logical-router-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1841,7 +1885,8 @@ class _RouteMapsStub(ApiInterfaceStub):
                 'logical_router_id': 'logical-router-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1874,7 +1919,8 @@ class _RouteMapsStub(ApiInterfaceStub):
                 'id': 'id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1907,7 +1953,8 @@ class _RouteMapsStub(ApiInterfaceStub):
                 'id': 'id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1948,7 +1995,8 @@ class _RouteMapsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1983,7 +2031,8 @@ class _RouteMapsStub(ApiInterfaceStub):
                 'id': 'id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2084,7 +2133,8 @@ class _RouteTableStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2153,7 +2203,8 @@ class _RoutingTableStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2206,7 +2257,8 @@ class _StaticRoutesStub(ApiInterfaceStub):
                 'logical_router_id': 'logical-router-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -2239,7 +2291,8 @@ class _StaticRoutesStub(ApiInterfaceStub):
                 'id': 'id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -2272,7 +2325,8 @@ class _StaticRoutesStub(ApiInterfaceStub):
                 'id': 'id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -2313,7 +2367,8 @@ class _StaticRoutesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -2348,7 +2403,8 @@ class _StaticRoutesStub(ApiInterfaceStub):
                 'id': 'id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

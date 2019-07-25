@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -125,6 +125,7 @@ class Operation(VapiInterface):
             self.name = name
             self.fields = fields
             VapiStruct.__init__(self)
+
 
         class DataType(Enum):
             """
@@ -311,6 +312,7 @@ class Operation(VapiInterface):
             self.error_definitions = error_definitions
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vapi.std.introspection.operation.info', {
             'input_definition': type.ReferenceType(__name__, 'Operation.DataDefinition'),
@@ -434,6 +436,7 @@ class Provider(VapiInterface):
             self.checksum = checksum
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vapi.std.introspection.provider.info', {
             'id': type.IdType(resource_types='com.vmware.vapi.provider'),
@@ -502,6 +505,7 @@ class Service(VapiInterface):
             """
             self.operations = operations
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vapi.std.introspection.service.info', {

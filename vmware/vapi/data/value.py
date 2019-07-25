@@ -156,8 +156,8 @@ class DoubleValue(PrimitiveDataValue, ComparableValueMixin):
             value = Decimal(str(value))
         if isinstance(value, Decimal):
             if math.isinf(float(value)):
-                msg = message_factory.get_message('vapi.data.invalid.double.inf',
-                                                  value)
+                msg = message_factory.get_message(
+                        'vapi.data.invalid.double.inf', value)
                 logger.debug(msg)
                 raise CoreException(msg)
         self.value = value
@@ -269,7 +269,7 @@ class ListValue(DataValue):
     """
     DataValue class for lists
     """
-    def __init__(self, values=None):
+    def __init__(self, values=None, is_map=False):
         """
         Initialize ListValue
         """
@@ -281,6 +281,7 @@ class ListValue(DataValue):
             logger.debug(msg)
             raise CoreException(msg)
         self._list_val = values if values is not None else []
+        self._is_map = is_map
 
     def add(self, value):
         """
@@ -319,6 +320,21 @@ class ListValue(DataValue):
         """
         return len(self._list_val)
 
+    def is_map(self):
+        """
+        Returns true if the list is representing a VMODL2 map type
+
+        :rtype: :class:`bool`
+        :return: True if the list is representing a map, false otherwise
+        """
+        return self._is_map
+
+    def set_map(self, is_map):
+        """
+        Sets if this List Value is used to represent a map
+        """
+        self._is_map = is_map
+
     def __eq__(self, other):
         if not isinstance(other, ListValue):
             return False
@@ -343,7 +359,7 @@ class ListValue(DataValue):
 
     def __repr__(self):
         ret = ', '.join([repr(val) for val in self._list_val])
-        return 'ListValue(values=[%s])' % ret
+        return 'ListValue(values=[%s], is_map=%s)' % (ret, self._is_map)
 
 
 class OptionalValue(DataValue, ComparableValueMixin):
@@ -583,7 +599,7 @@ class SimpleValueVisitor(VapiVisitor):
         :type  value: :class:`VoidValue`
         :param value: Data value
         """
-        pass
+        return None
 
     def visit_integer(self, value):
         """
@@ -592,7 +608,7 @@ class SimpleValueVisitor(VapiVisitor):
         :type  value: :class:`IntegerValue`
         :param value: Data value
         """
-        pass
+        return None
 
     def visit_double(self, value):
         """
@@ -601,7 +617,7 @@ class SimpleValueVisitor(VapiVisitor):
         :type  value: :class:`DoubleValue`
         :param value: Data value
         """
-        pass
+        return None
 
     def visit_string(self, value):
         """
@@ -610,7 +626,7 @@ class SimpleValueVisitor(VapiVisitor):
         :type  value: :class:`StringValue`
         :param value: Data value
         """
-        pass
+        return None
 
     def visit_boolean(self, value):
         """
@@ -619,7 +635,7 @@ class SimpleValueVisitor(VapiVisitor):
         :type  value: :class:`BooleanValue`
         :param value: Data value
         """
-        pass
+        return None
 
     def visit_blob(self, value):
         """
@@ -628,7 +644,7 @@ class SimpleValueVisitor(VapiVisitor):
         :type  value: :class:`BlobValue`
         :param value: Data value
         """
-        pass
+        return None
 
     def visit_list(self, value):
         """
@@ -637,7 +653,7 @@ class SimpleValueVisitor(VapiVisitor):
         :type  value: :class:`ListValue`
         :param value: Data value
         """
-        pass
+        return None
 
     def visit_optional(self, value):
         """
@@ -646,7 +662,7 @@ class SimpleValueVisitor(VapiVisitor):
         :type  value: :class:`OptionalValue`
         :param value: Data value
         """
-        pass
+        return None
 
     def visit_struct(self, value):
         """
@@ -655,7 +671,7 @@ class SimpleValueVisitor(VapiVisitor):
         :type  value: :class:`StructValue`
         :param value: Data value
         """
-        pass
+        return None
 
     def visit_error(self, value):
         """
@@ -664,7 +680,7 @@ class SimpleValueVisitor(VapiVisitor):
         :type  value: :class:`ErrorValue`
         :param value: Data value
         """
-        pass
+        return None
 
     def visit_secret(self, value):
         """
@@ -673,7 +689,7 @@ class SimpleValueVisitor(VapiVisitor):
         :type  value: :class:`SecretValue`
         :param value: Data value
         """
-        pass
+        return None
 
 
 # vapi type name to vapi type value map

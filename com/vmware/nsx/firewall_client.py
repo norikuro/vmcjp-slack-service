@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class Excludelist(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.firewall.excludelist'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -173,7 +176,10 @@ class Rules(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.firewall.rules'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -387,7 +393,10 @@ class Sections(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.firewall.sections'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -483,7 +492,7 @@ class Sections(VapiInterface):
                ):
         """
         Removes firewall section from the system. Firewall section with rules
-        can only be deleted by passing \\\\"cascade=true\\\\" parameter.
+        can only be deleted by passing \"cascade=true\" parameter.
 
         :type  section_id: :class:`str`
         :param section_id: (required)
@@ -927,7 +936,10 @@ class Stats(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.firewall.stats'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -968,7 +980,10 @@ class Status(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.firewall.status'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1172,7 +1187,8 @@ class _ExcludelistStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for checkifexists operation
@@ -1203,7 +1219,8 @@ class _ExcludelistStub(ApiInterfaceStub):
             },
             query_parameters={
                 'object_id': 'object_id',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1231,7 +1248,8 @@ class _ExcludelistStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for removemember operation
@@ -1262,7 +1280,8 @@ class _ExcludelistStub(ApiInterfaceStub):
             },
             query_parameters={
                 'object_id': 'object_id',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1293,7 +1312,8 @@ class _ExcludelistStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1381,7 +1401,8 @@ class _RulesStub(ApiInterfaceStub):
                 'rule_id': 'rule-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1436,7 +1457,8 @@ class _SectionsStub(ApiInterfaceStub):
             query_parameters={
                 'id': 'id',
                 'operation': 'operation',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for createwithrules operation
@@ -1473,7 +1495,8 @@ class _SectionsStub(ApiInterfaceStub):
             query_parameters={
                 'id': 'id',
                 'operation': 'operation',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1506,7 +1529,8 @@ class _SectionsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'cascade': 'cascade',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1537,7 +1561,8 @@ class _SectionsStub(ApiInterfaceStub):
                 'section_id': 'section-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1600,7 +1625,8 @@ class _SectionsStub(ApiInterfaceStub):
                 'sort_by': 'sort_by',
                 'sources': 'sources',
                 'type': 'type',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for listwithrules operation
@@ -1632,7 +1658,8 @@ class _SectionsStub(ApiInterfaceStub):
                 'section_id': 'section-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for lock operation
@@ -1667,7 +1694,8 @@ class _SectionsStub(ApiInterfaceStub):
                 'section_id': 'section-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for revise operation
@@ -1704,7 +1732,8 @@ class _SectionsStub(ApiInterfaceStub):
             query_parameters={
                 'id': 'id',
                 'operation': 'operation',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for revisewithrules operation
@@ -1743,7 +1772,8 @@ class _SectionsStub(ApiInterfaceStub):
             query_parameters={
                 'id': 'id',
                 'operation': 'operation',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for unlock operation
@@ -1778,7 +1808,8 @@ class _SectionsStub(ApiInterfaceStub):
                 'section_id': 'section-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1811,7 +1842,8 @@ class _SectionsStub(ApiInterfaceStub):
                 'section_id': 'section-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for updatewithrules operation
@@ -1846,7 +1878,8 @@ class _SectionsStub(ApiInterfaceStub):
                 'section_id': 'section-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1996,7 +2029,8 @@ class _StatsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'category': 'category',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2049,7 +2083,8 @@ class _StatusStub(ApiInterfaceStub):
                 'id': 'id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for enablefirewall operation
@@ -2082,7 +2117,8 @@ class _StatusStub(ApiInterfaceStub):
                 'id': 'id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -2113,7 +2149,8 @@ class _StatusStub(ApiInterfaceStub):
                 'context_type': 'context-type',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get_0 operation
@@ -2146,7 +2183,8 @@ class _StatusStub(ApiInterfaceStub):
                 'id': 'id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -2174,7 +2212,8 @@ class _StatusStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -2207,7 +2246,8 @@ class _StatusStub(ApiInterfaceStub):
                 'context_type': 'context-type',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

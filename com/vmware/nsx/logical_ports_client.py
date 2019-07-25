@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class ForwardingPath(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_ports.forwarding_path'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -89,7 +92,10 @@ class MacTable(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_ports.mac_table'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -112,7 +118,7 @@ class MacTable(VapiInterface):
         Returns MAC table of a specified logical port. If the target transport
         node id is not provided, the NSX manager will ask the controller for
         the transport node where the logical port is located. The query
-        parameter \\\\"source=cached\\\\" is not supported.
+        parameter \"source=cached\" is not supported.
 
         :type  lport_id: :class:`str`
         :param lport_id: (required)
@@ -162,7 +168,10 @@ class State(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_ports.state'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -215,7 +224,10 @@ class Statistics(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_ports.statistics'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -230,8 +242,8 @@ class Statistics(VapiInterface):
             ):
         """
         Returns statistics of a specified logical port. If the logical port is
-        attached to a logical router port, query parameter
-        \\\\"source=realtime\\\\" is not supported.
+        attached to a logical router port, query parameter \"source=realtime\"
+        is not supported.
 
         :type  lport_id: :class:`str`
         :param lport_id: (required)
@@ -315,7 +327,10 @@ class Status(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_ports.status'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -374,7 +389,7 @@ class Status(VapiInterface):
                ):
         """
         Returns operational status of all logical ports. The query parameter
-        \\\\"source=realtime\\\\" is not supported.
+        \"source=realtime\" is not supported.
 
         :type  attachment_id: :class:`str` or ``None``
         :param attachment_id: Logical Port attachment Id (optional)
@@ -478,7 +493,8 @@ class _ForwardingPathStub(ApiInterfaceStub):
             },
             query_parameters={
                 'peer_port_id': 'peer_port_id',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -543,7 +559,8 @@ class _MacTableStub(ApiInterfaceStub):
                 'sort_by': 'sort_by',
                 'source': 'source',
                 'transport_node_id': 'transport_node_id',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -594,7 +611,8 @@ class _StateStub(ApiInterfaceStub):
                 'lport_id': 'lport-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -647,7 +665,8 @@ class _StatisticsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -700,7 +719,8 @@ class _StatusStub(ApiInterfaceStub):
             },
             query_parameters={
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for getall operation
@@ -761,7 +781,8 @@ class _StatusStub(ApiInterfaceStub):
                 'switching_profile_id': 'switching_profile_id',
                 'transport_node_id': 'transport_node_id',
                 'transport_zone_id': 'transport_zone_id',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

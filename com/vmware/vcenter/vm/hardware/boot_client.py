@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -143,6 +143,7 @@ class Device(VapiInterface):
             self.type = type
             VapiStruct.__init__(self)
 
+
     EntryCreateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.boot.device.entry_create_spec', {
             'type': type.ReferenceType(__name__, 'Device.Type'),
@@ -210,6 +211,7 @@ class Device(VapiInterface):
             self.nic = nic
             self.disks = disks
             VapiStruct.__init__(self)
+
 
     Entry._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.boot.device.entry', {

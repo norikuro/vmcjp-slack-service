@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -46,7 +46,10 @@ class Statistics(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.serviceinsertion.services.service_instances.instance_runtimes.interfaces.statistics'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -65,7 +68,7 @@ class Statistics(VapiInterface):
         """
         Returns statistics of a specified interface via associated logical
         port. If the logical port is attached to a logical router port, query
-        parameter \\\\"source=realtime\\\\" is not supported.
+        parameter \"source=realtime\" is not supported.
 
         :type  service_id: :class:`str`
         :param service_id: (required)
@@ -113,7 +116,10 @@ class Status(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.serviceinsertion.services.service_instances.instance_runtimes.interfaces.status'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -201,7 +207,8 @@ class _StatisticsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -260,7 +267,8 @@ class _StatusStub(ApiInterfaceStub):
             },
             query_parameters={
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

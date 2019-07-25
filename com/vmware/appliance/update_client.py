@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -64,6 +64,7 @@ class ServiceInfo(VapiStruct):
         self.description = description
         VapiStruct.__init__(self)
 
+
 ServiceInfo._set_binding_type(type.StructType(
     'com.vmware.appliance.update.service_info', {
         'service': type.IdType(resource_types='com.vmware.appliance.service'),
@@ -125,6 +126,7 @@ class CommonInfo(VapiStruct):
         self.reboot_required = reboot_required
         self.size = size
         VapiStruct.__init__(self)
+
 
     class Priority(Enum):
         """
@@ -380,6 +382,7 @@ class Summary(VapiStruct):
         self.size = size
         VapiStruct.__init__(self)
 
+
 Summary._set_binding_type(type.StructType(
     'com.vmware.appliance.update.summary', {
         'version': type.IdType(resource_types='com.vmware.appliance.update.pending'),
@@ -517,6 +520,7 @@ class Policy(VapiInterface):
             self.minute = minute
             VapiStruct.__init__(self)
 
+
     Time._set_binding_type(type.StructType(
         'com.vmware.appliance.update.policy.time', {
             'day': type.ReferenceType(__name__, 'Policy.DayOfWeek'),
@@ -589,6 +593,7 @@ class Policy(VapiInterface):
             self.manual_control = manual_control
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.appliance.update.policy.info', {
             'custom_URL': type.OptionalType(type.StringType()),
@@ -653,6 +658,7 @@ class Policy(VapiInterface):
             self.check_schedule = check_schedule
             self.auto_stage = auto_stage
             VapiStruct.__init__(self)
+
 
     Config._set_binding_type(type.StructType(
         'com.vmware.appliance.update.policy.config', {
@@ -845,6 +851,7 @@ class Pending(VapiInterface):
             self.size = size
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.appliance.update.pending.info', {
             'contents': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
@@ -936,6 +943,7 @@ class Pending(VapiInterface):
             self.regexp = regexp
             self.default_answer = default_answer
             VapiStruct.__init__(self)
+
 
         class InputType(Enum):
             """
@@ -1053,6 +1061,7 @@ class Pending(VapiInterface):
             self.issues = issues
             self.questions = questions
             VapiStruct.__init__(self)
+
 
     PrecheckResult._set_binding_type(type.StructType(
         'com.vmware.appliance.update.pending.precheck_result', {
@@ -1385,6 +1394,7 @@ class Staged(VapiInterface):
             self.reboot_required = reboot_required
             self.size = size
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.appliance.update.staged.info', {

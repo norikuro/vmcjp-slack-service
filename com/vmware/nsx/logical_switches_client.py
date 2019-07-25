@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -46,7 +46,10 @@ class MacTable(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_switches.mac_table'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -69,7 +72,7 @@ class MacTable(VapiInterface):
         Returns MAC table of a specified logical switch from the given
         transport node if a transport node id is given in the query parameter
         from the Central Controller Plane. The query parameter
-        \\\\"source=cached\\\\" is not supported.
+        \"source=cached\" is not supported.
 
         :type  lswitch_id: :class:`str`
         :param lswitch_id: (required)
@@ -139,7 +142,10 @@ class State(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_switches.state'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -216,7 +222,10 @@ class Statistics(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_switches.statistics'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -231,7 +240,7 @@ class Statistics(VapiInterface):
             ):
         """
         Returns statistics of a specified logical switch. The query parameter
-        \\\\"source=realtime\\\\" is not supported.
+        \"source=realtime\" is not supported.
 
         :type  lswitch_id: :class:`str`
         :param lswitch_id: (required)
@@ -280,7 +289,10 @@ class Status(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_switches.status'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -306,7 +318,7 @@ class Status(VapiInterface):
             ):
         """
         Returns Operational status of all logical switches. The query parameter
-        \\\\"source=realtime\\\\" is not supported.
+        \"source=realtime\" is not supported.
 
         :type  cursor: :class:`str` or ``None``
         :param cursor: Opaque cursor to be used for getting next page of records (supplied
@@ -373,7 +385,10 @@ class Summary(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_switches.summary'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -422,7 +437,10 @@ class VtepTable(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_switches.vtep_table'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -445,7 +463,7 @@ class VtepTable(VapiInterface):
         Returns the virtual tunnel endpoint table of a specified logical switch
         from the given transport node if a transport node id is given in the
         query parameter, from the Central Controller Plane. The query parameter
-        \\\\"source=cached\\\\" is not supported.
+        \"source=cached\" is not supported.
 
         :type  lswitch_id: :class:`str`
         :param lswitch_id: (required)
@@ -534,7 +552,8 @@ class _MacTableStub(ApiInterfaceStub):
                 'sort_by': 'sort_by',
                 'source': 'source',
                 'transport_node_id': 'transport_node_id',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -585,7 +604,8 @@ class _StateStub(ApiInterfaceStub):
                 'lswitch_id': 'lswitch-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -616,7 +636,8 @@ class _StateStub(ApiInterfaceStub):
             },
             query_parameters={
                 'status': 'status',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -678,7 +699,8 @@ class _StatisticsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -753,7 +775,8 @@ class _StatusStub(ApiInterfaceStub):
                 'uplink_teaming_policy_name': 'uplink_teaming_policy_name',
                 'vlan': 'vlan',
                 'vni': 'vni',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -804,7 +827,8 @@ class _SummaryStub(ApiInterfaceStub):
                 'lswitch_id': 'lswitch-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -869,7 +893,8 @@ class _VtepTableStub(ApiInterfaceStub):
                 'sort_by': 'sort_by',
                 'source': 'source',
                 'transport_node_id': 'transport_node_id',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

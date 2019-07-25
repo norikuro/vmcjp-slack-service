@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -221,6 +221,7 @@ class Hostname(VapiInterface):
             self.result = result
             VapiStruct.__init__(self)
 
+
     Message._set_binding_type(type.StructType(
         'com.vmware.appliance.networking.dns.hostname.message', {
             'message': type.StringType(),
@@ -256,6 +257,7 @@ class Hostname(VapiInterface):
             self.status = status
             self.messages = messages
             VapiStruct.__init__(self)
+
 
     TestStatusInfo._set_binding_type(type.StructType(
         'com.vmware.appliance.networking.dns.hostname.test_status_info', {
@@ -486,6 +488,7 @@ class Servers(VapiInterface):
             self.servers = servers
             VapiStruct.__init__(self)
 
+
     DNSServerConfig._set_binding_type(type.StructType(
         'com.vmware.appliance.networking.dns.servers.DNS_server_config', {
             'mode': type.ReferenceType(__name__, 'Servers.DNSServerMode'),
@@ -522,6 +525,7 @@ class Servers(VapiInterface):
             self.result = result
             VapiStruct.__init__(self)
 
+
     Message._set_binding_type(type.StructType(
         'com.vmware.appliance.networking.dns.servers.message', {
             'message': type.StringType(),
@@ -557,6 +561,7 @@ class Servers(VapiInterface):
             self.status = status
             self.messages = messages
             VapiStruct.__init__(self)
+
 
     TestStatusInfo._set_binding_type(type.StructType(
         'com.vmware.appliance.networking.dns.servers.test_status_info', {

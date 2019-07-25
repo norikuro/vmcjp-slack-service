@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -95,6 +95,7 @@ class ConfigurationModel(VapiStruct):
         self.automatic_sync_stop_hour = automatic_sync_stop_hour
         self.maximum_concurrent_item_syncs = maximum_concurrent_item_syncs
         VapiStruct.__init__(self)
+
 
 ConfigurationModel._set_binding_type(type.StructType(
     'com.vmware.content.configuration_model', {
@@ -316,6 +317,7 @@ class LibraryModel(VapiStruct):
         self.server_guid = server_guid
         VapiStruct.__init__(self)
 
+
     class LibraryType(Enum):
         """
         The ``LibraryModel.LibraryType`` class defines the type of a
@@ -507,6 +509,7 @@ class Library(VapiInterface):
             self.type = type
             VapiStruct.__init__(self)
 
+
     FindSpec._set_binding_type(type.StructType(
         'com.vmware.content.library.find_spec', {
             'name': type.OptionalType(type.StringType()),
@@ -649,6 +652,47 @@ class LocalLibrary(VapiInterface):
         """
         VapiInterface.__init__(self, config, _LocalLibraryStub)
 
+    class DestinationSpec(VapiStruct):
+        """
+        The ``LocalLibrary.DestinationSpec`` class contains information required to
+        publish the library to a specific subscription. This class was added in
+        vSphere API 6.7.2.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     subscription=None,
+                    ):
+            """
+            :type  subscription: :class:`str`
+            :param subscription: Identifier of the subscription associated with the subscribed
+                library. This attribute was added in vSphere API 6.7.2.
+                When clients pass a value of this class as a parameter, the
+                attribute must be an identifier for the resource type:
+                ``com.vmware.content.library.Subscriptions``. When methods return a
+                value of this class as a return value, the attribute will be an
+                identifier for the resource type:
+                ``com.vmware.content.library.Subscriptions``.
+            """
+            self.subscription = subscription
+            VapiStruct.__init__(self)
+
+
+    DestinationSpec._set_binding_type(type.StructType(
+        'com.vmware.content.local_library.destination_spec', {
+            'subscription': type.IdType(resource_types='com.vmware.content.library.Subscriptions'),
+        },
+        DestinationSpec,
+        False,
+        None))
+
+
 
     def create(self,
                create_spec,
@@ -679,6 +723,9 @@ class LocalLibrary(VapiInterface):
             if you do not have all of the privileges described as follows: 
             
             * Method execution requires ``ContentLibrary.CreateLocalLibrary``.
+            * The resource ``Datastore`` referenced by the attribute
+              :attr:`com.vmware.content.library_client.StorageBacking.datastore_id`
+              requires ``Datastore.AllocateSpace``.
         """
         return self._invoke('create',
                             {
@@ -705,6 +752,11 @@ class LocalLibrary(VapiInterface):
              if the library specified by ``library_id`` is not a local library.
         :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
              if the library specified by ``library_id`` does not exist.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotAllowedInCurrentState` 
+            if the library contains a library item that cannot be deleted in
+            its current state. For example, the library item contains a virtual
+            machine template and a virtual machine is checked out of the
+            library item.
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
             if you do not have all of the privileges described as follows: 
             
@@ -814,6 +866,50 @@ class LocalLibrary(VapiInterface):
                             'library_id': library_id,
                             'update_spec': update_spec,
                             })
+
+    def publish(self,
+                library_id,
+                subscriptions=None,
+                ):
+        """
+        Publishes the library to specified subscriptions. If no subscriptions
+        are specified, then publishes the library to all its subscriptions.
+        This method was added in vSphere API 6.7.2.
+
+        :type  library_id: :class:`str`
+        :param library_id: Identifier of the published library.
+            The parameter must be an identifier for the resource type:
+            ``com.vmware.content.Library``.
+        :type  subscriptions: :class:`list` of :class:`LocalLibrary.DestinationSpec` or ``None``
+        :param subscriptions: The list of subscriptions to publish this library to.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Error` 
+             If the system reports an error while responding to the request.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
+             If the library specified by ``library_id`` does not exist.
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidArgument` 
+             If one or more ``subscriptions`` is not valid.
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidElementType` 
+            If the library specified by ``library_id`` is a subscribed library.
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotAllowedInCurrentState` 
+            If the library specified by ``library_id`` is not a published
+            library.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             If the user that requested the method cannot be authenticated.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
+            If the user that requested the method is not authorized to perform
+            the method.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
+            if you do not have all of the privileges described as follows: 
+            
+            * The resource ``com.vmware.content.Library`` referenced by the
+              parameter ``library_id`` requires
+              ``ContentLibrary.PublishLibrary``.
+        """
+        return self._invoke('publish',
+                            {
+                            'library_id': library_id,
+                            'subscriptions': subscriptions,
+                            })
 class SubscribedLibrary(VapiInterface):
     """
     
@@ -866,6 +962,7 @@ class SubscribedLibrary(VapiInterface):
             self.ssl_thumbprint = ssl_thumbprint
             self.error_messages = error_messages
             VapiStruct.__init__(self)
+
 
         class Status(Enum):
             """
@@ -997,6 +1094,9 @@ class SubscribedLibrary(VapiInterface):
             
             * Method execution requires
               ``ContentLibrary.CreateSubscribedLibrary``.
+            * The resource ``Datastore`` referenced by the attribute
+              :attr:`com.vmware.content.library_client.StorageBacking.datastore_id`
+              requires ``Datastore.AllocateSpace``.
         """
         return self._invoke('create',
                             {
@@ -1333,6 +1433,7 @@ class Type(VapiInterface):
             self.version = version
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.content.type.info', {
             'description': type.StringType(),
@@ -1548,6 +1649,8 @@ class _LocalLibraryStub(ApiInterfaceStub):
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidElementType'),
             'com.vmware.vapi.std.errors.not_found':
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+            'com.vmware.vapi.std.errors.not_allowed_in_current_state':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotAllowedInCurrentState'),
 
         }
         delete_input_value_validator_list = [
@@ -1608,6 +1711,34 @@ class _LocalLibraryStub(ApiInterfaceStub):
         ]
         update_rest_metadata = None
 
+        # properties for publish operation
+        publish_input_type = type.StructType('operation-input', {
+            'library_id': type.IdType(resource_types='com.vmware.content.Library'),
+            'subscriptions': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'LocalLibrary.DestinationSpec'))),
+        })
+        publish_error_dict = {
+            'com.vmware.vapi.std.errors.error':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Error'),
+            'com.vmware.vapi.std.errors.not_found':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+            'com.vmware.vapi.std.errors.invalid_argument':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidArgument'),
+            'com.vmware.vapi.std.errors.invalid_element_type':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidElementType'),
+            'com.vmware.vapi.std.errors.not_allowed_in_current_state':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotAllowedInCurrentState'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
+            'com.vmware.vapi.std.errors.unauthorized':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+
+        }
+        publish_input_value_validator_list = [
+        ]
+        publish_output_validator_list = [
+        ]
+        publish_rest_metadata = None
+
         operations = {
             'create': {
                 'input_type': create_input_type,
@@ -1649,6 +1780,14 @@ class _LocalLibraryStub(ApiInterfaceStub):
                 'output_validator_list': update_output_validator_list,
                 'task_type': TaskType.NONE,
             },
+            'publish': {
+                'input_type': publish_input_type,
+                'output_type': type.VoidType(),
+                'errors': publish_error_dict,
+                'input_value_validator_list': publish_input_value_validator_list,
+                'output_validator_list': publish_output_validator_list,
+                'task_type': TaskType.NONE,
+            },
         }
         rest_metadata = {
             'create': create_rest_metadata,
@@ -1656,6 +1795,7 @@ class _LocalLibraryStub(ApiInterfaceStub):
             'get': get_rest_metadata,
             'list': list_rest_metadata,
             'update': update_rest_metadata,
+            'publish': publish_rest_metadata,
         }
         ApiInterfaceStub.__init__(
             self, iface_name='com.vmware.content.local_library',

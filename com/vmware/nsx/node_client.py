@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class FileStore(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.node.file_store'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -218,7 +221,10 @@ class Logs(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.node.logs'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -256,7 +262,10 @@ class Mode(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.node.mode'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -289,7 +298,10 @@ class Network(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.node.network'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -322,7 +334,10 @@ class Processes(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.node.processes'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -388,7 +403,10 @@ class RabbitmqManagementPort(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.node.rabbitmq_management_port'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -458,7 +476,10 @@ class Services(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.node.services'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -491,7 +512,10 @@ class Status(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.node.status'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -525,7 +549,10 @@ class Tasks(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.node.tasks'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -664,7 +691,10 @@ class Users(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.node.users'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -761,7 +791,10 @@ class Version(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.node.version'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -826,7 +859,8 @@ class _FileStoreStub(ApiInterfaceStub):
                 'file_name': 'file-name',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for copytoremotefile operation
@@ -862,7 +896,8 @@ class _FileStoreStub(ApiInterfaceStub):
                 'file_name': 'file-name',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for createremotedirectory operation
@@ -895,7 +930,8 @@ class _FileStoreStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -926,7 +962,8 @@ class _FileStoreStub(ApiInterfaceStub):
                 'file_name': 'file-name',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -957,7 +994,8 @@ class _FileStoreStub(ApiInterfaceStub):
                 'file_name': 'file-name',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -985,7 +1023,8 @@ class _FileStoreStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1078,7 +1117,8 @@ class _LogsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1126,7 +1166,8 @@ class _ModeStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1174,7 +1215,8 @@ class _NetworkStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1225,7 +1267,8 @@ class _ProcessesStub(ApiInterfaceStub):
                 'process_id': 'process-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1253,7 +1296,8 @@ class _ProcessesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1310,7 +1354,8 @@ class _RabbitmqManagementPortStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1338,7 +1383,8 @@ class _RabbitmqManagementPortStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1366,7 +1412,8 @@ class _RabbitmqManagementPortStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1432,7 +1479,8 @@ class _ServicesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1480,7 +1528,8 @@ class _StatusStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1531,7 +1580,8 @@ class _TasksStub(ApiInterfaceStub):
                 'task_id': 'task-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1564,7 +1614,8 @@ class _TasksStub(ApiInterfaceStub):
                 'task_id': 'task-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1597,7 +1648,8 @@ class _TasksStub(ApiInterfaceStub):
             },
             query_parameters={
                 'suppress_redirect': 'suppress_redirect',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1638,7 +1690,8 @@ class _TasksStub(ApiInterfaceStub):
                 'request_uri': 'request_uri',
                 'status': 'status',
                 'user': 'user',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1716,7 +1769,8 @@ class _UsersStub(ApiInterfaceStub):
                 'userid': 'userid',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1744,7 +1798,8 @@ class _UsersStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1779,7 +1834,8 @@ class _UsersStub(ApiInterfaceStub):
                 'userid': 'userid',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1845,7 +1901,8 @@ class _VersionStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

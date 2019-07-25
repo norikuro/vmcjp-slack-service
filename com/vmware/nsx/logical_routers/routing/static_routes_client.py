@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class BfdPeers(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers.routing.static_routes.bfd_peers'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -255,7 +258,8 @@ class _BfdPeersStub(ApiInterfaceStub):
                 'logical_router_id': 'logical-router-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -290,7 +294,8 @@ class _BfdPeersStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -323,7 +328,8 @@ class _BfdPeersStub(ApiInterfaceStub):
                 'bfd_peer_id': 'bfd-peer-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -364,7 +370,8 @@ class _BfdPeersStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -399,7 +406,8 @@ class _BfdPeersStub(ApiInterfaceStub):
                 'bfd_peer_id': 'bfd-peer-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -75,6 +75,7 @@ class Datastore(VapiInterface):
             """
             self.type = type
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.inventory.datastore.info', {
@@ -164,6 +165,7 @@ class Network(VapiInterface):
             """
             self.type = type
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.inventory.network.info', {

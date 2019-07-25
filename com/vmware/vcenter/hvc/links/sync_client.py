@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -172,6 +172,7 @@ class Providers(VapiInterface):
             self.status_message = status_message
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.hvc.links.sync.providers.info', {
             'last_sync_time': type.OptionalType(type.DateTimeType()),
@@ -256,6 +257,7 @@ class Providers(VapiInterface):
             self.start_time = start_time
             self.exception = exception
             VapiStruct.__init__(self)
+
 
         class Stage(Enum):
             """
@@ -377,11 +379,54 @@ class Providers(VapiInterface):
             self.provider = provider
             VapiStruct.__init__(self)
 
+
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.hvc.links.sync.providers.summary', {
             'provider': type.IdType(resource_types='com.vmware.vcenter.hvc.links.sync.Providers'),
         },
         Summary,
+        False,
+        None))
+
+
+    class Credentials(VapiStruct):
+        """
+        The ``Providers.Credentials`` class specifies user credentials to make a
+        successful connection to remote endpoint. **Warning:** This class is
+        available as technical preview. It may be changed in a future release.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     user_name=None,
+                     password=None,
+                    ):
+            """
+            :type  user_name: :class:`str`
+            :param user_name: Name of the user to authenticate. **Warning:** This attribute is
+                available as technical preview. It may be changed in a future
+                release.
+            :type  password: :class:`str`
+            :param password: Password for the user. **Warning:** This attribute is available as
+                technical preview. It may be changed in a future release.
+            """
+            self.user_name = user_name
+            self.password = password
+            VapiStruct.__init__(self)
+
+
+    Credentials._set_binding_type(type.StructType(
+        'com.vmware.vcenter.hvc.links.sync.providers.credentials', {
+            'user_name': type.StringType(),
+            'password': type.SecretType(),
+        },
+        Credentials,
         False,
         None))
 

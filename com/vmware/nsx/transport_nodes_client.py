@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class PnicBondStatus(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.transport_nodes.pnic_bond_status'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -205,7 +208,10 @@ class RemoteTransportNodeStatus(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.transport_nodes.remote_transport_node_status'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -330,7 +336,10 @@ class State(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.transport_nodes.state'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -415,7 +424,10 @@ class Status(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.transport_nodes.status'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -599,7 +611,10 @@ class Tunnels(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.transport_nodes.tunnels'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -736,7 +751,8 @@ class _PnicBondStatusStub(ApiInterfaceStub):
                 'node_id': 'node-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -803,7 +819,8 @@ class _RemoteTransportNodeStatusStub(ApiInterfaceStub):
                 'sort_by': 'sort_by',
                 'source': 'source',
                 'tunnel_status': 'tunnel_status',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -854,7 +871,8 @@ class _StateStub(ApiInterfaceStub):
                 'transportnode_id': 'transportnode-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -889,7 +907,8 @@ class _StateStub(ApiInterfaceStub):
                 'mm_state': 'mm_state',
                 'status': 'status',
                 'vtep_ip': 'vtep_ip',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -946,7 +965,8 @@ class _StatusStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get_0 operation
@@ -979,7 +999,8 @@ class _StatusStub(ApiInterfaceStub):
             },
             query_parameters={
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1043,7 +1064,8 @@ class _TunnelsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1092,7 +1114,8 @@ class _TunnelsStub(ApiInterfaceStub):
                 'sort_by': 'sort_by',
                 'source': 'source',
                 'status': 'status',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

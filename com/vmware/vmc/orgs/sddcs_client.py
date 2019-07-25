@@ -200,7 +200,10 @@ class Esxs(VapiInterface):
             If = 'addToAll', will add esxs to all clusters in the SDDC (This is
             an privileged operation). If = 'removeFromAll', will delete the
             esxs from all clusters in the SDDC (This is an privileged
-            operation). Default behaviour is 'add' (optional)
+            operation). If = 'attach-diskgroup', will attach the provided
+            diskgroups to a given host (privileged). If = 'detach-diskgroup',
+            will detach the diskgroups of a given host (privileged). Default
+            behaviour is 'add' (optional)
         :rtype: :class:`com.vmware.vmc.model_client.Task`
         :return: com.vmware.vmc.model.Task
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
@@ -937,7 +940,9 @@ class StubFactory(StubFactoryBase):
         'Esxs': Esxs,
         'Publicips': Publicips,
         'SddcTemplate': SddcTemplate,
+        'addons': 'com.vmware.vmc.orgs.sddcs.addons_client.StubFactory',
         'dns': 'com.vmware.vmc.orgs.sddcs.dns_client.StubFactory',
+        'management_vms': 'com.vmware.vmc.orgs.sddcs.management_vms_client.StubFactory',
         'networking': 'com.vmware.vmc.orgs.sddcs.networking_client.StubFactory',
         'networks': 'com.vmware.vmc.orgs.sddcs.networks_client.StubFactory',
     }

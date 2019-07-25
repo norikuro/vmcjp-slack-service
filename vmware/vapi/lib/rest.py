@@ -21,7 +21,9 @@ class OperationRestMetadata(object):
     """
     def __init__(self, http_method, url_template='',
                  request_body_parameter=None, path_variables=None,
-                 query_parameters=None, content_type=None):
+                 query_parameters=None, dispatch_parameters=None,
+                 header_parameters=None, dispatch_header_parameters=None,
+                 content_type=None):
         """
         Initialze the rest metadata class
 
@@ -38,6 +40,14 @@ class OperationRestMetadata(object):
         :type  request_body_parameter: :class:`str`
         :param request_body_parameter: Python runtime name of the parameter that
                                        forms the HTTP request body
+        :type  dispatch_parameters: :class:`str`
+        :param dispatch_parameters: Map of query parameter wit its value
+                                    defined in interface Verb annotation
+        :type  header_parameters: :class:`str`
+        :param header_parameters: Map of header name with variable name
+        :type  dispatch_header_parameters: :class:`str`
+        :param dispatch_header_parameters: Map of header name with its value
+                                           defined in interface Verb annotation
         """
         self.http_method = http_method
         self._url_template = url_template
@@ -46,6 +56,12 @@ class OperationRestMetadata(object):
             path_variables if path_variables is not None else {})
         self._query_parameters = (
             query_parameters if query_parameters is not None else {})
+        self._dispatch_parameters = (
+            dispatch_parameters if dispatch_parameters is not None else {})
+        self._header_parameters = (
+            header_parameters if header_parameters is not None else {})
+        self._dispatch_header_parameters = (
+            dispatch_header_parameters if dispatch_header_parameters is not None else {})  # pylint: disable=line-too-long
         self.content_type = content_type
 
     def get_url_path(self, path_variable_fields, query_parameter_fields):
@@ -65,6 +81,7 @@ class OperationRestMetadata(object):
         :return: URL path
         """
         url_path = six.text_type(self._url_template)
+
         # Substitute path variables with values in the template
         for (field_name, field_str) in six.iteritems(
                 path_variable_fields):
@@ -80,6 +97,14 @@ class OperationRestMetadata(object):
             # Append the query params portion if it exists
             connector = '?' if '?' not in url_path else '&'
             url_path = connector.join([url_path, query_parameter_str])
+        if not bool(self._dispatch_parameters):
+            # Append the dispatch parameters not in query params
+            dispatch_parameters_str = '&'.join([
+                '%s=%s' % (self._dispatch_parameters[field_name], field_str)
+                for (field_name, field_str)
+                in six.iteritems(self._dispatch_parameters)])
+            url_path = url_path + dispatch_parameters_str
+
         return url_path
 
     def get_path_variable_field_names(self):
@@ -105,3 +130,24 @@ class OperationRestMetadata(object):
             return list(self._query_parameters.viewkeys())
         else:
             return list(self._query_parameters.keys())
+
+    def get_header_field_names(self):
+        """
+        Get the list of field names used as headers
+
+        :rtype: :class:`list` of :class:`str`
+        :return: List of fields used as header
+        """
+        if six.PY2:
+            return list(self._header_parameters.viewkeys())
+        else:
+            return list(self._header_parameters.keys())
+
+    def get_dispatch_header(self):
+        """
+        Get the map of field names and value as dispatch headers
+
+        :rtype: :class:`list` of :class:`str`
+        :return: Map of name and value as dispatch header
+        """
+        return self._dispatch_header_parameters

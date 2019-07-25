@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -34,7 +34,7 @@ from vmware.vapi.lib.rest import OperationRestMetadata
 class WarningType(Enum):
     """
     The ``WarningType`` class defines the warnings which can be raised during
-    the update session. This enumeration was added in vSphere API 6.7 U1.
+    the update session. This enumeration was added in vSphere API 6.8.
 
     .. note::
         This class represents an enumerated type in the interface language
@@ -48,25 +48,25 @@ class WarningType(Enum):
     SELF_SIGNED_CERTIFICATE = None
     """
     The certificate used for signing the content is self-signed. This class
-    attribute was added in vSphere API 6.7 U1.
+    attribute was added in vSphere API 6.8.
 
     """
     EXPIRED_CERTIFICATE = None
     """
     The certificate used for signing the content is expired. This class
-    attribute was added in vSphere API 6.7 U1.
+    attribute was added in vSphere API 6.8.
 
     """
     NOT_YET_VALID_CERTIFICATE = None
     """
     The certificate used for signing the content is not yet valid. This class
-    attribute was added in vSphere API 6.7 U1.
+    attribute was added in vSphere API 6.8.
 
     """
     UNTRUSTED_CERTIFICATE = None
     """
     The certificate used for signing the content is not trusted. This class
-    attribute was added in vSphere API 6.7 U1.
+    attribute was added in vSphere API 6.8.
 
     """
 
@@ -94,7 +94,7 @@ class CertificateInfo(VapiStruct):
     """
     The ``CertificateInfo`` class contains information about the public key
     certificate used to sign the content. This class was added in vSphere API
-    6.7 U1.
+    6.8.
 
     .. tip::
         The arguments are used to initialize data attributes with the same
@@ -113,24 +113,25 @@ class CertificateInfo(VapiStruct):
         """
         :type  issuer: :class:`str`
         :param issuer: Certificate issuer. For example: /C=US/ST=California/L=Palo
-            Alto/O=VMware, Inc. This attribute was added in vSphere API 6.7 U1.
+            Alto/O=VMware, Inc. This attribute was added in vSphere API 6.8.
         :type  subject: :class:`str`
         :param subject: Certificate subject. For example:
             C=US/ST=Massachusetts/L=Hopkinton/O=EMC Corporation/OU=EMC
             Avamar/CN=EMC Corporation. This attribute was added in vSphere API
-            6.7 U1.
+            6.8.
         :type  self_signed: :class:`bool`
         :param self_signed: Whether the certificate is self-signed. This attribute was added in
-            vSphere API 6.7 U1.
+            vSphere API 6.8.
         :type  x509: :class:`str`
         :param x509: The X509 representation of the certificate. This attribute was
-            added in vSphere API 6.7 U1.
+            added in vSphere API 6.8.
         """
         self.issuer = issuer
         self.subject = subject
         self.self_signed = self_signed
         self.x509 = x509
         VapiStruct.__init__(self)
+
 
 CertificateInfo._set_binding_type(type.StructType(
     'com.vmware.content.library.item.updatesession.certificate_info', {
@@ -148,7 +149,7 @@ CertificateInfo._set_binding_type(type.StructType(
 class PreviewInfo(VapiStruct):
     """
     The ``PreviewInfo`` class contains information about the files being
-    uploaded in the update session. This class was added in vSphere API 6.7 U1.
+    uploaded in the update session. This class was added in vSphere API 6.8.
 
     .. tip::
         The arguments are used to initialize data attributes with the same
@@ -177,16 +178,16 @@ class PreviewInfo(VapiStruct):
         """
         :type  state: :class:`PreviewInfo.State`
         :param state: Indicates the state of the preview of the update session. This
-            attribute was added in vSphere API 6.7 U1.
+            attribute was added in vSphere API 6.8.
         :type  certificate_info: :class:`CertificateInfo` or ``None``
         :param certificate_info: The certificate information of the signed update session content.
-            This attribute was added in vSphere API 6.7 U1.
+            This attribute was added in vSphere API 6.8.
             This attribute is None if the update session content is not signed.
         :type  warnings: :class:`list` of :class:`PreviewWarningInfo`
         :param warnings: The list of warnings raised for this update session. Any warning
             which is not ignored by the client will, by default, fail the
             update session during session complete operation. This attribute
-            was added in vSphere API 6.7 U1.
+            was added in vSphere API 6.8.
             This attribute is optional and it is only relevant when the value
             of ``state`` is :attr:`PreviewInfo.State.AVAILABLE`.
         """
@@ -195,10 +196,11 @@ class PreviewInfo(VapiStruct):
         self.warnings = warnings
         VapiStruct.__init__(self)
 
+
     class State(Enum):
         """
         The ``PreviewInfo.State`` class defines the state of the update session's
-        preview. This enumeration was added in vSphere API 6.7 U1.
+        preview. This enumeration was added in vSphere API 6.8.
 
         .. note::
             This class represents an enumerated type in the interface language
@@ -215,7 +217,7 @@ class PreviewInfo(VapiStruct):
         the files currently in the update session. However, preview may be possible
         after metadata files such as OVF descriptor are added to the session. In
         this case the state will transition to ``PREPARING``. This class attribute
-        was added in vSphere API 6.7 U1.
+        was added in vSphere API 6.8.
 
         """
         NOT_APPLICABLE = None
@@ -223,7 +225,7 @@ class PreviewInfo(VapiStruct):
         Preview is not possible for this update session. This state is reached when
         there are no metadata files in the update session and user invokes a
         session complete operation. This class attribute was added in vSphere API
-        6.7 U1.
+        6.8.
 
         """
         PREPARING = None
@@ -232,7 +234,7 @@ class PreviewInfo(VapiStruct):
         This state is reached when the applicable metadata files are added to the
         update session but their content is not fully uploaded yet. For OVF item
         type, this state indicates that the OVF descriptor file is currently being
-        uploaded. This class attribute was added in vSphere API 6.7 U1.
+        uploaded. This class attribute was added in vSphere API 6.8.
 
         """
         AVAILABLE = None
@@ -240,7 +242,7 @@ class PreviewInfo(VapiStruct):
         Preview is available for this update session. It is possible to review
         certificate details and warnings, if any. This state is reached when the
         applicable metadata files in the session have been fully uploaded. This
-        class attribute was added in vSphere API 6.7 U1.
+        class attribute was added in vSphere API 6.8.
 
         """
 
@@ -277,7 +279,7 @@ class PreviewWarningInfo(VapiStruct):
     """
     The ``PreviewWarningInfo`` class provides information about the warnings
     which are raised during the update session preview. This class was added in
-    vSphere API 6.7 U1.
+    vSphere API 6.8.
 
     .. tip::
         The arguments are used to initialize data attributes with the same
@@ -295,18 +297,19 @@ class PreviewWarningInfo(VapiStruct):
         """
         :type  type: :class:`WarningType`
         :param type: The warning type raised during preview of the update session. This
-            attribute was added in vSphere API 6.7 U1.
+            attribute was added in vSphere API 6.8.
         :type  message: :class:`com.vmware.vapi.std_client.LocalizableMessage`
         :param message: The message specifying more details about the warning. This
-            attribute was added in vSphere API 6.7 U1.
+            attribute was added in vSphere API 6.8.
         :type  ignored: :class:`bool`
         :param ignored: Indicates if this warning will be ignored during session complete
-            operation. This attribute was added in vSphere API 6.7 U1.
+            operation. This attribute was added in vSphere API 6.8.
         """
         self.type = type
         self.message = message
         self.ignored = ignored
         VapiStruct.__init__(self)
+
 
 PreviewWarningInfo._set_binding_type(type.StructType(
     'com.vmware.content.library.item.updatesession.preview_warning_info', {
@@ -324,7 +327,7 @@ class WarningBehavior(VapiStruct):
     """
     The ``WarningBehavior`` class defines the session behavior if the warning
     is raised during the update session. This class was added in vSphere API
-    6.7 U1.
+    6.8.
 
     .. tip::
         The arguments are used to initialize data attributes with the same
@@ -341,14 +344,15 @@ class WarningBehavior(VapiStruct):
         """
         :type  type: :class:`WarningType`
         :param type: The warning type which may be raised during the update session.
-            This attribute was added in vSphere API 6.7 U1.
+            This attribute was added in vSphere API 6.8.
         :type  ignored: :class:`bool`
         :param ignored: Indicates if this warning will be ignored during session complete
-            operation. This attribute was added in vSphere API 6.7 U1.
+            operation. This attribute was added in vSphere API 6.8.
         """
         self.type = type
         self.ignored = ignored
         VapiStruct.__init__(self)
+
 
 WarningBehavior._set_binding_type(type.StructType(
     'com.vmware.content.library.item.updatesession.warning_behavior', {
@@ -497,6 +501,7 @@ class File(VapiInterface):
             self.checksum_info = checksum_info
             VapiStruct.__init__(self)
 
+
     AddSpec._set_binding_type(type.StructType(
         'com.vmware.content.library.item.updatesession.file.add_spec', {
             'name': type.StringType(),
@@ -587,7 +592,7 @@ class File(VapiInterface):
                 the list of files returned from
                 :func:`com.vmware.content.library.item_client.File.list` upon
                 update session completion. This attribute was added in vSphere API
-                6.7 U1.
+                6.8.
                 If None, the file will be kept in storage upon update session
                 completion.
             """
@@ -602,6 +607,7 @@ class File(VapiInterface):
             self.error_message = error_message
             self.keep_in_storage = keep_in_storage
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.content.library.item.updatesession.file.info', {
@@ -647,6 +653,7 @@ class File(VapiInterface):
             self.name = name
             self.error_message = error_message
             VapiStruct.__init__(self)
+
 
     ValidationError._set_binding_type(type.StructType(
         'com.vmware.content.library.item.updatesession.file.validation_error', {
@@ -694,6 +701,7 @@ class File(VapiInterface):
             self.invalid_files = invalid_files
             VapiStruct.__init__(self)
 
+
     ValidationResult._set_binding_type(type.StructType(
         'com.vmware.content.library.item.updatesession.file.validation_result', {
             'has_errors': type.BooleanType(),
@@ -732,6 +740,10 @@ class File(VapiInterface):
             :attr:`com.vmware.content.library.item_client.UpdateSessionModel.State.ACTIVE`
             state, or if some of the files that will be uploaded by the client
             aren't received correctly.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
+            if you do not have all of the privileges described as follows: 
+            
+            * Method execution requires ``System.Anonymous``.
         """
         return self._invoke('validate',
                             {
@@ -787,6 +799,10 @@ class File(VapiInterface):
             after the OVF descriptor file. This is applicable to update
             sessions with library item type OVF only. This error was added in
             vSphere 6.8.0.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
+            if you do not have all of the privileges described as follows: 
+            
+            * Method execution requires ``System.Anonymous``.
         """
         return self._invoke('add',
                             {
@@ -813,6 +829,10 @@ class File(VapiInterface):
         :raise: :class:`com.vmware.vapi.std.errors_client.InvalidArgument` 
             if the file doesn't exist in the library item associated with the
             update session.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
+            if you do not have all of the privileges described as follows: 
+            
+            * Method execution requires ``System.Anonymous``.
         """
         return self._invoke('remove',
                             {
@@ -841,8 +861,7 @@ class File(VapiInterface):
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
             if you do not have all of the privileges described as follows: 
             
-            * The resource ``com.vmware.content.library.Item`` referenced by
-              the parameter ``libraryItemId`` requires ``System.Read``.
+            * Method execution requires ``System.Anonymous``.
         """
         return self._invoke('list',
                             {
@@ -873,8 +892,7 @@ class File(VapiInterface):
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
             if you do not have all of the privileges described as follows: 
             
-            * The resource ``com.vmware.content.library.Item`` referenced by
-              the parameter ``libraryItemId`` requires ``System.Read``.
+            * Method execution requires ``System.Anonymous``.
         """
         return self._invoke('get',
                             {

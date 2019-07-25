@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -162,6 +162,7 @@ class CertificateParams(VapiStruct):
         self.type = type
         VapiStruct.__init__(self)
 
+
 CertificateParams._set_binding_type(type.StructType(
     'com.vmware.vcenter.ovf.certificate_params', {
         'issuer': type.OptionalType(type.StringType()),
@@ -234,6 +235,7 @@ class DeploymentOption(VapiStruct):
         self.default_choice = default_choice
         VapiStruct.__init__(self)
 
+
 DeploymentOption._set_binding_type(type.StructType(
     'com.vmware.vcenter.ovf.deployment_option', {
         'key': type.OptionalType(type.StringType()),
@@ -302,6 +304,7 @@ class DeploymentOptionParams(VapiStruct):
         self.type = type
         VapiStruct.__init__(self)
 
+
 DeploymentOptionParams._set_binding_type(type.StructType(
     'com.vmware.vcenter.ovf.deployment_option_params', {
         'deployment_options': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'DeploymentOption'))),
@@ -366,6 +369,7 @@ class ExtraConfig(VapiStruct):
         self.value = value
         self.virtual_system_id = virtual_system_id
         VapiStruct.__init__(self)
+
 
 ExtraConfig._set_binding_type(type.StructType(
     'com.vmware.vcenter.ovf.extra_config', {
@@ -458,6 +462,7 @@ class ExtraConfigParams(VapiStruct):
         self.include_keys = include_keys
         self.type = type
         VapiStruct.__init__(self)
+
 
 ExtraConfigParams._set_binding_type(type.StructType(
     'com.vmware.vcenter.ovf.extra_config_params', {
@@ -564,6 +569,7 @@ class IpAllocationParams(VapiStruct):
         self.ip_protocol = ip_protocol
         self.type = type
         VapiStruct.__init__(self)
+
 
     class IpAllocationPolicy(Enum):
         """
@@ -794,6 +800,7 @@ class OvfMessage(VapiStruct):
         self.error = error
         VapiStruct.__init__(self)
 
+
     class Category(Enum):
         """
         The ``OvfMessage.Category`` class defines the categories of messages (see
@@ -902,6 +909,7 @@ class ParseIssue(VapiStruct):
         self.column_number = column_number
         self.message = message
         VapiStruct.__init__(self)
+
 
     class Category(Enum):
         """
@@ -1115,6 +1123,7 @@ class OvfError(VapiStruct):
         self.error = error
         VapiStruct.__init__(self)
 
+
 OvfError._set_binding_type(type.StructType(
     'com.vmware.vcenter.ovf.ovf_error', {
         'category': type.ReferenceType(__name__, 'OvfMessage.Category'),
@@ -1200,6 +1209,7 @@ class OvfWarning(VapiStruct):
         self.error = error
         VapiStruct.__init__(self)
 
+
 OvfWarning._set_binding_type(type.StructType(
     'com.vmware.vcenter.ovf.ovf_warning', {
         'category': type.ReferenceType(__name__, 'OvfMessage.Category'),
@@ -1238,6 +1248,7 @@ class OvfInfo(VapiStruct):
         """
         self.messages = messages
         VapiStruct.__init__(self)
+
 
 OvfInfo._set_binding_type(type.StructType(
     'com.vmware.vcenter.ovf.ovf_info', {
@@ -1292,6 +1303,7 @@ class OvfParams(VapiStruct):
         """
         self.type = type
         VapiStruct.__init__(self)
+
 
 OvfParams._set_binding_type(type.StructType(
     'com.vmware.vcenter.ovf.ovf_params', {
@@ -1409,6 +1421,7 @@ class Property(VapiStruct):
         self.value = value
         VapiStruct.__init__(self)
 
+
 Property._set_binding_type(type.StructType(
     'com.vmware.vcenter.ovf.property', {
         'class_id': type.OptionalType(type.StringType()),
@@ -1464,6 +1477,7 @@ class PropertyParams(VapiStruct):
         self.properties = properties
         self.type = type
         VapiStruct.__init__(self)
+
 
 PropertyParams._set_binding_type(type.StructType(
     'com.vmware.vcenter.ovf.property_params', {
@@ -1542,6 +1556,7 @@ class ScaleOutGroup(VapiStruct):
         self.maximum_instance_count = maximum_instance_count
         VapiStruct.__init__(self)
 
+
 ScaleOutGroup._set_binding_type(type.StructType(
     'com.vmware.vcenter.ovf.scale_out_group', {
         'id': type.OptionalType(type.StringType()),
@@ -1597,6 +1612,7 @@ class ScaleOutParams(VapiStruct):
         self.groups = groups
         self.type = type
         VapiStruct.__init__(self)
+
 
 ScaleOutParams._set_binding_type(type.StructType(
     'com.vmware.vcenter.ovf.scale_out_params', {
@@ -1683,6 +1699,7 @@ class SizeParams(VapiStruct):
         self.type = type
         VapiStruct.__init__(self)
 
+
 SizeParams._set_binding_type(type.StructType(
     'com.vmware.vcenter.ovf.size_params', {
         'approximate_download_size': type.OptionalType(type.IntegerType()),
@@ -1723,6 +1740,7 @@ class UnknownSection(VapiStruct):
         self.tag = tag
         self.info = info
         VapiStruct.__init__(self)
+
 
 UnknownSection._set_binding_type(type.StructType(
     'com.vmware.vcenter.ovf.unknown_section', {
@@ -1770,6 +1788,7 @@ class UnknownSectionParams(VapiStruct):
         self.unknown_sections = unknown_sections
         self.type = type
         VapiStruct.__init__(self)
+
 
 UnknownSectionParams._set_binding_type(type.StructType(
     'com.vmware.vcenter.ovf.unknown_section_params', {
@@ -1831,6 +1850,7 @@ class VcenterExtensionParams(VapiStruct):
         self.type = type
         VapiStruct.__init__(self)
 
+
 VcenterExtensionParams._set_binding_type(type.StructType(
     'com.vmware.vcenter.ovf.vcenter_extension_params', {
         'required': type.OptionalType(type.BooleanType()),
@@ -1887,6 +1907,7 @@ class ExportFlag(VapiInterface):
             self.option = option
             self.description = description
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.ovf.export_flag.info', {
@@ -1968,6 +1989,7 @@ class ImportFlag(VapiInterface):
             self.option = option
             self.description = description
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.ovf.import_flag.info', {
@@ -2097,18 +2119,20 @@ class LibraryItem(VapiInterface):
             :type  id: :class:`str`
             :param id: Identifier of the deployable resource.
                 When clients pass a value of this class as a parameter, the
-                attribute ``type`` must contain the actual resource type. When
-                methods return a value of this class as a return value, the
-                attribute ``type`` will contain the actual resource type.
+                attribute must be an identifier for one of these resource types:
+                ``null`` or ``null``. When methods return a value of this class as
+                a return value, the attribute will be an identifier for one of
+                these resource types: ``null`` or ``null``.
             """
             self.type = type
             self.id = id
             VapiStruct.__init__(self)
 
+
     DeployableIdentity._set_binding_type(type.StructType(
         'com.vmware.vcenter.ovf.library_item.deployable_identity', {
             'type': type.StringType(),
-            'id': type.IdType(resource_types=[], resource_type_field_name="type"),
+            'id': type.IdType(resource_types=["null", "null"], resource_type_field_name="type"),
         },
         DeployableIdentity,
         False,
@@ -2241,6 +2265,7 @@ class LibraryItem(VapiInterface):
             self.default_datastore_id = default_datastore_id
             VapiStruct.__init__(self)
 
+
     ResourcePoolDeploymentSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.ovf.library_item.resource_pool_deployment_spec', {
             'name': type.OptionalType(type.StringType()),
@@ -2326,6 +2351,7 @@ class LibraryItem(VapiInterface):
             self.storage_profile_id = storage_profile_id
             self.provisioning = provisioning
             VapiStruct.__init__(self)
+
 
         class Type(Enum):
             """
@@ -2418,6 +2444,7 @@ class LibraryItem(VapiInterface):
             self.information = information
             VapiStruct.__init__(self)
 
+
     ResultInfo._set_binding_type(type.StructType(
         'com.vmware.vcenter.ovf.library_item.result_info', {
             'errors': type.ListType(type.ReferenceType(__name__, 'OvfError')),
@@ -2465,6 +2492,7 @@ class LibraryItem(VapiInterface):
             self.resource_id = resource_id
             self.error = error
             VapiStruct.__init__(self)
+
 
     DeploymentResult._set_binding_type(type.StructType(
         'com.vmware.vcenter.ovf.library_item.deployment_result', {
@@ -2535,6 +2563,7 @@ class LibraryItem(VapiInterface):
             self.host_id = host_id
             self.folder_id = folder_id
             VapiStruct.__init__(self)
+
 
     DeploymentTarget._set_binding_type(type.StructType(
         'com.vmware.vcenter.ovf.library_item.deployment_target', {
@@ -2619,6 +2648,7 @@ class LibraryItem(VapiInterface):
             self.additional_params = additional_params
             VapiStruct.__init__(self)
 
+
     OvfSummary._set_binding_type(type.StructType(
         'com.vmware.vcenter.ovf.library_item.ovf_summary', {
             'name': type.OptionalType(type.StringType()),
@@ -2679,6 +2709,7 @@ class LibraryItem(VapiInterface):
             self.library_item_id = library_item_id
             VapiStruct.__init__(self)
 
+
     CreateTarget._set_binding_type(type.StructType(
         'com.vmware.vcenter.ovf.library_item.create_target', {
             'library_id': type.OptionalType(type.IdType()),
@@ -2724,6 +2755,7 @@ class LibraryItem(VapiInterface):
             self.description = description
             self.flags = flags
             VapiStruct.__init__(self)
+
 
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.ovf.library_item.create_spec', {
@@ -2777,6 +2809,7 @@ class LibraryItem(VapiInterface):
             self.ovf_library_item_id = ovf_library_item_id
             self.error = error
             VapiStruct.__init__(self)
+
 
     CreateResult._set_binding_type(type.StructType(
         'com.vmware.vcenter.ovf.library_item.create_result', {
@@ -3007,8 +3040,8 @@ class LibraryItem(VapiInterface):
             if you do not have all of the privileges described as follows: 
             
             * Method execution requires ``System.Read``.
-            * The attribute :attr:`LibraryItem.DeployableIdentity.id` requires
-              ``VApp.Export``.
+            * The resource ``null`` or ``null`` referenced by the attribute
+              :attr:`LibraryItem.DeployableIdentity.id` requires ``VApp.Export``.
             * The resource ``com.vmware.content.Library`` referenced by the
               attribute :attr:`LibraryItem.CreateTarget.library_id` requires
               ``ContentLibrary.AddLibraryItem``.

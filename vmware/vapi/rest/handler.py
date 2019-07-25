@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 """
 REST Handler for WSGI application
 """
 
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015-2017 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015-2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 import base64
 import collections
@@ -14,7 +13,8 @@ import six
 import werkzeug
 
 from com.vmware.vapi.metadata.metamodel_client import (
-    Component, Structure, Type, Enumeration, GenericInstantiation)
+    Component, Structure, Type, Enumeration,
+    GenericInstantiation, StructureInfo)
 from vmware.vapi.bindings.task_helper import get_task_operation_name
 from vmware.vapi.common.context import set_context, clear_context
 from vmware.vapi.core import ApplicationContext, ExecutionContext
@@ -24,8 +24,9 @@ from vmware.vapi.data.value import (
     data_value_factory, ListValue, StructValue,
     StringValue, OptionalValue, VoidValue, SecretValue)
 from vmware.vapi.lib.constants import (
-    MAP_ENTRY, OPERATION_INPUT, OPID, RestAnnotations, REST_OP_ID_HEADER,
-    TASK_REST_QUERY_PARAM)
+    HTTP_ACCEPT_LANGUAGE, HTTP_FORMAT_LOCALE, HTTP_TIMEZONE, LOCALE,
+    MAP_ENTRY, OPERATION_INPUT, OPID, RestAnnotations,
+    RestAnnotationType, REST_OP_ID_HEADER, TASK_REST_QUERY_PARAM)
 from vmware.vapi.lib.context import create_default_application_context
 from vmware.vapi.lib.load import dynamic_import_list
 from vmware.vapi.lib.log import get_vapi_logger
@@ -39,24 +40,6 @@ from .rules import RoutingRuleGenerator
 
 logger = get_vapi_logger(__name__)
 
-# Mapping from HTTP method to operation name. The actual
-# operation name might change based on ID parameters in the URL.
-# Since GET is mapped to both list() and get(<>) operations,
-# this map will return list as operation name and if the HTTP
-# request has identifier arguments, then 'get' operation
-# identifier should be used instead of 'list'.
-http_method_map = {
-    'GET': 'list',
-    'PATCH': 'update',
-    'DELETE': 'delete',
-    'POST': 'create',
-    'PUT': 'set',
-    'HEAD': 'get'
-}
-
-# Mapping from vAPI operation identifier to HTTP method
-vapi_method_map = dict((v, k) for k, v in six.iteritems(http_method_map))
-
 
 class MetadataStore(object):
     """
@@ -69,7 +52,10 @@ class MetadataStore(object):
         Helper class to contain only useful metamodel metadata of an operation
         """
         def __init__(self, param_info_map, path_variables_map=None,
-                     request_mapping_metadata=None, verb_metadata=None):
+                     request_mapping_metadata=None, verb_metadata=None,
+                     query_variables_map=None, header_variables_map=None,
+                     success_reponse_code=None, response_headers_map=None,
+                     response_body_name=None):
             """
             :type  param_info_map:
                 :class:`collections.OrderedDict` of :class:`str` and
@@ -84,11 +70,39 @@ class MetadataStore(object):
                 :class:`com.vmware.vapi.metadata.metamodel_provider.ElementMap`
             :param request_mapping_metadata: Metamodel metadata of
                 RequestMapping annotation on the operation
+            :type  verb_metadata:
+                :class:`com.vmware.vapi.metadata.metamodel_provider.ElementMap`
+            :param verb_metadata: Metamodel metadata of
+                Verb annotation on the operation
+            :type  query_variables_map:
+                :class:`com.vmware.vapi.metadata.metamodel_provider.ElementMap`
+            :param query_variables_map: Metamodel metadata of
+                dispatch query variable in Verb annotation on the operation
+            :type  header_variables_map:
+                :class:`com.vmware.vapi.metadata.metamodel_provider.ElementMap`
+            :param header_variables_map: Metamodel metadata of
+                dispatch header variable in Verb annotation on the operation
+            :type  success_reponse_code:
+                :class:`int`
+            :param success_response_code: Response code for success
+            :type  response_headers_map:
+                :class:`dict` of :class:`str` and :class:`str`
+            :param response_headers_map: Map of response field name to
+                http header name
+            :type  response_body_name:
+                :class:`str`
+            :param response_body_name: Response field name has
+                Body annotation, will only return the value of the field
             """
             self.param_info_map = param_info_map
             self.path_variables_map = path_variables_map
             self.request_mapping_metadata = request_mapping_metadata
             self.verb_metadata = verb_metadata
+            self.query_variables_map = query_variables_map
+            self.header_variables_map = header_variables_map
+            self.success_response_code = success_reponse_code
+            self.response_headers_map = response_headers_map
+            self.response_body_name = response_body_name
 
         def has_request_mapping_metadata(self):
             """
@@ -112,6 +126,12 @@ class MetadataStore(object):
         self.structure_map = {}
         self.enumeration_map = {}
         self.service_map = {}
+        # Map of {struct_id: {error_id: {code: http_status, reason: ''}}}
+        self.all_errors_response_code_map = {}
+        # Map of {struct_id: {field_name: header_name}}
+        self.all_response_header_map = {}
+        # Map of {struct_id: field_name}
+        self.all_response_body_map = {}
         self._build(api_provider)
 
     def _build(self, api_provider):
@@ -144,12 +164,85 @@ class MetadataStore(object):
             for structure_id, structure_info in six.iteritems(
                                                 package_info.structures):
                 self._process_structure_info(structure_id, structure_info)
-            for service_id, service_info in six.iteritems(
-                                            package_info.services):
-                self._process_service_info(service_id, service_info)
             for enumeration_id, enumeration_info in six.iteritems(
                                                     package_info.enumerations):
                 self.enumeration_map[enumeration_id] = enumeration_info
+            for service_id, service_info in six.iteritems(
+                                            package_info.services):
+                self._process_service_info(service_id, service_info)
+                self.service_map[service_id] = {
+                    operation_id: self._create_operation_summary(operation_info)
+                        for operation_id, operation_info in six.iteritems(
+                                                    service_info.operations)}
+
+    def _get_header_and_query_variables(self, param_info_map):
+        """
+        Get the annotation @Header or @Query parameter alias from metadata.
+
+        :type  param_info_map:
+            :class:`collections.OrderedDict` of :class:`str` and
+            :class:`com.vmware.vapi.metadata.metamodel_client.FieldInfo`
+        :param param_info_map: Map of parameter name to its metamodel metadata
+        :rtype: :class: `tuple`
+        :return: Tuple containing the @Header and @Query annotation parameter
+            alias.
+        """
+        header_variables = {}
+        query_variables = {}
+        for param_name, param_info in six.iteritems(param_info_map):
+            resource_id = None
+            # Get the structure body resource_id from param_info.
+            if param_info.type.category == Type.Category.USER_DEFINED:
+                resource_id = param_info.type.user_defined_type.resource_id
+            # Get the optional structure resource_id from param_info.
+            elif param_info.type.category == Type.Category.GENERIC:
+                generic_type = param_info.type.generic_instantiation.generic_type  # pylint: disable=line-too-long
+                if generic_type == GenericInstantiation.GenericType.OPTIONAL:
+                    element_type = param_info.type.generic_instantiation.element_type  # pylint: disable=line-too-long
+                    if element_type.category == Type.Category.USER_DEFINED:
+                        resource_id = element_type.user_defined_type.resource_id
+
+            # resource_id==None indicates that the parameter is not a struct
+            # type.
+            if resource_id is None:
+                # Get the @Header annotation parameter alias from metadata.
+                if RestAnnotations.HEADER_ELEMENT in param_info.metadata:
+                    alias = param_info.metadata[
+                        RestAnnotations.HEADER_ELEMENT].elements[
+                            RestAnnotations.NAME_ELEMENT].string_value
+                    header_variables[
+                        alias.title().replace('_', '-')] = param_name
+                # Get the @Query annotation parameter alias from metadata.
+                if RestAnnotations.QUERY_VARIABLE in param_info.metadata:
+                    alias = param_info.metadata[
+                        RestAnnotations.QUERY_VARIABLE].elements[
+                            RestAnnotations.NAME_ELEMENT].string_value
+                    query_variables[alias] = param_name
+            # resource_id!=None indicates that the parameter is of struct type.
+            else:
+                for name, info in six.iteritems(
+                                            self.structure_map[resource_id]):
+                    if info.type.category != Type.Category.USER_DEFINED:
+                        # Get the @Header annotation parameter alias from
+                        # the metadata of the structure
+                        if RestAnnotations.HEADER_ELEMENT in info.metadata:
+                            alias = info.metadata[
+                                RestAnnotations.HEADER_ELEMENT].elements[
+                                    RestAnnotations.NAME_ELEMENT].string_value
+                            name = '%s.%s' % (param_name, name)
+                            header_variables[
+                                alias.title().replace('_', '-')] = name
+                        # Get the @Query annotation parameter alias from
+                        # the metadata of the structure
+                        if RestAnnotations.QUERY_VARIABLE in info.metadata:
+                            alias = info.metadata[
+                                RestAnnotations.QUERY_VARIABLE].elements[
+                                    RestAnnotations.NAME_ELEMENT].string_value
+                            name = '%s.%s' % (param_name, name)
+                            query_variables[
+                                '%s.%s' % (param_name, alias)] = name
+
+        return header_variables, query_variables
 
     def _create_operation_summary(self, operation_info):
         """
@@ -166,6 +259,11 @@ class MetadataStore(object):
                       for param_info in operation_info.params]
         param_info_map = collections.OrderedDict(param_list)
         path_variables_map = None
+        query_variables_map = None
+        header_variables_map = None
+        success_response_code = None
+        response_headers_map = None
+        response_body_name = None
 
         if RestAnnotations.REQUEST_MAPPING in operation_info.metadata.keys():
             # Create a map of value in PathVariable annotation to
@@ -197,6 +295,31 @@ class MetadataStore(object):
         else:
             verb_info = None
 
+        if verb_info is not None:
+            header_variables_map, query_variables_map = \
+                self._get_header_and_query_variables(param_info_map)
+
+            if RestAnnotations.RESPONSE_ELEMENT in operation_info.metadata.keys():  # pylint: disable=line-too-long
+                success_response_code = int(operation_info.metadata.get(
+                        RestAnnotations.RESPONSE_ELEMENT).elements['code'].string_value)  # pylint: disable=line-too-long
+
+            response_headers_map = {}
+            result_type = operation_info.output.type
+            # response header can only be annotated within a structure
+            # and the structure belongs to user defined category type
+            if result_type.category == Type.Category.USER_DEFINED and \
+               result_type.user_defined_type.resource_type == \
+               Structure.RESOURCE_TYPE:
+                structure_name = \
+                    result_type.user_defined_type.resource_id
+                if structure_name in self.all_response_header_map:
+                    header_map = \
+                        self.all_response_header_map.get(structure_name)
+                    response_headers_map.update(header_map)
+                if structure_name in self.all_response_body_map:
+                    response_body_name = \
+                        self.all_response_body_map.get(structure_name)
+
         # XXX Instead of long if else above the code should change to line
         # below if metamodel metadata changes to single key
         #verb_info = operation_info.metadata.get(RestAnnotations.REST_DISPATCH)
@@ -204,7 +327,13 @@ class MetadataStore(object):
             param_info_map,
             path_variables_map,
             operation_info.metadata.get(RestAnnotations.REQUEST_MAPPING),
-            verb_info)
+            verb_info,
+            query_variables_map,
+            header_variables_map,
+            success_response_code,
+            response_headers_map,
+            response_body_name
+        )
 
     def _process_service_info(self, service_id, service_info):
         """
@@ -226,11 +355,6 @@ class MetadataStore(object):
                                                 service_info.enumerations):
             self.enumeration_map[enumeration_id] = enumeration_info
 
-        self.service_map[service_id] = {
-            operation_id: self._create_operation_summary(operation_info)
-            for operation_id, operation_info in six.iteritems(
-                                                service_info.operations)}
-
     def _process_structure_info(self, structure_id, structure_info):
         """
         Process the metamodel structure information. Scan the structures for
@@ -244,13 +368,30 @@ class MetadataStore(object):
         :param structure_info: Metamodel structure information to be processed
         """
         field_map = {}
+        field_header_map = {}
         for field_info in structure_info.fields:
             field_map[field_info.name] = field_info
+            if RestAnnotations.HEADER_ELEMENT in field_info.metadata.keys():
+                header_name = field_info.metadata.get(
+                    RestAnnotations.HEADER_ELEMENT).elements['name'].string_value  # pylint: disable=line-too-long
+                field_header_map[field_info.name] = header_name
+            if RestAnnotations.BODY_ELEMENT in field_info.metadata.keys():
+                self.all_response_body_map[structure_id] = field_info.name
+
         self.structure_map[structure_id] = field_map
+
+        if field_header_map:
+            self.all_response_header_map[structure_id] = field_header_map
 
         for enumeration_id, enumeration_info in six.iteritems(
                                                 structure_info.enumerations):
             self.enumeration_map[enumeration_id] = enumeration_info
+
+        if structure_info.type == StructureInfo.Type.ERROR \
+                and RestAnnotations.RESPONSE_ELEMENT in structure_info.metadata.keys():  # pylint: disable=line-too-long
+            error_element = structure_info.metadata.get(RestAnnotations.RESPONSE_ELEMENT)  # pylint: disable=line-too-long
+            self.all_errors_response_code_map[structure_id] = \
+                int(error_element.elements['code'].string_value)
 
 
 class URLValueDeserializer(object):
@@ -260,7 +401,11 @@ class URLValueDeserializer(object):
 
     For example:
         /rest/vmodl/test/uber/rest/filter?
+            list_string=string1&
+            list_string=string2&
+            list_string=string3&
             struct.string_field=string&
+            struct.binary_field=aGVsbG8=&
             struct.boolean_field=True&
             struct.long_field=10&
             struct.struct_field.string_field=string&
@@ -287,8 +432,14 @@ class URLValueDeserializer(object):
 
     Deserialized version of this query string will be:
     {
+        "list_string": [
+            "string1",
+            "string2",
+            "string3"
+        ],
         "struct": {
             "string_field": "string",
+            "binary_field": "aGVsbG8=",
             "boolean_field": True,
             "long_field": 10,
             "struct_field": {
@@ -327,82 +478,105 @@ class URLValueDeserializer(object):
             ]
         }
     }
-
     """
+
     @staticmethod
-    def deserialize(query_string):
+    def deserialize(query_string, mapping_type=RestAnnotationType.VERB):
         """
         Deserialize the given query string into a python dictionary.
 
         :type  query_string: :class:`str`
         :param query_string: HTTP query string containing parameters.
+        :type  mapping_type:
+            :class:`vmware.vapi.lib.constants.RestAnnotationType`
+        :param mapping_type: Rest annotation type needed for handling map input
         :rtype: :class:`dict` of :class:`str` and :class:`object`
         :return: Python dictionary deserialized from query string.
         """
-        query_string_dict = {}
-
+        # Convert query_string to a key-value pair dictionary
+        key_value_pairs = collections.OrderedDict()
         query_string = query_string.decode()
         for item in query_string.split('&'):
-            # Parse only the query parameters
             if '=' not in item:
                 continue
 
-            k, v = item.split('=')
+            pos = item.index('=')
+            key = item[:pos]
+            value = item[pos + 1:]
+            if value != '':
+                if key not in key_value_pairs:
+                    key_value_pairs[key] = value
+                elif isinstance(key_value_pairs[key], six.text_type):
+                    key_value_pairs[key] = [key_value_pairs[key], value]
+                elif isinstance(key_value_pairs[key], list):
+                    key_value_pairs[key].append(value)
+
+        # Deserialize query_string
+        query_string_dict = {}
+        for k, v in six.iteritems(key_value_pairs):
             tokens = k.split('.')
 
-            #
             # The core idea here is to split the tokens in
             # a.b.c.d type of string and go from left to right.
             # At each step, the next token will be either put
             # at a key in the dictionary or element in a list if
             # the token is a digit.
-            #
+
             # So, at each token, we should look ahead the next token,
             # and if the next token is a digit, then create an empty
             # list or return an existing list where it should be added
             # as element. If the next token is a non-digit, then create
             # a new dictionary or return an existing dictionary where
             # the token should be added as a key.
-            #
 
             current_value = query_string_dict
-            tokens_length = len(tokens)
+            key = None
             for i, token in enumerate(tokens):
 
                 # Lookahead the next token
                 next_token = None
-                if i + 1 < tokens_length:
+                if i + 1 < len(tokens):
                     next_token = tokens[i + 1]
 
-                # Next token is the last token
-                if next_token is None:
-                    if isinstance(current_value, list):
-                        current_value.append(v)  # pylint: disable=E1101
-                    elif isinstance(current_value, dict):
-                        current_value[token] = v
-                # Next token is not the last token
+                if key is None and mapping_type == RestAnnotationType.VERB:
+                    if next_token is None:
+                        key = '.'.join(tokens)
+                        current_value.setdefault(key, v)
+                        current_value = current_value[key]
+                        break
+                    elif next_token.isdigit():
+                        key = '.'.join(tokens[:i + 1])
+                        current_value.setdefault(key, [])
+                        current_value = current_value[key]
                 else:
-                    #
-                    # If next token is a digit, create array as placeholder
-                    # otherwise a dictionary
-                    next_token_type = [] if next_token.isdigit() else {}
+                    # Next token is the last token
+                    if next_token is None:
+                        if isinstance(current_value, list):
+                            current_value.append(v)  # pylint: disable=E1101
+                        elif isinstance(current_value, dict):
+                            current_value[token] = v
+                    # Next token is not the last token
+                    else:
+                        # If next token is a digit, create array as placeholder
+                        # otherwise a dictionary
+                        next_token_type = [] if next_token.isdigit() else {}
 
-                    if isinstance(current_value, list):
-                        index = int(token)
-                        if index > len(current_value) + 1:
-                            msg = (
-                                'Element with index %d is expected,'
-                                ' but got %d' % (len(current_value) + 1, index))
-                            logger.error(msg)
-                            raise werkzeug.exceptions.BadRequest(msg)
-                        elif index == len(current_value) + 1:
-                            # pylint: disable=E1101
-                            current_value.append(next_token_type)
-                        next_value = current_value[index - 1]
-                    elif isinstance(current_value, dict):
-                        next_value = current_value.setdefault(
-                            token, next_token_type)
-                    current_value = next_value
+                        if isinstance(current_value, list):
+                            index = int(token)
+                            if index > len(current_value) + 1:
+                                msg = (
+                                    'Element with index %d is expected, but got'
+                                    ' %d' % (len(current_value) + 1, index))
+                                logger.error(msg)
+                                raise werkzeug.exceptions.BadRequest(msg)
+                            elif index == len(current_value) + 1:
+                                # pylint: disable=E1101
+                                current_value.append(next_token_type)
+                            next_value = current_value[index - 1]
+                        elif isinstance(current_value, dict):
+                            next_value = current_value.setdefault(
+                                token, next_token_type)
+                        current_value = next_value
 
         return query_string_dict
 
@@ -424,7 +598,6 @@ class DataValueDeserializer(object):
         Type.BuiltinType.ID: DataType.STRING,
         Type.BuiltinType.URI: DataType.STRING,
         Type.BuiltinType.ANY_ERROR: DataType.ANY_ERROR,
-        Type.BuiltinType.DYNAMIC_STRUCTURE: DataType.DYNAMIC_STRUCTURE,
     }
     _builtin_native_type_map = {
         Type.BuiltinType.BOOLEAN: bool,
@@ -481,7 +654,9 @@ class DataValueDeserializer(object):
         :return: DataValue created using the input
         """
         try:
-            native_type = self._builtin_native_type_map[type_info.builtin_type]
+            builtin_type = type_info.builtin_type
+            native_type = self._builtin_native_type_map.get(
+                                  builtin_type)
             if native_type == six.text_type:
                 if type_info.builtin_type == Type.BuiltinType.BINARY:
                     # For Binary types, we need to convert unicode to bytes
@@ -504,7 +679,30 @@ class DataValueDeserializer(object):
                     msg = 'Expected boolean value, but got %s' % json_value
                     logger.error(msg)
                     raise werkzeug.exceptions.BadRequest(msg)
-            data_type = self._builtin_type_map[type_info.builtin_type]
+            elif native_type is None:
+                if builtin_type == Type.BuiltinType.DYNAMIC_STRUCTURE:
+                    return DataValueConverter.convert_to_data_value(
+                                                    json.dumps(json_value))
+                elif builtin_type == Type.BuiltinType.OPAQUE:
+                    if isinstance(json_value, six.text_type):
+                        builtin_type = Type.BuiltinType.STRING
+                        native_value = json_value
+                    elif isinstance(json_value, bool):
+                        builtin_type = Type.BuiltinType.BOOLEAN
+                        native_value = json_value
+                    elif isinstance(json_value, int):
+                        builtin_type = Type.BuiltinType.LONG
+                        native_value = json_value
+                    elif isinstance(json_value, decimal.Decimal):
+                        builtin_type = Type.BuiltinType.DOUBLE
+                        native_value = decimal.Decimal(json_value)
+                    else:
+                        msg = ('Expected string or boolean or long or double '
+                               'value, but got %s' % json_value)
+                        logger.error(msg)
+                        raise werkzeug.exceptions.BadRequest(msg)
+
+            data_type = self._builtin_type_map[builtin_type]
             return data_value_factory(data_type, native_value)
         except KeyError:
             msg = ('Could not process the request, '
@@ -599,25 +797,45 @@ class DataValueDeserializer(object):
         :rtype: :class:`vmware.vapi.data.value.StructValue`
         :return: DataValue created using the input
         """
-        if not isinstance(json_value, list):
-            msg = 'Excepted list, but got %s' % type(json_value).__name__
-            logger.error(msg)
-            raise werkzeug.exceptions.BadRequest(msg)
-        try:
-            return ListValue(
-                [StructValue(
-                    name=MAP_ENTRY,
-                    values={
-                        'key': self.visit(
-                            type_info.map_key_type, value['key']),
-                        'value': self.visit(
-                            type_info.map_value_type, value['value'])
-                    })
-                 for value in json_value])
-        except KeyError as e:
-            msg = 'Invalid Map input, missing %s' % e
-            logger.error(msg)
-            raise werkzeug.exceptions.BadRequest(msg)
+        # For new Rest annotations map deserializes to StructValue instead of
+        # ListValue for old annotations
+        if (self.mapping_type == RestAnnotationType.VERB):
+            if not isinstance(json_value, dict):
+                msg = 'Excepted dict, but got %s' % type(json_value).__name__
+                logger.error(msg)
+                raise werkzeug.exceptions.BadRequest(msg)
+
+            struct_value = StructValue()
+            for field_name, field_value in six.iteritems(json_value):
+                try:
+                    field_data_value = self.visit(type_info.map_value_type,
+                                                  field_value)
+                    struct_value.set_field(field_name, field_data_value)
+                except KeyError:
+                    msg = 'Unexpected field \'%s\' in request' % field_name
+                    logger.error(msg)
+                    raise werkzeug.exceptions.BadRequest(msg)
+            return struct_value
+        else:
+            if not isinstance(json_value, list):
+                msg = 'Excepted list, but got %s' % type(json_value).__name__
+                logger.error(msg)
+                raise werkzeug.exceptions.BadRequest(msg)
+            try:
+                return ListValue(
+                    [StructValue(
+                        name=MAP_ENTRY,
+                        values={
+                            'key': self.visit(
+                                type_info.map_key_type, value['key']),
+                            'value': self.visit(
+                                type_info.map_value_type, value['value'])
+                        })
+                        for value in json_value])
+            except KeyError as e:
+                msg = 'Invalid Map input, missing %s' % e
+                logger.error(msg)
+                raise werkzeug.exceptions.BadRequest(msg)
 
     def visit_generic(self, type_info, json_value):
         """
@@ -659,7 +877,8 @@ class DataValueDeserializer(object):
         convert_method = self._category_map[type_info.category]
         return convert_method(type_info, json_value)
 
-    def generate_operation_input(self, service_id, operation_id, input_data):
+    def generate_operation_input(self, service_id, operation_id, input_data,
+                                 mapping_type):
         """
         This method generates a StructValue corresponding to the Python dict
         (deserialized from JSON) suitable as an input value for the specified
@@ -672,6 +891,9 @@ class DataValueDeserializer(object):
         :type  input_data: :class:`dict`
         :param input_data: Dictionary object that represents the deserialized
             json input.
+        :type  mapping_type:
+            :class:`vmware.vapi.lib.constants.RestAnnotationType`
+        :param mapping_type: Rest annotation type needed for handling map input
         :rtype: :class:`vmware.vapi.data.value.DataValue` or
         :return: DataValue created using the input
         """
@@ -679,6 +901,7 @@ class DataValueDeserializer(object):
         param_info_map = \
             self._metadata.service_map[service_id][operation_id].param_info_map
 
+        self.mapping_type = mapping_type
         try:
             fields = {
                 param_name: self.visit(param_info_map[str(param_name)].type,
@@ -720,6 +943,103 @@ class DataValueDeserializer(object):
         # name of the parameter
         return {path_variables_map[name]: value
                 for name, value in six.iteritems(uri_parameters)}
+
+    def _change_parameter_structure(self, output, names, value):
+        """
+        Multilevel parameter names are converted to dictionaries and the
+        corresponding parameter values are set..
+
+        For example, suppose the input parameter values are as follows:
+            output = {'spec': 'index': 5}
+            names = ['spec', 'body', 'user']
+            value = 'Bob'
+
+        Returns the result:
+            {
+                'spec': {
+                    'index': 5,
+                    'body': {
+                        'user': 'Bob'
+                    }
+                }
+            }
+
+        :type  output: :class:`dict`
+        :param output: Converted parameter dictionary.
+        :type  names: :class: :`list`
+        :param names: Multilevel parameter name list.
+        :type  value: :class: :`string` or `list` or `dict`.
+        :param value: Parameter value.
+        :rtype: :class:`dict`
+        :return: Parameter dictionary.
+        """
+        param_dict = dict(output)
+        name = names.pop(0)
+        if len(names) > 0:
+            sub_param_dict = {}
+            if name in output and isinstance(output[name], dict):
+                sub_param_dict = output[name]
+            param_dict[name] = self._change_parameter_structure(
+                                    sub_param_dict, names, value)
+        else:
+            param_dict[name] = value
+        return param_dict
+
+    def map_query_params(self, request, service_id, operation_id):
+        """
+        For Verb annotation map Query parameters to respective parameter names.
+
+        :type  service_id: :class:`str`
+        :param service_id: Identifier of the service to be invoked
+        :type  operation_id: :class:`str`
+        :param operation_id: Identifier of the operation to be invoked
+        :rtype: :class:`dict` of :class:`str` and :class:`object`
+        :return: Query variables - canonical name of the parameter
+        """
+        service = self._metadata.service_map[service_id]
+        operation = service[operation_id]
+
+        if not operation.has_verb_metadata:
+            return None
+
+        output_data = {}
+        for key, value in six.iteritems(
+                        URLValueDeserializer.deserialize(request.query_string)):
+            if key != TASK_REST_QUERY_PARAM and \
+                                    key in operation.query_variables_map:
+                output_data = self._change_parameter_structure(
+                    output=output_data,
+                    names=operation.query_variables_map[key].split('.'),
+                    value=value
+                )
+        return output_data
+
+    def map_header_params(self, request, service_id, operation_id):
+        """
+        For Verb annotation map Header parameters to respective parameter names.
+
+        :type  service_id: :class:`str`
+        :param service_id: Identifier of the service to be invoked
+        :type  operation_id: :class:`str`
+        :param operation_id: Identifier of the operation to be invoked
+        :rtype: :class:`dict` of :class:`str` and :class:`object`
+        :return: Header variables - canonical name of the parameter
+        """
+        service = self._metadata.service_map[service_id]
+        operation = service[operation_id]
+
+        if not operation.has_verb_metadata:
+            return None
+
+        output_data = {}
+        for key, value in six.iteritems(request.headers):
+            if key in operation.header_variables_map:
+                output_data = self._change_parameter_structure(
+                    output=output_data,
+                    names=operation.header_variables_map[key].split('.'),
+                    value=value
+                )
+        return output_data
 
 
 class SecurityContextBuilder(object):
@@ -820,9 +1140,25 @@ class ApplicationContextBuilder(object):
         :rtype: :class:`vmware.vapi.core.ApplicationContext`
         :return: Application context
         """
+        headers = {}
         op_id = request.headers.get(REST_OP_ID_HEADER)
         if op_id:
-            return ApplicationContext({OPID: op_id})
+            headers[OPID] = op_id
+
+        locale = request.headers.get(HTTP_ACCEPT_LANGUAGE)
+        if locale:
+            headers[LOCALE] = locale
+
+        locale_format = request.headers.get(HTTP_FORMAT_LOCALE)
+        if locale_format:
+            headers[HTTP_FORMAT_LOCALE] = locale_format
+
+        timezone = request.headers.get(HTTP_TIMEZONE)
+        if timezone:
+            headers[HTTP_TIMEZONE] = timezone
+
+        if headers:
+            return ApplicationContext(headers)
         else:
             return create_default_application_context()
 
@@ -846,10 +1182,10 @@ class RESTHandler(object):
             requests
         """
         self._api_provider = api_provider
-        metadata = MetadataStore(api_provider)
+        self.metadata = MetadataStore(api_provider)
         self.rest_rules = RoutingRuleGenerator(
-            metadata, provider_config.get_rest_prefix()).rest_rules
-        self.data_value_deserializer = DataValueDeserializer(metadata)
+            self.metadata, provider_config.get_rest_prefix()).rest_rules
+        self.data_value_deserializer = DataValueDeserializer(self.metadata)
         self.application_context_builder = ApplicationContextBuilder()
         self.security_context_builder = SecurityContextBuilder(
             provider_config.get_rest_security_parsers())
@@ -857,63 +1193,8 @@ class RESTHandler(object):
             provider_config.get_rest_session_methods()) \
             if allow_cookies else None
 
-    @staticmethod
-    def _get_default_mapping_operation_id(
-            http_method,
-            query_params, uri_params):
-        """
-        Figure out the operation identifier based on the HTTP method,
-        the identifier arguments in the URL and the query string.
-
-        :type  http_method: :class:`str`
-        :param http_method: HTTP request method
-        :type  query_params: :class:`dict` of :class:`str` and :class:`object`
-        :param query_params: Decoded dictionary from the query string
-        :type  uri_params: :class:`dict` of :class:`str` and :class:`object`
-        :param uri_params: Arguments parsed from the HTTP URL
-        :rtype: :class:`str`
-        :return: Identifier of the operation to be invoked
-        """
-        operation_id = http_method_map[http_method]
-        # If ID is in the URI parameter then, operation_id is get instead of
-        # list
-        if uri_params and operation_id == 'list':
-            ## TODO: Handle composite identifier case
-            operation_id = 'get'
-        action = query_params.get('~action')
-        if action:
-            operation_id = action.replace('-', '_')
-        return operation_id
-
-    @staticmethod
-    def _get_action_operation_id(actions, query_params):
-        """
-        Figure out the operation identifier based on the action parameter
-        in the query string and dispatch info provided
-
-        :type  actions: :class:`dict` of :class:`str` and :class:`str`
-        :param actions: Dictionary of actions and operation ids
-        :type  query_params: :class:`dict` of :class:`str` and :class:`object`
-        :param query_params: Decoded dictionary from the query string
-        :rtype: :class:`str`
-        :return: Identifier of the operation to be invoked
-        """
-        action_requested = query_params.get(RestAnnotations.ACTION_PARAM)
-
-        if action_requested is None:
-            return actions[action_requested]
-        elif action_requested not in actions:
-            if action_requested:
-                msg = 'No matching method available for the requested ' + \
-                    'action \'%s\' on the URL' % action_requested
-            else:
-                msg = 'No matching method available for the requested ' + \
-                    'URL and HTTP method'
-            logger.error(msg)
-            raise werkzeug.exceptions.NotFound(msg)
-        return actions[action_requested]
-
-    def _get_input_value(self, service_id, operation_id, input_data):
+    def _get_input_value(self, service_id, operation_id, input_data,
+                         mapping_type):
         """
         Generate the input DataValue for the given operation
 
@@ -924,10 +1205,13 @@ class RESTHandler(object):
         :type  input_data: :class:`dict`
         :param input_data: Dictionary object that represents the deserialized
             json input.
+        :type  mapping_type:
+            :class:`vmware.vapi.lib.constants.RestAnnotationType`
+        :param mapping_type: Rest annotation type needed for handling map input
         """
         try:
             return self.data_value_deserializer.generate_operation_input(
-                service_id, operation_id, input_data)
+                service_id, operation_id, input_data, mapping_type)
         except werkzeug.exceptions.BadRequest as e:
             raise e
         except Exception as e:
@@ -937,7 +1221,7 @@ class RESTHandler(object):
 
     def _serialize_output(
             self, request, service_id, operation_id, method_result,
-            use_cookies):
+            use_cookies, mapping_type):
         """
         Serialize the MethodResult object
 
@@ -952,9 +1236,16 @@ class RESTHandler(object):
         :type  use_cookies: :class:`bool`
         :param use_cookies: Whether cookies are to be sent in response
         :rtype: :class:`tuple` of :class:`int`, :class:`str`, :class:`dict`
-        :return: HTTP status code, serialized json output of the operation and
-            a dictionary of response cookies.
+        :return: HTTP status code, serialized json output of the operation,
+            a dictionary of response cookies and response http headers
         """
+        status = None
+        http_headers = None
+
+        operation_summary = self.metadata.service_map[service_id][operation_id]
+        response_headers = operation_summary.response_headers_map
+        response_body_name = operation_summary.response_body_name
+
         if method_result.success():
             if self.response_cookie_builder is None or not use_cookies:
                 cookies = None
@@ -971,72 +1262,108 @@ class RESTHandler(object):
                     output = StructValue(name='output', values={
                         'value': output
                     })
-                json_output = DataValueConverter.convert_to_json(output)
-            status = 204 if request.method == 'DELETE' else 200
+
+                new_rest = mapping_type == RestAnnotationType.VERB
+                json_output = DataValueConverter.convert_to_json(output,
+                                                                 new_rest)
+
+            if operation_summary.success_response_code is not None:
+                status = operation_summary.success_response_code
+            else:
+                status = 200
+            if request.method == 'DELETE':
+                status = 204
         else:
+            error_name = method_result.error.name
+            if error_name in self.metadata.all_errors_response_code_map:
+                status = self.metadata.all_errors_response_code_map[error_name]
+
             cookies = None
             error = method_result.error
-            json_output = DataValueConverter.convert_to_json(error)
-            status = vapi_to_http_error_map.get(error.name, 500)
-        return (status, json_output, cookies)
+            new_rest = mapping_type == RestAnnotationType.VERB
+            json_output = DataValueConverter.convert_to_json(error,
+                                                             new_rest)
+            if status is None:
+                status = vapi_to_http_error_map.get(error.name, 500)
 
-    def invoke(self, request, endpoint, uri_parameters):
+        if json_output:
+            json_output_obj = json.loads(json_output)
+            if response_headers:
+                http_headers = {response_headers[key]: json_output_obj[key]
+                                for key in json_output_obj.keys()
+                                if key in response_headers}
+
+            response_body = json.loads(json_output)
+            if response_body_name:
+                # if there is @Body annotation, the result can only contain
+                # that field, nothing else.
+                if response_body_name in response_body.keys():
+                    json_output = json.dumps(response_body[response_body_name])
+                else:
+                    json_output = ''
+            elif response_headers:
+                for key in json_output_obj.keys():
+                    if key in response_headers.keys():
+                        del response_body[key]
+                json_output = json.dumps(response_body)
+
+        return (status, json_output, cookies, http_headers)
+
+    def _find_matching_operation(
+            self,
+            request,
+            service_id,
+            uri_parameters,
+            query_string_flat_dict,
+            dispatch_info_list):
         """
-        Handle the REST API invocation
+        Find matching operation
 
         :type  request: :class:`werkzeug.wrappers.Request`
         :param request: Request object
-        :type  endpoint: :class:`tuple` of :class:`tuple` of :class:`str` and
-        :class:`str`
-        :param endpoint: Tuple of service ID and dispatch_info is a tuples of
-        tuples of (action, operation_id)
+        :type  service_id: :class:`str`
+        :param service_id: Identifier of the service to be invoked.
         :type  uri_parameters: :class:`dict` of :class:`str` and :class:`object`
         :param uri_parameters: Arguments parsed from the HTTP URL
-        :rtype: :class:`tuple` of :class:`int`, :class:`str`, :class:`dict`
-        :return: HTTP status code, serialized json output of the operation and
-            response cookies.
+        :type  query_string_flat_dict: :class:`dict` of :class:`str` and :class:`object`  # pylint: disable=line-too-long
+        :param query_string_flat_dict: Arguments parsed from the HTTP URL
+        :type  dispatch_info_list:  :class:`list` of :class:`DispatchInfo`
+        :param dispatch_info_list: List of dispatch info object
+        :rtype: :class:`tuple` of :class:`str`, :class:`str`, :class:`dict`
+        :return: Operation id, annotation type and response code map
         """
-        # Operation input is contributed by:
-        # 1. URI parameters: Arguments parsed from HTTP URL
-        # 2. Query parameters: Arguments parsed from the query string in the
-        #               HTTP URL
-        # 3. Request body: Arguments present in request body
-        #
-        # There is a definitive place for each argument, a particular argument
-        # can be passed only using one of the above ways.
-        #
-        # Typically, main object identifiers are present in the base HTTP URL.
-        # For GET operations, additional parameters can be provided in the query
-        # string. For POST, PUT, PATCH, parameters can only be provided using
-        # the body
 
-        query_string_flat_dict = werkzeug.urls.url_decode(
-            request.query_string)
-        (service_id, dispatch_info_list) = endpoint
+        operation_id = None
+        mapping_type = RestAnnotationType.NONE
+        arity = 0
 
         # If there's just one dispatch target get that operation id.
-        if len(dispatch_info_list) == 1:
+        if len(dispatch_info_list) == 1 and \
+                dispatch_info_list[0].mapping_type != RestAnnotationType.VERB:
             operation_id = dispatch_info_list[0].operation_id
+            mapping_type = dispatch_info_list[0].mapping_type
         else:
-            # Create map of actions and operation ids for custom mapping only
-            actions = {dispatch.action_value: dispatch.operation_id
-                       for dispatch in dispatch_info_list
-                       if not dispatch.is_default_mapping}
+            for dispatch_info in dispatch_info_list:
+                curr_op_id, curr_arity, curr_type = \
+                    dispatch_info.get_operation_id(
+                        request, query_string_flat_dict, uri_parameters)
 
-            # If actions map is empty, use default mapping operation id
-            if actions == {}:
-                operation_id = self._get_default_mapping_operation_id(
-                    request.method, query_string_flat_dict, uri_parameters)
-            else:
-                operation_id = self._get_action_operation_id(
-                    actions, query_string_flat_dict)
-                # Fixed query param 'action' is supported only for
-                # HTTP POST method
-                # Delete 'action' from query string if:
-                # 1) We start supporting 'action' for GET or,
-                # 2) We start accepting query parameters for POST
-                # Only in those cases, the 'action' parameter in query string
-                # would cause an unexpected keyword argument error
+                if curr_op_id is not None and curr_arity >= arity:
+                    operation_id = curr_op_id
+                    arity = curr_arity
+                    mapping_type = curr_type
+
+            if operation_id is None:
+                action = query_string_flat_dict.get(
+                    RestAnnotations.ACTION_PARAM)
+                if action is not None:
+                    msg = 'No matching method available for the requested ' + \
+                        'action \'%s\' on the URL' % action
+                else:
+                    msg = 'No matching method available for the requested ' + \
+                        'URL and HTTP method'
+                logger.error(msg)
+                raise werkzeug.exceptions.NotFound(msg)
 
         # Check if it's a task invocation
         is_task = query_string_flat_dict.get(TASK_REST_QUERY_PARAM)
@@ -1055,30 +1382,133 @@ class RESTHandler(object):
             logger.error(msg)
             raise werkzeug.exceptions.NotFound(msg)
 
+        return (operation_id, mapping_type)
+
+    def _input_data_update(self, input_data, update_data):
+        """
+        The dictionary to merge.
+
+        For example, if you have two dictionaries
+        {
+            'header_string': 'first',
+            'query_bool': True,
+            'spec': {
+                'query_long': 1
+            }
+        }
+        and
+        {
+            'body_double': 1.0,
+            'spec': {
+                'body_list': [2, 3, 4]
+            }
+        }
+        the combined result
+        output_data = {
+            'header_string': 'first',
+            'query_bool': True,
+            'body_double': 1.0,
+            'spec': {
+                'query_long': 1,
+                'body_list': [2, 3, 4]
+            }
+        }
+
+        :type  input_data: :class:`dict`
+        :param input_data: HTTP passes in the parameter dictionary.
+        :type  update_data: :class:`dict`
+        :param update_data: The parameter dictionary to be appended.
+        :rtype :class:`dict`
+        :return The updated HTTP passes in the parameter dictionary.
+        """
+        tmp = dict(input_data)
+        for key, value in six.iteritems(update_data):
+            if key in tmp and isinstance(tmp[key], dict) and \
+                    isinstance(value, dict):
+                tmp[key] = self._input_data_update(tmp[key], value)
+            else:
+                tmp.update({key: value})
+        return tmp
+
+    def invoke(self, request, endpoint, uri_parameters):
+        """
+        Handle the REST API invocation
+
+        :type  request: :class:`werkzeug.wrappers.Request`
+        :param request: Request object
+        :type  endpoint: :class:`tuple` of :class:`tuple` of :class:`str` and
+        :class:`str`
+        :param endpoint: Tuple of service ID and dispatch_info is a tuples of
+        tuples of (action, operation_id)
+        :type  uri_parameters: :class:`dict` of :class:`str` and :class:`object`
+        :param uri_parameters: Arguments parsed from the HTTP URL
+        :rtype: :class:`tuple` of :class:`int`, :class:`str`, :class:`dict`
+        :return: HTTP status code, serialized json output of the operation,
+            response cookies and http headers
+        """
+
+        # Operation input is contributed by:
+        # 1. URI parameters: Arguments parsed from HTTP URL
+        # 2. Query parameters: Arguments parsed from the query string in the
+        #               HTTP URL
+        # 3. Header parameters: Arguments parsed from HTTP Header
+        # 4. Request body: Arguments present in request body
+        #
+        # There is a definitive place for each argument, a particular argument
+        # can be passed only using one of the above ways.
+        #
+        # Typically, main object identifiers are present in the base HTTP URL.
+        # For GET operations, additional parameters can be provided in the query
+        # string. For POST, PUT, PATCH, parameters can only be provided using
+        # the body
+
+        query_string_flat_dict = werkzeug.urls.url_decode(
+            request.query_string)
+        (service_id, dispatch_info_list) = endpoint
+        (operation_id, mapping_type) = \
+            self._find_matching_operation(request,
+                                          service_id,
+                                          uri_parameters,
+                                          query_string_flat_dict,
+                                          dispatch_info_list)
+
         input_data = self.data_value_deserializer.map_uri_params(
             uri_parameters, service_id, operation_id)
 
-        if request.method == 'GET':
+        if mapping_type == RestAnnotationType.VERB:
+            input_data = self._input_data_update(
+                input_data, self.data_value_deserializer.map_query_params(
+                    request, service_id, operation_id))
+
+            input_data = self._input_data_update(
+                input_data, self.data_value_deserializer.map_header_params(
+                    request, service_id, operation_id))
+
+        if request.method == 'GET' and mapping_type != RestAnnotationType.VERB:
             query_string_parameters = URLValueDeserializer.deserialize(
-                request.query_string)
+                request.query_string, mapping_type)
             # Currently we put all query params for GET requests in request
             # body, don't do that for TASK_REST_QUERY_PARAM
-            input_data.update({key: query_string_parameters[key]
-                               for key in query_string_parameters.keys()
-                               if key != TASK_REST_QUERY_PARAM})
+            input_data = self._input_data_update(
+                input_data, {
+                    key: query_string_parameters[key]
+                        for key in query_string_parameters
+                            if key != TASK_REST_QUERY_PARAM})
 
         if request.method in ['PUT', 'PATCH', 'POST']:
             request_body_string = request.get_data()
             if request_body_string:
                 try:
                     if isinstance(request_body_string, six.string_types):
-                        input_data.update(
-                            json.loads(request_body_string,
-                                       parse_float=decimal.Decimal))
+                        input_data = self._input_data_update(
+                            input_data, json.loads(
+                                request_body_string,
+                                parse_float=decimal.Decimal))
                     elif isinstance(request_body_string, six.binary_type):
-                        input_data.update(
-                            json.loads(request_body_string.decode('utf-8'),
-                                       parse_float=decimal.Decimal))
+                        input_data = self._input_data_update(
+                            input_data, json.loads(
+                                request_body_string.decode('utf-8'),
+                                parse_float=decimal.Decimal))
                 except ValueError as e:
                     msg = 'Invalid JSON in request body: %s' % e
                     logger.error(msg)
@@ -1095,7 +1525,7 @@ class RESTHandler(object):
         set_context(ctx)
 
         input_value = self._get_input_value(
-            service_id, operation_id, input_data)
+            service_id, operation_id, input_data, mapping_type)
 
         method_result = self._api_provider.invoke(
             service_id, operation_id, input_value, ctx)
@@ -1103,6 +1533,7 @@ class RESTHandler(object):
         # Clear application context from the current operation/thread
         clear_context()
 
-        use_cookies = False if REQUIRE_HEADER_AUTHN in request.headers else True
+        use_cookies = REQUIRE_HEADER_AUTHN not in request.headers
         return self._serialize_output(
-            request, service_id, operation_id, method_result, use_cookies)
+            request, service_id, operation_id,
+            method_result, use_cookies, mapping_type)

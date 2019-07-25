@@ -2,7 +2,7 @@
 Skeleton helper classes
 """
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015-2018 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015-2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 
 import sys
@@ -253,12 +253,18 @@ class ApiInterfaceSkeleton(ApiInterface):
                                         method_args, event)
             event_set = event.wait(accept_timeout)
 
+            # In case of provider throwing an error before  accepting task
+            # remove task from task manager.
+            if work_item.err:
+                task_manager.remove_task(task_id)
+                return work_item.err, None
+
             # In case of provider not accepting task remove task from task
             # manager.
             if not event_set:
                 task_manager.remove_task(task_id)
-                if work_item.err:
-                    return work_item.err, None
+                return None, False
+
             return task_id, event_set
         else:
             # If $task is not present in method id for a task operation

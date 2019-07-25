@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class DpdProfiles(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.vpn.ipsec.dpd_profiles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -206,7 +209,10 @@ class IkeProfiles(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.vpn.ipsec.ike_profiles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -382,7 +388,10 @@ class LocalEndpoints(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.vpn.ipsec.local_endpoints'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -559,7 +568,10 @@ class PeerEndpoints(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.vpn.ipsec.peer_endpoints'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -757,7 +769,10 @@ class Services(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.vpn.ipsec.services'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -936,7 +951,10 @@ class Sessions(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.vpn.ipsec.sessions'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1127,7 +1145,10 @@ class TunnelProfiles(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.vpn.ipsec.tunnel_profiles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1326,7 +1347,8 @@ class _DpdProfilesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1359,7 +1381,8 @@ class _DpdProfilesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1390,7 +1413,8 @@ class _DpdProfilesStub(ApiInterfaceStub):
                 'ipsec_vpn_dpd_profile_id': 'ipsec-vpn-dpd-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1429,7 +1453,8 @@ class _DpdProfilesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1462,7 +1487,8 @@ class _DpdProfilesStub(ApiInterfaceStub):
                 'ipsec_vpn_dpd_profile_id': 'ipsec-vpn-dpd-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1549,7 +1575,8 @@ class _IkeProfilesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1582,7 +1609,8 @@ class _IkeProfilesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1613,7 +1641,8 @@ class _IkeProfilesStub(ApiInterfaceStub):
                 'ipsec_vpn_ike_profile_id': 'ipsec-vpn-ike-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1652,7 +1681,8 @@ class _IkeProfilesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1685,7 +1715,8 @@ class _IkeProfilesStub(ApiInterfaceStub):
                 'ipsec_vpn_ike_profile_id': 'ipsec-vpn-ike-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1772,7 +1803,8 @@ class _LocalEndpointsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1805,7 +1837,8 @@ class _LocalEndpointsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1836,7 +1869,8 @@ class _LocalEndpointsStub(ApiInterfaceStub):
                 'ipsec_vpn_local_endpoint_id': 'ipsec-vpn-local-endpoint-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1879,7 +1913,8 @@ class _LocalEndpointsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1912,7 +1947,8 @@ class _LocalEndpointsStub(ApiInterfaceStub):
                 'ipsec_vpn_local_endpoint_id': 'ipsec-vpn-local-endpoint-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1999,7 +2035,8 @@ class _PeerEndpointsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -2032,7 +2069,8 @@ class _PeerEndpointsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -2063,7 +2101,8 @@ class _PeerEndpointsStub(ApiInterfaceStub):
                 'ipsec_vpn_peer_endpoint_id': 'ipsec-vpn-peer-endpoint-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -2102,7 +2141,8 @@ class _PeerEndpointsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for showsensitivedata operation
@@ -2133,7 +2173,8 @@ class _PeerEndpointsStub(ApiInterfaceStub):
                 'ipsec_vpn_peer_endpoint_id': 'ipsec-vpn-peer-endpoint-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -2166,7 +2207,8 @@ class _PeerEndpointsStub(ApiInterfaceStub):
                 'ipsec_vpn_peer_endpoint_id': 'ipsec-vpn-peer-endpoint-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2262,7 +2304,8 @@ class _ServicesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -2295,7 +2338,8 @@ class _ServicesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -2326,7 +2370,8 @@ class _ServicesStub(ApiInterfaceStub):
                 'ipsec_vpn_service_id': 'ipsec-vpn-service-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -2365,7 +2410,8 @@ class _ServicesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -2398,7 +2444,8 @@ class _ServicesStub(ApiInterfaceStub):
                 'ipsec_vpn_service_id': 'ipsec-vpn-service-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2487,7 +2534,8 @@ class _SessionsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -2520,7 +2568,8 @@ class _SessionsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -2552,7 +2601,8 @@ class _SessionsStub(ApiInterfaceStub):
                 'ipsec_vpn_session_id': 'ipsec-vpn-session-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -2598,7 +2648,8 @@ class _SessionsStub(ApiInterfaceStub):
                 'session_type': 'session_type',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -2633,7 +2684,8 @@ class _SessionsStub(ApiInterfaceStub):
                 'ipsec_vpn_session_id': 'ipsec-vpn-session-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2720,7 +2772,8 @@ class _TunnelProfilesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -2753,7 +2806,8 @@ class _TunnelProfilesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -2784,7 +2838,8 @@ class _TunnelProfilesStub(ApiInterfaceStub):
                 'ipsec_vpn_tunnel_profile_id': 'ipsec-vpn-tunnel-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -2823,7 +2878,8 @@ class _TunnelProfilesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -2856,7 +2912,8 @@ class _TunnelProfilesStub(ApiInterfaceStub):
                 'ipsec_vpn_tunnel_profile_id': 'ipsec-vpn-tunnel-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

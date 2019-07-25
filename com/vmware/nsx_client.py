@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -77,7 +77,10 @@ class Associations(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.associations'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -157,7 +160,10 @@ class Batch(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.batch'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -209,7 +215,10 @@ class BridgeClusters(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.bridge_clusters'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -376,7 +385,10 @@ class BridgeEndpointProfiles(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.bridge_endpoint_profiles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -550,7 +562,10 @@ class BridgeEndpoints(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.bridge_endpoints'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -733,7 +748,10 @@ class Cluster(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.cluster'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -824,8 +842,8 @@ class Cluster(VapiInterface):
     def get(self):
         """
         Returns information about the NSX cluster configuration. An NSX cluster
-        has two functions or purposes, commonly referred to as \\\\"roles.\\\\"
-        These two roles are control and management. Each NSX installation has a
+        has two functions or purposes, commonly referred to as \"roles.\" These
+        two roles are control and management. Each NSX installation has a
         single cluster. Separate NSX clusters do not share data. In other
         words, a given data-plane node is attached to only one cluster, not to
         multiple clusters.
@@ -939,7 +957,10 @@ class ClusterProfiles(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.cluster_profiles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1124,7 +1145,10 @@ class ComputeCollectionTransportNodeTemplates(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.compute_collection_transport_node_templates'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1274,7 +1298,10 @@ class EdgeClusters(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.edge_clusters'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1461,9 +1488,9 @@ class EdgeClusters(VapiInterface):
         call. User cannot use this PUT api to replace the transport_node of an
         existing member because this is a disruption action, we have exposed a
         explicit API for doing so, refer to
-        \\\\"ReplaceEdgeClusterMemberTransportNode\\\\" EdgeCluster only
-        supports homogeneous members. The TransportNodes backed by EdgeNode are
-        only allowed in cluster members. DeploymentType
+        \"ReplaceEdgeClusterMemberTransportNode\" EdgeCluster only supports
+        homogeneous members. The TransportNodes backed by EdgeNode are only
+        allowed in cluster members. DeploymentType
         (VIRTUAL_MACHINE|PHYSICAL_MACHINE) of these EdgeNodes is recommended to
         be the same. EdgeCluster supports members of different deployment
         types.
@@ -1495,7 +1522,10 @@ class ErrorResolver(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.error_resolver'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1605,7 +1635,10 @@ class HostSwitchProfiles(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.host_switch_profiles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1805,7 +1838,10 @@ class IpSets(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.ip_sets'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1847,8 +1883,8 @@ class IpSets(VapiInterface):
                ):
         """
         Deletes the specified IPSet. By default, if the IPSet is added to an
-        NSGroup, it won't be deleted. In such situations, pass
-        \\\\"force=true\\\\" as query param to force delete the IPSet.
+        NSGroup, it won't be deleted. In such situations, pass \"force=true\"
+        as query param to force delete the IPSet.
 
         :type  ip_set_id: :class:`str`
         :param ip_set_id: IPSet Id (required)
@@ -1980,7 +2016,10 @@ class IpfixCollectorProfiles(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.ipfix_collector_profiles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -2150,7 +2189,10 @@ class IpfixObsPoints(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.ipfix_obs_points'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -2202,7 +2244,10 @@ class IpfixProfiles(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.ipfix_profiles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -2390,7 +2435,10 @@ class Licenses(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.licenses'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -2458,7 +2506,7 @@ class Licenses(VapiInterface):
                  ):
         """
         This will delete the license key identified in the request body by
-        \\\\"license_key\\\\" and its properties from the system. Attempting to
+        \"license_key\" and its properties from the system. Attempting to
         delete the last license key will result in an error.
 
         :type  license: :class:`com.vmware.nsx.model_client.License`
@@ -2610,7 +2658,10 @@ class LogicalPorts(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_ports'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -2871,7 +2922,10 @@ class LogicalRouterPorts(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_router_ports'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -2923,8 +2977,8 @@ class LogicalRouterPorts(VapiInterface):
         Deletes the specified logical router port. You must delete logical
         router ports before you can delete the associated logical router. To
         Delete Tier0 router link port you must have to delete attached tier1
-        router link port, otherwise pass \\\\"force=true\\\\" as query param to
-        force delete the Tier0 router link port.
+        router link port, otherwise pass \"force=true\" as query param to force
+        delete the Tier0 router link port.
 
         :type  logical_router_port_id: :class:`str`
         :param logical_router_port_id: (required)
@@ -3093,7 +3147,10 @@ class LogicalRouters(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -3349,7 +3406,10 @@ class LogicalSwitches(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_switches'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -3562,7 +3622,10 @@ class MacSets(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.mac_sets'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -3603,8 +3666,8 @@ class MacSets(VapiInterface):
                ):
         """
         Deletes the specified MACSet. By default, if the MACSet is added to an
-        NSGroup, it won't be deleted. In such situations, pass
-        \\\\"force=true\\\\" as query param to force delete the MACSet.
+        NSGroup, it won't be deleted. In such situations, pass \"force=true\"
+        as query param to force delete the MACSet.
 
         :type  mac_set_id: :class:`str`
         :param mac_set_id: MACSet Id (required)
@@ -3736,7 +3799,10 @@ class MdProxies(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.md_proxies'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -3900,7 +3966,10 @@ class Migration(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.migration'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -3931,7 +4000,10 @@ class MirrorSessions(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.mirror_sessions'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -4124,7 +4196,10 @@ class NetworkMigrationSpecs(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.network_migration_specs'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -4336,7 +4411,10 @@ class Node(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.node'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -4477,7 +4555,10 @@ class Normalizations(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.normalizations'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -4564,7 +4645,10 @@ class NsGroups(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.ns_groups'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -4643,7 +4727,7 @@ class NsGroups(VapiInterface):
         """
         Deletes the specified NSGroup. By default, if the NSGroup is added to
         another NSGroup, it won't be deleted. In such situations, pass
-        \\\\"force=true\\\\" as query param to force delete the NSGroup.
+        \"force=true\" as query param to force delete the NSGroup.
 
         :type  ns_group_id: :class:`str`
         :param ns_group_id: NSGroup Id (required)
@@ -4790,7 +4874,10 @@ class NsServiceGroups(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.ns_service_groups'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -4835,8 +4922,8 @@ class NsServiceGroups(VapiInterface):
         """
         Deletes the specified NSServiceGroup. By default, if the NSServiceGroup
         is consumed in a Firewall rule, it won't get deleted. In such
-        situations, pass \\\\"force=true\\\\" as query param to force delete
-        the NSServiceGroup.
+        situations, pass \"force=true\" as query param to force delete the
+        NSServiceGroup.
 
         :type  ns_service_group_id: :class:`str`
         :param ns_service_group_id: NSServiceGroup Id (required)
@@ -4974,7 +5061,10 @@ class NsServices(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.ns_services'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -5017,8 +5107,8 @@ class NsServices(VapiInterface):
         """
         Deletes the specified NSService. By default, if the NSService is being
         referred in an NSServiceGroup, it can't be deleted. In such situations,
-        pass \\\\"force=true\\\\" as a parameter to force delete the NSService.
-        System defined NSServices can't be deleted using \\\\"force\\\\" flag.
+        pass \"force=true\" as a parameter to force delete the NSService.
+        System defined NSServices can't be deleted using \"force\" flag.
 
         :type  ns_service_id: :class:`str`
         :param ns_service_id: NSService Id (required)
@@ -5157,7 +5247,10 @@ class ServiceProfiles(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.service_profiles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -5332,7 +5425,10 @@ class Services(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.services'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -5507,7 +5603,10 @@ class SwitchingProfiles(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.switching_profiles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -5707,7 +5806,10 @@ class Tasks(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.tasks'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -5803,7 +5905,10 @@ class Traceflows(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.traceflows'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -5961,7 +6066,10 @@ class TransportNodes(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.transport_nodes'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -6287,7 +6395,10 @@ class TransportZones(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.transport_zones'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -6480,7 +6591,10 @@ class TransportzoneProfiles(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.transportzone_profiles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -6667,7 +6781,10 @@ class TrustManagement(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.trust_management'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -6700,7 +6817,10 @@ class UiViews(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.ui_views'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -6851,7 +6971,10 @@ class Upgrade(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.upgrade'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -6923,7 +7046,8 @@ class _AssociationsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -6976,7 +7100,8 @@ class _BatchStub(ApiInterfaceStub):
             },
             query_parameters={
                 'atomic': 'atomic',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -7027,7 +7152,8 @@ class _BridgeClustersStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -7058,7 +7184,8 @@ class _BridgeClustersStub(ApiInterfaceStub):
                 'bridgecluster_id': 'bridgecluster-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -7089,7 +7216,8 @@ class _BridgeClustersStub(ApiInterfaceStub):
                 'bridgecluster_id': 'bridgecluster-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -7128,7 +7256,8 @@ class _BridgeClustersStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -7161,7 +7290,8 @@ class _BridgeClustersStub(ApiInterfaceStub):
                 'bridgecluster_id': 'bridgecluster-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -7248,7 +7378,8 @@ class _BridgeEndpointProfilesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -7279,7 +7410,8 @@ class _BridgeEndpointProfilesStub(ApiInterfaceStub):
                 'bridgeendpointprofile_id': 'bridgeendpointprofile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -7310,7 +7442,8 @@ class _BridgeEndpointProfilesStub(ApiInterfaceStub):
                 'bridgeendpointprofile_id': 'bridgeendpointprofile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -7353,7 +7486,8 @@ class _BridgeEndpointProfilesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -7386,7 +7520,8 @@ class _BridgeEndpointProfilesStub(ApiInterfaceStub):
                 'bridgeendpointprofile_id': 'bridgeendpointprofile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -7473,7 +7608,8 @@ class _BridgeEndpointsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -7504,7 +7640,8 @@ class _BridgeEndpointsStub(ApiInterfaceStub):
                 'bridgeendpoint_id': 'bridgeendpoint-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -7535,7 +7672,8 @@ class _BridgeEndpointsStub(ApiInterfaceStub):
                 'bridgeendpoint_id': 'bridgeendpoint-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -7582,7 +7720,8 @@ class _BridgeEndpointsStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'vlan_transport_zone_id': 'vlan_transport_zone_id',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -7615,7 +7754,8 @@ class _BridgeEndpointsStub(ApiInterfaceStub):
                 'bridgeendpoint_id': 'bridgeendpoint-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -7699,7 +7839,8 @@ class _ClusterStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for create operation
@@ -7734,7 +7875,8 @@ class _ClusterStub(ApiInterfaceStub):
                 'target_uri': 'target-uri',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -7769,7 +7911,8 @@ class _ClusterStub(ApiInterfaceStub):
                 'target_uri': 'target-uri',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -7797,7 +7940,8 @@ class _ClusterStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get_0 operation
@@ -7832,7 +7976,8 @@ class _ClusterStub(ApiInterfaceStub):
                 'target_uri': 'target-uri',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for summarizeinventorytoremote operation
@@ -7860,7 +8005,8 @@ class _ClusterStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -7895,7 +8041,8 @@ class _ClusterStub(ApiInterfaceStub):
                 'target_uri': 'target-uri',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -8002,7 +8149,8 @@ class _ClusterProfilesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -8033,7 +8181,8 @@ class _ClusterProfilesStub(ApiInterfaceStub):
                 'cluster_profile_id': 'cluster-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -8065,7 +8214,8 @@ class _ClusterProfilesStub(ApiInterfaceStub):
                 'cluster_profile_id': 'cluster-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -8109,7 +8259,8 @@ class _ClusterProfilesStub(ApiInterfaceStub):
                 'resource_type': 'resource_type',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -8144,7 +8295,8 @@ class _ClusterProfilesStub(ApiInterfaceStub):
                 'cluster_profile_id': 'cluster-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -8233,7 +8385,8 @@ class _ComputeCollectionTransportNodeTemplatesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -8264,7 +8417,8 @@ class _ComputeCollectionTransportNodeTemplatesStub(ApiInterfaceStub):
                 'template_id': 'template-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -8296,7 +8450,8 @@ class _ComputeCollectionTransportNodeTemplatesStub(ApiInterfaceStub):
                 'template_id': 'template-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -8328,7 +8483,8 @@ class _ComputeCollectionTransportNodeTemplatesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'compute_collection_id': 'compute_collection_id',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -8363,7 +8519,8 @@ class _ComputeCollectionTransportNodeTemplatesStub(ApiInterfaceStub):
                 'template_id': 'template-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -8450,7 +8607,8 @@ class _EdgeClustersStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -8481,7 +8639,8 @@ class _EdgeClustersStub(ApiInterfaceStub):
                 'edge_cluster_id': 'edge-cluster-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -8512,7 +8671,8 @@ class _EdgeClustersStub(ApiInterfaceStub):
                 'edge_cluster_id': 'edge-cluster-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -8551,7 +8711,8 @@ class _EdgeClustersStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for replacetransportnode operation
@@ -8584,7 +8745,8 @@ class _EdgeClustersStub(ApiInterfaceStub):
                 'edge_cluster_id': 'edge-cluster-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -8617,7 +8779,8 @@ class _EdgeClustersStub(ApiInterfaceStub):
                 'edge_cluster_id': 'edge-cluster-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -8713,7 +8876,8 @@ class _ErrorResolverStub(ApiInterfaceStub):
                 'error_id': 'error_id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -8741,7 +8905,8 @@ class _ErrorResolverStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for resolveerror operation
@@ -8772,7 +8937,8 @@ class _ErrorResolverStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -8843,7 +9009,8 @@ class _HostSwitchProfilesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -8874,7 +9041,8 @@ class _HostSwitchProfilesStub(ApiInterfaceStub):
                 'host_switch_profile_id': 'host-switch-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -8906,7 +9074,8 @@ class _HostSwitchProfilesStub(ApiInterfaceStub):
                 'host_switch_profile_id': 'host-switch-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -8952,7 +9121,8 @@ class _HostSwitchProfilesStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'uplink_teaming_policy_name': 'uplink_teaming_policy_name',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -8987,7 +9157,8 @@ class _HostSwitchProfilesStub(ApiInterfaceStub):
                 'host_switch_profile_id': 'host-switch-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -9074,7 +9245,8 @@ class _IpSetsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -9109,7 +9281,8 @@ class _IpSetsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -9140,7 +9313,8 @@ class _IpSetsStub(ApiInterfaceStub):
                 'ip_set_id': 'ip-set-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -9179,7 +9353,8 @@ class _IpSetsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -9212,7 +9387,8 @@ class _IpSetsStub(ApiInterfaceStub):
                 'ip_set_id': 'ip-set-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -9299,7 +9475,8 @@ class _IpfixCollectorProfilesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -9330,7 +9507,8 @@ class _IpfixCollectorProfilesStub(ApiInterfaceStub):
                 'ipfix_collector_profile_id': 'ipfix-collector-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -9361,7 +9539,8 @@ class _IpfixCollectorProfilesStub(ApiInterfaceStub):
                 'ipfix_collector_profile_id': 'ipfix-collector-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -9402,7 +9581,8 @@ class _IpfixCollectorProfilesStub(ApiInterfaceStub):
                 'profile_types': 'profile_types',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -9435,7 +9615,8 @@ class _IpfixCollectorProfilesStub(ApiInterfaceStub):
                 'ipfix_collector_profile_id': 'ipfix-collector-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -9519,7 +9700,8 @@ class _IpfixObsPointsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -9572,7 +9754,8 @@ class _IpfixProfilesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -9603,7 +9786,8 @@ class _IpfixProfilesStub(ApiInterfaceStub):
                 'ipfix_profile_id': 'ipfix-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -9635,7 +9819,8 @@ class _IpfixProfilesStub(ApiInterfaceStub):
                 'ipfix_profile_id': 'ipfix-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -9681,7 +9866,8 @@ class _IpfixProfilesStub(ApiInterfaceStub):
                 'profile_types': 'profile_types',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -9716,7 +9902,8 @@ class _IpfixProfilesStub(ApiInterfaceStub):
                 'ipfix_profile_id': 'ipfix-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -9803,7 +9990,8 @@ class _LicensesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -9834,7 +10022,8 @@ class _LicensesStub(ApiInterfaceStub):
                 'license_key': 'license-key',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete_0 operation
@@ -9865,7 +10054,8 @@ class _LicensesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -9893,7 +10083,8 @@ class _LicensesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for getlicensebykey operation
@@ -9924,7 +10115,8 @@ class _LicensesStub(ApiInterfaceStub):
                 'license_key': 'license-key',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -9952,7 +10144,8 @@ class _LicensesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -9983,7 +10176,8 @@ class _LicensesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -10090,7 +10284,8 @@ class _LogicalPortsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -10123,7 +10318,8 @@ class _LogicalPortsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'detach': 'detach',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -10155,7 +10351,8 @@ class _LogicalPortsStub(ApiInterfaceStub):
                 'lport_id': 'lport-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -10215,7 +10412,8 @@ class _LogicalPortsStub(ApiInterfaceStub):
                 'switching_profile_id': 'switching_profile_id',
                 'transport_node_id': 'transport_node_id',
                 'transport_zone_id': 'transport_zone_id',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -10250,7 +10448,8 @@ class _LogicalPortsStub(ApiInterfaceStub):
                 'lport_id': 'lport-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -10339,7 +10538,8 @@ class _LogicalRouterPortsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -10372,7 +10572,8 @@ class _LogicalRouterPortsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -10404,7 +10605,8 @@ class _LogicalRouterPortsStub(ApiInterfaceStub):
                 'logical_router_port_id': 'logical-router-port-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -10450,7 +10652,8 @@ class _LogicalRouterPortsStub(ApiInterfaceStub):
                 'resource_type': 'resource_type',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -10485,7 +10688,8 @@ class _LogicalRouterPortsStub(ApiInterfaceStub):
                 'logical_router_port_id': 'logical-router-port-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -10574,7 +10778,8 @@ class _LogicalRoutersStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -10607,7 +10812,8 @@ class _LogicalRoutersStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -10639,7 +10845,8 @@ class _LogicalRoutersStub(ApiInterfaceStub):
                 'logical_router_id': 'logical-router-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -10681,7 +10888,8 @@ class _LogicalRoutersStub(ApiInterfaceStub):
                 'router_type': 'router_type',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for reallocate operation
@@ -10716,7 +10924,8 @@ class _LogicalRoutersStub(ApiInterfaceStub):
                 'logical_router_id': 'logical-router-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for reprocess operation
@@ -10747,7 +10956,8 @@ class _LogicalRoutersStub(ApiInterfaceStub):
                 'logical_router_id': 'logical-router-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -10782,7 +10992,8 @@ class _LogicalRoutersStub(ApiInterfaceStub):
                 'logical_router_id': 'logical-router-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -10887,7 +11098,8 @@ class _LogicalSwitchesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -10922,7 +11134,8 @@ class _LogicalSwitchesStub(ApiInterfaceStub):
             query_parameters={
                 'cascade': 'cascade',
                 'detach': 'detach',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -10953,7 +11166,8 @@ class _LogicalSwitchesStub(ApiInterfaceStub):
                 'lswitch_id': 'lswitch-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -11006,7 +11220,8 @@ class _LogicalSwitchesStub(ApiInterfaceStub):
                 'uplink_teaming_policy_name': 'uplink_teaming_policy_name',
                 'vlan': 'vlan',
                 'vni': 'vni',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -11039,7 +11254,8 @@ class _LogicalSwitchesStub(ApiInterfaceStub):
                 'lswitch_id': 'lswitch-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -11126,7 +11342,8 @@ class _MacSetsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -11161,7 +11378,8 @@ class _MacSetsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -11192,7 +11410,8 @@ class _MacSetsStub(ApiInterfaceStub):
                 'mac_set_id': 'mac-set-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -11231,7 +11450,8 @@ class _MacSetsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -11264,7 +11484,8 @@ class _MacSetsStub(ApiInterfaceStub):
                 'mac_set_id': 'mac-set-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -11351,7 +11572,8 @@ class _MdProxiesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -11382,7 +11604,8 @@ class _MdProxiesStub(ApiInterfaceStub):
                 'proxy_id': 'proxy-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -11413,7 +11636,8 @@ class _MdProxiesStub(ApiInterfaceStub):
                 'proxy_id': 'proxy-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -11452,7 +11676,8 @@ class _MdProxiesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -11485,7 +11710,8 @@ class _MdProxiesStub(ApiInterfaceStub):
                 'proxy_id': 'proxy-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -11569,7 +11795,8 @@ class _MigrationStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -11622,7 +11849,8 @@ class _MirrorSessionsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -11653,7 +11881,8 @@ class _MirrorSessionsStub(ApiInterfaceStub):
                 'mirror_session_id': 'mirror-session-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -11685,7 +11914,8 @@ class _MirrorSessionsStub(ApiInterfaceStub):
                 'mirror_session_id': 'mirror-session-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -11725,7 +11955,8 @@ class _MirrorSessionsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -11760,7 +11991,8 @@ class _MirrorSessionsStub(ApiInterfaceStub):
                 'mirror_session_id': 'mirror-session-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for verify operation
@@ -11791,7 +12023,8 @@ class _MirrorSessionsStub(ApiInterfaceStub):
                 'mirror_session_id': 'mirror-session-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -11889,7 +12122,8 @@ class _NetworkMigrationSpecsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -11920,7 +12154,8 @@ class _NetworkMigrationSpecsStub(ApiInterfaceStub):
                 'template_id': 'template-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -11952,7 +12187,8 @@ class _NetworkMigrationSpecsStub(ApiInterfaceStub):
                 'template_id': 'template-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -11996,7 +12232,8 @@ class _NetworkMigrationSpecsStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'type': 'type',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -12031,7 +12268,8 @@ class _NetworkMigrationSpecsStub(ApiInterfaceStub):
                 'template_id': 'template-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -12115,7 +12353,8 @@ class _NodeStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for restart operation
@@ -12143,7 +12382,8 @@ class _NodeStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for shutdown operation
@@ -12171,7 +12411,8 @@ class _NodeStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -12202,7 +12443,8 @@ class _NodeStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -12294,7 +12536,8 @@ class _NormalizationsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -12351,7 +12594,8 @@ class _NsGroupsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'action': 'action',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for create operation
@@ -12384,7 +12628,8 @@ class _NsGroupsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -12417,7 +12662,8 @@ class _NsGroupsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -12451,7 +12697,8 @@ class _NsGroupsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'populate_references': 'populate_references',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -12495,7 +12742,8 @@ class _NsGroupsStub(ApiInterfaceStub):
                 'populate_references': 'populate_references',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -12530,7 +12778,8 @@ class _NsGroupsStub(ApiInterfaceStub):
                 'ns_group_id': 'ns-group-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -12626,7 +12875,8 @@ class _NsServiceGroupsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -12661,7 +12911,8 @@ class _NsServiceGroupsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -12692,7 +12943,8 @@ class _NsServiceGroupsStub(ApiInterfaceStub):
                 'ns_service_group_id': 'ns-service-group-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -12733,7 +12985,8 @@ class _NsServiceGroupsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -12768,7 +13021,8 @@ class _NsServiceGroupsStub(ApiInterfaceStub):
                 'ns_service_group_id': 'ns-service-group-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -12857,7 +13111,8 @@ class _NsServicesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -12892,7 +13147,8 @@ class _NsServicesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -12924,7 +13180,8 @@ class _NsServicesStub(ApiInterfaceStub):
                 'ns_service_id': 'ns-service-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -12966,7 +13223,8 @@ class _NsServicesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -13003,7 +13261,8 @@ class _NsServicesStub(ApiInterfaceStub):
                 'ns_service_id': 'ns-service-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -13090,7 +13349,8 @@ class _ServiceProfilesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -13121,7 +13381,8 @@ class _ServiceProfilesStub(ApiInterfaceStub):
                 'service_profile_id': 'service-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -13152,7 +13413,8 @@ class _ServiceProfilesStub(ApiInterfaceStub):
                 'service_profile_id': 'service-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -13193,7 +13455,8 @@ class _ServiceProfilesStub(ApiInterfaceStub):
                 'resource_type': 'resource_type',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -13226,7 +13489,8 @@ class _ServiceProfilesStub(ApiInterfaceStub):
                 'service_profile_id': 'service-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -13313,7 +13577,8 @@ class _ServicesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -13344,7 +13609,8 @@ class _ServicesStub(ApiInterfaceStub):
                 'service_id': 'service-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -13375,7 +13641,8 @@ class _ServicesStub(ApiInterfaceStub):
                 'service_id': 'service-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -13416,7 +13683,8 @@ class _ServicesStub(ApiInterfaceStub):
                 'resource_type': 'resource_type',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -13449,7 +13717,8 @@ class _ServicesStub(ApiInterfaceStub):
                 'service_id': 'service-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -13538,7 +13807,8 @@ class _SwitchingProfilesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -13571,7 +13841,8 @@ class _SwitchingProfilesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'unbind': 'unbind',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -13603,7 +13874,8 @@ class _SwitchingProfilesStub(ApiInterfaceStub):
                 'switching_profile_id': 'switching-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -13647,7 +13919,8 @@ class _SwitchingProfilesStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'switching_profile_type': 'switching_profile_type',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -13682,7 +13955,8 @@ class _SwitchingProfilesStub(ApiInterfaceStub):
                 'switching_profile_id': 'switching-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -13769,7 +14043,8 @@ class _TasksStub(ApiInterfaceStub):
                 'task_id': 'task-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -13814,7 +14089,8 @@ class _TasksStub(ApiInterfaceStub):
                 'sort_by': 'sort_by',
                 'status': 'status',
                 'user': 'user',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -13874,7 +14150,8 @@ class _TraceflowsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -13905,7 +14182,8 @@ class _TraceflowsStub(ApiInterfaceStub):
                 'traceflow_id': 'traceflow-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -13936,7 +14214,8 @@ class _TraceflowsStub(ApiInterfaceStub):
                 'traceflow_id': 'traceflow-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -13977,7 +14256,8 @@ class _TraceflowsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -14057,7 +14337,8 @@ class _TransportNodesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -14090,7 +14371,8 @@ class _TransportNodesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'force': 'force',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -14122,7 +14404,8 @@ class _TransportNodesStub(ApiInterfaceStub):
                 'transportnode_id': 'transportnode-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -14172,7 +14455,8 @@ class _TransportNodesStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'transport_zone_id': 'transport_zone_id',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for resynchostconfig operation
@@ -14203,7 +14487,8 @@ class _TransportNodesStub(ApiInterfaceStub):
                 'transportnode_id': 'transportnode-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -14246,7 +14531,8 @@ class _TransportNodesStub(ApiInterfaceStub):
                 'if_id': 'if_id',
                 'vnic': 'vnic',
                 'vnic_migration_dest': 'vnic_migration_dest',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for updatemaintenancemode operation
@@ -14279,7 +14565,8 @@ class _TransportNodesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'action': 'action',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -14384,7 +14671,8 @@ class _TransportZonesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -14415,7 +14703,8 @@ class _TransportZonesStub(ApiInterfaceStub):
                 'zone_id': 'zone-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -14446,7 +14735,8 @@ class _TransportZonesStub(ApiInterfaceStub):
                 'zone_id': 'zone-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -14487,7 +14777,8 @@ class _TransportZonesStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'uplink_teaming_policy_name': 'uplink_teaming_policy_name',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -14520,7 +14811,8 @@ class _TransportZonesStub(ApiInterfaceStub):
                 'zone_id': 'zone-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -14609,7 +14901,8 @@ class _TransportzoneProfilesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -14640,7 +14933,8 @@ class _TransportzoneProfilesStub(ApiInterfaceStub):
                 'transportzone_profile_id': 'transportzone-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -14672,7 +14966,8 @@ class _TransportzoneProfilesStub(ApiInterfaceStub):
                 'transportzone_profile_id': 'transportzone-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -14716,7 +15011,8 @@ class _TransportzoneProfilesStub(ApiInterfaceStub):
                 'resource_type': 'resource_type',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -14751,7 +15047,8 @@ class _TransportzoneProfilesStub(ApiInterfaceStub):
                 'transportzone_profile_id': 'transportzone-profile-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -14835,7 +15132,8 @@ class _TrustManagementStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -14886,7 +15184,8 @@ class _UiViewsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -14917,7 +15216,8 @@ class _UiViewsStub(ApiInterfaceStub):
                 'view_id': 'view-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -14950,7 +15250,8 @@ class _UiViewsStub(ApiInterfaceStub):
             query_parameters={
                 'view_ids': 'view_ids',
                 'widget_id': 'widget_id',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get_0 operation
@@ -14981,7 +15282,8 @@ class _UiViewsStub(ApiInterfaceStub):
                 'view_id': 'view-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -15014,7 +15316,8 @@ class _UiViewsStub(ApiInterfaceStub):
                 'view_id': 'view-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -15098,7 +15401,8 @@ class _UpgradeStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

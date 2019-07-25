@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -131,6 +131,23 @@ class Job(VapiInterface):
         Destination is SSH server
 
         """
+        SFTP = None
+        """
+        Destination is SFTP server
+
+        """
+        NFS = None
+        """
+        Destination is NFS server. This class attribute was added in vSphere API
+        6.7.2.
+
+        """
+        SMB = None
+        """
+        Destination is SMB server. This class attribute was added in vSphere API
+        6.7.2.
+
+        """
 
         def __init__(self, string):
             """
@@ -145,6 +162,9 @@ class Job(VapiInterface):
         LocationType('FTPS'),
         LocationType('HTTPS'),
         LocationType('SCP'),
+        LocationType('SFTP'),
+        LocationType('NFS'),
+        LocationType('SMB'),
     ])
     LocationType._set_binding_type(type.EnumType(
         'com.vmware.appliance.recovery.restore.job.location_type',
@@ -234,6 +254,7 @@ class Job(VapiInterface):
             self.args = args
             VapiStruct.__init__(self)
 
+
     LocalizableMessage._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.restore.job.localizable_message', {
             'id': type.StringType(),
@@ -270,6 +291,7 @@ class Job(VapiInterface):
             self.status = status
             self.messages = messages
             VapiStruct.__init__(self)
+
 
     ReturnResult._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.restore.job.return_result', {
@@ -345,6 +367,7 @@ class Job(VapiInterface):
             self.ignore_warnings = ignore_warnings
             VapiStruct.__init__(self)
 
+
     RestoreRequest._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.restore.job.restore_request', {
             'backup_password': type.OptionalType(type.SecretType()),
@@ -390,6 +413,7 @@ class Job(VapiInterface):
             self.messages = messages
             self.progress = progress
             VapiStruct.__init__(self)
+
 
     RestoreJobStatus._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.restore.job.restore_job_status', {

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -394,6 +394,7 @@ class Notification(VapiStruct):
         self.resolution = resolution
         VapiStruct.__init__(self)
 
+
 Notification._set_binding_type(type.StructType(
     'com.vmware.vcenter.deployment.notification', {
         'id': type.StringType(),
@@ -444,6 +445,7 @@ class Notifications(VapiStruct):
         self.errors = errors
         VapiStruct.__init__(self)
 
+
 Notifications._set_binding_type(type.StructType(
     'com.vmware.vcenter.deployment.notifications', {
         'info': type.OptionalType(type.ListType(type.ReferenceType(__name__, 'Notification'))),
@@ -486,6 +488,7 @@ class StandaloneSpec(VapiStruct):
         self.sso_admin_password = sso_admin_password
         self.sso_domain_name = sso_domain_name
         VapiStruct.__init__(self)
+
 
 StandaloneSpec._set_binding_type(type.StructType(
     'com.vmware.vcenter.deployment.standalone_spec', {
@@ -533,6 +536,7 @@ class StandalonePscSpec(VapiStruct):
         self.sso_admin_password = sso_admin_password
         self.sso_domain_name = sso_domain_name
         VapiStruct.__init__(self)
+
 
 StandalonePscSpec._set_binding_type(type.StructType(
     'com.vmware.vcenter.deployment.standalone_psc_spec', {
@@ -594,6 +598,7 @@ class ReplicatedSpec(VapiStruct):
         self.ssl_thumbprint = ssl_thumbprint
         self.ssl_verify = ssl_verify
         VapiStruct.__init__(self)
+
 
 ReplicatedSpec._set_binding_type(type.StructType(
     'com.vmware.vcenter.deployment.replicated_spec', {
@@ -663,6 +668,7 @@ class ReplicatedPscSpec(VapiStruct):
         self.ssl_thumbprint = ssl_thumbprint
         self.ssl_verify = ssl_verify
         VapiStruct.__init__(self)
+
 
 ReplicatedPscSpec._set_binding_type(type.StructType(
     'com.vmware.vcenter.deployment.replicated_psc_spec', {
@@ -734,6 +740,7 @@ class RemotePscSpec(VapiStruct):
         self.ssl_verify = ssl_verify
         VapiStruct.__init__(self)
 
+
 RemotePscSpec._set_binding_type(type.StructType(
     'com.vmware.vcenter.deployment.remote_psc_spec', {
         'psc_hostname': type.StringType(),
@@ -776,6 +783,7 @@ class CheckInfo(VapiStruct):
         self.status = status
         self.result = result
         VapiStruct.__init__(self)
+
 
 CheckInfo._set_binding_type(type.StructType(
     'com.vmware.vcenter.deployment.check_info', {
@@ -827,6 +835,7 @@ class HistoryMigrationSpec(VapiStruct):
         self.data_set = data_set
         self.defer_import = defer_import
         VapiStruct.__init__(self)
+
 
 HistoryMigrationSpec._set_binding_type(type.StructType(
     'com.vmware.vcenter.deployment.history_migration_spec', {
@@ -896,6 +905,7 @@ class LocationSpec(VapiStruct):
         self.username = username
         self.password = password
         VapiStruct.__init__(self)
+
 
 LocationSpec._set_binding_type(type.StructType(
     'com.vmware.vcenter.deployment.location_spec', {
@@ -968,6 +978,7 @@ class Install(VapiInterface):
             self.ceip_enabled = ceip_enabled
             VapiStruct.__init__(self)
 
+
     VcsaEmbeddedSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.deployment.install.vcsa_embedded_spec', {
             'standalone': type.OptionalType(type.ReferenceType(__name__, 'StandaloneSpec')),
@@ -975,55 +986,6 @@ class Install(VapiInterface):
             'ceip_enabled': type.BooleanType(),
         },
         VcsaEmbeddedSpec,
-        False,
-        None))
-
-
-    class PscSpec(VapiStruct):
-        """
-        The ``Install.PscSpec`` class contains information used to configure a
-        standalone or replicated PSC. This class was added in vSphere API 6.7.
-
-        .. tip::
-            The arguments are used to initialize data attributes with the same
-            names.
-        """
-
-
-
-
-        def __init__(self,
-                     standalone=None,
-                     replicated=None,
-                     ceip_enabled=None,
-                    ):
-            """
-            :type  standalone: :class:`StandalonePscSpec` or ``None``
-            :param standalone: Spec used to configure a standalone Platform Services Controller.
-                This field describes how the standalone PSC should be configured.
-                This attribute was added in vSphere API 6.7.
-                If None, will default to None.
-            :type  replicated: :class:`ReplicatedPscSpec` or ``None``
-            :param replicated: Spec used to configure a replicated Platform Services Controller.
-                This field describes how the replicated PSC should be configured.
-                This attribute was added in vSphere API 6.7.
-                If None, will default to None.
-            :type  ceip_enabled: :class:`bool`
-            :param ceip_enabled: Customer experience improvement program should be enabled or
-                disabled. This attribute was added in vSphere API 6.7.
-            """
-            self.standalone = standalone
-            self.replicated = replicated
-            self.ceip_enabled = ceip_enabled
-            VapiStruct.__init__(self)
-
-    PscSpec._set_binding_type(type.StructType(
-        'com.vmware.vcenter.deployment.install.psc_spec', {
-            'standalone': type.OptionalType(type.ReferenceType(__name__, 'StandalonePscSpec')),
-            'replicated': type.OptionalType(type.ReferenceType(__name__, 'ReplicatedPscSpec')),
-            'ceip_enabled': type.BooleanType(),
-        },
-        PscSpec,
         False,
         None))
 
@@ -1043,33 +1005,13 @@ class Install(VapiInterface):
 
         def __init__(self,
                      vcsa_embedded=None,
-                     psc=None,
-                     vcsa_external=None,
                      auto_answer=None,
                     ):
             """
-            :type  vcsa_embedded: :class:`Install.VcsaEmbeddedSpec` or ``None``
+            :type  vcsa_embedded: :class:`Install.VcsaEmbeddedSpec`
             :param vcsa_embedded: Spec used to configure an embedded vCenter Server. This field
                 describes how the embedded vCenter Server appliance should be
                 configured. This attribute was added in vSphere API 6.7.
-                If None, will not configure this appliance as Embedded vCenter
-                Server. If None, either ``vcsaExternal`` or ``psc`` must be
-                provided.
-            :type  psc: :class:`Install.PscSpec` or ``None``
-            :param psc: Spec used to configure a Platform Services Controller. This field
-                describes how the Platform Services Controller appliance should be
-                configured. This attribute was added in vSphere API 6.7.
-                If None, will not configure this appliance as Platform Services
-                Controller. If None, either ``vcsaEmbedded`` or ``vcsaExternal``
-                must be provided.
-            :type  vcsa_external: :class:`RemotePscSpec` or ``None``
-            :param vcsa_external: Spec used to configure a vCenter Server registered with an external
-                PSC. This fields represent the remote external PSC that the
-                configuring vCenter Server will be registering with. This attribute
-                was added in vSphere API 6.7.
-                If None, will not configure this appliance as external vCenter
-                Server. If None, either ``vcsaEmbedded`` or ``psc`` must be
-                provided.
             :type  auto_answer: :class:`bool` or ``None``
             :param auto_answer: Use the default option for any questions that may come up during
                 appliance configuration. This attribute was added in vSphere API
@@ -1077,16 +1019,13 @@ class Install(VapiInterface):
                 If None, will default to false.
             """
             self.vcsa_embedded = vcsa_embedded
-            self.psc = psc
-            self.vcsa_external = vcsa_external
             self.auto_answer = auto_answer
             VapiStruct.__init__(self)
 
+
     InstallSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.deployment.install.install_spec', {
-            'vcsa_embedded': type.OptionalType(type.ReferenceType(__name__, 'Install.VcsaEmbeddedSpec')),
-            'psc': type.OptionalType(type.ReferenceType(__name__, 'Install.PscSpec')),
-            'vcsa_external': type.OptionalType(type.ReferenceType(__name__, 'RemotePscSpec')),
+            'vcsa_embedded': type.ReferenceType(__name__, 'Install.VcsaEmbeddedSpec'),
             'auto_answer': type.OptionalType(type.BooleanType()),
         },
         InstallSpec,
@@ -1223,6 +1162,7 @@ class Upgrade(VapiInterface):
             self.ceip_enabled = ceip_enabled
             VapiStruct.__init__(self)
 
+
     VcsaEmbeddedSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.deployment.upgrade.vcsa_embedded_spec', {
             'ceip_enabled': type.BooleanType(),
@@ -1257,6 +1197,7 @@ class Upgrade(VapiInterface):
             """
             self.ceip_enabled = ceip_enabled
             VapiStruct.__init__(self)
+
 
     PscSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.deployment.upgrade.psc_spec', {
@@ -1344,6 +1285,7 @@ class Upgrade(VapiInterface):
             self.ssh_thumbprint = ssh_thumbprint
             VapiStruct.__init__(self)
 
+
     SourceApplianceSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.deployment.upgrade.source_appliance_spec', {
             'hostname': type.StringType(),
@@ -1421,6 +1363,7 @@ class Upgrade(VapiInterface):
             self.psc = psc
             self.auto_answer = auto_answer
             VapiStruct.__init__(self)
+
 
     UpgradeSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.deployment.upgrade.upgrade_spec', {
@@ -1627,6 +1570,7 @@ class Question(VapiInterface):
             self.possible_answers = possible_answers
             VapiStruct.__init__(self)
 
+
     Question._set_binding_type(type.StructType(
         'com.vmware.vcenter.deployment.question.question', {
             'id': type.StringType(),
@@ -1665,6 +1609,7 @@ class Question(VapiInterface):
             self.questions = questions
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.deployment.question.info', {
             'questions': type.ListType(type.ReferenceType(__name__, 'Question.Question')),
@@ -1701,6 +1646,7 @@ class Question(VapiInterface):
             self.question_id = question_id
             self.answer_val = answer_val
             VapiStruct.__init__(self)
+
 
     AnswerSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.deployment.question.answer_spec', {
@@ -1825,8 +1771,10 @@ class ImportHistory(VapiInterface):
             :type  result: :class:`Notifications` or ``None``
             :param result: Result of the operation. If an operation reports partial results
                 before it completes, this attribute could be :class:`set` before
-                the null has the value null. The value could change as the
-                operation progresses. This attribute was added in vSphere API 6.7.
+                the null has the value
+                :attr:`com.vmware.cis.task_client.Status.SUCCEEDED`. The value
+                could change as the operation progresses. This attribute was added
+                in vSphere API 6.7.
                 This attribute will be None if result is not available at the
                 current step of the operation.
             :type  description: :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -1902,6 +1850,7 @@ class ImportHistory(VapiInterface):
             self.user = user
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.deployment.import_history.info', {
             'progress': type.OptionalType(type.ReferenceType('com.vmware.cis.task_client', 'Progress')),
@@ -1952,6 +1901,7 @@ class ImportHistory(VapiInterface):
             self.name = name
             self.description = description
             VapiStruct.__init__(self)
+
 
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.deployment.import_history.create_spec', {
@@ -2032,7 +1982,8 @@ class ImportHistory(VapiInterface):
             if the caller is not authorized to perform the method.
         :raise: :class:`com.vmware.vapi.std.errors_client.NotAllowedInCurrentState` 
             if vCenter historical data import task cannot be paused at this
-            time. Pause can be accepted only in null state
+            time. Pause can be accepted only in
+            :attr:`com.vmware.cis.task_client.Status.RUNNING` state.
         :raise: :class:`com.vmware.vapi.std.errors_client.AlreadyInDesiredState` 
             if vCenter historical data import task is already paused
         :raise: :class:`com.vmware.vapi.std.errors_client.Error` 
@@ -2052,7 +2003,8 @@ class ImportHistory(VapiInterface):
             if the caller is not authorized to perform the method.
         :raise: :class:`com.vmware.vapi.std.errors_client.NotAllowedInCurrentState` 
             if vCenter historical data import task cannot be resumed at this
-            state. Resume can be accepted only in null state
+            state. Resume can be accepted only in
+            :attr:`com.vmware.cis.task_client.Status.BLOCKED` state
         :raise: :class:`com.vmware.vapi.std.errors_client.AlreadyInDesiredState` 
             if vCenter historical data import task is already resumed.
         :raise: :class:`com.vmware.vapi.std.errors_client.Error` 

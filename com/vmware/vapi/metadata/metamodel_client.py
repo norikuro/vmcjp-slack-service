@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -109,6 +109,7 @@ class ComponentData(VapiStruct):
         self.fingerprint = fingerprint
         VapiStruct.__init__(self)
 
+
 ComponentData._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.metamodel.component_data', {
         'info': type.ReferenceType(__name__, 'ComponentInfo'),
@@ -178,6 +179,7 @@ class ComponentInfo(VapiStruct):
         self.documentation = documentation
         VapiStruct.__init__(self)
 
+
 ComponentInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.metamodel.component_info', {
         'name': type.StringType(),
@@ -223,6 +225,7 @@ class ConstantInfo(VapiStruct):
         self.value = value
         self.documentation = documentation
         VapiStruct.__init__(self)
+
 
 ConstantInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.metamodel.constant_info', {
@@ -279,6 +282,7 @@ class ConstantValue(VapiStruct):
         self.primitive_value = primitive_value
         self.list_value = list_value
         VapiStruct.__init__(self)
+
 
     class Category(Enum):
         """
@@ -364,6 +368,7 @@ class ElementMap(VapiStruct):
         self.elements = elements
         VapiStruct.__init__(self)
 
+
 ElementMap._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.metamodel.element_map', {
         'elements': type.MapType(type.StringType(), type.ReferenceType(__name__, 'ElementValue')),
@@ -447,6 +452,7 @@ class ElementValue(VapiStruct):
         self.structure_id = structure_id
         self.structure_ids = structure_ids
         VapiStruct.__init__(self)
+
 
     class Type(Enum):
         """
@@ -580,6 +586,7 @@ class EnumerationInfo(VapiStruct):
         self.documentation = documentation
         VapiStruct.__init__(self)
 
+
 EnumerationInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.metamodel.enumeration_info', {
         'name': type.StringType(),
@@ -633,6 +640,7 @@ class EnumerationValueInfo(VapiStruct):
         self.documentation = documentation
         VapiStruct.__init__(self)
 
+
 EnumerationValueInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.metamodel.enumeration_value_info', {
         'value': type.StringType(),
@@ -678,6 +686,7 @@ class ErrorInfo(VapiStruct):
         self.structure_id = structure_id
         self.documentation = documentation
         VapiStruct.__init__(self)
+
 
 ErrorInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.metamodel.error_info', {
@@ -734,6 +743,7 @@ class FieldInfo(VapiStruct):
         self.metadata = metadata
         self.documentation = documentation
         VapiStruct.__init__(self)
+
 
 FieldInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.metamodel.field_info', {
@@ -812,6 +822,7 @@ class GenericInstantiation(VapiStruct):
         self.map_key_type = map_key_type
         self.map_value_type = map_value_type
         VapiStruct.__init__(self)
+
 
     class GenericType(Enum):
         """
@@ -936,6 +947,7 @@ class OperationInfo(VapiStruct):
         self.documentation = documentation
         VapiStruct.__init__(self)
 
+
 OperationInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.metamodel.operation_info', {
         'name': type.StringType(),
@@ -990,6 +1002,7 @@ class OperationResultInfo(VapiStruct):
         self.metadata = metadata
         self.documentation = documentation
         VapiStruct.__init__(self)
+
 
 OperationResultInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.metamodel.operation_result_info', {
@@ -1098,6 +1111,7 @@ class PackageInfo(VapiStruct):
         self.documentation = documentation
         VapiStruct.__init__(self)
 
+
 PackageInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.metamodel.package_info', {
         'name': type.StringType(),
@@ -1169,6 +1183,7 @@ class PrimitiveValue(VapiStruct):
         self.long_value = long_value
         self.string_value = string_value
         VapiStruct.__init__(self)
+
 
     class Type(Enum):
         """
@@ -1330,6 +1345,7 @@ class ServiceInfo(VapiStruct):
         self.documentation = documentation
         VapiStruct.__init__(self)
 
+
 ServiceInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.metamodel.service_info', {
         'name': type.StringType(),
@@ -1428,6 +1444,7 @@ class StructureInfo(VapiStruct):
         self.metadata = metadata
         self.documentation = documentation
         VapiStruct.__init__(self)
+
 
     class Type(Enum):
         """
@@ -1554,6 +1571,7 @@ class Type(VapiStruct):
         self.user_defined_type = user_defined_type
         self.generic_instantiation = generic_instantiation
         VapiStruct.__init__(self)
+
 
     class Category(Enum):
         """
@@ -1772,6 +1790,7 @@ class UserDefinedType(VapiStruct):
         self.resource_id = resource_id
         VapiStruct.__init__(self)
 
+
 UserDefinedType._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.metamodel.user_defined_type', {
         'resource_type': type.StringType(),
@@ -1957,7 +1976,6 @@ class MetadataIdentifier(VapiInterface):
     package has a metadata field whose type is ``Map<String, ElementMap>``.
     :class:`MetadataIdentifier` contains the identifiers used in the keys of
     the above Map type.
-    **Note:** This class is restricted for **VMware internal use only**.
     """
     CANONICAL_NAME = "CanonicalName"
     """
@@ -2313,6 +2331,7 @@ class Source(VapiInterface):
             self.address = address
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vapi.metadata.metamodel.source.info', {
             'description': type.StringType(),
@@ -2381,6 +2400,7 @@ class Source(VapiInterface):
             self.filepath = filepath
             self.address = address
             VapiStruct.__init__(self)
+
 
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vapi.metadata.metamodel.source.create_spec', {

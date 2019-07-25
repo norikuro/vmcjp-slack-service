@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -88,6 +88,7 @@ class Links(VapiInterface):
             self.display_name = display_name
             VapiStruct.__init__(self)
 
+
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.hvc.links.summary', {
             'link': type.IdType(resource_types='com.vmware.vcenter.hvc.Links'),
@@ -163,6 +164,7 @@ class Links(VapiInterface):
             self.admin_groups = admin_groups
             VapiStruct.__init__(self)
 
+
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.hvc.links.create_spec', {
             'psc_hostname': type.StringType(),
@@ -204,11 +206,54 @@ class Links(VapiInterface):
             self.ssl_thumbprint = ssl_thumbprint
             VapiStruct.__init__(self)
 
+
     CertificateInfo._set_binding_type(type.StructType(
         'com.vmware.vcenter.hvc.links.certificate_info', {
             'ssl_thumbprint': type.StringType(),
         },
         CertificateInfo,
+        False,
+        None))
+
+
+    class Credentials(VapiStruct):
+        """
+        The ``Links.Credentials`` class specifies user credentials to make a
+        successful connection to remote endpoint. **Warning:** This class is
+        available as technical preview. It may be changed in a future release.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     user_name=None,
+                     password=None,
+                    ):
+            """
+            :type  user_name: :class:`str`
+            :param user_name: Name of the user to authenticate. **Warning:** This attribute is
+                available as technical preview. It may be changed in a future
+                release.
+            :type  password: :class:`str`
+            :param password: Password for the user. **Warning:** This attribute is available as
+                technical preview. It may be changed in a future release.
+            """
+            self.user_name = user_name
+            self.password = password
+            VapiStruct.__init__(self)
+
+
+    Credentials._set_binding_type(type.StructType(
+        'com.vmware.vcenter.hvc.links.credentials', {
+            'user_name': type.StringType(),
+            'password': type.SecretType(),
+        },
+        Credentials,
         False,
         None))
 
@@ -237,12 +282,12 @@ class Links(VapiInterface):
             If the PSC or the VC version is not supported.
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
             If the user is not authorized.
-        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidRequest` 
+        :raise: :class:`com.vmware.vapi.std.errors_client.UnverifiedPeer` 
             If the SSL certificate of the foreign PSC cannot be validated by
             comparing with the thumbprint provided in
             :attr:`Links.CreateSpec.ssl_thumbprint` or if
             :attr:`Links.CreateSpec.ssl_thumbprint` is None. The value of the
-            {\\\\@link InvalidRequest#data) attribute will be a class that
+            {\\\\@link UnverifiedPeer#data) attribute will be a class that
             contains all the attributes defined in
             :class:`Links.CertificateInfo`.
         :raise: :class:`com.vmware.vapi.std.errors_client.Error` 
@@ -304,8 +349,8 @@ class _LinksStub(ApiInterfaceStub):
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unsupported'),
             'com.vmware.vapi.std.errors.unauthorized':
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
-            'com.vmware.vapi.std.errors.invalid_request':
-                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidRequest'),
+            'com.vmware.vapi.std.errors.unverified_peer':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'UnverifiedPeer'),
             'com.vmware.vapi.std.errors.error':
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'Error'),
 

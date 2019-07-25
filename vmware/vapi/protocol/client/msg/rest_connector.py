@@ -3,12 +3,13 @@ Rest client handler
 """
 
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2017,2018 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2017-2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 from vmware.vapi.core import ApiProvider
 from vmware.vapi.data.serializers.rest import RestSerializer
 from vmware.vapi.lib.constants import (HTTP_USER_AGENT_HEADER,
-    JSON_CONTENT_TYPE, HTTP_ACCEPT_HEADER, HTTP_CONTENT_TYPE_HEADER)
+     JSON_CONTENT_TYPE, HTTP_ACCEPT_HEADER,
+     HTTP_CONTENT_TYPE_HEADER)  # noqa: E128
 from vmware.vapi.lib.load import dynamic_import
 from vmware.vapi.lib.log import get_client_wire_logger, get_vapi_logger
 from vmware.vapi.protocol.client.http_lib import HTTPMethod, HTTPRequest
@@ -121,7 +122,7 @@ class RestClientProvider(ApiProvider):
         :return: method result object
         """
         http_method = rest_metadata.http_method
-        (url_path, auth_headers, request_body_str, cookies) = \
+        (url_path, input_headers, request_body_str, cookies) = \
             RestSerializer.serialize_request(input_value, ctx, rest_metadata,
                                              is_vapi_rest)
         # Add headers
@@ -132,14 +133,15 @@ class RestClientProvider(ApiProvider):
             HTTP_USER_AGENT_HEADER: get_user_agent(),
         }
 
+        if input_headers is not None:
+            headers.update(input_headers)
+
         if rest_metadata.content_type is not None:
             headers[HTTP_CONTENT_TYPE_HEADER] = rest_metadata.content_type
         elif http_method not in [HTTPMethod.GET, HTTPMethod.HEAD]:
             # TODO Maybe add this as part of REST metadata
             headers[HTTP_CONTENT_TYPE_HEADER] = JSON_CONTENT_TYPE
 
-        if auth_headers is not None:
-            headers.update(auth_headers)
         request_logger.debug('_invoke: request url: %s', url_path)
         request_logger.debug('_invoke: request http method: %s', http_method)
         request_logger.debug('_invoke: request headers: %s', headers)
@@ -155,6 +157,15 @@ class RestClientProvider(ApiProvider):
         request_logger.debug(
             '_invoke: response status: %s', http_response.status)
         request_logger.debug('_invoke: response body: %s', http_response.body)
+
+        if ctx.runtime_data is not None and 'response_extractor' in ctx.runtime_data:           # pylint: disable=line-too-long
+            ctx.runtime_data.get('response_extractor').set_http_status(http_response.status)    # pylint: disable=line-too-long
+            ctx.runtime_data.get('response_extractor').set_http_headers(http_response.headers)    # pylint: disable=line-too-long
+            ctx.runtime_data.get('response_extractor').set_http_body(http_response.body)        # pylint: disable=line-too-long
+            ctx.runtime_data.get('response_extractor').set_http_method(http_method)    # pylint: disable=line-too-long
+            url = self._http_provider._base_url + url_path    # pylint: disable=protected-access
+            ctx.runtime_data.get('response_extractor').set_http_url(url)    # pylint: disable=line-too-long
+
         method_result = RestSerializer.deserialize_response(
             http_response.status, http_response.body, is_vapi_rest)
         return method_result

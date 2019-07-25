@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -255,6 +255,7 @@ class Service(VapiInterface):
             self.health_messages = health_messages
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.appliance.vmon.service.info', {
             'name_key': type.StringType(),
@@ -292,6 +293,7 @@ class Service(VapiInterface):
             """
             self.startup_type = startup_type
             VapiStruct.__init__(self)
+
 
     UpdateSpec._set_binding_type(type.StructType(
         'com.vmware.appliance.vmon.service.update_spec', {

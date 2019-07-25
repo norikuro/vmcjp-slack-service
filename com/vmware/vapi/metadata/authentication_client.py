@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -104,6 +104,7 @@ class AuthenticationInfo(VapiStruct):
         self.scheme = scheme
         VapiStruct.__init__(self)
 
+
     class SchemeType(Enum):
         """
         The ``AuthenticationInfo.SchemeType`` class provides class attributes for
@@ -204,6 +205,7 @@ class ComponentData(VapiStruct):
         self.fingerprint = fingerprint
         VapiStruct.__init__(self)
 
+
 ComponentData._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.authentication.component_data', {
         'info': type.ReferenceType(__name__, 'ComponentInfo'),
@@ -253,6 +255,7 @@ class ComponentInfo(VapiStruct):
         self.packages = packages
         VapiStruct.__init__(self)
 
+
 ComponentInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.authentication.component_info', {
         'packages': type.MapType(type.IdType(), type.ReferenceType(__name__, 'PackageInfo')),
@@ -287,6 +290,7 @@ class OperationInfo(VapiStruct):
         """
         self.schemes = schemes
         VapiStruct.__init__(self)
+
 
 OperationInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.authentication.operation_info', {
@@ -345,6 +349,7 @@ class PackageInfo(VapiStruct):
         self.services = services
         VapiStruct.__init__(self)
 
+
 PackageInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.authentication.package_info', {
         'schemes': type.ListType(type.ReferenceType(__name__, 'AuthenticationInfo')),
@@ -402,6 +407,7 @@ class ServiceInfo(VapiStruct):
         self.schemes = schemes
         self.operations = operations
         VapiStruct.__init__(self)
+
 
 ServiceInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.authentication.service_info', {
@@ -735,6 +741,7 @@ class Source(VapiInterface):
             self.address = address
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vapi.metadata.authentication.source.info', {
             'description': type.StringType(),
@@ -803,6 +810,7 @@ class Source(VapiInterface):
             self.filepath = filepath
             self.address = address
             VapiStruct.__init__(self)
+
 
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vapi.metadata.authentication.source.create_spec', {

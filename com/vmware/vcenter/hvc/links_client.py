@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -48,6 +48,48 @@ class Sync(VapiInterface):
         :param config: Configuration to be used for creating the stub.
         """
         VapiInterface.__init__(self, config, _SyncStub)
+
+    class Credentials(VapiStruct):
+        """
+        The ``Sync.Credentials`` class specifies user credentials to make a
+        successful connection to remote endpoint. **Warning:** This class is
+        available as technical preview. It may be changed in a future release.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     user_name=None,
+                     password=None,
+                    ):
+            """
+            :type  user_name: :class:`str`
+            :param user_name: Name of the user to authenticate. **Warning:** This attribute is
+                available as technical preview. It may be changed in a future
+                release.
+            :type  password: :class:`str`
+            :param password: Password for the user. **Warning:** This attribute is available as
+                technical preview. It may be changed in a future release.
+            """
+            self.user_name = user_name
+            self.password = password
+            VapiStruct.__init__(self)
+
+
+    Credentials._set_binding_type(type.StructType(
+        'com.vmware.vcenter.hvc.links.sync.credentials', {
+            'user_name': type.StringType(),
+            'password': type.SecretType(),
+        },
+        Credentials,
+        False,
+        None))
+
 
 
     def reset(self,

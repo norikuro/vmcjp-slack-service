@@ -4,13 +4,13 @@
 Type converter to/from vAPI runtime data model to Python native data model
 """
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015-2017 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015-2018 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 import base64
 import six
 
 from vmware.vapi.bindings.type import (
-    BindingTypeVisitor, OptionalType, MAP_KEY_FIELD,
+    BindingTypeVisitor, OptionalType, IntegerType, MAP_KEY_FIELD,
     MAP_VALUE_FIELD)
 from vmware.vapi.bindings.enum import Enum
 from vmware.vapi.bindings.error import (VapiError, UnresolvedError)
@@ -204,6 +204,7 @@ class PythonToVapiJsonRpcDataValueVisitor(BindingTypeVisitor):
         """
         in_value = self._in_value
         out_value = typ.definition.new_value()
+        out_value.set_map(True)
         struct_def = typ.definition.element_type
         for k, v in six.iteritems(in_value):
             struct_val = struct_def.new_value()
@@ -245,8 +246,8 @@ class PythonToVapiJsonRpcDataValueVisitor(BindingTypeVisitor):
                 # If self._in_value is None and field type is not
                 # optional, raise an error
                 field_type = typ.get_field(field)
-                if (not isinstance(field_type, OptionalType) and
-                        self._in_value is None):
+                if (not isinstance(field_type, OptionalType)
+                        and self._in_value is None):
                     raise AttributeError
             except AttributeError:
                 msg = message_factory.get_message(
@@ -655,18 +656,30 @@ class VapiJsonRpcDataValueToPythonVisitor(BindingTypeVisitor):
         key_typ = typ.key_type
         value_typ = typ.value_type
         out_value = {}
-        for elt_value in in_value:
-            key = self._visit_struct_field(elt_value.get_field(MAP_KEY_FIELD),
-                                           key_typ)
-            if key in out_value:
-                msg = message_factory.get_message(
-                    'vapi.bindings.typeconverter.map.duplicate.key',
-                    key)
-                logger.debug(msg)
-                raise CoreException(msg)
-            value = self._visit_struct_field(
-                elt_value.get_field(MAP_VALUE_FIELD), value_typ)
-            out_value[key] = value
+
+        # For REST 2018 maps
+        if isinstance(in_value, StructValue):
+            for k, v in in_value.get_fields():
+                if isinstance(key_typ, IntegerType):
+                    key_value = int(k)
+                else:
+                    key_value = k
+                self._in_value = v
+                self.visit(value_typ)
+                out_value[key_value] = self._out_value
+        else:
+            for elt_value in in_value:
+                key = self._visit_struct_field(
+                    elt_value.get_field(MAP_KEY_FIELD), key_typ)
+                if key in out_value:
+                    msg = message_factory.get_message(
+                        'vapi.bindings.typeconverter.map.duplicate.key',
+                        key)
+                    logger.debug(msg)
+                    raise CoreException(msg)
+                value = self._visit_struct_field(
+                    elt_value.get_field(MAP_VALUE_FIELD), value_typ)
+                out_value[key] = value
         self._out_value = out_value
         self._in_value = in_value
 
@@ -719,8 +732,8 @@ class VapiJsonRpcDataValueToPythonVisitor(BindingTypeVisitor):
             # - if old client talks to new server, we will visit all the known
             #   fields here and the unexpected fields are added to the
             #   VapiStruct object
-            if (isinstance(field_type, OptionalType) and
-                    not in_value.has_field(field_name)):
+            if (isinstance(field_type, OptionalType)
+                    and not in_value.has_field(field_name)):
                 out_value[pep_name] = None
             else:
                 out_value[pep_name] = self._visit_struct_field(

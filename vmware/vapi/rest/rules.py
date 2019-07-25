@@ -11,9 +11,24 @@ import six
 from werkzeug.routing import Rule
 
 from com.vmware.vapi.metadata.metamodel_client import Type
-from vmware.vapi.bindings.task_helper import (
-        is_task_operation, get_non_task_operation_name)
-from vmware.vapi.lib.constants import RestAnnotations
+from vmware.vapi.bindings.task_helper import get_non_task_operation_name
+from vmware.vapi.lib.constants import RestAnnotations, RestAnnotationType
+
+
+# Mapping from HTTP method to operation name. The actual
+# operation name might change based on ID parameters in the URL.
+# Since GET is mapped to both list() and get(<>) operations,
+# this map will return list as operation name and if the HTTP
+# request has identifier arguments, then 'get' operation
+# identifier should be used instead of 'list'.
+http_method_map = {
+    'GET': 'list',
+    'PATCH': 'update',
+    'DELETE': 'delete',
+    'POST': 'create',
+    'PUT': 'set',
+    'HEAD': 'get'
+}
 
 
 class MappingRule(object):
@@ -95,7 +110,7 @@ class ListMappingRule(MappingRule):
         :return: True, if the given operation matches the criteria
             for this mapping rule, False, otherwise.
         """
-        return (True if operation_id == 'list' else False)
+        return bool(operation_id == 'list')
 
     def url(self, service_id, operation_id, operation_summary):
         """
@@ -113,8 +128,9 @@ class ListMappingRule(MappingRule):
             given operation.
         """
         service_url = self._generate_service_base_url(service_id)
-        dispatch_info = DispatchInfo(is_default_mapping=True,
-                                     operation_id=operation_id)
+        dispatch_info = DispatchInfo(
+            mapping_type=RestAnnotationType.NONE,
+            operation_id=get_non_task_operation_name(operation_id))
         return (service_url, 'GET', dispatch_info)
 
 
@@ -151,7 +167,7 @@ class PostMappingRule(MappingRule):
         :return: True, if the given operation matches the criteria
             for this mapping rule, False, otherwise.
         """
-        return (True if operation_id == 'create' else False)
+        return bool(operation_id == 'create')
 
     def url(self, service_id, operation_id, operation_summary):
         """
@@ -169,8 +185,9 @@ class PostMappingRule(MappingRule):
             given operation.
         """
         service_url = self._generate_service_base_url(service_id)
-        dispatch_info = DispatchInfo(is_default_mapping=True,
-                                     operation_id=operation_id)
+        dispatch_info = DispatchInfo(
+            mapping_type=RestAnnotationType.NONE,
+            operation_id=get_non_task_operation_name(operation_id))
         return (service_url, 'POST', dispatch_info)
 
 
@@ -206,7 +223,7 @@ class DeleteMappingRule(MappingRule):
         :return: True, if the given operation matches the criteria
             for this mapping rule, False, otherwise.
         """
-        return (True if operation_id == 'delete' else False)
+        return bool(operation_id == 'delete')
 
     def url(self, service_id, operation_id, operation_summary):
         """
@@ -225,8 +242,9 @@ class DeleteMappingRule(MappingRule):
         """
         service_url = self._generate_service_base_url(service_id)
         id_suffix = self._get_id_suffix(operation_summary.param_info_map)
-        dispatch_info = DispatchInfo(is_default_mapping=True,
-                                     operation_id=operation_id)
+        dispatch_info = DispatchInfo(
+            mapping_type=RestAnnotationType.NONE,
+            operation_id=get_non_task_operation_name(operation_id))
         if id_suffix:
             return (service_url + id_suffix, 'DELETE', dispatch_info)
         else:
@@ -265,7 +283,7 @@ class GetMappingRule(MappingRule):
         :return: True, if the given operation matches the criteria
             for this mapping rule, False, otherwise.
         """
-        return (True if operation_id == 'get' else False)
+        return bool(operation_id == 'get')
 
     def url(self, service_id, operation_id, operation_summary):
         """
@@ -284,8 +302,9 @@ class GetMappingRule(MappingRule):
         """
         service_url = self._generate_service_base_url(service_id)
         id_suffix = self._get_id_suffix(operation_summary.param_info_map)
-        dispatch_info = DispatchInfo(is_default_mapping=True,
-                                     operation_id=operation_id)
+        dispatch_info = DispatchInfo(
+            mapping_type=RestAnnotationType.NONE,
+            operation_id=get_non_task_operation_name(operation_id))
         if id_suffix:
             return (service_url + id_suffix, 'GET', dispatch_info)
         else:
@@ -324,7 +343,7 @@ class PatchMappingRule(MappingRule):
         :return: True, if the given operation matches the criteria
             for this mapping rule, False, otherwise.
         """
-        return (True if operation_id == 'update' else False)
+        return bool(operation_id == 'update')
 
     def url(self, service_id, operation_id, operation_summary):
         """
@@ -343,8 +362,9 @@ class PatchMappingRule(MappingRule):
         """
         service_url = self._generate_service_base_url(service_id)
         id_suffix = self._get_id_suffix(operation_summary.param_info_map)
-        dispatch_info = DispatchInfo(is_default_mapping=True,
-                                     operation_id=operation_id)
+        dispatch_info = DispatchInfo(
+            mapping_type=RestAnnotationType.NONE,
+            operation_id=get_non_task_operation_name(operation_id))
         if id_suffix:
             return (service_url + id_suffix, 'PATCH', dispatch_info)
         else:
@@ -383,7 +403,7 @@ class PutMappingRule(MappingRule):
         :return: True, if the given operation matches the criteria
             for this mapping rule, False, otherwise.
         """
-        return (True if operation_id == 'set' else False)
+        return bool(operation_id == 'set')
 
     def url(self, service_id, operation_id, operation_summary):
         """
@@ -402,8 +422,9 @@ class PutMappingRule(MappingRule):
         """
         service_url = self._generate_service_base_url(service_id)
         id_suffix = self._get_id_suffix(operation_summary.param_info_map)
-        dispatch_info = DispatchInfo(is_default_mapping=True,
-                                     operation_id=operation_id)
+        dispatch_info = DispatchInfo(
+            mapping_type=RestAnnotationType.NONE,
+            operation_id=get_non_task_operation_name(operation_id))
         if id_suffix:
             return (service_url + id_suffix, 'PUT', dispatch_info)
         else:
@@ -447,8 +468,7 @@ class PostActionMappingRule(MappingRule):
         :return: True, if the given operation matches the criteria
             for this mapping rule, False, otherwise.
         """
-        return (True if operation_id not in PostActionMappingRule._crud_ops
-                else False)
+        return bool(operation_id not in PostActionMappingRule._crud_ops)
 
     def url(self, service_id, operation_id, operation_summary):
         """
@@ -467,8 +487,9 @@ class PostActionMappingRule(MappingRule):
         """
         service_url = self._generate_service_base_url(service_id)
         id_suffix = self._get_id_suffix(operation_summary.param_info_map)
-        dispatch_info = DispatchInfo(is_default_mapping=True,
-                                     operation_id=operation_id)
+        dispatch_info = DispatchInfo(
+            mapping_type=RestAnnotationType.NONE,
+            operation_id=get_non_task_operation_name(operation_id))
         return (service_url + id_suffix, 'POST', dispatch_info)
 
 
@@ -512,7 +533,7 @@ class CustomRequestMappingRule(MappingRule):
         :return: True, if the given operation matches the criteria
             for this mapping rule, False, otherwise.
         """
-        return True if operation_summary.has_request_mapping_metadata() else False  # pylint: disable=line-too-long
+        return bool(operation_summary.has_request_mapping_metadata())
 
     #TODO: Delete this method once idl-toolkit does these validations
     @staticmethod
@@ -584,15 +605,10 @@ class CustomRequestMappingRule(MappingRule):
             else:
                 action_value = None
 
-        if is_task_operation(operation_id):
-            non_task_operation_id = get_non_task_operation_name(
-                operation_id)
-        else:
-            non_task_operation_id = operation_id
-
-        dispatch_info = DispatchInfo(is_default_mapping=False,
-                                     operation_id=non_task_operation_id,
-                                     action_value=action_value)
+        dispatch_info = DispatchInfo(
+            mapping_type=RestAnnotationType.REQUEST,
+            operation_id=get_non_task_operation_name(operation_id),
+            action_value=action_value)
 
         return (custom_url, http_method, dispatch_info)
 
@@ -630,7 +646,7 @@ class VerbMappingRule(MappingRule):
         :return: True, if the given operation matches the criteria
             for this mapping rule, False, otherwise.
         """
-        return True if operation_summary.has_verb_metadata() else False
+        return bool(operation_summary.has_verb_metadata())
 
     def url(self, service_id, operation_id, operation_summary):
         """
@@ -657,17 +673,21 @@ class VerbMappingRule(MappingRule):
         custom_url = custom_url.replace('}', '>')
         custom_url = '%s%s' % (self._rest_prefix, custom_url[1:])
 
-        action_value = None
+        dispatch_params = request_metadata.elements.get(
+            RestAnnotations.PARAMS_ELEMENT)
+        if dispatch_params is not None:
+            dispatch_params = dispatch_params.list_value
+        dispatch_headers = request_metadata.elements.get(
+            RestAnnotations.HEADERS_ELEMENT)
+        if dispatch_headers is not None:
+            dispatch_headers = dispatch_headers.list_value
 
-        if is_task_operation(operation_id):
-            non_task_operation_id = get_non_task_operation_name(
-                operation_id)
-        else:
-            non_task_operation_id = operation_id
-
-        dispatch_info = DispatchInfo(is_default_mapping=False,
-                                     operation_id=non_task_operation_id,
-                                     action_value=action_value)
+        dispatch_info = DispatchInfo(
+            mapping_type=RestAnnotationType.VERB,
+            operation_id=get_non_task_operation_name(operation_id),
+            params=dispatch_params,
+            headers=dispatch_headers
+        )
 
         return (custom_url, http_method, dispatch_info)
 
@@ -676,10 +696,159 @@ class DispatchInfo(object):
     """
     Class to hold the request dispatch related information
     """
-    def __init__(self, is_default_mapping, operation_id, action_value=None):
-        self.is_default_mapping = is_default_mapping
+    def __init__(self, mapping_type, operation_id, params=None,
+                 headers=None, action_value=None):
+        self.mapping_type = mapping_type
         self.operation_id = operation_id
+        self.params = params if params else []
+        self.headers = headers if headers else []
         self.action_value = action_value
+
+    def _default_matching(self, http_method, query_params, uri_params):
+        """
+        Check if dispatch info matches based on the HTTP method, the
+        identifier arguments in the URL and the query string.
+
+        :type  http_method: :class:`str`
+        :param http_method: HTTP request method
+        :type  query_params: :class:`dict` of :class:`str` and :class:`object`
+        :param query_params: Decoded dictionary from the query string
+        :type  uri_params: :class:`dict` of :class:`str` and :class:`object`
+        :param uri_params: Arguments parsed from the HTTP URL
+        :rtype: :class:`str` and :class:`int`
+        :return: If operation matched and arity
+        """
+        operation_id = http_method_map[http_method]
+        # If ID is in the URI parameter then, operation_id is get instead of
+        # list
+        if uri_params and operation_id == 'list':
+            ## TODO: Handle composite identifier case
+            operation_id = 'get'
+        action = query_params.get('~action')
+        if action:
+            operation_id = action.replace('-', '_')
+        return operation_id == self.operation_id, 1
+
+    def _request_matching(self, http_method, query_params, uri_params):
+        """
+        Check if dispatch info matches based on the action parameter in the
+        query string
+
+        :type  http_method: :class:`str`
+        :param http_method: HTTP request method
+        :type  query_params: :class:`dict` of :class:`str` and :class:`object`
+        :param query_params: Decoded dictionary from the query string
+        :type  uri_params: :class:`dict` of :class:`str` and :class:`object`
+        :param uri_params: Arguments parsed from the HTTP URL
+        :rtype: :class:`bool` and :class:`int`
+        :return: If operation matched and arity
+        """
+        action_requested = query_params.get(RestAnnotations.ACTION_PARAM)
+        if action_requested:
+            return action_requested == self.action_value, 1
+        else:
+            return self._default_matching(http_method, query_params, uri_params)
+
+    def _verb_matching(self, query_params, headers):
+        """
+        Check if dispatch info matches the given request
+
+        :type  query_params: :class:`dict` of :class:`str` and :class:`object`
+        :param query_params: Decoded dictionary from the query string
+        :rtype: :class:`bool` and :class:`int`
+        :return: If operation matched and arity
+        """
+        arity = 0
+        # Iterating over the dispatch parameters
+        for param in self.params:
+            match = None
+            param_split = param.split('=')
+            # For every query param match increase arity by 3
+            if param_split[0].strip() in query_params:
+                arity += 3
+                match = True
+            else:
+                # For each param not in query param decrease arity by 1
+                arity -= 1
+
+            if len(param_split) > 1:
+                q_val = query_params.get(param_split[0].strip())
+                # For query param value match increase arity by 4
+                if q_val == param_split[1]:
+                    arity += 4
+                elif match and param_split[1]:
+                    # If param is present in query params but the param
+                    # value in dispatch is not equal to that in query params
+                    # match fails
+                    match = False
+
+            if match is False:
+                return False, arity
+
+        # Iterating over the dispatch headers
+        for header in self.headers:
+            match = None
+            header_split = header.split(':')
+            # For each header match increase arity by 1
+            if header_split[0].lower() in headers:
+                arity += 1
+                match = True
+            else:
+                # For each header mismatch decrease arity by 1
+                arity -= 1
+
+            if len(header_split) > 1:
+                header_split[1] = ','.join([
+                    x.strip() for x in header_split[1].split(',')])
+                header_val = headers.get(header_split[0].strip())
+                if header_val:
+                    header_val = ','.join([
+                        x.strip() for x in header_val.split(',')])
+                # For each header value match increase arity by 2
+                if header_val and header_val.find(header_split[1]) >= 0:
+                    arity += 2
+                    match = True
+                elif match and header_split[1]:
+                    # For header value mismatch match fails
+                    match = False
+
+            if match is False:
+                return False, arity
+
+        return True, arity
+
+    def get_operation_id(self, request, query_params, uri_params):
+        """
+        Get the matching operation id and arity based upon request
+
+        :type  request: :class:`werkzeug.wrappers.Request`
+        :param request: Request object
+        :type  query_params: :class:`dict` of :class:`str` and :class:`object`
+        :param query_params: Decoded dictionary from the query string
+        :type  uri_params: :class:`dict` of :class:`str` and :class:`object`
+        :param uri_params: Arguments parsed from the HTTP URL
+        :rtype: :class:`str` and :class:`int`
+        :return: Identifier of operation matched, arity and mapping type
+        """
+        arity = 0
+        if self.mapping_type == RestAnnotationType.VERB:
+            retval, arity = self._verb_matching(query_params,
+                                                request.headers)
+        elif self.mapping_type == RestAnnotationType.REQUEST:
+            # Fixed query param 'action' is supported only for
+            # HTTP POST method
+            # Delete 'action' from query string if:
+            # 1) We start supporting 'action' for GET or,
+            # 2) We start accepting query parameters for POST
+            # Only in those cases, the 'action' parameter in query string
+            # would cause an unexpected keyword argument error
+            retval, arity = self._request_matching(request.method,
+                                                   query_params, uri_params)
+        else:
+            retval, arity = self._default_matching(request.method,
+                                                   query_params, uri_params)
+
+        return self.operation_id if retval else None, arity, self.mapping_type
 
     def __eq__(self, other):
         if other is None or not isinstance(other, DispatchInfo):

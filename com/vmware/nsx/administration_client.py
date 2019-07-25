@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class AuditLogs(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.administration.audit_logs'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -93,7 +96,10 @@ class SupportBundles(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.administration.support_bundles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -172,7 +178,8 @@ class _AuditLogsStub(ApiInterfaceStub):
                 'cursor': 'cursor',
                 'fields': 'fields',
                 'page_size': 'page_size',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -227,7 +234,8 @@ class _SupportBundlesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'override_async_response': 'override_async_response',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

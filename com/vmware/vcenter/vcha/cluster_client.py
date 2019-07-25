@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -39,7 +39,7 @@ class Active(VapiInterface):
     """
     The ``Active`` class provides methods to get information related to the
     active vCenter High Availability (VCHA) node. This class was added in
-    vSphere API 6.7 U1.
+    vSphere API 6.7.1.
     """
 
     _VAPI_SERVICE_ID = 'com.vmware.vcenter.vcha.cluster.active'
@@ -56,8 +56,8 @@ class Active(VapiInterface):
     class Info(VapiStruct):
         """
         The ``Active.Info`` class contains the network and placement information of
-        the active node of a VCHA Cluster. This class was added in vSphere API 6.7
-        U1.
+        the active node of a VCHA Cluster. This class was added in vSphere API
+        6.7.1.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -75,15 +75,15 @@ class Active(VapiInterface):
             """
             :type  management: :class:`com.vmware.vcenter.vcha_client.IpSpec`
             :param management: IP specification for the Management network. This attribute was
-                added in vSphere API 6.7 U1.
+                added in vSphere API 6.7.1.
             :type  ha: :class:`com.vmware.vcenter.vcha_client.IpSpec` or ``None``
             :param ha: IP specification for the HA network. This attribute was added in
-                vSphere API 6.7 U1.
+                vSphere API 6.7.1.
                 If None, then the second NIC of the Active Node of the VCHA cluster
                 is not configured.
             :type  placement: :class:`com.vmware.vcenter.vcha_client.PlacementInfo` or ``None``
             :param placement: Contains the placement information of the active node. This
-                attribute was added in vSphere API 6.7 U1.
+                attribute was added in vSphere API 6.7.1.
                 If None, the request specified that placement information of the
                 active node should not be included.
             """
@@ -91,6 +91,7 @@ class Active(VapiInterface):
             self.ha = ha
             self.placement = placement
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vcha.cluster.active.info', {
@@ -110,12 +111,13 @@ class Active(VapiInterface):
             ):
         """
         Retrieves information about the active node of a VCHA cluster. This
-        method was added in vSphere API 6.7 U1.
+        method was added in vSphere API 6.7.1.
 
         :type  vc_spec: :class:`com.vmware.vcenter.vcha_client.CredentialsSpec` or ``None``
         :param vc_spec: Contains active node's management vCenter server credentials.
-            If None, then the active vCenter server is assumed to be managed by
-            itself.
+            If None, then the active vCenter Server instance is assumed to be
+            either self-managed or else in enhanced linked mode and managed by
+            a linked vCenter Server instance.
         :type  partial: :class:`bool` or ``None``
         :param partial: If true, then return only the information that does not require
             connecting to the Active vCenter Server. 
@@ -160,7 +162,7 @@ class DeploymentType(VapiInterface):
     """
     The DeploymentType class provides methods to get the deployment type of a
     vCenter High Availability Cluster (VCHA Cluster). This class was added in
-    vSphere API 6.7 U1.
+    vSphere API 6.7.1.
     """
 
     _VAPI_SERVICE_ID = 'com.vmware.vcenter.vcha.cluster.deployment_type'
@@ -177,7 +179,7 @@ class DeploymentType(VapiInterface):
     class Type(Enum):
         """
         The ``DeploymentType.Type`` class defines the possible deployment types for
-        a VCHA Cluster. This enumeration was added in vSphere API 6.7 U1.
+        a VCHA Cluster. This enumeration was added in vSphere API 6.7.1.
 
         .. note::
             This class represents an enumerated type in the interface language
@@ -191,19 +193,19 @@ class DeploymentType(VapiInterface):
         NONE = None
         """
         VCHA Cluster is not configured. This class attribute was added in vSphere
-        API 6.7 U1.
+        API 6.7.1.
 
         """
         AUTO = None
         """
         VCHA Cluster was deployed automatically. This class attribute was added in
-        vSphere API 6.7 U1.
+        vSphere API 6.7.1.
 
         """
         MANUAL = None
         """
         VCHA Cluster was deployed manually. This class attribute was added in
-        vSphere API 6.7 U1.
+        vSphere API 6.7.1.
 
         """
 
@@ -227,7 +229,7 @@ class DeploymentType(VapiInterface):
     class Info(VapiStruct):
         """
         The ``DeploymentType.Info`` class contains the deployment type of the VCHA
-        Cluster. This class was added in vSphere API 6.7 U1.
+        Cluster. This class was added in vSphere API 6.7.1.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -243,10 +245,11 @@ class DeploymentType(VapiInterface):
             """
             :type  deployment_type: :class:`DeploymentType.Type`
             :param deployment_type: Identifies the deployment type of the VCHA cluster. This attribute
-                was added in vSphere API 6.7 U1.
+                was added in vSphere API 6.7.1.
             """
             self.deployment_type = deployment_type
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vcha.cluster.deployment_type.info', {
@@ -261,7 +264,7 @@ class DeploymentType(VapiInterface):
     def get(self):
         """
         Retrieves the deployment type of a VCHA cluster. This method was added
-        in vSphere API 6.7 U1.
+        in vSphere API 6.7.1.
 
 
         :rtype: :class:`DeploymentType.Info`
@@ -278,7 +281,7 @@ class Mode(VapiInterface):
     """
     The Mode class provides methods to manage the operating mode of a vCenter
     High Availability Cluster (VCHA Cluster). This class was added in vSphere
-    API 6.7 U1.
+    API 6.7.1.
     """
 
     _VAPI_SERVICE_ID = 'com.vmware.vcenter.vcha.cluster.mode'
@@ -295,7 +298,7 @@ class Mode(VapiInterface):
     class ClusterMode(Enum):
         """
         The ``Mode.ClusterMode`` class defines the possible modes for a VCHA
-        Cluster. This enumeration was added in vSphere API 6.7 U1.
+        Cluster. This enumeration was added in vSphere API 6.7.1.
 
         .. note::
             This class represents an enumerated type in the interface language
@@ -310,21 +313,21 @@ class Mode(VapiInterface):
         """
         VCHA Cluster is enabled. State replication between the Active and Passive
         node is enabled and automatic failover is allowed. This class attribute was
-        added in vSphere API 6.7 U1.
+        added in vSphere API 6.7.1.
 
         """
         DISABLED = None
         """
         VCHA Cluster is disabled. State replication between the Active and Passive
         node is disabled and automatic failover is not allowed. This class
-        attribute was added in vSphere API 6.7 U1.
+        attribute was added in vSphere API 6.7.1.
 
         """
         MAINTENANCE = None
         """
         VCHA Cluster is in maintenance mode. State replication between the and
         Passive node is enabled but automatic failover is not allowed. This class
-        attribute was added in vSphere API 6.7 U1.
+        attribute was added in vSphere API 6.7.1.
 
         """
 
@@ -348,7 +351,7 @@ class Mode(VapiInterface):
     class Info(VapiStruct):
         """
         The ``Mode.Info`` class contains the mode of the VCHA Cluster. This class
-        was added in vSphere API 6.7 U1.
+        was added in vSphere API 6.7.1.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -364,10 +367,11 @@ class Mode(VapiInterface):
             """
             :type  mode: :class:`Mode.ClusterMode`
             :param mode: Identifies the mode of the VCHA cluster. This attribute was added
-                in vSphere API 6.7 U1.
+                in vSphere API 6.7.1.
             """
             self.mode = mode
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vcha.cluster.mode.info', {
@@ -382,7 +386,7 @@ class Mode(VapiInterface):
     def get(self):
         """
         Retrieves the current mode of a VCHA cluster. This method was added in
-        vSphere API 6.7 U1.
+        vSphere API 6.7.1.
 
 
         :rtype: :class:`Mode.Info`
@@ -414,7 +418,7 @@ class Mode(VapiInterface):
          All other transitions are not allowed. 
         
         VCHA Cluster configuration remains intact in any of the cluster modes..
-        This method was added in vSphere API 6.7 U1.
+        This method was added in vSphere API 6.7.1.
 
         :type  mode: :class:`Mode.ClusterMode`
         :param mode: Clustermode to change the VCHA cluster mode to.
@@ -435,7 +439,7 @@ class Passive(VapiInterface):
     """
     The ``Passive`` class provides methods to validate a passive's placement
     configuration and redeploy the passive node in a vCenter High Availability
-    (VCHA) cluster. This class was added in vSphere API 6.7 U1.
+    (VCHA) cluster. This class was added in vSphere API 6.7.1.
     """
 
     _VAPI_SERVICE_ID = 'com.vmware.vcenter.vcha.cluster.passive'
@@ -452,7 +456,7 @@ class Passive(VapiInterface):
     class CheckSpec(VapiStruct):
         """
         The ``Passive.CheckSpec`` class contains placement information for
-        validation. This class was added in vSphere API 6.7 U1.
+        validation. This class was added in vSphere API 6.7.1.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -469,16 +473,18 @@ class Passive(VapiInterface):
             """
             :type  vc_spec: :class:`com.vmware.vcenter.vcha_client.CredentialsSpec` or ``None``
             :param vc_spec: Contains the active node's management vCenter server credentials.
-                This attribute was added in vSphere API 6.7 U1.
-                If None, then the active vCenter server is assumed to to be managed
-                by itself.
+                This attribute was added in vSphere API 6.7.1.
+                If None, then the active vCenter Server instance is assumed to be
+                either self-managed or else in enhanced linked mode and managed by
+                a linked vCenter Server instance.
             :type  placement: :class:`com.vmware.vcenter.vcha_client.PlacementSpec`
             :param placement: Contains the node's placement information for validation. This
-                attribute was added in vSphere API 6.7 U1.
+                attribute was added in vSphere API 6.7.1.
             """
             self.vc_spec = vc_spec
             self.placement = placement
             VapiStruct.__init__(self)
+
 
     CheckSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vcha.cluster.passive.check_spec', {
@@ -494,7 +500,7 @@ class Passive(VapiInterface):
         """
         The ``Passive.CheckResult`` class contains the warnings and errors that
         will occur during the clone operation. This class was added in vSphere API
-        6.7 U1.
+        6.7.1.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -511,15 +517,15 @@ class Passive(VapiInterface):
             """
             :type  warnings: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
             :param warnings: A list of problems which may require attention, but which are not
-                fatal. This attribute was added in vSphere API 6.7 U1.
+                fatal. This attribute was added in vSphere API 6.7.1.
             :type  errors: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
             :param errors: A list of problems which are fatal to the operation and the
-                operation will fail. This attribute was added in vSphere API 6.7
-                U1.
+                operation will fail. This attribute was added in vSphere API 6.7.1.
             """
             self.warnings = warnings
             self.errors = errors
             VapiStruct.__init__(self)
+
 
     CheckResult._set_binding_type(type.StructType(
         'com.vmware.vcenter.vcha.cluster.passive.check_result', {
@@ -534,7 +540,7 @@ class Passive(VapiInterface):
     class RedeploySpec(VapiStruct):
         """
         The ``Passive.RedeploySpec`` class contains the redeploy specification.
-        This class was added in vSphere API 6.7 U1.
+        This class was added in vSphere API 6.7.1.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -553,23 +559,24 @@ class Passive(VapiInterface):
             """
             :type  vc_spec: :class:`com.vmware.vcenter.vcha_client.CredentialsSpec` or ``None``
             :param vc_spec: Contains the active node's management vCenter server credentials.
-                This attribute was added in vSphere API 6.7 U1.
-                If None, then the active vCenter server is assumed to be managed by
-                itself.
+                This attribute was added in vSphere API 6.7.1.
+                If None, then the active vCenter Server instance is assumed to be
+                either self-managed or else in enhanced linked mode and managed by
+                a linked vCenter Server instance.
             :type  placement: :class:`com.vmware.vcenter.vcha_client.PlacementSpec`
             :param placement: Contains the node's placement information. This attribute was added
-                in vSphere API 6.7 U1.
+                in vSphere API 6.7.1.
             :type  ha_ip: :class:`com.vmware.vcenter.vcha_client.IpSpec` or ``None``
             :param ha_ip: Contains the VCHA HA network configuration of the node. All cluster
                 communication (state replication, heartbeat, cluster messages)
                 happens over this network. This attribute was added in vSphere API
-                6.7 U1.
+                6.7.1.
                 If None, then the stored network configuration for the VCHA HA
                 network for the passive node will be used.
             :type  failover_ip: :class:`com.vmware.vcenter.vcha_client.IpSpec` or ``None``
             :param failover_ip: Failover IP address that this node must assume after the failover
                 to serve client requests. This attribute was added in vSphere API
-                6.7 U1.
+                6.7.1.
                 If None, then the public IP address of the Active vCenter Server is
                 assumed.
             """
@@ -578,6 +585,7 @@ class Passive(VapiInterface):
             self.ha_ip = ha_ip
             self.failover_ip = failover_ip
             VapiStruct.__init__(self)
+
 
     RedeploySpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vcha.cluster.passive.redeploy_spec', {
@@ -597,7 +605,7 @@ class Passive(VapiInterface):
               ):
         """
         Validates the specified passive node's placement configuration. This
-        method was added in vSphere API 6.7 U1.
+        method was added in vSphere API 6.7.1.
 
         :type  spec: :class:`Passive.CheckSpec`
         :param spec: Contains the passive node's placement specification.
@@ -642,7 +650,7 @@ class Passive(VapiInterface):
         """
         Creates the passive node in a degraded cluster with node location
         information and pre-existing VCHA cluster configuration from the active
-        node. This method was added in vSphere API 6.7 U1.
+        node. This method was added in vSphere API 6.7.1.
 
         :type  spec: :class:`Passive.RedeploySpec`
         :param spec: Contains the passive node's redeploy specification.
@@ -673,7 +681,7 @@ class Witness(VapiInterface):
     """
     The ``Witness`` class provides methods to validate a witness's placement
     configuration and redeploy the witness node in a vCenter High Availability
-    (VCHA) cluster. This class was added in vSphere API 6.7 U1.
+    (VCHA) cluster. This class was added in vSphere API 6.7.1.
     """
 
     _VAPI_SERVICE_ID = 'com.vmware.vcenter.vcha.cluster.witness'
@@ -690,7 +698,7 @@ class Witness(VapiInterface):
     class CheckSpec(VapiStruct):
         """
         The ``Witness.CheckSpec`` class contains placement information for
-        validation. This class was added in vSphere API 6.7 U1.
+        validation. This class was added in vSphere API 6.7.1.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -707,16 +715,18 @@ class Witness(VapiInterface):
             """
             :type  vc_spec: :class:`com.vmware.vcenter.vcha_client.CredentialsSpec` or ``None``
             :param vc_spec: Contains the active node's management vCenter server credentials.
-                This attribute was added in vSphere API 6.7 U1.
-                If None, then the active vCenter server is assumed to be managed by
-                itself.
+                This attribute was added in vSphere API 6.7.1.
+                If None, then the active vCenter Server instance is assumed to be
+                either self-managed or else in enhanced linked mode and managed by
+                a linked vCenter Server instance.
             :type  placement: :class:`com.vmware.vcenter.vcha_client.PlacementSpec`
             :param placement: Contains the node's placement information for validation. This
-                attribute was added in vSphere API 6.7 U1.
+                attribute was added in vSphere API 6.7.1.
             """
             self.vc_spec = vc_spec
             self.placement = placement
             VapiStruct.__init__(self)
+
 
     CheckSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vcha.cluster.witness.check_spec', {
@@ -732,7 +742,7 @@ class Witness(VapiInterface):
         """
         The ``Witness.CheckResult`` class contains the warnings and errors that
         will occur during the clone operation. This class was added in vSphere API
-        6.7 U1.
+        6.7.1.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -749,15 +759,15 @@ class Witness(VapiInterface):
             """
             :type  warnings: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
             :param warnings: A list of problems which may require attention, but which are not
-                fatal. This attribute was added in vSphere API 6.7 U1.
+                fatal. This attribute was added in vSphere API 6.7.1.
             :type  errors: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
             :param errors: A list of problems which are fatal to the operation and the
-                operation will fail. This attribute was added in vSphere API 6.7
-                U1.
+                operation will fail. This attribute was added in vSphere API 6.7.1.
             """
             self.warnings = warnings
             self.errors = errors
             VapiStruct.__init__(self)
+
 
     CheckResult._set_binding_type(type.StructType(
         'com.vmware.vcenter.vcha.cluster.witness.check_result', {
@@ -772,7 +782,7 @@ class Witness(VapiInterface):
     class RedeploySpec(VapiStruct):
         """
         The ``Witness.RedeploySpec`` class contains the redeploy specification.
-        This class was added in vSphere API 6.7 U1.
+        This class was added in vSphere API 6.7.1.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -790,17 +800,18 @@ class Witness(VapiInterface):
             """
             :type  vc_spec: :class:`com.vmware.vcenter.vcha_client.CredentialsSpec` or ``None``
             :param vc_spec: Contains the active node's management vCenter server credentials.
-                This attribute was added in vSphere API 6.7 U1.
-                If None, then the active vCenter server is assumed to be managed by
-                itself.
+                This attribute was added in vSphere API 6.7.1.
+                If None, then the active vCenter Server instance is assumed to be
+                either self-managed or else in enhanced linked mode and managed by
+                a linked vCenter Server instance.
             :type  placement: :class:`com.vmware.vcenter.vcha_client.PlacementSpec`
             :param placement: Contains the node's placement information. This attribute was added
-                in vSphere API 6.7 U1.
+                in vSphere API 6.7.1.
             :type  ha_ip: :class:`com.vmware.vcenter.vcha_client.IpSpec` or ``None``
             :param ha_ip: Contains the VCHA HA network configuration of the node. All cluster
                 communication (state replication, heartbeat, cluster messages)
                 happens over this network. This attribute was added in vSphere API
-                6.7 U1.
+                6.7.1.
                 If None, then the stored network configuration for the VCHA HA
                 network for the witness node will be used.
             """
@@ -808,6 +819,7 @@ class Witness(VapiInterface):
             self.placement = placement
             self.ha_ip = ha_ip
             VapiStruct.__init__(self)
+
 
     RedeploySpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vcha.cluster.witness.redeploy_spec', {
@@ -826,7 +838,7 @@ class Witness(VapiInterface):
               ):
         """
         Validates the specified witness node's placement configuration. This
-        method was added in vSphere API 6.7 U1.
+        method was added in vSphere API 6.7.1.
 
         :type  spec: :class:`Witness.CheckSpec`
         :param spec: Contains the witness node's placement specification.
@@ -871,7 +883,7 @@ class Witness(VapiInterface):
         """
         Creates the witness node in a degraded cluster with node location
         information and pre-existing VCHA cluster configuration from the active
-        node. This method was added in vSphere API 6.7 U1.
+        node. This method was added in vSphere API 6.7.1.
 
         :type  spec: :class:`Witness.RedeploySpec`
         :param spec: Contains the witness node's redeploy specification.

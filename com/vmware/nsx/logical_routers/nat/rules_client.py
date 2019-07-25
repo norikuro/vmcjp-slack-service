@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -56,7 +56,10 @@ class Statistics(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_routers.nat.rules.statistics'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -73,7 +76,7 @@ class Statistics(VapiInterface):
         Returns the summation of statistics for all rules from all nodes for
         the Specified Logical Router. Also gives the per transport node
         statistics for provided logical router. The query parameter
-        \\\\"source=realtime\\\\" is not supported.
+        \"source=realtime\" is not supported.
 
         :type  logical_router_id: :class:`str`
         :param logical_router_id: (required)
@@ -105,8 +108,8 @@ class Statistics(VapiInterface):
                    ):
         """
         Returns the summation of statistics from all nodes for the Specified
-        Logical Router NAT Rule. Query parameter \\\\"source=realtime\\\\" is
-        the only supported source.
+        Logical Router NAT Rule. Query parameter \"source=realtime\" is the
+        only supported source.
 
         :type  logical_router_id: :class:`str`
         :param logical_router_id: (required)
@@ -165,7 +168,8 @@ class _StatisticsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for getperrule operation
@@ -200,7 +204,8 @@ class _StatisticsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

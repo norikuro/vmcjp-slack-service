@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class PortMirroringInstances(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_policy.infra.domains.groups.port_mirroring_instances'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -277,7 +280,8 @@ class _PortMirroringInstancesStub(ApiInterfaceStub):
                 'port_mirroring_instance_id': 'port-mirroring-instance-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -312,7 +316,8 @@ class _PortMirroringInstancesStub(ApiInterfaceStub):
                 'port_mirroring_instance_id': 'port-mirroring-instance-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -355,7 +360,8 @@ class _PortMirroringInstancesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for patch operation
@@ -392,7 +398,8 @@ class _PortMirroringInstancesStub(ApiInterfaceStub):
                 'port_mirroring_instance_id': 'port-mirroring-instance-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -429,7 +436,8 @@ class _PortMirroringInstancesStub(ApiInterfaceStub):
                 'port_mirroring_instance_id': 'port-mirroring-instance-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

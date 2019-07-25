@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -35,6 +35,10 @@ from vmware.vapi.lib.rest import OperationRestMetadata
 
 class StubFactory(StubFactoryBase):
     _attrs = {
+        'disable_drs_vmotion': 'com.vmware.vcenter.compute.policies.capabilities.disable_drs_vmotion_client.StubFactory',
         'vm_host_affinity': 'com.vmware.vcenter.compute.policies.capabilities.vm_host_affinity_client.StubFactory',
+        'vm_host_anti_affinity': 'com.vmware.vcenter.compute.policies.capabilities.vm_host_anti_affinity_client.StubFactory',
+        'vm_vm_affinity': 'com.vmware.vcenter.compute.policies.capabilities.vm_vm_affinity_client.StubFactory',
+        'vm_vm_anti_affinity': 'com.vmware.vcenter.compute.policies.capabilities.vm_vm_anti_affinity_client.StubFactory',
     }
 

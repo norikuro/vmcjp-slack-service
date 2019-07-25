@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -135,6 +135,7 @@ class SourceCreateSpec(VapiStruct):
         self.address = address
         VapiStruct.__init__(self)
 
+
 SourceCreateSpec._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.source_create_spec', {
         'description': type.StringType(),
@@ -196,6 +197,7 @@ class SourceInfo(VapiStruct):
         self.remote_addr = remote_addr
         self.msg_protocol = msg_protocol
         VapiStruct.__init__(self)
+
 
 SourceInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.source_info', {

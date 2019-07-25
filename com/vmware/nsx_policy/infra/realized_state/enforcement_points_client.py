@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class Vifs(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_policy.infra.realized_state.enforcement_points.vifs'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -102,7 +105,10 @@ class VirtualMachines(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_policy.infra.realized_state.enforcement_points.virtual_machines'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -123,7 +129,8 @@ class VirtualMachines(VapiInterface):
              ):
         """
         This API filters objects of type virtual machines from the specified
-        NSX Manager.
+        NSX Manager. This API has been deprecated. Please use the new API GET
+        /infra/realized-state/virtual-machines
 
         :type  enforcement_point_name: :class:`str`
         :param enforcement_point_name: (required)
@@ -247,7 +254,8 @@ class _VifsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -312,7 +320,8 @@ class _VirtualMachinesStub(ApiInterfaceStub):
                 'query': 'query',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for updatetags operation
@@ -345,7 +354,8 @@ class _VirtualMachinesStub(ApiInterfaceStub):
                 'enforcement_point_name': 'enforcement-point-name',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -380,10 +390,5 @@ class StubFactory(StubFactoryBase):
     _attrs = {
         'Vifs': Vifs,
         'VirtualMachines': VirtualMachines,
-        'firewalls': 'com.vmware.nsx_policy.infra.realized_state.enforcement_points.firewalls_client.StubFactory',
-        'groups': 'com.vmware.nsx_policy.infra.realized_state.enforcement_points.groups_client.StubFactory',
-        'ip_sets': 'com.vmware.nsx_policy.infra.realized_state.enforcement_points.ip_sets_client.StubFactory',
-        'mac_sets': 'com.vmware.nsx_policy.infra.realized_state.enforcement_points.mac_sets_client.StubFactory',
-        'services': 'com.vmware.nsx_policy.infra.realized_state.enforcement_points.services_client.StubFactory',
     }
 

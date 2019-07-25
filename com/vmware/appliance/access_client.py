@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -162,6 +162,7 @@ class Shell(VapiInterface):
             self.enabled = enabled
             self.timeout = timeout
             VapiStruct.__init__(self)
+
 
     ShellConfig._set_binding_type(type.StructType(
         'com.vmware.appliance.access.shell.shell_config', {

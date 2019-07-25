@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -73,6 +73,7 @@ class Notification(VapiStruct):
         self.resolution = resolution
         VapiStruct.__init__(self)
 
+
 Notification._set_binding_type(type.StructType(
     'com.vmware.appliance.notification', {
         'id': type.StringType(),
@@ -122,6 +123,7 @@ class Notifications(VapiStruct):
         self.warnings = warnings
         self.errors = errors
         VapiStruct.__init__(self)
+
 
 Notifications._set_binding_type(type.StructType(
     'com.vmware.appliance.notifications', {
@@ -266,6 +268,7 @@ class SubtaskInfo(VapiStruct):
         self.end_time = end_time
         self.user = user
         VapiStruct.__init__(self)
+
 
 SubtaskInfo._set_binding_type(type.StructType(
     'com.vmware.appliance.subtask_info', {
@@ -418,6 +421,7 @@ class TaskInfo(VapiStruct):
         self.end_time = end_time
         self.user = user
         VapiStruct.__init__(self)
+
 
 TaskInfo._set_binding_type(type.StructType(
     'com.vmware.appliance.task_info', {
@@ -583,6 +587,7 @@ class LocalAccounts(VapiInterface):
             self.warn_days_before_password_expiration = warn_days_before_password_expiration
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.appliance.local_accounts.info', {
             'fullname': type.OptionalType(type.StringType()),
@@ -705,6 +710,7 @@ class LocalAccounts(VapiInterface):
             self.warn_days_before_password_expiration = warn_days_before_password_expiration
             VapiStruct.__init__(self)
 
+
     Config._set_binding_type(type.StructType(
         'com.vmware.appliance.local_accounts.config', {
             'password': type.SecretType(),
@@ -825,6 +831,7 @@ class LocalAccounts(VapiInterface):
             self.max_days_between_password_change = max_days_between_password_change
             self.warn_days_before_password_expiration = warn_days_before_password_expiration
             VapiStruct.__init__(self)
+
 
     UpdateConfig._set_binding_type(type.StructType(
         'com.vmware.appliance.local_accounts.update_config', {
@@ -1158,6 +1165,7 @@ class Monitoring(VapiInterface):
             self.data = data
             VapiStruct.__init__(self)
 
+
     MonitoredItemData._set_binding_type(type.StructType(
         'com.vmware.appliance.monitoring.monitored_item_data', {
             'name': type.IdType(resource_types='com.vmware.appliance.monitoring'),
@@ -1216,6 +1224,7 @@ class Monitoring(VapiInterface):
             self.start_time = start_time
             self.end_time = end_time
             VapiStruct.__init__(self)
+
 
     MonitoredItemDataRequest._set_binding_type(type.StructType(
         'com.vmware.appliance.monitoring.monitored_item_data_request', {
@@ -1278,6 +1287,7 @@ class Monitoring(VapiInterface):
             self.instance = instance
             self.description = description
             VapiStruct.__init__(self)
+
 
     MonitoredItem._set_binding_type(type.StructType(
         'com.vmware.appliance.monitoring.monitored_item', {
@@ -1392,6 +1402,7 @@ class Networking(VapiInterface):
             self.servers = servers
             VapiStruct.__init__(self)
 
+
         class DNSMode(Enum):
             """
             The ``Networking.DNSInfo.DNSMode`` class describes the source of DNS
@@ -1481,6 +1492,7 @@ class Networking(VapiInterface):
             self.interfaces = interfaces
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.appliance.networking.info', {
             'dns': type.ReferenceType(__name__, 'Networking.DNSInfo'),
@@ -1514,6 +1526,7 @@ class Networking(VapiInterface):
             """
             self.ipv6_enabled = ipv6_enabled
             VapiStruct.__init__(self)
+
 
     UpdateSpec._set_binding_type(type.StructType(
         'com.vmware.appliance.networking.update_spec', {
@@ -1655,6 +1668,7 @@ class Ntp(VapiInterface):
             self.args = args
             VapiStruct.__init__(self)
 
+
     LocalizableMessage._set_binding_type(type.StructType(
         'com.vmware.appliance.ntp.localizable_message', {
             'id': type.StringType(),
@@ -1698,6 +1712,7 @@ class Ntp(VapiInterface):
             self.status = status
             self.message = message
             VapiStruct.__init__(self)
+
 
     TestRunStatus._set_binding_type(type.StructType(
         'com.vmware.appliance.ntp.test_run_status', {
@@ -1807,6 +1822,7 @@ class Recovery(VapiInterface):
             """
             self.supported = supported
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.info', {
@@ -1930,6 +1946,7 @@ class Services(VapiInterface):
             self.description = description
             self.state = state
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.appliance.services.info', {
@@ -2116,6 +2133,7 @@ class Shutdown(VapiInterface):
             self.action = action
             self.reason = reason
             VapiStruct.__init__(self)
+
 
     ShutdownConfig._set_binding_type(type.StructType(
         'com.vmware.appliance.shutdown.shutdown_config', {
@@ -2435,6 +2453,7 @@ class Update(VapiInterface):
             self.version = version
             self.latest_query_time = latest_query_time
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.appliance.update.info', {

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -122,6 +122,7 @@ class Details(VapiInterface):
                      location_user=None,
                      type=None,
                      messages=None,
+                     build=None,
                      description=None,
                      service=None,
                      operation=None,
@@ -172,6 +173,11 @@ class Details(VapiInterface):
             :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
             :param messages: List of any info/warning/error messages returned by the backup job.
                 This attribute was added in vSphere API 6.7.
+            :type  build: :class:`Details.BuildInfo`
+            :param build: Information about the build of the appliance. This attribute was
+                added in vSphere API 6.7.2.
+                This attribute is optional because it was added in a newer version
+                than its parent node.
             :type  description: :class:`com.vmware.vapi.std_client.LocalizableMessage`
             :param description: Description of the operation associated with the task.
             :type  service: :class:`str`
@@ -237,6 +243,7 @@ class Details(VapiInterface):
             self.location_user = location_user
             self.type = type
             self.messages = messages
+            self.build = build
             self.description = description
             self.service = service
             self.operation = operation
@@ -250,6 +257,7 @@ class Details(VapiInterface):
             self.user = user
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.job.details.info', {
             'location': type.URIType(),
@@ -259,6 +267,7 @@ class Details(VapiInterface):
             'location_user': type.StringType(),
             'type': type.ReferenceType(__name__, 'Details.Type'),
             'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
+            'build': type.OptionalType(type.ReferenceType(__name__, 'Details.BuildInfo')),
             'description': type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage'),
             'service': type.IdType(resource_types='com.vmware.vapi.service'),
             'operation': type.IdType(resource_types='com.vmware.vapi.operation'),
@@ -308,11 +317,58 @@ class Details(VapiInterface):
             self.jobs = jobs
             VapiStruct.__init__(self)
 
+
     FilterSpec._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.job.details.filter_spec', {
             'jobs': type.OptionalType(type.SetType(type.IdType())),
         },
         FilterSpec,
+        False,
+        None))
+
+
+    class BuildInfo(VapiStruct):
+        """
+        The ``Details.BuildInfo`` class contains information about the build of the
+        appliance. This class was added in vSphere API 6.7.2.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     version_name=None,
+                     version=None,
+                     build_number=None,
+                    ):
+            """
+            :type  version_name: :class:`str`
+            :param version_name: Appliance product type, for example 6.8.2 GA. This attribute was
+                added in vSphere API 6.7.2.
+            :type  version: :class:`str`
+            :param version: Appliance version, for example 6.8.2.10000. This attribute was
+                added in vSphere API 6.7.2.
+            :type  build_number: :class:`str`
+            :param build_number: Build Number of the appliance. This attribute was added in vSphere
+                API 6.7.2.
+            """
+            self.version_name = version_name
+            self.version = version
+            self.build_number = build_number
+            VapiStruct.__init__(self)
+
+
+    BuildInfo._set_binding_type(type.StructType(
+        'com.vmware.appliance.recovery.backup.job.details.build_info', {
+            'version_name': type.StringType(),
+            'version': type.StringType(),
+            'build_number': type.StringType(),
+        },
+        BuildInfo,
         False,
         None))
 

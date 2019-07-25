@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class Bundles(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.upgrade.bundles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -103,7 +106,10 @@ class History(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.upgrade.history'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -136,7 +142,10 @@ class Nodes(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.upgrade.nodes'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -202,7 +211,10 @@ class NodesSummary(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.upgrade.nodes_summary'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -235,7 +247,10 @@ class Plan(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.upgrade.plan'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -379,7 +394,10 @@ class StatusSummary(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.upgrade.status_summary'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -428,7 +446,10 @@ class Summary(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.upgrade.summary'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -461,7 +482,10 @@ class UpgradeUnitGroups(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.upgrade.upgrade_unit_groups'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -703,7 +727,10 @@ class UpgradeUnitGroupsStatus(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.upgrade.upgrade_unit_groups_status'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -766,7 +793,10 @@ class UpgradeUnits(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.upgrade.upgrade_units'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -879,7 +909,10 @@ class UpgradeUnitsStats(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.upgrade.upgrade_units_stats'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -942,7 +975,10 @@ class VersionWhitelist(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.upgrade.version_whitelist'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1058,7 +1094,8 @@ class _BundlesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1089,7 +1126,8 @@ class _BundlesStub(ApiInterfaceStub):
                 'bundle_id': 'bundle-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1146,7 +1184,8 @@ class _HistoryStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1209,7 +1248,8 @@ class _NodesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1257,7 +1297,8 @@ class _NodesSummaryStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1310,7 +1351,8 @@ class _PlanStub(ApiInterfaceStub):
             },
             query_parameters={
                 'skip': 'skip',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for pause operation
@@ -1340,7 +1382,8 @@ class _PlanStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for reset operation
@@ -1371,7 +1414,8 @@ class _PlanStub(ApiInterfaceStub):
             },
             query_parameters={
                 'component_type': 'component_type',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for start operation
@@ -1399,7 +1443,8 @@ class _PlanStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for upgradeselectedunits operation
@@ -1432,7 +1477,8 @@ class _PlanStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1523,7 +1569,8 @@ class _StatusSummaryStub(ApiInterfaceStub):
                 'component_type': 'component_type',
                 'selection_status': 'selection_status',
                 'show_history': 'show_history',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1571,7 +1618,8 @@ class _SummaryStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1624,7 +1672,8 @@ class _UpgradeUnitGroupsStub(ApiInterfaceStub):
                 'group_id': 'group-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for create operation
@@ -1655,7 +1704,8 @@ class _UpgradeUnitGroupsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1686,7 +1736,8 @@ class _UpgradeUnitGroupsStub(ApiInterfaceStub):
                 'group_id': 'group-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1719,7 +1770,8 @@ class _UpgradeUnitGroupsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'summary': 'summary',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1764,7 +1816,8 @@ class _UpgradeUnitGroupsStub(ApiInterfaceStub):
                 'sort_by': 'sort_by',
                 'summary': 'summary',
                 'sync': 'sync',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for reorder operation
@@ -1797,7 +1850,8 @@ class _UpgradeUnitGroupsStub(ApiInterfaceStub):
                 'group_id': 'group-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1830,7 +1884,8 @@ class _UpgradeUnitGroupsStub(ApiInterfaceStub):
                 'group_id': 'group-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1945,7 +2000,8 @@ class _UpgradeUnitGroupsStatusStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1996,7 +2052,8 @@ class _UpgradeUnitsStub(ApiInterfaceStub):
                 'upgrade_unit_id': 'upgrade-unit-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -2047,7 +2104,8 @@ class _UpgradeUnitsStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'upgrade_unit_type': 'upgrade_unit_type',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2117,7 +2175,8 @@ class _UpgradeUnitsStatsStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'sync': 'sync',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2168,7 +2227,8 @@ class _VersionWhitelistStub(ApiInterfaceStub):
                 'component_type': 'component_type',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -2196,7 +2256,8 @@ class _VersionWhitelistStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -2229,7 +2290,8 @@ class _VersionWhitelistStub(ApiInterfaceStub):
                 'component_type': 'component_type',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

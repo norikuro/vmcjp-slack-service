@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -165,6 +165,7 @@ class Compliance(VapiInterface):
             self.disks = disks
             VapiStruct.__init__(self)
 
+
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.storage.policies.compliance.summary', {
             'vm': type.IdType(resource_types='VirtualMachine'),
@@ -200,6 +201,7 @@ class Compliance(VapiInterface):
             """
             self.status = status
             VapiStruct.__init__(self)
+
 
     FilterSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.storage.policies.compliance.filter_spec', {
@@ -296,6 +298,7 @@ class VM(VapiInterface):
             self.vm_home = vm_home
             self.disks = disks
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.storage.policies.VM.info', {

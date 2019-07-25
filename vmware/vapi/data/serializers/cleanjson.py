@@ -79,7 +79,8 @@ class DataValueToJSONEncoder(json.JSONEncoder):
         items = {}
         for field_name, field_value in value.get_fields():
             # Omit unset optional values
-            if isinstance(field_value, OptionalValue) and not field_value.is_set():
+            if (isinstance(field_value, OptionalValue)
+                    and not field_value.is_set()):
                 continue
             items[field_name] = field_value
         items = ['"%s":%s' % (k, self.encode(v))
@@ -133,7 +134,8 @@ class DataValueToJSONEncoder(json.JSONEncoder):
             :class:`vmware.vapi.data.value.IntegerValue` (or)
             :class:`vmware.vapi.data.value.BooleanValue` (or)
             :class:`vmware.vapi.data.value.VoidValue` (or)
-        :param value: StringValue, IntegerValue, BooleanValue or VoidValue object
+        :param value: StringValue, IntegerValue, BooleanValue or
+                      VoidValue object
         :rtype: :class:`str`
         :return: JSON string
         """
@@ -164,6 +166,44 @@ class DataValueToJSONEncoder(json.JSONEncoder):
         :return: JSON string
         """
         return json.JSONEncoder.encode(self, value)
+
+
+class DataValueToRestJSONEncoder(DataValueToJSONEncoder):
+    """
+    Custom JSON encoder that converts vAPI runtime values directly
+    into REST 2018 JSON string representation.
+    """
+    def __init__(self, *args, **kwargs):  # pylint: disable=W0231
+        DataValueToJSONEncoder.__init__(self, *args, **kwargs)
+
+    def visit_list(self, value):
+        """
+        Visit a ListValue object
+
+        :type  value: :class:`vmware.vapi.data.value.ListValue`
+        :param value: List value object
+        :rtype: :class:`str`
+        :return: JSON string
+        """
+        if value.is_map():
+            string = ','.join([self.map_entry(item)
+                              for item in value])
+            return '{%s}' % string
+        else:
+            return DataValueToJSONEncoder.visit_list(self, value)
+
+    def map_entry(self, value):
+        """
+        Visit a StructValue object
+
+        :type  value: :class:`vmware.vapi.data.value.StructValue`
+        :param value: Struct value object
+        :rtype: :class:`str`
+        :return: JSON string
+        """
+        k = value.get_field('key')
+        v = value.get_field('value')
+        return '%s: %s' % (self.encode(k), self.encode(v))
 
 
 class JsonDictToVapi(object):
@@ -296,19 +336,25 @@ class DataValueConverter(object):
     JSON objects and back.
     """
     @staticmethod
-    def convert_to_json(data_value):
+    def convert_to_json(data_value, new_rest=False):
         """
         Convert the given data value to a JSON string representation
 
         :type  data_value: :class:`vmware.vapi.data.value.DataValue`
         :param data_value: Data value to be converted
+        :type  new_rest: :class:`bool`
+        :param new_rest: Is it a REST 2018 call
         :rtype: :class:`str`
         :return: JSON representation of the data value
         """
+        if new_rest:
+            encoder = DataValueToRestJSONEncoder
+        else:
+            encoder = DataValueToJSONEncoder
         return json.dumps(data_value,
                           check_circular=False,
                           separators=(',', ':'),
-                          cls=DataValueToJSONEncoder)
+                          cls=encoder)
 
     @staticmethod
     def convert_to_data_value(json_string):

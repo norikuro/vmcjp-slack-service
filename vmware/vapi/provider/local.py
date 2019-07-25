@@ -166,7 +166,7 @@ class LocalProvider(ApiProvider):
         if error_def is None:
             method_id = method_definition.get_identifier()
             logger.error("Method %s reported the error %s which is not in "
-                         + "MethodDefinition",
+                         "MethodDefinition",
                          method_id.get_name(), error_value.name)
             message = message_factory.get_message(
                     'vapi.method.status.errors.invalid',

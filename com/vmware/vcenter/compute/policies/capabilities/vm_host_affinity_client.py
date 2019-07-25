@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -95,6 +95,7 @@ class CreateSpec(VapiStruct):
         self.description = description
         VapiStruct.__init__(self)
 
+
 CreateSpec._set_binding_type(type.StructType(
     'com.vmware.vcenter.compute.policies.capabilities.vm_host_affinity.create_spec', {
         'vm_tag': type.IdType(resource_types='com.vmware.cis.tagging.Tag:VirtualMachine'),
@@ -180,6 +181,7 @@ class Info(VapiStruct):
         self.description = description
         self.capability = capability
         VapiStruct.__init__(self)
+
 
 Info._set_binding_type(type.StructType(
     'com.vmware.vcenter.compute.policies.capabilities.vm_host_affinity.info', {

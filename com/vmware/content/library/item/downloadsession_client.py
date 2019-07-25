@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -223,6 +223,7 @@ class File(VapiInterface):
             self.error_message = error_message
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.content.library.item.downloadsession.file.info', {
             'name': type.StringType(),
@@ -258,8 +259,7 @@ class File(VapiInterface):
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
             if you do not have all of the privileges described as follows: 
             
-            * The resource ``com.vmware.content.library.Item`` referenced by
-              the parameter ``libraryItemId`` requires ``System.Read``.
+            * Method execution requires ``System.Anonymous``.
         """
         return self._invoke('list',
                             {
@@ -298,6 +298,10 @@ class File(VapiInterface):
             if the the download session wasn't created with the
             ContentLibrary.ReadStorage privilege and the caller requested a
             :attr:`File.EndpointType.DIRECT` endpoint type.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
+            if you do not have all of the privileges described as follows: 
+            
+            * Method execution requires ``System.Anonymous``.
         """
         return self._invoke('prepare',
                             {
@@ -330,8 +334,7 @@ class File(VapiInterface):
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
             if you do not have all of the privileges described as follows: 
             
-            * The resource ``com.vmware.content.library.Item`` referenced by
-              the parameter ``libraryItemId`` requires ``System.Read``.
+            * Method execution requires ``System.Anonymous``.
         """
         return self._invoke('get',
                             {

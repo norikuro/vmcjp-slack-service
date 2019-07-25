@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class PeerConfig(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_policy.infra.tier_0s.locale_services.l2vpn_context.l2vpns.peer_config'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -90,7 +93,10 @@ class Statistics(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_policy.infra.tier_0s.locale_services.l2vpn_context.l2vpns.statistics'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -176,7 +182,8 @@ class _PeerConfigStub(ApiInterfaceStub):
             },
             query_parameters={
                 'enforcement_point_path': 'enforcement_point_path',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -234,7 +241,8 @@ class _StatisticsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'enforcement_point_path': 'enforcement_point_path',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -96,6 +96,7 @@ class Identity(VapiInterface):
             self.ip_address = ip_address
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.guest.identity.info', {
             'name': type.ReferenceType('com.vmware.vcenter.vm_client', 'GuestOS'),
@@ -130,7 +131,7 @@ class Identity(VapiInterface):
         :raise: :class:`com.vmware.vapi.std.errors_client.ServiceUnavailable` 
             if VMware Tools is not running.
         :raise: :class:`com.vmware.vapi.std.errors_client.ServiceUnavailable` 
-            if VMware Tools has not provided any values.
+            if VMware Tools has not provided any data.
         """
         return self._invoke('get',
                             {
@@ -184,6 +185,7 @@ class LocalFilesystem(VapiInterface):
             self.free_space = free_space
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.guest.local_filesystem.info', {
             'capacity': type.IntegerType(),
@@ -215,6 +217,8 @@ class LocalFilesystem(VapiInterface):
             if the virtual machine is not found.
         :raise: :class:`com.vmware.vapi.std.errors_client.ServiceUnavailable` 
             if VMware Tools is not running.
+        :raise: :class:`com.vmware.vapi.std.errors_client.ServiceUnavailable` 
+            if VMware Tools has not provided any data.
         """
         return self._invoke('get',
                             {
@@ -335,6 +339,7 @@ class Power(VapiInterface):
             self.state = state
             self.operations_ready = operations_ready
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.guest.power.info', {

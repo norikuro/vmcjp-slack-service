@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class SshKeys(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.node.users.ssh_keys'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -158,7 +161,8 @@ class _SshKeysStub(ApiInterfaceStub):
                 'userid': 'userid',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -189,7 +193,8 @@ class _SshKeysStub(ApiInterfaceStub):
                 'userid': 'userid',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for removesshkey operation
@@ -222,7 +227,8 @@ class _SshKeysStub(ApiInterfaceStub):
                 'userid': 'userid',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

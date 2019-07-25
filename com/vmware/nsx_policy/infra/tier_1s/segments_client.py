@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class StaticArp(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_policy.infra.tier_1s.segments.static_arp'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -202,7 +205,8 @@ class _StaticArpStub(ApiInterfaceStub):
                 'segment_id': 'segment-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -235,7 +239,8 @@ class _StaticArpStub(ApiInterfaceStub):
                 'segment_id': 'segment-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for patch operation
@@ -270,7 +275,8 @@ class _StaticArpStub(ApiInterfaceStub):
                 'segment_id': 'segment-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -305,7 +311,8 @@ class _StaticArpStub(ApiInterfaceStub):
                 'segment_id': 'segment-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

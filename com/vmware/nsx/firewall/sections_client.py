@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -106,7 +106,10 @@ class Rules(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.firewall.sections.rules'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -444,7 +447,10 @@ class State(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.firewall.sections.state'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -501,7 +507,10 @@ class Summary(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.firewall.sections.summary'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -574,7 +583,8 @@ class _RulesStub(ApiInterfaceStub):
             query_parameters={
                 'id': 'id',
                 'operation': 'operation',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for createmultiple operation
@@ -613,7 +623,8 @@ class _RulesStub(ApiInterfaceStub):
             query_parameters={
                 'id': 'id',
                 'operation': 'operation',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -646,7 +657,8 @@ class _RulesStub(ApiInterfaceStub):
                 'rule_id': 'rule-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -680,7 +692,8 @@ class _RulesStub(ApiInterfaceStub):
                 'rule_id': 'rule-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -734,7 +747,8 @@ class _RulesStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'sources': 'sources',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for revise operation
@@ -775,7 +789,8 @@ class _RulesStub(ApiInterfaceStub):
             query_parameters={
                 'id': 'id',
                 'operation': 'operation',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -812,7 +827,8 @@ class _RulesStub(ApiInterfaceStub):
                 'rule_id': 'rule-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -921,7 +937,8 @@ class _StateStub(ApiInterfaceStub):
             query_parameters={
                 'barrier_id': 'barrier_id',
                 'request_id': 'request_id',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -972,7 +989,8 @@ class _SummaryStub(ApiInterfaceStub):
             },
             query_parameters={
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

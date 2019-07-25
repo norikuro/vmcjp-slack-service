@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -46,7 +46,10 @@ class Status(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.transport_zones.status'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -110,7 +113,10 @@ class Summary(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.transport_zones.summary'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -212,7 +218,10 @@ class TransportNodeStatus(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.transport_zones.transport_node_status'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -357,7 +366,8 @@ class _StatusStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get_0 operation
@@ -390,7 +400,8 @@ class _StatusStub(ApiInterfaceStub):
             },
             query_parameters={
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -450,7 +461,8 @@ class _SummaryStub(ApiInterfaceStub):
                 'zone_id': 'zone-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -513,7 +525,8 @@ class _TransportNodeStatusStub(ApiInterfaceStub):
                 'sort_by': 'sort_by',
                 'source': 'source',
                 'status': 'status',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -558,7 +571,8 @@ class _TransportNodeStatusStub(ApiInterfaceStub):
                 'sort_by': 'sort_by',
                 'source': 'source',
                 'status': 'status',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

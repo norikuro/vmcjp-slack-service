@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -182,6 +182,7 @@ class DownloadSessionModel(VapiStruct):
         self.expiration_time = expiration_time
         VapiStruct.__init__(self)
 
+
     class State(Enum):
         """
         The state of the download session.
@@ -298,6 +299,7 @@ class TransferEndpoint(VapiStruct):
         self.ssl_certificate_thumbprint = ssl_certificate_thumbprint
         VapiStruct.__init__(self)
 
+
 TransferEndpoint._set_binding_type(type.StructType(
     'com.vmware.content.library.item.transfer_endpoint', {
         'uri': type.URIType(),
@@ -392,7 +394,7 @@ class UpdateSessionModel(VapiStruct):
             methods. It is not used for the ``update`` method.
         :type  state: :class:`UpdateSessionModel.State`
         :param state: The current state (ACTIVE, DONE, ERROR, CANCELED) of the update
-            session. This attribute was added in vSphere API 6.7 U1.
+            session. This attribute was added in vSphere API 6.8.
             This attribute is not used for the ``create`` method. It will
             always be present in the return value of the ``get`` or ``list``
             methods. It is not used for the ``update`` method.
@@ -406,14 +408,14 @@ class UpdateSessionModel(VapiStruct):
         :param preview_info: A preview of the files currently being uploaded in the session.
             This property will be set only when the session is in the
             :attr:`UpdateSessionModel.State.ACTIVE`. This attribute was added
-            in vSphere API 6.7 U1.
+            in vSphere API 6.8.
             This attribute is optional and it is only relevant when the value
             of ``state`` is :attr:`UpdateSessionModel.State.ACTIVE`.
         :type  warning_behavior: :class:`list` of :class:`com.vmware.content.library.item.updatesession_client.WarningBehavior`
         :param warning_behavior: Indicates the update session behavior if warnings are raised in the
             session preview. Any warning which is raised by session preview but
             not ignored by the client will, by default, fail the update
-            session. This attribute was added in vSphere API 6.7 U1.
+            session. This attribute was added in vSphere API 6.8.
             This attribute is optional for the ``create`` method. It is
             optional in the return value of the ``get`` or ``list`` methods. It
             is optional for the ``update`` method.
@@ -428,6 +430,7 @@ class UpdateSessionModel(VapiStruct):
         self.preview_info = preview_info
         self.warning_behavior = warning_behavior
         VapiStruct.__init__(self)
+
 
     class State(Enum):
         """
@@ -806,13 +809,13 @@ class File(VapiInterface):
         SHA256 = None
         """
         Checksum algorithm: SHA-256. This class attribute was added in vSphere API
-        6.7 U1.
+        6.8.
 
         """
         SHA512 = None
         """
         Checksum algorithm: SHA-512. This class attribute was added in vSphere API
-        6.7 U1.
+        6.8.
 
         """
 
@@ -863,6 +866,7 @@ class File(VapiInterface):
             self.algorithm = algorithm
             self.checksum = checksum
             VapiStruct.__init__(self)
+
 
     ChecksumInfo._set_binding_type(type.StructType(
         'com.vmware.content.library.item.file.checksum_info', {
@@ -928,6 +932,7 @@ class File(VapiInterface):
             self.cached = cached
             self.version = version
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.content.library.item.file.info', {
@@ -1096,6 +1101,7 @@ class Storage(VapiInterface):
             self.cached = cached
             self.version = version
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.content.library.item.storage.info', {
@@ -1527,7 +1533,7 @@ class UpdateSession(VapiInterface):
         
         This method requires the session to be in the
         :attr:`UpdateSessionModel.State.ACTIVE` state.. This method was added
-        in vSphere API 6.7 U1.
+        in vSphere API 6.8.
 
         :type  update_session_id: :class:`str`
         :param update_session_id:  Identifer of the update session that should be updated.

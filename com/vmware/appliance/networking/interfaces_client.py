@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -158,6 +158,7 @@ class Ipv4(VapiInterface):
             self.default_gateway = default_gateway
             VapiStruct.__init__(self)
 
+
     Config._set_binding_type(type.StructType(
         'com.vmware.appliance.networking.interfaces.ipv4.config', {
             'mode': type.ReferenceType(__name__, 'Ipv4.Mode'),
@@ -238,6 +239,7 @@ class Ipv4(VapiInterface):
             self.prefix = prefix
             self.default_gateway = default_gateway
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.appliance.networking.interfaces.ipv4.info', {
@@ -507,6 +509,7 @@ class Ipv6(VapiInterface):
             self.prefix = prefix
             VapiStruct.__init__(self)
 
+
     Address._set_binding_type(type.StructType(
         'com.vmware.appliance.networking.interfaces.ipv6.address', {
             'address': type.StringType(),
@@ -556,6 +559,7 @@ class Ipv6(VapiInterface):
             self.address = address
             self.prefix = prefix
             VapiStruct.__init__(self)
+
 
     AddressInfo._set_binding_type(type.StructType(
         'com.vmware.appliance.networking.interfaces.ipv6.address_info', {
@@ -615,6 +619,7 @@ class Ipv6(VapiInterface):
             self.addresses = addresses
             self.default_gateway = default_gateway
             VapiStruct.__init__(self)
+
 
     Config._set_binding_type(type.StructType(
         'com.vmware.appliance.networking.interfaces.ipv6.config', {
@@ -677,6 +682,7 @@ class Ipv6(VapiInterface):
             self.default_gateway = default_gateway
             self.configurable = configurable
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.appliance.networking.interfaces.ipv6.info', {

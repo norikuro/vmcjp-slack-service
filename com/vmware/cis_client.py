@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -148,6 +148,7 @@ class Session(VapiInterface):
             self.created_time = created_time
             self.last_accessed_time = last_accessed_time
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.cis.session.info', {
@@ -301,6 +302,7 @@ class Tasks(VapiInterface):
             self.exclude_result = exclude_result
             VapiStruct.__init__(self)
 
+
     GetSpec._set_binding_type(type.StructType(
         'com.vmware.cis.tasks.get_spec', {
             'return_all': type.OptionalType(type.BooleanType()),
@@ -378,6 +380,7 @@ class Tasks(VapiInterface):
             self.targets = targets
             self.users = users
             VapiStruct.__init__(self)
+
 
     FilterSpec._set_binding_type(type.StructType(
         'com.vmware.cis.tasks.filter_spec', {

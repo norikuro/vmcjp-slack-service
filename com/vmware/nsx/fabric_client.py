@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class ComputeCollectionFabricTemplates(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.fabric.compute_collection_fabric_templates'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -188,7 +191,10 @@ class ComputeCollections(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.fabric.compute_collections'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -340,7 +346,10 @@ class ComputeManagers(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.fabric.compute_managers'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -523,7 +532,10 @@ class DiscoveredNodes(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.fabric.discovered_nodes'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -745,7 +757,10 @@ class Nodes(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.fabric.nodes'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -774,8 +789,8 @@ class Nodes(VapiInterface):
         SHA256 hash of the key using the following command. Please make sure to
         pass the appropriate file name if the public key is stored with a
         different file name other than the default 'id_rsa.pub'. **awk '{print
-        $2}' id_rsa.pub | base64 -d | sha256sum -b | sed 's/ .\\\\*$//' | xxd
-        -r -p | base64**
+        $2}' id_rsa.pub | base64 -d | sha256sum -b | sed 's/ .\*$//' | xxd -r
+        -p | base64**
 
         :type  node: :class:`vmware.vapi.struct.VapiStruct`
         :param node: (required)
@@ -1035,7 +1050,7 @@ class Nodes(VapiInterface):
         The supported fabric node actions are enter_maintenance_mode,
         exit_maintenance_mode for EdgeNode. This API is deprecated, please call
         TransportNode maintenance mode API to update maintenance mode, refer to
-        \\\\"Update transport node maintenance mode\\\\".
+        \"Update transport node maintenance mode\".
 
         :type  node_id: :class:`str`
         :param node_id: (required)
@@ -1189,7 +1204,10 @@ class Vifs(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.fabric.vifs'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1265,7 +1283,10 @@ class VirtualMachines(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.fabric.virtual_machines'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1388,7 +1409,8 @@ class _ComputeCollectionFabricTemplatesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1419,7 +1441,8 @@ class _ComputeCollectionFabricTemplatesStub(ApiInterfaceStub):
                 'fabric_template_id': 'fabric-template-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1450,7 +1473,8 @@ class _ComputeCollectionFabricTemplatesStub(ApiInterfaceStub):
                 'fabric_template_id': 'fabric-template-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1481,7 +1505,8 @@ class _ComputeCollectionFabricTemplatesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'compute_collection_id': 'compute_collection_id',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1514,7 +1539,8 @@ class _ComputeCollectionFabricTemplatesStub(ApiInterfaceStub):
                 'fabric_template_id': 'fabric-template-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1603,7 +1629,8 @@ class _ComputeCollectionsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'action': 'action',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1634,7 +1661,8 @@ class _ComputeCollectionsStub(ApiInterfaceStub):
                 'cc_ext_id': 'cc-ext-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1689,7 +1717,8 @@ class _ComputeCollectionsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1760,7 +1789,8 @@ class _ComputeManagersStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1791,7 +1821,8 @@ class _ComputeManagersStub(ApiInterfaceStub):
                 'compute_manager_id': 'compute-manager-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1823,7 +1854,8 @@ class _ComputeManagersStub(ApiInterfaceStub):
                 'compute_manager_id': 'compute-manager-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1867,7 +1899,8 @@ class _ComputeManagersStub(ApiInterfaceStub):
                 'server': 'server',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1902,7 +1935,8 @@ class _ComputeManagersStub(ApiInterfaceStub):
                 'compute_manager_id': 'compute-manager-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1989,7 +2023,8 @@ class _DiscoveredNodesStub(ApiInterfaceStub):
                 'node_ext_id': 'node-ext-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for hostprep operation
@@ -2021,7 +2056,8 @@ class _DiscoveredNodesStub(ApiInterfaceStub):
                 'node_ext_id': 'node-ext-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -2078,7 +2114,8 @@ class _DiscoveredNodesStub(ApiInterfaceStub):
                 'parent_compute_collection': 'parent_compute_collection',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2149,7 +2186,8 @@ class _NodesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for create_0 operation
@@ -2184,7 +2222,8 @@ class _NodesStub(ApiInterfaceStub):
                 'target_uri': 'target-uri',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -2217,7 +2256,8 @@ class _NodesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'unprepare_host': 'unprepare_host',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete_0 operation
@@ -2252,7 +2292,8 @@ class _NodesStub(ApiInterfaceStub):
                 'target_uri': 'target-uri',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -2284,7 +2325,8 @@ class _NodesStub(ApiInterfaceStub):
                 'node_id': 'node-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get_0 operation
@@ -2319,7 +2361,8 @@ class _NodesStub(ApiInterfaceStub):
                 'target_uri': 'target-uri',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -2373,7 +2416,8 @@ class _NodesStub(ApiInterfaceStub):
                 'resource_type': 'resource_type',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for performaction operation
@@ -2407,7 +2451,8 @@ class _NodesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'action': 'action',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for restartinventorysync operation
@@ -2438,7 +2483,8 @@ class _NodesStub(ApiInterfaceStub):
                 'node_id': 'node-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -2473,7 +2519,8 @@ class _NodesStub(ApiInterfaceStub):
                 'node_id': 'node-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update_0 operation
@@ -2508,7 +2555,8 @@ class _NodesStub(ApiInterfaceStub):
                 'target_uri': 'target-uri',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for upgradeinfra operation
@@ -2542,7 +2590,8 @@ class _NodesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'disable_vm_migration': 'disable_vm_migration',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2708,7 +2757,8 @@ class _VifsStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'vm_id': 'vm_id',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2773,7 +2823,8 @@ class _VirtualMachinesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for updatetags operation
@@ -2804,7 +2855,8 @@ class _VirtualMachinesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

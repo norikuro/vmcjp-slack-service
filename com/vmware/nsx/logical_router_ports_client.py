@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -46,7 +46,10 @@ class ArpTable(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_router_ports.arp_table'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -126,7 +129,10 @@ class Statistics(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.logical_router_ports.statistics'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -212,7 +218,8 @@ class _ArpTableStub(ApiInterfaceStub):
                 'sort_by': 'sort_by',
                 'source': 'source',
                 'transport_node_id': 'transport_node_id',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -267,7 +274,8 @@ class _StatisticsStub(ApiInterfaceStub):
             query_parameters={
                 'source': 'source',
                 'transport_node_id': 'transport_node_id',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

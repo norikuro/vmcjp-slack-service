@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,12 +36,12 @@ class CustomizationSpecs(VapiInterface):
     """
     The ``CustomizationSpecs`` class provides methods to manage guest
     customization specifications in the vCenter Server. This class was added in
-    vSphere API 6.7 U1.
+    vSphere API 6.7.1.
     """
     RESOURCE_TYPE = "com.vmware.vcenter.guest.CustomizationSpec"
     """
     The resource type for a vCenter guest customization specification. This class
-    attribute was added in vSphere API 6.7 U1.
+    attribute was added in vSphere API 6.7.1.
 
     """
 
@@ -60,7 +60,7 @@ class CustomizationSpecs(VapiInterface):
         """
         The ``CustomizationSpecs.OsType`` class defines the types of guest
         operating systems for which guest customization is supported. This
-        enumeration was added in vSphere API 6.7 U1.
+        enumeration was added in vSphere API 6.7.1.
 
         .. note::
             This class represents an enumerated type in the interface language
@@ -74,13 +74,13 @@ class CustomizationSpecs(VapiInterface):
         WINDOWS = None
         """
         A customization specification for a Windows guest operating system. This
-        class attribute was added in vSphere API 6.7 U1.
+        class attribute was added in vSphere API 6.7.1.
 
         """
         LINUX = None
         """
         A customization specification for a Linux guest operating system. This
-        class attribute was added in vSphere API 6.7 U1.
+        class attribute was added in vSphere API 6.7.1.
 
         """
 
@@ -106,7 +106,7 @@ class CustomizationSpecs(VapiInterface):
         filter the results when listing guest customization specifications (see
         :func:`CustomizationSpecs.list`). If multiple attributes are specified,
         only guest customization specifications matching all of the attributes
-        match the filter. This class was added in vSphere API 6.7 U1.
+        match the filter. This class was added in vSphere API 6.7.1.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -127,7 +127,7 @@ class CustomizationSpecs(VapiInterface):
             :type  names: :class:`set` of :class:`str` or ``None``
             :param names: Names that guest customization specifications must have to match
                 the filter (see :attr:`CustomizationSpecs.Summary.name`). This
-                attribute was added in vSphere API 6.7 U1.
+                attribute was added in vSphere API 6.7.1.
                 When clients pass a value of this class as a parameter, the
                 attribute must contain identifiers for the resource type:
                 ``com.vmware.vcenter.guest.CustomizationSpec``. When methods return
@@ -140,13 +140,14 @@ class CustomizationSpecs(VapiInterface):
             :param os_type: Guest operating system type that guest customization specifications
                 must have to match the filter (see
                 :attr:`CustomizationSpecs.Summary.os_type`). This attribute was
-                added in vSphere API 6.7 U1.
+                added in vSphere API 6.7.1.
                 If None, guest customization specifications with any guest
                 operating system type match the filter.
             """
             self.names = names
             self.os_type = os_type
             VapiStruct.__init__(self)
+
 
     FilterSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.guest.customization_specs.filter_spec', {
@@ -162,7 +163,7 @@ class CustomizationSpecs(VapiInterface):
         """
         The ``CustomizationSpecs.Summary`` class contains commonly used information
         about a guest customization specification. This class was added in vSphere
-        API 6.7 U1.
+        API 6.7.1.
 
         .. tip::
             The arguments are used to initialize data attributes with the same
@@ -184,7 +185,7 @@ class CustomizationSpecs(VapiInterface):
             """
             :type  name: :class:`str`
             :param name: Name of the guest customization specification. This attribute was
-                added in vSphere API 6.7 U1.
+                added in vSphere API 6.7.1.
                 When clients pass a value of this class as a parameter, the
                 attribute must be an identifier for the resource type:
                 ``com.vmware.vcenter.guest.CustomizationSpec``. When methods return
@@ -193,20 +194,21 @@ class CustomizationSpecs(VapiInterface):
                 ``com.vmware.vcenter.guest.CustomizationSpec``.
             :type  description: :class:`str`
             :param description: Description of the guest customization specification. This
-                attribute was added in vSphere API 6.7 U1.
+                attribute was added in vSphere API 6.7.1.
             :type  os_type: :class:`CustomizationSpecs.OsType`
             :param os_type: Guest operating system type for which that this guest customization
-                specification applies. This attribute was added in vSphere API 6.7
-                U1.
+                specification applies. This attribute was added in vSphere API
+                6.7.1.
             :type  last_modified: :class:`datetime.datetime`
             :param last_modified: Date and tme when this guest customization specification was last
-                modified. This attribute was added in vSphere API 6.7 U1.
+                modified. This attribute was added in vSphere API 6.7.1.
             """
             self.name = name
             self.description = description
             self.os_type = os_type
             self.last_modified = last_modified
             VapiStruct.__init__(self)
+
 
     Summary._set_binding_type(type.StructType(
         'com.vmware.vcenter.guest.customization_specs.summary', {
@@ -228,7 +230,7 @@ class CustomizationSpecs(VapiInterface):
         Returns information about at most 1000 visible (subject to permission
         checks) guest customization specifications in vCenter matching the
         :class:`CustomizationSpecs.FilterSpec`. This method was added in
-        vSphere API 6.7 U1.
+        vSphere API 6.7.1.
 
         :type  filter: :class:`CustomizationSpecs.FilterSpec` or ``None``
         :param filter: Specification of matching guest customization specifications for

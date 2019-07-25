@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -46,7 +46,10 @@ class Statistics(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.vpn.ipsec.sessions.statistics'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -61,7 +64,7 @@ class Statistics(VapiInterface):
             ):
         """
         Get statistics of a vpn session across all tunnels and IKE session.
-        Query parameter \\\\"source=realtime\\\\" is the only supported source.
+        Query parameter \"source=realtime\" is the only supported source.
 
         :type  session_id: :class:`str`
         :param session_id: (required)
@@ -124,7 +127,10 @@ class Status(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.vpn.ipsec.sessions.status'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -178,7 +184,10 @@ class Summary(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.vpn.ipsec.sessions.summary'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -249,7 +258,8 @@ class _StatisticsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for reset operation
@@ -280,7 +290,8 @@ class _StatisticsStub(ApiInterfaceStub):
                 'session_id': 'session-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -342,7 +353,8 @@ class _StatusStub(ApiInterfaceStub):
             },
             query_parameters={
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -395,7 +407,8 @@ class _SummaryStub(ApiInterfaceStub):
             query_parameters={
                 'site_id': 'site_id',
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

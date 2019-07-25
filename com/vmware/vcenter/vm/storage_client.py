@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -97,6 +97,7 @@ class Policy(VapiInterface):
             self.type = type
             self.policy = policy
             VapiStruct.__init__(self)
+
 
         class PolicyType(Enum):
             """
@@ -199,6 +200,7 @@ class Policy(VapiInterface):
             self.policy = policy
             VapiStruct.__init__(self)
 
+
         class PolicyType(Enum):
             """
             The ``Policy.DiskPolicySpec`` class defines the choices for how to specify
@@ -290,6 +292,7 @@ class Policy(VapiInterface):
             self.disks = disks
             VapiStruct.__init__(self)
 
+
     UpdateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.storage.policy.update_spec', {
             'vm_home': type.OptionalType(type.ReferenceType(__name__, 'Policy.VmHomePolicySpec')),
@@ -347,6 +350,7 @@ class Policy(VapiInterface):
             self.vm_home = vm_home
             self.disks = disks
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.storage.policy.info', {

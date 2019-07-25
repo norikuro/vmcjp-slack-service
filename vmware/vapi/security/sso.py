@@ -5,13 +5,12 @@ SSO Security Helper
 """
 
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015, 2017 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015, 2017-2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 from base64 import b64encode, b64decode
 import datetime
 import decimal
 import json
-from lxml import etree
 from OpenSSL import crypto
 import re
 import six
@@ -41,6 +40,7 @@ AUTHENTICATED = 'requestAuthenticated'
 STS_URL_PROP = 'stsurl'
 CERTIFICATE_PROP = 'certificate'
 PRIVATE_KEY_PROP = 'privatekey'
+CERT_NS = '{http://www.w3.org/2000/09/xmldsig#}'
 SECTION = __name__
 # Algorithm Header Parameter Values for JWS based on the following link
 # https://datatracker.ietf.org/doc/draft-ietf-jose-json-web-algorithms/?include_text=1
@@ -206,7 +206,7 @@ class JSONSSOSigner(RequestProcessor):
         }
         """
         if input_message is None:
-            return
+            return None
 
         # process only if the schemeId in the request matches the schemeId of
         # this signer
@@ -291,7 +291,7 @@ class JSONSSOVerifier(RequestProcessor):
         :return: JSON request message after signature verification
         """
         if not input_message:
-            return
+            return None
 
         if isinstance(input_message, six.binary_type):
             unicode_input_message = input_message.decode()
@@ -348,10 +348,10 @@ def _extract_element(xml, element_name, namespace):
     assert(len(namespace) == 1)
     result = xml.xpath("//%s:%s" % (list(namespace.keys())[0], element_name),
                        namespaces=namespace)
-    if result:
+    if result and len(result) == 1:
         return result[0]
     else:
-        raise KeyError("%s does not seem to be present in the XML." %
+        raise KeyError("%s does not seem to be present or valid in the XML." %
                        element_name)
 
 
@@ -402,13 +402,18 @@ def _extract_certificate(hok_token):
     :rtype: :class:`str`
     :return: Certificate of the principal
     """
+    from lxml import etree
     xml = etree.fromstring(hok_token)
     subject = _extract_element(
         xml,
         'SubjectConfirmationData',
         {'saml2': 'urn:oasis:names:tc:SAML:2.0:assertion'})
-    xml_certificate = subject.getchildren()[0].getchildren()[0].getchildren()[0]
-    return xml_certificate.text.replace('\\n', '\n')
+
+    xml_certificate = subject.find('./' + CERT_NS + 'KeyInfo/'
+                                   + CERT_NS + 'X509Data/'
+                                   + CERT_NS + 'X509Certificate')
+    xml_certificate = _get_element_text(xml_certificate)
+    return xml_certificate.replace('\\n', '\n')
 
 
 def _generate_request_timestamp():
@@ -424,3 +429,35 @@ def _generate_request_timestamp():
     created = DateTimeConverter.convert_from_datetime(created_dt)
     expires = DateTimeConverter.convert_from_datetime(created_dt + offset)
     return {EXPIRES: expires, CREATED: created}
+
+
+def _get_element_text(element):
+    """
+    Reading element.text is unsafe because of comments that may be embedded
+    in certain important fields by an attacker.
+    To ensure that we're getting the whole contents of the field this
+    method concatenates all text children of the given element.
+
+    Sample:
+    <name>root<!-- -->less-user</name> --> "rootless-user"
+    <name>alpha<x>bravo</x>charlie</name> --> "alpha"
+    <name></name> --> None
+
+    :type  element: :class:`str`
+    :param element: XML document element
+    :rtype: :class:`str`
+    :return: XML document stripped off comment
+    """
+    from lxml import etree
+    parts = []
+    if element.text is not None:
+        parts.append(element.text)
+    for child in element.iterchildren():
+        if child.tag is etree.Comment:
+            if child.tail is not None:
+                parts.append(child.tail)
+        else:
+            break
+    if not parts:
+        return None
+    return "".join(parts)

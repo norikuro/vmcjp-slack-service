@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -69,12 +69,13 @@ class Policies(VapiInterface):
                     ):
             """
             :type  status: :class:`com.vmware.vcenter.compute.policies_client.Status.Compliance`
-            :param status: The compliance status of the policy on a specified object.
-                **Warning:** This attribute is available as technical preview. It
-                may be changed in a future release.
+            :param status: The compliance status of the policy on a specified
+                object.**Warning:** This attribute is available as technical
+                preview. It may be changed in a future release.
             """
             self.status = status
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.compute.policies.info', {
@@ -102,7 +103,7 @@ class Policies(VapiInterface):
         :type  policy: :class:`str`
         :param policy: Identifier of the policy to query the status for.
             The parameter must be an identifier for the resource type:
-            ``com.vmware.vcenter.compute.Policy``.
+            ``com.vmware.vcenter.compute.Resources.COMPUTE_POLICY``.
         :rtype: :class:`Policies.Info`
         :return: Information about the compliance of the specified virtual machine
             with the specified compute policy.
@@ -111,10 +112,6 @@ class Policies(VapiInterface):
             if a policy with the given identifier does not exist.
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
             if the user doesn't have the required privileges.
-        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized`
-            if you do not have all of the privileges described as follows: 
-            
-            * Method execution requires ``System.Read``.
         """
         return self._invoke('get',
                             {
@@ -126,7 +123,7 @@ class _PoliciesStub(ApiInterfaceStub):
         # properties for get operation
         get_input_type = type.StructType('operation-input', {
             'vm': type.IdType(resource_types='VirtualMachine'),
-            'policy': type.IdType(resource_types='com.vmware.vcenter.compute.Policy'),
+            'policy': type.IdType(resource_types='com.vmware.vcenter.compute.Resources.COMPUTE_POLICY'),
         })
         get_error_dict = {
             'com.vmware.vapi.std.errors.not_found':

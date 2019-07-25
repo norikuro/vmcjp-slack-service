@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -82,6 +82,7 @@ class ComponentInfo(VapiStruct):
         self.privilege = privilege
         VapiStruct.__init__(self)
 
+
 ComponentInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.component_info', {
         'metamodel': type.ReferenceType('com.vmware.vapi.metadata.metamodel_client', 'ComponentInfo'),
@@ -133,6 +134,7 @@ class MetadataInfo(VapiStruct):
         self.version = version
         self.metadata = metadata
         VapiStruct.__init__(self)
+
 
 MetadataInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata_info', {

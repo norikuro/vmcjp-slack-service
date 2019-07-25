@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class ServiceInstances(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.serviceinsertion.services.service_instances'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -238,7 +241,8 @@ class _ServiceInstancesStub(ApiInterfaceStub):
                 'service_id': 'service-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -271,7 +275,8 @@ class _ServiceInstancesStub(ApiInterfaceStub):
                 'service_instance_id': 'service-instance-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -305,7 +310,8 @@ class _ServiceInstancesStub(ApiInterfaceStub):
                 'service_instance_id': 'service-instance-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -337,7 +343,8 @@ class _ServiceInstancesStub(ApiInterfaceStub):
                 'service_id': 'service-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -374,7 +381,8 @@ class _ServiceInstancesStub(ApiInterfaceStub):
                 'service_instance_id': 'service-instance-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

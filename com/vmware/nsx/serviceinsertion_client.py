@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -171,7 +171,10 @@ class Sections(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.serviceinsertion.sections'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -267,8 +270,8 @@ class Sections(VapiInterface):
                ):
         """
         Removes serviceinsertion section from the system. ServiceInsertion
-        section with rules can only be deleted by passing
-        \\\\"cascade=true\\\\" parameter.
+        section with rules can only be deleted by passing \"cascade=true\"
+        parameter.
 
         :type  section_id: :class:`str`
         :param section_id: (required)
@@ -598,7 +601,10 @@ class ServiceAttachments(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.serviceinsertion.service_attachments'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -711,7 +717,10 @@ class Services(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.serviceinsertion.services'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -752,7 +761,7 @@ class Services(VapiInterface):
                ):
         """
         Removes Service-Insertion Service from the system. A Service with
-        Service-Instances can only be deleted by passing \\\\"cascade=true\\\\"
+        Service-Instances can only be deleted by passing \"cascade=true\"
         parameter.
 
         :type  service_id: :class:`str`
@@ -887,7 +896,8 @@ class _SectionsStub(ApiInterfaceStub):
             query_parameters={
                 'id': 'id',
                 'operation': 'operation',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for createwithrules operation
@@ -924,7 +934,8 @@ class _SectionsStub(ApiInterfaceStub):
             query_parameters={
                 'id': 'id',
                 'operation': 'operation',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -957,7 +968,8 @@ class _SectionsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'cascade': 'cascade',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -988,7 +1000,8 @@ class _SectionsStub(ApiInterfaceStub):
                 'section_id': 'section-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1043,7 +1056,8 @@ class _SectionsStub(ApiInterfaceStub):
                 'sort_by': 'sort_by',
                 'sources': 'sources',
                 'type': 'type',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for listwithrules operation
@@ -1075,7 +1089,8 @@ class _SectionsStub(ApiInterfaceStub):
                 'section_id': 'section-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for revise operation
@@ -1112,7 +1127,8 @@ class _SectionsStub(ApiInterfaceStub):
             query_parameters={
                 'id': 'id',
                 'operation': 'operation',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for revisewithrules operation
@@ -1151,7 +1167,8 @@ class _SectionsStub(ApiInterfaceStub):
             query_parameters={
                 'id': 'id',
                 'operation': 'operation',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1184,7 +1201,8 @@ class _SectionsStub(ApiInterfaceStub):
                 'section_id': 'section-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for updatewithrules operation
@@ -1219,7 +1237,8 @@ class _SectionsStub(ApiInterfaceStub):
                 'section_id': 'section-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1351,7 +1370,8 @@ class _ServiceAttachmentsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1382,7 +1402,8 @@ class _ServiceAttachmentsStub(ApiInterfaceStub):
                 'service_attachment_id': 'service-attachment-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1413,7 +1434,8 @@ class _ServiceAttachmentsStub(ApiInterfaceStub):
                 'service_attachment_id': 'service-attachment-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1441,7 +1463,8 @@ class _ServiceAttachmentsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1519,7 +1542,8 @@ class _ServicesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1552,7 +1576,8 @@ class _ServicesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'cascade': 'cascade',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1583,7 +1608,8 @@ class _ServicesStub(ApiInterfaceStub):
                 'service_id': 'service-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1611,7 +1637,8 @@ class _ServicesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1644,7 +1671,8 @@ class _ServicesStub(ApiInterfaceStub):
                 'service_id': 'service-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

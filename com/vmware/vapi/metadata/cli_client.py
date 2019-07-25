@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -60,6 +60,7 @@ class ComponentInfo(VapiStruct):
         self.namespaces = namespaces
         self.commands = commands
         VapiStruct.__init__(self)
+
 
 ComponentInfo._set_binding_type(type.StructType(
     'com.vmware.vapi.metadata.cli.component_info', {
@@ -241,6 +242,7 @@ class Command(VapiInterface):
             self.display_name = display_name
             VapiStruct.__init__(self)
 
+
     OutputFieldInfo._set_binding_type(type.StructType(
         'com.vmware.vapi.metadata.cli.command.output_field_info', {
             'field_name': type.StringType(),
@@ -284,6 +286,7 @@ class Command(VapiInterface):
             self.structure_id = structure_id
             self.output_fields = output_fields
             VapiStruct.__init__(self)
+
 
     OutputInfo._set_binding_type(type.StructType(
         'com.vmware.vapi.metadata.cli.command.output_info', {
@@ -346,6 +349,7 @@ class Command(VapiInterface):
             self.generic = generic
             VapiStruct.__init__(self)
 
+
     OptionInfo._set_binding_type(type.StructType(
         'com.vmware.vapi.metadata.cli.command.option_info', {
             'long_option': type.StringType(),
@@ -387,6 +391,7 @@ class Command(VapiInterface):
             self.path = path
             self.name = name
             VapiStruct.__init__(self)
+
 
     Identity._set_binding_type(type.StructType(
         'com.vmware.vapi.metadata.cli.command.identity', {
@@ -458,6 +463,7 @@ class Command(VapiInterface):
             self.formatter = formatter
             self.output_field_list = output_field_list
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vapi.metadata.cli.command.info', {
@@ -575,6 +581,7 @@ class Namespace(VapiInterface):
             self.name = name
             VapiStruct.__init__(self)
 
+
     Identity._set_binding_type(type.StructType(
         'com.vmware.vapi.metadata.cli.namespace.identity', {
             'path': type.StringType(),
@@ -616,6 +623,7 @@ class Namespace(VapiInterface):
             self.description = description
             self.children = children
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vapi.metadata.cli.namespace.info', {
@@ -763,6 +771,7 @@ class Source(VapiInterface):
             self.address = address
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vapi.metadata.cli.source.info', {
             'description': type.StringType(),
@@ -831,6 +840,7 @@ class Source(VapiInterface):
             self.filepath = filepath
             self.address = address
             VapiStruct.__init__(self)
+
 
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.vapi.metadata.cli.source.create_spec', {

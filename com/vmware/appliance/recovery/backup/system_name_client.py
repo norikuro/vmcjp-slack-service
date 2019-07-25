@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -102,6 +102,7 @@ class Archive(VapiInterface):
             self.comment = comment
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.system_name.archive.info', {
             'timestamp': type.DateTimeType(),
@@ -161,6 +162,7 @@ class Archive(VapiInterface):
             self.comment = comment
             VapiStruct.__init__(self)
 
+
     Summary._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.system_name.archive.summary', {
             'archive': type.IdType(resource_types='com.vmware.appliance.recovery.backup.system_name.archive'),
@@ -217,6 +219,7 @@ class Archive(VapiInterface):
             self.comment_substring = comment_substring
             self.max_results = max_results
             VapiStruct.__init__(self)
+
 
     FilterSpec._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.system_name.archive.filter_spec', {

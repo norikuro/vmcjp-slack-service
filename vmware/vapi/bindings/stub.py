@@ -3,7 +3,7 @@ Stub helper classes
 """
 
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015, 2017 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015, 2017, 2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 import six
 
@@ -11,9 +11,10 @@ from vmware.vapi.bindings.converter import RestConverter, TypeConverter
 from vmware.vapi.bindings.error import UnresolvedError
 from vmware.vapi.bindings.common import (
     raise_core_exception, NameToTypeResolver)
+from vmware.vapi.bindings.http_helper import ResponseExtractor
 from vmware.vapi.core import (
     MethodIdentifier, InterfaceDefinition, MethodDefinition)
-from vmware.vapi.core import InterfaceIdentifier, ApiInterface
+from vmware.vapi.core import InterfaceIdentifier, ApiInterface, RuntimeData
 from vmware.vapi.exception import CoreException
 from vmware.vapi.l10n.runtime import message_factory
 from vmware.vapi.lib.constants import OPID
@@ -33,7 +34,7 @@ class StubConfiguration(object):
     :type connector: :class:`vmware.vapi.protocol.client.connector.Connector`
     :ivar connector: Connection to be used to talk to the remote ApiProvider
     """
-    def __init__(self, connector, *error_types):
+    def __init__(self, connector, *error_types, **kwargs):
         """
         Initialize the stub configuration
 
@@ -44,12 +45,22 @@ class StubConfiguration(object):
         :type  error_types: :class:`list` of :class:
                             `vmware.vapi.bindings.type.ErrorType`
         :param error_types: error types to be registered in this configuration
+        :type kwargs: :class: `ResponseExtractor`
+        :param kwargs: Extract rest http response status
         """
         if connector is None:
             raise TypeError('Input parameter connector is None')
         self._connector = connector
         self._resolver = NameToTypeResolver(
-            dict([(e.definition.name, e) for e in error_types]))
+            dict([(e.definition.name, e) for e in error_types]))   # pylint: disable=R1717
+
+        # In order to make it working for both 2.7 and 3.x,
+        # based on PEP 3102, use **kwargs with key of response_extractor
+        create_response_extractor = kwargs.get('response_extractor', False)
+        if create_response_extractor:
+            self._response_extractor = ResponseExtractor()
+        else:
+            self._response_extractor = None
 
     @property
     def connector(self):
@@ -68,6 +79,16 @@ class StubConfiguration(object):
         :return: Type resolver
         """
         return self._resolver
+
+    @property
+    def response_extractor(self):
+        """
+        Response extractor that can retrive the raw http response status and body    # pylint: disable=line-too-long
+
+        :rtype: :class:`vmware.vapi.bindings.http_helper.ResponseExtractor`
+        :return: Response extractor
+        """
+        return self._response_extractor
 
 
 # We don't need all the methods in ApiMethod in the stub.
@@ -106,8 +127,9 @@ class ApiInterfaceStub(ApiInterface):  # pylint: disable=W0223
             last_api_provider = self._api_provider.get_api_provider()
         else:
             last_api_provider = self._api_provider
+        self._response_extractor = None
         # Determine whether REST format needs to be used
-        self._use_rest = True if isinstance(
+        self._use_rest = True if isinstance(                 # pylint: disable=R1719
             last_api_provider, RestClientProvider) else False
         if self._use_rest:
             # Add the service metadata to the REST provider
@@ -122,6 +144,7 @@ class ApiInterfaceStub(ApiInterface):  # pylint: disable=W0223
                 self._rest_converter_mode = RestConverter.VAPI_REST
             else:
                 self._rest_converter_mode = RestConverter.SWAGGER_REST
+            self._response_extractor = self._config._response_extractor   # pylint: disable=W0212
         else:
             self._rest_converter_mode = None
         ApiInterface.__init__(self)
@@ -146,7 +169,7 @@ class ApiInterfaceStub(ApiInterface):  # pylint: disable=W0223
                       for operation_name in six.iterkeys(self._operations)]
         return InterfaceDefinition(self._iface_id, operations)
 
-    def get_method_definition(self, method_id):
+    def get_method_definition(self, method_id):                # pylint: disable=R1710
         op_info = self._operations.get(method_id.get_name())
         if op_info is None:
             return
@@ -264,8 +287,8 @@ class ApiInterfaceStub(ApiInterface):  # pylint: disable=W0223
                 error_type = self._config.resolver.resolve(
                     method_result.error.name)
             if error_type is None:
-                logger.warning('Unable to convert unexpected vAPI error %s ' +
-                               'to native Python exception',
+                logger.warning('Unable to convert unexpected vAPI error %s '   # pylint: disable=W1201
+                               + 'to native Python exception',
                                method_result.error.name)
                 vapi_error = UnresolvedError(method_result.error)
                 raise vapi_error
@@ -313,7 +336,12 @@ class VapiInterface(object):
         kwargs = kwargs or {}
         # Argument name is _method_name to make sure it doesn't collide
         # with actual parameter names of the method
-        ctx = self._config.connector.new_context()
+        if (self._config._response_extractor):           # pylint: disable=W0212
+            runtime_data = RuntimeData(
+                {'response_extractor': self._config._response_extractor})    # pylint: disable=W0212
+            ctx = self._config.connector.new_context(runtime_data)
+        else:
+            ctx = self._config.connector.new_context()
         return self._api_interface.native_invoke(ctx, _method_name, kwargs)
 
 
@@ -386,8 +414,8 @@ class StubFactoryBase(object):
         if name in ['_attrs', '_stub_config']:
             # Ignore them for further processing and just return
             return result
-        if (name in self._attrs and
-                not isinstance(result, (StubFactoryBase, VapiInterface))):
+        if (name in self._attrs
+                and not isinstance(result, (StubFactoryBase, VapiInterface))):
             # If the result is not a stub or stub factory instance, create an
             # instance using the saved stub config and set them on this object
             # itself so that it can be reused

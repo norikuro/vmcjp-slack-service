@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -71,6 +71,7 @@ class ArgumentLocations(VapiStruct):
         self.secondary = secondary
         VapiStruct.__init__(self)
 
+
 ArgumentLocations._set_binding_type(type.StructType(
     'com.vmware.vapi.std.errors.argument_locations', {
         'primary': type.StringType(),
@@ -115,6 +116,7 @@ class FileLocations(VapiStruct):
         self.secondary = secondary
         VapiStruct.__init__(self)
 
+
 FileLocations._set_binding_type(type.StructType(
     'com.vmware.vapi.std.errors.file_locations', {
         'primary': type.StringType(),
@@ -155,6 +157,7 @@ class TransientIndication(VapiStruct):
         self.is_transient = is_transient
         VapiStruct.__init__(self)
 
+
 TransientIndication._set_binding_type(type.StructType(
     'com.vmware.vapi.std.errors.transient_indication', {
         'is_transient': type.BooleanType(),
@@ -190,6 +193,7 @@ class Error(VapiError):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -220,16 +224,200 @@ class Error(VapiError):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         self.messages = messages
         self.data = data
+        self.error_type = error_type
         VapiError.__init__(self)
+
+    class Type(Enum):
+        """
+        Enumeration of all standard errors. Used as discriminator in protocols that
+        have no standard means for transporting the error type, e.g. REST.
+
+        .. note::
+            This class represents an enumerated type in the interface language
+            definition. The class contains class attributes which represent the
+            values in the current version of the enumerated type. Newer versions of
+            the enumerated type may contain new values. To use new values of the
+            enumerated type in communication with a server that supports the newer
+            version of the API, you instantiate this class. See :ref:`enumerated
+            type description page <enumeration_description>`.
+        """
+        ERROR = None
+        """
+        Discriminator for the :class:`Error` type.
+
+        """
+        ALREADY_EXISTS = None
+        """
+        Discriminator for the :class:`AlreadyExists` type.
+
+        """
+        ALREADY_IN_DESIRED_STATE = None
+        """
+        Discriminator for the :class:`AlreadyInDesiredState` type.
+
+        """
+        CANCELED = None
+        """
+        Discriminator for the :class:`Canceled` type.
+
+        """
+        CONCURRENT_CHANGE = None
+        """
+        Discriminator for the :class:`ConcurrentChange` type.
+
+        """
+        FEATURE_IN_USE = None
+        """
+        Discriminator for the :class:`FeatureInUse` type.
+
+        """
+        INTERNAL_SERVER_ERROR = None
+        """
+        Discriminator for the :class:`InternalServerError` type.
+
+        """
+        INVALID_ARGUMENT = None
+        """
+        Discriminator for the :class:`InvalidArgument` type.
+
+        """
+        INVALID_ELEMENT_CONFIGURATION = None
+        """
+        Discriminator for the :class:`InvalidElementConfiguration` type.
+
+        """
+        INVALID_ELEMENT_TYPE = None
+        """
+        Discriminator for the :class:`InvalidElementType` type.
+
+        """
+        INVALID_REQUEST = None
+        """
+        Discriminator for the :class:`InvalidRequest` type.
+
+        """
+        NOT_ALLOWED_IN_CURRENT_STATE = None
+        """
+        Discriminator for the :class:`NotAllowedInCurrentState` type.
+
+        """
+        NOT_FOUND = None
+        """
+        Discriminator for the :class:`NotFound` type.
+
+        """
+        OPERATION_NOT_FOUND = None
+        """
+        Discriminator for the :class:`OperationNotFound` type.
+
+        """
+        RESOURCE_BUSY = None
+        """
+        Discriminator for the :class:`ResourceBusy` type.
+
+        """
+        RESOURCE_IN_USE = None
+        """
+        Discriminator for the :class:`ResourceInUse` type.
+
+        """
+        RESOURCE_INACCESSIBLE = None
+        """
+        Discriminator for the :class:`ResourceInaccessible` type.
+
+        """
+        SERVICE_UNAVAILABLE = None
+        """
+        Discriminator for the :class:`ServiceUnavailable` type.
+
+        """
+        TIMED_OUT = None
+        """
+        Discriminator for the :class:`TimedOut` type.
+
+        """
+        UNABLE_TO_ALLOCATE_RESOURCE = None
+        """
+        Discriminator for the :class:`UnableToAllocateResource` type.
+
+        """
+        UNAUTHENTICATED = None
+        """
+        Discriminator for the :class:`Unauthenticated` type.
+
+        """
+        UNAUTHORIZED = None
+        """
+        Discriminator for the :class:`Unauthorized` type.
+
+        """
+        UNEXPECTED_INPUT = None
+        """
+        Discriminator for the :class:`UnexpectedInput` type.
+
+        """
+        UNSUPPORTED = None
+        """
+        Discriminator for the :class:`Unsupported` type.
+
+        """
+        UNVERIFIED_PEER = None
+        """
+        Discriminator for the :class:`UnverifiedPeer` type.
+
+        """
+
+        def __init__(self, string):
+            """
+            :type  string: :class:`str`
+            :param string: String value for the :class:`Type` instance.
+            """
+            Enum.__init__(string)
+
+    Type._set_values([
+        Type('ERROR'),
+        Type('ALREADY_EXISTS'),
+        Type('ALREADY_IN_DESIRED_STATE'),
+        Type('CANCELED'),
+        Type('CONCURRENT_CHANGE'),
+        Type('FEATURE_IN_USE'),
+        Type('INTERNAL_SERVER_ERROR'),
+        Type('INVALID_ARGUMENT'),
+        Type('INVALID_ELEMENT_CONFIGURATION'),
+        Type('INVALID_ELEMENT_TYPE'),
+        Type('INVALID_REQUEST'),
+        Type('NOT_ALLOWED_IN_CURRENT_STATE'),
+        Type('NOT_FOUND'),
+        Type('OPERATION_NOT_FOUND'),
+        Type('RESOURCE_BUSY'),
+        Type('RESOURCE_IN_USE'),
+        Type('RESOURCE_INACCESSIBLE'),
+        Type('SERVICE_UNAVAILABLE'),
+        Type('TIMED_OUT'),
+        Type('UNABLE_TO_ALLOCATE_RESOURCE'),
+        Type('UNAUTHENTICATED'),
+        Type('UNAUTHORIZED'),
+        Type('UNEXPECTED_INPUT'),
+        Type('UNSUPPORTED'),
+        Type('UNVERIFIED_PEER'),
+    ])
+    Type._set_binding_type(type.EnumType(
+        'com.vmware.vapi.std.errors.error.type',
+        Type))
 
 Error._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.error', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     Error))
 
@@ -267,6 +455,7 @@ class UnverifiedPeer(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -297,18 +486,24 @@ class UnverifiedPeer(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 UnverifiedPeer._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.unverified_peer', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     UnverifiedPeer))
 
@@ -336,6 +531,7 @@ class Unsupported(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -366,18 +562,24 @@ class Unsupported(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 Unsupported._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.unsupported', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     Unsupported))
 
@@ -417,6 +619,7 @@ class UnexpectedInput(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -447,18 +650,24 @@ class UnexpectedInput(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 UnexpectedInput._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.unexpected_input', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     UnexpectedInput))
 
@@ -518,6 +727,7 @@ class Unauthorized(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -548,18 +758,24 @@ class Unauthorized(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 Unauthorized._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.unauthorized', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     Unauthorized))
 
@@ -605,6 +821,8 @@ class Unauthenticated(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
+                 challenge=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -635,18 +853,42 @@ class Unauthenticated(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
+        :type  challenge: :class:`str`
+        :param challenge: Indicates the authentication challenges applicable to the target
+            API provider. It can be used by a client to discover the correct
+            authentication scheme to use. The exact syntax of the value is
+            defined by the specific provider, the protocol and authentication
+            schemes used. 
+            
+            For example, a provider using REST may adhere to the
+            WWW-Authenticate HTTP header specification, RFC7235, section 4.1.
+            In this case an example challenge value may be: SIGN
+            realm="27da1358-2ba4-11e9-b210-d663bd873d93",sts="http://vcenter/sso?vsphere.local",
+            Basic realm="vCenter". **Warning:** This attribute is part of a new
+            feature in development. It may be changed at any time and may not
+            have all supported functionality implemented.
+            This attribute is optional because it was added in a newer version
+            than its parent node.
         """
 
+        self.challenge = challenge
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 Unauthenticated._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.unauthenticated', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
+        'challenge': type.OptionalType(type.StringType()),
     },
     Unauthenticated))
 
@@ -691,6 +933,7 @@ class UnableToAllocateResource(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -721,18 +964,24 @@ class UnableToAllocateResource(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 UnableToAllocateResource._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.unable_to_allocate_resource', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     UnableToAllocateResource))
 
@@ -776,6 +1025,7 @@ class TimedOut(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -806,18 +1056,24 @@ class TimedOut(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 TimedOut._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.timed_out', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     TimedOut))
 
@@ -855,6 +1111,7 @@ class ServiceUnavailable(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -885,18 +1142,24 @@ class ServiceUnavailable(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 ServiceUnavailable._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.service_unavailable', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     ServiceUnavailable))
 
@@ -934,6 +1197,7 @@ class ResourceInaccessible(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -964,18 +1228,24 @@ class ResourceInaccessible(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 ResourceInaccessible._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.resource_inaccessible', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     ResourceInaccessible))
 
@@ -1010,6 +1280,7 @@ class ResourceInUse(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -1040,18 +1311,24 @@ class ResourceInUse(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 ResourceInUse._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.resource_in_use', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     ResourceInUse))
 
@@ -1085,6 +1362,7 @@ class ResourceBusy(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -1115,18 +1393,24 @@ class ResourceBusy(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 ResourceBusy._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.resource_busy', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     ResourceBusy))
 
@@ -1170,6 +1454,7 @@ class OperationNotFound(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -1200,18 +1485,24 @@ class OperationNotFound(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 OperationNotFound._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.operation_not_found', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     OperationNotFound))
 
@@ -1242,6 +1533,7 @@ class NotFound(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -1272,18 +1564,24 @@ class NotFound(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 NotFound._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.not_found', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     NotFound))
 
@@ -1323,6 +1621,7 @@ class NotAllowedInCurrentState(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -1353,18 +1652,24 @@ class NotAllowedInCurrentState(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 NotAllowedInCurrentState._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.not_allowed_in_current_state', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     NotAllowedInCurrentState))
 
@@ -1413,6 +1718,7 @@ class InvalidRequest(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -1443,18 +1749,24 @@ class InvalidRequest(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 InvalidRequest._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.invalid_request', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     InvalidRequest))
 
@@ -1490,6 +1802,7 @@ class InvalidElementType(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -1520,18 +1833,24 @@ class InvalidElementType(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 InvalidElementType._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.invalid_element_type', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     InvalidElementType))
 
@@ -1563,6 +1882,7 @@ class InvalidElementConfiguration(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -1593,18 +1913,24 @@ class InvalidElementConfiguration(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 InvalidElementConfiguration._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.invalid_element_configuration', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     InvalidElementConfiguration))
 
@@ -1656,6 +1982,7 @@ class InvalidArgument(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -1686,18 +2013,24 @@ class InvalidArgument(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 InvalidArgument._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.invalid_argument', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     InvalidArgument))
 
@@ -1728,6 +2061,7 @@ class InternalServerError(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -1758,18 +2092,24 @@ class InternalServerError(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 InternalServerError._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.internal_server_error', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     InternalServerError))
 
@@ -1795,6 +2135,7 @@ class FeatureInUse(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -1825,18 +2166,24 @@ class FeatureInUse(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 FeatureInUse._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.feature_in_use', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     FeatureInUse))
 
@@ -1861,6 +2208,7 @@ class ConcurrentChange(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -1891,18 +2239,24 @@ class ConcurrentChange(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 ConcurrentChange._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.concurrent_change', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     ConcurrentChange))
 
@@ -1945,6 +2299,7 @@ class Canceled(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -1975,18 +2330,24 @@ class Canceled(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 Canceled._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.canceled', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     Canceled))
 
@@ -2012,6 +2373,7 @@ class AlreadyInDesiredState(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -2042,18 +2404,24 @@ class AlreadyInDesiredState(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 AlreadyInDesiredState._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.already_in_desired_state', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     AlreadyInDesiredState))
 
@@ -2087,6 +2455,7 @@ class AlreadyExists(Error):
     def __init__(self,
                  messages=None,
                  data=None,
+                 error_type=None,
                 ):
         """
         :type  messages: :class:`list` of :class:`com.vmware.vapi.std_client.LocalizableMessage`
@@ -2117,18 +2486,24 @@ class AlreadyExists(Error):
             use as the value of this attribute when reporting exceptions from
             their methods.
             Some methods will not set this attribute when reporting exceptions.
+        :type  error_type: :class:`Error.Type`
+        :param error_type: Discriminator field to help API consumers identify the structure
+            type.
+            Can be None for compatibility with preceding implementations.
         """
 
         Error.__init__(
             self,
             messages=messages,
             data=data,
+            error_type=error_type,
         )
 
 AlreadyExists._set_binding_type(type.ErrorType(
     'com.vmware.vapi.std.errors.already_exists', {
         'messages': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'LocalizableMessage')),
         'data': type.OptionalType(type.DynamicStructType('vmware.vapi.dynamic_struct', {}, VapiStruct)),
+        'error_type': type.OptionalType(type.ReferenceType(__name__, 'Error.Type')),
     },
     AlreadyExists))
 

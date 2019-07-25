@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class RegistrationToken(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.aaa.registration_token'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -140,7 +143,10 @@ class RoleBindings(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.aaa.role_bindings'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -330,7 +336,10 @@ class Roles(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.aaa.roles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -389,7 +398,10 @@ class UserInfo(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.aaa.user_info'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -445,7 +457,8 @@ class _RegistrationTokenStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -476,7 +489,8 @@ class _RegistrationTokenStub(ApiInterfaceStub):
                 'token': 'token',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -507,7 +521,8 @@ class _RegistrationTokenStub(ApiInterfaceStub):
                 'token': 'token',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -576,7 +591,8 @@ class _RoleBindingsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -607,7 +623,8 @@ class _RoleBindingsStub(ApiInterfaceStub):
                 'binding_id': 'binding-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for deletestalebindings operation
@@ -635,7 +652,8 @@ class _RoleBindingsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -666,7 +684,8 @@ class _RoleBindingsStub(ApiInterfaceStub):
                 'binding_id': 'binding-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -709,7 +728,8 @@ class _RoleBindingsStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'type': 'type',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -742,7 +762,8 @@ class _RoleBindingsStub(ApiInterfaceStub):
                 'binding_id': 'binding-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -838,7 +859,8 @@ class _RolesStub(ApiInterfaceStub):
                 'role': 'role',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -866,7 +888,8 @@ class _RolesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -923,7 +946,8 @@ class _UserInfoStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

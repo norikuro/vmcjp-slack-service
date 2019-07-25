@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class Bundles(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.migration.bundles'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -103,7 +106,10 @@ class FeedbackRequests(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.migration.feedback_requests'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -163,7 +169,10 @@ class FeedbackResponse(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.migration.feedback_response'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -202,7 +211,10 @@ class MigrationUnitGroups(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.migration.migration_unit_groups'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -444,7 +456,10 @@ class MigrationUnitGroupsStatus(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.migration.migration_unit_groups_status'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -507,7 +522,10 @@ class MigrationUnits(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.migration.migration_units'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -620,7 +638,10 @@ class MigrationUnitsStats(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.migration.migration_units_stats'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -683,7 +704,10 @@ class Nodes(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.migration.nodes'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -749,7 +773,10 @@ class NodesSummary(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.migration.nodes_summary'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -782,7 +809,10 @@ class Plan(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.migration.plan'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -836,6 +866,25 @@ class Plan(VapiInterface):
              Not Found
         """
         return self._invoke('pause', None)
+
+    def rerun(self):
+        """
+        Resets all migration steps done so far, so that migration can be
+        restarted with new setup details.
+
+
+        :raise: :class:`com.vmware.vapi.std.errors_client.ServiceUnavailable` 
+             Service Unavailable
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidRequest` 
+             Bad Request, Precondition Failed
+        :raise: :class:`com.vmware.vapi.std.errors_client.InternalServerError` 
+             Internal Server Error
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
+             Forbidden
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
+             Not Found
+        """
+        return self._invoke('rerun', None)
 
     def reset(self,
               component_type,
@@ -903,7 +952,10 @@ class Setup(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.migration.setup'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -966,7 +1018,10 @@ class StatusSummary(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.migration.status_summary'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1006,7 +1061,10 @@ class Summary(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.migration.summary'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -1066,7 +1124,8 @@ class _BundlesStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1097,7 +1156,8 @@ class _BundlesStub(ApiInterfaceStub):
                 'bundle_id': 'bundle-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1167,7 +1227,8 @@ class _FeedbackRequestsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1220,7 +1281,8 @@ class _FeedbackResponseStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1273,7 +1335,8 @@ class _MigrationUnitGroupsStub(ApiInterfaceStub):
                 'group_id': 'group-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for create operation
@@ -1304,7 +1367,8 @@ class _MigrationUnitGroupsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -1335,7 +1399,8 @@ class _MigrationUnitGroupsStub(ApiInterfaceStub):
                 'group_id': 'group-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -1368,7 +1433,8 @@ class _MigrationUnitGroupsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'summary': 'summary',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1413,7 +1479,8 @@ class _MigrationUnitGroupsStub(ApiInterfaceStub):
                 'sort_by': 'sort_by',
                 'summary': 'summary',
                 'sync': 'sync',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for reorder operation
@@ -1446,7 +1513,8 @@ class _MigrationUnitGroupsStub(ApiInterfaceStub):
                 'group_id': 'group-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1479,7 +1547,8 @@ class _MigrationUnitGroupsStub(ApiInterfaceStub):
                 'group_id': 'group-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1594,7 +1663,8 @@ class _MigrationUnitGroupsStatusStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1645,7 +1715,8 @@ class _MigrationUnitsStub(ApiInterfaceStub):
                 'migration_unit_id': 'migration-unit-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -1696,7 +1767,8 @@ class _MigrationUnitsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1766,7 +1838,8 @@ class _MigrationUnitsStatsStub(ApiInterfaceStub):
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
                 'sync': 'sync',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1829,7 +1902,8 @@ class _NodesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1877,7 +1951,8 @@ class _NodesSummaryStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1930,7 +2005,8 @@ class _PlanStub(ApiInterfaceStub):
             },
             query_parameters={
                 'skip': 'skip',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for pause operation
@@ -1960,7 +2036,37 @@ class _PlanStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
+        )
+
+        # properties for rerun operation
+        rerun_input_type = type.StructType('operation-input', {})
+        rerun_error_dict = {
+            'com.vmware.vapi.std.errors.service_unavailable':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'ServiceUnavailable'),
+            'com.vmware.vapi.std.errors.invalid_request':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidRequest'),
+            'com.vmware.vapi.std.errors.internal_server_error':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InternalServerError'),
+            'com.vmware.vapi.std.errors.unauthorized':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+            'com.vmware.vapi.std.errors.not_found':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+
+        }
+        rerun_input_value_validator_list = [
+        ]
+        rerun_output_validator_list = [
+        ]
+        rerun_rest_metadata = OperationRestMetadata(
+            http_method='POST',
+            url_template='/api/v1/migration/plan?action=rerun',
+            path_variables={
+            },
+            query_parameters={
+            },
+            content_type='application/json'
         )
 
         # properties for reset operation
@@ -1991,7 +2097,8 @@ class _PlanStub(ApiInterfaceStub):
             },
             query_parameters={
                 'component_type': 'component_type',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for rollback operation
@@ -2019,7 +2126,8 @@ class _PlanStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for start operation
@@ -2047,7 +2155,8 @@ class _PlanStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2065,6 +2174,14 @@ class _PlanStub(ApiInterfaceStub):
                 'errors': pause_error_dict,
                 'input_value_validator_list': pause_input_value_validator_list,
                 'output_validator_list': pause_output_validator_list,
+                'task_type': TaskType.NONE,
+            },
+            'rerun': {
+                'input_type': rerun_input_type,
+                'output_type': type.VoidType(),
+                'errors': rerun_error_dict,
+                'input_value_validator_list': rerun_input_value_validator_list,
+                'output_validator_list': rerun_output_validator_list,
                 'task_type': TaskType.NONE,
             },
             'reset': {
@@ -2095,6 +2212,7 @@ class _PlanStub(ApiInterfaceStub):
         rest_metadata = {
             'continue': continue_rest_metadata,
             'pause': pause_rest_metadata,
+            'rerun': rerun_rest_metadata,
             'reset': reset_rest_metadata,
             'rollback': rollback_rest_metadata,
             'start': start_rest_metadata,
@@ -2133,7 +2251,8 @@ class _SetupStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -2166,7 +2285,8 @@ class _SetupStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2226,7 +2346,8 @@ class _StatusSummaryStub(ApiInterfaceStub):
             },
             query_parameters={
                 'component_type': 'component_type',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -2274,7 +2395,8 @@ class _SummaryStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

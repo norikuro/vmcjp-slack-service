@@ -3,7 +3,7 @@ This module is YATP (Yet another thread pool)
 """
 
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015, 2017 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015, 2017-2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 import six
 import sys
@@ -11,6 +11,7 @@ import time
 import threading
 
 from six.moves import queue
+from vmware.vapi.common.context import clear_event, get_event
 from vmware.vapi.lib.log import get_vapi_logger
 
 logger = get_vapi_logger(__name__)
@@ -156,6 +157,14 @@ class ThreadPool(object):
                     self._log(stack_trace)
                     if work_item:
                         work_item.err = errvalue
+
+                    # In case of exception from provider also set the event
+                    # so we can throw the error rightaway to client rather
+                    # than waiting for the timeout to expire.
+                    accept_event = get_event()
+                    if accept_event is not None:
+                        accept_event.set()
+                        clear_event()
                     #
                     # NOTE: See the Python documentation for sys.exc_info for a
                     # warning about an inefficiency in garbage collection and

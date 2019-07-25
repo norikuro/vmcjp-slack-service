@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -88,6 +88,7 @@ class Storage(VapiInterface):
             self.description = description
             VapiStruct.__init__(self)
 
+
     StorageMapping._set_binding_type(type.StructType(
         'com.vmware.appliance.system.storage.storage_mapping', {
             'disk': type.IdType(resource_types='com.vmware.appliance.system.storage'),
@@ -127,6 +128,7 @@ class Storage(VapiInterface):
             self.old_size = old_size
             self.new_size = new_size
             VapiStruct.__init__(self)
+
 
     StorageChange._set_binding_type(type.StructType(
         'com.vmware.appliance.system.storage.storage_change', {
@@ -251,6 +253,7 @@ class Time(VapiInterface):
             self.timezone = timezone
             VapiStruct.__init__(self)
 
+
     SystemTimeStruct._set_binding_type(type.StructType(
         'com.vmware.appliance.system.time.system_time_struct', {
             'seconds_since_epoch': type.DoubleType(),
@@ -341,6 +344,7 @@ class Version(VapiInterface):
             self.releasedate = releasedate
             self.install_time = install_time
             VapiStruct.__init__(self)
+
 
     VersionStruct._set_binding_type(type.StructType(
         'com.vmware.appliance.system.version.version_struct', {

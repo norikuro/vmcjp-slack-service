@@ -3,7 +3,7 @@ Api handler interface
 """
 
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015, 2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 
 class ApiHandler(object):
@@ -11,14 +11,15 @@ class ApiHandler(object):
 
     def __init__(self):
         """ Generic api handler interface init """
-        pass
 
-    def handle_request(self, request):
+    def handle_request(self, request, headers=None):
         """
         handle request
 
         :type:  :class:`str`
         :param: request string
+        :type:  :class:`dict`
+        :param: Request headers
         :rtype: :class:`str`
         :return: response string
         """

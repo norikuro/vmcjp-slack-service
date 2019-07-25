@@ -3,8 +3,7 @@ REST de/serializer
 """
 
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2017 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
-
+__copyright__ = 'Copyright 2017-2018 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 import base64
 import six
@@ -59,6 +58,11 @@ class RequestSerializer(object):
         # Concatenate all headers
         all_headers = input_headers
         all_headers.update(authz_headers)
+        if rest_metadata is not None:
+            dispatch_headers = rest_metadata.get_dispatch_header()
+        else:
+            dispatch_headers = {}
+        all_headers.update(dispatch_headers)
         return (url_path, all_headers, request_body_str, cookies)
 
     @staticmethod
@@ -79,10 +83,13 @@ class RequestSerializer(object):
                 rest_metadata.get_path_variable_field_names()
             query_param_field_names = \
                 rest_metadata.get_query_parameter_field_names()
+            header_field_names = \
+                rest_metadata.get_header_field_names()
             request_body_param = rest_metadata.request_body_parameter
         else:
             path_variable_field_names = []
             query_param_field_names = []
+            header_field_names = []
             request_body_param = None
         if request_body_param is not None:
             request_body_input_value = input_value.get_field(request_body_param)
@@ -90,6 +97,7 @@ class RequestSerializer(object):
             request_body_input_value = StructValue(name=input_value.name)
         path_variable_fields = {}
         query_param_fields = {}
+        header_fields = {}
         for (field_name, field_val) in input_value.get_fields():
             if field_name in path_variable_field_names:
                 field_str = RequestSerializer._convert_to_string(field_val)
@@ -99,11 +107,15 @@ class RequestSerializer(object):
                 field_str = RequestSerializer._convert_to_string(field_val)
                 if field_str is not None:
                     query_param_fields[field_name] = field_str
+            elif field_name in header_field_names:
+                field_str = RequestSerializer._convert_to_string(field_val)
+                if field_str is not None:
+                    header_fields[field_name] = field_str
             elif request_body_param is None:
                 request_body_input_value.set_field(field_name, field_val)
         url_path = rest_metadata.get_url_path(
             path_variable_fields, query_param_fields) if rest_metadata else None
-        return (url_path, {},
+        return (url_path, header_fields,
                 DataValueConverter.convert_to_json(request_body_input_value))
 
     @staticmethod

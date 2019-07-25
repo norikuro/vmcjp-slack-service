@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class NatRules(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_policy.infra.tier_1s.nat.nat_rules'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -51,7 +54,10 @@ class NatRules(VapiInterface):
                nat_rule_id,
                ):
         """
-        Delete NAT Rule.
+        Delete NAT Rule from Tier-1 denoted by Tier-1 ID, under NAT section
+        denoted by <nat-id>. Under tier-1 there will be 3 different
+        NATs(sections). (INTERNAL, USER and DEFAULT) For more details related
+        to NAT section please refer to PolicyNAT schema.
 
         :type  tier1_id: :class:`str`
         :param tier1_id: Tier-1 ID (required)
@@ -83,7 +89,10 @@ class NatRules(VapiInterface):
             nat_rule_id,
             ):
         """
-        Get NAT Rule.
+        Get NAT Rule from Tier-1 denoted by Tier-1 ID, under NAT section
+        denoted by <nat-id>. Under tier-1 there will be 3 different
+        NATs(sections). (INTERNAL, USER and DEFAULT) For more details related
+        to NAT section please refer to PolicyNAT schema.
 
         :type  tier1_id: :class:`str`
         :param tier1_id: Tier-1 ID (required)
@@ -121,7 +130,10 @@ class NatRules(VapiInterface):
              sort_by=None,
              ):
         """
-        List NAT Rules.
+        List NAT Rules from Tier-1 denoted by Tier-1 ID, under NAT section
+        denoted by <nat-id>. Under tier-1 there will be 3 different
+        NATs(sections). (INTERNAL, USER and DEFAULT) For more details related
+        to NAT section please refer to PolicyNAT schema.
 
         :type  tier1_id: :class:`str`
         :param tier1_id: Tier-1 ID (required)
@@ -172,7 +184,10 @@ class NatRules(VapiInterface):
               ):
         """
         If a NAT Rule is not already present on Tier-1 denoted by Tier-1 ID,
-        create a new NAT Rule. If it already exists, update the NAT Rule.
+        under NAT section denoted by <nat-id>, create a new NAT Rule. If it
+        already exists, update the NAT Rule. Under tier-1 there will be 3
+        different NATs(sections). (INTERNAL, USER and DEFAULT) For more details
+        related to NAT section please refer to PolicyNAT schema.
 
         :type  tier1_id: :class:`str`
         :param tier1_id: Tier-1 ID (required)
@@ -208,7 +223,10 @@ class NatRules(VapiInterface):
                policy_nat_rule,
                ):
         """
-        Update NAT Rule.
+        Update NAT Rule on Tier-1 denoted by Tier-1 ID, under NAT section
+        denoted by <nat-id>. Under tier-1 there will be 3 different
+        NATs(sections). (INTERNAL, USER and DEFAULT) For more details related
+        to NAT section please refer to PolicyNAT schema.
 
         :type  tier1_id: :class:`str`
         :param tier1_id: Tier-1 ID (required)
@@ -272,7 +290,8 @@ class _NatRulesStub(ApiInterfaceStub):
                 'nat_rule_id': 'nat-rule-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -307,7 +326,8 @@ class _NatRulesStub(ApiInterfaceStub):
                 'nat_rule_id': 'nat-rule-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -350,7 +370,8 @@ class _NatRulesStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for patch operation
@@ -387,7 +408,8 @@ class _NatRulesStub(ApiInterfaceStub):
                 'nat_rule_id': 'nat-rule-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -424,7 +446,8 @@ class _NatRulesStub(ApiInterfaceStub):
                 'nat_rule_id': 'nat-rule-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

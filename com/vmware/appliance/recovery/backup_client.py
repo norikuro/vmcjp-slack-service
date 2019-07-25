@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -65,6 +65,7 @@ class LocationSpec(VapiStruct):
         self.location_user = location_user
         self.location_password = location_password
         VapiStruct.__init__(self)
+
 
 LocationSpec._set_binding_type(type.StructType(
     'com.vmware.appliance.recovery.backup.location_spec', {
@@ -182,6 +183,23 @@ class Job(VapiInterface):
         Destination is SSH server.
 
         """
+        SFTP = None
+        """
+        Destination is SFTP server.
+
+        """
+        NFS = None
+        """
+        Destination is NFS server. This class attribute was added in vSphere API
+        6.7.2.
+
+        """
+        SMB = None
+        """
+        Destination is SMB server. This class attribute was added in vSphere API
+        6.7.2.
+
+        """
 
         def __init__(self, string):
             """
@@ -196,6 +214,9 @@ class Job(VapiInterface):
         LocationType('FTPS'),
         LocationType('HTTPS'),
         LocationType('SCP'),
+        LocationType('SFTP'),
+        LocationType('NFS'),
+        LocationType('SMB'),
     ])
     LocationType._set_binding_type(type.EnumType(
         'com.vmware.appliance.recovery.backup.job.location_type',
@@ -285,6 +306,7 @@ class Job(VapiInterface):
             self.args = args
             VapiStruct.__init__(self)
 
+
     LocalizableMessage._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.job.localizable_message', {
             'id': type.StringType(),
@@ -322,6 +344,7 @@ class Job(VapiInterface):
             self.status = status
             self.messages = messages
             VapiStruct.__init__(self)
+
 
     ReturnResult._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.job.return_result', {
@@ -390,6 +413,7 @@ class Job(VapiInterface):
             self.comment = comment
             VapiStruct.__init__(self)
 
+
     BackupRequest._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.job.backup_request', {
             'parts': type.ListType(type.StringType()),
@@ -448,6 +472,7 @@ class Job(VapiInterface):
             self.start_time = start_time
             self.end_time = end_time
             VapiStruct.__init__(self)
+
 
     BackupJobStatus._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.job.backup_job_status', {
@@ -588,6 +613,7 @@ class Parts(VapiInterface):
             self.args = args
             VapiStruct.__init__(self)
 
+
     LocalizableMessage._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.parts.localizable_message', {
             'id': type.StringType(),
@@ -642,6 +668,7 @@ class Parts(VapiInterface):
             self.selected_by_default = selected_by_default
             self.optional = optional
             VapiStruct.__init__(self)
+
 
     Part._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.parts.part', {
@@ -804,6 +831,7 @@ class Schedules(VapiInterface):
             self.max_count = max_count
             VapiStruct.__init__(self)
 
+
     RetentionInfo._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.schedules.retention_info', {
             'max_count': type.IntegerType(),
@@ -847,6 +875,7 @@ class Schedules(VapiInterface):
             self.hour = hour
             self.days = days
             VapiStruct.__init__(self)
+
 
     RecurrenceInfo._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.schedules.recurrence_info', {
@@ -935,6 +964,7 @@ class Schedules(VapiInterface):
             self.retention_info = retention_info
             VapiStruct.__init__(self)
 
+
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.schedules.create_spec', {
             'parts': type.OptionalType(type.ListType(type.StringType())),
@@ -1008,6 +1038,7 @@ class Schedules(VapiInterface):
             self.recurrence_info = recurrence_info
             self.retention_info = retention_info
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.schedules.info', {
@@ -1097,6 +1128,7 @@ class Schedules(VapiInterface):
             self.recurrence_info = recurrence_info
             self.retention_info = retention_info
             VapiStruct.__init__(self)
+
 
     UpdateSpec._set_binding_type(type.StructType(
         'com.vmware.appliance.recovery.backup.schedules.update_spec', {

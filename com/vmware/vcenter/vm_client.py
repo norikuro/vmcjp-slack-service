@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -846,8 +846,8 @@ class GuestOS(Enum):
     """
     AMAZONLINUX2_64 = None
     """
-    Amazon Linux 2 (64 bit). This class attribute was added in vSphere API 6.7
-    U1.
+    Amazon Linux 2 (64 bit). This class attribute was added in vSphere API
+    6.7.1.
 
     """
     OTHER = None
@@ -1128,7 +1128,8 @@ class Hardware(VapiInterface):
     class Version(Enum):
         """
         The ``Hardware.Version`` class defines the valid virtual hardware versions
-        for a virtual machine.
+        for a virtual machine. See https://kb.vmware.com/s/article/1003746 (Virtual
+        machine hardware versions (1003746)).
 
         .. note::
             This class represents an enumerated type in the interface language
@@ -1141,57 +1142,64 @@ class Hardware(VapiInterface):
         """
         VMX_03 = None
         """
-        Hardware version 3.
+        Hardware version 3, first supported in ESXi 2.5.
 
         """
         VMX_04 = None
         """
-        Hardware version 4.
+        Hardware version 4, first supported in ESXi 3.0.
 
         """
         VMX_06 = None
         """
-        Hardware version 6.
+        Hardware version 6, first supported in WS 6.0.
 
         """
         VMX_07 = None
         """
-        Hardware version 7.
+        Hardware version 7, first supported in ESXi 4.0.
 
         """
         VMX_08 = None
         """
-        Hardware version 8.
+        Hardware version 8, first supported in ESXi 5.0.
 
         """
         VMX_09 = None
         """
-        Hardware version 9.
+        Hardware version 9, first supported in ESXi 5.1.
 
         """
         VMX_10 = None
         """
-        Hardware version 10.
+        Hardware version 10, first supported in ESXi 5.5.
 
         """
         VMX_11 = None
         """
-        Hardware version 11.
+        Hardware version 11, first supported in ESXi 6.0.
 
         """
         VMX_12 = None
         """
-        Hardware version 12.
+        Hardware version 12, first supported in Workstation 12.0.
 
         """
         VMX_13 = None
         """
-        Hardware version 13.
+        Hardware version 13, first supported in ESXi 6.5.
 
         """
         VMX_14 = None
         """
-        Hardware version 14. This class attribute was added in vSphere API 6.7.
+        Hardware version 14, first supported in ESXi 6.7. This class attribute was
+        added in vSphere API 6.7.
+
+        """
+        VMX_15 = None
+        """
+        Hardware version 15, first supported in ESXi 6.7.0 Update 2. This class
+        attribute was added in vSphere API 6.7.2.
 
         """
 
@@ -1214,6 +1222,7 @@ class Hardware(VapiInterface):
         Version('VMX_12'),
         Version('VMX_13'),
         Version('VMX_14'),
+        Version('VMX_15'),
     ])
     Version._set_binding_type(type.EnumType(
         'com.vmware.vcenter.vm.hardware.version',
@@ -1386,6 +1395,7 @@ class Hardware(VapiInterface):
             self.upgrade_error = upgrade_error
             VapiStruct.__init__(self)
 
+
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.info', {
             'version': type.ReferenceType(__name__, 'Hardware.Version'),
@@ -1449,6 +1459,7 @@ class Hardware(VapiInterface):
             self.upgrade_policy = upgrade_policy
             self.upgrade_version = upgrade_version
             VapiStruct.__init__(self)
+
 
     UpdateSpec._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.hardware.update_spec', {
@@ -1582,6 +1593,73 @@ class Hardware(VapiInterface):
                             'vm': vm,
                             'version': version,
                             })
+class Identity(VapiInterface):
+    """
+    The ``Identity`` class provides methods for managing the identity of a
+    virtual machine. This class was added in vSphere API 6.7.1.
+    """
+
+    _VAPI_SERVICE_ID = 'com.vmware.vcenter.vm.identity'
+    """
+    Identifier of the service in canonical form.
+    """
+    def __init__(self, config):
+        """
+        :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
+        :param config: Configuration to be used for creating the stub.
+        """
+        VapiInterface.__init__(self, config, _IdentityStub)
+
+    class Info(VapiStruct):
+        """
+        The ``Identity.Info`` class contains information about the identity of a
+        virtual machine. This class was added in vSphere API 6.7.1.
+
+        .. tip::
+            The arguments are used to initialize data attributes with the same
+            names.
+        """
+
+
+
+
+        def __init__(self,
+                     name=None,
+                     bios_uuid=None,
+                     instance_uuid=None,
+                    ):
+            """
+            :type  name: :class:`str`
+            :param name: Virtual machine name. This attribute was added in vSphere API
+                6.7.1.
+            :type  bios_uuid: :class:`str`
+            :param bios_uuid: 128-bit SMBIOS UUID of a virtual machine represented as a
+                hexadecimal string in "12345678-abcd-1234-cdef-123456789abc"
+                format. This attribute was added in vSphere API 6.7.1.
+            :type  instance_uuid: :class:`str`
+            :param instance_uuid: VirtualCenter-specific 128-bit UUID of a virtual machine,
+                represented as a hexademical string. This identifier is used by
+                VirtualCenter to uniquely identify all virtual machine instances,
+                including those that may share the same SMBIOS UUID. This attribute
+                was added in vSphere API 6.7.1.
+            """
+            self.name = name
+            self.bios_uuid = bios_uuid
+            self.instance_uuid = instance_uuid
+            VapiStruct.__init__(self)
+
+
+    Info._set_binding_type(type.StructType(
+        'com.vmware.vcenter.vm.identity.info', {
+            'name': type.StringType(),
+            'bios_uuid': type.StringType(),
+            'instance_uuid': type.StringType(),
+        },
+        Info,
+        False,
+        None))
+
+
 class Power(VapiInterface):
     """
     The ``Power`` class provides methods for managing the power state of a
@@ -1686,6 +1764,7 @@ class Power(VapiInterface):
             self.state = state
             self.clean_power_off = clean_power_off
             VapiStruct.__init__(self)
+
 
     Info._set_binding_type(type.StructType(
         'com.vmware.vcenter.vm.power.info', {
@@ -2029,6 +2108,17 @@ class _HardwareStub(ApiInterfaceStub):
             config=config, operations=operations, rest_metadata=rest_metadata,
             is_vapi_rest=True)
 
+class _IdentityStub(ApiInterfaceStub):
+    def __init__(self, config):
+        operations = {
+        }
+        rest_metadata = {
+        }
+        ApiInterfaceStub.__init__(
+            self, iface_name='com.vmware.vcenter.vm.identity',
+            config=config, operations=operations, rest_metadata=rest_metadata,
+            is_vapi_rest=True)
+
 class _PowerStub(ApiInterfaceStub):
     def __init__(self, config):
         # properties for get operation
@@ -2272,6 +2362,7 @@ class _PowerStub(ApiInterfaceStub):
 class StubFactory(StubFactoryBase):
     _attrs = {
         'Hardware': Hardware,
+        'Identity': Identity,
         'Power': Power,
         'guest': 'com.vmware.vcenter.vm.guest_client.StubFactory',
         'hardware': 'com.vmware.vcenter.vm.hardware_client.StubFactory',

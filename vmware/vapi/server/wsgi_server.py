@@ -3,7 +3,7 @@ Wsgi Server
 """
 
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015-2017 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015-2017, 2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 import logging
 import six
@@ -79,12 +79,13 @@ class WsgiApplication(object):
                 'Content-Type %s is not supported' % (content_type))
         else:
             try:
-                result = handler.handle_request(request.get_data())
+                result, headers = handler.handle_request(request.get_data(),
+                                                         request.headers)
             except Exception as e:
                 logger.exception(e)
                 raise werkzeug.exceptions.InternalServerError(
                     'Unexpected error. See server logs for more details.')
-        return result
+        return result, headers
 
     def _handle_rest_call(self, request, endpoint, args):
         """
@@ -140,12 +141,17 @@ class WsgiApplication(object):
                 provider_wire_logger.debug(
                     'REQUEST BODY: %s', request.get_data())
             if endpoint == JSONRPC:
-                response = Response(self._handle_jsonrpc_call(request))
+                result, headers = self._handle_jsonrpc_call(request)
+                response = Response(result)
+                if headers:
+                    response.headers = headers
             else:
-                status, result, cookies = self._handle_rest_call(
+                status, result, cookies, headers = self._handle_rest_call(
                     request, endpoint, args)
                 response = Response(result)
                 response.status_code = status
+                if headers:
+                    response.headers = headers
                 if cookies:
                     path = self._rest_prefix
                     for k, v in six.iteritems(cookies):

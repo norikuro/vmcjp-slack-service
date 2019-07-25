@@ -3,7 +3,7 @@ String Constants used in vAPI runtime
 """
 
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015-2018 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015-2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 
 PARAMS = 'params'
@@ -41,6 +41,28 @@ JSON_CONTENT_TYPE = 'application/json'
 HTTP_ACCEPT_HEADER = 'Accept'
 HTTP_USER_AGENT_HEADER = 'User-Agent'
 HTTP_CONTENT_TYPE_HEADER = 'Content-Type'
+HTTP_ACCEPT_LANGUAGE = 'accept-language'
+HTTP_FORMAT_LOCALE = 'format-locale'
+HTTP_TIMEZONE = 'timezone'
+LOCALE = 'locale'
+
+# HTTP headers
+VAPI_ERROR_HEADER = 'vapi-error'
+VAPI_HEADER_PREFIX = 'vapi-ctx-'
+VAPI_SERVICE_HEADER = 'vapi-service'
+VAPI_OPERATION_HEADER = 'vapi-operation'
+VAPI_SESSION_HEADER = 'vmware-api-session-id'
+
+header_mapping_dict = {
+    'opid': 'opId',
+    'actid': 'actId',
+    '$showunreleasedapis': '$showUnreleasedAPIs',
+    '$useragent': '$userAgent',
+    '$donotroute': '$doNotRoute',
+    'vmwaresessionid': 'vmwareSessionId',
+    'activationid': 'ActivationId',
+    '$taskid': '$taskId',
+}
 
 
 class Introspection(object):
@@ -65,17 +87,31 @@ class RestAnnotations(object):
     """
     REQUEST_MAPPING = 'RequestMapping'
     PATH_VARIABLE = 'PathVariable'
+    QUERY_VARIABLE = 'Query'
     METHOD_ELEMENT = 'method'
     VALUE_ELEMENT = 'value'
     ACTION_PARAM = 'action'
     PARAMS_ELEMENT = 'params'
     PATH_ELEMENT = 'path'
     HEADERS_ELEMENT = 'headers'
+    NAME_ELEMENT = 'name'
+    RESPONSE_ELEMENT = 'Response'
+    HEADER_ELEMENT = 'Header'
+    BODY_ELEMENT = 'Body'
     VERB_GET = 'GET'
     VERB_POST = 'POST'
     VERB_PUT = 'PUT'
     VERB_PATCH = 'PATCH'
     VERB_DELETE = 'DELETE'
+
+
+class RestAnnotationType(object):
+    """
+    Rest annotation type in VMODL definition
+    """
+    NONE = 0
+    REQUEST = 1
+    VERB = 2
 
 
 class TaskType(object):

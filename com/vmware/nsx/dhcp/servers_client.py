@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class IpPools(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.dhcp.servers.ip_pools'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -230,7 +233,10 @@ class Leases(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.dhcp.servers.leases'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -246,13 +252,12 @@ class Leases(VapiInterface):
             source=None,
             ):
         """
-        Get lease info of a given dhcp server id. If a \\\\"pool_id\\\\" is
-        specified, the lease info of the pool are returned. If an
-        \\\\"address\\\\" is specified, only the lease info the this address is
-        returned. The \\\\"address\\\\" can be a single IP, an ip-range, or a
-        mac address. \\\\"pool_id\\\\" and \\\\"address\\\\" are mutually
-        excluded. Either a \\\\"pool_id\\\\" or an \\\\"address\\\\" can be
-        provided, but not both.
+        Get lease info of a given dhcp server id. If a \"pool_id\" is
+        specified, the lease info of the pool are returned. If an \"address\"
+        is specified, only the lease info the this address is returned. The
+        \"address\" can be a single IP, an ip-range, or a mac address.
+        \"pool_id\" and \"address\" are mutually excluded. Either a \"pool_id\"
+        or an \"address\" can be provided, but not both.
 
         :type  server_id: :class:`str`
         :param server_id: (required)
@@ -287,7 +292,10 @@ class StaticBindings(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.dhcp.servers.static_bindings'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -471,7 +479,10 @@ class Statistics(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.dhcp.servers.statistics'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -510,7 +521,10 @@ class Status(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx.dhcp.servers.status'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -576,7 +590,8 @@ class _IpPoolsStub(ApiInterfaceStub):
                 'server_id': 'server-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -609,7 +624,8 @@ class _IpPoolsStub(ApiInterfaceStub):
                 'pool_id': 'pool-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -642,7 +658,8 @@ class _IpPoolsStub(ApiInterfaceStub):
                 'pool_id': 'pool-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -683,7 +700,8 @@ class _IpPoolsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -718,7 +736,8 @@ class _IpPoolsStub(ApiInterfaceStub):
                 'pool_id': 'pool-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -811,7 +830,8 @@ class _LeasesStub(ApiInterfaceStub):
                 'address': 'address',
                 'pool_id': 'pool_id',
                 'source': 'source',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -864,7 +884,8 @@ class _StaticBindingsStub(ApiInterfaceStub):
                 'server_id': 'server-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -897,7 +918,8 @@ class _StaticBindingsStub(ApiInterfaceStub):
                 'binding_id': 'binding-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for get operation
@@ -930,7 +952,8 @@ class _StaticBindingsStub(ApiInterfaceStub):
                 'binding_id': 'binding-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -971,7 +994,8 @@ class _StaticBindingsStub(ApiInterfaceStub):
                 'page_size': 'page_size',
                 'sort_ascending': 'sort_ascending',
                 'sort_by': 'sort_by',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -1006,7 +1030,8 @@ class _StaticBindingsStub(ApiInterfaceStub):
                 'binding_id': 'binding-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1093,7 +1118,8 @@ class _StatisticsStub(ApiInterfaceStub):
                 'server_id': 'server-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -1144,7 +1170,8 @@ class _StatusStub(ApiInterfaceStub):
                 'server_id': 'server-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

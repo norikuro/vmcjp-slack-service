@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -31,98 +31,15 @@ from vmware.vapi.lib.constants import TaskType
 from vmware.vapi.lib.rest import OperationRestMetadata
 
 
-class EnforcementPoints(VapiInterface):
-    """
-    
-    """
-
-
-    def __init__(self, config):
-        """
-        :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
-        :param config: Configuration to be used for creating the stub.
-        """
-        VapiInterface.__init__(self, config, _EnforcementPointsStub)
-
-
-    def get(self,
-            enforcement_point_name,
-            ):
-        """
-        Read a Enforcement Point and the complete tree underneath. Returns the
-        populated enforcement point object.
-
-        :type  enforcement_point_name: :class:`str`
-        :param enforcement_point_name: Enforcement Point Name (required)
-        :rtype: :class:`com.vmware.nsx_policy.model_client.RealizedEnforcementPoint`
-        :return: com.vmware.nsx_policy.model.RealizedEnforcementPoint
-        :raise: :class:`com.vmware.vapi.std.errors_client.ServiceUnavailable` 
-             Service Unavailable
-        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidRequest` 
-             Bad Request, Precondition Failed
-        :raise: :class:`com.vmware.vapi.std.errors_client.InternalServerError` 
-             Internal Server Error
-        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
-             Forbidden
-        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
-             Not Found
-        """
-        return self._invoke('get',
-                            {
-                            'enforcement_point_name': enforcement_point_name,
-                            })
-
-    def list(self,
-             cursor=None,
-             included_fields=None,
-             page_size=None,
-             sort_ascending=None,
-             sort_by=None,
-             ):
-        """
-        Paginated list of all enforcement points. Returns the populated
-        enforcement points.
-
-        :type  cursor: :class:`str` or ``None``
-        :param cursor: Opaque cursor to be used for getting next page of records (supplied
-            by current result page) (optional)
-        :type  included_fields: :class:`str` or ``None``
-        :param included_fields: Comma separated list of fields that should be included in query
-            result (optional)
-        :type  page_size: :class:`long` or ``None``
-        :param page_size: Maximum number of results to return in this page (server may return
-            fewer) (optional, default to 1000)
-        :type  sort_ascending: :class:`bool` or ``None``
-        :param sort_ascending: (optional)
-        :type  sort_by: :class:`str` or ``None``
-        :param sort_by: Field by which records are sorted (optional)
-        :rtype: :class:`com.vmware.nsx_policy.model_client.RealizedEnforcementPointListResult`
-        :return: com.vmware.nsx_policy.model.RealizedEnforcementPointListResult
-        :raise: :class:`com.vmware.vapi.std.errors_client.ServiceUnavailable` 
-             Service Unavailable
-        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidRequest` 
-             Bad Request, Precondition Failed
-        :raise: :class:`com.vmware.vapi.std.errors_client.InternalServerError` 
-             Internal Server Error
-        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
-             Forbidden
-        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
-             Not Found
-        """
-        return self._invoke('list',
-                            {
-                            'cursor': cursor,
-                            'included_fields': included_fields,
-                            'page_size': page_size,
-                            'sort_ascending': sort_ascending,
-                            'sort_by': sort_by,
-                            })
 class RealizedEntities(VapiInterface):
     """
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_policy.infra.realized_state.realized_entities'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -161,7 +78,10 @@ class RealizedEntity(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_policy.infra.realized_state.realized_entity'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -229,7 +149,10 @@ class Status(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_policy.infra.realized_state.status'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -264,107 +187,72 @@ class Status(VapiInterface):
                             {
                             'intent_path': intent_path,
                             })
-class _EnforcementPointsStub(ApiInterfaceStub):
+class VirtualMachines(VapiInterface):
+    """
+    
+    """
+
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_policy.infra.realized_state.virtual_machines'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
-        # properties for get operation
-        get_input_type = type.StructType('operation-input', {
-            'enforcement_point_name': type.StringType(),
-        })
-        get_error_dict = {
-            'com.vmware.vapi.std.errors.service_unavailable':
-                type.ReferenceType('com.vmware.vapi.std.errors_client', 'ServiceUnavailable'),
-            'com.vmware.vapi.std.errors.invalid_request':
-                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidRequest'),
-            'com.vmware.vapi.std.errors.internal_server_error':
-                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InternalServerError'),
-            'com.vmware.vapi.std.errors.unauthorized':
-                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
-            'com.vmware.vapi.std.errors.not_found':
-                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+        """
+        :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
+        :param config: Configuration to be used for creating the stub.
+        """
+        VapiInterface.__init__(self, config, _VirtualMachinesStub)
 
-        }
-        get_input_value_validator_list = [
-        ]
-        get_output_validator_list = [
-            HasFieldsOfValidator()
-        ]
-        get_rest_metadata = OperationRestMetadata(
-            http_method='GET',
-            url_template='/policy/api/v1/infra/realized-state/enforcement-points/{enforcement-point-name}',
-            path_variables={
-                'enforcement_point_name': 'enforcement-point-name',
-            },
-            query_parameters={
-            }
-        )
 
-        # properties for list operation
-        list_input_type = type.StructType('operation-input', {
-            'cursor': type.OptionalType(type.StringType()),
-            'included_fields': type.OptionalType(type.StringType()),
-            'page_size': type.OptionalType(type.IntegerType()),
-            'sort_ascending': type.OptionalType(type.BooleanType()),
-            'sort_by': type.OptionalType(type.StringType()),
-        })
-        list_error_dict = {
-            'com.vmware.vapi.std.errors.service_unavailable':
-                type.ReferenceType('com.vmware.vapi.std.errors_client', 'ServiceUnavailable'),
-            'com.vmware.vapi.std.errors.invalid_request':
-                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidRequest'),
-            'com.vmware.vapi.std.errors.internal_server_error':
-                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InternalServerError'),
-            'com.vmware.vapi.std.errors.unauthorized':
-                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
-            'com.vmware.vapi.std.errors.not_found':
-                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+    def list(self,
+             enforcement_point_path,
+             cursor=None,
+             included_fields=None,
+             page_size=None,
+             sort_ascending=None,
+             sort_by=None,
+             ):
+        """
+        This API filters objects of type virtual machine. This API also gives
+        some VM details such as VM name, IDs and the current state of the VMs.
 
-        }
-        list_input_value_validator_list = [
-        ]
-        list_output_validator_list = [
-            HasFieldsOfValidator()
-        ]
-        list_rest_metadata = OperationRestMetadata(
-            http_method='GET',
-            url_template='/policy/api/v1/infra/realized-state/enforcement-points',
-            path_variables={
-            },
-            query_parameters={
-                'cursor': 'cursor',
-                'included_fields': 'included_fields',
-                'page_size': 'page_size',
-                'sort_ascending': 'sort_ascending',
-                'sort_by': 'sort_by',
-            }
-        )
-
-        operations = {
-            'get': {
-                'input_type': get_input_type,
-                'output_type': type.ReferenceType('com.vmware.nsx_policy.model_client', 'RealizedEnforcementPoint'),
-                'errors': get_error_dict,
-                'input_value_validator_list': get_input_value_validator_list,
-                'output_validator_list': get_output_validator_list,
-                'task_type': TaskType.NONE,
-            },
-            'list': {
-                'input_type': list_input_type,
-                'output_type': type.ReferenceType('com.vmware.nsx_policy.model_client', 'RealizedEnforcementPointListResult'),
-                'errors': list_error_dict,
-                'input_value_validator_list': list_input_value_validator_list,
-                'output_validator_list': list_output_validator_list,
-                'task_type': TaskType.NONE,
-            },
-        }
-        rest_metadata = {
-            'get': get_rest_metadata,
-            'list': list_rest_metadata,
-        }
-        ApiInterfaceStub.__init__(
-            self, iface_name='com.vmware.nsx_policy.infra.realized_state.enforcement_points',
-            config=config, operations=operations, rest_metadata=rest_metadata,
-            is_vapi_rest=False)
-
+        :type  enforcement_point_path: :class:`str`
+        :param enforcement_point_path: String Path of the enforcement point (required)
+        :type  cursor: :class:`str` or ``None``
+        :param cursor: Opaque cursor to be used for getting next page of records (supplied
+            by current result page) (optional)
+        :type  included_fields: :class:`str` or ``None``
+        :param included_fields: Comma separated list of fields that should be included in query
+            result (optional)
+        :type  page_size: :class:`long` or ``None``
+        :param page_size: Maximum number of results to return in this page (server may return
+            fewer) (optional, default to 1000)
+        :type  sort_ascending: :class:`bool` or ``None``
+        :param sort_ascending: (optional)
+        :type  sort_by: :class:`str` or ``None``
+        :param sort_by: Field by which records are sorted (optional)
+        :rtype: :class:`com.vmware.nsx_policy.model_client.VirtualMachineListResult`
+        :return: com.vmware.nsx_policy.model.VirtualMachineListResult
+        :raise: :class:`com.vmware.vapi.std.errors_client.ServiceUnavailable` 
+             Service Unavailable
+        :raise: :class:`com.vmware.vapi.std.errors_client.InvalidRequest` 
+             Bad Request, Precondition Failed
+        :raise: :class:`com.vmware.vapi.std.errors_client.InternalServerError` 
+             Internal Server Error
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
+             Forbidden
+        :raise: :class:`com.vmware.vapi.std.errors_client.NotFound` 
+             Not Found
+        """
+        return self._invoke('list',
+                            {
+                            'enforcement_point_path': enforcement_point_path,
+                            'cursor': cursor,
+                            'included_fields': included_fields,
+                            'page_size': page_size,
+                            'sort_ascending': sort_ascending,
+                            'sort_by': sort_by,
+                            })
 class _RealizedEntitiesStub(ApiInterfaceStub):
     def __init__(self, config):
         # properties for list operation
@@ -395,7 +283,8 @@ class _RealizedEntitiesStub(ApiInterfaceStub):
             },
             query_parameters={
                 'intent_path': 'intent_path',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -446,7 +335,8 @@ class _RealizedEntityStub(ApiInterfaceStub):
             },
             query_parameters={
                 'realized_path': 'realized_path',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for refresh operation
@@ -479,7 +369,8 @@ class _RealizedEntityStub(ApiInterfaceStub):
             query_parameters={
                 'intent_path': 'intent_path',
                 'enforcement_point_path': 'enforcement_point_path',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -539,7 +430,8 @@ class _StatusStub(ApiInterfaceStub):
             },
             query_parameters={
                 'intent_path': 'intent_path',
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -560,13 +452,75 @@ class _StatusStub(ApiInterfaceStub):
             config=config, operations=operations, rest_metadata=rest_metadata,
             is_vapi_rest=False)
 
+class _VirtualMachinesStub(ApiInterfaceStub):
+    def __init__(self, config):
+        # properties for list operation
+        list_input_type = type.StructType('operation-input', {
+            'enforcement_point_path': type.StringType(),
+            'cursor': type.OptionalType(type.StringType()),
+            'included_fields': type.OptionalType(type.StringType()),
+            'page_size': type.OptionalType(type.IntegerType()),
+            'sort_ascending': type.OptionalType(type.BooleanType()),
+            'sort_by': type.OptionalType(type.StringType()),
+        })
+        list_error_dict = {
+            'com.vmware.vapi.std.errors.service_unavailable':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'ServiceUnavailable'),
+            'com.vmware.vapi.std.errors.invalid_request':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidRequest'),
+            'com.vmware.vapi.std.errors.internal_server_error':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'InternalServerError'),
+            'com.vmware.vapi.std.errors.unauthorized':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+            'com.vmware.vapi.std.errors.not_found':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
+
+        }
+        list_input_value_validator_list = [
+        ]
+        list_output_validator_list = [
+        ]
+        list_rest_metadata = OperationRestMetadata(
+            http_method='GET',
+            url_template='/policy/api/v1/infra/realized-state/virtual-machines',
+            path_variables={
+            },
+            query_parameters={
+                'enforcement_point_path': 'enforcement_point_path',
+                'cursor': 'cursor',
+                'included_fields': 'included_fields',
+                'page_size': 'page_size',
+                'sort_ascending': 'sort_ascending',
+                'sort_by': 'sort_by',
+            },
+            content_type='application/json'
+        )
+
+        operations = {
+            'list': {
+                'input_type': list_input_type,
+                'output_type': type.ReferenceType('com.vmware.nsx_policy.model_client', 'VirtualMachineListResult'),
+                'errors': list_error_dict,
+                'input_value_validator_list': list_input_value_validator_list,
+                'output_validator_list': list_output_validator_list,
+                'task_type': TaskType.NONE,
+            },
+        }
+        rest_metadata = {
+            'list': list_rest_metadata,
+        }
+        ApiInterfaceStub.__init__(
+            self, iface_name='com.vmware.nsx_policy.infra.realized_state.virtual_machines',
+            config=config, operations=operations, rest_metadata=rest_metadata,
+            is_vapi_rest=False)
+
 
 class StubFactory(StubFactoryBase):
     _attrs = {
-        'EnforcementPoints': EnforcementPoints,
         'RealizedEntities': RealizedEntities,
         'RealizedEntity': RealizedEntity,
         'Status': Status,
+        'VirtualMachines': VirtualMachines,
         'enforcement_points': 'com.vmware.nsx_policy.infra.realized_state.enforcement_points_client.StubFactory',
     }
 

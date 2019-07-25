@@ -54,6 +54,9 @@ class CompatibleSubnets(VapiInterface):
             region=None,
             sddc=None,
             force_refresh=None,
+            instance_type=None,
+            sddc_type=None,
+            num_of_hosts=None,
             ):
         """
         Gets a customer's compatible subnets for account linking
@@ -69,6 +72,12 @@ class CompatibleSubnets(VapiInterface):
         :type  force_refresh: :class:`bool` or ``None``
         :param force_refresh: When true, forces the mappings for datacenters to be refreshed for
             the connected account. (optional)
+        :type  instance_type: :class:`str` or ``None``
+        :param instance_type: The server instance type to be used. (optional)
+        :type  sddc_type: :class:`str` or ``None``
+        :param sddc_type: The sddc type to be used. (1NODE, SingleAZ, MultiAZ) (optional)
+        :type  num_of_hosts: :class:`long` or ``None``
+        :param num_of_hosts: The number of hosts (optional)
         :rtype: :class:`com.vmware.vmc.model_client.AwsCompatibleSubnets`
         :return: com.vmware.vmc.model.AwsCompatibleSubnets
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
@@ -83,6 +92,9 @@ class CompatibleSubnets(VapiInterface):
                             'region': region,
                             'sddc': sddc,
                             'force_refresh': force_refresh,
+                            'instance_type': instance_type,
+                            'sddc_type': sddc_type,
+                            'num_of_hosts': num_of_hosts,
                             })
 
     def post(self,
@@ -127,6 +139,9 @@ class CompatibleSubnetsAsync(VapiInterface):
             linked_account_id=None,
             region=None,
             sddc=None,
+            instance_type=None,
+            sddc_type=None,
+            num_of_hosts=None,
             ):
         """
         Gets a customer's compatible subnets for account linking via a task.
@@ -143,6 +158,12 @@ class CompatibleSubnetsAsync(VapiInterface):
         :param region: The region of the cloud resources to work in (optional)
         :type  sddc: :class:`str` or ``None``
         :param sddc: sddc (optional)
+        :type  instance_type: :class:`str` or ``None``
+        :param instance_type: The server instance type to be used. (optional)
+        :type  sddc_type: :class:`str` or ``None``
+        :param sddc_type: The sddc type to be used. (1NODE, SingleAZ, MultiAZ) (optional)
+        :type  num_of_hosts: :class:`long` or ``None``
+        :param num_of_hosts: The number of hosts (optional)
         :rtype: :class:`com.vmware.vmc.model_client.Task`
         :return: com.vmware.vmc.model.Task
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
@@ -156,6 +177,9 @@ class CompatibleSubnetsAsync(VapiInterface):
                             'linked_account_id': linked_account_id,
                             'region': region,
                             'sddc': sddc,
+                            'instance_type': instance_type,
+                            'sddc_type': sddc_type,
+                            'num_of_hosts': num_of_hosts,
                             })
 
     def post(self,
@@ -233,12 +257,16 @@ class ConnectedAccounts(VapiInterface):
 
     def get(self,
             org,
+            provider=None,
             ):
         """
         Get a list of connected accounts
 
         :type  org: :class:`str`
         :param org: Organization identifier. (required)
+        :type  provider: :class:`str` or ``None``
+        :param provider: The cloud provider of the SDDC (AWS or ZeroCloud). Default value is
+            AWS. (optional)
         :rtype: :class:`list` of :class:`com.vmware.vmc.model_client.AwsCustomerConnectedAccount`
         :return: 
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
@@ -249,6 +277,7 @@ class ConnectedAccounts(VapiInterface):
         return self._invoke('get',
                             {
                             'org': org,
+                            'provider': provider,
                             })
 class MapCustomerZones(VapiInterface):
     """
@@ -341,6 +370,9 @@ class _CompatibleSubnetsStub(ApiInterfaceStub):
             'region': type.OptionalType(type.StringType()),
             'sddc': type.OptionalType(type.StringType()),
             'force_refresh': type.OptionalType(type.BooleanType()),
+            'instance_type': type.OptionalType(type.StringType()),
+            'sddc_type': type.OptionalType(type.StringType()),
+            'num_of_hosts': type.OptionalType(type.IntegerType()),
         })
         get_error_dict = {
             'com.vmware.vapi.std.errors.unauthenticated':
@@ -364,6 +396,9 @@ class _CompatibleSubnetsStub(ApiInterfaceStub):
                 'region': 'region',
                 'sddc': 'sddc',
                 'force_refresh': 'forceRefresh',
+                'instance_type': 'instanceType',
+                'sddc_type': 'sddcType',
+                'num_of_hosts': 'numOfHosts',
             },
             content_type='application/json'
         )
@@ -429,6 +464,9 @@ class _CompatibleSubnetsAsyncStub(ApiInterfaceStub):
             'linked_account_id': type.OptionalType(type.StringType()),
             'region': type.OptionalType(type.StringType()),
             'sddc': type.OptionalType(type.StringType()),
+            'instance_type': type.OptionalType(type.StringType()),
+            'sddc_type': type.OptionalType(type.StringType()),
+            'num_of_hosts': type.OptionalType(type.IntegerType()),
         })
         get_error_dict = {
             'com.vmware.vapi.std.errors.unauthenticated':
@@ -451,6 +489,9 @@ class _CompatibleSubnetsAsyncStub(ApiInterfaceStub):
                 'linked_account_id': 'linkedAccountId',
                 'region': 'region',
                 'sddc': 'sddc',
+                'instance_type': 'instanceType',
+                'sddc_type': 'sddcType',
+                'num_of_hosts': 'numOfHosts',
             },
             content_type='application/json'
         )
@@ -547,6 +588,7 @@ class _ConnectedAccountsStub(ApiInterfaceStub):
         # properties for get operation
         get_input_type = type.StructType('operation-input', {
             'org': type.StringType(),
+            'provider': type.OptionalType(type.StringType()),
         })
         get_error_dict = {
             'com.vmware.vapi.std.errors.unauthenticated':
@@ -566,6 +608,7 @@ class _ConnectedAccountsStub(ApiInterfaceStub):
                 'org': 'org',
             },
             query_parameters={
+                'provider': 'provider',
             },
             content_type='application/json'
         )

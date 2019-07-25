@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -36,7 +36,10 @@ class Bgp(VapiInterface):
     
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_vmc_app.infra.direct_connect.bgp'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -106,7 +109,10 @@ class Vifs(VapiInterface):
 
     """
 
-
+    _VAPI_SERVICE_ID = 'com.vmware.nsx_vmc_app.infra.direct_connect.vifs'
+    """
+    Identifier of the service in canonical form.
+    """
     def __init__(self, config):
         """
         :type  config: :class:`vmware.vapi.bindings.stub.StubConfiguration`
@@ -172,9 +178,9 @@ class Vifs(VapiInterface):
 
     def list(self):
         """
-        Return all non-connected VIFs (with states \\\\"avalible\\\\",
-        \\\\"down\\\\", \\\\"pending\\\\" and \\\\"confirming\\\\") and
-        connected VIFs that are available to the SDDC.
+        Return all non-connected VIFs (with states \"avalible\", \"down\",
+        \"pending\" and \"confirming\") and connected VIFs that are available
+        to the SDDC.
 
 
         :rtype: :class:`com.vmware.nsx_vmc_app.model_client.VifsListResult`
@@ -218,7 +224,8 @@ class _BgpStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for update operation
@@ -249,7 +256,8 @@ class _BgpStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {
@@ -311,7 +319,8 @@ class _VifsStub(ApiInterfaceStub):
             },
             query_parameters={
                 'action': 'action',
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for delete operation
@@ -342,7 +351,8 @@ class _VifsStub(ApiInterfaceStub):
                 'vif_id': 'vif-id',
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         # properties for list operation
@@ -370,7 +380,8 @@ class _VifsStub(ApiInterfaceStub):
             path_variables={
             },
             query_parameters={
-            }
+            },
+            content_type='application/json'
         )
 
         operations = {

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #---------------------------------------------------------------------------
-# Copyright 2018 VMware, Inc.  All rights reserved.
+# Copyright 2019 VMware, Inc.  All rights reserved.
 
 # AUTO GENERATED FILE -- DO NOT MODIFY!
 #
@@ -91,6 +91,7 @@ class CategoryModel(VapiStruct):
         self.associable_types = associable_types
         self.used_by = used_by
         VapiStruct.__init__(self)
+
 
     class Cardinality(Enum):
         """
@@ -209,6 +210,7 @@ class TagModel(VapiStruct):
         self.used_by = used_by
         VapiStruct.__init__(self)
 
+
 TagModel._set_binding_type(type.StructType(
     'com.vmware.cis.tagging.tag_model', {
         'id': type.IdType(resource_types='com.vmware.cis.tagging.Tag'),
@@ -287,6 +289,7 @@ class Category(VapiInterface):
             self.category_id = category_id
             VapiStruct.__init__(self)
 
+
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.cis.tagging.category.create_spec', {
             'name': type.StringType(),
@@ -355,6 +358,7 @@ class Category(VapiInterface):
             self.cardinality = cardinality
             self.associable_types = associable_types
             VapiStruct.__init__(self)
+
 
     UpdateSpec._set_binding_type(type.StructType(
         'com.vmware.cis.tagging.category.update_spec', {
@@ -467,6 +471,8 @@ class Category(VapiInterface):
             system.
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
              if you do not have the privilege to delete the category.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             if the user can not be authenticated.
         """
         return self._invoke('delete',
                             {
@@ -661,6 +667,7 @@ class Tag(VapiInterface):
             self.tag_id = tag_id
             VapiStruct.__init__(self)
 
+
     CreateSpec._set_binding_type(type.StructType(
         'com.vmware.cis.tagging.tag.create_spec', {
             'name': type.StringType(),
@@ -706,6 +713,7 @@ class Tag(VapiInterface):
             self.name = name
             self.description = description
             VapiStruct.__init__(self)
+
 
     UpdateSpec._set_binding_type(type.StructType(
         'com.vmware.cis.tagging.tag.update_spec', {
@@ -816,6 +824,8 @@ class Tag(VapiInterface):
              if the tag for the given ``tag_id`` does not exist in the system.
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
              if you do not have the privilege to delete the tag.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             if the user can not be authenticated.
         """
         return self._invoke('delete',
                             {
@@ -1015,6 +1025,7 @@ class TagAssociation(VapiInterface):
             self.error_messages = error_messages
             VapiStruct.__init__(self)
 
+
     BatchResult._set_binding_type(type.StructType(
         'com.vmware.cis.tagging.tag_association.batch_result', {
             'success': type.BooleanType(),
@@ -1062,6 +1073,7 @@ class TagAssociation(VapiInterface):
             self.object_ids = object_ids
             VapiStruct.__init__(self)
 
+
     TagToObjects._set_binding_type(type.StructType(
         'com.vmware.cis.tagging.tag_association.tag_to_objects', {
             'tag_id': type.IdType(resource_types='com.vmware.cis.tagging.Tag'),
@@ -1108,6 +1120,7 @@ class TagAssociation(VapiInterface):
             self.tag_ids = tag_ids
             VapiStruct.__init__(self)
 
+
     ObjectToTags._set_binding_type(type.StructType(
         'com.vmware.cis.tagging.tag_association.object_to_tags', {
             'object_id': type.ReferenceType('com.vmware.vapi.std_client', 'DynamicID'),
@@ -1146,6 +1159,8 @@ class TagAssociation(VapiInterface):
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
             if you do not have the privilege to attach the tag or do not have
             the privilege to read the object.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             if the user can not be authenticated.
         """
         return self._invoke('attach',
                             {
@@ -1177,6 +1192,8 @@ class TagAssociation(VapiInterface):
             describing attachment failures.
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
              if you do not have the privilege to read the object.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             if the user can not be authenticated.
         """
         return self._invoke('attach_multiple_tags_to_object',
                             {
@@ -1210,6 +1227,8 @@ class TagAssociation(VapiInterface):
              if the tag for the given ``tag_id`` does not exist in the system.
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
              if you do not have the attach tag privilege on the tag.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             if the user can not be authenticated.
         """
         return self._invoke('attach_tag_to_multiple_objects',
                             {
@@ -1238,6 +1257,8 @@ class TagAssociation(VapiInterface):
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
             if you do not have the privilege to detach the tag or do not have
             the privilege to read the given object.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             if the user can not be authenticated.
         """
         return self._invoke('detach',
                             {
@@ -1269,6 +1290,8 @@ class TagAssociation(VapiInterface):
             describing detachment failures.
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
              if you do not have the privilege to read the object.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             if the user can not be authenticated.
         """
         return self._invoke('detach_multiple_tags_from_object',
                             {
@@ -1302,6 +1325,8 @@ class TagAssociation(VapiInterface):
              if the tag for the given tag does not exist in the system.
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
              if you do not have the attach tag privilege on the tag.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             if the user can not be authenticated.
         """
         return self._invoke('detach_tag_from_multiple_objects',
                             {
@@ -1327,6 +1352,8 @@ class TagAssociation(VapiInterface):
              if the tag for the given ``tag_id`` does not exist in the system.
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
              if you do not have the privilege to read the tag.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             if the user can not be authenticated.
         """
         return self._invoke('list_attached_objects',
                             {
@@ -1351,6 +1378,8 @@ class TagAssociation(VapiInterface):
         :rtype: :class:`list` of :class:`TagAssociation.TagToObjects`
         :return: The :class:`list` of the tag identifiers to all object identifiers
             that each tag is attached to.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             if the user can not be authenticated.
         """
         return self._invoke('list_attached_objects_on_tags',
                             {
@@ -1375,6 +1404,8 @@ class TagAssociation(VapiInterface):
             ``com.vmware.cis.tagging.Tag``.
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
              if you do not have the privilege to read the object.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             if the user can not be authenticated.
         """
         return self._invoke('list_attached_tags',
                             {
@@ -1397,6 +1428,8 @@ class TagAssociation(VapiInterface):
         :rtype: :class:`list` of :class:`TagAssociation.ObjectToTags`
         :return: The :class:`list` of the object identifiers to all tag identifiers
             that are attached to that object.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             if the user can not be authenticated.
         """
         return self._invoke('list_attached_tags_on_objects',
                             {
@@ -1425,6 +1458,8 @@ class TagAssociation(VapiInterface):
             ``com.vmware.cis.tagging.Tag``.
         :raise: :class:`com.vmware.vapi.std.errors_client.Unauthorized` 
              if you do not have the privilege to read the object.
+        :raise: :class:`com.vmware.vapi.std.errors_client.Unauthenticated` 
+             if the user can not be authenticated.
         """
         return self._invoke('list_attachable_tags',
                             {
@@ -1499,6 +1534,8 @@ class _CategoryStub(ApiInterfaceStub):
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
             'com.vmware.vapi.std.errors.unauthorized':
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
 
         }
         delete_input_value_validator_list = [
@@ -1741,6 +1778,8 @@ class _TagStub(ApiInterfaceStub):
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
             'com.vmware.vapi.std.errors.unauthorized':
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
 
         }
         delete_input_value_validator_list = [
@@ -1952,6 +1991,8 @@ class _TagAssociationStub(ApiInterfaceStub):
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'InvalidArgument'),
             'com.vmware.vapi.std.errors.unauthorized':
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
 
         }
         attach_input_value_validator_list = [
@@ -1968,6 +2009,8 @@ class _TagAssociationStub(ApiInterfaceStub):
         attach_multiple_tags_to_object_error_dict = {
             'com.vmware.vapi.std.errors.unauthorized':
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
 
         }
         attach_multiple_tags_to_object_input_value_validator_list = [
@@ -1986,6 +2029,8 @@ class _TagAssociationStub(ApiInterfaceStub):
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
             'com.vmware.vapi.std.errors.unauthorized':
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
 
         }
         attach_tag_to_multiple_objects_input_value_validator_list = [
@@ -2004,6 +2049,8 @@ class _TagAssociationStub(ApiInterfaceStub):
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
             'com.vmware.vapi.std.errors.unauthorized':
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
 
         }
         detach_input_value_validator_list = [
@@ -2020,6 +2067,8 @@ class _TagAssociationStub(ApiInterfaceStub):
         detach_multiple_tags_from_object_error_dict = {
             'com.vmware.vapi.std.errors.unauthorized':
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
 
         }
         detach_multiple_tags_from_object_input_value_validator_list = [
@@ -2038,6 +2087,8 @@ class _TagAssociationStub(ApiInterfaceStub):
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
             'com.vmware.vapi.std.errors.unauthorized':
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
 
         }
         detach_tag_from_multiple_objects_input_value_validator_list = [
@@ -2055,6 +2106,8 @@ class _TagAssociationStub(ApiInterfaceStub):
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'NotFound'),
             'com.vmware.vapi.std.errors.unauthorized':
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
 
         }
         list_attached_objects_input_value_validator_list = [
@@ -2067,7 +2120,11 @@ class _TagAssociationStub(ApiInterfaceStub):
         list_attached_objects_on_tags_input_type = type.StructType('operation-input', {
             'tag_ids': type.ListType(type.IdType()),
         })
-        list_attached_objects_on_tags_error_dict = {}
+        list_attached_objects_on_tags_error_dict = {
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
+
+        }
         list_attached_objects_on_tags_input_value_validator_list = [
         ]
         list_attached_objects_on_tags_output_validator_list = [
@@ -2081,6 +2138,8 @@ class _TagAssociationStub(ApiInterfaceStub):
         list_attached_tags_error_dict = {
             'com.vmware.vapi.std.errors.unauthorized':
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
 
         }
         list_attached_tags_input_value_validator_list = [
@@ -2093,7 +2152,11 @@ class _TagAssociationStub(ApiInterfaceStub):
         list_attached_tags_on_objects_input_type = type.StructType('operation-input', {
             'object_ids': type.ListType(type.ReferenceType('com.vmware.vapi.std_client', 'DynamicID')),
         })
-        list_attached_tags_on_objects_error_dict = {}
+        list_attached_tags_on_objects_error_dict = {
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
+
+        }
         list_attached_tags_on_objects_input_value_validator_list = [
         ]
         list_attached_tags_on_objects_output_validator_list = [
@@ -2107,6 +2170,8 @@ class _TagAssociationStub(ApiInterfaceStub):
         list_attachable_tags_error_dict = {
             'com.vmware.vapi.std.errors.unauthorized':
                 type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthorized'),
+            'com.vmware.vapi.std.errors.unauthenticated':
+                type.ReferenceType('com.vmware.vapi.std.errors_client', 'Unauthenticated'),
 
         }
         list_attachable_tags_input_value_validator_list = [

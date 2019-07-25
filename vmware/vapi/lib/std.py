@@ -5,22 +5,76 @@ the standard types (e.g. LocalizableMessage) and errors
 """
 
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015, 2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 from vmware.vapi.data.definition import (
     DynamicStructDefinition, ErrorDefinition, ListDefinition,
-    OptionalDefinition, StringDefinition, StructDefinition)
+    OptionalDefinition, StringDefinition, StructDefinition,
+    StructRefDefinition, IntegerDefinition, DoubleDefinition)
 from vmware.vapi.l10n.runtime import message_factory
+from vmware.vapi.lib.constants import MAP_ENTRY
 
+
+LOCALIZATION_PARAM = 'com.vmware.vapi.std.localization_param'
+LOCALIZABLE_MESSAGE = 'com.vmware.vapi.std.localizable_message'
+NESTED_LOCALIZABLE_MESSAGE = 'com.vmware.vapi.std.nested_localizable_message'
+
+_MAP_KEY_FIELD_NAME = "key"
+_MAP_VALUE_FIELD_NAME = "value"
+
+
+def make_map_def(key, value):
+    """
+    Internal function to create map definition from a key and value
+    definitions. For use only by vAPI runtime.
+    :type  key: :class:`vmware.vapi.data.type.DataDefinition`
+    :param key: DataDefintion for the map key
+    :type  value: :class:`vmware.vapi.data.type.DataDefinition`
+    :param value: DataDefintion for the map value
+    """
+    return ListDefinition(
+                StructDefinition(
+                    MAP_ENTRY,
+                    ((_MAP_KEY_FIELD_NAME, key),
+                     (_MAP_VALUE_FIELD_NAME, value))))
+
+
+localization_param_ref = \
+    StructRefDefinition('com.vmware.vapi.std.localization_param')
 
 _ID_FIELD_NAME = 'id'
 _DEFAULT_MESSAGE_FIELD_NAME = 'default_message'
 _ARGS_FIELD_NAME = 'args'
+_LOCALIZED_FIELD_NAME = 'localized'
+_PARAMS_FIELD_NAME = 'params'
+
+nested_localizable_message_def = StructDefinition(
+    NESTED_LOCALIZABLE_MESSAGE,
+    ((_ID_FIELD_NAME, StringDefinition()),
+     (_PARAMS_FIELD_NAME, OptionalDefinition(make_map_def(StringDefinition(),
+                                             localization_param_ref)))))
+
+localization_param_def = StructDefinition(
+        LOCALIZATION_PARAM,
+        (("s", OptionalDefinition(StringDefinition())),
+         ("dt", OptionalDefinition(StringDefinition())),
+         ("i", OptionalDefinition(IntegerDefinition())),
+         ("d", OptionalDefinition(DoubleDefinition())),
+         ("l", OptionalDefinition(nested_localizable_message_def)),
+         ("format", OptionalDefinition(StringDefinition())),
+         ("precision", OptionalDefinition(IntegerDefinition()))))
+
+localization_param_ref.target = localization_param_def
+
 localizable_message_def = StructDefinition(
-    'com.vmware.vapi.std.localizable_message',
+    LOCALIZABLE_MESSAGE,
     ((_ID_FIELD_NAME, StringDefinition()),
      (_DEFAULT_MESSAGE_FIELD_NAME, StringDefinition()),
-     (_ARGS_FIELD_NAME, ListDefinition(StringDefinition()))))
+     (_ARGS_FIELD_NAME, ListDefinition(StringDefinition())),
+     (_LOCALIZED_FIELD_NAME, OptionalDefinition(StringDefinition())),
+     (_PARAMS_FIELD_NAME, OptionalDefinition(
+                                make_map_def(StringDefinition(),
+                                             localization_param_def)))))
 
 
 _MESSAGES_FIELD_NAME = 'messages'
@@ -28,8 +82,12 @@ messages_list_def = ListDefinition(localizable_message_def)
 _DATA_FIELD_NAME = 'data'
 data_optional_dynamicstructure_def = OptionalDefinition(
     DynamicStructDefinition())
+_DISCRIMINATOR_FIELD_NAME = 'error_type'
+error_optional_string_def = OptionalDefinition(
+    StringDefinition())
 _ERROR_DEF_FIELDS = [(_MESSAGES_FIELD_NAME, messages_list_def),
-                     (_DATA_FIELD_NAME, data_optional_dynamicstructure_def)]
+                     (_DATA_FIELD_NAME, data_optional_dynamicstructure_def),
+                     (_DISCRIMINATOR_FIELD_NAME, error_optional_string_def)]
 
 
 def make_std_error_def(name):
@@ -37,7 +95,7 @@ def make_std_error_def(name):
     Internal function to create a "standard" ErrorDefinition for use only by
     the vAPI runtime.
     :type  name: :class:`str`
-    :param args: Fully qualified name of the standard error type
+    :param name: Fully qualified name of the standard error type
     :rtype: :class:`vmware.vapi.data.definition.ErrorDefinition`
     :return: ErrorDefinition containing a single message field
     """
@@ -57,6 +115,10 @@ def _make_struct_value_from_message(message):
     result.set_field(_ID_FIELD_NAME, id_def.new_value(message.id))
     result.set_field(_DEFAULT_MESSAGE_FIELD_NAME,
                      default_message_def.new_value(message.def_msg))
+    result.set_field(_LOCALIZED_FIELD_NAME,
+                     error_optional_string_def.new_value())
+    result.set_field(_PARAMS_FIELD_NAME,
+                     error_optional_string_def.new_value())
     args_list_value = args_def.new_value()
     arg_def = args_def.element_type
     for arg in message.args:
@@ -82,9 +144,11 @@ def make_error_value_from_msg_id(error_def, msg_id, *args):
     messages = error_def.get_field(_MESSAGES_FIELD_NAME).new_value()
     messages.add(_make_struct_value_from_message(msg))
     data = data_optional_dynamicstructure_def.new_value()
+    discriminator = _make_discriminator_from_name(error_def.name)
     error_value = error_def.new_value()
     error_value.set_field(_MESSAGES_FIELD_NAME, messages)
     error_value.set_field(_DATA_FIELD_NAME, data)
+    error_value.set_field(_DISCRIMINATOR_FIELD_NAME, discriminator)
     return error_value
 
 
@@ -103,9 +167,11 @@ def make_error_value_from_msgs(error_def, *msg_list):
     for msg in msg_list:
         messages.add(_make_struct_value_from_message(msg))
     data = data_optional_dynamicstructure_def.new_value()
+    discriminator = _make_discriminator_from_name(error_def.name)
     error_value = error_def.new_value()
     error_value.set_field(_MESSAGES_FIELD_NAME, messages)
     error_value.set_field(_DATA_FIELD_NAME, data)
+    error_value.set_field(_DISCRIMINATOR_FIELD_NAME, discriminator)
     return error_value
 
 
@@ -140,7 +206,24 @@ def make_error_value_from_error_value_and_msgs(error_def,
         # just ignore it.
         pass
     data = data_optional_dynamicstructure_def.new_value()
+    discriminator = _make_discriminator_from_name(error_def.name)
     error_value = error_def.new_value()
     error_value.set_field(_MESSAGES_FIELD_NAME, messages)
     error_value.set_field(_DATA_FIELD_NAME, data)
+    error_value.set_field(_DISCRIMINATOR_FIELD_NAME, discriminator)
     return error_value
+
+
+def _make_discriminator_from_name(name):
+    """
+    Helper function to extract the discriminator of an error type from
+    its name.
+    :return: OptionalValue containing a StringValue
+    """
+    discriminator = name
+    dot_index = name.rfind('.')
+    if dot_index > -1:
+        discriminator = discriminator[dot_index + 1:]
+    discriminator = discriminator.upper()
+    discriminator = error_optional_string_def.element_type.new_value(discriminator)
+    return error_optional_string_def.new_value(discriminator)

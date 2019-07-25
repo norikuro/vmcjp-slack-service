@@ -3,7 +3,7 @@ Factory methods for creating application context
 """
 
 __author__ = 'VMware, Inc.'
-__copyright__ = 'Copyright 2015, 2017 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
+__copyright__ = 'Copyright 2015, 2017, 2019 VMware, Inc.  All rights reserved. -- VMware Confidential'  # pylint: disable=line-too-long
 
 
 import uuid
@@ -83,3 +83,21 @@ def get_task_id():
         app_ctx = ctx.application_context
         if app_ctx:
             return app_ctx.get(TASK_ID)
+
+    return None
+
+
+def insert_header(app_ctx, key, value):
+    """
+    Add a key, value pair in application context.
+    If the key exists override the value.
+
+    :type  app_ctx: :class:`vmware.vapi.core.ApplicationContext`
+    :param app_ctx: Application Context
+    :type  key: :class:`str`
+    :param key: Application context key
+    :type  value: :class:`str`
+    :param value: Application context key value
+    """
+    if app_ctx is not None:
+        app_ctx[key] = value

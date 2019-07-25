@@ -86,6 +86,8 @@ vapi_to_http_error_map = {
         HTTPStatusCodes.HTTP_400_BAD_REQUEST,
     'com.vmware.vapi.std.errors.resource_inaccessible':
         HTTPStatusCodes.HTTP_400_BAD_REQUEST,
+    'com.vmware.vapi.std.errors.concurrent_change':
+        HTTPStatusCodes.HTTP_409_CONFLICT,
     'com.vmware.vapi.std.errors.service_unavailable':
         HTTPStatusCodes.HTTP_503_SERVICE_UNAVAILABLE,
     'com.vmware.vapi.std.errors.timed_out':
