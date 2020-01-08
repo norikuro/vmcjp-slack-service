@@ -254,6 +254,22 @@ def event_handler(event):
                 }
             )
             return
+        elif "register org" in text:
+            slack_message.register_org_message(event)
+            db.write_cred_db(
+                event.get("user_id"), 
+                {
+                    "status": "registering"
+                }
+            )
+            db.write_event_db(
+                event.get("user_id"), 
+                {
+                    "command": "register org",
+                    "status": "registering"
+                }
+            )
+            return
         elif "delete token" in text:
             slack_message.delete_token_message(event)
             db.delete_cred_db(event["user_id"])
