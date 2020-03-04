@@ -125,7 +125,12 @@ def event_handler(event):
             if __cred_data is None:
                 slack_message.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
-                event.update({"token": __cred_data.get("token")})
+                event.update(
+                    {
+                        "token": __cred_data.get("token"),
+                        "org_id": __cred_data.get("org_id")
+                    }
+                )
                 slack_message.start_create_sddc_wizard_message(event)
                 slack_message.check_resources_message(event)
                 event.update(
@@ -155,7 +160,12 @@ def event_handler(event):
             if __cred_data is None:
                 slack_message.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
-                event.update({"token": __cred_data.get("token")})
+                event.update(
+                    {
+                        "token": __cred_data.get("token"),
+                        "org_id": __cred_data.get("org_id")
+                    }
+                )
                 slack_message.start_create_sddc_wizard_message(event)
                 slack_message.check_resources_message(event)
                 event.update(
@@ -185,7 +195,12 @@ def event_handler(event):
             if __cred_data is None:
                 slack_message.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
-                event.update({"token": __cred_data.get("token")})
+                event.update(
+                    {
+                        "token": __cred_data.get("token"),
+                        "org_id": __cred_data.get("org_id")
+                    }
+                )
                 event.update(
                     {
                         "option_list": list_sddcs(
@@ -210,7 +225,12 @@ def event_handler(event):
                 slack_message.start_restore_wizard_message(event)
                 config = db.get_backedup_sddc_config()
                 event.update(config)
-                event.update({"token": __cred_data.get("token")})
+                event.update(
+                    {
+                        "token": __cred_data.get("token"),
+                        "org_id":
+                    }
+                )
                 config.update(
                     {
                         "command": "restore", 
