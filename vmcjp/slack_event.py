@@ -278,8 +278,8 @@ def event_handler(event):
                 }
             )
             return
-        elif "delete token" in text:
-            slack_message.delete_token_message(event)
+        elif "delete org" in text:
+            slack_message.delete_org_message(event)
             db.delete_cred_db(event["user_id"])
             return
         elif "help" in text:
