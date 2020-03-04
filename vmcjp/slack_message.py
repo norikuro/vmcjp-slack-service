@@ -161,8 +161,8 @@ def register_org_message(event):
     response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
-def delete_token_message(event):
-    text = "Deleted VMC refresh token from system db."
+def delete_org_message(event):
+    text = "Deleted VMC Org ID and refresh token from this system db."
     response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
