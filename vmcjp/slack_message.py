@@ -171,6 +171,11 @@ def cancel_token_registration_message(event):
     response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
+def cancel_org_registration_message(event):
+    text = "OK, Org registration has canceled."
+    response = post_text_with_bot_token(event, text)
+#    logging.info(response.read())
+
 def succeed_token_registratuin_message(event):
     text = "Registered VMC refresh token to system db, you can delete it with `delete token`."
     response = post_text_with_bot_token(event, text)
