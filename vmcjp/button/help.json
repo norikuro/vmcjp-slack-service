@@ -9,8 +9,8 @@
       "callback_id": "help",
       "fields": [
         {
-          "title": "Register VMC's API token",
-          "value": "Type `register token` to register this org's API token. This token will stored in this system db. You need to register your token at first if you want to use this slack app."
+          "title": "Register VMC Org and API token",
+          "value": "Type `register org` to register VMC Org ID and API token. This Org ID and token will stored in this system db. You need to register your Org ID and token at first if you want to use this slack app."
         }
       ]
     },
@@ -20,8 +20,8 @@
       "callback_id": "help",
       "fields": [
         {
-          "title": "Delete VMC's API token",
-          "value": "Type `delete token` to delete your token stored in this system db."
+          "title": "Delete VMC Org ID and API token",
+          "value": "Type `delete org` to delete your token stored in this system db."
         }
       ]
     },
