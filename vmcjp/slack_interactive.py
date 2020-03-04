@@ -109,7 +109,12 @@ def interactive_handler(event):
         return
 
     __cred_data = db.read_cred_db(event.get("user_id"))
-    event.update({"token": __cred_data.get("token")})
+    event.update(
+        {
+            "token": __cred_data.get("token"),
+            "org_id": __cred_data.get("org_id")
+        }
+    )
     if "delete_sddc" in event.get("callback_id"):
         if "delete_sddc" in result.get("status"):
             sddc_name = event.get("response").split("+")[0]
