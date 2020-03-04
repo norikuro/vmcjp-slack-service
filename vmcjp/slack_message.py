@@ -181,6 +181,11 @@ def succeed_token_registratuin_message(event):
     response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
+def succeed_org_registratuin_message(event):
+    text = "Registered VMC Org ID to system db, you can delete it with `delete org id`."
+    response = post_text_with_bot_token(event, text)
+#    logging.info(response.read())
+
 def wrong_token_message(event):
     text = "Token number you entered is something wrong, please check your token and enter correct token."
     response = post_text_with_bot_token(event, text)
