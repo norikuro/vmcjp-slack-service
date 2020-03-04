@@ -228,7 +228,7 @@ def event_handler(event):
                 event.update(
                     {
                         "token": __cred_data.get("token"),
-                        "org_id":
+                        "org_id": __cred_data.get("org_id")
                     }
                 )
                 config.update(
