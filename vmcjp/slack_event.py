@@ -246,22 +246,22 @@ def event_handler(event):
                     )
                     slack_message.list_sddcs_message(event)
             return
-        elif "register token" in text:
-            slack_message.register_token_message(event)
-            db.write_cred_db(
-                event.get("user_id"), 
-                {
-                    "status": "registering"
-                }
-            )
-            db.write_event_db(
-                event.get("user_id"), 
-                {
-                    "command": "register",
-                    "status": "registering"
-                }
-            )
-            return
+#        elif "register token" in text:
+#            slack_message.register_token_message(event)
+#            db.write_cred_db(
+#                event.get("user_id"), 
+#                {
+#                    "status": "registering"
+#                }
+#            )
+#            db.write_event_db(
+#                event.get("user_id"), 
+#                {
+#                    "command": "register token",
+#                    "status": "registering"
+#                }
+#            )
+#            return
         elif "register org" in text:
             slack_message.register_org_message(event)
             db.write_cred_db(
@@ -274,7 +274,7 @@ def event_handler(event):
                 event.get("user_id"), 
                 {
                     "command": "register org",
-                    "status": "registering"
+                    "status": "registering org"
                 }
             )
             return
@@ -346,12 +346,50 @@ def event_handler(event):
         if "cancel" in text:
             slack_message.cancel_sddc_restoration_message(event)
             db.delete_event_db(event.get("user_id"))
-    elif "register" in result.get("command"):
+#    elif "register token" in result.get("command"):
+#        if "cancel" in text:
+#            slack_message.cancel_token_registration_message(event)
+#            db.delete_event_db(event.get("user_id"))
+#            db.delete_cred_db(event.get("user_id"))
+#        else:
+#            user_name = validate_token(event.get("text"))
+#            if user_name is not None:
+#                slack_message.succeed_token_registratuin_message(event)
+#                db.write_cred_db(
+#                    event.get("user_id"), 
+#                    {
+#                        "status": "registered", 
+#                        "token": event.get("text"), 
+#                        "user_name": user_name
+#                    }
+#                )
+#                db.delete_event_db(event["user_id"])
+#            else:
+#                slack_message.wrong_token_message(event)
+    elif "register org" in result.get("command"):
         if "cancel" in text:
-            slack_message.cancel_token_registration_message(event)
+            slack_message.cancel_org_registration_message(event)
             db.delete_event_db(event.get("user_id"))
             db.delete_cred_db(event.get("user_id"))
-        else:
+        else if "registering org" in result.get("status"):
+            slack_message.succeed_org_registratuin_message(event)
+            db.write_cred_db(
+                event.get("user_id"), 
+                {
+#                    "status": "registered", 
+#                    "org_id": event.get("text"), 
+                    "org_id": event.get("text")
+#                    "user_name": user_name
+                }
+            )
+            db.write_event_db(
+                event.get("user_id"), 
+                {
+                    "status": "registering token"
+                }
+            )
+            slack_message.register_token_message(event)
+        else if "registering token" in result.get("status"):
             user_name = validate_token(event.get("text"))
             if user_name is not None:
                 slack_message.succeed_token_registratuin_message(event)
@@ -366,19 +404,3 @@ def event_handler(event):
                 db.delete_event_db(event["user_id"])
             else:
                 slack_message.wrong_token_message(event)
-    elif "register org" in result.get("command"):
-        if "cancel" in text:
-            slack_message.cancel_org_registration_message(event)
-            db.delete_event_db(event.get("user_id"))
-            db.delete_cred_db(event.get("user_id"))
-        else:
-            slack_message.succeed_org_registratuin_message(event)
-            db.write_cred_db(
-                event.get("user_id"), 
-                {
-                    "status": "registered", 
-                    "org_id": event.get("text"), 
-                    "user_name": user_name
-                }
-            )
-            db.delete_event_db(event["user_id"])
