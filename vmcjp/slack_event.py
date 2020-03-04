@@ -243,7 +243,12 @@ def event_handler(event):
             if __cred_data is None:
                 slack_message.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
-                event.update({"token": __cred_data.get("token")})
+                event.update(
+                    {
+                        "token": __cred_data.get("token"),
+                        "org_id": __cred_data.get("org_id")
+                    }
+                )
                 vmc_client = get_vmc_client(event.get("token"))
                 sddcs = vmc_client.orgs.Sddcs.list(event.get("org_id"))
                 slack_message.list_sddcs_text_message(event)
