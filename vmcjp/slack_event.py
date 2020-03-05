@@ -399,19 +399,19 @@ def event_handler(event):
         elif "registering token" in result.get("status"):
             try:
                 user_name = validate_token(event.get("text"), __cred_data.get("org_id"))
+                if user_name is not None:
+                    slack_message.succeed_token_registratuin_message(event)
+                    db.write_cred_db(
+                        event.get("user_id"), 
+                        {
+                            "status": "registered", 
+                            "token": event.get("text"), 
+                            "user_name": user_name
+                        }
+                    )
+                    db.delete_event_db(event["user_id"])
+                else:
+                    slack_message.wrong_token_message(event)
             except Exception as e:
                 event.update({"message": e.message})
                 slack_message.failed_token_registratuin_message(event)
-            if user_name is not None:
-                slack_message.succeed_token_registratuin_message(event)
-                db.write_cred_db(
-                    event.get("user_id"), 
-                    {
-                        "status": "registered", 
-                        "token": event.get("text"), 
-                        "user_name": user_name
-                    }
-                )
-                db.delete_event_db(event["user_id"])
-            else:
-                slack_message.wrong_token_message(event)
