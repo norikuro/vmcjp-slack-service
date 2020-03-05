@@ -197,7 +197,6 @@ def event_handler(event):
                 event.update(
                     {
                         "option_list": list_sddcs(
-                            get_vmc_client(event.get("token")), 
                             event.get("token"), 
                             event.get("org_id")
                         )
