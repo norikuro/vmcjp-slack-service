@@ -148,11 +148,14 @@ def ask_wait_to_finish_task_message(event):
 #    logging.info(response.read())
 
 def ask_register_token_message(event):
-    text = "Please register VMC reresh token at first, type `register org`."
+    text = "Please register VMC refesh token at first, type `register org`."
     response = post_text_with_bot_token(event, text)
 
 def register_token_message(event):
     text = "Please enter VMC refresh token."
+    response = post_text_with_bot_token(event, text)
+#    logging.info(response.read())
+    text = "This conversation will end by typing `cancel`"
     response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
