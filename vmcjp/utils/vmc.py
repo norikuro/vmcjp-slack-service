@@ -37,13 +37,13 @@ def get_username(access_token):
 def validate_token(token, org_id):
     response = login(token, org_id)
 
-    if response.status_code = 200:
+    if response.status_code == 200:
       return get_username(response.json().get("access_token"))
-    elif response.status_code = 400:
+    elif response.status_code == 400:
       raise Exception("Invalid request body | In case of expired refresh_token.")
-    elif response.status_code = 401:
+    elif response.status_code == 401:
       raise Exception("Unauthorized")
-    elif response.status_code = 404:
+    elif response.status_code == 404:
       raise Exception("Organization not found")
     else:
       raise Exception("Something wrong!")
