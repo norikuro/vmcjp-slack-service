@@ -99,7 +99,7 @@ def is_valid_network(address):
     else:
         return False
 
-def list_sddcs(vmc_client, token, org_id):
+def list_sddcs(token, org_id):
     vmc_client = get_vmc_client(token)
     sddcs = vmc_client.orgs.Sddcs.list(org_id)
     return [
