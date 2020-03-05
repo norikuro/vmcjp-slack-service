@@ -182,7 +182,7 @@ def succeed_token_registratuin_message(event):
 #    logging.info(response.read())
 
 def succeed_org_registratuin_message(event):
-    text = "Registered VMC Org ID to system db, you can delete it with `delete org id`."
+    text = "Registered VMC Org ID to system db."
     response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
