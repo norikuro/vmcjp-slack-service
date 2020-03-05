@@ -18,6 +18,7 @@ def login(token, org_id):
     "orgId": org_id
   }
   
+  logging.info("!!!!!next is requests.post")
   response = requests.post(
     '{}{}'.format(BASE_URL, uri), 
     headers=HEADERS, 
@@ -40,6 +41,7 @@ def get_username(access_token):
     return response.json().get("username")
 
 def validate_token(token, org_id):
+    logging.info("!!!!!next is login")
     response = login(token, org_id)
     logging.info(response.status_code)
     logging.info(response.headers)
