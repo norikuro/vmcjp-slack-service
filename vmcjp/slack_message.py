@@ -189,9 +189,9 @@ def failed_token_registratuin_message(event):
     response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
-def succeed_org_registratuin_message(event):
-    text = "Registered VMC Org ID to system db."
-    response = post_text_with_bot_token(event, text)
+#def succeed_org_registratuin_message(event):
+#    text = "Registered VMC Org ID to system db."
+#    response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
 def wrong_token_message(event):
