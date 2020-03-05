@@ -1,7 +1,11 @@
 import requests
+import logging
 
 BASE_URL = "https://console.cloud.vmware.com/csp/gateway"
 HEADERS = {"Content-Type": "application/json"}
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def login(token, org_id):
 #  uri = "/am/api/auth/api-tokens/authorize"
@@ -36,6 +40,7 @@ def get_username(access_token):
 
 def validate_token(token, org_id):
     response = login(token, org_id)
+    logging.info(response)
 
     if response.status_code == 200:
       return get_username(response.json().get("access_token"))
@@ -46,4 +51,5 @@ def validate_token(token, org_id):
     elif response.status_code == 404:
       raise Exception("Organization not found")
     else:
+      logging.info(response)
       raise Exception("Something wrong!")
