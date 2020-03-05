@@ -43,6 +43,8 @@ def get_username(access_token):
 def validate_token(token, org_id):
     logging.info("!!!!!next is login")
     response = login(token, org_id)
+    logging.info("!!!!!got response")
+    logging.info(response)
     logging.info(response.status_code)
     logging.info(response.headers)
     logging.info(response.text)
