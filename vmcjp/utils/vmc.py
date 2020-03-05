@@ -3,9 +3,16 @@ import requests
 BASE_URL = "https://console.cloud.vmware.com/csp/gateway"
 HEADERS = {"Content-Type": "application/json"}
 
-def login(token):
-  uri = "/am/api/auth/api-tokens/authorize"
-  payload = {"refresh_token": token}
+def login(token, org_id):
+#  uri = "/am/api/auth/api-tokens/authorize"
+  uri = "/am/api/auth/authorize"
+#  payload = {"refresh_token": token}
+  payload = {
+    "grant_type": "refresh_token",
+    "refresh_token": token,
+    "orgId": org_id
+  }
+  
   response = requests.post(
     '{}{}'.format(BASE_URL, uri), 
     headers=HEADERS, 
