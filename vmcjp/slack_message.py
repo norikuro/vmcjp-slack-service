@@ -148,7 +148,7 @@ def ask_wait_to_finish_task_message(event):
 #    logging.info(response.read())
 
 def ask_register_token_message(event):
-    text = "Please register VMC reresh token at first, type `register token`."
+    text = "Please register VMC reresh token at first, type `register org`."
     response = post_text_with_bot_token(event, text)
 
 def register_token_message(event):
