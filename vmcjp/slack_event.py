@@ -371,7 +371,7 @@ def event_handler(event):
             slack_message.cancel_org_registration_message(event)
             db.delete_event_db(event.get("user_id"))
             db.delete_cred_db(event.get("user_id"))
-        else if "registering org" in result.get("status"):
+        elif "registering org" in result.get("status"):
             slack_message.succeed_org_registratuin_message(event)
             db.write_cred_db(
                 event.get("user_id"), 
@@ -389,7 +389,7 @@ def event_handler(event):
                 }
             )
             slack_message.register_token_message(event)
-        else if "registering token" in result.get("status"):
+        elif "registering token" in result.get("status"):
             user_name = validate_token(event.get("text"))
             if user_name is not None:
                 slack_message.succeed_token_registratuin_message(event)
