@@ -116,7 +116,7 @@ def event_cred_update(event, cred):
             "org_id": cred.get("org_id")
         }
     )
-    logging.info(event)
+#    logging.info(event)
 
 def event_handler(event):
     text = event.get("text").lower()
@@ -233,12 +233,12 @@ def event_handler(event):
                 slack_message.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
                 event_cred_update(event, __cred_data)
-                event.update(
-                    {
-                        "token": __cred_data.get("token")#,
+#                event.update(
+#                    {
+#                        "token": __cred_data.get("token")#,
 #                        "org_id": __cred_data.get("org_id")
-                    }
-                )
+#                    }
+#                )
                 vmc_client = get_vmc_client(event.get("token"))
                 sddcs = vmc_client.orgs.Sddcs.list(event.get("org_id"))
                 slack_message.list_sddcs_text_message(event)
