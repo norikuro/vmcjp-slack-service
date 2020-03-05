@@ -195,7 +195,7 @@ def succeed_org_registratuin_message(event):
 #    logging.info(response.read())
 
 def wrong_token_message(event):
-    text = "Token number you entered is something wrong, please check your token and enter correct token."
+    text = "You might entered wrong Org ID or token, please check your Org ID or token and enter correct one."
     response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
