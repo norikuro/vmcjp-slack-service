@@ -234,9 +234,10 @@ def event_handler(event):
             elif "registered" in __cred_data.get("status"):
                 event_cred_update(event, __cred_data)
                 vmc_client = get_vmc_client(event.get("token"))
-                logging.info(event)
-                logging.info(event.get("org_id"))
-                sddcs = vmc_client.orgs.Sddcs.list(event.get("org_id"))
+#                logging.info(event)
+#                logging.info(event.get("org_id"))
+#                sddcs = vmc_client.orgs.Sddcs.list(event.get("org_id"))
+                sddcs = vmc_client.orgs.Sddcs.list("b9faab50-1f98-4fbd-9bf8-869b3df7fe34")
                 slack_message.list_sddcs_text_message(event)
                 for sddc in sddcs:
                     event.update(
