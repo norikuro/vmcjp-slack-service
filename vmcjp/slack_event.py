@@ -110,13 +110,13 @@ def list_sddcs(vmc_client, token, org_id):
     ]
 
 def event_cred_update(event, cred):
-    event.update(
-        {
-            "token": cred.get("token"),
-            "org_id": cred.get("org_id")
-        }
-    )
-#    logging.info(event)
+#    event.update(
+#        {
+#            "token": cred.get("token"),
+#            "org_id": cred.get("org_id")
+#        }
+#    )
+    logging.info(event)
 
 def event_handler(event):
     text = event.get("text").lower()
@@ -232,7 +232,7 @@ def event_handler(event):
             if __cred_data is None:
                 slack_message.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
-#                event_cred_update(event, __cred_data)
+                event_cred_update(event, __cred_data)
                 event.update(
                     {
                         "token": __cred_data.get("token")#,
