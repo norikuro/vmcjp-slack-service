@@ -3,7 +3,7 @@ import logging
 
 BASE_URL = "https://console.cloud.vmware.com/csp/gateway"
 #HEADERS = {"Content-Type": "application/json"}
-HEADERS = {"application/x-www-form-urlencoded"}
+HEADERS = {"Content-Type": "application/x-www-form-urlencoded"}
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
