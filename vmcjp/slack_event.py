@@ -408,9 +408,10 @@ def event_handler(event):
 #                            "user_name": user_name
 #                        }
 #                    )
-#                    db.delete_event_db(event.get("user_id"))
+                    db.delete_event_db(event.get("user_id"))
                 else:
                     slack_message.failed_token_registratuin_message(event)
                     slack_message.wrong_token_message(event)
                     logging.info(__cred_data.get("org_id"))
-                    db.delete_cred_db_by_org_id(__cred_data.get("org_id"))
+                    db.delete_event_db(event.get("user_id"))
+                    db.delete_cred_db(event.get("user_id"))
