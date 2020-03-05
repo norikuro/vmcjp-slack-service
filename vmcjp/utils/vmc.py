@@ -31,8 +31,8 @@ def get_username(access_token):
   else:
     return response.json().get("username")
 
-def validate_token(token):
-    response = login(token)
+def validate_token(token, org_id):
+    response = login(token, org_id)
     
     if response is None:
       return
