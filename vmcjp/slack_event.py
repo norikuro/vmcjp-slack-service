@@ -110,12 +110,12 @@ def list_sddcs(vmc_client, token, org_id):
     ]
 
 def event_cred_update(event, cred):
-#    event.update(
-#        {
-#            "token": cred.get("token"),
-#            "org_id": cred.get("org_id")
-#        }
-#    )
+    event.update(
+        {
+            "token": cred.get("token"),
+            "org_id": cred.get("org_id")
+        }
+    )
     logging.info(event)
 
 def event_handler(event):
