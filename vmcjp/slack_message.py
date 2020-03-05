@@ -185,7 +185,7 @@ def succeed_token_registratuin_message(event):
 #    logging.info(response.read())
 
 def failed_token_registratuin_message(event):
-    text = "Failed to register Org ID or token.")
+    text = "Failed to register Org ID or token."
     response = post_text_with_bot_token(event, text)
 #    logging.info(response.read())
 
