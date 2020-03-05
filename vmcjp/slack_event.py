@@ -397,7 +397,7 @@ def event_handler(event):
             )
             slack_message.register_token_message(event)
         elif "registering token" in result.get("status"):
-            user_name = validate_token(event.get("text"))
+            user_name = validate_token(event.get("text"), __cred_data.get("org_id"))
             if user_name is not None:
                 slack_message.succeed_token_registratuin_message(event)
                 db.write_cred_db(
