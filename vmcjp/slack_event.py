@@ -116,7 +116,6 @@ def event_cred_update(event, cred):
             "org_id": cred.get("org_id")
         }
     )
-#    logging.info(event)
 
 def event_handler(event):
     text = event.get("text").lower()
