@@ -377,7 +377,7 @@ def event_handler(event):
             db.delete_event_db(event.get("user_id"))
             db.delete_cred_db(event.get("user_id"))
         elif "registering org" in result.get("status"):
-            slack_message.succeed_org_registratuin_message(event)
+#            slack_message.succeed_org_registratuin_message(event)
             db.write_cred_db(
                 event.get("user_id"), 
                 {
