@@ -27,6 +27,7 @@ def lambda_handler(event, context):
             "db_url": j.get("db_url")
         }
     )
+    logging.info(event)
     
     if event.has_key("callback_id"):
         interactive_handler(event)
