@@ -413,4 +413,4 @@ def event_handler(event):
                     slack_message.failed_token_registratuin_message(event)
                     slack_message.wrong_token_message(event)
                     logging.info(__cred_data.get("org_id"))
-                    db.delete_event_db(__cred_data.get("org_id"))
+                    db.delete_cred_db_by_org_id(__cred_data.get("org_id"))
