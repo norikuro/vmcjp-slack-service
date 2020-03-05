@@ -64,6 +64,9 @@ class DocmentDb(object):
     def delete_cred_db(self, user_id):
         self.cred_col.remove({"_id": user_id})
 
+    def delete_cred_db_by_org_id(self, org_id):
+        self.cred_col.remove({"org_id": org_id})
+        
     def init_sddc_db(self):
         sddc_db = self.client[constant.SDDC_DB]
         self.sddc_col = sddc_db[constant.SDDC_COLLECTION]
