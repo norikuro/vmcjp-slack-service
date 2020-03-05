@@ -41,6 +41,9 @@ def get_username(access_token):
 
 def validate_token(token, org_id):
     response = login(token, org_id)
+    logging.info(response.status_code)
+    logging.info(response.headers)
+    logging.info(response.text)
 
     if response.status_code == 200:
       return get_username(response.json().get("access_token"))
@@ -51,7 +54,4 @@ def validate_token(token, org_id):
     elif response.status_code == 404:
       raise Exception("Organization not found")
     else:
-      logging.info(response.status_code)
-      logging.info(response.headers)
-      logging.info(response.text)
       raise Exception("Something wrong!")
