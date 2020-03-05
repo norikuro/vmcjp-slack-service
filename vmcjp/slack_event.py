@@ -58,11 +58,11 @@ def is_network(address):
     except ValueError:
         return False
 
-def is_valid_token(event):
+def is_valid_token(token, org_id):
     try:
-        get_vmc_client(event.get("text")).orgs.Sddcs.list(event.get("org_id"))
+        get_vmc_client(token).Orgs.get(org_id)
         return True
-    except KeyError:
+    except:
         return False
 
 def is_valid_network(address):
@@ -395,30 +395,21 @@ def event_handler(event):
             )
             slack_message.register_token_message(event)
         elif "registering token" in result.get("status"):
-            try:
-                logging.info("!!!!!next is get token")
-                token = event.get("text")
-                logging.info("!!!!!next is get org_id")
-                cred = __cred_data.get("org_id")
-                logging.info("!!!!!next is validate_token")
-                user_name = validate_token(token, cred)
-                logging.info("!!!!!finished validate_token")
-                if user_name is not None:
-                    logging.info("!!!!!message succeeded and write db")
+                if is_valid_token(event.get("text"), __cred_data.get("org_id"))
+#                user_name = validate_token(token, cred)
+#                if user_name is not None:
+#                    slack_message.succeed_token_registratuin_message(event)
                     slack_message.succeed_token_registratuin_message(event)
-                    db.write_cred_db(
-                        event.get("user_id"), 
-                        {
-                            "status": "registered", 
-                            "token": event.get("text"), 
-                            "user_name": user_name
-                        }
-                    )
+#                    db.write_cred_db(
+#                        event.get("user_id"), 
+#                        {
+#                            "status": "registered", 
+#                            "token": event.get("text"), 
+#                            "user_name": user_name
+#                        }
+#                    )
                     db.delete_event_db(event.get("user_id"))
                 else:
                     slack_message.wrong_token_message(event)
-            except Exception as e:
-                logging.info("!!!!!Exception")
-                event.update({"message": e.message})
-                slack_message.failed_token_registratuin_message(event)
-                db.delete_event_db(event.get("org_id"))
+                    slack_message.failed_token_registratuin_message(event)
+                    db.delete_event_db(event.get("org_id"))
