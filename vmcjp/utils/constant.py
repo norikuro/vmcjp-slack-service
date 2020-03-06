@@ -44,6 +44,7 @@ class _const:
   NUM_HOSTS = "num_hosts_list"
   AWS_ACCOUNT = "aws_account_list_message"
   AWS_VPC = "aws_vpc_list_message"
+  AWS_SUBNET = "aws_subnet_list_message"
 
   class ConstError(TypeError):
     pass
