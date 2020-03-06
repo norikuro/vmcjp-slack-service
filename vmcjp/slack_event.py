@@ -14,6 +14,12 @@ from vmcjp import slack_message
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+def get_vmc_client(token):
+    session = requests.Session()
+    vmc_client = create_vmc_client(token, session=session)
+    atexit.register(session.close)
+    return vmc_client
+
 def get_max_num_hosts(token, org_id):
 # get deployable number of hosts
 # 1 host is for Storage EDRS
@@ -35,12 +41,6 @@ def get_max_num_hosts(token, org_id):
 #def get_max_num_hosts_zerocloud(token, org_id): #for internal use
 #    vmc_client = get_vmc_client(token)
 #    return int(vmc_client.Orgs.get(org_id).properties.values["maxHostsPerSddcOnCreate"])
-
-def get_vmc_client(token):
-    session = requests.Session()
-    vmc_client = create_vmc_client(token, session=session)
-    atexit.register(session.close)
-    return vmc_client
 
 def list_region(vmc_client, org_id):
     regions = vmc_client.Orgs.get(org_id).properties.values.get("defaultAwsRegions").split(",")
