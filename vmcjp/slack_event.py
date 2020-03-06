@@ -32,9 +32,9 @@ def get_max_num_hosts(token, org_id):
 #        return 1 if max_hosts < 3 else max_hosts
     return 4 #for test
 
-def get_max_num_hosts_zerocloud(token, org_id): #for internal use
-    vmc_client = get_vmc_client(token)
-    return int(vmc_client.Orgs.get(org_id).properties.values["maxHostsPerSddcOnCreate"])
+#def get_max_num_hosts_zerocloud(token, org_id): #for internal use
+#    vmc_client = get_vmc_client(token)
+#    return int(vmc_client.Orgs.get(org_id).properties.values["maxHostsPerSddcOnCreate"])
 
 def get_vmc_client(token):
     session = requests.Session()
