@@ -351,7 +351,7 @@ def event_handler(event):
 #        else:
 #            user_name = validate_token(event.get("text"))
 #            if user_name is not None:
-#                slack_message.succeed_token_registratuin_message(event)
+#                slack_message.succeed_token_registration_message(event)
 #                db.write_cred_db(
 #                    event.get("user_id"), 
 #                    {
