@@ -165,7 +165,7 @@ def interactive_handler(event):
                     ]
                 }
             )
-            messages.region_list_message(event)
+            message_handler(constant.REGION, event)
             db.write_event_db(
                 event.get("user_id"), 
                 {
