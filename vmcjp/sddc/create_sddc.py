@@ -13,8 +13,8 @@ from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils import constant
 from vmcjp.slack.message import messages
 
-#logger = logging.getLogger()
-#logger.setLevel(logging.INFO)
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def get_vmc_client(token):  
   session = requests.Session()
