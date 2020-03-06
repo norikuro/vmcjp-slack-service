@@ -31,7 +31,7 @@ class _const:
   CONFIRM_DELETE = "sddc_deletion_confirmation_message"
   START_DELETE = "started_delete_sddc_message"
   CANT_DELETE = "cannot_delete_sddc_message"
-  CALCEL_DELETE = "cancel_sddc_deletion_message"
+  CANCEL_DELETE = "cancel_sddc_deletion_message"
   SDDC_WIZARD = "start_create_sddc_wizard_message"
   CHECK_RESOURCE = "check_resources_message"
   CANCEL_SDDC = "cancel_sddc_creation_message"
