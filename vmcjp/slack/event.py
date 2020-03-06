@@ -234,7 +234,7 @@ def event_handler(event):
                             "num_hosts": len(sddc.resource_config.esx_hosts)
                         }
                     )
-                    messages.list_sddcs_message(event)
+                    message_handler(constant.SDDCS_MSG, event)
             return
 
         elif "register org" in text:
