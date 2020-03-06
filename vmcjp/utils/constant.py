@@ -45,6 +45,7 @@ class _const:
   AWS_ACCOUNT = "aws_account_list_message"
   AWS_VPC = "aws_vpc_list_message"
   AWS_SUBNET = "aws_subnet_list_message"
+  CIDR = "ask_cidr_message"
 
   class ConstError(TypeError):
     pass
