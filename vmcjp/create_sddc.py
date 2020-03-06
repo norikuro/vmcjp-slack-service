@@ -100,7 +100,7 @@ def lambda_handler(event, context):
   
   message_handler(constant.TASK_MSG, event)
   message_handler(constant.CRUD_SDDC, event)
-  messages.task_webhook_message(event)
+  message_handler(constant.TASK_WH, event)
   
   event.update(
     {"status": "task_started"}
