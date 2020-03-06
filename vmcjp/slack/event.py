@@ -114,7 +114,7 @@ def event_handler(event):
     db = dbutils.DocmentDb(event.get("db_url"))
     current = db.read_event_db(event.get("user_id"), 120)
     if current is not None and current.get("status") == "creating":
-        slack_message.ask_wait_to_finish_task_message(event)
+        messages.ask_wait_to_finish_task_message(event)
         return
     
     result = db.read_event_db(event.get("user_id"), 5)
@@ -122,11 +122,11 @@ def event_handler(event):
     if result is None:
         if "create sddc on zerocloud" in text: #for internal use only
             if __cred_data is None:
-                slack_message.ask_register_token_message(event)
+                messages.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
                 event_cred_update(event, __cred_data)
-                slack_message.start_create_sddc_wizard_message(event)
-                slack_message.check_resources_message(event)
+                messages.start_create_sddc_wizard_message(event)
+                messages.check_resources_message(event)
                 event.update(
                     {
                         "max_hosts": get_max_num_hosts(
@@ -136,10 +136,10 @@ def event_handler(event):
                     }
                 )
                 if event.get("max_hosts") < 1:
-                    slack_message.no_enough_resouces_message(event)
+                    messages.no_enough_resouces_message(event)
                     db.delete_event_db(event.get("user_id"))
                     return
-                slack_message.max_hosts_message(event)
+                messages.max_hosts_message(event)
                 db.write_event_db(
                     event.get("user_id"), 
                     {
@@ -152,11 +152,11 @@ def event_handler(event):
             return
         elif "create sddc" in text:
             if __cred_data is None:
-                slack_message.ask_register_token_message(event)
+                messages.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
                 event_cred_update(event, __cred_data)
-                slack_message.start_create_sddc_wizard_message(event)
-                slack_message.check_resources_message(event)
+                messages.start_create_sddc_wizard_message(event)
+                messages.check_resources_message(event)
                 event.update(
                     {
                         "max_hosts": get_max_num_hosts(
@@ -166,10 +166,10 @@ def event_handler(event):
                     }
                 )
                 if event.get("max_hosts") < 1:
-                    slack_message.no_enough_resouces_message(event)
+                    messages.no_enough_resouces_message(event)
                     db.delete_event_db(event.get("user_id"))
                     return
-                slack_message.max_hosts_message(event)
+                messages.max_hosts_message(event)
                 db.write_event_db(
                     event.get("user_id"), 
                     {
@@ -182,7 +182,7 @@ def event_handler(event):
             return
         elif "delete sddc" in text:
             if __cred_data is None:
-                slack_message.ask_register_token_message(event)
+                messages.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
                 event_cred_update(event, __cred_data)
                 event.update(
@@ -193,7 +193,7 @@ def event_handler(event):
                         )
                     }
                 )
-                slack_message.delete_sddc_message(event)
+                messages.delete_sddc_message(event)
                 db.write_event_db(
                     event.get("user_id"), 
                     {
@@ -203,9 +203,9 @@ def event_handler(event):
                 )
         elif "restore sddc" in text: #for internal use
             if __cred_data is None:
-                slack_message.ask_register_token_message(event)
+                messages.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
-                slack_message.start_restore_wizard_message(event)
+                messages.start_restore_wizard_message(event)
                 config = db.get_backedup_sddc_config()
                 event.update(config)
                 event_cred_update(event, __cred_data)
@@ -216,15 +216,15 @@ def event_handler(event):
                     }
                 )
                 db.write_event_db(event.get("user_id"), config)
-                slack_message.restore_message(event)
+                messages.restore_message(event)
         elif "list sddcs" in text:
             if __cred_data is None:
-                slack_message.ask_register_token_message(event)
+                messages.ask_register_token_message(event)
             elif "registered" in __cred_data.get("status"):
                 event_cred_update(event, __cred_data)
                 vmc_client = get_vmc_client(event.get("token"))
                 sddcs = vmc_client.orgs.Sddcs.list(event.get("org_id"))
-                slack_message.list_sddcs_text_message(event)
+                messages.list_sddcs_text_message(event)
                 for sddc in sddcs:
                     event.update(
                         {
@@ -234,10 +234,10 @@ def event_handler(event):
                             "num_hosts": len(sddc.resource_config.esx_hosts)
                         }
                     )
-                    slack_message.list_sddcs_message(event)
+                    messages.list_sddcs_message(event)
             return
 #        elif "register token" in text:
-#            slack_message.register_token_message(event)
+#            messages.register_token_message(event)
 #            db.write_cred_db(
 #                event.get("user_id"), 
 #                {
@@ -253,7 +253,7 @@ def event_handler(event):
 #            )
 #            return
         elif "register org" in text:
-            slack_message.register_org_message(event)
+            messages.register_org_message(event)
             db.write_cred_db(
                 event.get("user_id"), 
                 {
@@ -269,27 +269,27 @@ def event_handler(event):
             )
             return
         elif "delete org" in text:
-            slack_message.delete_org_message(event)
+            messages.delete_org_message(event)
             db.delete_cred_db(event["user_id"])
             return
         elif "help" in text:
-            slack_message.help_message(event)
+            messages.help_message(event)
             return
         elif "cancel" in text:
             if __cred_data is not None and "registering" in __cred_data.get("status"):
-                slack_message.cancel_token_registration_message(event)
+                messages.cancel_token_registration_message(event)
                 db.delete_cred_db(event.get("user_id"))
             else:
-                slack_message.may_i_message(event)
+                messages.may_i_message(event)
             return
         else:
-            slack_message.may_i_message(event)
+            messages.may_i_message(event)
             return
     elif "create" in result.get("command"):
         if "create sddc" in text:
             return
         elif "cancel" in text:
-            slack_message.cancel_sddc_creation_message(event)
+            messages.cancel_sddc_creation_message(event)
             db.delete_event_db(event.get("user_id"))
             return
         elif text.find(" ") != -1:
@@ -301,7 +301,7 @@ def event_handler(event):
                         {"vpc_cidr": event.get("text")}
                     )
                     event.update(result)
-                    slack_message.create_sddc_confirmation_message(event)
+                    messages.create_sddc_confirmation_message(event)
                     db.write_event_db(
                         event.get("user_id"), 
                         {
@@ -310,14 +310,14 @@ def event_handler(event):
                         }
                     )
                 else:
-                    slack_message.wrong_network_message(event)
+                    messages.wrong_network_message(event)
             return
         else:
             if result.get("status") == "region":
                 if result.get("max_hosts") == 1:
-                    slack_message.link_aws_message(event)
+                    messages.link_aws_message(event)
                 else:
-                    slack_message.single_multi_message(event)
+                    messages.single_multi_message(event)
                 db.write_event_db(
                     event.get("user_id"), 
                     {
@@ -326,25 +326,25 @@ def event_handler(event):
                     }
                 )
             elif result.get("status") in constant.INT_STATUS:
-                slack_message.ask_select_button_message(event)
+                messages.ask_select_button_message(event)
             return
     elif "delete" in result.get("command"):
         if "cancel" in text:
-            slack_message.cancel_sddc_deletion_message(event)
+            messages.cancel_sddc_deletion_message(event)
             db.delete_event_db(event.get("user_id"))
     elif "restore" in result.get("command"):
         if "cancel" in text:
-            slack_message.cancel_sddc_restoration_message(event)
+            messages.cancel_sddc_restoration_message(event)
             db.delete_event_db(event.get("user_id"))
 #    elif "register token" in result.get("command"):
 #        if "cancel" in text:
-#            slack_message.cancel_token_registration_message(event)
+#            messages.cancel_token_registration_message(event)
 #            db.delete_event_db(event.get("user_id"))
 #            db.delete_cred_db(event.get("user_id"))
 #        else:
 #            user_name = validate_token(event.get("text"))
 #            if user_name is not None:
-#                slack_message.succeed_token_registration_message(event)
+#                messages.succeed_token_registration_message(event)
 #                db.write_cred_db(
 #                    event.get("user_id"), 
 #                    {
@@ -355,10 +355,10 @@ def event_handler(event):
 #                )
 #                db.delete_event_db(event["user_id"])
 #            else:
-#                slack_message.wrong_token_message(event)
+#                messages.wrong_token_message(event)
     elif "register org" in result.get("command"):
         if "cancel" in text:
-            slack_message.cancel_org_registration_message(event)
+            messages.cancel_org_registration_message(event)
             db.delete_event_db(event.get("user_id"))
             db.delete_cred_db(event.get("user_id"))
         elif "registering org" in result.get("status"):
@@ -377,11 +377,11 @@ def event_handler(event):
                     "status": "registering token"
                 }
             )
-            slack_message.register_token_message(event)
+            messages.register_token_message(event)
         elif "registering token" in result.get("status"):
                 user_name = validate_token(event.get("text"), __cred_data.get("org_id"))
                 if user_name is not None:
-                    slack_message.succeed_token_registration_message(event)
+                    messages.succeed_token_registration_message(event)
                     db.write_cred_db(
                         event.get("user_id"), 
                         {
@@ -392,7 +392,7 @@ def event_handler(event):
                     )
                     db.delete_event_db(event.get("user_id"))
                 else:
-                    slack_message.failed_token_registration_message(event)
-                    slack_message.wrong_token_message(event)
+                    messages.failed_token_registration_message(event)
+                    messages.wrong_token_message(event)
                     db.delete_event_db(event.get("user_id"))
                     db.delete_cred_db(event.get("user_id"))
