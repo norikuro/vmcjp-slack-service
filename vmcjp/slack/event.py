@@ -125,7 +125,7 @@ def event_handler(event):
                 message_handler(constant.ASK_REGISTER_TOKEN, event)
             elif "registered" in __cred_data.get("status"):
                 event_cred_update(event, __cred_data)
-                messages.start_create_sddc_wizard_message(event)
+                message_handler(constant.SDDC_WIZARD, event)
                 messages.check_resources_message(event)
                 event.update(
                     {
