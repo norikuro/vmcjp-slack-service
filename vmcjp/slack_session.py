@@ -20,7 +20,7 @@ def lambda_handler(event, context):
             "db_url": j.get("db_url"),
             "aws_internal_account": os.environ["aws_account"], #for internal use
             "aws_internal_id": os.environ["aws_id"], #for internal use
-            "cloudwatch_account": j.get("cloudwatch_account"),
+            "cloudwatch_account": j.get("cloudwatch_account"), #for internal use
             "webhook_url": j.get("webhook_url"),
             "db_url": j.get("db_url")
         }
