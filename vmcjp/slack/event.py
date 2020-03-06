@@ -280,10 +280,10 @@ def event_handler(event):
                 messages.cancel_token_registration_message(event)
                 db.delete_cred_db(event.get("user_id"))
             else:
-                messages.may_i_message(event)
+                messages.message_handler(constant.MAY_I, event)
             return
         else:
-            messages.message_handler(constant.MAY_I_MESSAGE, event)
+            messages.message_handler(constant.MAY_I, event)
             return
     elif "create" in result.get("command"):
         if "create sddc" in text:
