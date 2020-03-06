@@ -260,7 +260,7 @@ def interactive_handler(event):
                 ]
             }
         )
-        messages.aws_account_list_message(event)
+        message_handler(constant.AWS_ACCOUNT, event)
         db.write_event_db(
             user_id, 
             {
