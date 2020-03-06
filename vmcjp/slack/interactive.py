@@ -133,7 +133,7 @@ def interactive_handler(event):
         return
     elif "delete_confirmation" in event.get("callback_id"):
         if "yes" in event.get("response"):
-            messages.started_delete_sddc_message(event)
+            message_handler(constant.START_DELETE, event)
             event.update(result)
             event.update(
                 {"user_name": __cred_data.get("user_name")}
