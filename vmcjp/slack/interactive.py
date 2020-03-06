@@ -351,7 +351,7 @@ def interactive_handler(event):
                 }
             )
         else:
-            messages.cancel_sddc_restoration_message(event)
+            message_handler(constant.CANCEL_RESOURCE, event)
             db.delete_event_db(user_id)
         return
     else:
