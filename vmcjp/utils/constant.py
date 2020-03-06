@@ -59,6 +59,7 @@ class _const:
   TASK_WH = "task_webhook_message"
   RESTORE_WIZARD = "start_restore_wizard_message"
   RESTORE = "restore_message"
+  CANCEL_RESTORE = "cancel_sddc_restoration_message"
 
   class ConstError(TypeError):
     pass
