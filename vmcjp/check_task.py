@@ -8,7 +8,7 @@ from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.cloudwatch import remove_event
 from vmcjp.utils.task_helper import task_handler
 from vmcjp.utils import dbutils
-from vmcjp.slack.message import messages
+from vmcjp.slack.message.messages import message_handler
 
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
@@ -42,7 +42,7 @@ def lambda_handler(event, context):
       event
     )
     event.update({"status": status})
-    messages.check_task_message(event)
+    message_handler(constant.CHECK_TASK, event)
     messages.check_task_webhook_message(event)
 
     if "Failed" in status or "Canceled" in status or "Finished" in status:
