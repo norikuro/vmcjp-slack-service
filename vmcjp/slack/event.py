@@ -1,4 +1,4 @@
-import logging
+#import logging
 import ipaddress
 import atexit
 import requests
@@ -9,8 +9,8 @@ from vmcjp.utils import dbutils
 from vmcjp.utils import constant
 from vmcjp.slack.messages import message_handler
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+#logger = logging.getLogger()
+#logger.setLevel(logging.INFO)
 
 def get_vmc_client(token):
     session = requests.Session()
