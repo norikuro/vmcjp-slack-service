@@ -12,8 +12,8 @@ from vmcjp.utils import dbutils
 from vmcjp.utils import constant
 from vmcjp.slack.message import messages
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+#logger = logging.getLogger()
+#logger.setLevel(logging.INFO)
 
 def get_vmc_client(token):
   session = requests.Session()
@@ -89,7 +89,7 @@ def lambda_handler(event, context):
   event.update({"token": os.environ["token"]}) #for test
   event.update({"connected_account_id": "e462f412-be3a-3fa4-9d97-59f1217339a6"}) #for test
   event.update({"customer_subnet_id": "subnet-1b128540"}) #for test
-  logging.info(event)
+#  logging.info(event)
 
   result = check(
     event, 
