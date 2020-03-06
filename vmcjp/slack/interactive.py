@@ -283,7 +283,7 @@ def interactive_handler(event):
                 )
             }
         )
-        messages.aws_vpc_list_message(event)
+        message_handler(constant.AWS_VPC, event)
         db.write_event_db(
             user_id, 
             {
