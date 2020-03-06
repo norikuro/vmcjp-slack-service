@@ -1,8 +1,9 @@
 import datetime
 
 from time import sleep
-from vmcjp.utils import dbutils
 from com.vmware.vmc.model_client import Task
+
+from vmcjp.utils import dbutils
 from vmcjp.utils.cloudwatch import put_event
 
 
