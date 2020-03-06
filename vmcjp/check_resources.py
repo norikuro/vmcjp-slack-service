@@ -1,4 +1,3 @@
-import json
 import requests
 import atexit
 import logging
