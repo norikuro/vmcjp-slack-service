@@ -1,9 +1,5 @@
 import json
 import urllib2
-import logging
-
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
 
 def post(url, data, bot_oauth_token=None):
     headers = {
