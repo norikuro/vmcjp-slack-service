@@ -29,6 +29,7 @@ class _const:
   WRONG_TOKEN = "wrong_token_message"
   DELETE_SDDC = "delete_sddc_message"
   CONFIRM_DELETE = "sddc_deletion_confirmation_message"
+  START_DELETE = "started_delete_sddc_message"
 
   class ConstError(TypeError):
     pass
