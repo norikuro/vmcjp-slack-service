@@ -18,6 +18,7 @@ class _const:
   HELP = "help_message"
   ASK_SELECT_BUTTON = "ask_select_button_message"
   ASK_WAIT_TASK = "ask_wait_to_finish_task_message"
+  ASK_REGISTER_TOKEN = "ask_register_token_message"
 
   class ConstError(TypeError):
     pass
