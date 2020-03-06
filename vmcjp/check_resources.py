@@ -10,7 +10,7 @@ from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils.s3utils import read_json_from_s3
 from vmcjp.utils import dbutils
 from vmcjp.utils import constant
-from vmcjp.slack.message import messages
+from vmcjp.slack.message.messages import message_handler
 
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
@@ -101,7 +101,7 @@ def lambda_handler(event, context):
       "check_result": result.get("message")
     }
   )
-  messages.check_result_message(event)
+  message_handler(constant.CHECK_RESULT, event)
   
   db = dbutils.DocmentDb(event.get("db_url"))
   if result.get("result"):
