@@ -28,5 +28,5 @@ def validate_token(token, org_id):
     
     if response.status_code == 200:
       data = response.json()
-      if data.get("OrgID") == org_id:
+      if data.get("orgId") == org_id:
         return data.get("username")
