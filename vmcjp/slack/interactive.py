@@ -220,7 +220,7 @@ def interactive_handler(event):
         return
     elif "single_multi" in event.get("callback_id"):
         if "single" in event.get("response"):
-            messages.link_aws_message(event)
+            message_handler(constant.LINK_AWS, event)
             db.write_event_db(
                 user_id,
                 {
