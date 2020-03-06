@@ -57,13 +57,13 @@ def lambda_handler(event, context):
         "status": "task_failed"
       }
     )
-    slack_message.crud_sddc_result_message(event)
+    messages.crud_sddc_result_message(event)
     call_lambda("check_task", event)
     return 
   
-  slack_message.task_message(event)
-  slack_message.started_crud_sddc_message(event)
-  slack_message.task_webhook_message(event)
+  messages.task_message(event)
+  messages.started_crud_sddc_message(event)
+  messages.task_webhook_message(event)
 
   event.update(
     {"status": "task_started"}
