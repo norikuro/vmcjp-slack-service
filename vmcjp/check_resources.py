@@ -1,7 +1,6 @@
 import requests
 import atexit
 import logging
-import os
 
 from vmware.vapi.vmc.client import create_vmc_client
 
