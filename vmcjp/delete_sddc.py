@@ -67,5 +67,5 @@ def lambda_handler(event, context):
 
   event.update(
     {"status": "task_started"}
-   )
+  )
   call_lambda("check_task", event)
