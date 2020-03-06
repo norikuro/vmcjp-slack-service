@@ -8,7 +8,7 @@ from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils import dbutils
 from vmcjp.utils import constant
 from vmcjp.utils.lambdautils import call_lambda
-from vmcjp.slack.message import messages
+from vmcjp.slack.message.messages import message_handler
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
