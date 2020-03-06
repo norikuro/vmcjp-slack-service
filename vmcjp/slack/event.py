@@ -346,7 +346,7 @@ def event_handler(event):
         elif "registering token" in result.get("status"):
                 user_name = validate_token(event.get("text"), __cred_data.get("org_id"))
                 if user_name is not None:
-                    messages.succeed_token_registration_message(event)
+                    message_handler(constant.SUCCESS_TOKEN, event)
                     db.write_cred_db(
                         event.get("user_id"), 
                         {
