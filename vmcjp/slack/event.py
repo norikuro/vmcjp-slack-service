@@ -152,7 +152,7 @@ def event_handler(event):
             return
         elif "create sddc" in text:
             if __cred_data is None:
-                messages.ask_register_token_message(event)
+                message_handler(constant.ASK_REGISTER_TOKEN, event)
             elif "registered" in __cred_data.get("status"):
                 event_cred_update(event, __cred_data)
                 messages.start_create_sddc_wizard_message(event)
