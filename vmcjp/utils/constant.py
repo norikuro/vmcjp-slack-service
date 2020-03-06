@@ -24,6 +24,7 @@ class _const:
   DELETE_ORG = "delete_org_message"
   CALCEL_TOKEN = "cancel_token_registration_message"
   CANCEL_PRG = "cancel_org_registration_message"
+  SUCCESS_TOKEN = "succeed_token_registration_message"
 
   class ConstError(TypeError):
     pass
