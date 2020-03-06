@@ -49,7 +49,7 @@ class _const:
   WRONG_NETWORK = "wrong_network_message"
   SDDC_CONFIRM = "create_sddc_confirmation_message"
   CREATE = "start_create_sddc_message"
-  SDDCS = "list_sddcs_text_message"
+  SDDCS_TXT = "list_sddcs_text_message"
   SDDCS_MSG = "list_sddcs_message"
 
   class ConstError(TypeError):
