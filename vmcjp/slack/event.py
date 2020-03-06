@@ -315,7 +315,7 @@ def event_handler(event):
             return
     elif "delete" in result.get("command"):
         if "cancel" in text:
-            messages.cancel_sddc_deletion_message(event)
+            message_handler(constant.CANCEL_DELETE, event)
             db.delete_event_db(event.get("user_id"))
     elif "restore" in result.get("command"):
         if "cancel" in text:
