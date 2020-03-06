@@ -48,6 +48,7 @@ class _const:
   CIDR = "ask_cidr_message"
   WRONG_NETWORK = "wrong_network_message"
   SDDC_CONFIRM = "create_sddc_confirmation_message"
+  CREATE = "start_create_sddc_message"
 
   class ConstError(TypeError):
     pass
