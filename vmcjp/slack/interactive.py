@@ -233,7 +233,7 @@ def interactive_handler(event):
                     "num_hosts_list": list_num_hosts(result.get("max_hosts"))
                 }
             )
-            messages.num_hosts_list(event)
+            message_handler(constant.NUM_HOSTS, event)
             db.write_event_db(
                 user_id,
                 {
