@@ -283,7 +283,7 @@ def event_handler(event):
                 messages.may_i_message(event)
             return
         else:
-            messages.may_i_message(event)
+            messages.message_handler(const.MAY_I_MESSAGE, event)
             return
     elif "create" in result.get("command"):
         if "create sddc" in text:
