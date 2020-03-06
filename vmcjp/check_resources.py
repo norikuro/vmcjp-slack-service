@@ -25,18 +25,20 @@ def check(event, vmc_client):
       "result": False,
       "message": "SDDC ID {} already exists".format(event.get("sddc_id"))
     }
-#  if not check_num_hosts(event.get("org_id"), event.get("num_hosts"), vmc_client):
-#    return {
-#      "result": False,
-#      "message": "Maximum deployable number of hosts exeeded"
-#    }
+  
+  if not check_num_hosts(event.get("org_id"), event.get("num_hosts"), vmc_client):
+    return {
+      "result": False,
+      "message": "Maximum deployable number of hosts exeeded"
+    }
+  
   if not check_customer_aws(event.get("org_id"), event.get("aws_account"), vmc_client):
     return {
       "result": False,
       "message": "AWS Account with ID {} doesn't exist or connected to this Org".format(event.get("aws_account"))
     }
   else:
-#    call_lambda("create_sddc", event)
+    call_lambda("create_sddc", event)
     return {
       "result": True,
       "message": "Checked, no pronlem. Then I will create sddc."
@@ -59,7 +61,6 @@ def check_num_hosts(org_id, num_hosts, vmc_client):
     i = i + len(sddc.resource_config.esx_hosts)
   i = i + num_hosts
   max_host = int(vmc_client.Orgs.get(org_id).properties.values["sddcLimit"]) - 1
-#skip following for test
   if i >= max_host:
     return False
   return True
@@ -81,12 +82,12 @@ def check_customer_aws(org_id, aws_account, vmc_client):
 
 def lambda_handler(event, context):
 #  logging.info(event)
-  event.update({"org_id": os.environ["test_org"]}) #for test
-  event.update({"sddc_name": "sddc_test_nk"}) #for test
-  event.update({"vpc_cidr": "10.4.0.0/16"}) #for test
-  event.update({"token": os.environ["token"]}) #for test
-  event.update({"connected_account_id": "e462f412-be3a-3fa4-9d97-59f1217339a6"}) #for test
-  event.update({"customer_subnet_id": "subnet-1b128540"}) #for test
+#  event.update({"org_id": os.environ["test_org"]}) #for test
+#  event.update({"sddc_name": "sddc_test_nk"}) #for test
+#  event.update({"vpc_cidr": "10.4.0.0/16"}) #for test
+#  event.update({"token": os.environ["token"]}) #for test
+#  event.update({"connected_account_id": "e462f412-be3a-3fa4-9d97-59f1217339a6"}) #for test
+#  event.update({"customer_subnet_id": "subnet-1b128540"}) #for test
 #  logging.info(event)
 
   result = check(
