@@ -395,23 +395,21 @@ def event_handler(event):
             )
             slack_message.register_token_message(event)
         elif "registering token" in result.get("status"):
-                if is_valid_token(event.get("text"), __cred_data.get("org_id")):
-#                user_name = validate_token(token, cred)
-#                if user_name is not None:
-#                    slack_message.succeed_token_registratuin_message(event)
+#                if is_valid_token(event.get("text"), __cred_data.get("org_id")):
+                user_name = validate_token(token, __cred_data.get("org_id"))
+                if user_name is not None:
                     slack_message.succeed_token_registratuin_message(event)
-#                    db.write_cred_db(
-#                        event.get("user_id"), 
-#                        {
-#                            "status": "registered", 
-#                            "token": event.get("text"), 
-#                            "user_name": user_name
-#                        }
-#                    )
+                    db.write_cred_db(
+                        event.get("user_id"), 
+                        {
+                            "status": "registered", 
+                            "token": event.get("text"), 
+                            "user_name": user_name
+                        }
+                    )
                     db.delete_event_db(event.get("user_id"))
                 else:
                     slack_message.failed_token_registratuin_message(event)
                     slack_message.wrong_token_message(event)
-                    logging.info(__cred_data.get("org_id"))
                     db.delete_event_db(event.get("user_id"))
                     db.delete_cred_db(event.get("user_id"))
