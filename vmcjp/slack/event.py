@@ -166,7 +166,7 @@ def event_handler(event):
                     }
                 )
                 if event.get("max_hosts") < 1:
-                    messages.no_enough_resouces_message(event)
+                    message_handler(constant.NOT_ENOUGH, event)
                     db.delete_event_db(event.get("user_id"))
                     return
                 messages.max_hosts_message(event)
