@@ -99,7 +99,7 @@ def lambda_handler(event, context):
   logging.info(event) #need this log to ckech config later.
   
   messages.task_message(event)
-  messages.started_crud_sddc_message(event)
+  message_handler(constant.CRUD_SDDC, event)
   messages.task_webhook_message(event)
   
   event.update(
