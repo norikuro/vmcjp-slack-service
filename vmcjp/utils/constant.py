@@ -35,6 +35,7 @@ class _const:
   SDDC_WIZARD = "start_create_sddc_wizard_message"
   CHECK_RESOURCE = "check_resources_message"
   CANCEL_SDDC = "cancel_sddc_creation_message"
+  NOT_ENOUGH = "no_enough_resouces_message"
 
   class ConstError(TypeError):
     pass
