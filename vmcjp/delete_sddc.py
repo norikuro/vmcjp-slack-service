@@ -9,7 +9,7 @@ from com.vmware.vapi.std.errors_client import InvalidRequest
 from vmcjp.utils.task_helper import task_handler
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils import constant
-from vmcjp.slack.message import messages
+from vmcjp.slack.message.messages import message_handler
 
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
