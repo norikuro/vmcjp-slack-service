@@ -53,6 +53,7 @@ class _const:
   SDDCS_MSG = "list_sddcs_message"
   SDDC_RESULT = "crud_sddc_result_message"
   CHECK_TASK = "check_task_message"
+  CHECK_TASK_WH = "check_task_webhook_message"
 
   class ConstError(TypeError):
     pass
