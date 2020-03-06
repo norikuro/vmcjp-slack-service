@@ -300,7 +300,7 @@ def event_handler(event):
         else:
             if result.get("status") == "region":
                 if result.get("max_hosts") == 1:
-                    messages.link_aws_message(event)
+                    message_handler(constant.LINK_AWS, event)
                 else:
                     messages.single_multi_message(event)
                 db.write_event_db(
