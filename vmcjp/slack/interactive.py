@@ -209,7 +209,7 @@ def interactive_handler(event):
         )
         return
     elif "region" in event.get("callback_id"):
-        messages.ask_sddc_name_message(event)
+        message_handler(constant.SDDC_NAME, event)
         db.write_event_db(
             user_id, 
             {
