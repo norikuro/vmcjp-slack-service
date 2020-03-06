@@ -1,6 +1,9 @@
 from vmcjp.utils import constant
 from vmcjp.utils.slack_post import post_text, post_button, post_option, post_field_button
 
+def message_handler(message, event):
+    eval(message)(event)
+
 def post_text_with_bot_token(event, text):
     data = {"text": text}
     response = post_text(
