@@ -302,7 +302,7 @@ def event_handler(event):
                 if result.get("max_hosts") == 1:
                     message_handler(constant.LINK_AWS, event)
                 else:
-                    messages.single_multi_message(event)
+                    message_handler(constant.SINGLE_MULTI, event)
                 db.write_event_db(
                     event.get("user_id"), 
                     {
