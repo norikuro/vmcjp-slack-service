@@ -58,12 +58,12 @@ def is_network(address):
     except ValueError:
         return False
 
-def is_valid_token(token, org_id):
-    try:
-        get_vmc_client(token).Orgs.get(org_id)
-        return True
-    except:
-        return False
+#def is_valid_token(token, org_id):
+#    try:
+#        get_vmc_client(token).Orgs.get(org_id)
+#        return True
+#    except:
+#        return False
 
 def is_valid_network(address):
     try:
