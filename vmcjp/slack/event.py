@@ -358,6 +358,6 @@ def event_handler(event):
                     db.delete_event_db(event.get("user_id"))
                 else:
                     message_handler(constant.FAILED_TOKEN, event)
-                    messages.wrong_token_message(event)
+                    message_handler(constant.WRONG_TOKEN, event)
                     db.delete_event_db(event.get("user_id"))
                     db.delete_cred_db(event.get("user_id"))
