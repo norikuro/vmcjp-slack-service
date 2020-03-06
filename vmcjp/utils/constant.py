@@ -60,6 +60,7 @@ class _const:
   RESTORE_WIZARD = "start_restore_wizard_message"
   RESTORE = "restore_message"
   CANCEL_RESTORE = "cancel_sddc_restoration_message"
+  CHECK_RESULT = "check_result_message"
 
   class ConstError(TypeError):
     pass
