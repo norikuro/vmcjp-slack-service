@@ -101,7 +101,7 @@ def lambda_handler(event, context):
       "check_result": result.get("message")
     }
   )
-  slack_message.check_result_message(event)
+  messages.check_result_message(event)
   
   db = dbutils.DocmentDb(event.get("db_url"))
   if result.get("result"):
