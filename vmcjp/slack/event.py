@@ -323,7 +323,7 @@ def event_handler(event):
             db.delete_event_db(event.get("user_id"))
     elif "register org" in result.get("command"):
         if "cancel" in text:
-            messages.cancel_org_registration_message(event)
+            message_handler(constant.CANCEL_ORG, event)
             db.delete_event_db(event.get("user_id"))
             db.delete_cred_db(event.get("user_id"))
         elif "registering org" in result.get("status"):
