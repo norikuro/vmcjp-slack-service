@@ -105,7 +105,7 @@ def interactive_handler(event):
     db = dbutils.DocmentDb(event.get("db_url"))
     result = db.read_event_db(user_id, 5)
     if result is None:
-        slack_message.may_i_message(event)
+        messages.may_i_message(event)
         return
 
     __cred_data = db.read_cred_db(event.get("user_id"))
@@ -129,11 +129,11 @@ def interactive_handler(event):
                     "sddc_id": sddc_id
                 }
             )
-            slack_message.sddc_deletion_confirmation_message(event)
+            messages.sddc_deletion_confirmation_message(event)
         return
     elif "delete_confirmation" in event.get("callback_id"):
         if "yes" in event.get("response"):
-            slack_message.started_delete_sddc_message(event)
+            messages.started_delete_sddc_message(event)
             event.update(result)
             event.update(
                 {"user_name": __cred_data.get("user_name")}
@@ -141,10 +141,10 @@ def interactive_handler(event):
             if check_sddc_user(event):
                 call_lambda("delete_sddc", event)
             else:
-                slack_message.cannot_delete_sddc_message(event)
+                messages.cannot_delete_sddc_message(event)
                 db.delete_event_db(user_id)
         else:
-            slack_message.cancel_sddc_deletion_message(event)
+            messages.cancel_sddc_deletion_message(event)
             db.delete_event_db(user_id)
         return
     elif "create_sddc" in event.get("callback_id"):
@@ -165,7 +165,7 @@ def interactive_handler(event):
                     ]
                 }
             )
-            slack_message.region_list_message(event)
+            messages.region_list_message(event)
             db.write_event_db(
                 event.get("user_id"), 
                 {
@@ -173,7 +173,7 @@ def interactive_handler(event):
                 }
             ) 
         else:
-            slack_message.cancel_sddc_creation_message(event)
+            messages.cancel_sddc_creation_message(event)
             db.delete_event_db(user_id)
         return
     elif "link_aws_sddc" in event.get("callback_id"):
@@ -195,9 +195,9 @@ def interactive_handler(event):
                     ]
                 }
             )
-            slack_message.aws_account_list_message(event)
+            messages.aws_account_list_message(event)
         else:
-            slack_message.ask_cidr_message(event)
+            messages.ask_cidr_message(event)
         db.write_event_db(
             user_id, 
             {
@@ -209,7 +209,7 @@ def interactive_handler(event):
         )
         return
     elif "region" in event.get("callback_id"):
-        slack_message.ask_sddc_name_message(event)
+        messages.ask_sddc_name_message(event)
         db.write_event_db(
             user_id, 
             {
@@ -220,7 +220,7 @@ def interactive_handler(event):
         return
     elif "single_multi" in event.get("callback_id"):
         if "single" in event.get("response"):
-            slack_message.link_aws_message(event)
+            messages.link_aws_message(event)
             db.write_event_db(
                 user_id,
                 {
@@ -233,7 +233,7 @@ def interactive_handler(event):
                     "num_hosts_list": list_num_hosts(result.get("max_hosts"))
                 }
             )
-            slack_message.num_hosts_list(event)
+            messages.num_hosts_list(event)
             db.write_event_db(
                 user_id,
                 {
@@ -260,7 +260,7 @@ def interactive_handler(event):
                 ]
             }
         )
-        slack_message.aws_account_list_message(event)
+        messages.aws_account_list_message(event)
         db.write_event_db(
             user_id, 
             {
@@ -283,7 +283,7 @@ def interactive_handler(event):
                 )
             }
         )
-        slack_message.aws_vpc_list_message(event)
+        messages.aws_vpc_list_message(event)
         db.write_event_db(
             user_id, 
             {
@@ -305,7 +305,7 @@ def interactive_handler(event):
                 )
             }
         )
-        slack_message.aws_subnet_list_message(event)
+        messages.aws_subnet_list_message(event)
         db.write_event_db(
             user_id, 
             {
@@ -315,7 +315,7 @@ def interactive_handler(event):
         )
         return
     elif "subnet" in event.get("callback_id"):
-        slack_message.ask_cidr_message(event)
+        messages.ask_cidr_message(event)
         db.write_event_db(
             user_id, 
             {
@@ -326,7 +326,7 @@ def interactive_handler(event):
         return
     elif "confirmation" in event.get("callback_id"):
         if "yes" in event.get("response"):
-            slack_message.start_create_sddc_message(event)
+            messages.start_create_sddc_message(event)
             db.write_event_db(
                 user_id, 
                 {
@@ -336,12 +336,12 @@ def interactive_handler(event):
             event.update(result)
             call_lambda("create_sddc", event)
         else:
-            slack_message.cancel_sddc_creation_message(event)
+            messages.cancel_sddc_creation_message(event)
             db.delete_event_db(user_id)
         return
     elif "restore_sddc" in event.get("callback_id"):
         if "yes" in event.get("response"):
-            slack_message.check_resources_message(event)
+            messages.check_resources_message(event)
             event.update(result)
             call_lambda("check_resources", event)
             db.write_event_db(
@@ -351,7 +351,7 @@ def interactive_handler(event):
                 }
             )
         else:
-            slack_message.cancel_sddc_restoration_message(event)
+            messages.cancel_sddc_restoration_message(event)
             db.delete_event_db(user_id)
         return
     else:
