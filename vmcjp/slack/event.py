@@ -273,17 +273,17 @@ def event_handler(event):
             db.delete_cred_db(event["user_id"])
             return
         elif "help" in text:
-            messages.message_handler(constant.HELP, event)
+            message_handler(constant.HELP, event)
             return
         elif "cancel" in text:
             if __cred_data is not None and "registering" in __cred_data.get("status"):
                 messages.cancel_token_registration_message(event)
                 db.delete_cred_db(event.get("user_id"))
             else:
-                messages.message_handler(constant.MAY_I, event)
+                message_handler(constant.MAY_I, event)
             return
         else:
-            messages.message_handler(constant.MAY_I, event)
+            message_handler(constant.MAY_I, event)
             return
     elif "create" in result.get("command"):
         if "create sddc" in text:
