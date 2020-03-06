@@ -390,7 +390,7 @@ def event_handler(event):
 #                if is_valid_token(event.get("text"), __cred_data.get("org_id")):
                 user_name = validate_token(token, __cred_data.get("org_id"))
                 if user_name is not None:
-                    slack_message.succeed_token_registratuin_message(event)
+                    slack_message.succeed_token_registration_message(event)
                     db.write_cred_db(
                         event.get("user_id"), 
                         {
