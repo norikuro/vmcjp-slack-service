@@ -13,7 +13,6 @@ def login(token):
     headers=HEADERS, 
     data=payload
   )
-  
   return response
 
 def validate_token(token, org_id):
