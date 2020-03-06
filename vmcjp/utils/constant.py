@@ -51,6 +51,7 @@ class _const:
   CREATE = "start_create_sddc_message"
   SDDCS_TXT = "list_sddcs_text_message"
   SDDCS_MSG = "list_sddcs_message"
+  SDDC_RESULT = "crud_sddc_result_message"
 
   class ConstError(TypeError):
     pass
