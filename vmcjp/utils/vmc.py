@@ -18,7 +18,7 @@ def login(token):
   return response
 
 def validate_token(token, org_id):
-    response = login(token, org_id)
+    response = login(token)
     
     if response.status_code == 200:
       data = response.json()
