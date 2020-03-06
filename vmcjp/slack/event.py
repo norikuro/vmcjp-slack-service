@@ -238,7 +238,7 @@ def event_handler(event):
             return
 
         elif "register org" in text:
-            messages.register_org_message(event)
+            message_handler(constant.REGISTER_ORG, event)
             db.write_cred_db(
                 event.get("user_id"), 
                 {
