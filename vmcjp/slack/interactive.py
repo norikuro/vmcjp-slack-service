@@ -315,7 +315,7 @@ def interactive_handler(event):
         )
         return
     elif "subnet" in event.get("callback_id"):
-        messages.ask_cidr_message(event)
+        message_handler(constant.CIDR, event)
         db.write_event_db(
             user_id, 
             {
