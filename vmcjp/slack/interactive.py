@@ -173,7 +173,7 @@ def interactive_handler(event):
                 }
             ) 
         else:
-            messages.cancel_sddc_creation_message(event)
+            message_handler(constant.CANCEL_SDDC, event)
             db.delete_event_db(user_id)
         return
     elif "link_aws_sddc" in event.get("callback_id"):
