@@ -43,6 +43,7 @@ class _const:
   SINGLE_MULTI = "single_multi_message"
   NUM_HOSTS = "num_hosts_list"
   AWS_ACCOUNT = "aws_account_list_message"
+  AWS_VPC = "aws_vpc_list_message"
 
   class ConstError(TypeError):
     pass
