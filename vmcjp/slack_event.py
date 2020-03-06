@@ -56,13 +56,6 @@ def is_network(address):
     except ValueError:
         return False
 
-#def is_valid_token(token, org_id):
-#    try:
-#        get_vmc_client(token).Orgs.get(org_id)
-#        return True
-#    except:
-#        return False
-
 def is_valid_network(address):
     try:
         nw = ipaddress.ip_network(address)
@@ -369,7 +362,6 @@ def event_handler(event):
             db.delete_event_db(event.get("user_id"))
             db.delete_cred_db(event.get("user_id"))
         elif "registering org" in result.get("status"):
-#            slack_message.succeed_org_registratuin_message(event)
             db.write_cred_db(
                 event.get("user_id"), 
                 {
@@ -387,7 +379,6 @@ def event_handler(event):
             )
             slack_message.register_token_message(event)
         elif "registering token" in result.get("status"):
-#                if is_valid_token(event.get("text"), __cred_data.get("org_id")):
                 user_name = validate_token(token, __cred_data.get("org_id"))
                 if user_name is not None:
                     slack_message.succeed_token_registration_message(event)
