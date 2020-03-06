@@ -32,6 +32,7 @@ class _const:
   START_DELETE = "started_delete_sddc_message"
   CANT_DELETE = "cannot_delete_sddc_message"
   CALCEL_DELETE = "cancel_sddc_deletion_message"
+  SDDC_WIZARD = "start_create_sddc_wizard_message"
 
   class ConstError(TypeError):
     pass
