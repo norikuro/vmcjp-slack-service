@@ -341,7 +341,7 @@ def interactive_handler(event):
         return
     elif "restore_sddc" in event.get("callback_id"):
         if "yes" in event.get("response"):
-            messages.check_resources_message(event)
+            message_handler(constant.CHECK_RESOURCE, event)
             event.update(result)
             call_lambda("check_resources", event)
             db.write_event_db(
