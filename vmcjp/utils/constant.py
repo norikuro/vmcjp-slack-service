@@ -41,6 +41,7 @@ class _const:
   SDDC_NAME = "ask_sddc_name_message"
   LINK_AWS = "link_aws_message"
   SINGLE_MULTI = "single_multi_message"
+  NUM_HOSTS = "num_hosts_list"
 
   class ConstError(TypeError):
     pass
