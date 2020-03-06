@@ -169,7 +169,7 @@ def event_handler(event):
                     message_handler(constant.NOT_ENOUGH, event)
                     db.delete_event_db(event.get("user_id"))
                     return
-                messages.max_hosts_message(event)
+                message_handler(constant.MAX_HOSTS, event)
                 db.write_event_db(
                     event.get("user_id"), 
                     {
