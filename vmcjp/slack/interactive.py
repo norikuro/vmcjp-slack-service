@@ -305,7 +305,7 @@ def interactive_handler(event):
                 )
             }
         )
-        messages.aws_subnet_list_message(event)
+        message_handler(constant.AWS_SUBNET, event)
         db.write_event_db(
             user_id, 
             {
