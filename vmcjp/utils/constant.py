@@ -11,7 +11,7 @@ class _const:
   USER_COLLECTION = "user_collection"
   CRED_DB = "cred_db"
   CRED_COLLECTION = "cred_collection"
-  BUTTON_DIR = "vmcjp/button/"
+  BUTTON_DIR = "vmcjp/slack/button/"
   INT_STATUS = ["create_sddc", "resource_check", "sddc_name", "single_multi", "num_hosts", "aws_account", "vpc", "vpc_cidr", "link_aws"]  
 
   class ConstError(TypeError):
