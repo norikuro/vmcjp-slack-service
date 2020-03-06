@@ -105,7 +105,7 @@ def interactive_handler(event):
     db = dbutils.DocmentDb(event.get("db_url"))
     result = db.read_event_db(user_id, 5)
     if result is None:
-        messages.may_i_message(event)
+        message_handler(constant.MAY_I, event)
         return
 
     __cred_data = db.read_cred_db(event.get("user_id"))
