@@ -326,7 +326,7 @@ def event_handler(event):
                     }
                 )
             elif result.get("status") in constant.INT_STATUS:
-                messages.ask_select_button_message(event)
+                messages.message_handler(constant.ASK_SELECT_BUTTON, event)
             return
     elif "delete" in result.get("command"):
         if "cancel" in text:
