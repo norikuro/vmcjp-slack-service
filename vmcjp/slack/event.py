@@ -273,7 +273,7 @@ def event_handler(event):
             db.delete_cred_db(event["user_id"])
             return
         elif "help" in text:
-            messages.help_message(event)
+            messages.message_handler(constant.HELP, event)
             return
         elif "cancel" in text:
             if __cred_data is not None and "registering" in __cred_data.get("status"):
