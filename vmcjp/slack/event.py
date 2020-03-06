@@ -330,10 +330,7 @@ def event_handler(event):
             db.write_cred_db(
                 event.get("user_id"), 
                 {
-#                    "status": "registered", 
-#                    "org_id": event.get("text"), 
                     "org_id": event.get("text")
-#                    "user_name": user_name
                 }
             )
             db.write_event_db(
