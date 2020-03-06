@@ -156,7 +156,7 @@ def event_handler(event):
             elif "registered" in __cred_data.get("status"):
                 event_cred_update(event, __cred_data)
                 message_handler(constant.SDDC_WIZARD, event)
-                messages.check_resources_message(event)
+                message_handler(constant.CHECK_RESOURCE, event)
                 event.update(
                     {
                         "max_hosts": get_max_num_hosts(
