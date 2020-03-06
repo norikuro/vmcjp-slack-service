@@ -21,6 +21,7 @@ class _const:
   ASK_REGISTER_TOKEN = "ask_register_token_message"
   REGISTER_TOKEN = "register_token_message"
   REGISTER_ORG = "register_org_message"
+  DELETE_ORG = "delete_org_message"
 
   class ConstError(TypeError):
     pass
