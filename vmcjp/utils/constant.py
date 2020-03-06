@@ -47,6 +47,7 @@ class _const:
   AWS_SUBNET = "aws_subnet_list_message"
   CIDR = "ask_cidr_message"
   WRONG_NETWORK = "wrong_network_message"
+  SDDC_CONFIRM = "create_sddc_confirmation_message"
 
   class ConstError(TypeError):
     pass
