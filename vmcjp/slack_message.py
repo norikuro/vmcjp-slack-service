@@ -173,7 +173,7 @@ def failed_token_registration_message(event):
     response = post_text_with_bot_token(event, text)
 
 def wrong_token_message(event):
-    text = "You might entered wrong Org ID or token, please check your Org ID or token and enter correct one."
+    text = "You might enter wrong Org ID or token, please check your Org ID or token and enter correct one."
     response = post_text_with_bot_token(event, text)
 
 def delete_sddc_message(event):
