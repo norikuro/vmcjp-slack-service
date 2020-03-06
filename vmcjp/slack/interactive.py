@@ -129,7 +129,7 @@ def interactive_handler(event):
                     "sddc_id": sddc_id
                 }
             )
-            messages.sddc_deletion_confirmation_message(event)
+            message_handler(constant.CONFIRM_DELETE, event)
         return
     elif "delete_confirmation" in event.get("callback_id"):
         if "yes" in event.get("response"):
