@@ -39,6 +39,7 @@ class _const:
   MAX_HOSTS = "max_hosts_message"
   REGION = "region_list_message"
   SDDC_NAME = "ask_sddc_name_message"
+  LINK_AWS = "link_aws_message"
 
   class ConstError(TypeError):
     pass
