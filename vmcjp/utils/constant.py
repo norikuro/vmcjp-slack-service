@@ -22,7 +22,7 @@ class _const:
   REGISTER_TOKEN = "register_token_message"
   REGISTER_ORG = "register_org_message"
   DELETE_ORG = "delete_org_message"
-  CALCEL_TOKEN = "cancel_token_registration_message"
+  CANCEL_TOKEN = "cancel_token_registration_message"
   CANCEL_PRG = "cancel_org_registration_message"
   SUCCESS_TOKEN = "succeed_token_registration_message"
   FAILED_TOKEN = "failed_token_registration_message"
