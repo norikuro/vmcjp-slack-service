@@ -7,13 +7,14 @@ import atexit
 from vmware.vapi.vmc.client import create_vmc_client
 from com.vmware.vmc.model_client import ErrorResponse
 from com.vmware.vapi.std.errors_client import InvalidRequest
+
 from vmcjp.utils.task_helper import task_handler
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils import constant
-from vmcjp import slack_message
+from vmcjp.slack.message import messages
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+#logger = logging.getLogger()
+#logger.setLevel(logging.INFO)
 
 def get_vmc_client(token):  
   session = requests.Session()
