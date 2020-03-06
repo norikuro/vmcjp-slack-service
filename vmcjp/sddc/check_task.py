@@ -4,13 +4,14 @@ import requests
 import atexit
 
 from vmware.vapi.vmc.client import create_vmc_client
+
 from vmcjp.utils.cloudwatch import remove_event
 from vmcjp.utils.task_helper import task_handler
 from vmcjp.utils import dbutils
-from vmcjp import slack_message
+from vmcjp.slack.message import messages
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+#logger = logging.getLogger()
+#logger.setLevel(logging.INFO)
 
 def get_vmc_client(token):  
   session = requests.Session()
