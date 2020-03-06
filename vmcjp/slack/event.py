@@ -236,22 +236,7 @@ def event_handler(event):
                     )
                     messages.list_sddcs_message(event)
             return
-#        elif "register token" in text:
-#            messages.register_token_message(event)
-#            db.write_cred_db(
-#                event.get("user_id"), 
-#                {
-#                    "status": "registering"
-#                }
-#            )
-#            db.write_event_db(
-#                event.get("user_id"), 
-#                {
-#                    "command": "register token",
-#                    "status": "registering"
-#                }
-#            )
-#            return
+
         elif "register org" in text:
             messages.register_org_message(event)
             db.write_cred_db(
@@ -336,26 +321,6 @@ def event_handler(event):
         if "cancel" in text:
             messages.cancel_sddc_restoration_message(event)
             db.delete_event_db(event.get("user_id"))
-#    elif "register token" in result.get("command"):
-#        if "cancel" in text:
-#            messages.cancel_token_registration_message(event)
-#            db.delete_event_db(event.get("user_id"))
-#            db.delete_cred_db(event.get("user_id"))
-#        else:
-#            user_name = validate_token(event.get("text"))
-#            if user_name is not None:
-#                messages.succeed_token_registration_message(event)
-#                db.write_cred_db(
-#                    event.get("user_id"), 
-#                    {
-#                        "status": "registered", 
-#                        "token": event.get("text"), 
-#                        "user_name": user_name
-#                    }
-#                )
-#                db.delete_event_db(event["user_id"])
-#            else:
-#                messages.wrong_token_message(event)
     elif "register org" in result.get("command"):
         if "cancel" in text:
             messages.cancel_org_registration_message(event)
@@ -377,7 +342,7 @@ def event_handler(event):
                     "status": "registering token"
                 }
             )
-            messages.register_token_message(event)
+            message_handler(constant.REGISTER_TOKEN, event)
         elif "registering token" in result.get("status"):
                 user_name = validate_token(event.get("text"), __cred_data.get("org_id"))
                 if user_name is not None:
