@@ -36,6 +36,7 @@ class _const:
   CHECK_RESOURCE = "check_resources_message"
   CANCEL_SDDC = "cancel_sddc_creation_message"
   NOT_ENOUGH = "no_enough_resouces_message"
+  MAX_HOSTS = "max_hosts_message"
 
   class ConstError(TypeError):
     pass
