@@ -15,6 +15,7 @@ class _const:
   INT_STATUS = ["create_sddc", "resource_check", "sddc_name", "single_multi", "num_hosts", "aws_account", "vpc", "vpc_cidr", "link_aws"]  
   
   MAY_I = "may_i_message"
+  HELP = "help_message"
 
   class ConstError(TypeError):
     pass
