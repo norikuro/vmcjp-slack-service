@@ -58,7 +58,7 @@ class _const:
   TASK_MSG = "task_message"
   TASK_WH = "task_webhook_message"
   RESTORE_WIZARD = "start_restore_wizard_message"
-  RESTORE = "message_handler(constant.ASK_REGISTER_TOKEN, event)"
+  RESTORE = "restore_message"
 
   class ConstError(TypeError):
     pass
