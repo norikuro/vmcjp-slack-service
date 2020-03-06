@@ -254,7 +254,7 @@ def event_handler(event):
             )
             return
         elif "delete org" in text:
-            messages.delete_org_message(event)
+            message_handler(constant.DELETE_ORG, event)
             db.delete_cred_db(event["user_id"])
             return
         elif "help" in text:
