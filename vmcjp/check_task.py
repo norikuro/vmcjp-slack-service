@@ -43,7 +43,7 @@ def lambda_handler(event, context):
     )
     event.update({"status": status})
     message_handler(constant.CHECK_TASK, event)
-    messages.check_task_webhook_message(event)
+    message_handler(constant.CHECK_TASK_WH, event)
 
     if "Failed" in status or "Canceled" in status or "Finished" in status:
       db.delete_event_db(event.get("user_id"))
