@@ -46,6 +46,7 @@ class _const:
   AWS_VPC = "aws_vpc_list_message"
   AWS_SUBNET = "aws_subnet_list_message"
   CIDR = "ask_cidr_message"
+  WRONG_NETWORK = "wrong_network_message"
 
   class ConstError(TypeError):
     pass
