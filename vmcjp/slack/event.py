@@ -205,7 +205,7 @@ def event_handler(event):
             if __cred_data is None:
                 message_handler(constant.ASK_REGISTER_TOKEN, event)
             elif "registered" in __cred_data.get("status"):
-                message_handler(constant.RESTORE, event)
+                message_handler(constant.RESTORE_WIZARD, event)
                 config = db.get_backedup_sddc_config()
                 event.update(config)
                 event_cred_update(event, __cred_data)
