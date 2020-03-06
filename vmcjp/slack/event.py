@@ -274,7 +274,7 @@ def event_handler(event):
         if "create sddc" in text:
             return
         elif "cancel" in text:
-            messages.cancel_sddc_creation_message(event)
+            message_handler(constant.CANCEL_SDDC, event)
             db.delete_event_db(event.get("user_id"))
             return
         elif text.find(" ") != -1:
