@@ -195,9 +195,9 @@ def interactive_handler(event):
                     ]
                 }
             )
-           message_handler(constant.AWS_ACCOUNT, event)
+            message_handler(constant.AWS_ACCOUNT, event)
         else:
-            messages.ask_cidr_message(event)
+            message_handler(constant.CIDR, event)
         db.write_event_db(
             user_id, 
             {
