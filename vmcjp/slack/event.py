@@ -295,7 +295,7 @@ def event_handler(event):
                         }
                     )
                 else:
-                    messages.wrong_network_message(event)
+                    message_handler(constant.WRONG_NETWORK, event)
             return
         else:
             if result.get("status") == "region":
