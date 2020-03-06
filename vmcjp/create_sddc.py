@@ -11,7 +11,7 @@ from vmware.vapi.vmc.client import create_vmc_client
 
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils import constant
-from vmcjp.slack.message import messages
+from vmcjp.slack.message.messages import message_handler
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -92,7 +92,7 @@ def lambda_handler(event, context):
         "status": "task_failed"
       }
     )
-    messages.crud_sddc_result_message(event)
+    message_handler(constant.SDDC_RESULT, event)
     call_lambda("check_task", event)
     return
   
