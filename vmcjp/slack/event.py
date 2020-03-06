@@ -224,7 +224,7 @@ def event_handler(event):
                 event_cred_update(event, __cred_data)
                 vmc_client = get_vmc_client(event.get("token"))
                 sddcs = vmc_client.orgs.Sddcs.list(event.get("org_id"))
-                messages.list_sddcs_text_message(event)
+                message_handler(constant.SDDCS, event)
                 for sddc in sddcs:
                     event.update(
                         {
