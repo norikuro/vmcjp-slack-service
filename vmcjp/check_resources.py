@@ -76,9 +76,6 @@ def check_customer_aws(org_id, aws_account, vmc_client):
   
 #  check if customer subnet is exist
 #  need to implement later, Zero Cloud happens error
-#  vmc_map = vmc_client.orgs.account_link.CompatibleSubnets.get(org=event["org_id"], linked_account_id=event["connected_account_id"]).vpc_map
-#  for v in vpc_map.values():
-#    for subnet in v.subnets:
 
 def lambda_handler(event, context):
 #  logging.info(event)
