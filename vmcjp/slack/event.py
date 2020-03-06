@@ -193,7 +193,7 @@ def event_handler(event):
                         )
                     }
                 )
-                messages.delete_sddc_message(event)
+                message_handler(constant.DELETE_SDDC, event)
                 db.write_event_db(
                     event.get("user_id"), 
                     {
