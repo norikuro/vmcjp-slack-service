@@ -14,7 +14,7 @@ class _const:
   BUTTON_DIR = "vmcjp/slack/button/"
   INT_STATUS = ["create_sddc", "resource_check", "sddc_name", "single_multi", "num_hosts", "aws_account", "vpc", "vpc_cidr", "link_aws"]  
   
-  MAY_I_MESSAGE = "may_i_message"
+  MAY_I = "may_i_message"
 
   class ConstError(TypeError):
     pass
