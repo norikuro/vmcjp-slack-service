@@ -262,7 +262,7 @@ def event_handler(event):
             return
         elif "cancel" in text:
             if __cred_data is not None and "registering" in __cred_data.get("status"):
-                messages.cancel_token_registration_message(event)
+                message_handler(constant.CANCEL_TOKEN, event)
                 db.delete_cred_db(event.get("user_id"))
             else:
                 message_handler(constant.MAY_I, event)
