@@ -52,6 +52,7 @@ class _const:
   SDDCS_TXT = "list_sddcs_text_message"
   SDDCS_MSG = "list_sddcs_message"
   SDDC_RESULT = "crud_sddc_result_message"
+  CHECK_TASK = "check_task_message"
 
   class ConstError(TypeError):
     pass
