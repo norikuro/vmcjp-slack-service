@@ -351,7 +351,7 @@ def interactive_handler(event):
                 }
             )
         else:
-            message_handler(constant.CANCEL_RESOURCE, event)
+            message_handler(constant.CANCEL_RESTORE, event)
             db.delete_event_db(user_id)
         return
     else:
