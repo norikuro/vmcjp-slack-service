@@ -286,7 +286,7 @@ def event_handler(event):
                         {"vpc_cidr": event.get("text")}
                     )
                     event.update(result)
-                    messages.create_sddc_confirmation_message(event)
+                    message_handler(constant.SDDC_CONFIRM, event)
                     db.write_event_db(
                         event.get("user_id"), 
                         {
