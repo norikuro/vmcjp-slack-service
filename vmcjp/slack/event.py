@@ -216,7 +216,7 @@ def event_handler(event):
                     }
                 )
                 db.write_event_db(event.get("user_id"), config)
-                messages.restore_message(event)
+                message_handler(constant.RESTORE, event)
         elif "list sddcs" in text:
             if __cred_data is None:
                 message_handler(constant.ASK_REGISTER_TOKEN, event)
