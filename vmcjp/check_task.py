@@ -7,7 +7,7 @@ from vmware.vapi.vmc.client import create_vmc_client
 from vmcjp.utils.cloudwatch import remove_event
 from vmcjp.utils.task_helper import task_handler
 from vmcjp.utils import dbutils
-from vmcjp.slack.message.messages import message_handler
+from vmcjp.slack.messages import message_handler
 
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
