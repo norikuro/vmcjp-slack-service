@@ -26,6 +26,7 @@ class _const:
   CANCEL_PRG = "cancel_org_registration_message"
   SUCCESS_TOKEN = "succeed_token_registration_message"
   FAILED_TOKEN = "failed_token_registration_message"
+  WRONG_TOKEN = "wrong_token_message"
 
   class ConstError(TypeError):
     pass
