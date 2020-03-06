@@ -326,7 +326,7 @@ def interactive_handler(event):
         return
     elif "confirmation" in event.get("callback_id"):
         if "yes" in event.get("response"):
-            messages.start_create_sddc_message(event)
+            message_handler(constant.CREATE, event)
             db.write_event_db(
                 user_id, 
                 {
