@@ -144,7 +144,7 @@ def interactive_handler(event):
                 message_handler(constant.CANT_DELETE, event)
                 db.delete_event_db(user_id)
         else:
-            messages.cancel_sddc_deletion_message(event)
+            message_handler(constant.CANCEL_DELETE, event)
             db.delete_event_db(user_id)
         return
     elif "create_sddc" in event.get("callback_id"):
