@@ -141,7 +141,7 @@ def interactive_handler(event):
             if check_sddc_user(event):
                 call_lambda("delete_sddc", event)
             else:
-                messages.cannot_delete_sddc_message(event)
+                message_handler(constant.CANT_DELETE, event)
                 db.delete_event_db(user_id)
         else:
             messages.cancel_sddc_deletion_message(event)
