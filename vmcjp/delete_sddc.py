@@ -1,6 +1,6 @@
-#import logging
 import requests
 import atexit
+#import logging
 
 from vmware.vapi.vmc.client import create_vmc_client
 from com.vmware.vmc.model_client import ErrorResponse
