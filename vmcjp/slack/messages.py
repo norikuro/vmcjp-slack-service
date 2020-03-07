@@ -38,7 +38,8 @@ def post_text_to_webhook(event, text):
 
 def post_option_with_bot_token(event, button, option_list):
     response = post_option(
-        event.get("post_url"),
+#        event.get("post_url"),
+        constant.POST_URL,
         event.get("slack_token"), 
         event.get("channel"),
         button, 
