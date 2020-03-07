@@ -7,7 +7,8 @@ def message_handler(message, event):
 def post_text_with_bot_token(event, text):
     data = {"text": text}
     response = post_text(
-        event.get("post_url"),
+#        event.get("post_url"),
+        constant.POST_URL,
         event.get("slack_token"),
         event.get("channel"),
         data,
