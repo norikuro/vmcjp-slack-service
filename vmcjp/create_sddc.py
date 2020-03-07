@@ -1,6 +1,6 @@
-import logging
 import requests
 import atexit
+import logging
 
 from distutils.util import strtobool
 from com.vmware.vmc.model_client import AwsSddcConfig, AccountLinkSddcConfig, SddcConfig, AccountLinkConfig, ErrorResponse
