@@ -69,7 +69,8 @@ def post_button_to_response_url(event, button):
 
 def post_button_with_bot_token(event, button):
     response = post_button(
-        event.get("post_url"),
+#        event.get("post_url"),
+        constant.POST_URL,
         event.get("slack_token"), 
         event.get("channel"),
         button,
