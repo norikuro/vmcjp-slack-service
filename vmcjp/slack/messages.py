@@ -98,7 +98,8 @@ def post_field_button_to_webhook(event, button):
 
 def post_field_button_with_bot_token(event, button):
     response = post_field_button(
-        event.get("post_url"),
+#        event.get("post_url"),
+        constant.POST_URL,
         event.get("slack_token"), 
         event.get("channel"),
         button,
