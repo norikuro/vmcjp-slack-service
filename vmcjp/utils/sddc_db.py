@@ -1,6 +1,5 @@
 import pymongo
 
-from vmcjp.utils.s3utils import read_json_from_s3
 from vmcjp.utils import constant
 
 class DocmentDb(object):
