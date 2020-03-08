@@ -6,32 +6,32 @@ from vmcjp.utils import dbutils
 from vmcjp.utils import constant
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.slack.messages import message_handler
-from vmcjp.vmc.vmc_client import get_vmc_client, list_region, list_aws_account, list_vpc
+from vmcjp.vmc.vmc_client import get_vmc_client, list_region, list_aws_account, list_vpc, list_subnet
 
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
 
-def list_subnet(
-    vmc_client,
-    org_id,
-    linked_account_id, 
-    region,
-    vpc_id
-):
-    csbnts = vmc_client.orgs.account_link.CompatibleSubnets.get(
-        org_id, 
-        linked_account_id=linked_account_id, 
-        region=region, 
-        sddc=None, 
-        force_refresh=None
-    )
-    vpc_subnets = csbnts.get_field("vpc_map").get(vpc_id).subnets
-    return [
-        {
-            "text": "{}, {}".format(sub.subnet_id, sub.name),
-            "value": sub.subnet_id
-        } for sub in vpc_subnets if sub.compatible
-    ]
+#def list_subnet(
+#    vmc_client,
+#    org_id,
+#    linked_account_id, 
+#    region,
+#    vpc_id
+#):
+#    csbnts = vmc_client.orgs.account_link.CompatibleSubnets.get(
+#        org_id, 
+#        linked_account_id=linked_account_id, 
+#        region=region, 
+#        sddc=None, 
+#        force_refresh=None
+#    )
+#    vpc_subnets = csbnts.get_field("vpc_map").get(vpc_id).subnets
+#    return [
+#        {
+#            "text": "{}, {}".format(sub.subnet_id, sub.name),
+#            "value": sub.subnet_id
+#        } for sub in vpc_subnets if sub.compatible
+#    ]
 
 def list_num_hosts(num_hosts):
     return [
