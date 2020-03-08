@@ -121,3 +121,26 @@ def list_vpc(
             "value": vpc
         } for vpc in vpcs
     ]
+
+def list_subnet(
+    token,
+    org_id,
+    linked_account_id, 
+    region,
+    vpc_id
+):
+    vmc_client = get_vmc_client(token)
+    csbnts = vmc_client.orgs.account_link.CompatibleSubnets.get(
+        org_id, 
+        linked_account_id=linked_account_id, 
+        region=region, 
+        sddc=None, 
+        force_refresh=None
+    )
+    vpc_subnets = csbnts.get_field("vpc_map").get(vpc_id).subnets
+    return [
+        {
+            "text": "{}, {}".format(sub.subnet_id, sub.name),
+            "value": sub.subnet_id
+        } for sub in vpc_subnets if sub.compatible
+    ]
