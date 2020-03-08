@@ -43,3 +43,44 @@ def list_region(vmc_client, org_id):
             "value": region
         } for region in regions
     ]
+
+def is_network(address):
+    try:
+        ipaddress.ip_network(address)
+        return True
+    except ValueError:
+        return False
+
+def is_valid_network(address):
+    try:
+        nw = ipaddress.ip_network(address)
+    except ValueError:
+        return False
+    
+    prefix = nw.prefixlen
+    if prefix != 23 and prefix != 20 and prefix != 16:
+        return False
+    
+    rs10 = ipaddress.ip_network(u'10.0.0.0/15')
+    rs192 = ipaddress.ip_network(u'192.168.1.0/24')
+    rs172 = ipaddress.ip_network(u'172.31.0.0/16')
+
+    if nw.subnet_of(rs10):
+        return False
+    elif rs192.subnet_of(nw):
+        return False
+    elif nw.subnet_of(rs172):
+        return False
+    
+    nw10 = ipaddress.ip_network(u'10.0.0.0/8')
+    nw172 = ipaddress.ip_network(u'172.16.0.0/12')
+    nw192 = ipaddress.ip_network(u'192.168.0.0/16')
+    
+    if nw.subnet_of(nw10):
+        return True
+    elif nw.subnet_of(nw172):
+        return True
+    elif nw.subnet_of(nw192):
+        return True
+    else:
+        return False
