@@ -229,7 +229,7 @@ def interactive_handler(event):
         event.update(
             {
 #                "aws_account_list": list_aws_account(
-#                    get_vmc_client(event.get("token")),
+#                    event.get("token"),
 #                    event.get("org_id")
 #                )
                 "aws_account_list": [
