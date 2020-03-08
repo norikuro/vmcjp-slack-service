@@ -21,7 +21,7 @@ def lambda_handler(event, context):
             "aws_internal_account": os.environ["aws_account"], #for internal use
             "aws_internal_id": os.environ["aws_id"], #for internal use
             "cloudwatch_account": j.get("cloudwatch_account"), #for internal use
-            "webhook_url": j.get("webhook_url")
+            "webhook_url": j.get("webhook_url"),
             "bot_token": j.get("bot_token")
         }
     )
