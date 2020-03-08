@@ -8,7 +8,7 @@ from vmcjp.utils.loginutils import validate_token
 from vmcjp.utils import dbutils
 from vmcjp.utils import constant
 from vmcjp.slack.messages import message_handler
-from vmcjp.vmc.vmc_client import get_vmc_client, list_sddcs
+from vmcjp.vmc.vmc_client import get_vmc_client, list_sddcs, get_max_num_hosts
 
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
