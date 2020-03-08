@@ -34,3 +34,12 @@ def get_max_num_hosts(token, org_id):
 #def get_max_num_hosts_zerocloud(token, org_id): #for internal use
 #    vmc_client = get_vmc_client(token)
 #    return int(vmc_client.Orgs.get(org_id).properties.values["maxHostsPerSddcOnCreate"])
+
+def list_region(vmc_client, org_id):
+    regions = vmc_client.Orgs.get(org_id).properties.values.get("defaultAwsRegions").split(",")
+    return [
+        {
+            "text": region,
+            "value": region
+        } for region in regions
+    ]
