@@ -6,7 +6,7 @@ from vmcjp.utils import dbutils
 from vmcjp.utils import constant
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.slack.messages import message_handler
-from vmcjp.vmc.vmc_client import get_vmc_client, list_region, list_aws_account
+from vmcjp.vmc.vmc_client import get_vmc_client, list_region, list_aws_account, list_vpc
 
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
@@ -259,7 +259,7 @@ def interactive_handler(event):
         event.update(
             {
                 "vpc_list": list_vpc(
-                    get_vmc_client(event.get("token")),
+                    event.get("token"),
                     event.get("org_id"),
                     aws_id,
                     result.get("region")
