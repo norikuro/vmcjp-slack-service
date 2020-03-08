@@ -16,6 +16,16 @@ class _const:
   BUTTON_DIR = "vmcjp/slack/button/"
   INT_STATUS = ["create_sddc", "resource_check", "sddc_name", "single_multi", "num_hosts", "aws_account", "vpc", "vpc_cidr", "link_aws"]  
   
+  command = {
+    "register org": "register_org",
+    "delete org": "delete_org",
+    "create sddc": "create_sddc",
+    "delete sddc": "delete_sddc",
+    "list sddcs": "list_sddcs",
+    "restore sddc": "restore_sddc", # for internal use
+    "help": "help"
+  }
+  
   MAY_I = "may_i_message"
   HELP = "help_message"
   ASK_SELECT_BUTTON = "ask_select_button_message"
