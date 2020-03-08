@@ -152,3 +152,12 @@ def list_num_hosts(num_hosts):
             "value": i + 1
         } for i in range(2, num_hosts)
     ]
+
+def check_sddc_user(token, org_id, sddc_id, user_name):
+    vmc_client = get_vmc_client(token)
+    sddc = vmc_client.orgs.Sddcs.get(org_id, sddc_id)
+    sddc_user_name = sddc.user_name
+    if sddc_user_name in user_name:
+        return True
+    else:
+        return False
