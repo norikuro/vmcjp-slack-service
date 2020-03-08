@@ -87,3 +87,15 @@ def is_valid_network(address):
         return True
     else:
         return False
+
+def list_aws_account(token, org_id):
+    vmc_client = get_vmc_client(token)
+    accounts = vmc_client.orgs.account_link.ConnectedAccounts.get(org_id)
+    return [
+        {
+            "text": account.account_number,
+            "value": "{}+{}".format(
+                account.account_number, 
+                account.id)
+        } for account in accounts
+    ]
