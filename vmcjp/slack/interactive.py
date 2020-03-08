@@ -1,7 +1,4 @@
 import json
-#import logging
-#import atexit
-#import requests
 
 from vmware.vapi.vmc.client import create_vmc_client
 
@@ -13,12 +10,6 @@ from vmcjp.vmc.vmc_client import get_vmc_client
 
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
-
-#def get_vmc_client(token):
-#    session = requests.Session()
-#    vmc_client = create_vmc_client(token, session=session)
-#    atexit.register(session.close)
-#    return vmc_client
 
 def list_aws_account(vmc_client, org_id):
     accounts = vmc_client.orgs.account_link.ConnectedAccounts.get(org_id)
