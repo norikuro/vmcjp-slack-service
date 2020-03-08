@@ -248,7 +248,7 @@ def interactive_handler(event):
         event.update(
             {
                 "subnet_list": list_subnet(
-                    get_vmc_client(event.get("token")),
+                    event.get("token"),
                     event.get("org_id"),
                     result.get("connected_account_id"),
                     result.get("region"),
