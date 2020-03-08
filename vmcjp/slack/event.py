@@ -4,7 +4,7 @@ import atexit
 import requests
 
 from vmware.vapi.vmc.client import create_vmc_client
-from vmcjp.utils.vmc import validate_token
+from vmcjp.utils.loginutils import validate_token
 from vmcjp.utils import dbutils
 from vmcjp.utils import constant
 from vmcjp.slack.messages import message_handler
