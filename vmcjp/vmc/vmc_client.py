@@ -144,3 +144,11 @@ def list_subnet(
             "value": sub.subnet_id
         } for sub in vpc_subnets if sub.compatible
     ]
+
+def list_num_hosts(num_hosts):
+    return [
+        {
+            "text": i + 1,
+            "value": i + 1
+        } for i in range(2, num_hosts)
+    ]
