@@ -1,5 +1,5 @@
 import json
-import logging
+#import logging
 #import atexit
 #import requests
 
@@ -11,8 +11,8 @@ from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.slack.messages import message_handler
 from vmcjp.vmc.vmc_client import get_vmc_client
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+#logger = logging.getLogger()
+#logger.setLevel(logging.INFO)
 
 #def get_vmc_client(token):
 #    session = requests.Session()
