@@ -6,21 +6,21 @@ from vmcjp.utils import dbutils
 from vmcjp.utils import constant
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.slack.messages import message_handler
-from vmcjp.vmc.vmc_client import get_vmc_client, list_region
+from vmcjp.vmc.vmc_client import get_vmc_client, list_region, list_aws_account
 
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
 
-def list_aws_account(vmc_client, org_id):
-    accounts = vmc_client.orgs.account_link.ConnectedAccounts.get(org_id)
-    return [
-        {
-            "text": account.account_number,
-            "value": "{}+{}".format(
-                account.account_number, 
-                account.id)
-        } for account in accounts
-    ]
+#def list_aws_account(vmc_client, org_id):
+#    accounts = vmc_client.orgs.account_link.ConnectedAccounts.get(org_id)
+#    return [
+#        {
+#            "text": account.account_number,
+#            "value": "{}+{}".format(
+#                account.account_number, 
+#                account.id)
+#        } for account in accounts
+#    ]
 
 def list_vpc(
     vmc_client, 
