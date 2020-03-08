@@ -1,7 +1,5 @@
 import json
 
-from vmware.vapi.vmc.client import create_vmc_client
-
 from vmcjp.utils import dbutils
 from vmcjp.utils import constant
 from vmcjp.utils.lambdautils import call_lambda
