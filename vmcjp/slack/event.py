@@ -8,7 +8,7 @@ from vmcjp.utils.loginutils import validate_token
 from vmcjp.utils import dbutils
 from vmcjp.utils import constant
 from vmcjp.slack.messages import message_handler
-from vmcjp.vmc.vmc_client import get_vmc_client
+from vmcjp.vmc.vmc_client import get_vmc_client, list_sddcs
 
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
@@ -91,15 +91,15 @@ def is_valid_network(address):
     else:
         return False
 
-def list_sddcs(token, org_id):
-    vmc_client = get_vmc_client(token)
-    sddcs = vmc_client.orgs.Sddcs.list(org_id)
-    return [
-        {
-            "text": sddc.name,
-            "value": "{}+{}".format(sddc.name, sddc.id)
-        } for sddc in sddcs
-    ]
+#def list_sddcs(token, org_id):
+#    vmc_client = get_vmc_client(token)
+#    sddcs = vmc_client.orgs.Sddcs.list(org_id)
+#    return [
+#        {
+#            "text": sddc.name,
+#            "value": "{}+{}".format(sddc.name, sddc.id)
+#        } for sddc in sddcs
+#    ]
 
 def event_cred_update(event, cred):
     event.update(
