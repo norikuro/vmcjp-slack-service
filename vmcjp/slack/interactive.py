@@ -67,7 +67,12 @@ def interactive_handler(event):
             event.update(
                 {"user_name": __cred_data.get("user_name")}
             )
-            if check_sddc_user(event):
+            if check_sddc_user(
+                event.get("token"),
+                event.get("org_id"),
+                event.get("sddc_id"),
+                event.get("user_name")
+            ):
                 call_lambda("delete_sddc", event)
             else:
                 message_handler(constant.CANT_DELETE, event)
