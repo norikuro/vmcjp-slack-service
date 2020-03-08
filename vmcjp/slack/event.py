@@ -8,7 +8,7 @@ from vmcjp.utils.loginutils import validate_token
 from vmcjp.utils import dbutils
 from vmcjp.utils import constant
 from vmcjp.slack.messages import message_handler
-from vmcjp.vmc.vmc_client import get_vmc_client, list_sddcs, get_max_num_hosts
+from vmcjp.vmc.vmc_client import get_vmc_client, list_sddcs, get_max_num_hosts, list_region
 
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
@@ -41,14 +41,14 @@ from vmcjp.vmc.vmc_client import get_vmc_client, list_sddcs, get_max_num_hosts
 ##    vmc_client = get_vmc_client(token)
 ##    return int(vmc_client.Orgs.get(org_id).properties.values["maxHostsPerSddcOnCreate"])
 
-def list_region(vmc_client, org_id):
-    regions = vmc_client.Orgs.get(org_id).properties.values.get("defaultAwsRegions").split(",")
-    return [
-        {
-            "text": region,
-            "value": region
-        } for region in regions
-    ]
+#def list_region(vmc_client, org_id):
+#    regions = vmc_client.Orgs.get(org_id).properties.values.get("defaultAwsRegions").split(",")
+#    return [
+#        {
+#            "text": region,
+#            "value": region
+#        } for region in regions
+#    ]
 
 def is_network(address):
     try:
