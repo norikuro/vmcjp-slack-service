@@ -6,18 +6,18 @@ from vmcjp.utils import dbutils
 from vmcjp.utils import constant
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.slack.messages import message_handler
-from vmcjp.vmc.vmc_client import get_vmc_client, list_region, list_aws_account, list_vpc, list_subnet
+from vmcjp.vmc.vmc_client import get_vmc_client, list_region, list_aws_account, list_vpc, list_subnet, list_num_hosts
 
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
 
-def list_num_hosts(num_hosts):
-    return [
-        {
-            "text": i + 1,
-            "value": i + 1
-        } for i in range(2, num_hosts)
-    ]
+#def list_num_hosts(num_hosts):
+#    return [
+#        {
+#            "text": i + 1,
+#            "value": i + 1
+#        } for i in range(2, num_hosts)
+#    ]
 
 def check_sddc_user(event):
     vmc_client = get_vmc_client(event.get("token"))
