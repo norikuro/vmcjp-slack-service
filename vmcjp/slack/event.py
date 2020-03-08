@@ -4,9 +4,6 @@ from vmcjp.utils import constant
 from vmcjp.slack.messages import message_handler
 from vmcjp.vmc.vmc_client import get_vmc_client, list_sddcs, get_max_num_hosts, is_network, is_valid_network
 
-#logger = logging.getLogger()
-#logger.setLevel(logging.INFO)
-
 def event_cred_update(event, cred):
     event.update(
         {
