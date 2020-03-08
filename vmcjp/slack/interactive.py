@@ -22,15 +22,6 @@ def list_aws_account(vmc_client, org_id):
         } for account in accounts
     ]
 
-#def list_region(vmc_client, org_id):
-#    regions = vmc_client.Orgs.get(org_id).properties.values.get("defaultAwsRegions").split(",")
-#    return [
-#        {
-#            "text": region,
-#            "value": region
-#        } for region in regions
-#    ]
-
 def list_vpc(
     vmc_client, 
     org_id, 
