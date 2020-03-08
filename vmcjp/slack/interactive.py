@@ -144,7 +144,7 @@ def interactive_handler(event):
             event.update(
 #                {
 #                    "region_list": list_region(
-#                        get_vmc_client(event.get("token")),
+#                        event.get("token"),
 #                        event.get("org_id")
 #                    )
 #                }
