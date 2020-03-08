@@ -99,3 +99,25 @@ def list_aws_account(token, org_id):
                 account.id)
         } for account in accounts
     ]
+
+def list_vpc(
+    token, 
+    org_id, 
+    linked_account_id, 
+    region
+):
+    vmc_client = get_vmc_client(token)
+    csbnts = vmc_client.orgs.account_link.CompatibleSubnets.get(
+        org_id, 
+        linked_account_id=linked_account_id, 
+        region=region, 
+        sddc=None, 
+        force_refresh=None
+    )
+    vpcs = csbnts.vpc_map.keys()
+    return [
+        {
+            "text": vpc,
+            "value": vpc
+        } for vpc in vpcs
+    ]
