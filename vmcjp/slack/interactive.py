@@ -11,23 +11,6 @@ from vmcjp.vmc.vmc_client import get_vmc_client, list_region, list_aws_account, 
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
 
-#def list_num_hosts(num_hosts):
-#    return [
-#        {
-#            "text": i + 1,
-#            "value": i + 1
-#        } for i in range(2, num_hosts)
-#    ]
-
-#def check_sddc_user(event):
-#    vmc_client = get_vmc_client(event.get("token"))
-#    sddc = vmc_client.orgs.Sddcs.get(event.get("org_id"), event.get("sddc_id"))
-#    user_name = sddc.user_name
-#    if user_name in event.get("user_name"):
-#        return True
-#    else:
-#        return False
-
 def interactive_handler(event):
     user_id = event.get("user_id")
     
