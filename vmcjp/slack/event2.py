@@ -48,3 +48,6 @@ def event_handler(event):
             message_handler(msg_const.CANCEL_SDDC, event)
             db.delete_event_db(event.get("user_id"))
             return
+        elif cmd_const.MGMT_CIDR in event_db.get("status"):
+            command_handler(cmd_const.MGMT_CIDR event, db)
+            return
