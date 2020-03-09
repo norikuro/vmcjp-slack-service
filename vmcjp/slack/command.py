@@ -8,8 +8,8 @@ def command_handler(cmd, event, db=None):
     elif db is not None:
         eval(cmd)(event, db)
 
-def help(event):
-    message_handler(constant.HELP, event)
+#def help(event):
+#    message_handler(constant.HELP, event)
 
 def cancel(event, db):
     message_handler(constant.CANCEL_TOKEN, event)
