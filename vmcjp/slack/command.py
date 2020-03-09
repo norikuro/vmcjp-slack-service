@@ -9,6 +9,10 @@ def command_handler(cmd, event, db=None):
 def help(event):
     message_handler(constant.HELP, event)
 
+def cancel(event, db):
+    message_handler(constant.CANCEL_TOKEN, event)
+    db.delete_cred_db(event.get("user_id"))
+
 def register_org(event, db):
     message_handler(constant.REGISTER_ORG, event)
     db.write_cred_db(
