@@ -43,7 +43,7 @@
       "fields": [
         {
           "title": "Create SDDC on ZEROCLOUD",
-          "value": "Type `create sddc on zerocloud` to create sddc on zerocloud.  This will deploy virtual SDDC and this type of sddc will not consume AWS's bare metal.  You can check results in #vmcjpdemo channel."
+          "value": "Type `create zerocloud sddc` to create sddc on zerocloud.  This will deploy virtual SDDC and this type of sddc will not consume AWS's bare metal.  You can check results in #vmcjpdemo channel."
         }
       ]
     },
