@@ -94,7 +94,7 @@ def delete_sddc(event, db):
     db.write_event_db(
         event.get("user_id"),
         {
-            "command": "delete", 
-            "status": "delete_sddc"
+            "command": constant.COMMAND_SDDC[event.get(text)],
+            "status": constant.DELETE_SDDC
         }
     )
