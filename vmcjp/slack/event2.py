@@ -28,6 +28,7 @@ def event_handler(event):
             return
         elif text in constant.COMMAND_SDDC:
             if cred is not None and "registered" in cred.get("status"):
+                event_cred_update(event, cred)
                 command_handler(constant.COMMAND_SDDC[text], event, db)
                 return
             else:
