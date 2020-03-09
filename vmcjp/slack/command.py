@@ -1,3 +1,4 @@
+from vmcjp.utils import constant
 from vmcjp.slack.messages import message_handler
 from vmcjp.vmc.vmc_client import list_sddcs_, get_max_num_hosts, list_sddcs
 
