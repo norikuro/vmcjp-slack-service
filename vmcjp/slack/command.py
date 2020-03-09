@@ -14,7 +14,7 @@ def register_org(event, db):
     db.write_event_db(
         event.get("user_id"), 
         {
-            "command": "register org",
+            "command": "register_org",
         }
     )
 
