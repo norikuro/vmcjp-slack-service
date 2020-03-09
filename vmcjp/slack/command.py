@@ -1,6 +1,7 @@
 from vmcjp.utils import constant
+from vmcjp.utils.loginutils import validate_token
 from vmcjp.slack.messages import message_handler
-from vmcjp.vmc.vmc_client import list_sddcs_, get_max_num_hosts, list_sddcs
+from vmcjp.vmc.vmc_client import list_sddcs_, get_max_num_hosts, list_sddcs, validate_token
 
 def command_handler(cmd, event, db):
     eval(cmd)(event, db)
@@ -20,6 +21,23 @@ def register_org(event, db):
             "status": "registering"
         }
     )
+
+def register_token(event, db):
+    user_name = validate_token(event.get("text"), __cred_data.get("org_id"))
+    if user_name is not None:
+        message_handler(constant.SUCCESS_TOKEN, event)
+        db.write_cred_db(
+            event.get("user_id"), 
+            {
+                "status": "registered", 
+                "token": event.get("text"), 
+                "user_name": user_name
+            }
+        )
+    else:
+        message_handler(constant.FAILED_TOKEN, event)
+        message_handler(constant.WRONG_TOKEN, event)
+        db.delete_cred_db(event.get("user_id"))
 
 def delete_org(event, db):
     message_handler(constant.DELETE_ORG, event)
