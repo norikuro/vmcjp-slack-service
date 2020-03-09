@@ -79,7 +79,7 @@ def create_sddc(event, db):
         db.write_event_db(
             event.get("user_id"), 
             {
-                "command": constant.COMMAND_SDDC[event.get(text)],
+                "command": cmd_const.COMMAND_SDDC[event.get(text)],
                 "status": cmd_const.CHECK_MAX_HOSTS, 
                 "max_hosts": max_hosts,
                 "provider": "AWS"
@@ -99,7 +99,7 @@ def delete_sddc(event, db):
     db.write_event_db(
         event.get("user_id"),
         {
-            "command": constant.COMMAND_SDDC[event.get(text)],
+            "command": cmd_const.COMMAND_SDDC[event.get(text)],
             "status": cmd_const.DELETE_SDDC
         }
     )
