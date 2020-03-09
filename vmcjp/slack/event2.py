@@ -48,6 +48,11 @@ def event_handler(event):
             message_handler(msg_const.CANCEL_SDDC, event)
             db.delete_event_db(event.get("user_id"))
             return
+        elif cmd_const.SDDC_NAME in event_db.get("status"):
+            if text.find(" ") != -1:
+                return
+            else:
+                command_handler(cmd_const.SDDC_NAME event, db)
         elif cmd_const.MGMT_CIDR in event_db.get("status"):
             event.update(event_db)
             command_handler(cmd_const.MGMT_CIDR event, db)
