@@ -11,5 +11,4 @@ def event_handler(event):
         return
     
     result = db.read_event_db(event.get("user_id"), 5)
-    __cred_data = db.read_cred_db(event.get("user_id"))
-    
+    cred = db.read_cred_db(event.get("user_id"))
