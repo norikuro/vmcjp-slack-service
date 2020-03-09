@@ -16,7 +16,7 @@ def event_handler(event):
     
     db = dbutils.DocmentDb(event.get("db_url"))
     current = db.read_event_db(event.get("user_id"), 120)
-    if current is not None and current.get("status") == "creating":
+    if current is not None and current.get("status") == cmd_const.CREATING:
         message_handler(constant.ASK_WAIT_TASK, event)
         return
     
@@ -27,7 +27,7 @@ def event_handler(event):
             command_handler(cmd_const.COMMAND_ORG[text], event, db)
             return
         elif text in cmd_const.COMMAND_SDDC:
-            if cred is not None and "registered" in cred.get("status"):
+            if cred is not None and cmd_const.REGISTERED in cred.get("status"):
                 event_cred_update(event, cred)
                 command_handler(cmd_const.COMMAND_SDDC[text], event, db)
                 return
@@ -35,7 +35,7 @@ def event_handler(event):
                 message_handler(constant.ASK_REGISTER_TOKEN, event)
                 return
         elif cred is not None and "registering" in cred.get("status"):
-            command_handler("register_token", event, db)
+            command_handler(cmd_const.REGISTER_TOKEN, event, db)
         elif text == "help":
             message_handler(constant.HELP, event)
         else:
