@@ -3,18 +3,6 @@
 import sys
 
 class _const:
-  POST_URL = "https://slack.com/api/chat.postMessage"
-  
-  S3_CONFIG = "vmcjp/s3config.json"
-#  S3_CONFIG = "vmcjp/test_s3config.json" #for test
-  SDDC_DB = "sddc_db"
-  SDDC_COLLECTION = "sddc_collection"
-  USER_DB = "user_db"
-  USER_COLLECTION = "user_collection"
-  CRED_DB = "cred_db"
-  CRED_COLLECTION = "cred_collection"
-  BUTTON_DIR = "vmcjp/slack/button/"
-  
   MAY_I = "may_i_message"
   HELP = "help_message"
   ASK_SELECT_BUTTON = "ask_select_button_message"
