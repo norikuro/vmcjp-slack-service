@@ -50,4 +50,5 @@ def list_sddcs(event, db):
 #                "num_hosts": len(sddc.resource_config.esx_hosts)
 #            }
 #        )
-        message_handler(constant.SDDCS_MSG, event)
+#        message_handler(constant.SDDCS_MSG, event)
+    message_handler(constant.SDDCS_MSG, event)
