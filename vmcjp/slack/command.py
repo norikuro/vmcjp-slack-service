@@ -33,7 +33,11 @@ def delete_org(event, db):
     db.delete_cred_db(event.get("user_id"))
 
 def list_sddcs(event, db):
-    message_handler(constant.SDDCS_TXT, event)
+    event.update(
+        {
+            "sddcs": message_handler(constant.SDDCS_TXT, event)
+        }
+    )
     list_sddcs_(event.get("token"), event.get("org_id"))
 #    vmc_client = get_vmc_client(event.get("token"))
 #    sddcs = vmc_client.orgs.Sddcs.list(event.get("org_id"))
