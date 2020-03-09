@@ -3,6 +3,27 @@ from vmcjp.utils.loginutils import validate_token
 from vmcjp.slack.messages import message_handler
 from vmcjp.vmc.vmc_client import list_sddcs_, get_max_num_hosts, list_sddcs
 
+#followings are status of register ORG and token
+REGISTER_ORG = "register_org"
+REGISTER_TOKEN = "register_token"
+REGISTERED = "registered"
+
+#followings are status of create SDDC
+CHECK_MAX_HOSTS = "check_max_hosts"
+AWS_REGION = "aws_region"
+SDDC_NAME = "sddc_name"
+SINGLE_MULTI = "single_multi"
+NUM_HOSTS = "num_hosts"
+AWS_ACCOUNT = "aws_account"
+AWS_VPC = "aws_vpc"
+AWS_SUBNET = "aws_subnet"
+MGMT_CIDR = "mgmt_cidr"
+CHECK_CONFIG = "check_config"
+CREATING = "creating"
+  
+#followings are status of delete SDDC
+DELETE_SDDC = "delete_sddc"
+
 def command_handler(cmd, event, db):
     eval(cmd)(event, db)
 
@@ -18,7 +39,7 @@ def register_org(event, db):
     db.write_cred_db(
         event.get("user_id"), 
         {
-            "status": constant.REGISTER_ORG
+            "status": REGISTER_ORG
         }
     )
 
@@ -30,7 +51,7 @@ def register_token(event, db):
         db.write_cred_db(
             event.get("user_id"), 
             {
-                "status": "registered", 
+                "status": REGISTERED, 
                 "token": event.get("text"), 
                 "user_name": user_name
             }
@@ -85,7 +106,7 @@ def create_sddc(event, db):
             event.get("user_id"), 
             {
                 "command": constant.COMMAND_SDDC[event.get(text)],
-                "status": constant.CHECK_MAX_HOSTS, 
+                "status": CHECK_MAX_HOSTS, 
                 "max_hosts": max_hosts,
                 "provider": "AWS"
             }
@@ -105,6 +126,6 @@ def delete_sddc(event, db):
         event.get("user_id"),
         {
             "command": constant.COMMAND_SDDC[event.get(text)],
-            "status": constant.DELETE_SDDC
+            "status": DELETE_SDDC
         }
     )
