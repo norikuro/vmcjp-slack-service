@@ -15,6 +15,18 @@ def list_sddcs(token, org_id):
         } for sddc in sddcs
     ]
 
+def list_sddcs_(token, org_id):
+    vmc_client = get_vmc_client(token)
+    sddcs = vmc_client.orgs.Sddcs.list(org_id)
+    return [
+        {
+            "sddc_name": sddc.name,
+            "user_name": sddc.user_name,
+            "created": sddc.created.isoformat(),
+            "num_hosts": len(sddc.resource_config.esx_hosts)
+        } for sddc in sddcs
+    ]
+
 def get_max_num_hosts(token, org_id):
 # get deployable number of hosts
 # 1 host is for Storage EDRS
