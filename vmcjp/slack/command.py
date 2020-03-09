@@ -1,9 +1,9 @@
 from vmcjp.slack.messages import message_handler
 
-def command_handler(cmd, event):
-    eval(cmd)(event)
+def command_handler(cmd, event, db):
+    eval(cmd)(event, db)
 
-def register_org(event):
+def register_org(event, db):
   message_handler(constant.REGISTER_ORG, event)
   db.write_cred_db(
     event.get("user_id"), 
