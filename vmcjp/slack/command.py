@@ -19,6 +19,14 @@ def register_org(event, db):
         }
     )
 
+def register_org_id(event, db):
+    db.write_cred_db(
+        event.get("user_id"), 
+        {
+            "org_id": event.get("text")
+        }
+    )
+
 def register_token(event, db):
     cred = db.read_cred_db(event.get("user_id"))
     user_name = validate_token(event.get("text"), cred.get("org_id"))
