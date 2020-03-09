@@ -29,7 +29,8 @@ class _const:
   }
   
   #followings are status of register ORG and token
-  REGISTERING = "registering"
+  REGISTER_ORG = "register_org"
+  REGISTER_TOKEN = "register_token"
   REGISTERED = "registered"
   
   #followings are status of create SDDC
