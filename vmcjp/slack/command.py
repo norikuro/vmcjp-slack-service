@@ -15,7 +15,7 @@ def register_org(event, db):
     db.write_cred_db(
         event.get("user_id"), 
         {
-            "status": cmd_const.REGISTER_ORG
+            "status": cmd_const.REGISTER_ORG_ID
         }
     )
 
