@@ -20,4 +20,4 @@ def register_org(event, db):
 
 def delete_org(event, db):
     message_handler(constant.DELETE_ORG, event)
-    db.delete_cred_db(event["user_id"])
+    db.delete_cred_db(event.get("user_id"))
