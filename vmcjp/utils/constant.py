@@ -14,7 +14,6 @@ class _const:
   CRED_DB = "cred_db"
   CRED_COLLECTION = "cred_collection"
   BUTTON_DIR = "vmcjp/slack/button/"
-  INT_STATUS = ["create_sddc", "resource_check", "sddc_name", "single_multi", "num_hosts", "aws_account", "vpc", "vpc_cidr", "link_aws"]  
   
   COMMAND_ORG = {
     "register org": "register_org",
@@ -46,6 +45,9 @@ class _const:
   MGMT_CIDR = "mgmt_cidr"
   CHECK_CONFIG = "check_config"
   CREATING = "creating"
+  
+  #followings are status of delete SDDC
+  DELETE_SDDC = "delete_sddc"
   
   MAY_I = "may_i_message"
   HELP = "help_message"
