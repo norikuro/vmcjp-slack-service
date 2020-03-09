@@ -27,7 +27,6 @@ class _const:
     "delete sddc": "delete_sddc",
     "list sddcs": "list_sddcs",
     "restore sddc": "restore_sddc", # for internal use
-    "cancel": "cancel"
   }
   
   MAY_I = "may_i_message"
