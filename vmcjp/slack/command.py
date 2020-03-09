@@ -1,4 +1,4 @@
-from vmcjp.utils import constant, cmd_const
+from vmcjp.utils import msg_const, cmd_const
 from vmcjp.utils.loginutils import validate_token
 from vmcjp.slack.messages import message_handler
 from vmcjp.vmc.vmc_client import list_sddcs_, get_max_num_hosts, list_sddcs
@@ -7,11 +7,11 @@ def command_handler(cmd, event, db):
     eval(cmd)(event, db)
 
 def cancel(event, db):
-    message_handler(constant.CANCEL_TOKEN, event)
+    message_handler(msg_const.CANCEL_TOKEN, event)
     db.delete_cred_db(event.get("user_id"))
 
 def register_org(event, db):
-    message_handler(constant.REGISTER_ORG, event)
+    message_handler(msg_const.REGISTER_ORG, event)
     db.write_cred_db(
         event.get("user_id"), 
         {
@@ -20,7 +20,7 @@ def register_org(event, db):
     )
 
 def register_org_id(event, db):
-    message_handler(constant.REGISTER_TOKEN, event)
+    message_handler(msg_const.REGISTER_TOKEN, event)
     db.write_cred_db(
         event.get("user_id"), 
         {
@@ -33,7 +33,7 @@ def register_token(event, db):
     cred = db.read_cred_db(event.get("user_id"))
     user_name = validate_token(event.get("text"), cred.get("org_id"))
     if user_name is not None:
-        message_handler(constant.SUCCESS_TOKEN, event)
+        message_handler(msg_const.SUCCESS_TOKEN, event)
         db.write_cred_db(
             event.get("user_id"), 
             {
@@ -43,16 +43,16 @@ def register_token(event, db):
             }
         )
     else:
-        message_handler(constant.FAILED_TOKEN, event)
-        message_handler(constant.WRONG_TOKEN, event)
+        message_handler(msg_const.FAILED_TOKEN, event)
+        message_handler(msg_const.WRONG_TOKEN, event)
         db.delete_cred_db(event.get("user_id"))
 
 def delete_org(event, db):
-    message_handler(constant.DELETE_ORG, event)
+    message_handler(msg_const.DELETE_ORG, event)
     db.delete_cred_db(event.get("user_id"))
 
 def list_sddcs(event, db):
-    message_handler(constant.SDDCS_TXT, event)
+    message_handler(msg_const.SDDCS_TXT, event)
     event.update(
         {
             "sddcs": list_sddcs_(
@@ -61,21 +61,21 @@ def list_sddcs(event, db):
             )
         }
     )
-    message_handler(constant.SDDCS_MSG, event)
+    message_handler(msg_const.SDDCS_MSG, event)
 
 def create_sddc(event, db):
-    message_handler(constant.SDDC_WIZARD, event)
-    message_handler(constant.CHECK_RESOURCE, event)
+    message_handler(msg_const.SDDC_WIZARD, event)
+    message_handler(msg_const.CHECK_RESOURCE, event)
     max_hosts = get_max_num_hosts(
         event.get("token"),
         event.get("org_id")
     )
     event.update({"max_hosts": max_hosts})
     if max_hosts < 1:
-        message_handler(constant.NOT_ENOUGH, event)
+        message_handler(msg_const.NOT_ENOUGH, event)
         db.delete_event_db(event.get("user_id"))
     else:
-        message_handler(constant.MAX_HOSTS, event)
+        message_handler(msg_const.MAX_HOSTS, event)
         db.write_event_db(
             event.get("user_id"), 
             {
@@ -95,7 +95,7 @@ def delete_sddc(event, db):
             )
         }
     )
-    message_handler(constant.DELETE_SDDC, event)
+    message_handler(msg_const.DELETE_SDDC, event)
     db.write_event_db(
         event.get("user_id"),
         {
