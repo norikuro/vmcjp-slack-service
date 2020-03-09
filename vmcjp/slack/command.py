@@ -20,7 +20,7 @@ def register_org(event, db):
     db.write_cred_db(
         event.get("user_id"), 
         {
-            "status": "register_token"
+            "status": "registering"
         }
     )
 
