@@ -88,3 +88,12 @@ def delete_sddc(event, db):
                 event.get("org_id")
             )
         }
+    )
+    message_handler(constant.DELETE_SDDC, event)
+    db.write_event_db(
+        event.get("user_id"),
+        {
+            "command": "delete", 
+            "status": "delete_sddc"
+        }
+    )
