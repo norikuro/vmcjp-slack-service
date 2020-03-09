@@ -30,6 +30,18 @@ class _const:
     "restore sddc": "restore_sddc", # for internal use
   }
   
+  CHECK_MAX_HOSTS = "check_max_hosts"
+  AWS_REGION = "aws_region"
+  SDDC_NAME = "sddc_name"
+  SINGLE_MULTI = "single_multi"
+  NUM_HOSTS = "num_hosts"
+  AWS_ACCOUNT = "aws_account"
+  AWS_VPC = "aws_vpc"
+  AWS_SUBNET = "aws_subnet"
+  MGMT_CIDR = "mgmt_cidr"
+  CHECK_CONFIG = "check_config"
+  CREATING = "creating"
+  
   MAY_I = "may_i_message"
   HELP = "help_message"
   ASK_SELECT_BUTTON = "ask_select_button_message"
