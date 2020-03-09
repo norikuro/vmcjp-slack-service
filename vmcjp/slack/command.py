@@ -31,3 +31,18 @@ def register_org(event, db):
 def delete_org(event, db):
     message_handler(constant.DELETE_ORG, event)
     db.delete_cred_db(event.get("user_id"))
+
+def list_sddcs(event, db):
+    vmc_client = get_vmc_client(event.get("token"))
+    sddcs = vmc_client.orgs.Sddcs.list(event.get("org_id"))
+    message_handler(constant.SDDCS_TXT, event)
+    for sddc in sddcs:
+        event.update(
+            {
+                "sddc_name": sddc.name,
+                "user_name": sddc.user_name,
+                "created": sddc.created.isoformat(),
+                "num_hosts": len(sddc.resource_config.esx_hosts)
+            }
+        )
+        message_handler(constant.SDDCS_MSG, event)
