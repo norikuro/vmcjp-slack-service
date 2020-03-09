@@ -130,6 +130,9 @@ def delete_sddc(event, db):
 def restore_sddc(event, db): #for internal only
     hoge = 1
 
+def sddc_name(event, db):
+    hogehoge = 1
+
 def mgmt_cidr(event, db):
     text = event.get("text")
     
