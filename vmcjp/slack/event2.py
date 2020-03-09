@@ -3,6 +3,14 @@ from vmcjp.utils import constant
 from vmcjp.slack.messages import message_handler
 from vmcjp.slack.command import command_handler
 
+def event_cred_update(event, cred):
+    event.update(
+        {
+            "token": cred.get("token"),
+            "org_id": cred.get("org_id")
+        }
+    )
+
 def event_handler(event):
     text = event.get("text").lower()
     
