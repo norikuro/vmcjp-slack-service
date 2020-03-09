@@ -4,7 +4,8 @@ import os
 
 from vmcjp.utils import constant
 from vmcjp.utils.s3utils import read_json_from_s3
-from vmcjp.slack.event import event_handler
+#from vmcjp.slack.event import event_handler
+from vmcjp.slack.event2 import event_handler
 from vmcjp.slack.interactive import interactive_handler
 
 #logger = logging.getLogger()
