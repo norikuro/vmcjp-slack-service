@@ -17,16 +17,11 @@ def cancel(event, db):
 
 def register_org(event, db):
     message_handler(constant.REGISTER_ORG, event)
-    db.write_cred_db(
-        event.get("user_id"),
-        {
-            "status": "registering"
-        }
-    )
     db.write_event_db(
         event.get("user_id"), 
         {
             "command": "register_org",
+            "status": "registering"
         }
     )
 
