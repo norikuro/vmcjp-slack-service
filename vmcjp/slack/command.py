@@ -21,7 +21,7 @@ def register_org(event, db):
         event.get("user_id"), 
         {
             "command": "register_org",
-            "status": "registering"
+            "status": "register_org"
         }
     )
 
