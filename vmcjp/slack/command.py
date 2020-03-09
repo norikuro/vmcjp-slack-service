@@ -68,13 +68,13 @@ def create_sddc(event, db):
     if max_hosts < 1:
         message_handler(constant.NOT_ENOUGH, event)
         db.delete_event_db(event.get("user_id"))
-        return
-    message_handler(constant.MAX_HOSTS, event)
-    db.write_event_db(
-        event.get("user_id"), 
-        {
-            "command": "create",
-            "status": "create_sddc", 
-            "max_hosts": event.get("max_hosts"),
-            "provider": "AWS"
-        }
+    else:
+        message_handler(constant.MAX_HOSTS, event)
+        db.write_event_db(
+            event.get("user_id"), 
+            {
+                "command": "create",
+                "status": "create_sddc", 
+                "max_hosts": max_hosts,
+                "provider": "AWS"
+            }
