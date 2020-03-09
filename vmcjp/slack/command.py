@@ -1,7 +1,10 @@
 from vmcjp.slack.messages import message_handler
 
 def command_handler(cmd, event, db):
-    eval(cmd)(event, db)
+    if db is None:
+        eval(cmd)(event)
+    elif db not None:
+        eval(cmd)(event, db)
 
 def help(event):
     message_handler(constant.HELP, event)
