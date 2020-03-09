@@ -36,6 +36,8 @@ def event_handler(event):
                 return
         elif cred is not None and cmd_const.REGISTER_ORG_ID in cred.get("status"):
             command_handler(cmd_const.REGISTER_ORG_ID, event, db)
+        elif cred is not None and cmd_const.REGISTER_TOKEN in cred.get("status"):
+            command_handler(cmd_const.REGISTER_TOKEN, event, db)
         elif text == "help":
             message_handler(msg_const.HELP, event)
         else:
