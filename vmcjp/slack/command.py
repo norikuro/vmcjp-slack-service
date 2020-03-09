@@ -1,5 +1,5 @@
 from vmcjp.slack.messages import message_handler
-from vmcjp.vmc.vmc_client import list_sddcs_, get_max_num_hosts, 
+from vmcjp.vmc.vmc_client import list_sddcs_, get_max_num_hosts, list_sddcs
 
 def command_handler(cmd, event, db=None):
     if db is None:
@@ -81,4 +81,10 @@ def create_sddc(event, db):
         )
 
 def delete_sddc(event, db):
-    
+    event.update(
+        {
+            "option_list": list_sddcs(
+                event.get("token"), 
+                event.get("org_id")
+            )
+        }
