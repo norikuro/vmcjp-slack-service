@@ -37,7 +37,10 @@ def list_sddcs(event, db):
     message_handler(constant.SDDCS_TXT, event)
     event.update(
         {
-            "sddcs": list_sddcs_(event.get("token"), event.get("org_id"))
+            "sddcs": list_sddcs_(
+                event.get("token"), 
+                event.get("org_id")
+            )
         }
     )
 #    vmc_client = get_vmc_client(event.get("token"))
@@ -57,10 +60,21 @@ def list_sddcs(event, db):
 def create_sddc(event, db):
     message_handler(constant.SDDC_WIZARD, event)
     message_handler(constant.CHECK_RESOURCE, event)
-    event.update(
-        {
-            "max_hosts": get_max_num_hosts(
-                event.get("token"), 
-                event.get("org_id")
-        }
+    max_hosts = get_max_num_hosts(
+        event.get("token"),
+        event.get("org_id")
     )
+    event.update({"max_hosts": max_hosts})
+    if max_hosts < 1:
+        message_handler(constant.NOT_ENOUGH, event)
+        db.delete_event_db(event.get("user_id"))
+        return
+    message_handler(constant.MAX_HOSTS, event)
+    db.write_event_db(
+        event.get("user_id"), 
+        {
+            "command": "create",
+            "status": "create_sddc", 
+            "max_hosts": event.get("max_hosts"),
+            "provider": "AWS"
+        }
