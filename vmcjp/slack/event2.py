@@ -34,6 +34,8 @@ def event_handler(event):
             else:
                 message_handler(constant.ASK_REGISTER_TOKEN, event)
                 return
+        elif cred is not None and "registering" in cred.get("status"):
+            command_handler(constant.COMMAND_ORG["register_token"], event, db)
         elif text == "help":
             message_handler(constant.HELP, event)
         else:
