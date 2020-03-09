@@ -1,5 +1,5 @@
 from vmcjp.utils import dbutils
-from vmcjp.utils import constant, cmd_const
+from vmcjp.utils import msg_const, cmd_const
 from vmcjp.slack.messages import message_handler
 from vmcjp.slack.command import command_handler
 
@@ -17,7 +17,7 @@ def event_handler(event):
     db = dbutils.DocmentDb(event.get("db_url"))
     current = db.read_event_db(event.get("user_id"), 120)
     if current is not None and current.get("status") == cmd_const.CREATING:
-        message_handler(constant.ASK_WAIT_TASK, event)
+        message_handler(msg_const.ASK_WAIT_TASK, event)
         return
     
     event_db = db.read_event_db(event.get("user_id"), 5)
@@ -32,12 +32,12 @@ def event_handler(event):
                 command_handler(cmd_const.COMMAND_SDDC[text], event, db)
                 return
             else:
-                message_handler(constant.ASK_REGISTER_TOKEN, event)
+                message_handler(msg_const.ASK_REGISTER_TOKEN, event)
                 return
         elif cred is not None and "registering" in cred.get("status"):
             command_handler(cmd_const.REGISTER_TOKEN, event, db)
         elif text == "help":
-            message_handler(constant.HELP, event)
+            message_handler(msg_const.HELP, event)
         else:
-            message_handler(constant.MAY_I, event)
+            message_handler(msg_const.MAY_I, event)
             return
