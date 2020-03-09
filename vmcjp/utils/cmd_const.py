@@ -10,6 +10,7 @@ class _const:
   }
   
   COMMAND_SDDC = {
+    "create zerocloud sddc": "create_zero_sddc",
     "create sddc": "create_sddc",
     "delete sddc": "delete_sddc",
     "list sddcs": "list_sddcs",
