@@ -24,3 +24,6 @@ def event_handler(event):
             else:
                 message_handler(constant.ASK_REGISTER_TOKEN, event)
                 return
+        else:
+            message_handler(constant.MAY_I, event)
+            return
