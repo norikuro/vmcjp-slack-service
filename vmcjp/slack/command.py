@@ -23,7 +23,7 @@ def register_org(event, db):
     )
 
 def register_token(event, db):
-    user_name = validate_token(event.get("text"), __cred_data.get("org_id"))
+    user_name = validate_token(event.get("text"), cred.get("org_id"))
     if user_name is not None:
         message_handler(constant.SUCCESS_TOKEN, event)
         db.write_cred_db(
