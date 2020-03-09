@@ -1,7 +1,7 @@
 from vmcjp.slack.messages import message_handler
 
-def command_handler(com, event):
-    eval(com)(event)
+def command_handler(cmd, event):
+    eval(cmd)(event)
 
 def register_org(event):
   message_handler(constant.REGISTER_ORG, event)
