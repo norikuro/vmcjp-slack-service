@@ -23,7 +23,7 @@ def event_handler(event):
     event_db = db.read_event_db(event.get("user_id"), 5)
     cred = db.read_cred_db(event.get("user_id"))
     if event_db is None:
-        if text in constant.COMMAND_ORG:
+        if text in cmd_const.COMMAND_ORG:
             command_handler(cmd_const.COMMAND_ORG[text], event, db)
             return
         elif text in cmd_const.COMMAND_SDDC:
