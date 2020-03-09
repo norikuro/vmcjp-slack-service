@@ -136,7 +136,7 @@ def mgmt_cidr(event, db):
     if is_network(text):
         if is_valid_network(text):
             event.update({"vpc_cidr": text})
-            message_handler(constant.SDDC_CONFIRM, event)
+            message_handler(msg_const.SDDC_CONFIRM, event)
             db.write_event_db(
                 event.get("user_id"), 
                 {
@@ -145,4 +145,4 @@ def mgmt_cidr(event, db):
                 }
             )
     else:
-        message_handler(constant.WRONG_NETWORK, event)
+        message_handler(msg_const.WRONG_NETWORK, event)
