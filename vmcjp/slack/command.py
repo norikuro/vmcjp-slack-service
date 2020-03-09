@@ -64,7 +64,27 @@ def list_sddcs(event, db):
     message_handler(msg_const.SDDCS_MSG, event)
 
 def create_zero_sddc(event, db): #for internal test only
-    hoge = 1
+    message_handler(msg_const.SDDC_WIZARD, event)
+    message_handler(msg_const.CHECK_RESOURCE, event)
+    max_hosts = get_max_num_hosts(
+        event.get("token"),
+        event.get("org_id")
+    )
+    event.update({"max_hosts": max_hosts})
+    if max_hosts < 1:
+        message_handler(msg_const.NOT_ENOUGH, event)
+        db.delete_event_db(event.get("user_id"))
+    else:
+        message_handler(msg_const.MAX_HOSTS, event)
+        db.write_event_db(
+            event.get("user_id"), 
+            {
+                "command": cmd_const.COMMAND_SDDC[event.get(text)],
+                "status": cmd_const.CHECK_MAX_HOSTS, 
+                "max_hosts": max_hosts,
+                "provider": "ZEROCLOUD"
+            }
+        )
 
 def create_sddc(event, db):
     message_handler(msg_const.SDDC_WIZARD, event)
