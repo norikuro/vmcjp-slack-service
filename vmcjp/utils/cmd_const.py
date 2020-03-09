@@ -5,7 +5,6 @@ import sys
 class _const:
   COMMAND_ORG = {
     "register org": "register_org",
-    "register org id": "register_org_id",
     "delete org": "delete_org",
     "cancel": "cancel"
   }
