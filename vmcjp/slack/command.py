@@ -106,3 +106,6 @@ def delete_sddc(event, db):
             "status": cmd_const.DELETE_SDDC
         }
     )
+
+def restore_sddc(event, db): #for internal only
+    hoge = 1
