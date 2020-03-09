@@ -6,9 +6,6 @@ from vmcjp.vmc.vmc_client import list_sddcs_, get_max_num_hosts, list_sddcs
 def command_handler(cmd, event, db):
     eval(cmd)(event, db)
 
-#def help(event):
-#    message_handler(constant.HELP, event)
-
 def cancel(event, db):
     message_handler(constant.CANCEL_TOKEN, event)
     db.delete_cred_db(event.get("user_id"))
