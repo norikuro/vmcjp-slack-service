@@ -1,6 +1,7 @@
 from vmcjp.utils import dbutils
 from vmcjp.utils import constant
 from vmcjp.slack.messages import message_handler
+from vmcjp.slack.command import command_handler
 
 def event_handler(event):
     text = event.get("text").lower()
