@@ -14,6 +14,7 @@ class _const:
   CRED_DB = "cred_db"
   CRED_COLLECTION = "cred_collection"
   BUTTON_DIR = "vmcjp/slack/button/"
+  INT_STATUS = ["create_sddc", "resource_check", "sddc_name", "single_multi", "num_hosts", "aws_account", "vpc", "vpc_cidr", "link_aws"]
   
   MAY_I = "may_i_message"
   HELP = "help_message"
