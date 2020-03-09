@@ -1,7 +1,7 @@
 from vmcjp.utils import constant
 from vmcjp.utils.loginutils import validate_token
 from vmcjp.slack.messages import message_handler
-from vmcjp.vmc.vmc_client import list_sddcs_, get_max_num_hosts, list_sddcs, validate_token
+from vmcjp.vmc.vmc_client import list_sddcs_, get_max_num_hosts, list_sddcs
 
 def command_handler(cmd, event, db):
     eval(cmd)(event, db)
