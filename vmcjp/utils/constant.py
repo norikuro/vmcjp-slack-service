@@ -15,40 +15,6 @@ class _const:
   CRED_COLLECTION = "cred_collection"
   BUTTON_DIR = "vmcjp/slack/button/"
   
-  COMMAND_ORG = {
-    "register org": "register_org",
-    "delete org": "delete_org",
-    "cancel": "cancel"
-  }
-  
-  COMMAND_SDDC = {
-    "create sddc": "create_sddc",
-    "delete sddc": "delete_sddc",
-    "list sddcs": "list_sddcs",
-    "restore sddc": "restore_sddc", # for internal use
-  }
-  
-  #followings are status of register ORG and token
-  REGISTER_ORG = "register_org"
-  REGISTER_TOKEN = "register_token"
-  REGISTERED = "registered"
-  
-  #followings are status of create SDDC
-  CHECK_MAX_HOSTS = "check_max_hosts"
-  AWS_REGION = "aws_region"
-  SDDC_NAME = "sddc_name"
-  SINGLE_MULTI = "single_multi"
-  NUM_HOSTS = "num_hosts"
-  AWS_ACCOUNT = "aws_account"
-  AWS_VPC = "aws_vpc"
-  AWS_SUBNET = "aws_subnet"
-  MGMT_CIDR = "mgmt_cidr"
-  CHECK_CONFIG = "check_config"
-  CREATING = "creating"
-  
-  #followings are status of delete SDDC
-  DELETE_SDDC = "delete_sddc"
-  
   MAY_I = "may_i_message"
   HELP = "help_message"
   ASK_SELECT_BUTTON = "ask_select_button_message"
