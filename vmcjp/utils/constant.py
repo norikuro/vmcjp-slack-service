@@ -18,7 +18,6 @@ class _const:
   COMMAND_ORG = {
     "register org": "register_org",
     "delete org": "delete_org",
-    "help": "help",
     "cancel": "cancel"
   }
   
