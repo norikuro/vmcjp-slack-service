@@ -15,11 +15,11 @@ def event_handler(event):
     cred = db.read_cred_db(event.get("user_id"))
     if event_db is None:
         if text in constant.COMMAND_ORG:
-            eval(constant.COMMAND_ORG[text])(event)
+            command_handler(constant.COMMAND_ORG[text], event)
             return
         elif text in constant.COMMAND_SDDC:
             if cred is not None:
-                eval(constant.COMMAND_SDDC[text])(event)
+                command_handler(constant.COMMAND_SDDC[text], event)
                 return
             else:
                 message_handler(constant.ASK_REGISTER_TOKEN, event)
