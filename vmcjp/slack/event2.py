@@ -1,5 +1,5 @@
 from vmcjp.utils import dbutils
-from vmcjp.utils import constant
+from vmcjp.utils import constant, cmd_const
 from vmcjp.slack.messages import message_handler
 from vmcjp.slack.command import command_handler
 
@@ -24,12 +24,12 @@ def event_handler(event):
     cred = db.read_cred_db(event.get("user_id"))
     if event_db is None:
         if text in constant.COMMAND_ORG:
-            command_handler(constant.COMMAND_ORG[text], event, db)
+            command_handler(cmd_const.COMMAND_ORG[text], event, db)
             return
-        elif text in constant.COMMAND_SDDC:
+        elif text in cmd_const.COMMAND_SDDC:
             if cred is not None and "registered" in cred.get("status"):
                 event_cred_update(event, cred)
-                command_handler(constant.COMMAND_SDDC[text], event, db)
+                command_handler(cmd_const.COMMAND_SDDC[text], event, db)
                 return
             else:
                 message_handler(constant.ASK_REGISTER_TOKEN, event)
