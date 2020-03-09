@@ -30,6 +30,11 @@ class _const:
     "restore sddc": "restore_sddc", # for internal use
   }
   
+  #followings are status of register ORG and token
+  REGISTERING = "registering"
+  REGISTERED = "registered"
+  
+  #followings are status of create SDDC
   CHECK_MAX_HOSTS = "check_max_hosts"
   AWS_REGION = "aws_region"
   SDDC_NAME = "sddc_name"
