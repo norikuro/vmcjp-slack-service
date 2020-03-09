@@ -18,7 +18,7 @@ class _const:
   }
   
   #followings are status of register ORG and token
-  REGISTER_ORG = "register_org"
+  REGISTER_ORG_ID = "register_org_id"
   REGISTER_TOKEN = "register_token"
   REGISTERED = "registered"
   
