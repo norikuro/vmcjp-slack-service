@@ -325,11 +325,14 @@ def list_sddcs_text_message(event):
     response = post_text_with_bot_token(event, text)
 
 def list_sddcs_message(event):
-    list_button = constant.BUTTON_DIR + "list.json"
-    response = post_field_button_with_bot_token(
-        event, 
-        list_button
-    )
+    sddcs = event.pop("sddcs")
+    for sddc in sddcs:
+        event.update(sddc)
+        list_button = constant.BUTTON_DIR + "list.json"
+        response = post_field_button_with_bot_token(
+            event, 
+            list_button
+        )
 
 def crud_sddc_result_message(event):
     response = post_text_with_bot_token(event, event.get("message"))
