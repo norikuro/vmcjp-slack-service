@@ -1,7 +1,7 @@
 from vmcjp.utils import msg_const, cmd_const
 from vmcjp.utils.loginutils import validate_token
 from vmcjp.slack.messages import message_handler
-from vmcjp.vmc.vmc_client import list_sddcs_, get_max_num_hosts, list_sddcs
+from vmcjp.vmc.vmc_client import list_sddcs_, get_max_num_hosts, list_sddcs, is_network, is_valid_network
 
 def command_handler(cmd, event, db):
     eval(cmd)(event, db)
@@ -129,3 +129,20 @@ def delete_sddc(event, db):
 
 def restore_sddc(event, db): #for internal only
     hoge = 1
+
+def mgmt_cidr(event, db):
+    text = event.get("text")
+    
+    if is_network(text):
+        if is_valid_network(text):
+            event.update({"vpc_cidr": text})
+            message_handler(constant.SDDC_CONFIRM, event)
+            db.write_event_db(
+                event.get("user_id"), 
+                {
+                    "status": cmd_const.CHECK_CONFIG, 
+                    "vpc_cidr": text
+                }
+            )
+    else:
+        message_handler(constant.WRONG_NETWORK, event)
