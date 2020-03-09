@@ -74,7 +74,7 @@ def create_sddc(event, db):
             event.get("user_id"), 
             {
                 "command": "create_sddc",
-                "status": "check_max_hosts", 
+                "status": constant.CHECK_MAX_HOSTS, 
                 "max_hosts": max_hosts,
                 "provider": "AWS"
             }
