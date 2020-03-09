@@ -20,10 +20,12 @@ def register_org(event, db):
     )
 
 def register_org_id(event, db):
+    message_handler(constant.REGISTER_TOKEN, event)
     db.write_cred_db(
         event.get("user_id"), 
         {
-            "org_id": event.get("text")
+            "org_id": event.get("text"),
+            "status": cmd_const.REGISTER_TOKEN
         }
     )
 
