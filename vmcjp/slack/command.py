@@ -63,6 +63,9 @@ def list_sddcs(event, db):
     )
     message_handler(msg_const.SDDCS_MSG, event)
 
+def create_zero_sddc(event, db):
+    hoge = 1
+
 def create_sddc(event, db):
     message_handler(msg_const.SDDC_WIZARD, event)
     message_handler(msg_const.CHECK_RESOURCE, event)
