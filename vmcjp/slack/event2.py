@@ -16,7 +16,7 @@ def event_handler(event):
     
     db = dbutils.DocmentDb(event.get("db_url"))
     current = db.read_event_db(event.get("user_id"), 120)
-    if current is not None and current.get("status") == cmd_const.CREATING:
+    if current is not None and current.get("status") in [cmd_const.CREATING, cmd_const.DELETING]:
         message_handler(msg_const.ASK_WAIT_TASK, event)
         return
     
