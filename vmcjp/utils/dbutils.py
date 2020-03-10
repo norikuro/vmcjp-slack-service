@@ -33,21 +33,14 @@ class DocmentDb(object):
         ).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
         
         if minutes is None:
-            cur = self.event_col.find({"_id": user_id})
+            data = self.event_col.find_one({"_id": user_id})
         else:
-            cur = self.event_col.find({"start_time": {"$gt": past}, "_id": user_id})
-        
-        if cur.count() != 0:
-            return json.dumps(cur[0])
-        else:
-            return
-        
+            data = self.event_col.find_one({"start_time": {"$gt": past}, "_id": user_id})
+        return data
+
     def read_cred_db(self, user_id):
-        cur = self.cred_col.find({"_id": user_id})
-        if cur.count() != 0:
-            return json.dumps(cur[0])
-        else:
-            return
+        data = self.cred_col.find_one({"_id": user_id})
+        return data
 
     def write_event_db(self, user_id, data):
         now = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
