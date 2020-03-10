@@ -49,10 +49,7 @@ def event_handler(event):
             db.delete_event_db(event.get("user_id"))
             return
         elif cmd_const.SDDC_NAME in event_db.get("status"):
-            if result.get("max_hosts") == 1:
-                message_handler(msg_const.LINK_AWS, event)
-            else:
-                message_handler(msg_const.SINGLE_MULTI, event)
+            event.update(event_db.get("max_hosts"))
             command_handler(cmd_const.SDDC_NAME event, db)
             return
         elif cmd_const.MGMT_CIDR in event_db.get("status"):
