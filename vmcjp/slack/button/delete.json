@@ -6,7 +6,7 @@
       "fallback": "Please select SDDC.",
       "color": "#3AA3E3",
       "attachment_type": "default",
-      "callback_id": "delete_sddc",
+      "callback_id": "selected_sddc_to_delete",
       "actions": [
         {
           "name": "delete_sddc",
