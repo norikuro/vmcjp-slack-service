@@ -21,20 +21,20 @@ def event_handler(event):
         return
     
     event_db = db.read_event_db(event.get("user_id"), 5)
-    cred = db.read_cred_db(event.get("user_id"))
+    cred_db = db.read_cred_db(event.get("user_id"))
     if event_db is None:
         if text in cmd_const.COMMAND_ORG:
             command_handler(cmd_const.COMMAND_ORG[text], event, db)
             return
         elif text in cmd_const.COMMAND_SDDC:
-            if cred is not None and cmd_const.REGISTERED in cred.get("status"):
+            if cred_db is not None and cmd_const.REGISTERED in cred.get("status"):
                 event_cred_update(event, cred)
                 command_handler(cmd_const.COMMAND_SDDC[text], event, db)
                 return
             else:
                 message_handler(msg_const.ASK_REGISTER_TOKEN, event)
                 return
-        elif cred is not None and cmd_const.REGISTER_ORG_ID in cred.get("status"):
+        elif cred_db is not None and cmd_const.REGISTER_ORG_ID in cred.get("status"):
             command_handler(cmd_const.REGISTER_ORG_ID, event, db)
         elif cred is not None and cmd_const.REGISTER_TOKEN in cred.get("status"):
             command_handler(cmd_const.REGISTER_TOKEN, event, db)
