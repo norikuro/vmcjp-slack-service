@@ -49,11 +49,7 @@ def event_handler(event):
             db.delete_event_db(event.get("user_id"))
             return
         elif cmd_const.SDDC_NAME in event_db.get("status"):
-            if text.find(" ") != -1:
-                #need to send message of "do not contain any space in sddc"
-                return
-            else:
-                command_handler(cmd_const.SDDC_NAME event, db)
+            command_handler(cmd_const.SDDC_NAME event, db)
         elif cmd_const.MGMT_CIDR in event_db.get("status"):
             event.update(event_db)
             command_handler(cmd_const.MGMT_CIDR event, db)
