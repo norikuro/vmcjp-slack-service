@@ -47,7 +47,7 @@ def event_handler(event):
             message_handler(msg_const.MAY_I, event)
             return
     else:
-        if "cancel" in text:
+        if text == "cancel":
             message_handler(msg_const.CANCEL_SDDC, event)
             db.delete_event_db(event.get("user_id"))
             return
