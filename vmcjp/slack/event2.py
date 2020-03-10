@@ -22,6 +22,7 @@ def event_handler(event):
     
     event_db = db.read_event_db(event.get("user_id"), 5)
     cred_db = db.read_cred_db(event.get("user_id"))
+    
     if event_db is None:
         if cred_db is not None and text == "cancel":
             if cmd_const.REGISTERED not in cred_db.get("status"):
