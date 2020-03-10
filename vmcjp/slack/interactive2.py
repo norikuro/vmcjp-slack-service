@@ -8,3 +8,10 @@ def interactive_handler(event):
       message_handler(constant.MAY_I, event)
       return
     
+    cred_db = db.read_cred_db(event.get("user_id"))
+    event.update(
+        {
+            "token": cred_db.get("token"),
+            "org_id": cred_db.get("org_id")
+        }
+    )
