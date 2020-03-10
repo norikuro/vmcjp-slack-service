@@ -49,7 +49,10 @@ def event_handler(event):
             return
     else:
         if text == "cancel":
-            message_handler(msg_const.CANCEL_SDDC, event)
+            if "create_sddc" in event_db.get("command"):
+                message_handler(msg_const.CANCEL_SDDC, event)
+            elif "delete_sddc" in event_db.get("command"):
+                message_handler(msg_const.CANCEL_DELETE, event)
             db.delete_event_db(event.get("user_id"))
             return
         elif cmd_const.SDDC_NAME in event_db.get("status"):
