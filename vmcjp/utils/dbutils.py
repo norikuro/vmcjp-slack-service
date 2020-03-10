@@ -1,5 +1,6 @@
 import pymongo
 import datetime
+import json
 
 from vmcjp.utils import constant
 
@@ -37,14 +38,14 @@ class DocmentDb(object):
             cur = self.event_col.find({"start_time": {"$gt": past}, "_id": user_id})
         
         if cur.count() != 0:
-            return cur[0]
+            return json.dumps(cur[0])
         else:
             return
         
     def read_cred_db(self, user_id):
         cur = self.cred_col.find({"_id": user_id})
         if cur.count() != 0:
-            return cur[0]
+            return json.dumps(cur[0])
         else:
             return
 
