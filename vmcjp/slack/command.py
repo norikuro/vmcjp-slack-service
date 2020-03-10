@@ -131,13 +131,24 @@ def restore_sddc(event, db): #for internal only
     hoge = 1
 
 def sddc_name(event, db):
-    db.write_event_db(
-        event.get("user_id"), 
-        {
-            "status": "sddc_name", 
-            "sddc_name": event.get("text")
-        }
-    )
+    if event.get("max_hosts") == 1:
+        message_handler(msg_const.LINK_AWS, event)
+        db.write_event_db(
+            event.get("user_id"), 
+            {
+                "status": cmd_const.AWS_ACCOUNT, 
+                "sddc_name": event.get("text")
+            }
+        )
+    else:
+        message_handler(msg_const.SINGLE_MULTI, event)
+        db.write_event_db(
+            event.get("user_id"), 
+            {
+                "status": cmd_const.SINGLE_MULTI, 
+                "sddc_name": event.get("text")
+            }
+        )
 
 def mgmt_cidr(event, db):
     text = event.get("text")
