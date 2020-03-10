@@ -3,6 +3,7 @@
 import sys
 
 class _const:
+  #followings are command names which we can do on slack app
   REGISTER_ORG = "register_org"
   DELETE_ORG = "delete_org"
   CREATE_ZEROCLOUD_SDDC = "create_zero_sddc"
