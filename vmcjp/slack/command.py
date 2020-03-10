@@ -112,7 +112,7 @@ def create_sddc(event, db):
 def delete_sddc(event, db):
     event.update(
         {
-            "option_list": list_sddcs(
+            "option_list": list_sddcs__(
                 event.get("token"), 
                 event.get("org_id")
             )
