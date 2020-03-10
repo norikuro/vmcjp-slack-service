@@ -1,7 +1,8 @@
 from vmcjp.utils import msg_const, cmd_const
+from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils.loginutils import validate_token
 from vmcjp.slack.messages import message_handler
-from vmcjp.vmc.vmc_client import list_sddcs_, list_sddcs__, get_max_num_hosts, is_network, is_valid_network
+from vmcjp.vmc.vmc_client import list_sddcs_, list_sddcs__, get_max_num_hosts, is_network, is_valid_network, check_sddc_user
 
 def command_handler(cmd, event, db):
     eval(cmd)(event, db)
@@ -140,15 +141,15 @@ def selected_sddc_to_delete(event, db):
             "sddc_id": sddc_id
         }
     )
-    message_handler(constant.CONFIRM_DELETE, event)
+    message_handler(msg_const.CONFIRM_DELETE, event)
 
 def delete_confirmation(event, db):
     response = event.get("response")
     if "yes" in response:
-        message_handler(constant.START_DELETE, event)
+        message_handler(msg_const.START_DELETE, event)
 #        event.update(result)
         event.update(
-            {"user_name": __cred_data.get("user_name")}
+            {"user_name": event.get("user_name")}
         )
         if check_sddc_user(
             event.get("token"),
@@ -158,11 +159,11 @@ def delete_confirmation(event, db):
         ):
             call_lambda("delete_sddc", event)
         else:
-            message_handler(constant.CANT_DELETE, event)
-            db.delete_event_db(user_id)
+            message_handler(msg_const.CANT_DELETE, event)
+            db.delete_event_db(event.get("user_id"))
     else:
-        message_handler(constant.CANCEL_DELETE, event)
-        db.delete_event_db(user_id)
+        message_handler(msg_const.CANCEL_DELETE, event)
+        db.delete_event_db(event.get("user_id"))
 
 def restore_sddc(event, db): #for internal only
     hoge = 1
