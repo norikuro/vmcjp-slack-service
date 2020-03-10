@@ -15,3 +15,5 @@ def interactive_handler(event):
             "org_id": cred_db.get("org_id")
         }
     )
+    
+    callback_id = event.get("callback_id")
