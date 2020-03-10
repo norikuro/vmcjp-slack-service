@@ -12,7 +12,8 @@ def interactive_handler(event):
     event.update(
         {
             "token": cred_db.get("token"),
-            "org_id": cred_db.get("org_id")
+            "org_id": cred_db.get("org_id"),
+            "user_name": cred_db.get("user_name")
         }
     )
     event.update(event_db)
