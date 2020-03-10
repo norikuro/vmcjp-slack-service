@@ -126,6 +126,21 @@ def delete_sddc(event, db):
             "status": cmd_const.DELETE_SDDC
         }
     )
+    
+def selected_sddc_to_delete(event, db):
+    sddc_name = event.get("response").split("+")[0]
+    sddc_id = event.get("response").split("+")[1]
+    event.update(
+        {"sddc_name": sddc_name}
+    )
+    db.write_event_db(
+        event.get("user_id"),
+        {
+            "sddc_name": sddc_name,
+            "sddc_id": sddc_id
+        }
+    )
+    message_handler(constant.CONFIRM_DELETE, event)
 
 def restore_sddc(event, db): #for internal only
     hoge = 1
