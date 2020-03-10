@@ -36,7 +36,7 @@ def event_handler(event):
                 return
         elif cred_db is not None and cmd_const.REGISTER_ORG_ID in cred_db.get("status"):
             command_handler(cmd_const.REGISTER_ORG_ID, event, db)
-        elif cred is not None and cmd_const.REGISTER_TOKEN in cred_db.get("status"):
+        elif cred_db is not None and cmd_const.REGISTER_TOKEN in cred_db.get("status"):
             command_handler(cmd_const.REGISTER_TOKEN, event, db)
         elif text == "cancel":
             if cmd_const.REGISTERED not in cred_db.get("status"):
