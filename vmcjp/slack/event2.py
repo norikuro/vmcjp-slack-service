@@ -50,6 +50,7 @@ def event_handler(event):
             return
         elif cmd_const.SDDC_NAME in event_db.get("status"):
             if text.find(" ") != -1:
+                #need to send message of "do not contain any space in sddc"
                 return
             else:
                 command_handler(cmd_const.SDDC_NAME event, db)
