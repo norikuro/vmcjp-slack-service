@@ -3,9 +3,19 @@
 import sys
 
 class _const:
+  REGISTER_ORG = "register_org"
+  DELETE_ORG = "delete_org"
+  CREATE_ZEROCLOUD_SDDC = "create_zero_sddc"
+  CREATE_SDDC = "create_sddc"
+  DELETE_SDDC = "delete_sddc"
+  LIST_SDDCS = "list_sddcs"
+  RESTORE_SDDC = "restore_sddc" # for internal use
+  
   COMMAND_ORG = {
-    "register org": "register_org",
-    "delete org": "delete_org"
+#    "register org": "register_org",
+#    "delete org": "delete_org"
+    "register org": REGISTER_ORG,
+    "delete org": DELETE_ORG
   }
   
   COMMAND_SDDC = {
