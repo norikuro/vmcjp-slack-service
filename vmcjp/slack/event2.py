@@ -48,21 +48,23 @@ def event_handler(event):
             message_handler(msg_const.MAY_I, event)
             return
     else:
+        command = event_db.get("command")
+        status = event_db.get("status")
         if text == "cancel":
-            if "create_sddc" in event_db.get("command"):
+            if "create_sddc" in command:
                 message_handler(msg_const.CANCEL_SDDC, event)
-            elif "delete_sddc" in event_db.get("command"):
+            elif "delete_sddc" in command:
                 message_handler(msg_const.CANCEL_DELETE, event)
             db.delete_event_db(event.get("user_id"))
             return
-        elif cmd_const.SDDC_NAME in event_db.get("status"):
+        elif cmd_const.SDDC_NAME in status:
             event.update(event_db.get("max_hosts"))
             command_handler(cmd_const.SDDC_NAME, event, db)
             return
-        elif cmd_const.MGMT_CIDR in event_db.get("status"):
+        elif cmd_const.MGMT_CIDR in status:
             event.update(event_db)
             command_handler(cmd_const.MGMT_CIDR, event, db)
             return
-        elif "create_sddc" in event_db.get("command"):
+        elif "create_sddc" in command:
             message_handler(constant.ASK_SELECT_BUTTON, event)
             return
