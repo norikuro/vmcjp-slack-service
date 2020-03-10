@@ -142,6 +142,28 @@ def selected_sddc_to_delete(event, db):
     )
     message_handler(constant.CONFIRM_DELETE, event)
 
+def delete_confirmation(event, db):
+    response = event.get("response")
+    if "yes" in response:
+        message_handler(constant.START_DELETE, event)
+#        event.update(result)
+        event.update(
+            {"user_name": __cred_data.get("user_name")}
+        )
+        if check_sddc_user(
+            event.get("token"),
+            event.get("org_id"),
+            event.get("sddc_id"),
+            event.get("user_name")
+        ):
+            call_lambda("delete_sddc", event)
+        else:
+            message_handler(constant.CANT_DELETE, event)
+            db.delete_event_db(user_id)
+    else:
+        message_handler(constant.CANCEL_DELETE, event)
+        db.delete_event_db(user_id)
+
 def restore_sddc(event, db): #for internal only
     hoge = 1
 
