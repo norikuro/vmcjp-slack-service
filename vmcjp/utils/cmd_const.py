@@ -20,6 +20,7 @@ class _const:
   REGISTER_ORG_ID = "register_org_id"
   REGISTER_TOKEN = "register_token"
   REGISTERED = "registered"
+  CANCEL_REGISTER = "cancel_register"
   
   #followings are status of create SDDC
   CHECK_MAX_HOSTS = "check_max_hosts"
