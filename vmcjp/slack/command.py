@@ -131,7 +131,13 @@ def restore_sddc(event, db): #for internal only
     hoge = 1
 
 def sddc_name(event, db):
-    hogehoge = 1
+    db.write_event_db(
+        event.get("user_id"), 
+        {
+            "status": "sddc_name", 
+            "sddc_name": event.get("text")
+        }
+    )
 
 def mgmt_cidr(event, db):
     text = event.get("text")
