@@ -27,16 +27,16 @@ def event_handler(event):
             command_handler(cmd_const.COMMAND_ORG[text], event, db)
             return
         elif text in cmd_const.COMMAND_SDDC:
-            if cred_db is not None and cmd_const.REGISTERED in cred.get("status"):
-                event_cred_update(event, cred)
+            if cred_db is not None and cmd_const.REGISTERED in cred_db.get("status"):
+                event_cred_update(event, cred_db)
                 command_handler(cmd_const.COMMAND_SDDC[text], event, db)
                 return
             else:
                 message_handler(msg_const.ASK_REGISTER_TOKEN, event)
                 return
-        elif cred_db is not None and cmd_const.REGISTER_ORG_ID in cred.get("status"):
+        elif cred_db is not None and cmd_const.REGISTER_ORG_ID in cred_db.get("status"):
             command_handler(cmd_const.REGISTER_ORG_ID, event, db)
-        elif cred is not None and cmd_const.REGISTER_TOKEN in cred.get("status"):
+        elif cred is not None and cmd_const.REGISTER_TOKEN in cred_db.get("status"):
             command_handler(cmd_const.REGISTER_TOKEN, event, db)
         elif text == "cancel":
             if cmd_const.REGISTERED not in cred_db.get("status"):
