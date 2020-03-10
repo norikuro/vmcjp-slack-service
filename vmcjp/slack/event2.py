@@ -65,6 +65,6 @@ def event_handler(event):
             event.update(event_db)
             command_handler(cmd_const.MGMT_CIDR, event, db)
             return
-        elif "create_sddc" in command:
+        elif command in ["create_sddc", "delete_sddc"]:
             message_handler(constant.ASK_SELECT_BUTTON, event)
             return
