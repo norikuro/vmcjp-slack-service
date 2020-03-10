@@ -17,3 +17,4 @@ def interactive_handler(event):
     )
     
     callback_id = event.get("callback_id")
+    command_handler(callback_id, event, db)
