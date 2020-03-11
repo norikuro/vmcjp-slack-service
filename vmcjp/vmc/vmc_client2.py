@@ -28,5 +28,5 @@ def login(refresh_token):
         else:
             return data
 
-def get_sddcs(access_token):
+def get_sddcs(access_token, org_id):
     
