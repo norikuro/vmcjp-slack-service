@@ -11,7 +11,8 @@ def event_cred_update(event, cred):
         }
     )
 
-def event_handler(event):
+def lambda_handler(event, context):
+#    logging.info(event)
     text = event.get("text").lower()
     
     db = dbutils.DocmentDb(event.get("db_url"))
@@ -68,7 +69,3 @@ def event_handler(event):
         elif command in ["create_sddc", "delete_sddc"]:
             message_handler(constant.ASK_SELECT_BUTTON, event)
             return
-
-def lambda_handler(event, context):
-#    logging.info(event)
-    event_handler(event)
