@@ -18,9 +18,8 @@ def login(refresh_token):
     now = time.time()
     
     if response is not None:
-        status_code = response.status_code
         data = response.json()
-        if status_code == 200:
+        if response.status_code == 200:
             return {
                 "access_token": data.get("access_token"),
                 "expire_time": now + data.get("expires_in")
@@ -28,7 +27,7 @@ def login(refresh_token):
         else:
             return data
 
-def list_sddcs(access_token, org_id):
+def get_sddcs(access_token, org_id):
     uri = "/orgs/{}/sddcs".format(org_id)
     headers = {"csp-auth-token": access_token}
     headers.update(HEADERS)
@@ -37,3 +36,10 @@ def list_sddcs(access_token, org_id):
         '{}{}'.format(VMC_URL, uri),
         headers=headers
     )
+    
+    if response is not None:
+        data = response.json()
+        if response.status_code == 200:
+            return data
+        else:
+            return data
