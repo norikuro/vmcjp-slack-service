@@ -41,5 +41,3 @@ def get_sddcs(access_token, org_id):
         data = response.json()
         if response.status_code == 200:
             return data
-        else:
-            return data
