@@ -21,11 +21,9 @@ def login(refresh_token):
         status_code = response.status_code
         data = response.json()
         if status_code == 200:
-            expire_in = data.get("expires_in")
             return {
                 "access_token": data.get("access_token"),
-                "expires_in": expire_in,
-                "expire_time": now + expire_in
+                "expire_time": now + data.get("expires_in")
             }
         else:
             return data
