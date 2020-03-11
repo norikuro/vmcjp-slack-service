@@ -4,7 +4,7 @@ import time
 import logging
 
 LOGIN_URL = "https://console.cloud.vmware.com/csp/gateway"
-VMC_URL = "https://vmc.vmware.com"
+VMC_URL = "https://vmc.vmware.com/vmc/api"
 HEADERS = {"Content-Type": "application/json"}
 
 logger = logging.getLogger()
