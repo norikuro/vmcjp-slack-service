@@ -29,7 +29,7 @@ def login(refresh_token):
                 "expires_in": expire_in,
                 "expire_time": expire_time
             }
-        elif status_code==400:
+        elif status_code in [400, 401, 403, 500]:
             message = {
                 "status_code": status_code,
                 "message": data.get("message")
