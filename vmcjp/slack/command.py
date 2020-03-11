@@ -2,7 +2,9 @@ from vmcjp.utils import msg_const, cmd_const
 from vmcjp.utils.lambdautils import call_lambda
 from vmcjp.utils.loginutils import validate_token
 from vmcjp.slack.messages import message_handler
-from vmcjp.vmc.vmc_client import list_sddcs_, list_sddcs__, get_max_num_hosts, is_network, is_valid_network, check_sddc_user
+#from vmcjp.vmc.vmc_client import list_sddcs_, list_sddcs__, get_max_num_hosts, is_network, is_valid_network, check_sddc_user
+from vmcjp.vmc.vmc_client import get_max_num_hosts, is_network, is_valid_network, check_sddc_user
+from vmcjp.vmc.vmc_client2 import list_sddcs_name_and_id, list_sddcs
 
 def command_handler(cmd, event, db):
     eval(cmd)(event, db)
