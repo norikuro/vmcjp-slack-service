@@ -27,11 +27,5 @@ def login(refresh_token):
                 "expires_in": expire_in,
                 "expire_time": now + expire_in
             }
-        elif status_code in [400, 401, 403, 500]:
-            message = {
-                "status_code": status_code,
-                "message": data.get("message")
-            }
-            raise Exception(message)
-    else:
-        raise Exception("Cannot connect VMC, Something wrong!")
+        else:
+            return data
