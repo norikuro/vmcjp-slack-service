@@ -60,7 +60,8 @@ def list_sddcs(event, db):
         {
 #            "sddcs": list_sddcs_(
             "sddcs": sddc_list(
-                event.get("token"), 
+#                event.get("token"), 
+                event.get("access_token"), 
                 event.get("org_id")
             )
         }
