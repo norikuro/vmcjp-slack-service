@@ -1,10 +1,14 @@
 import requests
 import json
 import time
+import logging
 
 LOGIN_URL = "https://console.cloud.vmware.com/csp/gateway"
 VMC_URL = "https://vmc.vmware.com"
 HEADERS = {"Content-Type": "application/json"}
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def login(refresh_token):
     uri = "/am/api/auth/api-tokens/authorize"
@@ -36,6 +40,7 @@ def get_sddcs(access_token, org_id):
     )
     
     if response is not None:
+        logging.info(response)
         sddcs = response.json()
         if response.status_code == 200:
             return sddcs
