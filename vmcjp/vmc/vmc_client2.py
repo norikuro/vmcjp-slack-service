@@ -38,9 +38,9 @@ def get_sddcs(access_token, org_id):
     )
     
     if response is not None:
-        data = response.json()
+        sddcs = response.json()
         if response.status_code == 200:
-            return data
+            return sddcs
 
 def list_sddcs_name_and_id(access_token, org_id):
     sddcs = get_sddcs(access_token, org_id)
