@@ -2,8 +2,8 @@ import requests
 import json
 import time
 
-LOGIN_BASE_URL = "https://console.cloud.vmware.com/csp/gateway"
-BASE_URL = "https://vmc.vmware.com"
+LOGIN_URL = "https://console.cloud.vmware.com/csp/gateway"
+VMC_URL = "https://vmc.vmware.com"
 HEADERS = {"Content-Type": "application/json"}
 
 def login(refresh_token):
@@ -11,7 +11,7 @@ def login(refresh_token):
     params = {"refresh_token": refresh_token}
     
     response = requests.post(
-        '{}{}'.format(LOGIN_BASE_URL, uri),
+        '{}{}'.format(LOGIN_URL, uri),
         headers=HEADERS,
       params = params
     )
@@ -28,5 +28,12 @@ def login(refresh_token):
         else:
             return data
 
-def get_sddcs(access_token, org_id):
+def list_sddcs(access_token, org_id):
+    uri = "/orgs/{}/sddcs".format(org_id)
+    headers = {"csp-auth-token": access_token}
+    headers.update(HEADERS)
     
+    response = requests.get(
+        '{}{}'.format(VMC_URL, uri),
+        headers=headers
+    )
