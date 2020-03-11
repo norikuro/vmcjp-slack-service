@@ -15,7 +15,6 @@ def login(refresh_token):
         headers=HEADERS,
       params = params
     )
-    
     now = time.time()
     
     if response is not None:
@@ -23,11 +22,10 @@ def login(refresh_token):
         data = response.json()
         if status_code == 200:
             expire_in = data.get("expires_in")
-            expire_time = now + expire_in
             return {
                 "access_token": data.get("access_token"),
                 "expires_in": expire_in,
-                "expire_time": expire_time
+                "expire_time": now + expire_in
             }
         elif status_code in [400, 401, 403, 500]:
             message = {
