@@ -24,8 +24,6 @@ def login(refresh_token):
                 "access_token": data.get("access_token"),
                 "expire_time": now + data.get("expires_in")
             }
-        else:
-            return data
 
 def get_sddcs(access_token, org_id):
     uri = "/orgs/{}/sddcs".format(org_id)
