@@ -4,9 +4,12 @@ from vmcjp.utils.loginutils import validate_token
 from vmcjp.slack.messages import message_handler
 #from vmcjp.vmc.vmc_client import list_sddcs_, list_sddcs__, get_max_num_hosts, is_network, is_valid_network, check_sddc_user
 from vmcjp.vmc.vmc_client import list_sddcs__, get_max_num_hosts, is_network, is_valid_network, check_sddc_user
-from vmcjp.vmc.vmc_client2 import sddc_list, sddc_name_and_id_list
+from vmcjp.vmc.vmc_client2 import login, sddc_list, sddc_name_and_id_list
 
 def command_handler(cmd, event, db):
+    response = login(event.get("token"))
+    if response is not None:
+        
     eval(cmd)(event, db)
 
 def cancel_register(event, db):
