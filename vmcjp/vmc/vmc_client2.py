@@ -48,6 +48,9 @@ def list_sddcs_name_and_id(access_token, org_id):
         return [
             {
                 "text": sddc.get("name"),
-                "value": "{}+{}".format(sddc.get("name"), sddc.get("resource_config").get("sddc_id"))
+                "value": "{}+{}".format(
+                    sddc.get("name"), 
+                    sddc.get("resource_config").get("sddc_id")
+                )
             }
         ] for sddc in sddcs
