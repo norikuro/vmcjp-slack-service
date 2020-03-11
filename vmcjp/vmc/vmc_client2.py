@@ -64,7 +64,7 @@ def sddc_list(access_token, org_id):
         {
             "sddc_name": sddc.get("name"),
             "user_name": sddc.get("user_name"),
-            "created": sddc.get("created").isoformat(),
+            "created": sddc.get("created"),
             "num_hosts": len(sddc.get("resource_config").get("esx_hosts"))
         } for sddc in sddcs
     ]
