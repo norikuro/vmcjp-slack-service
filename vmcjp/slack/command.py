@@ -4,7 +4,7 @@ from vmcjp.utils.loginutils import validate_token
 from vmcjp.slack.messages import message_handler
 #from vmcjp.vmc.vmc_client import list_sddcs_, list_sddcs__, get_max_num_hosts, is_network, is_valid_network, check_sddc_user
 from vmcjp.vmc.vmc_client import list_sddcs__, get_max_num_hosts, is_network, is_valid_network, check_sddc_user
-from vmcjp.vmc.vmc_client2 import sddc_name_and_id_list, sddc_list
+from vmcjp.vmc.vmc_client2 import sddc_list, sddc_name_and_id_list
 
 def command_handler(cmd, event, db):
     eval(cmd)(event, db)
@@ -58,7 +58,8 @@ def list_sddcs(event, db):
     message_handler(msg_const.SDDCS_TXT, event)
     event.update(
         {
-            "sddcs": list_sddcs_(
+#            "sddcs": list_sddcs_(
+            "sddcs": sddc_list(
                 event.get("token"), 
                 event.get("org_id")
             )
