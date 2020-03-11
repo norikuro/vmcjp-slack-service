@@ -1,5 +1,6 @@
 import requests
 import json
+import time
 
 LOGIN_BASE_URL = "https://console.cloud.vmware.com/csp/gateway"
 BASE_URL = "https://vmc.vmware.com"
@@ -14,11 +15,15 @@ def login(refresh_token):
     headers=HEADERS,
     params = params
   )
+  now = time.time()
   
   if response.status_code == 200:
     data = response.json()
+    expire_in = data.get("expires_in")
+    expire_time = now + expire_in
     retrun {
       "access_token": data.get("access_token"),
-      "expires": data.get("expires_in")
+      "expires_in": expire_in,
+      "expire_time": expire_time
     }
   
