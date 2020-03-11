@@ -46,6 +46,8 @@ def list_sddcs_name_and_id(access_token, org_id):
     sddcs = get_sddcs(access_token, org_id)
     if sddcs is not None:
         return [
-            "text": sddc.get("name"),
-            "value": "{}+{}".format(sddc.get("name"), sddc.get("resource_config").get("sddc_id"))
+            {
+                "text": sddc.get("name"),
+                "value": "{}+{}".format(sddc.get("name"), sddc.get("resource_config").get("sddc_id"))
+            }
         ] for sddc in sddcs
