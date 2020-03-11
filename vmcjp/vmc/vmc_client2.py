@@ -42,7 +42,7 @@ def get_sddcs(access_token, org_id):
         if response.status_code == 200:
             return sddcs
 
-def list_sddcs_name_and_id(access_token, org_id):
+def sddc_name_and_id_list(access_token, org_id):
     sddcs = get_sddcs(access_token, org_id)
     if sddcs is not None:
         return [
@@ -55,7 +55,7 @@ def list_sddcs_name_and_id(access_token, org_id):
             }
         ] for sddc in sddcs
 
-def list_sddcs(access_token, org_id):
+def sddc_list(access_token, org_id):
     sddcs = get_sddcs(access_token, org_id)
     return [
         {
