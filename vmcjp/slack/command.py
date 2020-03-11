@@ -9,7 +9,11 @@ from vmcjp.vmc.vmc_client2 import login, sddc_list, sddc_name_and_id_list
 def command_handler(cmd, event, db):
     response = login(event.get("token"))
     if response is not None:
-        
+        event.update(
+            {
+                "access_token": response.get("access_token")
+            }
+        )    
     eval(cmd)(event, db)
 
 def cancel_register(event, db):
